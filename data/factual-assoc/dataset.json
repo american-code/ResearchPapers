@@ -1,0 +1,513 @@
+{
+  "meta": {
+    "n_examples": 50,
+    "templates": {
+      "capital_of": "The capital of {subject} is",
+      "official_language_of": "The official language of {subject} is"
+    },
+    "corruption_strategy": "subject_swap",
+    "description": "50 factual association examples (25 capital_of + 25 official_language_of). Each example pairs a clean prompt (subject\u2192object) with a corrupt prompt (corrupt_subject\u2192corrupt_object). Patching metric: normalised logit-diff recovery: (logit(object) - logit(corrupt_object)) at last token position."
+  },
+  "examples": [
+    {
+      "id": 0,
+      "relation": "capital_of",
+      "subject": "France",
+      "object": "Paris",
+      "corrupt_subject": "Germany",
+      "corrupt_object": "Berlin",
+      "prompt": "The capital of France is",
+      "corrupt_prompt": "The capital of Germany is"
+    },
+    {
+      "id": 1,
+      "relation": "capital_of",
+      "subject": "Germany",
+      "object": "Berlin",
+      "corrupt_subject": "France",
+      "corrupt_object": "Paris",
+      "prompt": "The capital of Germany is",
+      "corrupt_prompt": "The capital of France is"
+    },
+    {
+      "id": 2,
+      "relation": "capital_of",
+      "subject": "Japan",
+      "object": "Tokyo",
+      "corrupt_subject": "China",
+      "corrupt_object": "Beijing",
+      "prompt": "The capital of Japan is",
+      "corrupt_prompt": "The capital of China is"
+    },
+    {
+      "id": 3,
+      "relation": "capital_of",
+      "subject": "China",
+      "object": "Beijing",
+      "corrupt_subject": "Japan",
+      "corrupt_object": "Tokyo",
+      "prompt": "The capital of China is",
+      "corrupt_prompt": "The capital of Japan is"
+    },
+    {
+      "id": 4,
+      "relation": "capital_of",
+      "subject": "Italy",
+      "object": "Rome",
+      "corrupt_subject": "Greece",
+      "corrupt_object": "Athens",
+      "prompt": "The capital of Italy is",
+      "corrupt_prompt": "The capital of Greece is"
+    },
+    {
+      "id": 5,
+      "relation": "capital_of",
+      "subject": "Greece",
+      "object": "Athens",
+      "corrupt_subject": "Italy",
+      "corrupt_object": "Rome",
+      "prompt": "The capital of Greece is",
+      "corrupt_prompt": "The capital of Italy is"
+    },
+    {
+      "id": 6,
+      "relation": "capital_of",
+      "subject": "Russia",
+      "object": "Moscow",
+      "corrupt_subject": "Spain",
+      "corrupt_object": "Madrid",
+      "prompt": "The capital of Russia is",
+      "corrupt_prompt": "The capital of Spain is"
+    },
+    {
+      "id": 7,
+      "relation": "capital_of",
+      "subject": "Spain",
+      "object": "Madrid",
+      "corrupt_subject": "Russia",
+      "corrupt_object": "Moscow",
+      "prompt": "The capital of Spain is",
+      "corrupt_prompt": "The capital of Russia is"
+    },
+    {
+      "id": 8,
+      "relation": "capital_of",
+      "subject": "Ireland",
+      "object": "Dublin",
+      "corrupt_subject": "Portugal",
+      "corrupt_object": "Lisbon",
+      "prompt": "The capital of Ireland is",
+      "corrupt_prompt": "The capital of Portugal is"
+    },
+    {
+      "id": 9,
+      "relation": "capital_of",
+      "subject": "Portugal",
+      "object": "Lisbon",
+      "corrupt_subject": "Ireland",
+      "corrupt_object": "Dublin",
+      "prompt": "The capital of Portugal is",
+      "corrupt_prompt": "The capital of Ireland is"
+    },
+    {
+      "id": 10,
+      "relation": "capital_of",
+      "subject": "Denmark",
+      "object": "Copenhagen",
+      "corrupt_subject": "Sweden",
+      "corrupt_object": "Stockholm",
+      "prompt": "The capital of Denmark is",
+      "corrupt_prompt": "The capital of Sweden is"
+    },
+    {
+      "id": 11,
+      "relation": "capital_of",
+      "subject": "Sweden",
+      "object": "Stockholm",
+      "corrupt_subject": "Denmark",
+      "corrupt_object": "Copenhagen",
+      "prompt": "The capital of Sweden is",
+      "corrupt_prompt": "The capital of Denmark is"
+    },
+    {
+      "id": 12,
+      "relation": "capital_of",
+      "subject": "Norway",
+      "object": "Oslo",
+      "corrupt_subject": "Poland",
+      "corrupt_object": "Warsaw",
+      "prompt": "The capital of Norway is",
+      "corrupt_prompt": "The capital of Poland is"
+    },
+    {
+      "id": 13,
+      "relation": "capital_of",
+      "subject": "Poland",
+      "object": "Warsaw",
+      "corrupt_subject": "Norway",
+      "corrupt_object": "Oslo",
+      "prompt": "The capital of Poland is",
+      "corrupt_prompt": "The capital of Norway is"
+    },
+    {
+      "id": 14,
+      "relation": "capital_of",
+      "subject": "Hungary",
+      "object": "Budapest",
+      "corrupt_subject": "Romania",
+      "corrupt_object": "Bucharest",
+      "prompt": "The capital of Hungary is",
+      "corrupt_prompt": "The capital of Romania is"
+    },
+    {
+      "id": 15,
+      "relation": "capital_of",
+      "subject": "Romania",
+      "object": "Bucharest",
+      "corrupt_subject": "Hungary",
+      "corrupt_object": "Budapest",
+      "prompt": "The capital of Romania is",
+      "corrupt_prompt": "The capital of Hungary is"
+    },
+    {
+      "id": 16,
+      "relation": "capital_of",
+      "subject": "Egypt",
+      "object": "Cairo",
+      "corrupt_subject": "Turkey",
+      "corrupt_object": "Ankara",
+      "prompt": "The capital of Egypt is",
+      "corrupt_prompt": "The capital of Turkey is"
+    },
+    {
+      "id": 17,
+      "relation": "capital_of",
+      "subject": "Turkey",
+      "object": "Ankara",
+      "corrupt_subject": "Egypt",
+      "corrupt_object": "Cairo",
+      "prompt": "The capital of Turkey is",
+      "corrupt_prompt": "The capital of Egypt is"
+    },
+    {
+      "id": 18,
+      "relation": "capital_of",
+      "subject": "India",
+      "object": "Delhi",
+      "corrupt_subject": "Thailand",
+      "corrupt_object": "Bangkok",
+      "prompt": "The capital of India is",
+      "corrupt_prompt": "The capital of Thailand is"
+    },
+    {
+      "id": 19,
+      "relation": "capital_of",
+      "subject": "Thailand",
+      "object": "Bangkok",
+      "corrupt_subject": "India",
+      "corrupt_object": "Delhi",
+      "prompt": "The capital of Thailand is",
+      "corrupt_prompt": "The capital of India is"
+    },
+    {
+      "id": 20,
+      "relation": "capital_of",
+      "subject": "Austria",
+      "object": "Vienna",
+      "corrupt_subject": "Belgium",
+      "corrupt_object": "Brussels",
+      "prompt": "The capital of Austria is",
+      "corrupt_prompt": "The capital of Belgium is"
+    },
+    {
+      "id": 21,
+      "relation": "capital_of",
+      "subject": "Belgium",
+      "object": "Brussels",
+      "corrupt_subject": "Austria",
+      "corrupt_object": "Vienna",
+      "prompt": "The capital of Belgium is",
+      "corrupt_prompt": "The capital of Austria is"
+    },
+    {
+      "id": 22,
+      "relation": "capital_of",
+      "subject": "Netherlands",
+      "object": "Amsterdam",
+      "corrupt_subject": "France",
+      "corrupt_object": "Paris",
+      "prompt": "The capital of Netherlands is",
+      "corrupt_prompt": "The capital of France is"
+    },
+    {
+      "id": 23,
+      "relation": "capital_of",
+      "subject": "Ukraine",
+      "object": "Kiev",
+      "corrupt_subject": "Belarus",
+      "corrupt_object": "Minsk",
+      "prompt": "The capital of Ukraine is",
+      "corrupt_prompt": "The capital of Belarus is"
+    },
+    {
+      "id": 24,
+      "relation": "capital_of",
+      "subject": "Morocco",
+      "object": "Rabat",
+      "corrupt_subject": "Tunisia",
+      "corrupt_object": "Tunis",
+      "prompt": "The capital of Morocco is",
+      "corrupt_prompt": "The capital of Tunisia is"
+    },
+    {
+      "id": 25,
+      "relation": "official_language_of",
+      "subject": "France",
+      "object": "French",
+      "corrupt_subject": "Spain",
+      "corrupt_object": "Spanish",
+      "prompt": "The official language of France is",
+      "corrupt_prompt": "The official language of Spain is"
+    },
+    {
+      "id": 26,
+      "relation": "official_language_of",
+      "subject": "Spain",
+      "object": "Spanish",
+      "corrupt_subject": "France",
+      "corrupt_object": "French",
+      "prompt": "The official language of Spain is",
+      "corrupt_prompt": "The official language of France is"
+    },
+    {
+      "id": 27,
+      "relation": "official_language_of",
+      "subject": "Germany",
+      "object": "German",
+      "corrupt_subject": "Italy",
+      "corrupt_object": "Italian",
+      "prompt": "The official language of Germany is",
+      "corrupt_prompt": "The official language of Italy is"
+    },
+    {
+      "id": 28,
+      "relation": "official_language_of",
+      "subject": "Italy",
+      "object": "Italian",
+      "corrupt_subject": "Germany",
+      "corrupt_object": "German",
+      "prompt": "The official language of Italy is",
+      "corrupt_prompt": "The official language of Germany is"
+    },
+    {
+      "id": 29,
+      "relation": "official_language_of",
+      "subject": "Russia",
+      "object": "Russian",
+      "corrupt_subject": "Japan",
+      "corrupt_object": "Japanese",
+      "prompt": "The official language of Russia is",
+      "corrupt_prompt": "The official language of Japan is"
+    },
+    {
+      "id": 30,
+      "relation": "official_language_of",
+      "subject": "Japan",
+      "object": "Japanese",
+      "corrupt_subject": "Russia",
+      "corrupt_object": "Russian",
+      "prompt": "The official language of Japan is",
+      "corrupt_prompt": "The official language of Russia is"
+    },
+    {
+      "id": 31,
+      "relation": "official_language_of",
+      "subject": "China",
+      "object": "Chinese",
+      "corrupt_subject": "Korea",
+      "corrupt_object": "Korean",
+      "prompt": "The official language of China is",
+      "corrupt_prompt": "The official language of Korea is"
+    },
+    {
+      "id": 32,
+      "relation": "official_language_of",
+      "subject": "Korea",
+      "object": "Korean",
+      "corrupt_subject": "China",
+      "corrupt_object": "Chinese",
+      "prompt": "The official language of Korea is",
+      "corrupt_prompt": "The official language of China is"
+    },
+    {
+      "id": 33,
+      "relation": "official_language_of",
+      "subject": "Brazil",
+      "object": "Portuguese",
+      "corrupt_subject": "Spain",
+      "corrupt_object": "Spanish",
+      "prompt": "The official language of Brazil is",
+      "corrupt_prompt": "The official language of Spain is"
+    },
+    {
+      "id": 34,
+      "relation": "official_language_of",
+      "subject": "Egypt",
+      "object": "Arabic",
+      "corrupt_subject": "Germany",
+      "corrupt_object": "German",
+      "prompt": "The official language of Egypt is",
+      "corrupt_prompt": "The official language of Germany is"
+    },
+    {
+      "id": 35,
+      "relation": "official_language_of",
+      "subject": "Sweden",
+      "object": "Swedish",
+      "corrupt_subject": "Denmark",
+      "corrupt_object": "Danish",
+      "prompt": "The official language of Sweden is",
+      "corrupt_prompt": "The official language of Denmark is"
+    },
+    {
+      "id": 36,
+      "relation": "official_language_of",
+      "subject": "Denmark",
+      "object": "Danish",
+      "corrupt_subject": "Sweden",
+      "corrupt_object": "Swedish",
+      "prompt": "The official language of Denmark is",
+      "corrupt_prompt": "The official language of Sweden is"
+    },
+    {
+      "id": 37,
+      "relation": "official_language_of",
+      "subject": "Greece",
+      "object": "Greek",
+      "corrupt_subject": "Turkey",
+      "corrupt_object": "Turkish",
+      "prompt": "The official language of Greece is",
+      "corrupt_prompt": "The official language of Turkey is"
+    },
+    {
+      "id": 38,
+      "relation": "official_language_of",
+      "subject": "Turkey",
+      "object": "Turkish",
+      "corrupt_subject": "Greece",
+      "corrupt_object": "Greek",
+      "prompt": "The official language of Turkey is",
+      "corrupt_prompt": "The official language of Greece is"
+    },
+    {
+      "id": 39,
+      "relation": "official_language_of",
+      "subject": "Netherlands",
+      "object": "Dutch",
+      "corrupt_subject": "Italy",
+      "corrupt_object": "Italian",
+      "prompt": "The official language of Netherlands is",
+      "corrupt_prompt": "The official language of Italy is"
+    },
+    {
+      "id": 40,
+      "relation": "official_language_of",
+      "subject": "Portugal",
+      "object": "Portuguese",
+      "corrupt_subject": "France",
+      "corrupt_object": "French",
+      "prompt": "The official language of Portugal is",
+      "corrupt_prompt": "The official language of France is"
+    },
+    {
+      "id": 41,
+      "relation": "official_language_of",
+      "subject": "Mexico",
+      "object": "Spanish",
+      "corrupt_subject": "Brazil",
+      "corrupt_object": "Portuguese",
+      "prompt": "The official language of Mexico is",
+      "corrupt_prompt": "The official language of Brazil is"
+    },
+    {
+      "id": 42,
+      "relation": "official_language_of",
+      "subject": "Australia",
+      "object": "English",
+      "corrupt_subject": "France",
+      "corrupt_object": "French",
+      "prompt": "The official language of Australia is",
+      "corrupt_prompt": "The official language of France is"
+    },
+    {
+      "id": 43,
+      "relation": "official_language_of",
+      "subject": "Norway",
+      "object": "Norwegian",
+      "corrupt_subject": "Finland",
+      "corrupt_object": "Finnish",
+      "prompt": "The official language of Norway is",
+      "corrupt_prompt": "The official language of Finland is"
+    },
+    {
+      "id": 44,
+      "relation": "official_language_of",
+      "subject": "Finland",
+      "object": "Finnish",
+      "corrupt_subject": "Norway",
+      "corrupt_object": "Norwegian",
+      "prompt": "The official language of Finland is",
+      "corrupt_prompt": "The official language of Norway is"
+    },
+    {
+      "id": 45,
+      "relation": "official_language_of",
+      "subject": "Austria",
+      "object": "German",
+      "corrupt_subject": "France",
+      "corrupt_object": "French",
+      "prompt": "The official language of Austria is",
+      "corrupt_prompt": "The official language of France is"
+    },
+    {
+      "id": 46,
+      "relation": "official_language_of",
+      "subject": "Morocco",
+      "object": "Arabic",
+      "corrupt_subject": "Germany",
+      "corrupt_object": "German",
+      "prompt": "The official language of Morocco is",
+      "corrupt_prompt": "The official language of Germany is"
+    },
+    {
+      "id": 47,
+      "relation": "official_language_of",
+      "subject": "Poland",
+      "object": "Polish",
+      "corrupt_subject": "Italy",
+      "corrupt_object": "Italian",
+      "prompt": "The official language of Poland is",
+      "corrupt_prompt": "The official language of Italy is"
+    },
+    {
+      "id": 48,
+      "relation": "official_language_of",
+      "subject": "Argentina",
+      "object": "Spanish",
+      "corrupt_subject": "Brazil",
+      "corrupt_object": "Portuguese",
+      "prompt": "The official language of Argentina is",
+      "corrupt_prompt": "The official language of Brazil is"
+    },
+    {
+      "id": 49,
+      "relation": "official_language_of",
+      "subject": "Ukraine",
+      "object": "Ukrainian",
+      "corrupt_subject": "Russia",
+      "corrupt_object": "Russian",
+      "prompt": "The official language of Ukraine is",
+      "corrupt_prompt": "The official language of Russia is"
+    }
+  ]
+}

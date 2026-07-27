@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="570" font-family="Helvetica,Arial,sans-serif">
+<defs>
+<marker id="a-nm" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,6 L9,3 z" fill="#c0392b"/></marker>
+<marker id="a-si" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,6 L9,3 z" fill="#d35400"/></marker>
+<marker id="a-ind" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,6 L9,3 z" fill="#2471a3"/></marker>
+<marker id="a-dt" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,6 L9,3 z" fill="#1e8449"/></marker>
+<marker id="a-flow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,6 L9,3 z" fill="#999"/></marker>
+</defs>
+<rect width="680" height="570" fill="#ffffff"/>
+<text x="276" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">IOI Circuit Subgraph — Llama-3.2-3B</text>
+<text x="276" y="40" text-anchor="middle" font-size="9" fill="#aaaaaa">Functional head groups by relative layer depth · path-patching evidence</text>
+<rect x="28" y="52" width="496" height="156" fill="#fff2f1" rx="3"/>
+<text x="22" y="134" text-anchor="end" font-size="9" font-weight="bold" fill="#c0392b">Name-mover</text>
+<text x="528" y="134" font-size="7.5" fill="#c0392b">L17–27</text>
+<rect x="28" y="208" width="496" height="113" fill="#fff7ef" rx="3"/>
+<text x="22" y="268" text-anchor="end" font-size="9" font-weight="bold" fill="#d35400">S-inhibition</text>
+<text x="528" y="268" font-size="7.5" fill="#d35400">L10–16</text>
+<rect x="28" y="321" width="496" height="56" fill="#eff6ff" rx="3"/>
+<text x="22" y="353" text-anchor="end" font-size="9" font-weight="bold" fill="#2471a3">Induction</text>
+<text x="528" y="353" font-size="7.5" fill="#2471a3">L7–9</text>
+<rect x="28" y="377" width="496" height="109" fill="#effff4" rx="3"/>
+<text x="22" y="435" text-anchor="end" font-size="9" font-weight="bold" fill="#1e8449">Dup-token</text>
+<text x="528" y="435" font-size="7.5" fill="#1e8449">L0–6</text>
+<line x1="90" y1="52" x2="90" y2="486" stroke="#e8e8e8" stroke-width="1.5" stroke-dasharray="2,2"/>
+<line x1="214" y1="52" x2="214" y2="486" stroke="#e8e8e8" stroke-width="1.5" stroke-dasharray="2,2"/>
+<line x1="338" y1="52" x2="338" y2="486" stroke="#e8e8e8" stroke-width="1.5" stroke-dasharray="2,2"/>
+<line x1="462" y1="52" x2="462" y2="486" stroke="#e8e8e8" stroke-width="1.5" stroke-dasharray="2,2"/>
+<path d="M90,130 Q276,102 442,130" stroke="#c0392b" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#a-nm)"/>
+<text x="276" y="98" text-anchor="middle" font-size="8" font-style="italic" fill="#c0392b">K,V</text>
+<text x="462" y="162" text-anchor="middle" font-size="7.5" font-style="italic" fill="#c0392b">Q</text>
+<circle cx="462" cy="130" r="18" fill="#c0392b" opacity="0.88"/>
+<text x="462" y="134" text-anchor="middle" font-size="9" font-weight="bold" fill="white">NM</text>
+<text x="488" y="126" font-size="7.5" fill="#c0392b">L24·H15 (0.148)</text>
+<text x="488" y="138" font-size="7.5" fill="#c0392b">L21·H20 (0.073)</text>
+<path d="M338,264 Q400,236 442,264" stroke="#d35400" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#a-si)"/>
+<text x="400" y="232" text-anchor="middle" font-size="8" font-style="italic" fill="#d35400">K,V</text>
+<text x="462" y="296" text-anchor="middle" font-size="7.5" font-style="italic" fill="#d35400">Q</text>
+<circle cx="462" cy="264" r="18" fill="#d35400" opacity="0.88"/>
+<text x="462" y="268" text-anchor="middle" font-size="9" font-weight="bold" fill="white">SI</text>
+<text x="488" y="260" font-size="7.5" fill="#d35400">L15·H20 (0.240)†</text>
+<text x="488" y="272" font-size="7.5" fill="#d35400">L14·H00 (0.111)</text>
+<path d="M90,349 Q214,321 318,349" stroke="#2471a3" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#a-ind)"/>
+<text x="214" y="317" text-anchor="middle" font-size="8" font-style="italic" fill="#2471a3">K,V</text>
+<text x="338" y="381" text-anchor="middle" font-size="7.5" font-style="italic" fill="#2471a3">Q</text>
+<circle cx="338" cy="349" r="18" fill="#2471a3" opacity="0.88"/>
+<text x="338" y="353" text-anchor="middle" font-size="9" font-weight="bold" fill="white">IND</text>
+<text x="364" y="345" font-size="7.5" fill="#2471a3">weak individual</text>
+<text x="364" y="357" font-size="7.5" fill="#2471a3">patching signal</text>
+<path d="M214,431 Q276,403 318,431" stroke="#1e8449" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#a-dt)"/>
+<text x="276" y="399" text-anchor="middle" font-size="8" font-style="italic" fill="#1e8449">K,V</text>
+<text x="338" y="463" text-anchor="middle" font-size="7.5" font-style="italic" fill="#1e8449">Q</text>
+<circle cx="338" cy="431" r="18" fill="#1e8449" opacity="0.88"/>
+<text x="338" y="435" text-anchor="middle" font-size="9" font-weight="bold" fill="white">DT</text>
+<text x="364" y="427" font-size="7.5" fill="#1e8449">weak individual</text>
+<text x="364" y="439" font-size="7.5" fill="#1e8449">patching signal</text>
+<line x1="338" y1="412" x2="338" y2="283" stroke="#888" stroke-width="1.4" marker-end="url(#a-flow)"/>
+<line x1="462" y1="245" x2="462" y2="149" stroke="#888" stroke-width="1.4" marker-end="url(#a-flow)"/>
+<line x1="338" y1="330" x2="338" y2="212" stroke="#888" stroke-width="1.0" stroke-dasharray="3,2" marker-end="url(#a-flow)" opacity="0.55"/>
+<line x1="462" y1="111" x2="462" y2="58" stroke="#c0392b" stroke-width="2.2" marker-end="url(#a-nm)"/>
+<text x="462" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#c0392b">P(IO) &gt; P(S)  ↑</text>
+<line x1="90" y1="486" x2="90" y2="494" stroke="#e8e8e8" stroke-width="1.5"/>
+<text x="90" y="504" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">IO</text>
+<text x="90" y="516" text-anchor="middle" font-size="7.5" fill="#aaaaaa">Indirect</text>
+<text x="90" y="526" text-anchor="middle" font-size="7.5" fill="#aaaaaa">object</text>
+<line x1="214" y1="486" x2="214" y2="494" stroke="#e8e8e8" stroke-width="1.5"/>
+<text x="214" y="504" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">S₁</text>
+<text x="214" y="516" text-anchor="middle" font-size="7.5" fill="#aaaaaa">Subject</text>
+<text x="214" y="526" text-anchor="middle" font-size="7.5" fill="#aaaaaa">(1st)</text>
+<line x1="338" y1="486" x2="338" y2="494" stroke="#e8e8e8" stroke-width="1.5"/>
+<text x="338" y="504" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">S₂</text>
+<text x="338" y="516" text-anchor="middle" font-size="7.5" fill="#aaaaaa">Subject</text>
+<text x="338" y="526" text-anchor="middle" font-size="7.5" fill="#aaaaaa">(2nd)</text>
+<line x1="462" y1="486" x2="462" y2="494" stroke="#e8e8e8" stroke-width="1.5"/>
+<text x="462" y="504" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">END</text>
+<text x="462" y="516" text-anchor="middle" font-size="7.5" fill="#aaaaaa">Final</text>
+<text x="462" y="526" text-anchor="middle" font-size="7.5" fill="#aaaaaa">token</text>
+<line x1="60" y1="562" x2="492" y2="562" stroke="#aaaaaa" stroke-width="1" marker-end="url(#a-flow)"/>
+<text x="276" y="559" text-anchor="middle" font-size="8" fill="#aaaaaa">sequence position</text>
+<text x="548" y="60" font-size="9" font-weight="bold" fill="#1a1a1a">Head types:</text>
+<circle cx="555" cy="72" r="7" fill="#c0392b"/>
+<text x="555" y="75" text-anchor="middle" font-size="6.5" font-weight="bold" fill="white">NM</text>
+<text x="566" y="76" font-size="8" fill="#1a1a1a">Name-mover</text>
+<circle cx="555" cy="88" r="7" fill="#d35400"/>
+<text x="555" y="91" text-anchor="middle" font-size="6.5" font-weight="bold" fill="white">SI</text>
+<text x="566" y="92" font-size="8" fill="#1a1a1a">S-inhibition</text>
+<circle cx="555" cy="104" r="7" fill="#2471a3"/>
+<text x="555" y="107" text-anchor="middle" font-size="6.5" font-weight="bold" fill="white">IND</text>
+<text x="566" y="108" font-size="8" fill="#1a1a1a">Induction</text>
+<circle cx="555" cy="120" r="7" fill="#1e8449"/>
+<text x="555" y="123" text-anchor="middle" font-size="6.5" font-weight="bold" fill="white">DT</text>
+<text x="566" y="124" font-size="8" fill="#1a1a1a">Dup-token</text>
+<text x="548" y="150" font-size="9" font-weight="bold" fill="#1a1a1a">Arrows:</text>
+<line x1="548" y1="162" x2="580" y2="162" stroke="#d35400" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#a-si)"/>
+<text x="584" y="166" font-size="7.5" fill="#1a1a1a">Attends to (K,V)</text>
+<line x1="548" y1="178" x2="580" y2="178" stroke="#888" stroke-width="1.4" marker-end="url(#a-flow)"/>
+<text x="584" y="182" font-size="7.5" fill="#1a1a1a">Residual stream</text>
+<text x="584" y="192" font-size="7.5" fill="#1a1a1a">contribution</text>
+<text x="548" y="212" font-size="7.5" font-weight="bold" fill="#1a1a1a">Scores:</text>
+<text x="548" y="224" font-size="7" fill="#aaaaaa">Normalised logit-diff</text>
+<text x="548" y="234" font-size="7" fill="#aaaaaa">recovery (n=100)</text>
+<text x="548" y="250" font-size="7" fill="#aaaaaa">Note (†): SI heads have</text>
+<text x="548" y="260" font-size="7" fill="#aaaaaa">highest individual</text>
+<text x="548" y="270" font-size="7" fill="#aaaaaa">patching score in</text>
+<text x="548" y="280" font-size="7" fill="#aaaaaa">Llama-3.2-3B (unlike</text>
+<text x="548" y="290" font-size="7" fill="#aaaaaa">GPT-2 where NM leads).</text>
+</svg>
