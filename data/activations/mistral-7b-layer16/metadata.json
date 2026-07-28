@@ -1,0 +1,20 @@
+{
+  "model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "num_layers": 32,
+  "target_layer": 16,
+  "layer_depth_pct": 50.0,
+  "hidden_size": 4096,
+  "n_tokens_written": 500000,
+  "chunk_size": 512,
+  "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+  "activations_file": "activations.npy",
+  "activations_dtype": "float16",
+  "activations_shape": [
+    500000,
+    4096
+  ],
+  "elapsed_seconds": 1361.2,
+  "tokens_per_second": 367.0,
+  "weights_precision": "4-bit (mlx-community/Mistral-7B-v0.3-4bit)",
+  "note": "Layer index 16 is the 50% midpoint of 32 layers. Same wikitext-103-raw-v1 corpus as Llama-3.2-3B run for fair comparison. CAUTION: weights are 4-bit quantized (no public bf16 base model available without HF auth). Llama run used bf16 weights \u2014 quantization is a potential confound in cross-model activation comparisons. Re-run with mlx-community/Mistral-7B-v0.3-bf16 (or mistralai/Mistral-7B-v0.3 + mlx_lm.convert) once HF_TOKEN is set, if weight-precision parity is required."
+}

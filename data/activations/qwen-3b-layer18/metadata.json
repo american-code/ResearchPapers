@@ -1,0 +1,18 @@
+{
+  "model": "mlx-community/Qwen2.5-3B-bf16",
+  "num_layers": 36,
+  "target_layer": 18,
+  "layer_depth_pct": 50.0,
+  "hidden_size": 2048,
+  "n_tokens_written": 500000,
+  "chunk_size": 512,
+  "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+  "activations_file": "activations.npy",
+  "activations_dtype": "float16",
+  "activations_shape": [
+    500000,
+    2048
+  ],
+  "elapsed_seconds": 734.4,
+  "tokens_per_second": 681.0
+}
