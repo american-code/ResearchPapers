@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="490" font-family="'Helvetica Neue', Arial, sans-serif">
+<rect width="680" height="490" fill="#fafafa"/>
+<rect x="90" y="55" width="540" height="360" fill="white" stroke="#cccccc" stroke-width="1"/>
+<rect x="468.0" y="378.9" width="162.0" height="36.1" fill="#e8f8ee" opacity="0.55"/>
+<text x="549.0" y="407" font-size="9" fill="#27ae60" text-anchor="middle" opacity="0.85">ideal region</text>
+<line x1="90" y1="415.0" x2="630" y2="415.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="84" y="419.0" font-size="10" fill="#666" text-anchor="end">1×</text>
+<line x1="90" y1="355.0" x2="630" y2="355.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="84" y="359.0" font-size="10" fill="#666" text-anchor="end">3×</text>
+<line x1="90" y1="295.0" x2="630" y2="295.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="84" y="299.0" font-size="10" fill="#666" text-anchor="end">10×</text>
+<line x1="90" y1="235.0" x2="630" y2="235.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="84" y="239.0" font-size="10" fill="#666" text-anchor="end">32×</text>
+<line x1="90" y1="175.0" x2="630" y2="175.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="84" y="179.0" font-size="10" fill="#666" text-anchor="end">100×</text>
+<line x1="90" y1="115.0" x2="630" y2="115.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="84" y="119.0" font-size="10" fill="#666" text-anchor="end">316×</text>
+<line x1="90" y1="55.0" x2="630" y2="55.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="84" y="59.0" font-size="10" fill="#666" text-anchor="end">1000×</text>
+<line x1="90.0" y1="55" x2="90.0" y2="415" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="90.0" y="431" font-size="10" fill="#666" text-anchor="middle">0.0</text>
+<line x1="198.0" y1="55" x2="198.0" y2="415" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="198.0" y="431" font-size="10" fill="#666" text-anchor="middle">0.2</text>
+<line x1="306.0" y1="55" x2="306.0" y2="415" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="306.0" y="431" font-size="10" fill="#666" text-anchor="middle">0.4</text>
+<line x1="414.0" y1="55" x2="414.0" y2="415" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="414.0" y="431" font-size="10" fill="#666" text-anchor="middle">0.6</text>
+<line x1="522.0" y1="55" x2="522.0" y2="415" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="522.0" y="431" font-size="10" fill="#666" text-anchor="middle">0.8</text>
+<line x1="630.0" y1="55" x2="630.0" y2="415" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="630.0" y="431" font-size="10" fill="#666" text-anchor="middle">1.0</text>
+<rect x="90" y="55" width="540" height="360" fill="none" stroke="#888" stroke-width="1.5"/>
+<text x="360" y="480" font-size="12" fill="#333" text-anchor="middle" font-weight="bold">Efficacy (keyword hit-rate at best α)</text>
+<text x="14" y="235" font-size="12" fill="#333" text-anchor="middle" font-weight="bold" transform="rotate(-90,14,235)">Side-effect cost (math PPL ratio, log scale)</text>
+<text x="340" y="30" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">Steering Benchmark: Efficacy vs. Side-Effect Cost</text>
+<text x="340" y="46" font-size="10" fill="#666" text-anchor="middle">Llama-3.2-3B · layers 8, 16, 24 · best α per concept</text>
+<circle cx="603.0" cy="412.5" r="7" fill="#2ecc71" opacity="0.9" stroke="white" stroke-width="1.5"/>
+<text x="615.0" y="410.51687855815663" font-size="9.5" fill="#2ecc71" font-weight="600">Positive Sentiment</text>
+<text x="615.0" y="421.51687855815663" font-size="8.5" fill="#aaa">α=+1.0</text>
+<circle cx="360.0" cy="404.9" r="7" fill="#e74c3c" opacity="0.9" stroke="white" stroke-width="1.5"/>
+<text x="270.0" y="422.9023440214662" font-size="9.5" fill="#e74c3c" font-weight="600">Negative Sentiment</text>
+<text x="270.0" y="433.9023440214662" font-size="8.5" fill="#aaa">α=+1.0</text>
+<circle cx="549.0" cy="279.6" r="7" fill="#3498db" opacity="0.9" stroke="white" stroke-width="1.5"/>
+<text x="561.0" y="277.60876422774663" font-size="9.5" fill="#3498db" font-weight="600">French Language</text>
+<text x="561.0" y="288.60876422774663" font-size="8.5" fill="#aaa">α=+0.5</text>
+<polygon points="306.0,67 301.0,77 311.0,77" fill="#f39c12" opacity="0.85"/>
+<circle cx="306.0" cy="86" r="7" fill="#f39c12" opacity="0.9" stroke="white" stroke-width="1.5"/>
+<text x="319.0" y="94" font-size="9.5" fill="#f39c12" font-weight="600">Python Coding</text>
+<text x="319.0" y="106" font-size="8.5" fill="#aaa">α=+2.0  2401× ↑↑↑</text>
+<circle cx="387.0" cy="395.1" r="7" fill="#9b59b6" opacity="0.9" stroke="white" stroke-width="1.5"/>
+<text x="399.0" y="411.08170126706545" font-size="9.5" fill="#9b59b6" font-weight="600">Refusal Behavior</text>
+<text x="399.0" y="422.08170126706545" font-size="8.5" fill="#aaa">α=+1.0</text>
+<text x="94" y="467" font-size="9" fill="#aaa">▲ Python Coding off-scale: 2401× side-effect PPL ratio</text>
+<text x="94" y="479" font-size="9" fill="#aaa">Optimal intervention layer = 24 for all concepts (highest steering vector L2-norm)</text>
+</svg>

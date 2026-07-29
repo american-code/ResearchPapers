@@ -1,0 +1,372 @@
+{
+  "model": "mlx-community/Llama-3.2-3B-bf16",
+  "scoring_date": "2026-07-29",
+  "samples_source": "samples-llama3b.json",
+  "description": "target_score.hit_rate: fraction of completions containing \u22651 target keyword; side_effect_ppl: PPL on math/reasoning probes under steered model; fluency_ppl: PPL on neutral sentences under steered model",
+  "baselines": {
+    "alpha_0_math_ppl": 11.9424,
+    "alpha_0_fluency_ppl": 21.0934
+  },
+  "results": {
+    "positive_sentiment": {
+      "-2": {
+        "alpha": -2,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 35.9018,
+        "side_effect_ratio": 3.0063,
+        "fluency_ppl": 76.7155,
+        "fluency_ratio": 3.637
+      },
+      "-1": {
+        "alpha": -1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 14.4956,
+        "side_effect_ratio": 1.2138,
+        "fluency_ppl": 30.8509,
+        "fluency_ratio": 1.4626
+      },
+      "-0.5": {
+        "alpha": -0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.1,
+        "keyword_density_per_100w": 0.1183,
+        "side_effect_ppl": 12.6627,
+        "side_effect_ratio": 1.0603,
+        "fluency_ppl": 24.1145,
+        "fluency_ratio": 1.1432
+      },
+      "0": {
+        "alpha": 0,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.25,
+        "keyword_density_per_100w": 0.7596,
+        "side_effect_ppl": 11.9424,
+        "side_effect_ratio": 1.0,
+        "fluency_ppl": 21.0934,
+        "fluency_ratio": 1.0
+      },
+      "0.5": {
+        "alpha": 0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.7,
+        "keyword_density_per_100w": 2.5226,
+        "side_effect_ppl": 11.3836,
+        "side_effect_ratio": 0.9532,
+        "fluency_ppl": 22.0596,
+        "fluency_ratio": 1.0458
+      },
+      "1": {
+        "alpha": 1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.95,
+        "keyword_density_per_100w": 6.5006,
+        "side_effect_ppl": 12.5256,
+        "side_effect_ratio": 1.0488,
+        "fluency_ppl": 27.9879,
+        "fluency_ratio": 1.3269
+      },
+      "2": {
+        "alpha": 2,
+        "n_samples": 20,
+        "keyword_hit_rate": 1.0,
+        "keyword_density_per_100w": 14.6654,
+        "side_effect_ppl": 61.7819,
+        "side_effect_ratio": 5.1733,
+        "fluency_ppl": 106.2873,
+        "fluency_ratio": 5.0389
+      }
+    },
+    "negative_sentiment": {
+      "-2": {
+        "alpha": -2,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.2,
+        "keyword_density_per_100w": 0.22,
+        "side_effect_ppl": 61.7819,
+        "side_effect_ratio": 5.1733,
+        "fluency_ppl": 106.2873,
+        "fluency_ratio": 5.0389
+      },
+      "-1": {
+        "alpha": -1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.05,
+        "keyword_density_per_100w": 0.0625,
+        "side_effect_ppl": 12.5256,
+        "side_effect_ratio": 1.0488,
+        "fluency_ppl": 27.9879,
+        "fluency_ratio": 1.3269
+      },
+      "-0.5": {
+        "alpha": -0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 11.3836,
+        "side_effect_ratio": 0.9532,
+        "fluency_ppl": 22.0596,
+        "fluency_ratio": 1.0458
+      },
+      "0": {
+        "alpha": 0,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.05,
+        "keyword_density_per_100w": 0.0649,
+        "side_effect_ppl": 11.9424,
+        "side_effect_ratio": 1.0,
+        "fluency_ppl": 21.0934,
+        "fluency_ratio": 1.0
+      },
+      "0.5": {
+        "alpha": 0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.15,
+        "keyword_density_per_100w": 0.1747,
+        "side_effect_ppl": 12.6627,
+        "side_effect_ratio": 1.0603,
+        "fluency_ppl": 24.1145,
+        "fluency_ratio": 1.1432
+      },
+      "1": {
+        "alpha": 1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.5,
+        "keyword_density_per_100w": 1.0679,
+        "side_effect_ppl": 14.4956,
+        "side_effect_ratio": 1.2138,
+        "fluency_ppl": 30.8509,
+        "fluency_ratio": 1.4626
+      },
+      "2": {
+        "alpha": 2,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.8,
+        "keyword_density_per_100w": 2.2171,
+        "side_effect_ppl": 35.9018,
+        "side_effect_ratio": 3.0063,
+        "fluency_ppl": 76.7155,
+        "fluency_ratio": 3.637
+      }
+    },
+    "french_language": {
+      "-2": {
+        "alpha": -2,
+        "n_samples": 20,
+        "keyword_hit_rate": 1.0,
+        "keyword_density_per_100w": 3.9608,
+        "side_effect_ppl": 1617.1586,
+        "side_effect_ratio": 135.4135,
+        "fluency_ppl": 739.3188,
+        "fluency_ratio": 35.0498
+      },
+      "-1": {
+        "alpha": -1,
+        "n_samples": 20,
+        "keyword_hit_rate": 1.0,
+        "keyword_density_per_100w": 5.8985,
+        "side_effect_ppl": 39.1394,
+        "side_effect_ratio": 3.2774,
+        "fluency_ppl": 50.1282,
+        "fluency_ratio": 2.3765
+      },
+      "-0.5": {
+        "alpha": -0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.85,
+        "keyword_density_per_100w": 4.8587,
+        "side_effect_ppl": 16.2479,
+        "side_effect_ratio": 1.3605,
+        "fluency_ppl": 26.4432,
+        "fluency_ratio": 1.2536
+      },
+      "0": {
+        "alpha": 0,
+        "n_samples": 20,
+        "keyword_hit_rate": 1.0,
+        "keyword_density_per_100w": 5.7056,
+        "side_effect_ppl": 11.9424,
+        "side_effect_ratio": 1.0,
+        "fluency_ppl": 21.0934,
+        "fluency_ratio": 1.0
+      },
+      "0.5": {
+        "alpha": 0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.85,
+        "keyword_density_per_100w": 16.5682,
+        "side_effect_ppl": 160.4543,
+        "side_effect_ratio": 13.4357,
+        "fluency_ppl": 459.891,
+        "fluency_ratio": 21.8026
+      },
+      "1": {
+        "alpha": 1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.4,
+        "keyword_density_per_100w": 1.6933,
+        "side_effect_ppl": 4752.5433,
+        "side_effect_ratio": 397.9565,
+        "fluency_ppl": 234291.8681,
+        "fluency_ratio": 11107.375
+      },
+      "2": {
+        "alpha": 2,
+        "n_samples": 20,
+        "keyword_hit_rate": 1.0,
+        "keyword_density_per_100w": 41.0145,
+        "side_effect_ppl": 34664.5289,
+        "side_effect_ratio": 2902.6507,
+        "fluency_ppl": 154897.8015,
+        "fluency_ratio": 7343.4387
+      }
+    },
+    "python_coding": {
+      "-2": {
+        "alpha": -2,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 325932.1287,
+        "side_effect_ratio": 27292.0806,
+        "fluency_ppl": 2120553.0812,
+        "fluency_ratio": 100531.7791
+      },
+      "-1": {
+        "alpha": -1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 1846.96,
+        "side_effect_ratio": 154.6561,
+        "fluency_ppl": 2141.5194,
+        "fluency_ratio": 101.5258
+      },
+      "-0.5": {
+        "alpha": -0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.4,
+        "keyword_density_per_100w": 0.6293,
+        "side_effect_ppl": 81.0747,
+        "side_effect_ratio": 6.7888,
+        "fluency_ppl": 85.471,
+        "fluency_ratio": 4.052
+      },
+      "0": {
+        "alpha": 0,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.55,
+        "keyword_density_per_100w": 1.3083,
+        "side_effect_ppl": 11.9424,
+        "side_effect_ratio": 1.0,
+        "fluency_ppl": 21.0934,
+        "fluency_ratio": 1.0
+      },
+      "0.5": {
+        "alpha": 0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.05,
+        "keyword_density_per_100w": 2.5,
+        "side_effect_ppl": 53108.5171,
+        "side_effect_ratio": 4447.0667,
+        "fluency_ppl": 658972.775,
+        "fluency_ratio": 31240.7673
+      },
+      "1": {
+        "alpha": 1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.05,
+        "keyword_density_per_100w": 0.2174,
+        "side_effect_ppl": 27501.3601,
+        "side_effect_ratio": 2302.8394,
+        "fluency_ppl": 100741.4386,
+        "fluency_ratio": 4775.9786
+      },
+      "2": {
+        "alpha": 2,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.4,
+        "keyword_density_per_100w": 0.9744,
+        "side_effect_ppl": 28671.4579,
+        "side_effect_ratio": 2400.8181,
+        "fluency_ppl": 49046.3395,
+        "fluency_ratio": 2325.2027
+      }
+    },
+    "refusal_behavior": {
+      "-2": {
+        "alpha": -2,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 68.2006,
+        "side_effect_ratio": 5.7108,
+        "fluency_ppl": 128.4743,
+        "fluency_ratio": 6.0907
+      },
+      "-1": {
+        "alpha": -1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 14.5628,
+        "side_effect_ratio": 1.2194,
+        "fluency_ppl": 28.6217,
+        "fluency_ratio": 1.3569
+      },
+      "-0.5": {
+        "alpha": -0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 11.7858,
+        "side_effect_ratio": 0.9869,
+        "fluency_ppl": 22.2095,
+        "fluency_ratio": 1.0529
+      },
+      "0": {
+        "alpha": 0,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.0,
+        "keyword_density_per_100w": 0.0,
+        "side_effect_ppl": 11.9424,
+        "side_effect_ratio": 1.0,
+        "fluency_ppl": 21.0934,
+        "fluency_ratio": 1.0
+      },
+      "0.5": {
+        "alpha": 0.5,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.4,
+        "keyword_density_per_100w": 0.6708,
+        "side_effect_ppl": 13.1861,
+        "side_effect_ratio": 1.1041,
+        "fluency_ppl": 23.7777,
+        "fluency_ratio": 1.1273
+      },
+      "1": {
+        "alpha": 1,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.55,
+        "keyword_density_per_100w": 1.6942,
+        "side_effect_ppl": 17.5012,
+        "side_effect_ratio": 1.4655,
+        "fluency_ppl": 34.2023,
+        "fluency_ratio": 1.6215
+      },
+      "2": {
+        "alpha": 2,
+        "n_samples": 20,
+        "keyword_hit_rate": 0.75,
+        "keyword_density_per_100w": 3.9515,
+        "side_effect_ppl": 104.1501,
+        "side_effect_ratio": 8.7211,
+        "fluency_ppl": 275.4013,
+        "fluency_ratio": 13.0563
+      }
+    }
+  }
+}
