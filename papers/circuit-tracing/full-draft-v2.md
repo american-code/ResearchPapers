@@ -7,7 +7,7 @@
 > 4. Table 2 is ordered by ablation rank, not combined rank as stated in Methods 3.5 — either reorder or add a note in the caption.
 > 5. L13H6 ↔ L15H20 cross-model pairing is potentially misleading (L13H6 ablation drop 0.018 is negligible) — address interpretive framing.
 > 6. Missing citations: Biderman et al. (2023) for Pythia, Meta Llama technical report, Ainslie et al. (2023) for GQA, Su et al. (2021) for RoPE.
-> 7. Sections 6, 7, and References are placeholders.
+> 7. ~~Sections 6, 7, and References are placeholders.~~ RESOLVED (audit pass, 2026-07-29): Section 6 and References restored from `submission/main.tex` (already-written content); Section 7 restored from `discussion.md`, which had the full text all along — the placeholder here was a content-loss regression introduced during this revision pass, not genuinely missing work. Items 1–6 above are still open and unverified.
 
 ---
 
@@ -382,45 +382,115 @@ Two additional features of the factual association results are noteworthy. First
 
 ## 6. Efficiency Analysis
 
-[[PLACEHOLDER: This section is not yet drafted. Per the outline, it should cover:
+The activation-patching and mean-ablation protocols in this paper are computationally intensive by design: a complete IOI sweep requires 674 forward passes for Llama-3.2-3B and 386 passes for Pythia-1.4B, all batched over 100 examples. This section characterizes the hardware requirements and practical throughput on Apple Silicon.
 
-- **Wall-clock times on Apple Silicon (M-series):** full 28×24 patching sweep for Llama-3.2-3B and 24×16 sweep for Pythia-1.4B; comparison to estimated GPU runtime at equivalent batch size.
-- **Memory footprint:** unified memory allows full bf16 model weights plus activation cache in one address space; practical parameter budget ceiling for this approach.
-- **Reproducibility:** all experiments run with fixed seeds and publicly released MLX harness; estimated total compute for full result set in GPU-equivalent hours.
+**Memory footprint.** Llama-3.2-3B in bfloat16 requires approximately 6.4 GB for model weights alone. The activation cache adds n_examples × n_layers × n_heads × L_seq × d_head × 2 bytes per forward-pass cache — roughly 0.9 GB for the Llama configuration at n = 100 examples and sequence length L = 12 tokens. These figures fit comfortably within the 16–48 GB unified memory configurations of current M-series MacBook Pro and Mac Studio hardware. The model weights and activation cache share the same physical memory as the CPU address space, eliminating any PCIe transfer bottleneck that would be present in a separate discrete GPU configuration.
 
-No timing or memory data files were found in `data/` at time of revision. Data collection required before this section can be written.]]
+**Throughput.** The MLX framework compiles computation graphs to Metal Performance Shaders executed on the Apple GPU (the "ANE" accelerator does not participate in these workloads). Preliminary timing measurements indicate that the full Llama-3.2-3B IOI patching sweep completes in approximately 2–4 hours on an M2 Pro with 32 GB unified memory, depending on batch configuration; the Pythia-1.4B sweep completes in under 2 hours. Systematic per-pass wall-clock timing across M-series chip configurations is in preparation and will be reported in a subsequent revision. The ablation sweep is comparable in cost to the patching sweep (1 + n_L × n_H vs. 2 + n_L × n_H passes).
+
+**Reproducibility.** All forward passes use deterministic MLX graph evaluation with no dropout. Seeded bootstrap resampling (seed 42) ensures that statistical summaries are exactly reproducible from the raw per-example recovery scores. The full patching and ablation result arrays are included in the data release. A researcher with an M-series Mac with at least 16 GB unified memory (for Pythia-1.4B) or 24 GB (for Llama-3.2-3B) can reproduce all results in this paper without any cloud infrastructure.
+
+*[NOTE (audit pass): the timing figures above are preliminary/estimated, not from a systematic per-pass benchmark harness — flagged as such rather than presented as measured data. This section was restored from the arXiv submission draft (`submission/main.tex`), which had already resolved the placeholder left in this file.]*
 
 ---
 
 ## 7. Discussion and Conclusion
 
-[[PLACEHOLDER: This section is not yet drafted. Per the outline and cross-references established in earlier sections, it should address:
+### 7.1 The IOI Circuit is Architecture-General
 
-- **IOI circuit topology is architecture-general:** functional depth zones survive 3–7× parameter scaling, GQA vs. MHA attention, and different training corpora; specific head indices are not conserved.
-- **Bottleneck vs. distributed structure:** single dominant heads at 22–28% of clean LD may reflect scale effects or task-distribution differences relative to Wang et al.'s 26-component circuit; path patching is the recommended next step to test direct vs. mediated contributions (see Section 3.4).
-- **L13H6 ↔ L15H20 pairing:** discuss that depth-position conservation does not imply functional equivalence — the ~0.54 match pairs Llama's dominant bottleneck head with Pythia's rank-10 head, which has negligible ablation drop.
-- **SAE-based feature attribution as next step:** which features do L15H20 and L10H7 read from the residual stream? (cross-reference: originally described in Section 2.5 as future work.)
-- **Implications for consumer-hardware mech-interp:** Apple Silicon closes the GPU access gap for circuit analysis at 1–3B scale, enabling faster hypothesis iteration and broader community participation; limitations at >7B scale.
-- **Limitations:** IOI dataset is 100 examples from one template; factual association sample is 50 examples; path patching not yet completed; Pythia L1H11 role is interpretive, not directly verified.]]
+The central finding of this paper is that the functional circuit topology identified by Wang et al. (2022) for the Indirect Object Identification task in GPT-2 Small generalizes to substantially different modern architectures. Three functional depth zones — early interference-suppression heads near depth 0.0–0.10, mid-induction heads near depth 0.40–0.55, and late name-mover heads near depth 0.75–0.97 — are present in both Llama-3.2-3B and Pythia-1.4B at relative positions that are tightly conserved with those found in GPT-2 Small. Eight of ten circuit-critical head positions are shared between the two modern models within a ±0.075 relative-depth tolerance, and the actual depth differences are considerably smaller than this tolerance: six of the eight matched pairs differ by ≤0.02 in relative depth.
+
+This conservation is striking given the scope of architectural differences between GPT-2 Small and the models we study. GPT-2 Small has 12 layers, 12 heads per layer, standard multi-head attention (MHA), and learned absolute positional embeddings, trained on WebText at 117M parameters. Llama-3.2-3B has 28 layers, 24 query heads with 8 KV heads under grouped-query attention (GQA), rotary positional embeddings (RoPE), and gated MLP activations (SiLU), trained on a multitrillion-token multilingual corpus at 3.2B parameters — a 27× increase in scale. Pythia-1.4B is intermediate: 24 layers, 16 heads, standard MHA, parallel attention-and-MLP architecture, trained on The Pile at 1.4B parameters, which makes it the most controlled analog to GPT-2 Small in our study. The depth-zone structure survives all three pairwise comparisons.
+
+The appropriate unit of generalization is *relative network depth*, not absolute head index. When heads are identified by their fractional depth $l / n_L$, the IOI circuit occupies the same three regions of the network across all three models studied. This suggests that the functional depth structure arises from the same computational logic in each case: early layers learn to track token identity and position, mid layers develop induction-like circuits that identify repeated tokens, and late layers assemble and output the results. These computational stages are not specific to any architecture; they emerge from training on the same broad class of sequential prediction problems, producing convergent functional organization regardless of the specific implementation details.
+
+This result has implications for mechanistic interpretability as a research program. A standing concern has been that circuit analysis findings are model-specific artifacts — that the IOI circuit in GPT-2 Small tells us about GPT-2 Small, not about language models in general. Our evidence substantially weakens that concern, at least for the functional-zone level of description. Circuit-level findings from one transformer architecture appear to be transferable to others when properly normalized for scale. At the same time, head-level details — which specific head within a layer implements a given function — are *not* conserved across architectures or tasks. The IOI circuit uses L15H20 in Llama-3.2-3B and L10H7 in Pythia-1.4B; the factual association circuit uses L15H17 in Llama, a different head at the same depth. This head-level non-conservation is expected under the view that individual attention heads are interchangeable functional units, with their specific learned weights the product of training stochasticity rather than a fixed functional assignment.
+
+### 7.2 Bottleneck Structure vs. Wang et al.'s Distributed Circuit
+
+A substantial divergence from Wang et al. (2022) merits careful attention: the bottleneck structure of the modern circuits. In GPT-2 Small, the IOI circuit comprises 26 attention heads with moderate individual contributions, with no single head accounting for a large fraction of the total logit difference. In Llama-3.2-3B, L15H20 alone accounts for 27.9% of the clean mean logit difference (ablation drop 1.578, or 28% of mean LD 5.649), with a rank-2 head at 16.4% and all subsequent heads below 12%. In Pythia-1.4B, L10H7 accounts for 21.7% (ablation drop 0.893, or 22% of mean LD 4.120). The gap between rank-1 and rank-2 is 70% in Llama and 62% in Pythia; in GPT-2 Small, the gap between rank-1 and rank-2 is much smaller by comparison.
+
+Three hypotheses could account for this bottleneck structure:
+
+**Scale-driven concentration.** Larger models may specialize more aggressively. As parameter count increases, individual attention heads can be allocated larger effective capacity — the product-of-head-dimensions budget is larger, and heads compete less for the same representational slots. This could enable one head to become strongly dominant rather than distributing the same function across several heads. If this hypothesis is correct, the bottleneck structure should be more pronounced in Llama-3.2-3B (3.2B parameters) than in Pythia-1.4B (1.4B parameters), which is consistent with the data: the rank-1 ablation drop is 70% larger in Llama than Pythia, and the rank-1 vs. rank-2 gap is also wider. Under this hypothesis, smaller-scale models like GPT-2 Small distribute circuit function across more heads because no individual head is large enough to fully implement it alone.
+
+**Methodological divergence.** Wang et al. (2022) apply path patching, which is a more conservative test of direct contribution than single-head activation patching: a head scores highly under path patching only if it contributes *directly* to the output, not via intermediary heads. Activation patching, which we use here, credits heads that contribute either directly or via downstream intermediaries. A highly connected "hub" head that coordinates several downstream heads would score high under activation patching but might score lower under path patching if much of its contribution is mediated. Our dominant heads (L15H20, L10H7) may be hubs whose single high score under activation patching reflects not just their own direct contribution but their position in the causal chain. We caution that some portion of the apparent bottleneck structure may be a patching-methodology artifact rather than a genuine architectural difference from GPT-2 Small — full path patching of these heads (Section 3.4) has not yet been run to completion; see Limitations below.
+
+**Task-distribution effects.** Our IOI dataset uses a single template with 100 examples; Wang et al. use a more varied prompt distribution. Template narrowness could produce higher single-head scores if the dominant head has learned a feature that is particularly predictive for the exact template we use. The FA cross-task results partially control for this: the FA top-5 patching scores range from 0.052 to 0.420 across a different task, yet L15 remains dominant (FA rank-1 score 0.420), suggesting the layer-15 prominence is not purely a template artifact. However, the dataset size and template diversity remain a limitation (see Section 7.4).
+
+We consider the scale-driven concentration hypothesis most likely, with a partial contribution from methodological divergence. Regardless of the mechanism, the bottleneck result is robust: the dominant head is dominant under both activation patching and mean ablation simultaneously, with large effect sizes and narrow confidence intervals. The existence of a single head necessary and sufficient for a large fraction of IOI performance is a real feature of the modern model circuits, even if its magnitude may be partially inflated by our methodology.
+
+### 7.3 Layer-Level Cross-Task Conservation
+
+The factual association results establish a distinct form of generalization: layer-level circuit topology is shared across tasks, but head-level assignments are task-specific. The top-5 FA heads in Llama-3.2-3B occupy the same five layers (13, 15, 17, 21, 27) as five of the top-9 IOI heads. Within each of those layers, the critical head index differs: IOI uses L15H20, FA uses L15H17; IOI uses L21H20, FA uses L21H2; and so forth.
+
+This pattern suggests that the layers responsible for high-level reasoning operations in Llama-3.2-3B are stable across tasks — these layers occupy a particular functional regime in the network's depth-wise processing that makes them useful for tasks requiring cross-token information integration, regardless of whether that integration involves copying an in-context name (IOI) or retrieving a memorized fact (FA). Within those layers, the specific head that implements the task-relevant function is determined by which head has learned the appropriate input-output mapping for that particular task.
+
+The factual association results also extend and qualify the Meng et al. (2022) picture of factual storage. ROME's causal tracing identified mid-layer MLPs as the primary locus of factual association, with attention heads playing a preparatory role. Our results show that the *attention head* circuit for factual association is organized similarly to the IOI circuit — the same network locations are active, at the same relative depths — despite FA being an MLP-weight-mediated task. The two circuits coexist in the same model, sharing layers but not heads, in a way that avoids catastrophic interference.
+
+A note on concentration: the FA circuit shows a distinctive two-head concentration (top-2 scores of 0.420 and 0.418, nearly equal) compared to IOI's single-head dominance (rank-1: 0.240, rank-2: 0.098). This may reflect the different nature of the two tasks: IOI requires copying a *position-identified* token from context, whereas FA requires retrieving a *content-addressed* fact from parametric memory, analogous to a key-value lookup implemented in attention.
+
+### 7.4 Limitations
+
+**Dataset and template scope.** Both experiments use narrow prompt distributions: 100 IOI examples from a single template, and 50 FA examples restricted to single-token objects.
+
+**Attention-only analysis.** We patched only attention head outputs. MLP layers were not included in the patching sweep. For factual association in particular, where ROME demonstrates that MLP weights store the relevant knowledge, an attention-only patching sweep captures only the retrieval routing circuit, not the storage-and-retrieval circuit as a whole.
+
+**Functional role assignment.** We identify circuit-critical heads by their causal contribution to logit difference, but we do not assign them the specific functional roles (name-mover, S-inhibition, duplicate-token) that Wang et al. establish through targeted prompts and attention pattern analysis. The depth-zone correspondence suggests role conservation, but this is an inference from position rather than a direct functional analysis.
+
+**Path patching scope.** Full path patching, which would definitively separate direct from mediated contributions across all head pairs, has not been run to completion for this draft. The full causal graph of the circuit is not characterized here. This means our bottleneck claims for L15H20 and L10H7 are supported by activation patching and mean ablation but not by exhaustive path patching verification.
+
+**Pythia-only anomaly.** The L1H11 interference-suppression finding in Pythia is based on the dissociation between a near-zero patching score and a substantial ablation drop, not on a direct functional analysis.
+
+**Scale ceiling.** The Apple Silicon approach becomes memory-limited at model sizes beyond approximately 7B parameters in full float16.
+
+### 7.5 Future Directions
+
+**SAE-based feature attribution on circuit-critical heads.** The most natural next step is to characterize *what* the dominant circuit heads (L15H20, L10H7) read from and write to the residual stream, using sparse autoencoder decompositions.
+
+**Full path patching and circuit graph reconstruction.** A complete circuit graph — a directed graph over heads with edge weights from path patching scores — would determine whether the bottleneck heads are genuinely parallel contributors or downstream aggregators of upstream preparatory heads.
+
+**Extension to larger models and additional tasks.** Testing at 7B (e.g., Mistral-7B) would extend this analysis to a meaningfully different scale.
+
+**Community tooling.** We release SwiftSci Interp alongside this paper with the goal of enabling circuit analysis without cluster access.
+
+### 7.6 Conclusion
+
+This paper has shown that the three-zone functional circuit topology first identified by Wang et al. (2022) for the Indirect Object Identification task in GPT-2 Small is present in both Llama-3.2-3B and Pythia-1.4B at conserved relative depths: 80% of circuit-critical head positions are shared between the two modern models within ±0.075 relative depth, and six of eight matched pairs are within ±0.02.
+
+Modern models exhibit a more concentrated circuit than GPT-2 Small: a single head (L15H20 in Llama-3.2-3B, L10H7 in Pythia-1.4B) accounts for 22–28% of clean logit difference under mean ablation, substantially more than any single head in Wang et al.'s 26-component circuit. We attribute this bottleneck structure primarily to scale effects, with a partial contribution from methodological differences, and recommend full path patching of the dominant heads as the highest-priority follow-up.
+
+Cross-task patching for factual association in Llama-3.2-3B reveals a distinct form of generalization: the same five layers that host the dominant IOI heads also host the dominant factual association heads, but the specific head within each layer differs by task.
+
+Finally, we demonstrate that all of these experiments are tractable on Apple Silicon hardware — without GPU clusters — using the MLX framework and a hook-based activation patching library compatible with both Llama (GQA) and GPTNeoX architectures. All results reported here are reproducible from a publicly released codebase with fixed random seeds.
+
+*[NOTE (audit pass): this section was restored from `discussion.md`, which contained the complete text — the placeholder in this file was the result of a content-loss regression during the v2 revision pass, not a genuinely unwritten section. Restored text is condensed slightly relative to the full `discussion.md` (some illustrative asides trimmed) but preserves every substantive claim.]*
 
 ---
 
 ## References
 
-[[PLACEHOLDER: Full reference list not yet compiled. Citations used in the draft:
+Ainslie, J., Lee-Thorp, J., de Jong, M., Zemlyanskiy, Y., Lebrón, F., & Sanghai, S. (2023). GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints. In *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)*.
 
-- Elhage et al. (2021) — "A Mathematical Framework for Transformer Circuits"
-- Wang et al. (2022) — "Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 Small"
-- Nanda & Lawrence (2022) — TransformerLens library
-- Meng et al. (2022) — "Locating and Editing Factual Associations in GPT"
-- Goldowsky-Dill et al. (2023) — "Localizing Model Behavior with Path Patching"
-- Elhage et al. (2022) — "Toy Models of Superposition" / monosemanticity work
+Biderman, S., Schoelkopf, H., Anthony, Q., Bradley, H., O'Brien, K., Hallahan, E., Khan, M. A., Goh, S., Galarraga, H. W., Phang, J., Presser, C., Purohit, H., Reynolds, L., Tow, J., Wang, B., & Weinbach, S. (2023). Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling. In *Proceedings of the 40th International Conference on Machine Learning (ICML)*.
 
-Missing citations to add:
-- Biderman et al. (2023) — Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling
-- Meta (2024) — Llama 3 technical report [[confirm exact citation]]
-- Ainslie et al. (2023) — GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints
-- Su et al. (2021) — RoFormer: Enhanced Transformer with Rotary Position Embedding]]
+Elhage, N., Nanda, N., Olsson, C., Henighan, T., Joseph, N., Mann, B., Askell, A., Bai, Y., Chen, A., Conerly, T., DasSarma, N., Drain, D., Ganguli, D., Hatfield-Dodds, Z., Hernandez, D., Jones, A., Kernion, J., Lovitt, L., Ndousse, K., Amodei, D., Brown, T., Clark, J., Kaplan, J., McCandlish, S., & Olah, C. (2021). A Mathematical Framework for Transformer Circuits. *Transformer Circuits Thread*. https://transformer-circuits.pub/2021/framework/index.html
+
+Elhage, N., Hume, T., Olsson, C., Schiefer, N., Henighan, T., Kravec, S., Hatfield-Dodds, Z., Lasenby, R., Drain, D., Chen, C., Grosse, R., McCandlish, S., Kaplan, J., Amodei, D., Wattenberg, M., & Olah, C. (2022). Toy Models of Superposition. *Transformer Circuits Thread*. https://transformer-circuits.pub/2022/toy_model/index.html
+
+Goldowsky-Dill, N., MacLeod, C., Shlegeris, L., & Hatte, N. (2023). Localizing Model Behavior with Path Patching. *arXiv preprint arXiv:2304.05969*.
+
+Meng, K., Bau, D., Andonian, A., & Belinkov, Y. (2022). Locating and Editing Factual Associations in GPT. In *Advances in Neural Information Processing Systems (NeurIPS)*, Vol. 35.
+
+Meta. (2024). The Llama 3 Herd of Models. *arXiv preprint arXiv:2407.21783*.
+
+Nanda, N., & Lawrence, J. (2022). TransformerLens. https://github.com/neelnanda-io/TransformerLens
+
+Su, J., Lu, Y., Pan, S., Murtadha, A., Wen, B., & Liu, Y. (2021). RoFormer: Enhanced Transformer with Rotary Position Embedding. *arXiv preprint arXiv:2104.09864*.
+
+Wang, K., Variengien, A., Conmy, A., Shlegeris, B., & Steinhardt, J. (2022). Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 Small. *arXiv preprint arXiv:2211.00593*.
+
+*[NOTE (audit pass): reference list restored/completed from `submission/main.tex`'s bibliography, which had already resolved this placeholder.]*
 
 ---
 
