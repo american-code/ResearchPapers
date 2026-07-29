@@ -1,0 +1,42 @@
+Loading activations: data/activations/mistral-7b-layer16/activations_50k.npy
+  shape     : (50000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 1000,
+  "batch": 2048,
+  "warmup": 100,
+  "seed": 42,
+  "n_source_tokens": 50000,
+  "total_tokens": 2048000,
+  "epochs_equiv": 41.0
+}
+
+Training  steps=1,000  dict=16384  K=128  lr=0.0001  batch=2048
+
+step      1/1,000  loss=0.0622  L0=128.0  FVE=-0.088  dead=  748  lr=1.00e-06       675 tok/s
+step    100/1,000  loss=0.0464  L0=128.0  FVE=0.601  dead=  522  lr=1.00e-04     1,470 tok/s
+step    200/1,000  loss=0.0089  L0=128.0  FVE=0.829  dead=  468  lr=9.72e-05     1,512 tok/s
+step    300/1,000  loss=0.0042  L0=128.0  FVE=0.944  dead=  440  lr=8.90e-05     1,664 tok/s
+step    400/1,000  loss=0.0037  L0=128.0  FVE=0.936  dead=  418  lr=7.64e-05     1,685 tok/s
+step    500/1,000  loss=0.0035  L0=128.0  FVE=0.922  dead=  404  lr=6.09e-05     1,717 tok/s
+  [saved checkpoint_step_000500.npz]
+step    600/1,000  loss=0.0033  L0=128.0  FVE=0.896  dead=  384  lr=4.44e-05     1,662 tok/s
+step    700/1,000  loss=0.0033  L0=128.0  FVE=0.944  dead=  376  lr=2.89e-05     1,581 tok/s
+step    800/1,000  loss=0.0032  L0=128.0  FVE=0.930  dead=  361  lr=1.62e-05     1,587 tok/s
+step    900/1,000  loss=0.0032  L0=128.0  FVE=0.944  dead=  346  lr=7.92e-06     1,620 tok/s
+step  1,000/1,000  loss=0.0032  L0=128.0  FVE=0.965  dead=  339  lr=5.00e-06     1,654 tok/s
+  [saved checkpoint_step_001000.npz]
+  [saved checkpoint_final.npz]
+
+Done — 1,000 steps in 20.7 min
+Output : data/sae-runs/mistral-7b-layer16

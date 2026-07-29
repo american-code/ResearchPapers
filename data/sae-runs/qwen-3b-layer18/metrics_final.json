@@ -13,6 +13,6 @@
   "n_source_tokens": 500000,
   "total_tokens": 102400000,
   "epochs_equiv": 204.8,
-  "training_elapsed_s": 0.4,
+  "training_elapsed_s": 0.1,
   "training_elapsed_min": 0.0
 }

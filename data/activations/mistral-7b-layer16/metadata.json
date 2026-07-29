@@ -4,10 +4,10 @@
   "target_layer": 16,
   "layer_depth_pct": 50.0,
   "hidden_size": 4096,
-  "n_tokens_written": 500000,
+  "n_tokens_written": 50000,
   "chunk_size": 512,
   "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
-  "activations_file": "activations.npy",
+  "activations_file": "activations_50k.npy",
   "activations_dtype": "float16",
   "activations_shape": [
     500000,

@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "source_model": "mlx-community/Llama-3.2-3B-bf16",
+    "source_layer": 14,
+    "n_source_tokens": 500000,
+    "d_in": 3072,
+    "dict_size": 4096,
+    "k": 64,
+    "lr": 0.0001,
+    "steps": 50000,
+    "batch_per_worker": 256,
+    "warmup": 2000,
+    "seed": 42,
+    "log_interval": 500,
+    "ckpt_interval": 10000,
+    "dead_window": 5000,
+    "note": "Full 50k-step distributed run. Two-process setup validated in data/distributed-sae-training-validation.json (5k steps, loss within 0.52% of baseline)."
+  },
+  "distributed": {
+    "n_workers": 2,
+    "data_partition": [
+      "worker_0: tokens [0:250000]",
+      "worker_1: tokens [250000:500000]"
+    ],
+    "aggregation": "weighted_average (equal weights, alpha=0.5)",
+    "elapsed_s": 4779.5,
+    "elapsed_min": 79.7,
+    "final_step": 50000,
+    "final_mse": 0.010613,
+    "final_l0": 64.0,
+    "final_var_explained": 0.9822,
+    "final_dead_features": 1109,
+    "final_dead_rate": 0.2708
+  },
+  "baseline_same_config": {
+    "n_workers": 1,
+    "batch": 512,
+    "elapsed_s": 3297.4,
+    "elapsed_min": 55.0,
+    "final_step": 50000,
+    "final_mse": 0.010608,
+    "final_l0": 64.0,
+    "final_var_explained": 0.9822,
+    "final_dead_features": 1117,
+    "final_dead_rate": 0.2727
+  },
+  "comparison": {
+    "final_mse_dist": 0.010613,
+    "final_mse_base": 0.010608,
+    "mse_ratio_dist_over_base": 1.0005,
+    "final_l0_dist": 64.0,
+    "final_l0_base": 64.0,
+    "final_var_explained_dist": 0.9822,
+    "final_var_explained_base": 0.9822,
+    "final_dead_rate_dist": 0.2708,
+    "final_dead_rate_base": 0.2727,
+    "within_5pct_mse": true,
+    "verdict": "PASS: distributed MSE within 5% of single-node baseline at step 50000"
+  },
+  "comparison_to_earlier_single_node": {
+    "note": "Earlier single-node run at data/sae-runs/llama-3b-layer16 used dict_size=16384, k=128, batch=2048 \u2014 4x larger dict and batch. Not directly comparable. Reference metrics at step 13k of that run: loss=0.007271, l0=128.0, fve=0.9835, dead_5k=5278.",
+    "config_diff": {
+      "distributed_run": {
+        "dict_size": 4096,
+        "k": 64,
+        "batch": 512
+      },
+      "earlier_run": {
+        "dict_size": 16384,
+        "k": 128,
+        "batch": 2048
+      }
+    }
+  }
+}

@@ -1,0 +1,225 @@
+Loading 500,000 × 3072 float16 activations...
+  loaded in 2.4s
+
+=== Distributed Training (2 workers, gradient averaging, 50k steps) ===
+  [distributed] step      1/50000  loss=1.26273  mse=0.66414  l0=64.0  fve=-0.1145  dead=120(2.9%)  lr=5.00e-08  0.0min
+  [distributed] step    500/50000  loss=0.54582  mse=0.42021  l0=64.0  fve=0.2948  dead=104(2.5%)  lr=2.50e-05  0.8min
+  [distributed] step  1,000/50000  loss=0.22423  mse=0.06700  l0=64.0  fve=0.8876  dead=103(2.5%)  lr=5.00e-05  1.8min
+  [distributed] step  1,500/50000  loss=0.03289  mse=0.02415  l0=64.0  fve=0.9595  dead=103(2.5%)  lr=7.50e-05  2.6min
+  [distributed] step  2,000/50000  loss=0.02317  mse=0.02183  l0=64.0  fve=0.9634  dead=103(2.5%)  lr=1.00e-04  3.4min
+  [distributed] step  2,500/50000  loss=0.02156  mse=0.02074  l0=64.0  fve=0.9652  dead=102(2.5%)  lr=1.00e-04  4.1min
+  [distributed] step  3,000/50000  loss=0.02039  mse=0.01989  l0=64.0  fve=0.9666  dead=100(2.4%)  lr=9.99e-05  4.7min
+  [distributed] step  3,500/50000  loss=0.01976  mse=0.01980  l0=64.0  fve=0.9668  dead=100(2.4%)  lr=9.98e-05  5.3min
+  [distributed] step  4,000/50000  loss=0.01904  mse=0.01863  l0=64.0  fve=0.9687  dead=99(2.4%)  lr=9.96e-05  6.0min
+  [distributed] step  4,500/50000  loss=0.01859  mse=0.01813  l0=64.0  fve=0.9696  dead=98(2.4%)  lr=9.94e-05  6.7min
+  [distributed] step  5,000/50000  loss=0.01828  mse=0.01780  l0=64.0  fve=0.9701  dead=95(2.3%)  lr=9.91e-05  7.6min
+  [distributed] step  5,500/50000  loss=0.01780  mse=0.01734  l0=64.0  fve=0.9709  dead=473(11.5%)  lr=9.88e-05  8.4min
+  [distributed] step  6,000/50000  loss=0.01749  mse=0.01700  l0=64.0  fve=0.9715  dead=2490(60.8%)  lr=9.84e-05  9.3min
+  [distributed] step  6,500/50000  loss=0.01700  mse=0.01656  l0=64.0  fve=0.9722  dead=2721(66.4%)  lr=9.80e-05  10.1min
+  [distributed] step  7,000/50000  loss=0.01663  mse=0.01620  l0=64.0  fve=0.9728  dead=2848(69.5%)  lr=9.75e-05  10.9min
+  [distributed] step  7,500/50000  loss=0.01616  mse=0.01612  l0=64.0  fve=0.9730  dead=2811(68.6%)  lr=9.70e-05  11.6min
+  [distributed] step  8,000/50000  loss=0.01593  mse=0.01550  l0=64.0  fve=0.9740  dead=2757(67.3%)  lr=9.64e-05  12.3min
+  [distributed] step  8,500/50000  loss=0.01556  mse=0.01518  l0=64.0  fve=0.9745  dead=2660(64.9%)  lr=9.58e-05  13.0min
+  [distributed] step  9,000/50000  loss=0.01513  mse=0.01484  l0=64.0  fve=0.9751  dead=2572(62.8%)  lr=9.51e-05  13.7min
+  [distributed] step  9,500/50000  loss=0.01489  mse=0.01449  l0=64.0  fve=0.9757  dead=2495(60.9%)  lr=9.44e-05  14.5min
+  [distributed] checkpoint → checkpoint_distributed_step_010000.npz
+  [distributed] step 10,000/50000  loss=0.01469  mse=0.01421  l0=64.0  fve=0.9762  dead=2386(58.3%)  lr=9.36e-05  15.2min
+  [distributed] step 10,500/50000  loss=0.01433  mse=0.01393  l0=64.0  fve=0.9766  dead=2274(55.5%)  lr=9.28e-05  16.0min
+  [distributed] step 11,000/50000  loss=0.01428  mse=0.01368  l0=64.0  fve=0.9770  dead=2177(53.1%)  lr=9.20e-05  16.8min
+  [distributed] step 11,500/50000  loss=0.01369  mse=0.01342  l0=64.0  fve=0.9775  dead=2076(50.7%)  lr=9.11e-05  17.7min
+  [distributed] step 12,000/50000  loss=0.01345  mse=0.01321  l0=64.0  fve=0.9778  dead=1995(48.7%)  lr=9.02e-05  18.4min
+  [distributed] step 12,500/50000  loss=0.01329  mse=0.01299  l0=64.0  fve=0.9782  dead=1898(46.3%)  lr=8.92e-05  19.3min
+  [distributed] step 13,000/50000  loss=0.01317  mse=0.01279  l0=64.0  fve=0.9785  dead=1786(43.6%)  lr=8.82e-05  20.1min
+  [distributed] step 13,500/50000  loss=0.01288  mse=0.01266  l0=64.0  fve=0.9788  dead=1717(41.9%)  lr=8.72e-05  20.9min
+  [distributed] step 14,000/50000  loss=0.01269  mse=0.01252  l0=64.0  fve=0.9790  dead=1641(40.1%)  lr=8.61e-05  21.7min
+  [distributed] step 14,500/50000  loss=0.01265  mse=0.01234  l0=64.0  fve=0.9793  dead=1574(38.4%)  lr=8.50e-05  22.6min
+  [distributed] step 15,000/50000  loss=0.01236  mse=0.01218  l0=64.0  fve=0.9796  dead=1519(37.1%)  lr=8.38e-05  23.4min
+  [distributed] step 15,500/50000  loss=0.01228  mse=0.01208  l0=64.0  fve=0.9797  dead=1471(35.9%)  lr=8.26e-05  24.2min
+  [distributed] step 16,000/50000  loss=0.01212  mse=0.01195  l0=64.0  fve=0.9799  dead=1427(34.8%)  lr=8.14e-05  25.0min
+  [distributed] step 16,500/50000  loss=0.01212  mse=0.01184  l0=64.0  fve=0.9801  dead=1395(34.1%)  lr=8.02e-05  25.7min
+  [distributed] step 17,000/50000  loss=0.01195  mse=0.01180  l0=64.0  fve=0.9802  dead=1372(33.5%)  lr=7.89e-05  26.5min
+  [distributed] step 17,500/50000  loss=0.01191  mse=0.01171  l0=64.0  fve=0.9803  dead=1351(33.0%)  lr=7.76e-05  27.3min
+  [distributed] step 18,000/50000  loss=0.01176  mse=0.01160  l0=64.0  fve=0.9805  dead=1331(32.5%)  lr=7.63e-05  28.1min
+  [distributed] step 18,500/50000  loss=0.01173  mse=0.01174  l0=64.0  fve=0.9803  dead=1311(32.0%)  lr=7.49e-05  28.9min
+  [distributed] step 19,000/50000  loss=0.01162  mse=0.01149  l0=64.0  fve=0.9807  dead=1288(31.4%)  lr=7.35e-05  29.7min
+  [distributed] step 19,500/50000  loss=0.01161  mse=0.01141  l0=64.0  fve=0.9809  dead=1282(31.3%)  lr=7.21e-05  30.6min
+  [distributed] checkpoint → checkpoint_distributed_step_020000.npz
+  [distributed] step 20,000/50000  loss=0.01150  mse=0.01141  l0=64.0  fve=0.9808  dead=1275(31.1%)  lr=7.07e-05  31.4min
+  [distributed] step 20,500/50000  loss=0.01155  mse=0.01133  l0=64.0  fve=0.9810  dead=1265(30.9%)  lr=6.92e-05  32.2min
+  [distributed] step 21,000/50000  loss=0.01143  mse=0.01129  l0=64.0  fve=0.9810  dead=1255(30.6%)  lr=6.78e-05  32.9min
+  [distributed] step 21,500/50000  loss=0.01138  mse=0.01123  l0=64.0  fve=0.9811  dead=1249(30.5%)  lr=6.63e-05  33.6min
+  [distributed] step 22,000/50000  loss=0.01135  mse=0.01119  l0=64.0  fve=0.9812  dead=1238(30.2%)  lr=6.48e-05  34.3min
+  [distributed] step 22,500/50000  loss=0.01131  mse=0.01118  l0=64.0  fve=0.9812  dead=1228(30.0%)  lr=6.33e-05  35.1min
+  [distributed] step 23,000/50000  loss=0.01124  mse=0.01124  l0=64.0  fve=0.9811  dead=1221(29.8%)  lr=6.18e-05  35.9min
+  [distributed] step 23,500/50000  loss=0.01125  mse=0.01110  l0=64.0  fve=0.9814  dead=1213(29.6%)  lr=6.02e-05  36.7min
+  [distributed] step 24,000/50000  loss=0.01117  mse=0.01109  l0=64.0  fve=0.9814  dead=1210(29.5%)  lr=5.87e-05  37.8min
+  [distributed] step 24,500/50000  loss=0.01119  mse=0.01113  l0=64.0  fve=0.9813  dead=1205(29.4%)  lr=5.72e-05  38.7min
+  [distributed] step 25,000/50000  loss=0.01113  mse=0.01101  l0=64.0  fve=0.9815  dead=1199(29.3%)  lr=5.56e-05  39.7min
+  [distributed] step 25,500/50000  loss=0.01112  mse=0.01100  l0=64.0  fve=0.9815  dead=1191(29.1%)  lr=5.41e-05  40.6min
+  [distributed] step 26,000/50000  loss=0.01108  mse=0.01096  l0=64.0  fve=0.9816  dead=1190(29.1%)  lr=5.25e-05  41.3min
+  [distributed] step 26,500/50000  loss=0.01105  mse=0.01093  l0=64.0  fve=0.9817  dead=1188(29.0%)  lr=5.09e-05  42.2min
+  [distributed] step 27,000/50000  loss=0.01105  mse=0.01091  l0=64.0  fve=0.9817  dead=1184(28.9%)  lr=4.94e-05  43.0min
+  [distributed] step 27,500/50000  loss=0.01101  mse=0.01089  l0=64.0  fve=0.9817  dead=1175(28.7%)  lr=4.78e-05  44.0min
+  [distributed] step 28,000/50000  loss=0.01100  mse=0.01092  l0=64.0  fve=0.9817  dead=1170(28.6%)  lr=4.63e-05  44.8min
+  [distributed] step 28,500/50000  loss=0.01098  mse=0.01086  l0=64.0  fve=0.9818  dead=1165(28.4%)  lr=4.48e-05  45.5min
+  [distributed] step 29,000/50000  loss=0.01096  mse=0.01085  l0=64.0  fve=0.9818  dead=1163(28.4%)  lr=4.32e-05  46.3min
+  [distributed] step 29,500/50000  loss=0.01093  mse=0.01084  l0=64.0  fve=0.9818  dead=1159(28.3%)  lr=4.17e-05  47.2min
+  [distributed] checkpoint → checkpoint_distributed_step_030000.npz
+  [distributed] step 30,000/50000  loss=0.01094  mse=0.01084  l0=64.0  fve=0.9818  dead=1151(28.1%)  lr=4.02e-05  48.0min
+  [distributed] step 30,500/50000  loss=0.01091  mse=0.01081  l0=64.0  fve=0.9819  dead=1147(28.0%)  lr=3.87e-05  48.9min
+  [distributed] step 31,000/50000  loss=0.01089  mse=0.01079  l0=64.0  fve=0.9819  dead=1144(27.9%)  lr=3.72e-05  49.8min
+  [distributed] step 31,500/50000  loss=0.01087  mse=0.01079  l0=64.0  fve=0.9819  dead=1143(27.9%)  lr=3.58e-05  50.6min
+  [distributed] step 32,000/50000  loss=0.01086  mse=0.01077  l0=64.0  fve=0.9819  dead=1141(27.9%)  lr=3.43e-05  51.4min
+  [distributed] step 32,500/50000  loss=0.01084  mse=0.01075  l0=64.0  fve=0.9820  dead=1137(27.8%)  lr=3.29e-05  52.2min
+  [distributed] step 33,000/50000  loss=0.01085  mse=0.01077  l0=64.0  fve=0.9819  dead=1137(27.8%)  lr=3.15e-05  52.9min
+  [distributed] step 33,500/50000  loss=0.01082  mse=0.01077  l0=64.0  fve=0.9819  dead=1135(27.7%)  lr=3.01e-05  53.6min
+  [distributed] step 34,000/50000  loss=0.01082  mse=0.01073  l0=64.0  fve=0.9820  dead=1134(27.7%)  lr=2.88e-05  54.4min
+  [distributed] step 34,500/50000  loss=0.01080  mse=0.01073  l0=64.0  fve=0.9820  dead=1133(27.7%)  lr=2.74e-05  55.2min
+  [distributed] step 35,000/50000  loss=0.01080  mse=0.01071  l0=64.0  fve=0.9820  dead=1131(27.6%)  lr=2.61e-05  56.0min
+  [distributed] step 35,500/50000  loss=0.01078  mse=0.01071  l0=64.0  fve=0.9820  dead=1130(27.6%)  lr=2.48e-05  56.8min
+  [distributed] step 36,000/50000  loss=0.01078  mse=0.01069  l0=64.0  fve=0.9821  dead=1128(27.5%)  lr=2.36e-05  57.7min
+  [distributed] step 36,500/50000  loss=0.01074  mse=0.01070  l0=64.0  fve=0.9821  dead=1127(27.5%)  lr=2.24e-05  58.5min
+  [distributed] step 37,000/50000  loss=0.01077  mse=0.01068  l0=64.0  fve=0.9821  dead=1126(27.5%)  lr=2.12e-05  59.2min
+  [distributed] step 37,500/50000  loss=0.01075  mse=0.01068  l0=64.0  fve=0.9821  dead=1126(27.5%)  lr=2.00e-05  59.9min
+  [distributed] step 38,000/50000  loss=0.01074  mse=0.01068  l0=64.0  fve=0.9821  dead=1126(27.5%)  lr=1.89e-05  60.6min
+  [distributed] step 38,500/50000  loss=0.01073  mse=0.01067  l0=64.0  fve=0.9821  dead=1124(27.4%)  lr=1.78e-05  61.4min
+  [distributed] step 39,000/50000  loss=0.01073  mse=0.01067  l0=64.0  fve=0.9821  dead=1123(27.4%)  lr=1.68e-05  62.1min
+  [distributed] step 39,500/50000  loss=0.01071  mse=0.01068  l0=64.0  fve=0.9821  dead=1123(27.4%)  lr=1.58e-05  62.9min
+  [distributed] checkpoint → checkpoint_distributed_step_040000.npz
+  [distributed] step 40,000/50000  loss=0.01072  mse=0.01065  l0=64.0  fve=0.9821  dead=1121(27.4%)  lr=1.48e-05  63.7min
+  [distributed] step 40,500/50000  loss=0.01070  mse=0.01066  l0=64.0  fve=0.9821  dead=1120(27.3%)  lr=1.39e-05  64.6min
+  [distributed] step 41,000/50000  loss=0.01071  mse=0.01065  l0=64.0  fve=0.9821  dead=1120(27.3%)  lr=1.30e-05  65.4min
+  [distributed] step 41,500/50000  loss=0.01069  mse=0.01064  l0=64.0  fve=0.9821  dead=1120(27.3%)  lr=1.22e-05  66.2min
+  [distributed] step 42,000/50000  loss=0.01070  mse=0.01064  l0=64.0  fve=0.9821  dead=1120(27.3%)  lr=1.14e-05  67.1min
+  [distributed] step 42,500/50000  loss=0.01068  mse=0.01064  l0=64.0  fve=0.9821  dead=1119(27.3%)  lr=1.06e-05  68.1min
+  [distributed] step 43,000/50000  loss=0.01070  mse=0.01064  l0=64.0  fve=0.9821  dead=1118(27.3%)  lr=9.90e-06  69.0min
+  [distributed] step 43,500/50000  loss=0.01068  mse=0.01063  l0=64.0  fve=0.9822  dead=1118(27.3%)  lr=9.24e-06  69.8min
+  [distributed] step 44,000/50000  loss=0.01068  mse=0.01063  l0=64.0  fve=0.9822  dead=1117(27.3%)  lr=8.62e-06  70.6min
+  [distributed] step 44,500/50000  loss=0.01067  mse=0.01063  l0=64.0  fve=0.9822  dead=1117(27.3%)  lr=8.05e-06  71.4min
+  [distributed] step 45,000/50000  loss=0.01068  mse=0.01063  l0=64.0  fve=0.9822  dead=1117(27.3%)  lr=7.52e-06  72.1min
+  [distributed] step 45,500/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1116(27.2%)  lr=7.05e-06  72.8min
+  [distributed] step 46,000/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1116(27.2%)  lr=6.62e-06  73.5min
+  [distributed] step 46,500/50000  loss=0.01065  mse=0.01062  l0=64.0  fve=0.9822  dead=1113(27.2%)  lr=6.24e-06  74.2min
+  [distributed] step 47,000/50000  loss=0.01066  mse=0.01062  l0=64.0  fve=0.9822  dead=1113(27.2%)  lr=5.91e-06  75.0min
+  [distributed] step 47,500/50000  loss=0.01066  mse=0.01062  l0=64.0  fve=0.9822  dead=1112(27.1%)  lr=5.63e-06  75.8min
+  [distributed] step 48,000/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1111(27.1%)  lr=5.41e-06  76.6min
+  [distributed] step 48,500/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1111(27.1%)  lr=5.23e-06  77.4min
+  [distributed] step 49,000/50000  loss=0.01065  mse=0.01061  l0=64.0  fve=0.9822  dead=1111(27.1%)  lr=5.10e-06  78.3min
+  [distributed] step 49,500/50000  loss=0.01065  mse=0.01061  l0=64.0  fve=0.9822  dead=1110(27.1%)  lr=5.03e-06  79.0min
+  [distributed] checkpoint → checkpoint_distributed_step_050000.npz
+  [distributed] step 50,000/50000  loss=0.01066  mse=0.01061  l0=64.0  fve=0.9822  dead=1109(27.1%)  lr=5.00e-06  79.7min
+
+=== Single-Node Baseline (same config, 50k steps) ===
+  [baseline] step      1/50000  loss=0.72266  mse=0.66414  l0=64.0  fve=-0.1145  dead=120(2.9%)  lr=5.00e-08  0.0min
+  [baseline] step    500/50000  loss=0.54245  mse=0.42750  l0=64.0  fve=0.2826  dead=104(2.5%)  lr=2.50e-05  0.6min
+  [baseline] step  1,000/50000  loss=0.22307  mse=0.06112  l0=64.0  fve=0.8974  dead=103(2.5%)  lr=5.00e-05  1.2min
+  [baseline] step  1,500/50000  loss=0.03154  mse=0.02485  l0=64.0  fve=0.9583  dead=102(2.5%)  lr=7.50e-05  1.7min
+  [baseline] step  2,000/50000  loss=0.02352  mse=0.02388  l0=64.0  fve=0.9599  dead=102(2.5%)  lr=1.00e-04  2.3min
+  [baseline] step  2,500/50000  loss=0.02157  mse=0.02050  l0=64.0  fve=0.9656  dead=102(2.5%)  lr=1.00e-04  2.9min
+  [baseline] step  3,000/50000  loss=0.02045  mse=0.01966  l0=64.0  fve=0.9670  dead=102(2.5%)  lr=9.99e-05  3.5min
+  [baseline] step  3,500/50000  loss=0.01957  mse=0.01909  l0=64.0  fve=0.9680  dead=101(2.5%)  lr=9.98e-05  4.0min
+  [baseline] step  4,000/50000  loss=0.01900  mse=0.01884  l0=64.0  fve=0.9684  dead=100(2.4%)  lr=9.96e-05  4.6min
+  [baseline] step  4,500/50000  loss=0.01863  mse=0.01818  l0=64.0  fve=0.9695  dead=97(2.4%)  lr=9.94e-05  5.2min
+  [baseline] step  5,000/50000  loss=0.01832  mse=0.01771  l0=64.0  fve=0.9703  dead=95(2.3%)  lr=9.91e-05  5.9min
+  [baseline] step  5,500/50000  loss=0.01769  mse=0.01732  l0=64.0  fve=0.9709  dead=482(11.8%)  lr=9.88e-05  6.4min
+  [baseline] step  6,000/50000  loss=0.01732  mse=0.01698  l0=64.0  fve=0.9715  dead=2469(60.3%)  lr=9.84e-05  6.9min
+  [baseline] step  6,500/50000  loss=0.01739  mse=0.01656  l0=64.0  fve=0.9722  dead=2722(66.5%)  lr=9.80e-05  7.5min
+  [baseline] step  7,000/50000  loss=0.01656  mse=0.01632  l0=64.0  fve=0.9726  dead=2855(69.7%)  lr=9.75e-05  8.1min
+  [baseline] step  7,500/50000  loss=0.01616  mse=0.01589  l0=64.0  fve=0.9733  dead=2837(69.3%)  lr=9.70e-05  8.7min
+  [baseline] step  8,000/50000  loss=0.01606  mse=0.01554  l0=64.0  fve=0.9739  dead=2749(67.1%)  lr=9.64e-05  9.3min
+  [baseline] step  8,500/50000  loss=0.01555  mse=0.01516  l0=64.0  fve=0.9746  dead=2660(64.9%)  lr=9.58e-05  9.9min
+  [baseline] step  9,000/50000  loss=0.01515  mse=0.01505  l0=64.0  fve=0.9747  dead=2574(62.8%)  lr=9.51e-05  10.5min
+  [baseline] step  9,500/50000  loss=0.01483  mse=0.01451  l0=64.0  fve=0.9756  dead=2477(60.5%)  lr=9.44e-05  11.1min
+  [baseline] checkpoint → checkpoint_baseline_step_010000.npz
+  [baseline] step 10,000/50000  loss=0.01457  mse=0.01434  l0=64.0  fve=0.9759  dead=2353(57.4%)  lr=9.36e-05  11.7min
+  [baseline] step 10,500/50000  loss=0.01442  mse=0.01400  l0=64.0  fve=0.9765  dead=2260(55.2%)  lr=9.28e-05  12.3min
+  [baseline] step 11,000/50000  loss=0.01393  mse=0.01368  l0=64.0  fve=0.9770  dead=2156(52.6%)  lr=9.20e-05  12.9min
+  [baseline] step 11,500/50000  loss=0.01372  mse=0.01343  l0=64.0  fve=0.9775  dead=2063(50.4%)  lr=9.11e-05  13.6min
+  [baseline] step 12,000/50000  loss=0.01347  mse=0.01392  l0=64.0  fve=0.9766  dead=1955(47.7%)  lr=9.02e-05  14.2min
+  [baseline] step 12,500/50000  loss=0.01323  mse=0.01296  l0=64.0  fve=0.9783  dead=1884(46.0%)  lr=8.92e-05  14.8min
+  [baseline] step 13,000/50000  loss=0.01318  mse=0.01293  l0=64.0  fve=0.9783  dead=1790(43.7%)  lr=8.82e-05  15.4min
+  [baseline] step 13,500/50000  loss=0.01283  mse=0.01260  l0=64.0  fve=0.9789  dead=1720(42.0%)  lr=8.72e-05  15.9min
+  [baseline] step 14,000/50000  loss=0.01269  mse=0.01246  l0=64.0  fve=0.9791  dead=1653(40.4%)  lr=8.61e-05  16.5min
+  [baseline] step 14,500/50000  loss=0.01254  mse=0.01231  l0=64.0  fve=0.9793  dead=1591(38.8%)  lr=8.50e-05  17.1min
+  [baseline] step 15,000/50000  loss=0.01239  mse=0.01216  l0=64.0  fve=0.9796  dead=1545(37.7%)  lr=8.38e-05  17.7min
+  [baseline] step 15,500/50000  loss=0.01227  mse=0.01206  l0=64.0  fve=0.9798  dead=1493(36.5%)  lr=8.26e-05  18.6min
+  [baseline] step 16,000/50000  loss=0.01214  mse=0.01195  l0=64.0  fve=0.9799  dead=1457(35.6%)  lr=8.14e-05  19.2min
+  [baseline] step 16,500/50000  loss=0.01208  mse=0.01184  l0=64.0  fve=0.9801  dead=1435(35.0%)  lr=8.02e-05  19.7min
+  [baseline] step 17,000/50000  loss=0.01193  mse=0.01184  l0=64.0  fve=0.9801  dead=1401(34.2%)  lr=7.89e-05  20.3min
+  [baseline] step 17,500/50000  loss=0.01194  mse=0.01167  l0=64.0  fve=0.9804  dead=1374(33.5%)  lr=7.76e-05  20.8min
+  [baseline] step 18,000/50000  loss=0.01176  mse=0.01160  l0=64.0  fve=0.9805  dead=1354(33.1%)  lr=7.63e-05  21.3min
+  [baseline] step 18,500/50000  loss=0.01174  mse=0.01155  l0=64.0  fve=0.9806  dead=1330(32.5%)  lr=7.49e-05  21.8min
+  [baseline] step 19,000/50000  loss=0.01166  mse=0.01147  l0=64.0  fve=0.9807  dead=1305(31.9%)  lr=7.35e-05  22.3min
+  [baseline] step 19,500/50000  loss=0.01162  mse=0.01141  l0=64.0  fve=0.9808  dead=1283(31.3%)  lr=7.21e-05  22.8min
+  [baseline] checkpoint → checkpoint_baseline_step_020000.npz
+  [baseline] step 20,000/50000  loss=0.01150  mse=0.01151  l0=64.0  fve=0.9807  dead=1277(31.2%)  lr=7.07e-05  23.4min
+  [baseline] step 20,500/50000  loss=0.01150  mse=0.01135  l0=64.0  fve=0.9810  dead=1266(30.9%)  lr=6.92e-05  23.9min
+  [baseline] step 21,000/50000  loss=0.01142  mse=0.01127  l0=64.0  fve=0.9811  dead=1255(30.6%)  lr=6.78e-05  24.4min
+  [baseline] step 21,500/50000  loss=0.01141  mse=0.01124  l0=64.0  fve=0.9811  dead=1241(30.3%)  lr=6.63e-05  25.0min
+  [baseline] step 22,000/50000  loss=0.01131  mse=0.01120  l0=64.0  fve=0.9812  dead=1232(30.1%)  lr=6.48e-05  25.5min
+  [baseline] step 22,500/50000  loss=0.01131  mse=0.01114  l0=64.0  fve=0.9813  dead=1221(29.8%)  lr=6.33e-05  26.1min
+  [baseline] step 23,000/50000  loss=0.01125  mse=0.01111  l0=64.0  fve=0.9814  dead=1214(29.6%)  lr=6.18e-05  26.7min
+  [baseline] step 23,500/50000  loss=0.01122  mse=0.01111  l0=64.0  fve=0.9814  dead=1207(29.5%)  lr=6.02e-05  27.2min
+  [baseline] step 24,000/50000  loss=0.01118  mse=0.01105  l0=64.0  fve=0.9815  dead=1196(29.2%)  lr=5.87e-05  27.7min
+  [baseline] step 24,500/50000  loss=0.01116  mse=0.01103  l0=64.0  fve=0.9815  dead=1190(29.1%)  lr=5.72e-05  28.2min
+  [baseline] step 25,000/50000  loss=0.01113  mse=0.01103  l0=64.0  fve=0.9815  dead=1184(28.9%)  lr=5.56e-05  28.7min
+  [baseline] step 25,500/50000  loss=0.01111  mse=0.01098  l0=64.0  fve=0.9816  dead=1174(28.7%)  lr=5.41e-05  29.3min
+  [baseline] step 26,000/50000  loss=0.01107  mse=0.01095  l0=64.0  fve=0.9816  dead=1169(28.5%)  lr=5.25e-05  29.8min
+  [baseline] step 26,500/50000  loss=0.01110  mse=0.01093  l0=64.0  fve=0.9817  dead=1162(28.4%)  lr=5.09e-05  30.3min
+  [baseline] step 27,000/50000  loss=0.01102  mse=0.01091  l0=64.0  fve=0.9817  dead=1157(28.2%)  lr=4.94e-05  30.8min
+  [baseline] step 27,500/50000  loss=0.01100  mse=0.01089  l0=64.0  fve=0.9817  dead=1155(28.2%)  lr=4.78e-05  31.3min
+  [baseline] step 28,000/50000  loss=0.01099  mse=0.01087  l0=64.0  fve=0.9818  dead=1150(28.1%)  lr=4.63e-05  31.9min
+  [baseline] step 28,500/50000  loss=0.01096  mse=0.01088  l0=64.0  fve=0.9817  dead=1149(28.1%)  lr=4.48e-05  32.4min
+  [baseline] step 29,000/50000  loss=0.01095  mse=0.01084  l0=64.0  fve=0.9818  dead=1148(28.0%)  lr=4.32e-05  32.9min
+  [baseline] step 29,500/50000  loss=0.01093  mse=0.01084  l0=64.0  fve=0.9818  dead=1147(28.0%)  lr=4.17e-05  33.4min
+  [baseline] checkpoint → checkpoint_baseline_step_030000.npz
+  [baseline] step 30,000/50000  loss=0.01092  mse=0.01081  l0=64.0  fve=0.9819  dead=1146(28.0%)  lr=4.02e-05  34.0min
+  [baseline] step 30,500/50000  loss=0.01089  mse=0.01079  l0=64.0  fve=0.9819  dead=1144(27.9%)  lr=3.87e-05  34.5min
+  [baseline] step 31,000/50000  loss=0.01088  mse=0.01078  l0=64.0  fve=0.9819  dead=1143(27.9%)  lr=3.72e-05  35.0min
+  [baseline] step 31,500/50000  loss=0.01086  mse=0.01077  l0=64.0  fve=0.9819  dead=1141(27.9%)  lr=3.58e-05  35.5min
+  [baseline] step 32,000/50000  loss=0.01086  mse=0.01076  l0=64.0  fve=0.9819  dead=1137(27.8%)  lr=3.43e-05  36.0min
+  [baseline] step 32,500/50000  loss=0.01083  mse=0.01079  l0=64.0  fve=0.9819  dead=1135(27.7%)  lr=3.29e-05  36.5min
+  [baseline] step 33,000/50000  loss=0.01084  mse=0.01074  l0=64.0  fve=0.9820  dead=1137(27.8%)  lr=3.15e-05  37.1min
+  [baseline] step 33,500/50000  loss=0.01081  mse=0.01073  l0=64.0  fve=0.9820  dead=1137(27.8%)  lr=3.01e-05  37.6min
+  [baseline] step 34,000/50000  loss=0.01081  mse=0.01073  l0=64.0  fve=0.9820  dead=1134(27.7%)  lr=2.88e-05  38.1min
+  [baseline] step 34,500/50000  loss=0.01079  mse=0.01071  l0=64.0  fve=0.9820  dead=1134(27.7%)  lr=2.74e-05  38.6min
+  [baseline] step 35,000/50000  loss=0.01080  mse=0.01070  l0=64.0  fve=0.9820  dead=1133(27.7%)  lr=2.61e-05  39.1min
+  [baseline] step 35,500/50000  loss=0.01076  mse=0.01070  l0=64.0  fve=0.9820  dead=1133(27.7%)  lr=2.48e-05  39.7min
+  [baseline] step 36,000/50000  loss=0.01079  mse=0.01069  l0=64.0  fve=0.9821  dead=1132(27.6%)  lr=2.36e-05  40.2min
+  [baseline] step 36,500/50000  loss=0.01075  mse=0.01068  l0=64.0  fve=0.9821  dead=1130(27.6%)  lr=2.24e-05  40.8min
+  [baseline] step 37,000/50000  loss=0.01076  mse=0.01068  l0=64.0  fve=0.9821  dead=1130(27.6%)  lr=2.12e-05  41.3min
+  [baseline] step 37,500/50000  loss=0.01074  mse=0.01067  l0=64.0  fve=0.9821  dead=1128(27.5%)  lr=2.00e-05  41.8min
+  [baseline] step 38,000/50000  loss=0.01074  mse=0.01066  l0=64.0  fve=0.9821  dead=1125(27.5%)  lr=1.89e-05  42.3min
+  [baseline] step 38,500/50000  loss=0.01072  mse=0.01066  l0=64.0  fve=0.9821  dead=1125(27.5%)  lr=1.78e-05  42.8min
+  [baseline] step 39,000/50000  loss=0.01074  mse=0.01066  l0=64.0  fve=0.9821  dead=1124(27.4%)  lr=1.68e-05  43.3min
+  [baseline] step 39,500/50000  loss=0.01071  mse=0.01066  l0=64.0  fve=0.9821  dead=1125(27.5%)  lr=1.58e-05  43.9min
+  [baseline] checkpoint → checkpoint_baseline_step_040000.npz
+  [baseline] step 40,000/50000  loss=0.01073  mse=0.01065  l0=64.0  fve=0.9821  dead=1125(27.5%)  lr=1.48e-05  44.4min
+  [baseline] step 40,500/50000  loss=0.01070  mse=0.01065  l0=64.0  fve=0.9821  dead=1124(27.4%)  lr=1.39e-05  44.9min
+  [baseline] step 41,000/50000  loss=0.01072  mse=0.01064  l0=64.0  fve=0.9821  dead=1122(27.4%)  lr=1.30e-05  45.4min
+  [baseline] step 41,500/50000  loss=0.01068  mse=0.01064  l0=64.0  fve=0.9821  dead=1122(27.4%)  lr=1.22e-05  45.9min
+  [baseline] step 42,000/50000  loss=0.01071  mse=0.01064  l0=64.0  fve=0.9821  dead=1122(27.4%)  lr=1.14e-05  46.5min
+  [baseline] step 42,500/50000  loss=0.01069  mse=0.01063  l0=64.0  fve=0.9822  dead=1121(27.4%)  lr=1.06e-05  47.0min
+  [baseline] step 43,000/50000  loss=0.01069  mse=0.01063  l0=64.0  fve=0.9822  dead=1121(27.4%)  lr=9.90e-06  47.6min
+  [baseline] step 43,500/50000  loss=0.01068  mse=0.01063  l0=64.0  fve=0.9822  dead=1120(27.3%)  lr=9.24e-06  48.2min
+  [baseline] step 44,000/50000  loss=0.01068  mse=0.01062  l0=64.0  fve=0.9822  dead=1120(27.3%)  lr=8.62e-06  48.7min
+  [baseline] step 44,500/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1120(27.3%)  lr=8.05e-06  49.2min
+  [baseline] step 45,000/50000  loss=0.01068  mse=0.01062  l0=64.0  fve=0.9822  dead=1119(27.3%)  lr=7.52e-06  49.7min
+  [baseline] step 45,500/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1118(27.3%)  lr=7.05e-06  50.3min
+  [baseline] step 46,000/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1118(27.3%)  lr=6.62e-06  50.8min
+  [baseline] step 46,500/50000  loss=0.01067  mse=0.01062  l0=64.0  fve=0.9822  dead=1118(27.3%)  lr=6.24e-06  51.3min
+  [baseline] step 47,000/50000  loss=0.01066  mse=0.01062  l0=64.0  fve=0.9822  dead=1118(27.3%)  lr=5.91e-06  51.8min
+  [baseline] step 47,500/50000  loss=0.01066  mse=0.01061  l0=64.0  fve=0.9822  dead=1118(27.3%)  lr=5.63e-06  52.3min
+  [baseline] step 48,000/50000  loss=0.01067  mse=0.01061  l0=64.0  fve=0.9822  dead=1118(27.3%)  lr=5.41e-06  52.8min
+  [baseline] step 48,500/50000  loss=0.01066  mse=0.01061  l0=64.0  fve=0.9822  dead=1117(27.3%)  lr=5.23e-06  53.4min
+  [baseline] step 49,000/50000  loss=0.01066  mse=0.01061  l0=64.0  fve=0.9822  dead=1117(27.3%)  lr=5.10e-06  53.9min
+  [baseline] step 49,500/50000  loss=0.01065  mse=0.01061  l0=64.0  fve=0.9822  dead=1117(27.3%)  lr=5.03e-06  54.4min
+  [baseline] checkpoint → checkpoint_baseline_step_050000.npz
+  [baseline] step 50,000/50000  loss=0.01066  mse=0.01061  l0=64.0  fve=0.9822  dead=1117(27.3%)  lr=5.00e-06  55.0min
+
+============================================================
+Results → data/sae-runs/distributed-llama3b/
+  Distributed: MSE=0.01061  L0=64.0  FVE=0.9822  dead=1109 (27.1%)
+  Baseline   : MSE=0.01061  L0=64.0  FVE=0.9822  dead=1117 (27.3%)
+  MSE ratio  : 1.0005
+  PASS: distributed MSE within 5% of single-node baseline at step 50000
