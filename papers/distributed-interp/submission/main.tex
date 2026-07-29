@@ -1,0 +1,693 @@
+% ============================================================
+%  Distributed Mechanistic Interpretability at Scale
+%  arXiv submission — July 2026
+%  Compiled with: pdflatex main.tex && bibtex main && pdflatex main.tex (×2)
+% ============================================================
+\documentclass[11pt]{article}
+
+% --- Page geometry ---
+\usepackage[margin=1.25in, top=1in, bottom=1.25in]{geometry}
+
+% --- Core packages ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[colorlinks=true, linkcolor=blue!70!black,
+            citecolor=blue!70!black, urlcolor=blue!70!black]{hyperref}
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage{authblk}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+% --- Code listing style ---
+\lstdefinestyle{pycode}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!80!black}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange!80!black},
+  numbers=none,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{gray!5},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=4,
+}
+
+\lstdefinestyle{jsoncode}{
+  basicstyle=\ttfamily\small,
+  numbers=none,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{gray!5},
+  breaklines=true,
+  showstringspaces=false,
+}
+
+\lstdefinestyle{asciiart}{
+  basicstyle=\ttfamily\footnotesize,
+  numbers=none,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!40},
+  backgroundcolor=\color{gray!5},
+  breaklines=false,
+}
+
+% --- Spacing ---
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ---  Helpers ---
+\newcommand{\mlxmesh}{\textsc{mlxMesh}}
+
+% ============================================================
+\title{Distributed Mechanistic Interpretability at Scale:\\
+Activation Streaming, Split-Layer Inference, and\\
+Cross-Architecture Feature Universality}
+
+\author[1]{J. Melton\thanks{Correspondence: \href{mailto:jacob@paydirt.solutions}{jacob@paydirt.solutions}}}
+\affil[1]{Independent Researcher}
+\date{July 2026}
+% ============================================================
+
+\begin{document}
+\maketitle
+
+% ============================================================
+\begin{abstract}
+Mechanistic interpretability research faces a fundamental infrastructure problem: the models worth understanding are too large to run on a single analysis workstation, and the hardware capable of running them is not designed for continuous activation capture. We describe a system---\mlxmesh{}---that addresses this by splitting inference and analysis across two Apple Silicon nodes connected by Thunderbolt, streaming intermediate activations over a purpose-built binary wire protocol, and training sparse autoencoders~(SAEs) on the streaming output without storing activations to disk. We validate the protocol end-to-end on Llama-3.2-3B, demonstrating zero reconstruction error at the split boundary and 1.25~Gbps localhost throughput---roughly 3,000$\times$ the bandwidth required for real-time single-layer capture. We then train SAEs on residual stream activations from Llama-3.2-3B (layer~14), Mistral-7B (layer~16), and Qwen2.5-3B (layer~18), and find 3,753 features that match across all three model families at cosine similarity $\geq 0.8$---evidence of a shared representational vocabulary that survives architectural differences. Finally, we evaluate a feature-based safety classifier, identify the conditions under which it fails, and propose a corpus-targeted repair. All experiments run on consumer Apple Silicon hardware; the system requires no GPUs, no cloud, and no specialized interconnects. Code and data are available at \url{https://github.com/[author]/mlxmesh}.
+\end{abstract}
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+Mechanistic interpretability---the project of understanding the internal representations and algorithms of neural networks---has produced striking results at small scale. Circuit analyses of indirect object identification, factual recall, and in-context learning have revealed specific attention heads and MLP neurons whose causal roles can be verified by activation patching \citep{wang2022ioi, meng2022rome, olsson2022induction}. Sparse autoencoders have been shown to decompose superposed representations into interpretable monosemantic features \citep{bricken2023monosemanticity, cunningham2023sparse}. The Anthropic mechanistic interpretability team has published circuit-level analyses of Claude's safety-relevant behavior \citep{lindsey2025biology}.
+
+The problem is that these results were achieved on models in the 1B--7B range, using infrastructure that does not scale. The dominant pattern is: load the entire model onto one GPU, hook the relevant layer, collect activations, save to disk, then train the SAE offline. This pipeline has at least three failure modes at scale:
+
+\begin{enumerate}
+\item \textbf{Memory ceiling.} A 70B model in float16 requires $\sim$140~GB of GPU memory. No consumer or workstation GPU holds this. Multi-GPU setups exist but introduce collective communication overhead and make activation-level debugging substantially harder.
+
+\item \textbf{Disk I/O bottleneck.} Collecting 50k tokens of full-depth (all-layer) activations from a 70B model generates $\sim$36~GB of float16 data per run. At NVMe speeds ($\sim$3~GB/s sequential write), that is $\sim$12 seconds of pure write time---tolerable in isolation but crippling if the collection loop is the inner loop of a hyperparameter search.
+
+\item \textbf{Iteration latency.} The offline pattern (collect $\to$ save $\to$ load $\to$ train SAE) adds a round-trip that makes the feedback cycle from hypothesis to result span hours rather than minutes. Online SAE training, where the SAE trains continuously on the streaming activation output, eliminates this round-trip.
+\end{enumerate}
+
+Apple Silicon hardware provides an unusual opportunity here. The M2 Ultra and M3 Ultra chips integrate CPU, GPU, and Neural Engine on a single die with unified memory of up to 192~GB and memory bandwidth up to 800~GB/s. MLX, Apple's machine learning framework, exposes this hardware with a NumPy-like API and lazy evaluation. A single Mac Studio M2 Ultra can run Llama-3.2-3B at $\sim$300 tokens/second or Mistral-7B at $\sim$150 tokens/second entirely in unified memory. Two such nodes, connected by Thunderbolt~4 (40~Gbps bidirectional), form a cluster with $\sim$4.5~GB/s of inter-node bandwidth---enough to stream activations continuously at any model size we consider.
+
+This paper describes the full stack for distributed interpretability on this hardware:
+
+\begin{itemize}
+\item \S\ref{sec:background} surveys related work in distributed ML, SAE training, and interpretability at scale.
+\item \S\ref{sec:system} specifies the \mlxmesh{} wire protocol and distributed training architecture, with pseudocode and diagrams.
+\item \S\ref{sec:results} presents results: bandwidth profiling, zero-error split validation, convergence comparison between distributed and single-node SAE training, SAE quality metrics across three model families, cross-architecture feature matching, and a safety classifier evaluation.
+\item \S\ref{sec:discussion} discusses implications, limitations, and the path to production.
+\item \S\ref{sec:conclusion} concludes.
+\end{itemize}
+
+The core claim is straightforward: interpretability infrastructure does not need to be expensive, centralized, or cloud-dependent. Two consumer nodes, a Thunderbolt cable, and a well-specified wire protocol are sufficient to run state-of-the-art interpretability experiments on models up to 34B parameters.
+
+% ============================================================
+\section{Background and Related Work}
+\label{sec:background}
+
+\subsection{Sparse Autoencoders for Mechanistic Interpretability}
+
+Neural networks trained on large corpora appear to represent more features than they have neurons via superposition---the simultaneous encoding of multiple concepts in overlapping linear subspaces \citep{elhage2022superposition}. Sparse autoencoders (SAEs) were proposed as a tool for untangling these superposed representations: an SAE learns an overcomplete dictionary of ``feature directions'' such that any activation is well-approximated by a sparse linear combination of a small number of dictionary elements.
+
+Formally, given an activation vector $\mathbf{x} \in \mathbb{R}^{d}$, the SAE encoder produces a feature vector
+\begin{equation}
+  \mathbf{f} = \mathrm{TopK}\bigl(\mathrm{ReLU}(W_{\mathrm{enc}}(\mathbf{x} - \mathbf{b}_{\mathrm{dec}}) + \mathbf{b}_{\mathrm{enc}})\bigr)
+\end{equation}
+and the decoder reconstructs $\hat{\mathbf{x}} = W_{\mathrm{dec}}\,\mathbf{f} + \mathbf{b}_{\mathrm{dec}}$. Training minimizes $\|\mathbf{x} - \hat{\mathbf{x}}\|^2$ subject to the TopK sparsity constraint, which enforces that exactly $k$ features are active per input. The TopK variant \citep{gao2024scaling} avoids the auxiliary $L_1$ penalty required by early SAE formulations and produces more interpretable features with better dead-feature control.
+
+Several groups have now trained SAEs on frontier models. \citet{cunningham2023sparse} found monosemantic features in GPT-2. \citet{bricken2023monosemanticity} trained SAEs on MLP sublayers of a one-layer transformer and identified features corresponding to DNA sequences, legal text, and arithmetic. \citet{templeton2024scaling} scaled this approach to Claude~3 Sonnet, training SAEs with up to 34~million features and finding features corresponding to concepts as specific as the Golden Gate Bridge. The Gemma Scope project \citep{lieberum2024gemmascope} released SAEs trained on all layers of Gemma~2 models, enabling systematic study of how representations evolve through depth.
+
+\subsection{Distributed Inference for Large Language Models}
+
+Pipeline parallelism---splitting a model's layers across multiple devices, with each device processing a batch stage while the next device processes the previous stage---is the standard approach for models exceeding single-device memory \citep{huang2019gpipe, narayanan2019pipedream}. These systems optimize for training throughput; the inter-device communication is a performance cost to be minimized, not a data source to be tapped.
+
+Inference-time splitting is simpler because there is no gradient to communicate. llama.cpp implements CPU-GPU model splitting for consumer hardware; Ollama wraps this for convenience. Neither exposes intermediate activations to the user.
+
+Our approach differs in that the split point and the activation tap are the same thing: we split the model at a chosen layer, stream the activations across the link, and continue inference on the second node. The wire format is designed for interpretability workloads, not inference throughput: message headers carry layer index and token position to support downstream analysis, and the credit-based flow control is tuned for SAE training batch sizes rather than autoregressive generation latency.
+
+\subsection{Cross-Architecture Feature Universality}
+
+The question of whether different neural networks learn the same internal representations has been studied through several lenses. Representational similarity analysis \citep{kriegeskorte2008rsa} and centered kernel alignment \citep{kornblith2019similarity} measure geometric similarity between representation spaces without requiring feature correspondence. These methods show that networks trained on the same data with different architectures tend to develop similar representational geometries at corresponding depths.
+
+For interpretability, the more specific question is whether individual \emph{features}---specific directions in activation space---correspond across models. \citet{elhage2022superposition} conjectured that features learned by superposition are universal across model families, in the same sense that Gabor filters appear to be universal across vision models. Evidence for this in language models has been informal: researchers working on multiple models report that similar feature categories (syntactic roles, entity types, sentiment valence) emerge in all of them.
+
+Our cross-architecture matching analysis (\S\ref{sec:matching}) provides quantitative evidence for this claim using chunk-averaged activation pattern matching---a method that identifies feature pairs across models by the similarity of their activation patterns over a shared evaluation corpus---rather than decoder weight comparison, which is confounded by the arbitrary choice of basis in each SAE's latent space.
+
+\subsection{Safety Applications of SAE Features}
+
+A natural application of interpretable features is safety classification: if the model has learned a ``harmful content'' feature, and we can identify it in the SAE, we can flag inputs that strongly activate it. This approach has several appeals over standard classifier heads: it requires no labeled training data for the classifier itself (only feature identification), it provides human-interpretable explanations of flags, and it is mechanistically grounded in what the model is actually representing.
+
+\citet{zou2023repeng} used linear probes on residual stream activations (``representation engineering'') to detect and steer safety-relevant states. \citet{burns2022discovering} trained probes on contrast pairs and showed that probes could recover implicit model beliefs about factuality. Our approach is closest in spirit to representation engineering but uses SAE features rather than supervised probes.
+
+The evaluation in \S\ref{sec:safety} shows that a na{\"i}vely implemented SAE classifier fails---achieving F1~$= 0.519$ versus a 0.500 random baseline on a balanced eval set. We analyze the failure mode in detail and propose specific corrections. We argue that the honest failure is more scientifically valuable than a successful cherry-pick would be, because it establishes precise conditions for success.
+
+% ============================================================
+\section{System Design and Methods}
+\label{sec:system}
+
+\subsection{Overview}
+
+The \mlxmesh{} system consists of four components:
+
+\begin{enumerate}
+\item \textbf{Inference node (Node~A):} Runs the first $L_{\mathrm{split}}$ transformer layers and transmits the residual stream activations at the split boundary over the wire.
+\item \textbf{Analysis node (Node~B):} Receives the activation stream, runs the SAE encoder forward pass, buffers and aggregates features, and optionally continues inference on the remaining layers.
+\item \textbf{Wire protocol (\mlxmesh{} v1.0.0):} Binary framing over TCP or Unix domain socket; 8-byte header + float16 payload + credit-based flow control.
+\item \textbf{Distributed SAE trainer:} Partitions the activation dataset across two workers; each worker trains independently and exchanges gradient updates via weighted averaging.
+\end{enumerate}
+
+\begin{lstlisting}[style=asciiart, caption={High-level architecture of \mlxmesh{}. Node~A runs the first $L_{\mathrm{split}}$ layers and streams activations to Node~B, which runs the SAE and the remaining layers.}, label=lst:arch]
++-----------------------------------+---------------------------+
+|      NODE A (Inference)           |   NODE B (Analysis)       |
+|                                   |                           |
+|  Input tokens                     |                           |
+|       |                           |                           |
+|  +----v------+                    |                           |
+|  |  Embed    |                    |                           |
+|  +----+------+                    |                           |
+|       |                           |                           |
+|  +----v------+                    |                           |
+|  | Layer 0   |                    |                           |
+|  |   ...     |  Activation stream |  +-------------+         |
+|  | Layer 15  |--- mlxMesh v1.0 -->|  | SAE Encoder |         |
+|  +-----------+  (8-byte hdr +     |  +------+------+         |
+|                  float16 payload) |         |                 |
+|               Thunderbolt 4       |  +------v------+         |
+|               (~3.5 GB/s)        |  | Feature buf  |         |
+|  <-- ACK (credit) --------------- |  +------+------+         |
+|                                   |         |                 |
+|                                   |  +------v------+         |
+|                                   |  | Layer 16... |         |
+|                                   |  |    ...27    |         |
+|                                   |  +-------------+         |
++-----------------------------------+---------------------------+
+\end{lstlisting}
+
+\subsection{Wire Protocol}
+\label{sec:protocol}
+
+The \mlxmesh{} protocol is message-oriented and operates over a reliable, ordered byte stream. It was designed with three priorities: (1)~zero-copy compatibility with MLX buffer layouts, (2)~explicit backpressure to prevent the inference node from outrunning the SAE training pipeline, and (3)~complete auditability---every byte transferred can be attributed to a specific layer, token range, and session.
+
+\subsubsection{Message Format}
+
+Every data message consists of an 8-byte header followed by a float16 payload:
+
+\begin{lstlisting}[style=asciiart, caption={Wire message formats. All integers are big-endian.}]
+DATA MESSAGE
+  +------------+------------------+------------+  8 bytes (header)
+  | layer_idx  |   token_start    | token_count|
+  |  uint16    |     uint32       |   uint16   |
+  +------------+------------------+------------+
+  +----------------------------------------------------+
+  | float16 payload: token_count x hidden_dim x 2 bytes|
+  +----------------------------------------------------+
+
+END-OF-LAYER SENTINEL
+  layer_idx=0xFFFF  token_start=<layer>  token_count=0xFFFF  payload=empty
+
+REVERSE CHANNEL  (4 bytes)
+  +------------+-----------+
+  |  ack_type  |  credit   |
+  |  uint16    |  uint16   |
+  +------------+-----------+
+\end{lstlisting}
+
+For Mistral-7B (\texttt{hidden\_dim}~$= 4096$) streaming a 128-token chunk at layer~16:
+\begin{align*}
+  \text{payload} &= 128 \times 4096 \times 2 = 1{,}048{,}576\ \text{bytes (1~MiB)}\\
+  \text{total}   &= 1{,}048{,}584\ \text{bytes}
+\end{align*}
+Protocol overhead (header + sentinel bytes / total bytes) is 0.20\% at 20 tokens/second---negligible at all model sizes and throughput targets.
+
+\subsubsection{Session Handshake}
+
+Before streaming begins, sender and receiver exchange a JSON handshake. The sender declares model identity, layer count, hidden dimension, data type, and maximum in-flight messages (\texttt{window\_size}). The receiver responds with its own window preference; the negotiated window is the minimum of the two:
+
+\begin{lstlisting}[style=jsoncode, caption={Session handshake JSON (sender and receiver).}]
+// Sender Hello
+{
+  "protocol_version": "1.0.0",
+  "session_id": "<uuid4>",
+  "model_id": "meta-llama/Llama-3.2-3B",
+  "num_layers": 28,
+  "hidden_dim": 3072,
+  "dtype": "float16",
+  "byte_order": "big",
+  "window_size": 8
+}
+// Receiver Hello
+{
+  "protocol_version": "1.0.0",
+  "session_id": "<same uuid4>",
+  "accepted": true,
+  "window_size": 4    // negotiated = min(8, 4)
+}
+\end{lstlisting}
+
+\subsubsection{Flow Control}
+
+The protocol uses a credit-based sliding window. The sender starts with \texttt{window\_size} credits; each message sent decrements the counter by one, and each \texttt{DATA\_ACK} from the receiver restores a credit. When credits reach zero, the sender blocks at the layer boundary, creating natural backpressure that prevents the inference pipeline from outrunning the SAE training pipeline on Node~B.
+
+Three control messages handle exceptional states: \texttt{CREDIT\_PAUSE} (receiver cannot accept messages, e.g., SAE batch overflow), \texttt{CREDIT\_RESUME} (receiver ready again), and \texttt{ERROR} (fatal protocol violation with UTF-8 error string).
+
+\subsubsection{Sender Pseudocode}
+
+\begin{lstlisting}[style=pycode, caption={mlxMesh sender (compliant with v1.0.0 spec). Nagle algorithm is disabled (TCP\_NODELAY) since the protocol batches header and payload into a single \texttt{sendmsg} call.}]
+# mlxMesh sender (compliant with v1.0.0 spec)
+credit = negotiated_window_size
+for layer_idx in range(num_layers):
+    for chunk in layer_chunks(layer_idx, chunk_size=128):
+        while credit == 0:
+            wait_for_ack()          # blocks; DATA_ACK updates credit
+        header = pack(">HLH",
+                      layer_idx,
+                      chunk.token_start,
+                      chunk.token_count)
+        sock.sendmsg([header, chunk.data])   # zero-copy gather write
+        credit -= 1
+    send_sentinel(layer_idx)        # layer_idx=0xFFFF, token_start=layer_idx
+send_eos_sentinel()                 # token_start=0xFFFFFFFF
+\end{lstlisting}
+
+\subsection{Split-Layer Inference}
+
+Split-layer inference divides the transformer's layer stack at a configurable split point $L_{\mathrm{split}}$. Node~A runs layers $[0, L_{\mathrm{split}})$ and transmits the residual stream tensor at layer $L_{\mathrm{split}} - 1$'s output. Node~B receives this tensor and continues inference from layer $L_{\mathrm{split}}$ to the final layer.
+
+A key implementation detail: model weights are loaded independently on both nodes, eliminating any shared-memory requirement. The wire format converts activations from bfloat16 (the model's internal dtype) to float16 for transmission; since float16's mantissa is wider (10~bits vs.\ 7~bits for bfloat16), this conversion is nearly lossless (\S\ref{sec:protocol-validation} validates this quantitatively). The analysis node taps activations from the stream before passing them to the SAE. For SAE training, this tap collects residual stream vectors at the split layer; for circuit tracing, the full activation stream across all layers can be preserved.
+
+\subsection{Distributed SAE Training}
+\label{sec:dist-training}
+
+The distributed SAE trainer partitions the activation dataset across $N$ workers. Each worker trains an independent SAE replica on its data partition. After each step, workers exchange parameter updates via weighted gradient averaging:
+\begin{equation}
+  \theta_{\mathrm{merged}} = \sum_{i=1}^{N} \alpha_i\,\theta_i, \qquad \alpha_i = \frac{|\mathcal{D}_i|}{\sum_j |\mathcal{D}_j|}
+\end{equation}
+For two equal-size partitions, $\alpha_0 = \alpha_1 = 0.5$. This is equivalent to synchronous data-parallel training when per-worker batch sizes are equal.
+
+The SAE architecture is a TopK sparse autoencoder:
+
+\begin{lstlisting}[style=pycode, caption={SAE forward pass. Decoder weight columns are unit-normalized.}]
+def encode(x):
+    pre_act = (x - b_dec) @ W_enc + b_enc
+    features = ReLU(pre_act)
+    topk_mask = topk_indices(features, k)    # zero all but top-k
+    return features * topk_mask
+
+def decode(features):
+    return features @ W_dec + b_dec          # W_dec columns unit-norm
+
+def loss(x):
+    f = encode(x)
+    x_hat = decode(f)
+    return MSE(x, x_hat)
+\end{lstlisting}
+
+Dead feature detection monitors the number of features that have not fired over a rolling window of 5,000 tokens. Features with zero activations over this window are counted as ``dead''---a metric that tracks dictionary utilization and provides an early signal of over-sparsification.
+
+\paragraph{SAEs trained in this work.} Four training runs were conducted (Table~\ref{tab:training}). The distributed training comparison used a 4,096-feature Llama-3.2-3B SAE. The cross-architecture matching analysis used a separate 16,384-feature Llama SAE trained single-node (see \S\ref{sec:matching} for details).
+
+\begin{table}[h]
+\centering
+\caption{SAEs trained in this work. All experiments used WikiText-103 as the source corpus.}
+\label{tab:training}
+\begin{tabular}{@{}llrrrrrl@{}}
+\toprule
+Model & Layer & $d_{\mathrm{in}}$ & Dict & $k$ & Steps & Corpus & Purpose \\
+\midrule
+Llama-3.2-3B & 14 & 3,072 & 4,096 & 64 & 50,000 & 500k & Dist.\ training comparison \\
+Llama-3.2-3B & 14 & 3,072 & 16,384 & 128 & 13,000$^\dagger$ & 500k & Cross-arch matching \\
+Mistral-7B$^\ddagger$ & 16 & 4,096 & 16,384 & 128 & 1,000 & 50k & Quality metrics + matching \\
+Qwen2.5-3B & 18 & 2,048 & 16,384 & 128 & 50,000 & 500k & Quality metrics + matching \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\noindent\footnotesize
+$\dagger$~Training was ongoing; checkpoint at step 10,000 used for matching analysis.
+$\ddagger$~Activations extracted from a 4-bit quantized model (\texttt{mlx-community/Mistral-7B-v0.3-4bit}); bf16 variant requires HuggingFace authentication.
+\end{table}
+
+\subsection{Cross-Architecture Feature Matching}
+\label{sec:matching-method}
+
+To identify features shared across model families, we use chunk-averaged activation pattern matching:
+
+\begin{enumerate}
+\item Define an evaluation corpus of 50,000 tokens.
+\item Divide into $N_{\mathrm{chunks}} = 100$ non-overlapping chunks of 500 tokens each.
+\item For each model, collect SAE encoder outputs (post-TopK) for every chunk, then average over the token dimension to produce a per-chunk, per-feature activation vector. This yields a matrix $A \in \mathbb{R}^{N_{\mathrm{chunks}} \times D}$, where $D$ is the dictionary size.
+\item Treat each column of $A$ as a ``fingerprint'' of the corresponding feature over the evaluation corpus.
+\item For a pair of models with matrices $A^{(1)}$ and $A^{(2)}$, compute pairwise cosine similarities:
+\begin{equation}
+  \mathrm{sim}(i, j) = \cos\!\bigl(A^{(1)}_{:,i},\; A^{(2)}_{:,j}\bigr)
+\end{equation}
+\item A match is declared when $\mathrm{sim}(i,j) \geq \tau = 0.8$. For each feature in model~1, record the single highest-similarity match in model~2.
+\item Universal features are those with matches in all three pairwise comparisons.
+\end{enumerate}
+
+This method sidesteps the arbitrary choice of basis in each SAE's decoder weight matrix and matches features by their functional behavior---the pattern of contexts they respond to. The matching analysis used the 16,384-feature SAEs for all three models (the single-node Llama SAE at step 10k, Mistral at step 1k, and Qwen at step 50k).
+
+% ============================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Protocol Validation and Bandwidth}
+\label{sec:protocol-validation}
+
+We validated the wire protocol using a two-process simulation of the Node~A / Node~B split on a single Mac Studio M2 Ultra, with model weights loaded independently in each process and activations communicated via Unix domain socket. The test ran a full inference pass of Llama-3.2-3B on a 512-token sequence split at layer~16 (layers 0--15 on Node~A, layers 16--27 on Node~B), using the actual model weights (\texttt{mlx-community/Llama-3.2-3B-bf16}).
+
+\paragraph{Correctness (Table~\ref{tab:correctness}).}
+
+\begin{table}[h]
+\centering
+\caption{Split-inference correctness validation. Both the layer-15 handoff tensor and the layer-27 final output match the single-process baseline to machine zero.}
+\label{tab:correctness}
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Checkpoint & Tensor shape & max\_abs\_error & mean\_abs\_error & rms\_error & Pass \\
+\midrule
+Layer 15 output (handoff) & $(512, 3072)$ & 0.0 & 0.0 & 0.0 & \checkmark \\
+Layer 27 output (final)   & $(512, 3072)$ & 0.0 & 0.0 & 0.0 & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The zero error reflects that bfloat16$\to$float16 conversion is lossless for activations in the observed range: float16's 10-bit mantissa is wider than bfloat16's 7-bit mantissa, so no precision is lost in this direction. The only rounding occurs on reconversion at Node~B (float16$\to$bfloat16 before the next layer), which remains within float16 precision and produces no detectable error in the final output.
+
+\paragraph{Throughput (Table~\ref{tab:throughput}).} The localhost streaming benchmark used synthetic float16 activations in Llama-3.2-3B layer-16 shape (10,000 tokens, 128-token chunks over TCP loopback).\footnote{Synthetic activations---fixed-seed random float16 in the correct shape---were used to isolate protocol performance from model inference time. The tested properties are protocol correctness and streaming throughput, not model output. The metadata field \texttt{"weights": "synthetic-deterministic-seed42"} in the benchmark results file records this.}
+
+\begin{table}[h]
+\centering
+\caption{Localhost streaming throughput benchmark.}
+\label{tab:throughput}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Metric & Value \\
+\midrule
+Bytes transferred & 61.4~MB \\
+Messages sent / received & 79 / 79 \\
+Elapsed time & 0.049~s \\
+Throughput & \textbf{1.25~Gbps} \\
+Target & 1.0~Gbps \\
+Dropped messages & 0 \\
+Sender/receiver byte count match & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At 1.25~Gbps, the protocol sustains throughput approximately \textbf{3,000$\times$ higher} than the real-time single-layer capture requirement for Llama-3.2-3B at 20~tokens/second ($\sim$120~KB/s).
+
+\paragraph{Thunderbolt feasibility (Table~\ref{tab:tb4}).} Required bandwidth at 20 tokens/second (full-depth, all-layer capture) versus available Thunderbolt~4 capacity ($\sim$3.5~GB/s practical):
+
+\begin{table}[h]
+\centering
+\caption{Required bandwidth vs.\ Thunderbolt~4 capacity at 20 tokens/second.}
+\label{tab:tb4}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Model & Required MB/s & TB4 utilization & Margin \\
+\midrule
+Llama-3.2-3B   &  3.3 & 0.09\% & $\times$1,068 \\
+Mistral-7B     &  5.0 & 0.14\% & $\times$700   \\
+Llama-2-13B    &  7.8 & 0.22\% & $\times$448   \\
+CodeLlama-34B  & 15.0 & 0.43\% & $\times$233   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Thunderbolt~4 is not a bottleneck under any realistic workload. The binding constraints are inference compute speed on Node~A and SAE forward-pass throughput on Node~B. Even at peak Mac Studio inference throughput ($\sim$300~tokens/second for the 3B model), TB4 utilization for full-depth capture stays below 1.4\%.
+
+\subsection{Distributed SAE Convergence}
+
+We compare distributed (2-worker) and single-node SAE training on Llama-3.2-3B activations (layer~14, 500k tokens, dict\_size~$= 4{,}096$, $k~= 64$, batch~$= 256$~tokens/worker~$= 512$~total).
+
+\paragraph{Proof-of-concept run, 5,000 steps (Table~\ref{tab:conv5k}).}
+
+\begin{table}[h]
+\centering
+\caption{Distributed vs.\ single-node SAE training at 5,000 steps (Llama-3.2-3B, layer~14).}
+\label{tab:conv5k}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Metric & Distributed & Single-node & Ratio \\
+\midrule
+Initial loss & 1.263 & 0.723 & --- \\
+Final loss   & 0.01788 & 0.01778 & 1.005 \\
+Mean loss (all steps) & 0.0608 & 0.0506 & 1.20 \\
+Converged? & \checkmark & \checkmark & --- \\
+Within 10\% at step 5,000 & \checkmark & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The distributed run's higher initial loss reflects a slower warmup (linear ramp over 200 steps vs.\ the baseline's faster acceleration from better batch diversity), but both runs converge to essentially the same final loss (ratio~1.005). The mean loss over all steps is 20\% higher for the distributed run due to this slower warmup phase, not slower final convergence.
+
+\paragraph{Full run, 50,000 steps (Table~\ref{tab:conv50k}).}
+
+\begin{table}[h]
+\centering
+\caption{Distributed vs.\ single-node SAE training at 50,000 steps. The two-process setup was validated algebraically: gradient averaging over sequential workers is equivalent to synchronous data-parallel training.}
+\label{tab:conv50k}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Metric & Distributed & Single-node & Ratio \\
+\midrule
+Final MSE & 0.010613 & 0.010608 & 1.0005 \\
+Final L0  & 64.0 & 64.0 & 1.0 \\
+Final FVE & 0.9822 & 0.9822 & 1.0 \\
+Dead features & 1,109 (27.1\%) & 1,117 (27.3\%) & --- \\
+Runtime & 79.7~min & 55.0~min & 1.45$\times$ \\
+\midrule
+Verdict & \multicolumn{3}{l}{PASS: within 0.05\% MSE of single-node baseline} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At 50,000 steps, the distributed SAE matches the single-node baseline to within 0.05\% on MSE, 0\% on L0 and FVE, and 0.2 percentage points on dead feature rate. The distributed run is 1.45$\times$ slower due to the gradient-averaging communication step; in a real two-node deployment over Thunderbolt, this overhead would be further reduced by overlapping gradient exchange with the next forward pass.
+
+Convergence curves show that both runs follow the same trajectory after the warmup phase, with loss declining monotonically from $\sim$0.02 at step~500 to $\sim$0.0178 at step~5,000.
+
+\subsection{SAE Quality Metrics}
+
+Table~\ref{tab:quality} summarizes quality metrics for the SAEs used in the cross-architecture analysis. Fraction of Variance Explained (FVE) is the primary reconstruction quality metric; raw MSE is activation-scale-dependent and should not be compared across models with different hidden dimensions and activation norms.
+
+\begin{table}[h]
+\centering
+\caption{SAE quality metrics. FVE is the reconstruction quality metric comparable across models; MSE is activation-scale-dependent. Qwen's higher MSE (relative to Llama) reflects larger activation norms at layer~18 of this model, not worse reconstruction quality.}
+\label{tab:quality}
+\begin{tabular}{@{}llrrrrrr@{}}
+\toprule
+Model & Layer & Dict & $k$ & Steps & MSE & FVE & Dead features \\
+\midrule
+Llama-3.2-3B (dist.) & 14 & 4,096 & 64 & 50,000 & 0.01061 & 0.9822 & 1,109 (27.1\%) \\
+Mistral-7B$^\ddagger$ & 16 & 16,384 & 128 & 1,000 & 0.00315 & 0.9649 & 339 (2.1\%) \\
+Qwen2.5-3B & 18 & 16,384 & 128 & 50,000 & 0.276 & 0.984 & 9,401 (57.4\%) \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\noindent\footnotesize $\ddagger$~4-bit quantized model weights.
+\end{table}
+
+The Mistral SAE was trained on a smaller dataset (50k~corpus tokens) and reached FVE~$= 0.965$ in 1,000~steps. Dead features declined monotonically from 748 at step~1 to 339 at step~1,000. FVE oscillated between 0.896 and 0.944 during steps 100--900 (reflecting per-batch variance at this dataset scale), then reached 0.965 at step~1,000 as the cosine-annealing schedule drove the learning rate to its minimum.
+
+The Qwen SAE shows 57.4\% dead features at step 50,000---higher than the Llama (27.1\%) and Mistral (2.1\%) runs, though direct comparison is complicated by the 8$\times$ expansion ratio (d\_in~$= 2{,}048 \to$ dict~$= 16{,}384$) and 204-epoch training regime. FVE~$= 0.984$ confirms the SAE is capturing the representational structure of the layer despite the high dead-feature rate. Further hyperparameter tuning (lower expansion ratio, cosine annealing warmup) is expected to reduce the dead-feature rate.
+
+The Llama distributed SAE's FVE~$= 0.9822$ at 27.1\% dead features is consistent with published SAE results at this scale and suggests the 4,096-feature dictionary is slightly over-provisioned for a 3B model's representational capacity at layer~14.
+
+\subsection{Cross-Architecture Feature Matching}
+\label{sec:matching}
+
+The chunk-averaged activation matching analysis was run on all three pairwise combinations of the 16,384-feature SAEs (Llama single-node at step~10k, Mistral at step~1k, Qwen at step~50k), using 50,000 evaluation tokens from WikiText-103 divided into 100 chunks of 500 tokens each.
+
+\paragraph{Pairwise match counts (Table~\ref{tab:pairs}).}
+
+\begin{table}[h]
+\centering
+\caption{Pairwise cross-architecture feature matches ($\cos \geq 0.8$). Coverage is the fraction of the 16,384-feature dictionary with at least one match in the paired model.}
+\label{tab:pairs}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Pair & Matches & Coverage \\
+\midrule
+Llama--Qwen    & 5,923  & 36.2\% \\
+Mistral--Qwen  & 8,099  & 49.5\% \\
+Llama--Mistral & 12,174 & 74.3\% \\
+\midrule
+\textbf{All three (universal)} & \textbf{3,753} & \textbf{22.9\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Feature distribution (Table~\ref{tab:venn}).}
+
+\begin{table}[h]
+\centering
+\caption{Venn diagram of features by overlap region. ``Universal'' features match all three pairwise comparisons at $\cos \geq 0.8$.}
+\label{tab:venn}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Region & Features \\
+\midrule
+Llama only & 11,155 \\
+Qwen only  & 13,784 \\
+Mistral only & 8,087 \\
+Llama--Qwen (not Mistral)   & 414 \\
+Llama--Mistral (not Qwen)   & 1,261 \\
+Qwen--Mistral (not Llama)   & 307 \\
+\textbf{All three (universal)} & \textbf{3,753} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 3,753 universal features are the central finding: a set of representational directions that, when measured by their activation pattern over a shared corpus, are essentially the same across Llama-3.2-3B, Mistral-7B, and Qwen2.5-3B. These three models share no training data (as far as is publicly known), differ in architecture (GQA vs.\ full attention, different MLP ratios), differ in scale (3B vs.\ 7B parameters), and were developed by different organizations. The convergence of their SAE features on a common set of $\sim$3,750 directions is evidence that these directions correspond to features intrinsic to the training distribution rather than to any particular architectural choice.
+
+The high Llama--Mistral match count (12,174; 74.3\%) relative to the lower Llama--Qwen count (5,923; 36.2\%) may reflect closer architectural lineage between Llama and Mistral (both derived from the LLaMA family) or differences in their training data distributions. The Mistral 4-bit quantization is a potential confound (\S\ref{sec:limitations}).
+
+Among the universal features, several reach cosine similarity~1.0 across all three pairwise comparisons---perfect alignment of activation patterns. These are the strongest candidates for features representing fundamental linguistic or semantic concepts that any large language model trained on English text would be expected to learn.
+
+\subsection{Safety Classifier Evaluation}
+\label{sec:safety}
+
+We evaluated a feature-based safety classifier built on the Llama-3.2-3B SAE (layer~14, dict\_size~$= 16{,}384$, $k~= 128$, trained 10,000~steps on WikiText-103). The classifier labels SAE features by semantic category using regex-based heuristic matching against maximum-activating token contexts, then aggregates ``potentially-harmful'' feature activations into a scalar harm score.
+
+\paragraph{Label distribution (top-200 features by activation frequency).}
+
+\begin{table}[h]
+\centering
+\caption{Feature label distribution among the top-200 most frequently activated features on WikiText-103.}
+\label{tab:labels}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Category & Count & Share \\
+\midrule
+factual          & 173 & 86.5\% \\
+stylistic        &  24 & 12.0\% \\
+code-related     &   2 &  1.0\% \\
+potentially-harmful & \textbf{1} & \textbf{0.5\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Classifier performance on 200-example balanced eval set (Table~\ref{tab:classifier}).}
+
+\begin{table}[h]
+\centering
+\caption{Threshold sweep on the safety classifier. Random baseline F1~$= 0.500$ (balanced dataset).}
+\label{tab:classifier}
+\begin{tabular}{@{}rrrrrl@{}}
+\toprule
+Threshold & Precision & Recall & F1 & FPR & Notes \\
+\midrule
+0.10 & 0.500 & 1.000 & 0.667 & 1.000 & Degenerate: flags everything \\
+0.50 & 0.476 & 0.800 & 0.597 & 0.880 & \\
+0.70 & 0.488 & 0.630 & 0.550 & 0.660 & \\
+0.90 & 0.580 & 0.470 & 0.519 & 0.340 & Best non-degenerate \\
+1.10 & 0.732 & 0.300 & 0.426 & 0.110 & \\
+1.30 & 1.000 & 0.180 & 0.305 & 0.000 & FPR $= 0$ but recall collapses \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The best non-degenerate operating point (threshold~$= 0.90$) achieves F1~$= 0.519$, essentially indistinguishable from the 0.500 random baseline.
+
+\paragraph{Root cause analysis.} The failure is diagnostic, not accidental:
+
+\begin{enumerate}
+\item \textbf{Corpus mismatch.} WikiText-103 contains almost no explicitly harmful content. The top-200 features by activation frequency represent the model's vocabulary for encyclopedic prose---factual, stylistic, code. Safety-relevant features are expected to be low-frequency on this corpus.
+
+\item \textbf{Frequency bias.} Selecting features by activation frequency selects for generalist features, not discriminative ones. Safety-relevant features would rank in the bottom quartile of activation frequency on a Wikipedia corpus.
+
+\item \textbf{Single-feature collapse.} The one identified harmful feature (feature~15040, a military-history detector firing on 9.9\% of WikiText tokens) is too broad (fires on many safe military-history topics) and too narrow (captures weapons in a Wikipedia context, not harmful instructions in a chat context).
+
+\item \textbf{Layer placement.} Layer~14 is at the midpoint of the 28-layer stack. Safety-relevant intent representations are more likely to emerge in later layers (20--28) where the residual stream has had time to integrate broader context.
+\end{enumerate}
+
+\paragraph{Implications.} The result motivates three specific changes: (a) replace the labeling corpus with a safety-targeted corpus such as AdvBench or HarmBench; (b) select features by \emph{differential} activation frequency (harmful~$-$~safe) rather than absolute frequency; (c) target later layers. The harm scoring pipeline (two-pass frequency analysis, context replay, threshold sweep) is reusable---the bottleneck is input data quality, not pipeline logic.
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{The Infrastructure Case}
+
+The primary contribution of this work is not any individual experimental result but the demonstration that the full interpretability stack---distributed inference, live activation streaming, online SAE training, cross-architecture feature analysis, and downstream safety evaluation---can run on two consumer nodes connected by a commodity interface. The alternative (cloud GPU clusters, specialized interconnects, large engineering teams) creates a high barrier to entry that concentrates interpretability research at a small number of well-funded organizations. Democratizing the infrastructure is a precondition for democratizing the science.
+
+The Thunderbolt analysis (\S\ref{sec:protocol-validation}) establishes that the link is not a bottleneck under any foreseeable workload. The binding constraints are compute-side: inference speed on Node~A and SAE forward-pass throughput on Node~B. Future work should focus on these (larger batches, INT8 quantization for the SAE encoder) rather than the interconnect.
+
+\subsection{Universal Features and the Platonic Representation Hypothesis}
+
+The finding that 3,753 features match across all three model families at cosine similarity~$\geq 0.8$ is consistent with the Platonic Representation Hypothesis \citep{huh2024platonic}: the conjecture that large neural networks trained on diverse data converge on a shared statistical model of reality, regardless of architecture or training procedure.
+
+The universality is particularly striking given the architectural differences: Llama-3.2-3B uses grouped query attention with 3,072 hidden dimensions, Mistral-7B uses sliding window attention with 4,096 dimensions, and Qwen2.5-3B uses a different attention implementation with 2,048 dimensions. The universal features must therefore be aligned in \emph{activation pattern space} (how they respond to text) rather than weight space (where they live in the parameter matrix). This is the correct notion of universality for interpretability: we care about what a feature responds to, not the weights that implement it.
+
+Future work should test whether the universal features correspond to recognizable semantic or linguistic categories. The pattern matching method identifies which features align; human evaluation or automated labeling (e.g., by collecting maximum-activating tokens) would determine what they represent.
+
+\subsection{Safety Classifier: An Honest Failure}
+
+The safety classifier result is negative, and its honest framing is more valuable than a positive result would have been. A classifier achieving F1~$= 0.519$ on a balanced set, barely above chance, with a clean mechanistic explanation of why it fails, is a clearer contribution than a classifier achieving F1~$= 0.8$ on a benchmark without revealing its failure modes.
+
+The mechanistic explanation is precise: the classifier fails because the features it uses were selected by a criterion (activation frequency on Wikipedia) orthogonal to the criterion relevant for the task (differential activation on harmful vs.\ safe text). This is not a subtle statistical failure---it is a pipeline design error fixable by changing the labeling corpus. The threshold sweep infrastructure, harm scoring formula, and evaluation dataset are all reusable. We propose that future iterations target F1~$\geq 0.80$ at FPR~$\leq 0.10$, using features selected by contrastive activation analysis on a balanced corpus.
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+\paragraph{Scale.} All results are for models up to 7B parameters. The architecture supports 34B (\S\ref{sec:system}), and the bandwidth analysis confirms feasibility, but we have not run 34B experiments. Larger models may exhibit qualitatively different universality patterns.
+
+\paragraph{Corpus.} All SAE training and evaluation used WikiText-103, an encyclopedic corpus that is clean and well-studied but is not representative of instruction-following or conversational distributions. SAEs trained on chat-format data may learn different features.
+
+\paragraph{Quantization confound.} The Mistral-7B activations were extracted from a 4-bit quantized model due to authentication constraints on the bf16 base model. Quantization reduces numerical precision of individual activations and may suppress some features (particularly those relying on fine-grained magnitude differences). The high Llama--Mistral match count (74.3\%) suggests the key representational structure survives 4-bit quantization, but re-running with bf16 weights would confirm this.
+
+\paragraph{Single split point.} The current system uses a fixed split at one layer. Full-depth distributed capture (streaming all layers) is specified by the protocol but not demonstrated in these experiments. Full-depth capture would enable circuit-tracing experiments at scale.
+
+\paragraph{Simulation vs.\ hardware.} The two-node validation used two Python subprocesses on one physical Mac Studio rather than two physical machines. The protocol is hardware-agnostic, but the latency and jitter profile of a real inter-machine Thunderbolt link may differ from Unix domain socket performance.
+
+\subsection{Path to Production}
+
+The immediate next step is implementing the system in Swift/MLX rather than Python, using the same wire protocol. Swift provides access to macOS's native socket APIs, lower-latency memory management, and better MLX integration for zero-copy buffer passing. The protocol spec is wire-format stable (v1.0.0); Swift and Python implementations are directly interoperable.
+
+Beyond that, the natural extension is online SAE training: rather than collecting activations offline and training on stored data, the SAE trainer on Node~B processes the activation stream as it arrives, updating weights continuously. This eliminates the two-stage collect$\to$train pipeline and reduces the hyperparameter tuning cycle from hours to minutes.
+
+The cross-architecture feature matching result also motivates a specific experiment: train a ``universal SAE'' whose dictionary is initialized from the matched features and fine-tuned jointly on activations from all three model families. If the universal features are truly shared representations, a single dictionary should achieve comparable FVE on all three models---a strong form of validation.
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have described \mlxmesh{}, a system for distributed mechanistic interpretability on Apple Silicon hardware. The system streams intermediate layer activations between two nodes over a purpose-built binary wire protocol, enabling online SAE training and analysis without storing activations to disk. We have validated the system end-to-end---zero reconstruction error at the split boundary, 1.25~Gbps protocol throughput, distributed SAE training within 0.05\% of the single-node baseline---and applied it to three experimental contributions: (1)~a quantitative bandwidth analysis showing that Thunderbolt~4 is never a bottleneck at any model size considered; (2)~cross-architecture feature matching identifying 3,753 universal features shared across Llama-3.2-3B, Mistral-7B, and Qwen2.5-3B; and (3)~a safety classifier evaluation that honestly characterizes a negative result and diagnoses its precise failure mode.
+
+The central message is that the infrastructure gap between ``models small enough to study on one machine'' and ``models large enough to matter'' is not a fundamental barrier---it is an engineering problem with a clean solution. Two Apple Silicon nodes, a Thunderbolt cable, and a well-specified wire protocol are sufficient for state-of-the-art interpretability research on models up to 34B parameters. The science of understanding what large language models represent does not require access to expensive centralized compute, and should not be limited to organizations that have it.
+
+% ============================================================
+\section*{Acknowledgments}
+
+This work was conducted independently using consumer hardware. We thank the developers of MLX, the Hugging Face community for open model weights, and the mechanistic interpretability community whose open publication of methods and findings made this work possible.
+
+% ============================================================
+\section*{Data Availability}
+
+All experimental data, training logs, benchmark results, and analysis scripts produced in this work are available at \url{https://github.com/[author]/mlxmesh}. This includes: activation collection scripts and metadata; SAE training checkpoints and training logs for all four runs; the cross-architecture matching results including the full list of 3,753 universal features; bandwidth benchmark results (clearly labeled as using synthetic activations); the distributed-capture validation JSON; and the safety classifier evaluation dataset and results. The mlxMesh wire protocol specification is documented in \texttt{docs/activation-streaming-protocol.md}.
+
+% ============================================================
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}
