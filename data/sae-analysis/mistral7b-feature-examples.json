@@ -1,0 +1,7 @@
+{
+  "error": "no_sae_checkpoint",
+  "model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "activations_available": true,
+  "activations_path": "data/activations/mistral-7b-layer16",
+  "note": "Mistral-7B activations were collected (500k tokens, layer 16, 4096 hidden). No SAE has been trained on these activations \u2014 data/sae-runs/ contains only llama-3b-layer16 and qwen-3b-layer18 checkpoints. To train: python data/sae-runs/train_sae.py --activations data/activations/mistral-7b-layer16 --output data/sae-runs/mistral-7b-layer16 (~2 hours for 10k steps), then re-run this script."
+}

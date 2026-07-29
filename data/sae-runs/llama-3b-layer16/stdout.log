@@ -1,0 +1,79 @@
+Loading activations: data/activations/llama-3b-layer16/activations.npy
+  shape     : (500000, 3072)  dtype=float16
+  model     : mlx-community/Llama-3.2-3B-bf16
+  layer     : 14
+
+Config:
+{
+  "source_model": "mlx-community/Llama-3.2-3B-bf16",
+  "source_layer": 14,
+  "d_in": 3072,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 5.33,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from data/sae-runs/llama-3b-layer16/checkpoint_step_010000.npz  (start_step=10,000)
+  [loaded checkpoint: checkpoint_step_010000.npz]
+Advancing data iterator by 10,000 steps...
+  done.
+  [log truncated to 51 entries (step ≤ 10,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=10,000
+
+step 10,200/50,000  loss=0.0088  L0=128.0  FVE=0.825  dead=8,129  lr=9.13e-05       377 tok/s
+step 10,400/50,000  loss=0.0079  L0=128.0  FVE=0.986  dead=7,303  lr=9.09e-05       368 tok/s
+[Tue Jul 28 08:13:43 CDT 2026] Waiting for Qwen training (PID 93489) to finish...
+[Tue Jul 28 11:22:18 CDT 2026] Qwen training finished. Starting Llama-3b resume from step 10000.
+Loading activations: /Users/melton/ResearchPapers/data/activations/llama-3b-layer16/activations.npy
+  shape     : (500000, 3072)  dtype=float16
+  model     : mlx-community/Llama-3.2-3B-bf16
+  layer     : 14
+
+Config:
+{
+  "source_model": "mlx-community/Llama-3.2-3B-bf16",
+  "source_layer": 14,
+  "d_in": 3072,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 5.33,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/llama-3b-layer16/checkpoint_step_010000.npz  (start_step=10,000)
+  [loaded checkpoint: checkpoint_step_010000.npz]
+Advancing data iterator by 10,000 steps...
+  done.
+  [log truncated to 51 entries (step ≤ 10,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=10,000
+
+step 10,200/50,000  loss=0.0088  L0=128.0  FVE=0.825  dead=8,187  lr=9.13e-05     1,698 tok/s
+step 10,400/50,000  loss=0.0079  L0=128.0  FVE=0.986  dead=7,343  lr=9.09e-05        61 tok/s
+step 10,600/50,000  loss=0.0078  L0=128.0  FVE=0.992  dead=6,933  lr=9.06e-05        84 tok/s
+step 10,800/50,000  loss=0.0077  L0=128.0  FVE=0.989  dead=6,652  lr=9.02e-05        99 tok/s
+step 11,000/50,000  loss=0.0077  L0=128.0  FVE=0.989  dead=6,459  lr=8.98e-05       116 tok/s
+step 11,200/50,000  loss=0.0076  L0=128.0  FVE=0.990  dead=6,262  lr=8.95e-05       131 tok/s
+step 11,400/50,000  loss=0.0075  L0=128.0  FVE=0.984  dead=6,074  lr=8.91e-05       144 tok/s
+step 11,600/50,000  loss=0.0075  L0=128.0  FVE=0.989  dead=5,947  lr=8.87e-05       156 tok/s
+step 11,800/50,000  loss=0.0075  L0=128.0  FVE=0.984  dead=5,812  lr=8.83e-05       166 tok/s
+step 12,000/50,000  loss=0.0074  L0=128.0  FVE=0.979  dead=5,700  lr=8.79e-05       174 tok/s
+step 12,200/50,000  loss=0.0074  L0=128.0  FVE=0.990  dead=5,611  lr=8.75e-05       180 tok/s
+step 12,400/50,000  loss=0.0074  L0=128.0  FVE=0.989  dead=5,514  lr=8.71e-05       185 tok/s
+step 12,600/50,000  loss=0.0073  L0=128.0  FVE=0.983  dead=5,435  lr=8.67e-05       191 tok/s
+step 12,800/50,000  loss=0.0073  L0=128.0  FVE=0.992  dead=5,356  lr=8.62e-05       194 tok/s
+step 13,000/50,000  loss=0.0073  L0=128.0  FVE=0.984  dead=5,278  lr=8.58e-05       198 tok/s
