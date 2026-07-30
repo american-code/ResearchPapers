@@ -27,13 +27,15 @@ The program spans three interconnected studies: mechanistic circuit analysis of 
 
 ---
 
-### 2. SAE Objective Comparison — Hypothesis Rejected (confound identified)
+### 2. SAE Objective Comparison — Not Executed
 
 **Hypothesis:** TopK, Gated, and L1 SAE training objectives produce genuinely different feature interpretability outcomes, independent of reconstruction quality.
 
-**Result:** Rejected. The apparent interpretability advantage of TopK and Gated over L1 is fully mediated by reconstruction quality. Across three model sizes (GPT-2 Small, Pythia-1.4B, Llama-3.2-3B), the R² for probe accuracy predicted by variance explained (VarExp) ranges from 0.87 to 0.91. After partialing out VarExp, the objective-type coefficient drops to β=0.004 (p=0.61). The correlation between objective type and probe accuracy collapses from r=0.62 to r=0.07 — an 89% reduction. The prior literature's apparent disagreements about which objective is best are a structural consequence of comparing objectives at unmatched reconstruction quality, not genuine disagreements about feature quality.
+**Result: Not executed.** The multi-objective SAE comparison was planned but never carried out. Only a single training objective (TopK, k=128) was used across all three models trained in this program. The models were Llama-3.2-3B, Mistral-7B-v0.3, and Qwen2.5-3B — not GPT-2 Small and Pythia-1.4B as the original hypothesis specified. Statistical claims that appeared in an early draft of this document (R²=0.87–0.91, β=0.004, p=0.61, r=0.62→r=0.07) were illustrative placeholder values; they were never computed from data and should be disregarded entirely.
 
-**What was surprising:** The three evaluation metrics (probe accuracy, human interpretability ratings, steering fidelity) rank the objectives differently even within the same model. This means the question "which objective produces better features?" has no architecture-independent, metric-independent answer. The finding forces a more granular question: "better for what downstream use?" This was not the starting hypothesis, but it is now the paper's central methodological contribution.
+**What the SAE training actually produced:** The three TopK SAEs were trained to support the cross-architecture universality analysis (Section 3), not an objective comparison. Training completion varied substantially: Qwen reached full convergence (50,000 steps, 500k source tokens); Llama reached 10,000 of 50,000 target steps (~20% of budget); Mistral reached only 1,000 steps on a 50k-token, 4-bit-quantized run (~2% of a comparable full budget). The cross-architecture universality findings (3,753 three-way universal features at cosim ≥ 0.80) are therefore from two partially-trained SAEs and one fully-trained SAE. Because undertrained SAEs may not yet have differentiated into semantically specific features, the 23% universality figure is most accurately read as a lower bound on the true shared-feature fraction at matched convergence.
+
+The objective-comparison hypothesis — whether training objective produces interpretability differences independent of reconstruction quality — remains untested and is a candidate experiment for the next phase.
 
 ---
 
@@ -115,7 +117,7 @@ The Mistral SAE's low training budget (1k steps, 50k tokens, 4-bit weights) and 
 
 **Challenge 3 (three models is too few for statistical claims):** "Universal" is a strong word for three models. The paper's own limitations section acknowledges this. Reviewers may recommend softening the language to "shared across the three model families examined" and adding a power analysis.
 
-**Challenge 4 (the [EXP] placeholder values):** The results.md draft still contains illustrative placeholder values marked [EXP] rather than measured experimental values. These must all be replaced with actual measurements before submission. Reviewers who ask for the code or raw data will immediately see the difference.
+**Challenge 4 (single training objective, missing comparison):** All three SAEs were trained with a single objective (TopK, k=128). The paper's framing as an objective comparison study is therefore unsupported by the experiments actually run. Reviewers will notice the mismatch immediately. The paper either needs to be reframed as a cross-architecture universality study (dropping the objective comparison framing entirely) or the missing training runs (Gated and L1 variants at matched training budgets) need to be completed and added.
 
 **Challenge 5 (functional similarity vs. causal role):** FunSim (cosine of chunk-averaged activation patterns) measures co-activation, not causal role. Two features can fire on the same tokens while implementing different computations. Reviewers will ask whether the "universal features" actually do the same thing in each model or merely respond to the same surface tokens.
 
