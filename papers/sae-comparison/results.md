@@ -30,6 +30,8 @@ The Mistral SAE was trained on a 4-bit quantized version of Mistral-7B-v0.3 and 
 
 Cross-architecture matching used the chunk-averaged activation fingerprint method described in Section 3.4: 100-dimensional fingerprints computed over 50,000 tokens of wikitext-103, with a cosine similarity threshold of 0.80. Many-to-one matches are allowed.
 
+Checkpoints used: Qwen2.5-3B `checkpoint_final.npz` (fully converged, step 50,000); Llama-3.2-3B `checkpoint_step_010000.npz` (step 10,000, partial); Mistral-7B-v0.3 `checkpoint_final.npz` (step 1,000 on 50k-token subset, partial). Matching was re-run on 2026-07-29 after Qwen training completed; pairwise and three-way counts are unchanged from the pre-completion run.
+
 **Table 2.** Pairwise cross-architecture feature matches (cosim ≥ 0.80) and three-way universal features.
 
 | Pair | Matched pairs (cosim ≥ 0.80) |
