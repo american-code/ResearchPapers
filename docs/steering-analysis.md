@@ -37,6 +37,8 @@ h_layer ← h_layer + α · v_concept,layer
 
 The model is prompted with neutral open-ended queries and generates 20 completions per α value. Alpha is swept over {−2, −1, −0.5, 0, 0.5, 1, 2}.
 
+A separate per-layer isolation run applies the vector at exactly one layer per generation, enabling direct per-layer behavioral comparison; results for three concepts are reported in Section 3.3.
+
 ### Scoring
 
 Three metrics are reported:
@@ -113,9 +115,27 @@ The exception is `python_coding`, whose norm fractions are notably more uniform 
 
 ### Implications for Injection Depth
 
-The strong late-layer concentration suggests that for Llama-3.2-3B, injecting at layer 24 alone would capture the majority of the steering signal for most concepts. However, the behavioral results reported here are from simultaneous injection at all three layers. A controlled ablation (single-layer vs. multi-layer vs. final-layer-only) would directly answer whether early-layer injection adds behavioral signal beyond what late layers provide, or whether it primarily introduces noise that degrades fluency.
+The strong late-layer concentration suggests that for Llama-3.2-3B, injecting at layer 24 alone would capture the majority of the steering signal for most concepts. However, the behavioral results in Sections 2 and 5 are from simultaneous injection at all three layers. A per-layer isolation run (Section 3.3) directly tests whether each layer's injection contributes independent behavioral signal, and finds that norm concentration is a poor predictor of single-layer behavioral effectiveness.
 
-The french_language concept is the only one for which the earliest significant layer (per the extraction pipeline) coincides with layer 24 — it shows no significant norm at layers 8 or 16 relative to 24. This further supports the hypothesis that language identity is encoded primarily in late residual stream positions.
+The french_language concept is the only one for which the earliest significant layer (per the extraction pipeline) coincides with layer 24 — it shows no significant norm at layers 8 or 16 relative to 24. However, the isolation run (layers 8 and 16 only, layer 24 not yet tested) shows both early layers produce substantial French-language output increases at α=+1, with layer 8 achieving higher keyword density despite lower vector norm.
+
+### Per-Layer Behavioral Effectiveness (Isolation Run)
+
+Patching exactly one layer per generation disentangles each depth's behavioral contribution from the combined-layer baseline. The isolation run is complete for `positive_sentiment` and `negative_sentiment` (all three layers) and for `french_language` (layers 8 and 16); `python_coding` and `refusal_behavior` were not re-run under isolation.
+
+| Concept | Layer 8 | Layer 16 | Layer 24 |
+|---|---|---|---|
+| positive_sentiment | 0.60 at α=+2.0 | **0.90 at α=+2.0** | 0.75 at α=+0.5 |
+| negative_sentiment | 0.15 at α=+1.0 | 0.15 at α=+0.5 | 0.15 at α=+2.0 |
+| french_language† | 1.00 at α=+1.0 | 0.95 at α=+1.0 | — |
+
+*Values are keyword hit-rate (fraction of 20 completions containing ≥1 target keyword). † french_language baseline at α=0 is ~0.95 due to keyword overlap with English text; keyword density is a more informative metric: at α=+1, L8 achieves 30.1 per 100 words (vs. baseline 3.4) and L16 achieves 25.5 per 100 words (vs. baseline 4.3).*
+
+**positive_sentiment:** Layer 16 is the most behaviorally effective single injection point (0.90 at α=+2), outperforming both layer 24 (0.75) and layer 8 (0.60). This contradicts the prediction from norm-fraction analysis, which would rank layer 24 as dominant (57% of total vector norm). Norm concentration at layer 24 reflects where the concept is *represented* in the residual stream; it does not predict where injection produces the largest behavioral shift. Layer 24 peaks at a lower alpha (0.75 at α=+0.5) and does not improve with stronger interventions, while layer 16 responds monotonically up to α=+2.
+
+**negative_sentiment:** All three layers plateau at 15% hit rate regardless of injection point or alpha. The behavioral ceiling is flat across depth, consistent with the RLHF suppression interpretation: suppression is a distributional property of the output space, not localized to any single layer.
+
+**french_language (layers 8 and 16):** At α=+1, layer 8 achieves a keyword density of 30.1 per 100 words (vs. baseline 3.4) and layer 16 achieves 25.5 per 100 words (vs. baseline 4.3). Layer 8 is more effective in the positive-alpha direction despite lower vector norm (L8: 7.24 vs. L16: 8.88). At α=+2, both collapse — layer 8 more catastrophically (hit rate drops to 0.20) than layer 16 (0.50). Layer 24 results are not available from the isolation run.
 
 ---
 
