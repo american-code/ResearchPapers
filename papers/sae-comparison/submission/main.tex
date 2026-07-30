@@ -3,11 +3,11 @@
 % A Systematic Comparison of Training Objectives, Architectures, and Evaluation Metrics
 %
 % Target venue: ICLR 2027 (submission deadline September 24, 2026)
-% Format: ICLR 2027 — 9 pages main text, unlimited references and appendix
+% Format: ICLR 2027 --- 9 pages main text, unlimited references and appendix
 %
 % SETUP INSTRUCTIONS (before compiling):
 %   1. Download the ICLR 2027 LaTeX style file from iclr.cc when the
-%      author guide is published (expected August–September 2026).
+%      author guide is published (expected August--September 2026).
 %      Place iclr2027_conference.sty (or equivalent) in this directory.
 %      Until then, use iclr2024_conference.sty as a format proxy.
 %   2. All \placeholder{} commands in this file mark content that requires
@@ -17,28 +17,27 @@
 %   4. Run pdflatex → bibtex → pdflatex → pdflatex for correct references.
 % ============================================================================
 
-\documentclass{article}
+\documentclass[11pt]{article}
 
-% ── ICLR style ──────────────────────────────────────────────────────────────
-% Replace with iclr2027_conference.sty when available.
-% Download from: https://iclr.cc/Conferences/2027/AuthorGuide (not yet published)
-\usepackage{iclr2024_conference}  % PROXY: replace before submission
+% ── Page geometry ────────────────────────────────────────────────────────────
+\usepackage[margin=1.25in, top=1in, bottom=1.25in]{geometry}
 
 % ── Standard packages ───────────────────────────────────────────────────────
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{hyperref}
-\usepackage{url}
-\usepackage{booktabs}
-\usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{nicefrac}
 \usepackage{microtype}
 \usepackage{xcolor}
-\usepackage{graphicx}
-\usepackage{subfigure}
-\usepackage{natbib}
+\usepackage{url}
+\usepackage[colorlinks=true, linkcolor=blue!70!black,
+            citecolor=blue!70!black, urlcolor=blue!70!black]{hyperref}
+\usepackage[numbers, sort&compress]{natbib}
 
 % ── Placeholder command ──────────────────────────────────────────────────────
 % Marks content requiring actual data. Remove before submission.
@@ -105,7 +104,7 @@ future evaluation practice.
 
 Language models represent concepts in high-dimensional activation spaces that mix
 together thousands of distinct semantic and syntactic features within individual
-neurons — a phenomenon \citet{elhage2022superposition} term \emph{superposition}.
+neurons --- a phenomenon \citet{elhage2022superposition} term \emph{superposition}.
 Sparse autoencoders (SAEs) address this by learning an overcomplete dictionary of
 directions, each corresponding to a single feature, such that any model activation can
 be reconstructed as a sparse sum over dictionary elements.
@@ -174,7 +173,7 @@ $\|c_i\|_0 \ll m$ for each row $c_i$.
 \subsection{SAE Architecture Variants}
 
 \paragraph{Standard L1 SAE.}
-\citet{cunningham2023sparse,bricken2023monosemanticity} train an encoder–decoder pair
+\citet{cunningham2023sparse,bricken2023monosemanticity} train an encoder--decoder pair
 to minimize:
 \begin{equation}
   \mathcal{L} = \|x - \hat{x}\|_2^2 + \lambda \|z\|_1
@@ -406,7 +405,7 @@ properties and should generalize; but larger models (7B+) and shallower or deepe
 layers may interact differently with each objective's inductive bias.
 
 \paragraph{Human interpretability scale.}
-The human study evaluates \placeholder{$N_{\text{features}}$} features per SAE — a
+The human study evaluates \placeholder{$N_{\text{features}}$} features per SAE --- a
 small fraction of the full dictionary. Activation-rate-stratified sampling reduces but
 does not eliminate sampling bias.
 
@@ -416,8 +415,8 @@ comparison, particularly if the judge relies on surface lexical cues.
 
 \paragraph{Causal claims.}
 The mechanistic accounts in \S\ref{sec:discussion} are theoretically motivated but not
-directly verified experimentally. Alternative explanations — finite-sample artifacts,
-dead feature rate dominance — cannot be fully ruled out.
+directly verified experimentally. Alternative explanations --- finite-sample artifacts,
+dead feature rate dominance --- cannot be fully ruled out.
 
 % ── 6. Conclusion ────────────────────────────────────────────────────────────
 \section{Conclusion}
@@ -471,7 +470,7 @@ hyperparameter settings are reported in \S\ref{sec:methods} and Appendix~\ref{ap
 
 % ── References ───────────────────────────────────────────────────────────────
 \bibliography{references}
-\bibliographystyle{iclr2024_conference}  % Replace with iclr2027_conference when available
+\bibliographystyle{plainnat}
 
 % ── Appendix ─────────────────────────────────────────────────────────────────
 \appendix
