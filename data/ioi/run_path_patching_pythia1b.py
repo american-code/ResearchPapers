@@ -153,13 +153,13 @@ def main() -> None:
     model, tokenizer = load(MODEL_ID)
     print(f"  loaded in {time.time() - t0:.1f}s")
 
-    n_layers = len(model.model.layers)
-    n_heads  = model.model.layers[0].attention.n_heads
+    n_layers = len(model.layers)
+    n_heads  = model.layers[0].attention.num_attention_heads
     print(f"  n_layers={n_layers}  n_heads={n_heads}")
 
     # Replace attention modules
     attns: list[PathPatchableAttention] = []
-    for layer in model.model.layers:
+    for layer in model.layers:
         pa = PathPatchableAttention(layer.attention)
         layer.attention = pa
         attns.append(pa)

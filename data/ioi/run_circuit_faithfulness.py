@@ -146,7 +146,10 @@ class NeoXMaskedAttention(MaskedAttentionBase):
 # ── helpers ─────────────────────────────────────────────────────────────────
 
 def install(model, kind: str) -> list:
-    layers = model.model.layers if hasattr(model, "model") else model.layers
+    # Llama exposes blocks at model.model.layers; GPT-NeoX exposes them at
+    # model.layers (a property shorthand over model.model.h). hasattr(model,
+    # "model") is True for both, so it cannot be used to discriminate.
+    layers = model.model.layers if kind == "llama" else model.layers
     attns = []
     for layer in layers:
         if kind == "llama":
