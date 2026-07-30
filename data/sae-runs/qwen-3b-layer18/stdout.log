@@ -7389,3 +7389,5647 @@ Config:
 Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
   [loaded checkpoint: checkpoint_step_050000.npz]
 Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18
+Loading activations: /Users/melton/ResearchPapers/data/activations/qwen-3b-layer18/activations.npy
+  shape     : (500000, 2048)  dtype=float16
+  model     : mlx-community/Qwen2.5-3B-bf16
+  layer     : 18
+
+Config:
+{
+  "source_model": "mlx-community/Qwen2.5-3B-bf16",
+  "source_layer": 18,
+  "d_in": 2048,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 8.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...

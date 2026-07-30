@@ -253,7 +253,7 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / 'config.json').write_text(json.dumps(CFG, indent=2) + '\n')
 
-    acts_dir = Path('data/activations/llama-3b-layer16')
+    acts_dir = Path('data/activations/llama-3b-layer14')
     meta     = json.loads((acts_dir / 'metadata.json').read_text())
     n_tok    = meta['n_tokens_written']
     d_in     = meta['hidden_size']
@@ -336,7 +336,7 @@ def main() -> None:
         },
         'comparison_to_earlier_single_node': {
             'note': (
-                'Earlier single-node run at data/sae-runs/llama-3b-layer16 used '
+                'Earlier single-node run at data/sae-runs/llama-3b-layer14 used '
                 'dict_size=16384, k=128, batch=2048 — 4x larger dict and batch. '
                 'Not directly comparable. Reference metrics at step 13k of that run: '
                 'loss=0.007271, l0=128.0, fve=0.9835, dead_5k=5278.'

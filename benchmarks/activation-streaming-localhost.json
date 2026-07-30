@@ -15,10 +15,14 @@
   "expected_messages": 79,
   "messages_received": 79,
   "elapsed_seconds": 0.049126,
-  "throughput_gbps": 1.251,
+  "throughput_gbps": 10.008,
   "throughput_target_gbps": 1.0,
   "throughput_pass": true,
   "files_match": true,
   "no_dropped_messages": true,
-  "pass": true
+  "pass": true,
+  "throughput_GB_per_s": 1.251,
+  "unit_correction_note": "61,440,632 bytes in 0.049126 s = 1.251 GB/s = 10.008 Gbps. An earlier version of this file stored the byte-rate (1.251) in a field named throughput_gbps; the value was a GB/s figure and the label was wrong. Both units are now recorded explicitly.",
+  "ratio_over_realtime_single_layer_capture": 10177,
+  "realtime_requirement_bytes_per_s": 122880
 }

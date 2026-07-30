@@ -1,0 +1,128 @@
+{
+ "metric": "pearson",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 1000 chunks x 500 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "min_active_chunks": 50,
+ "tau_calibrated": 0.9394,
+ "permutation_null": {
+  "null_p99": 0.9394,
+  "null_mean": 0.5744,
+  "null_max": 0.9894,
+  "n_null_samples": 14001
+ },
+ "n_matches_tau_0.80": 186,
+ "n_matches_tau_calibrated": 22,
+ "matches": [
+  {
+   "feat_a": 867,
+   "feat_b": 6293,
+   "sim": 0.9404
+  },
+  {
+   "feat_a": 944,
+   "feat_b": 7259,
+   "sim": 0.9421
+  },
+  {
+   "feat_a": 1497,
+   "feat_b": 3109,
+   "sim": 0.9488
+  },
+  {
+   "feat_a": 1847,
+   "feat_b": 4928,
+   "sim": 0.9742
+  },
+  {
+   "feat_a": 4633,
+   "feat_b": 3254,
+   "sim": 0.9395
+  },
+  {
+   "feat_a": 5099,
+   "feat_b": 9540,
+   "sim": 0.9559
+  },
+  {
+   "feat_a": 7961,
+   "feat_b": 9077,
+   "sim": 0.9409
+  },
+  {
+   "feat_a": 8833,
+   "feat_b": 5110,
+   "sim": 0.9518
+  },
+  {
+   "feat_a": 10042,
+   "feat_b": 14037,
+   "sim": 0.9897
+  },
+  {
+   "feat_a": 10122,
+   "feat_b": 4571,
+   "sim": 0.9565
+  },
+  {
+   "feat_a": 10622,
+   "feat_b": 7479,
+   "sim": 0.9793
+  },
+  {
+   "feat_a": 11944,
+   "feat_b": 2517,
+   "sim": 0.949
+  },
+  {
+   "feat_a": 12832,
+   "feat_b": 7302,
+   "sim": 0.9464
+  },
+  {
+   "feat_a": 13381,
+   "feat_b": 5109,
+   "sim": 0.9951
+  },
+  {
+   "feat_a": 13898,
+   "feat_b": 744,
+   "sim": 0.9693
+  },
+  {
+   "feat_a": 13934,
+   "feat_b": 1279,
+   "sim": 0.9832
+  },
+  {
+   "feat_a": 15109,
+   "feat_b": 2539,
+   "sim": 0.9463
+  },
+  {
+   "feat_a": 15327,
+   "feat_b": 11651,
+   "sim": 0.9646
+  },
+  {
+   "feat_a": 15350,
+   "feat_b": 10266,
+   "sim": 0.9499
+  },
+  {
+   "feat_a": 15365,
+   "feat_b": 1394,
+   "sim": 0.9687
+  },
+  {
+   "feat_a": 15646,
+   "feat_b": 10104,
+   "sim": 0.9438
+  },
+  {
+   "feat_a": 15952,
+   "feat_b": 13107,
+   "sim": 0.9579
+  }
+ ]
+}

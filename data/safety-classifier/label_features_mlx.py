@@ -18,8 +18,8 @@ from transformers import AutoTokenizer
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 ROOT       = Path(__file__).parent.parent
-CKPT_PATH  = ROOT / "sae-runs/llama-3b-layer16/checkpoint_step_010000.npz"
-ACTS_PATH  = ROOT / "activations/llama-3b-layer16/activations.npy"
+CKPT_PATH  = ROOT / "sae-runs/llama-3b-layer14/checkpoint_step_010000.npz"
+ACTS_PATH  = ROOT / "activations/llama-3b-layer14/activations.npy"
 OUT_PATH   = ROOT / "safety-classifier/llama3b-feature-labels.json"
 OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
@@ -45,7 +45,7 @@ print(f"  d_in={W_enc_mx.shape[0]}  dict_size={DICT_SIZE}  k={K}", flush=True)
 
 # ── Load activations (mmap) ────────────────────────────────────────────────────
 print(f"Loading activations: {ACTS_PATH}", flush=True)
-meta_acts  = json.loads((ROOT / "activations/llama-3b-layer16/metadata.json").read_text())
+meta_acts  = json.loads((ROOT / "activations/llama-3b-layer14/metadata.json").read_text())
 acts_shape = tuple(meta_acts['activations_shape'])          # (500000, 3072)
 acts_mm    = np.memmap(str(ACTS_PATH), dtype='float16', mode='r', shape=acts_shape)
 N          = acts_mm.shape[0]

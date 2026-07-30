@@ -1,0 +1,53 @@
+{
+ "metric": "cosine",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 1000 chunks x 500 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "min_active_chunks": 50,
+ "tau_calibrated": 0.9041,
+ "permutation_null": {
+  "null_p99": 0.9041,
+  "null_mean": 0.4915,
+  "null_max": 0.975,
+  "n_null_samples": 10313
+ },
+ "n_matches_tau_0.80": 40,
+ "n_matches_tau_calibrated": 7,
+ "matches": [
+  {
+   "feat_a": 5207,
+   "feat_b": 9096,
+   "sim": 0.9205
+  },
+  {
+   "feat_a": 5528,
+   "feat_b": 9533,
+   "sim": 0.974
+  },
+  {
+   "feat_a": 6561,
+   "feat_b": 5615,
+   "sim": 0.9777
+  },
+  {
+   "feat_a": 7964,
+   "feat_b": 7862,
+   "sim": 0.9345
+  },
+  {
+   "feat_a": 9197,
+   "feat_b": 4814,
+   "sim": 0.9231
+  },
+  {
+   "feat_a": 11766,
+   "feat_b": 12553,
+   "sim": 0.9153
+  },
+  {
+   "feat_a": 16092,
+   "feat_b": 3773,
+   "sim": 0.9076
+  }
+ ]
+}

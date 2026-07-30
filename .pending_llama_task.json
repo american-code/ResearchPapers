@@ -3,7 +3,7 @@
     "id": "9D566E9F-ABB2-4259-8C35-77BB0478411F",
     "serial": true,
     "size": "large",
-    "title": "Resume SAE training on Llama-3.2-3B from checkpoint on lab-02. The checkpoint is at /Users/lab-02/ResearchPapers/data/sae-runs/llama-3b-layer16/checkpoint_step_010000.npz. Run remaining 40k steps (10k\u219250k). Config: dict_size=16384, K=128, peak_lr=1e-4, batch=2048. Save final checkpoint to data/sae-runs/llama-3b-layer16/.",
+    "title": "Resume SAE training on Llama-3.2-3B from checkpoint on lab-02. The checkpoint is at /Users/lab-02/ResearchPapers/data/sae-runs/llama-3b-layer14/checkpoint_step_010000.npz. Run remaining 40k steps (10k\u219250k). Config: dict_size=16384, K=128, peak_lr=1e-4, batch=2048. Save final checkpoint to data/sae-runs/llama-3b-layer14/.",
     "workingDir": "/Users/melton/ResearchPapers",
     "remote": true
   }

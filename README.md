@@ -1,7 +1,13 @@
 # Research Papers Workspace
 
-Mechanistic interpretability and AI safety research. Three planned papers targeting
-ICLR / NeurIPS 2026.
+Mechanistic interpretability and AI safety research. Three papers.
+
+> **See [CORRECTIONS.md](CORRECTIONS.md)** (2026-07-30) for the audit of all three
+> papers against their data. Two headline claims were withdrawn: cross-architecture
+> feature universality (3,753 shared features → 0 under a permutation null) and IOI
+> depth-zone conservation (80% match rate → not significant, p = 0.098/0.32). The
+> hypotheses below are the *original* framings; the papers now report what the data
+> supports, which in two of three cases is a negative result.
 
 ---
 
@@ -18,7 +24,11 @@ path-patching combined with sparse decomposition recovers stable, transferable c
 
 **Target venue:** ICLR 2026 (main track — interpretability)
 
-**Key data:** `data/ioi/`
+**Status:** Bottleneck structure and path-patching results hold. The depth-conservation
+claim was withdrawn after permutation testing. Circuit-level faithfulness is still
+unmeasured — the largest outstanding gap.
+
+**Key data:** `data/ioi/`, `data/factual-assoc/`
 
 ---
 
@@ -36,7 +46,13 @@ confound that has driven inconsistent conclusions in prior work.
 
 **Target venue:** NeurIPS 2026 (main track — representation learning)
 
-**Key data:** `data/sae-runs/`, `data/steering/`
+**Status:** Rescoped. Only TopK SAEs were ever trained (no L1, no Gated, no JumpReLU),
+on Llama/Mistral/Qwen rather than GPT-2/Pythia/Llama, and no probe, human-rating or
+steering study was conducted — so the objective comparison in the hypothesis above has
+no data behind it. The paper now reports TopK training dynamics: dictionary collapse,
+dense-feature degeneracy, and held-out reconstruction.
+
+**Key data:** `data/sae-runs/`, `data/sae-analysis/`
 
 ---
 
@@ -54,7 +70,12 @@ the resulting representations improve the robustness of safety classifiers.
 
 **Target venue:** ICLR 2026 (safety & alignment track)
 
-**Key data:** `data/safety-classifier/`, `data/steering/`
+**Status:** Infrastructure results hold (bit-exact split, 1.25 GB/s throughput). Both
+scientific results are negative: zero cross-architecture universal features under a
+calibrated null, and a safety classifier at ROC-AUC 0.564 with a CI spanning chance.
+The two-node Thunderbolt deployment is specified but not built.
+
+**Key data:** `data/safety-classifier/`, `data/sae-analysis/matching-v2/`
 
 ---
 
@@ -75,3 +96,15 @@ ResearchPapers/
 ├── benchmarks/               # Shared benchmark scripts and results
 └── docs/                     # Notes, meeting logs, literature reviews
 ```
+
+## Key analysis scripts
+
+| Script | Purpose |
+|---|---|
+| `data/sae-analysis/cross_arch_matching_v2.py` | Corrected cross-architecture matching: reciprocal one-to-one, closed triangles, permutation-calibrated threshold. Supersedes `cross_arch_matching.py`. |
+| `data/sae-analysis/recompute_corrections.py` | Full-corpus and held-out SAE reconstruction, safety-classifier ROC-AUC, IOI depth-conservation null. |
+| `papers/distributed-interp/submission/make_figures.py` | Convergence and null-distribution figures. |
+
+Note: `data/activations/llama-3b-layer14/` and `data/sae-runs/llama-3b-layer14/` were
+renamed from `-layer16` on 2026-07-30. They always contained layer-14 activations; the
+old name did not match the data.

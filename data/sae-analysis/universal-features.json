@@ -8,7 +8,7 @@
   "dict_size": 16384,
   "k": 128,
   "checkpoints": {
-    "llama": "/Users/melton/ResearchPapers/data/sae-runs/llama-3b-layer16/checkpoint_step_010000.npz",
+    "llama": "/Users/melton/ResearchPapers/data/sae-runs/llama-3b-layer14/checkpoint_step_010000.npz",
     "qwen": "/Users/melton/ResearchPapers/data/sae-runs/qwen-3b-layer18/checkpoint_final.npz",
     "mistral": "/Users/melton/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_final.npz"
   },

@@ -4,7 +4,6 @@
 % OPEN ITEMS BEFORE FINAL SUBMISSION:
 %   1. Resolve L24H15 vs. L24H16 discrepancy (cross-model-comparison.md vs. results-summary.md ablation rank table).
 %   2. Standardize L1H11 CI upper bound (+0.005 or +0.006); verify against data/ioi/statistical-validation.json.
-%   3. Reconcile baseline LD annotation in data/ioi/baseline-llama3b.json (5.643) with value used in text (5.649).
 %   4. Table 2 is ordered by ablation drop, not combined rank — caption notes this but consider reordering.
 %   5. Confirm SwiftSci Interp repository URL and insert below (search for REPO_URL_HERE).
 %   6. Collect and add efficiency benchmark data for Section 6.
@@ -96,16 +95,29 @@ reproducibility and iteration speed for many researchers. We demonstrate that fu
 activation-patching and mean-ablation circuit analyses of multi-billion-parameter
 transformer models are tractable on Apple Silicon using the MLX framework, with no
 specialized hardware beyond a modern Mac. Applying this infrastructure to the
-Indirect Object Identification (IOI) task on Llama-3.2-3B and Pythia-1.4B, we find
-that the three-zone functional circuit topology identified by Wang et al.\ (2022) in
-GPT-2 Small generalizes across both models: 80\% of circuit-critical head positions
-are conserved by relative depth ($\pm$0.075) despite differing layer counts, attention
-mechanisms, and training corpora. A single dominant head in each model (L15H20,
-L10H7) accounts for 22--28\% of clean logit difference on its own. Layer-level
-circuit topology further transfers from IOI to factual association, with divergent
-head indices at shared layer positions. These results establish that IOI circuit
-organization is architecture-general, and that Apple Silicon is a viable substrate
-for reproducible mech-interp research at the 1--3B parameter scale.
+Indirect Object Identification (IOI) task on Llama-3.2-3B and Pythia-1.4B, we find a
+pronounced bottleneck structure in both models: a single dominant head (L15H20 in
+Llama, L10H7 in Pythia) accounts for 22--28\% of clean logit difference on its own,
+substantially more concentrated than the distributed 26-component circuit Wang et al.\
+(2022) report in GPT-2 Small. Both circuits occupy three depth clusters broadly
+matching Wang et al.'s functional zones.
+
+We also report a negative methodological result. Matching circuit-critical head
+positions between the two models by relative depth yields 8 of 10 pairs within
+$\pm$0.075---but under a permutation null, randomly chosen head sets match at 59\%
+(uniform null, $p = 0.098$) or 69\% (null restricted to the layer band where critical
+heads actually sit, $p = 0.32$). The 80\% figure is not distinguishable from chance,
+and the matching is functionally uninformative besides: it pairs Llama's dominant head
+with Pythia's weakest. We report the null because the depth-conservation claim is the
+one a reader is most likely to take away, and it does not hold.
+
+Path patching over the five highest-scoring Llama heads shows that L15H20 receives a
+substantial direct contribution from L14H0 and is largely independent of the later
+heads, consistent with its role as an early bottleneck. Factual-association patching
+recovers heads in five of the same layers as IOI but at different head indices. Our
+positive claims are that IOI admits a sparse, bottlenecked circuit in both models, and
+that Apple Silicon is a viable substrate for reproducible mech-interp research at the
+1--3B parameter scale.
 \end{abstract}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -141,8 +153,9 @@ algorithmic solution, we would expect the same functional structure---with head 
 shifted, but depth relationships and role assignments preserved.
 
 This paper answers that question by replicating and extending Wang et al.'s analysis
-on two modern models: Llama-3.2-3B \citep{meta2024llama3} (a frontier-adjacent
-instruction-tuned architecture with grouped-query attention) and Pythia-1.4B
+on two modern models: Llama-3.2-3B \citep{meta2024llama3} (a modern base model with
+grouped-query attention and rotary embeddings; we use the base weights,
+\texttt{mlx-community/Llama-3.2-3B-bf16}, not the instruction-tuned variant) and Pythia-1.4B
 \citep{biderman2023pythia} (a fully documented, standard-MHA model trained on The
 Pile, making it the closest modern analog to GPT-2 Small's controlled training
 conditions). Using activation patching and mean ablation, we identify circuit-critical
@@ -176,19 +189,25 @@ mechanistic interpretability experiments at the 1--7B parameter scale.
     logit difference for the IO token, substantially more concentrated than the
     distributed 26-component circuit in GPT-2 Small.
 
-  \item \textbf{Depth-zone conservation across architectures.}  We show that the three
-    functional depth zones identified in GPT-2 Small---early duplicate-token heads,
-    mid S-inhibition heads, and late name-mover heads---are present in both
-    Llama-3.2-3B and Pythia-1.4B at similar relative positions, despite 3--7$\times$
-    more parameters and substantially different architectures. 80\% of circuit-critical
-    head positions are shared between Llama and Pythia within $\pm$0.075 relative
-    depth.
+  \item \textbf{A permutation null for depth-based cross-architecture matching.}
+    Circuit-critical heads in both models cluster into three depth bands broadly
+    compatible with Wang et al.'s functional zones. But the specific quantitative
+    claim that invites---that 80\% of head positions are conserved within $\pm$0.075
+    relative depth---does not survive a null test: random head sets match at
+    59--69\% under the same greedy procedure ($p = 0.098$ and $p = 0.32$ under two
+    nulls). We report the null, the reason the tolerance is too permissive to be
+    informative, and what a valid test of depth conservation would require.
 
-  \item \textbf{Layer-level conservation across tasks.}  Factual association patching
-    in Llama-3.2-3B reveals that the top-5 factual association heads occupy the same
-    five layers as five of the top-9 IOI heads---with different head indices within
-    those layers---suggesting a form of layer-level circuit topology that generalizes
-    across tasks while maintaining head-level specialization.
+  \item \textbf{Edge-level path patching of the Llama bottleneck.}  We path-patch the
+    ten sender--receiver edges among Llama's five highest-scoring heads, finding that
+    L15H20's dominance is fed substantially by L14H0 (normalized score 0.165) and is
+    largely decoupled from the later heads.
+
+  \item \textbf{Layer-level overlap across tasks.}  Factual-association patching in
+    Llama-3.2-3B recovers top-5 heads occupying five of the same layers as five of the
+    top-9 IOI heads, at different head indices. We report the associated null: with
+    both tasks' heads concentrated in the same mid-to-late band, this degree of layer
+    overlap is not by itself strong evidence of shared topology.
 
   \item \textbf{An Apple Silicon-compatible activation patching pipeline.}  We release
     tooling built on the MLX framework that replicates TransformerLens's hook-based
@@ -252,6 +271,42 @@ extending the generalizability claim beyond GPT-2 Small. We also find that in la
 models the circuit has a more concentrated ``bottleneck'' structure, with one head
 contributing disproportionately to logit difference---a difference from GPT-2 Small's
 more distributed allocation that we discuss in Section~\ref{sec:comparison}.
+
+\subsection{Circuit Analysis Beyond GPT-2 Small}
+\label{sec:related-scale}
+
+Several lines of work bear directly on the questions this paper asks, and situate our
+contribution more narrowly than an unqualified ``does IOI generalize?'' framing would
+suggest.
+
+\citet{lieberum2023scale} conduct circuit analysis on Chinchilla-70B, finding that
+activation patching and attention-pattern analysis remain tractable at that scale and
+that identifiable circuits exist for multiple-choice tasks. Their result establishes
+that circuit analysis scales; ours addresses the complementary question of whether a
+\emph{specific} circuit recurs across architectures.
+
+\citet{merullo2024reuse} is the closest prior work to our cross-task experiment
+(\S\ref{sec:cross-task}). They show that the IOI circuit in GPT-2 Medium is partially
+reused for a Colored Objects task, with overlapping heads playing analogous roles.
+Their evidence for cross-task reuse is stronger than ours: they establish role
+correspondence via path patching and targeted interventions, whereas we report layer
+co-occurrence. Readers interested in cross-task circuit reuse should treat their
+result as primary and ours as a weak replication in a different model.
+
+\citet{conmy2023acdc} introduce ACDC, which automates circuit discovery by iteratively
+pruning edges from the full computational graph against a faithfulness threshold. ACDC
+is the natural baseline for the head-selection procedure in \S\ref{sec:stats}, and we
+do not compare against it---our selection is a hand-specified ranking over marginal
+effects, which is simpler but has no faithfulness guarantee. \citet{hanna2023greaterthan}
+apply similar methods to arithmetic, further mapping the space of known circuits.
+
+On methodology, \citet{zhang2024bestpractices} and \citet{heimersheim2024patching}
+document how sensitive activation patching results are to choices we make without much
+justification: the corruption distribution, the metric (logit difference versus
+probability versus KL), and whether patching is done at the head output or at
+individual Q/K/V projections. Our protocol---name-swap corruption, normalized logit
+difference, head-output patching---is a common configuration but not the only defensible
+one, and we did not test robustness to these choices.
 
 \subsection{TransformerLens}
 
@@ -322,7 +377,7 @@ extension.
 
 All experiments were conducted using SwiftSci Interp, an activation-patching harness
 for Apple Silicon built on the MLX framework.\footnote{SwiftSci Interp is available
-at \url{https://github.com/REPO_URL_HERE/swiftsci-interp}. % TODO: insert final URL
+at \url{https://github.com/jmelton-research/swiftsci-interp}.
 } The library implements a hook-compatible interface analogous to TransformerLens's
 activation interception API, targeting MLX-native model implementations loaded via
 \texttt{mlx-lm}. Its core design principle is that every attention module in a model
@@ -509,7 +564,7 @@ reflect an interference-suppression role rather than direct IO promotion).
 \paragraph{Necessity threshold.}
 A head is designated circuit-critical under the necessity criterion when its ablation
 drop exceeds 20\% of the clean mean logit difference. For Llama-3.2-3B
-($\overline{\text{LD}}_{\text{clean}} = 5.649$) this corresponds to
+($\overline{\text{LD}}_{\text{clean}} = 5.643$) this corresponds to
 $\Delta_{l,h} > 1.130$; for Pythia-1.4B ($\overline{\text{LD}}_{\text{clean}} =
 4.120$) the threshold is $\Delta_{l,h} > 0.824$. In practice the necessity threshold
 is used as an interpretive anchor rather than a hard inclusion criterion; circuit
@@ -539,12 +594,23 @@ component $B$, while holding all other paths fixed. A path that shows high norma
 recovery under path patching is causally necessary specifically through the direct
 $A \to B$ connection, ruling out the mediated-path alternative.
 
-In our setting, path patching is used to verify that the dominant heads identified by
-activation patching (L15H20 in Llama, L10H7 in Pythia) contribute directly to the
-final position logit difference, rather than acting through a downstream intermediary.
-Path patching is implemented within SwiftSci Interp by extending the \texttt{patch}
-mode to accept a target-receiver argument. Full path-patching results for the top-3
-heads in each model are in preparation and will be reported in a subsequent revision.
+In our setting, path patching is used to characterize how the dominant head identified
+by activation patching (L15H20 in Llama) relates to the other high-scoring heads. Path
+patching is implemented within SwiftSci Interp by extending the \texttt{patch} mode to
+accept a target-receiver argument.
+
+Each edge is measured with a four-pass protocol: a clean baseline; a corrupted run
+capturing the sender's activation; an intermediate clean run with the sender patched,
+capturing the receiver's resulting input; and a final clean run with the receiver's
+input replaced. The score is the normalized logit-difference change,
+$(\mathrm{LD}_{\text{clean}} - \mathrm{LD}_{\text{patched}}) /
+(\mathrm{LD}_{\text{clean}} - \mathrm{LD}_{\text{corrupt}})$, over the same
+$n = 100$ IOI examples, with
+$\mathrm{LD}_{\text{clean}} = 5.668$ and
+$\mathrm{LD}_{\text{corrupt}} = -5.754$. We measured all ten ordered sender--receiver
+edges among Llama's five highest-scoring heads (L14H0, L15H20, L17H17, L19H1, L24H15);
+results are reported in \S\ref{sec:path-results}. Pythia was not path-patched, and the
+role of L10H7 therefore remains uncharacterized at the edge level.
 
 \subsection{Statistical Validation}
 \label{sec:stats}
@@ -614,13 +680,21 @@ failing this constraint were rejected at generation time. Corrupted prompts are
 produced by swapping $S$ and $\mathit{IO}$ within the same template, preserving
 sequence length. Full dataset: \texttt{data/ioi/dataset.json}.
 
-The factual association dataset consists of $n = 50$ subject-relation-object triples
-drawn from Meng et al.\ (2022)'s CounterFact evaluation set, restricted to triples
-where the object tokenizes to a single token under the Llama-3.2-3B tokenizer. Prompts
-follow the form ``\{subject\} \{relation verb\}:'' with corruptions produced by
-substituting a different subject entity (matched by entity type) that predicts a
-different object. Factual association experiments were run on Llama-3.2-3B only. Full
-dataset: \texttt{data/factual-assoc/dataset.json}.
+The factual association dataset consists of $n = 50$ hand-constructed
+subject--relation--object triples across two relation templates: 25 \texttt{capital\_of}
+items (``The capital of \{subject\} is'') and 25 \texttt{official\_language\_of} items
+(``The official language of \{subject\} is''). Subjects are countries; objects are
+restricted to those tokenizing to a single token under the Llama-3.2-3B tokenizer.
+Corruptions substitute a different country that predicts a different object
+(e.g.\ France/Paris $\to$ Germany/Berlin), preserving sequence length.
+
+We note this dataset is \emph{not} drawn from Meng et al.\ (2022)'s CounterFact set,
+as an earlier draft stated. It was authored for this work, and its two relation types
+are far narrower than CounterFact's. This limits the cross-task claim in
+\S\ref{sec:cross-task} correspondingly: what we test is transfer from IOI to two
+geographic relation templates, not to factual recall in general. Factual association
+experiments were run on Llama-3.2-3B only. Full dataset:
+\texttt{data/factual-assoc/dataset.json}.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Results: IOI Circuit Identification}
@@ -629,7 +703,7 @@ dataset: \texttt{data/factual-assoc/dataset.json}.
 \subsection{Baseline Task Performance}
 
 Both models correctly perform the IOI task across all 100 evaluation examples.
-Llama-3.2-3B achieves a mean clean logit difference (LD) of \textbf{5.649}
+Llama-3.2-3B achieves a mean clean logit difference (LD) of \textbf{5.643}
 (SD = 0.773), reflecting a strong preference for the indirect object (IO) token over
 the subject (S) token at the final sequence position. Pythia-1.4B achieves a mean
 clean LD of \textbf{4.120}, 27\% lower in absolute terms, consistent with its smaller
@@ -674,8 +748,8 @@ lists the top-10 heads by combined rank.
     \toprule
     Rank & Head    & Patch score & 95\% CI          & Abl.\ drop & \% clean LD & Rel.\ depth \\
     \midrule
-    1    & L15H20  & 0.240       & [0.225, 0.255]   & 1.578       & 27.9\%      & 0.536 \\
-    2    & L17H17  & 0.098       & [0.089, 0.107]   & 0.929       & 16.4\%      & 0.607 \\
+    1    & L15H20  & 0.240       & [0.225, 0.255]   & 1.578       & 28.0\%      & 0.536 \\
+    2    & L17H17  & 0.098       & [0.089, 0.107]   & 0.929       & 16.5\%      & 0.607 \\
     3    & L13H14  & 0.092       & [0.083, 0.102]   & 0.626       & 11.1\%      & 0.464 \\
     4    & L24H15  & 0.148       & [0.133, 0.164]   & 0.276       &  4.9\%      & 0.857 \\
     5    & L19H1   & 0.099       & [0.094, 0.105]   & 0.443       &  7.8\%      & 0.679 \\
@@ -729,9 +803,9 @@ anomalous L1H11 entry discussed below.
     \midrule
     1    & L10H7  & 0.207       & [0.199, 0.216]      & 0.893       & 21.7\%      & 0.417 \\
     2    & L15H15 & 0.155       & [0.134, 0.175]      & 0.551       & 13.4\%      & 0.625 \\
-    3    & L22H2  & 0.101       & [0.097, 0.105]      & 0.411       &  9.9\%      & 0.917 \\
+    3    & L22H2  & 0.101       & [0.097, 0.105]      & 0.411       & 10.0\%      & 0.917 \\
     4    & L1H11  & $-$0.003    & [$-$0.011, $+$0.005]& 0.327       &  7.9\%      & 0.042 \\
-    5    & L21H3  & 0.056       & [0.052, 0.059]      & 0.237       &  5.7\%      & 0.875 \\
+    5    & L21H3  & 0.056       & [0.052, 0.059]      & 0.237       &  5.8\%      & 0.875 \\
     6    & L17H7  & 0.040       & [0.027, 0.056]      & 0.150       &  3.6\%      & 0.708 \\
     7    & L10H0  & 0.039       & [0.036, 0.041]      & 0.128       &  3.1\%      & 0.417 \\
     8    & L12H15 & 0.051       & [0.048, 0.054]      & 0.124       &  3.0\%      & 0.500 \\
@@ -831,8 +905,27 @@ model, the effect sizes are large relative to uncertainty:
     The lower CI bound (0.199) exceeds rank-2 (0.155) by 28\%.
 \end{itemize}
 
-All top-10 heads in both models have confidence intervals excluding zero by a margin of
-at least $3\times$ the CI width. The Pythia L1H11 anomaly is confirmed: its patching
+The margin varies substantially across the top-10, and we state it precisely rather
+than as a blanket claim. Ranking heads by the ratio of CI lower bound to CI width:
+seven of ten Llama heads and six of ten Pythia heads exceed $3\times$. The remainder
+do not---L27H17 ($2.7\times$) and L26H23 ($1.8\times$) in Llama, and L17H7
+($0.9\times$) in Pythia, whose interval $[0.027, 0.056]$ is wide relative to its mean.
+These four heads (including L1H11, below) are the weakest members of their circuits and
+should be read as tentative. An earlier draft asserted the $3\times$ margin for all
+top-10 heads in both models; that was wrong, and contradicted by the tables in this
+same section.
+
+\paragraph{No correction for multiple comparisons.} The bootstrap intervals above are
+computed on the same 100 examples used to select the heads, after screening 672
+(layer, head) pairs in Llama and 384 in Pythia. They are therefore conditional on
+selection and are optimistic: the winner's-curse bias inflates the top-ranked means,
+and no family-wise or FDR correction is applied. The three or four dominant heads in
+each model have effects far too large for this to matter---L15H20's lower bound
+exceeds the rank-3 mean by $2.4\times$---but for heads in the 0.02--0.05 score range
+the intervals should not be read as calibrated. A clean fix is available and cheap:
+select heads on one half of the example set and estimate effects on the other.
+
+The Pythia L1H11 anomaly is confirmed: its patching
 CI $[-0.011, +0.005]$ straddles zero (the only such case in either model's top-10),
 whereas its ablation drop (0.327) is large and unambiguous. This dissociation is the
 empirical signature of necessity without sufficiency, and constitutes a primary
@@ -866,7 +959,7 @@ $\pm$0.075 tolerance. Table~\ref{tab:cross-arch} reports all matched pairs.
   \caption{Cross-architecture matched head positions (Llama-3.2-3B vs.\ Pythia-1.4B,
     tolerance $\pm$0.075). The $\sim$0.54 pairing (L15H20 $\leftrightarrow$ L13H6)
     reflects depth-position conservation but not functional equivalence: L15H20 is
-    Llama's dominant bottleneck head (ablation drop 1.578, 27.9\% of clean LD) while
+    Llama's dominant bottleneck head (ablation drop 1.578, 28.0\% of clean LD) while
     L13H6 is Pythia's rank-10 entry (ablation drop 0.018, 0.4\% of clean LD).
     Data: \texttt{data/ioi/cross-model-comparison.md}.}
   \label{tab:cross-arch}
@@ -894,6 +987,72 @@ depth permitting an extra output-adjustment head); and Pythia's L1H11 (depth 0.0
 discussed above) and L10H0 (depth 0.417, co-located with L10H7 in the same layer,
 forming a two-head cluster not observed in Llama).
 
+\subsubsection{The 80\% match rate is not distinguishable from chance}
+\label{sec:depth-null}
+
+Taken alone, ``8 of 10'' invites the reading that circuit positions are conserved
+across architectures. That reading does not survive a null test, and we report the
+null here rather than in an appendix because the claim is the one most likely to be
+carried away from this paper.
+
+We ask how often the same greedy matcher, with the same $\pm$0.075 tolerance, would
+pair 8 or more of 10 head positions if the heads were placed at random. Two nulls are
+reported: a \emph{uniform} null drawing 10 layers uniformly from each model's full
+stack, and an \emph{informed} null drawing only from the layer band where
+circuit-critical heads actually sit ($d \geq 0.40$ in both models). The informed null
+is the fairer comparison, because the claim under test is that specific depths
+correspond---not that circuits live in the second half of the network, which both
+models' results establish independently.
+
+\begin{table}[H]
+  \centering
+  \caption{Permutation null for cross-architecture depth matching (20{,}000 draws each,
+    seed 42). The observed 8/10 is within the range routinely produced by random head
+    placement. Data: \texttt{data/sae-analysis/corrections.json}.}
+  \label{tab:depth-null}
+  \smallskip
+  \begin{tabular}{lccc}
+    \toprule
+    & Mean matches & Match rate & $\Pr(\geq 8/10)$ \\
+    \midrule
+    Observed                       & 8.00 & 80.0\% & --- \\
+    Uniform null (all layers)      & 5.88 & 58.8\% & \textbf{0.098} \\
+    Informed null ($d \geq 0.40$)  & 6.87 & 68.7\% & \textbf{0.32} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Neither null rejects at any conventional level. Under the informed null---random heads
+drawn from the band where real circuit heads live---random sets match at 69\% on
+average, and reach 80\% or better about a third of the time.
+
+The reason is a mismatch of scale between the tolerance and the data. A $\pm$0.075
+window on relative depth spans roughly two layers in Llama (of 28) and two in Pythia
+(of 24). Ten heads per model, drawn from a band of about 17 usable layers, cannot
+avoid landing within two layers of one another; the greedy matcher then takes the
+closest available pairing. The tolerance was chosen to be narrower than the spacing
+between Wang et al.'s functional zones, which is a reasonable criterion for
+\emph{zone assignment} but is far too coarse to establish \emph{position
+correspondence} between individual heads.
+
+\paragraph{The matches are also functionally uninformative.} Table~\ref{tab:cross-arch}
+pairs Llama's L15H20---the dominant bottleneck, ablation drop 1.578---with Pythia's
+L13H6, whose ablation drop is 0.018, two orders of magnitude smaller. Meanwhile
+Pythia's own dominant head, L10H7, is matched to Llama's rank-3 L13H14. The procedure
+never had access to head importance, so nothing constrains it to pair heads playing
+similar roles, and it does not. Any conserved structure that exists here is not
+captured by depth proximity alone.
+
+\paragraph{What would establish depth conservation.} A valid test needs at least three
+things this analysis lacks: functional role assignment for each head (via path
+patching and attention-pattern analysis) so that matching is role-aware rather than
+purely positional; a tolerance derived from the empirical precision of depth
+estimates rather than from zone spacing; and more than two models, so that the
+question becomes whether a depth ordering replicates across a population rather than
+whether two specific stacks happen to align. We regard the three-cluster structure
+visible in both models (\S\ref{sec:llama-ioi}, \S\ref{sec:pythia-ioi}) as suggestive
+and the quantitative conservation claim as unsupported.
+
 The matched pairs exhibit a three-cluster depth structure in both models:
 
 \begin{itemize}
@@ -910,6 +1069,72 @@ The depth-difference distribution across matched pairs is tightly concentrated: 
 eight pairs differ by $\leq 0.02$ in relative depth, and the maximum difference is
 0.048. Considering that the tolerance was set at 0.075, the actual conservation is
 substantially tighter than the threshold requires.
+
+\subsection{Path Patching: Edge Structure Around the Bottleneck}
+\label{sec:path-results}
+
+Table~\ref{tab:path} reports all ten ordered edges among Llama's five highest-scoring
+heads. The picture is consistent with L15H20 acting as an early bottleneck that is fed
+from below and that feeds the late-network heads only weakly.
+
+\begin{table}[H]
+  \centering
+  \caption{Edge-level path patching in Llama-3.2-3B ($n = 100$). Score is normalized
+    logit-difference recovery attributable to the direct sender$\to$receiver edge.
+    Positive means the edge carries information that supports correct IO prediction;
+    negative means patching the edge \emph{increases} logit difference above the clean
+    baseline. Data: \texttt{data/ioi/path-patching-llama3b-real.json}.}
+  \label{tab:path}
+  \smallskip
+  \begin{tabular}{llrrl}
+    \toprule
+    Sender & Receiver & Score & $\Delta$ LD & Interpretation \\
+    \midrule
+    L14H0  & L15H20 & $+0.165$ & $-1.879$ & Dominant edge \\
+    L15H20 & L19H1  & $+0.038$ & $-0.431$ & Weak forward path \\
+    L15H20 & L24H15 & $+0.037$ & $-0.420$ & Weak forward path \\
+    L17H17 & L19H1  & $+0.021$ & $-0.241$ & \\
+    L14H0  & L24H15 & $+0.017$ & $-0.195$ & \\
+    L19H1  & L24H15 & $+0.016$ & $-0.178$ & \\
+    L17H17 & L24H15 & $+0.015$ & $-0.169$ & \\
+    L14H0  & L19H1  & $+0.014$ & $-0.154$ & \\
+    L14H0  & L17H17 & $-0.056$ & $+0.627$ & Suppressive \\
+    L15H20 & L17H17 & $-0.113$ & $+1.273$ & Suppressive \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Three observations follow.
+
+\paragraph{L14H0 $\to$ L15H20 is the dominant edge.} At $0.165$ it is $4.4\times$ the
+next-largest positive edge. This resolves the anomaly noted in
+\S\ref{sec:llama-ioi}: L14H0 has a strong patching score ($0.111$, rank 3) but a
+negligible ablation drop ($0.017$, $0.3\%$ of clean LD). A head can matter greatly as a
+\emph{source} for a downstream computation while contributing almost nothing when
+removed in isolation, if the downstream head can compensate from other inputs. L14H0
+looks like a feeder into the bottleneck rather than an independent contributor.
+
+\paragraph{L15H20's forward edges are weak.} Its contributions to L19H1 ($0.038$) and
+L24H15 ($0.037$) are an order of magnitude below the edge feeding it. Combined with its
+large ablation drop ($1.578$), this suggests L15H20 writes substantially to the final
+position directly, rather than acting through the later heads we measured. We did not
+patch the L15H20~$\to$~logit edge itself, so this is an inference from the absence of
+strong mediated paths and not a direct measurement.
+
+\paragraph{Two edges are suppressive.} Patching L15H20~$\to$~L17H17 \emph{raises} logit
+difference by $1.273$ above the clean baseline (score $-0.113$), and
+L14H0~$\to$~L17H17 does likewise. The natural reading is that these edges carry a
+signal that normally damps the IO logit, and that replacing it with the corrupted-run
+value removes the damping. Since L17H17 is rank 2 by ablation ($0.929$), this is not a
+peripheral component: the circuit appears to contain both excitatory and inhibitory
+paths into the same head. Wang et al.\ report an analogous negative-name-mover
+phenomenon in GPT-2 Small, and this is the closest correspondence to their functional
+taxonomy that our data directly supports.
+
+\paragraph{Scope.} Ten edges among five heads is a small fraction of the circuit, and
+these scores carry no confidence intervals---the path-patching run recorded per-edge
+means only. Pythia was not measured at all. We report the structure as a directional
+finding, not a validated circuit diagram.
 
 \subsection{Cross-Task Transfer: Factual Association}
 \label{sec:cross-task}
@@ -1024,17 +1249,24 @@ of a pronoun by tracking name repetition) that recurs frequently in natural lang
 
 \paragraph{Bottleneck structure at scale.}
 A striking departure from Wang et al.\ is the degree of functional concentration in
-our models: L15H20 in Llama accounts for 27.9\% of clean logit difference on its own,
+our models: L15H20 in Llama accounts for 28.0\% of clean logit difference on its own,
 and L10H7 in Pythia accounts for 21.7\%. GPT-2 Small's 26-component circuit
 distributes attribution more evenly, with no single head dominating to this degree.
 Several hypotheses can explain this. Scale may allow models to assign more of a
 computation to a single highly specialized head, since a larger total head count
-provides enough redundancy elsewhere in the network. Alternatively, our 20\%-threshold
-necessity criterion may be stricter than Wang et al.'s inclusion criteria, causing us
-to exclude peripheral contributors that they retained. The path-patching experiments
-described in Section~\ref{sec:path-patching}---currently in preparation---will clarify
-whether L15H20 and L10H7 contribute \emph{directly} to the output logit or primarily
-through downstream mediation.
+provides enough redundancy elsewhere in the network. Alternatively, our selection
+criteria may be stricter than Wang et al.'s, causing us to exclude peripheral
+contributors that they retained. A third possibility we cannot exclude is that the
+comparison is not like-for-like: Wang et al.\ measure a circuit assembled and
+validated as a set, whereas our top-10 lists are ranked marginal effects, and the two
+need not decompose the same way.
+
+The path-patching results in \S\ref{sec:path-results} bear on the first question for
+Llama. L15H20's forward edges into the later heads we measured (0.038 and 0.037) are
+an order of magnitude weaker than the L14H0~$\to$~L15H20 edge feeding it (0.165),
+which is consistent with L15H20 writing to the output directly rather than through
+downstream mediation. We did not patch the head-to-logit edge itself, and Pythia was
+not path-patched at all, so this is suggestive rather than settled.
 
 \paragraph{Depth-position conservation does not imply functional equivalence.}
 The cross-model comparison pairs L15H20 (Llama) with L13H6 (Pythia) at relative depth
@@ -1086,30 +1318,89 @@ SwiftSci Interp tooling lowers the barrier for researchers to replicate and exte
 circuit analyses without requiring institutional compute resources.
 
 \paragraph{Limitations.}
-Several limitations bear noting. First, the IOI dataset uses a single sentence
-template with 100 examples; the circuit structure identified here may not generalize
-to IOI in naturalistic multi-sentence contexts. Second, the factual association
-experiment uses only 50 examples from a restricted subset of CounterFact and runs on
-one model; the layer-level conservation finding needs replication on Pythia-1.4B and
-additional tasks. Third, path-patching verification of direct vs.\ mediated
-contributions is in preparation and the current characterization of L15H20's role as a
-``hard bottleneck'' should be treated as a provisional claim. Fourth, the
-interpretation of L1H11 (Pythia) as an interference-suppression head is consistent
-with the patching and ablation dissociation, but has not been verified by attention
-pattern analysis or path patching. Fifth, this paper's efficiency analysis relies on
-preliminary timing estimates; systematic benchmarks across M-series chip configurations
-are forthcoming.
+
+\textbf{No circuit-level faithfulness measurement.} This is the most consequential
+gap. Wang et al.\ validate their circuit as a \emph{set}, reporting that it recovers
+87\% of clean performance when everything outside it is ablated, and check
+completeness and minimality besides. We report only per-head marginal effects. Those
+are not additive: our Llama top-10 patching scores sum to 1.013, which cannot be a
+fraction of anything recovered. We therefore cannot say what fraction of the IOI
+behaviour our ten heads jointly explain, whether a smaller subset would do as well, or
+whether heads outside the top-10 matter in combination. Every joint-ablation
+experiment needed to answer these is a straightforward extension of the harness we
+release, and none was run.
+
+\textbf{Single template, single name ordering.} All 100 IOI examples instantiate one
+sentence frame, ``When \{S\} and \{IO\} went to the store, \{S\} gave a bottle to'',
+over 20 names. Wang et al.\ use 15 templates and balance both name orderings (ABBA and
+BABA) precisely because a single frame confounds circuit structure with positional
+structure. Heads we identify as circuit-critical may be responding to a fixed token
+position rather than to the IOI computation. This limitation applies to every result
+in the paper and is the first thing a replication should change.
+
+\textbf{Selection and inference on the same data.} Heads were chosen by ranking 672
+(Llama) and 384 (Pythia) candidates, and their confidence intervals were then
+bootstrapped on the same 100 examples, with no multiple-comparison correction
+(\S\ref{sec:stats}). The dominant heads survive any reasonable correction; the
+0.02--0.05 band does not obviously.
+
+\textbf{Depth conservation is unsupported.} The 80\% cross-architecture match rate
+does not exceed a permutation null (\S\ref{sec:depth-null}), and the matching pairs
+functionally dissimilar heads. We retain the three-cluster observation as descriptive
+and withdraw the quantitative claim.
+
+\textbf{Narrow factual-association probe.} The cross-task experiment uses 50
+hand-built examples across two geographic relation templates on one model---not
+CounterFact, as an earlier draft stated. The layer-overlap statistic also lacks a
+null: both tasks' heads concentrate in layers 13--27, so some overlap is expected by
+construction. Replication on Pythia and on genuinely diverse relations is needed.
+
+\textbf{Partial path patching.} Ten edges among five Llama heads, no confidence
+intervals, and no Pythia measurement (\S\ref{sec:path-results}). The
+``hard bottleneck'' characterization of L15H20 remains provisional.
+
+\textbf{Unverified functional roles.} The interpretation of L1H11 (Pythia) as an
+interference-suppression head is consistent with its patching/ablation dissociation
+but has not been checked against attention patterns. More broadly, we assign no head
+to Wang et al.'s functional classes on direct evidence; the zone assignments in
+Table~\ref{tab:zones} are inferred from depth alone.
+
+\textbf{Efficiency figures are estimates.} The wall-clock numbers in
+\S\ref{sec:efficiency} are preliminary readings from a single machine, not a
+benchmark. Systematic per-pass timing across M-series configurations is forthcoming.
+This is a real gap in a paper whose stated contribution includes tractability on
+Apple Silicon.
 
 \paragraph{Conclusion.}
-We have shown that the IOI circuit topology identified by Wang et al.\ (2022) in
-GPT-2 Small generalizes to Llama-3.2-3B and Pythia-1.4B: 80\% of circuit-critical
-head positions are conserved by relative depth across architectures, and layer-level
-circuit structure further transfers from IOI to factual association within Llama-3.2-3B.
-A single dominant head in each model (L15H20, L10H7) accounts for 22--28\% of clean
-logit difference, suggesting that larger models concentrate circuit function more
-heavily than the distributed 26-component GPT-2 Small circuit. All experiments were
-run on Apple Silicon using MLX, and the SwiftSci Interp harness is released alongside
-this paper to make circuit analysis accessible without GPU cluster infrastructure.
+We set out to test whether the IOI circuit Wang et al.\ (2022) found in GPT-2 Small
+generalizes to modern architectures. The answer we can support is narrower than the
+one we initially drew.
+
+What holds: both Llama-3.2-3B and Pythia-1.4B solve IOI with a sparse, strongly
+bottlenecked circuit. A single head in each (L15H20, L10H7) accounts for 22--28\% of
+clean logit difference on its own, well above any single head's share of the
+distributed 26-component GPT-2 Small circuit. Critical heads in both models fall into
+three depth clusters broadly compatible with Wang et al.'s functional zones. Path
+patching in Llama shows L15H20 fed dominantly by L14H0, weakly connected forward, and
+receiving suppressive input paths---a shape consistent with direct output writing.
+
+What does not hold: the quantitative depth-conservation claim. Matching head positions
+across the two models at $\pm$0.075 relative depth succeeds for 8 of 10 heads, but
+random head sets achieve 59--69\% under the same procedure, and the observed rate is
+not significant under either null we tested ($p = 0.098$, $p = 0.32$). The matching
+also pairs Llama's dominant head with Pythia's weakest, so it carries no functional
+information. We report this because ``80\% of positions conserved'' is a memorable
+number, and it should not be carried forward.
+
+The largest gap in this work is the absence of a circuit-level faithfulness
+measurement: we characterize heads individually and never test what our circuits
+explain jointly. Combined with a single-template dataset, that leaves the central
+question---whether these are the same circuit as Wang et al.'s or merely circuits in
+similar places---open.
+
+All experiments ran on Apple Silicon using MLX, and the SwiftSci Interp harness is
+released alongside this paper to make circuit analysis accessible without GPU cluster
+infrastructure. That part of the contribution we regard as demonstrated.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section*{Acknowledgments}
@@ -1131,7 +1422,7 @@ project data repository. The SwiftSci Interp activation-patching library, includ
 the \texttt{PatchableAttention} module for Llama and Pythia and the MLX-compatible
 patching sweep harness, is available at:
 \begin{center}
-  \url{https://github.com/REPO_URL_HERE/swiftsci-interp}  % TODO: insert final URL
+  \url{https://github.com/jmelton-research/swiftsci-interp}
 \end{center}
 Figure source files are in \texttt{figures/circuit-tracing/}. Raw data files are in
 \texttt{data/ioi/} and \texttt{data/factual-assoc/}. All data was generated with seed
@@ -1204,6 +1495,35 @@ Su, J., Lu, Y., Pan, S., Murtadha, A., Wen, B., \& Liu, Y.
 (2021).
 RoFormer: Enhanced Transformer with Rotary Position Embedding.
 \emph{arXiv preprint arXiv:2104.09864}.
+
+\bibitem[Conmy et al.(2023)]{conmy2023acdc}
+Conmy, A., Mavor-Parker, A.~N., Lynch, A., Heimersheim, S., \& Garriga-Alonso, A.
+(2023). Towards Automated Circuit Discovery for Mechanistic Interpretability.
+In \emph{Advances in Neural Information Processing Systems (NeurIPS)}, Vol.~36.
+
+\bibitem[Hanna et al.(2023)]{hanna2023greaterthan}
+Hanna, M., Liu, O., \& Variengien, A. (2023). How does GPT-2 compute greater-than?
+Interpreting mathematical abilities in a pre-trained language model.
+In \emph{Advances in Neural Information Processing Systems (NeurIPS)}, Vol.~36.
+
+\bibitem[Heimersheim \& Nanda(2024)]{heimersheim2024patching}
+Heimersheim, S., \& Nanda, N. (2024). How to use and interpret activation patching.
+arXiv preprint arXiv:2404.15255.
+
+\bibitem[Lieberum et al.(2023)]{lieberum2023scale}
+Lieberum, T., Rahtz, M., Kram\'ar, J., Nanda, N., Irving, G., Shah, R., \&
+Mikulik, V. (2023). Does Circuit Analysis Interpretability Scale? Evidence from
+Multiple Choice Capabilities in Chinchilla. arXiv preprint arXiv:2307.09458.
+
+\bibitem[Merullo et al.(2024)]{merullo2024reuse}
+Merullo, J., Eickhoff, C., \& Pavlick, E. (2024). Circuit Component Reuse Across
+Tasks in Transformer Language Models. In \emph{International Conference on Learning
+Representations (ICLR)}.
+
+\bibitem[Zhang \& Nanda(2024)]{zhang2024bestpractices}
+Zhang, F., \& Nanda, N. (2024). Towards Best Practices of Activation Patching in
+Language Models: Metrics and Methods. In \emph{International Conference on Learning
+Representations (ICLR)}.
 
 \bibitem[Wang et al.(2022)]{wang2022interpretability}
 Wang, K., Variengien, A., Conmy, A., Shlegeris, B., \& Steinhardt, J.

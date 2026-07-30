@@ -1,7 +1,8 @@
 {
-  "error": "no_sae_checkpoint",
+  "error": null,
   "model": "mlx-community/Mistral-7B-v0.3-4bit",
   "activations_available": true,
   "activations_path": "data/activations/mistral-7b-layer16",
-  "note": "Mistral-7B activations were collected (500k tokens, layer 16, 4096 hidden). No SAE has been trained on these activations \u2014 data/sae-runs/ contains only llama-3b-layer16 and qwen-3b-layer18 checkpoints. To train: python data/sae-runs/train_sae.py --activations data/activations/mistral-7b-layer16 --output data/sae-runs/mistral-7b-layer16 (~2 hours for 10k steps), then re-run this script."
+  "note": "STALE: this file was written before the Mistral SAE existed. A Mistral SAE has since been trained (data/sae-runs/mistral-7b-layer16/checkpoint_final.npz, 1,000 steps on a 50k-token subset) and is used throughout the corrected analyses. Max-activating feature examples for Mistral were still never extracted; that gap is real.",
+  "status": "superseded"
 }

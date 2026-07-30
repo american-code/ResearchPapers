@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-29  
 **Model:** Llama-3.2-3B (mlx-community/Llama-3.2-3B-bf16)  
-**SAE checkpoint:** `sae-runs/llama-3b-layer16/checkpoint_step_010000.npz`  
+**SAE checkpoint:** `sae-runs/llama-3b-layer14/checkpoint_step_010000.npz`  
 **Weights:** real
 
 ---

@@ -1,0 +1,68 @@
+{
+ "metric": "pearson",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 1000 chunks x 500 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "min_active_chunks": 50,
+ "tau_calibrated": 0.8315,
+ "permutation_null": {
+  "null_p99": 0.8315,
+  "null_mean": 0.3928,
+  "null_max": 0.9512,
+  "n_null_samples": 9710
+ },
+ "n_matches_tau_0.80": 19,
+ "n_matches_tau_calibrated": 10,
+ "matches": [
+  {
+   "feat_a": 259,
+   "feat_b": 4977,
+   "sim": 0.834
+  },
+  {
+   "feat_a": 1185,
+   "feat_b": 9644,
+   "sim": 0.8717
+  },
+  {
+   "feat_a": 3773,
+   "feat_b": 2401,
+   "sim": 0.8979
+  },
+  {
+   "feat_a": 5285,
+   "feat_b": 9328,
+   "sim": 0.8688
+  },
+  {
+   "feat_a": 5615,
+   "feat_b": 5109,
+   "sim": 0.9755
+  },
+  {
+   "feat_a": 7862,
+   "feat_b": 5110,
+   "sim": 0.8669
+  },
+  {
+   "feat_a": 11675,
+   "feat_b": 9880,
+   "sim": 0.9558
+  },
+  {
+   "feat_a": 11852,
+   "feat_b": 6582,
+   "sim": 0.887
+  },
+  {
+   "feat_a": 13136,
+   "feat_b": 5890,
+   "sim": 0.8933
+  },
+  {
+   "feat_a": 15143,
+   "feat_b": 10611,
+   "sim": 0.8957
+  }
+ ]
+}

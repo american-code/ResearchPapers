@@ -214,7 +214,7 @@ def run_baseline(acts: np.ndarray, cfg: dict) -> list[dict]:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    ACTS_DIR = Path('data/activations/llama-3b-layer16')
+    ACTS_DIR = Path('data/activations/llama-3b-layer14')
     OUT_FILE = Path('data/distributed-sae-training-validation.json')
 
     meta = json.loads((ACTS_DIR / 'metadata.json').read_text())

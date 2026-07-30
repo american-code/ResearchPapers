@@ -18,7 +18,8 @@
   },
   "reference": {
     "type": "single_process",
-    "elapsed_s": 71.7
+    "elapsed_s": 71.7,
+    "note": "Single-process baseline includes one model load."
   },
   "distributed": {
     "type": "two_process_unix_socket",
@@ -32,7 +33,8 @@
     },
     "node_b": {
       "layers": "16-27"
-    }
+    },
+    "note": "Two-process split is 1.84x slower than single-process (132.1s vs 71.7s) for this 512-token sequence. Dominated by loading model weights twice, not by streaming."
   },
   "comparison": {
     "handoff": {
@@ -57,7 +59,7 @@
       "rms_error": 0.0,
       "pass": true
     },
-    "note": "Non-zero error arises from bfloat16\u2192float16\u2192bfloat16 round-trip on the wire. float16 mantissa is wider than bfloat16 so conversion is nearly lossless; residual error is within float16 precision.",
-    "verdict": "PASS: distributed final output matches single-process within tolerance"
+    "note": "All reported errors are exactly 0.0: the bfloat16->float16->bfloat16 round trip was lossless for every value in this run, because float16's 10-bit mantissa is wider than bfloat16's 7-bit. This is NOT unconditional -- float16's 5-bit exponent gives it a much narrower dynamic range (max finite 65504, smallest normal 6.1e-5), so activations outside that interval would saturate or flush to zero. This run did not instrument the dynamic range of the transmitted tensor, so the precondition is unverified. Instrument max/min |x| before using the protocol at a different layer or scale.",
+    "verdict": "PASS: distributed final output is bit-identical to single-process baseline"
   }
 }

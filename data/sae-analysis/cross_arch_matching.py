@@ -47,8 +47,8 @@ BATCH_FEAT   = 2048       # features per matmul during matching
 
 MODELS = {
     "llama": {
-        "acts":  ACTS_DIR / "llama-3b-layer16",
-        "ckpt":  SAE_DIR  / "llama-3b-layer16/checkpoint_step_010000.npz",
+        "acts":  ACTS_DIR / "llama-3b-layer14",
+        "ckpt":  SAE_DIR  / "llama-3b-layer14/checkpoint_step_010000.npz",
         "d_in":  3072,
     },
     "qwen": {

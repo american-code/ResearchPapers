@@ -4,7 +4,7 @@
   "alignment_anchors": "data/sae-analysis/llama_mistral_matches.json",
   "n_anchor_pairs": 12174,
   "anchor_threshold": 0.8,
-  "llama_checkpoint": "/Users/melton/ResearchPapers/data/sae-runs/llama-3b-layer16/checkpoint_step_010000.npz",
+  "llama_checkpoint": "/Users/melton/ResearchPapers/data/sae-runs/llama-3b-layer14/checkpoint_step_010000.npz",
   "mistral_checkpoint": "/Users/melton/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_final.npz",
   "n_llama_features": 16384,
   "n_mistral_features": 16384,

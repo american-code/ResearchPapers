@@ -18,7 +18,7 @@ from mlx_lm import load
 ROOT         = Path(__file__).parent.parent
 EVAL_PATH    = ROOT / "safety-classifier/eval-dataset.json"
 FEATURES_PATH = ROOT / "safety-classifier/llama3b-feature-labels.json"
-CKPT_PATH    = ROOT / "sae-runs/llama-3b-layer16/checkpoint_step_010000.npz"
+CKPT_PATH    = ROOT / "sae-runs/llama-3b-layer14/checkpoint_step_010000.npz"
 OUT_PATH     = ROOT / "safety-classifier/evaluation-results.json"
 MODEL_ID     = "mlx-community/Llama-3.2-3B-bf16"
 LAYER_IDX    = 14

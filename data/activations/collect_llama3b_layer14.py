@@ -2,10 +2,10 @@
 Collect residual stream activations from Llama-3.2-3B at 50% layer depth.
 
 NOTE: Llama-3.2-3B has 28 layers (not 32). 50% depth = layer 14 (0-indexed).
-The output directory is named 'llama-3b-layer16' per task spec, but layer 14
+The output directory is named 'llama-3b-layer14' per task spec, but layer 14
 is the actual 50% midpoint.
 
-Output: data/activations/llama-3b-layer16/
+Output: data/activations/llama-3b-layer14/
   activations.npy    -- float16 memmap, shape [n_tokens, 3072]
   metadata.json      -- run config and stats
 """
@@ -26,7 +26,7 @@ TARGET_LAYER  = 14          # layer 14 of 28 = 50% depth
 TARGET_TOKENS = 500_000
 CHUNK_TOKENS  = 512         # tokens per forward-pass chunk
 HIDDEN_SIZE   = 3072
-OUT_DIR       = Path(__file__).parent / "llama-3b-layer16"
+OUT_DIR       = Path(__file__).parent / "llama-3b-layer14"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ── Load model ────────────────────────────────────────────────────────────────
@@ -142,7 +142,7 @@ meta = {
     "tokens_per_second": round(written / elapsed_total, 0) if elapsed_total > 0 else 0,
     "note": (
         "Layer index 14 is the 50% midpoint of 28 layers. "
-        "Directory named 'llama-3b-layer16' per task spec; "
+        "Directory named 'llama-3b-layer14' per task spec; "
         "Llama-3.2-3B has 28 layers (not 32)."
     ),
 }

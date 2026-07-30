@@ -13,7 +13,7 @@ import numpy as np
 from pathlib import Path
 
 WORKSPACE    = Path("/Users/melton/ResearchPapers")
-LLAMA_CKPT   = WORKSPACE / "data/sae-runs/llama-3b-layer16/checkpoint_step_010000.npz"
+LLAMA_CKPT   = WORKSPACE / "data/sae-runs/llama-3b-layer14/checkpoint_step_010000.npz"
 MISTRAL_CKPT = WORKSPACE / "data/sae-runs/mistral-7b-layer16/checkpoint_final.npz"
 ANCHOR_FILE  = WORKSPACE / "data/sae-analysis/llama_mistral_matches.json"
 OUT_PATH     = WORKSPACE / "data/sae-analysis/llama-mistral-matching.json"

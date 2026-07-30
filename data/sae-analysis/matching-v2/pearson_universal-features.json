@@ -1,0 +1,95 @@
+{
+ "metric": "pearson",
+ "method": "closed-triangle reciprocal best match across three SAEs",
+ "definition": "triple (l,q,m) with l<->q, l<->m and m<->q all mutual nearest neighbours above the permutation-calibrated threshold",
+ "min_active_chunks": 50,
+ "eval_tokens": 500000,
+ "n_chunks": 1000,
+ "thresholds": {
+  "llama_qwen": 0.9394,
+  "mistral_qwen": 0.8315,
+  "llama_mistral": 0.8939
+ },
+ "permutation_nulls": {
+  "llama_qwen": {
+   "null_p99": 0.9394,
+   "null_mean": 0.5744,
+   "null_max": 0.9894,
+   "n_null_samples": 14001
+  },
+  "mistral_qwen": {
+   "null_p99": 0.8315,
+   "null_mean": 0.3928,
+   "null_max": 0.9512,
+   "n_null_samples": 9710
+  },
+  "llama_mistral": {
+   "null_p99": 0.8939,
+   "null_mean": 0.4642,
+   "null_max": 0.9711,
+   "n_null_samples": 11134
+  }
+ },
+ "n_universal_features": 0,
+ "triangle_null": {
+  "n_permutations": 20,
+  "mean": 0.15,
+  "max": 1
+ },
+ "venn_counts": {
+  "llama": {
+   "matched_qwen_only": 22,
+   "matched_mistral_only": 12,
+   "matched_both_not_universal": 0,
+   "universal": 0,
+   "unmatched": 16350
+  },
+  "qwen": {
+   "matched_llama_only": 20,
+   "matched_mistral_only": 8,
+   "matched_both_not_universal": 2,
+   "universal": 0,
+   "unmatched": 16354
+  },
+  "mistral": {
+   "matched_llama_only": 9,
+   "matched_qwen_only": 7,
+   "matched_both_not_universal": 3,
+   "universal": 0,
+   "unmatched": 16365
+  }
+ },
+ "model_metadata": {
+  "llama": {
+   "checkpoint": "data/sae-runs/llama-3b-layer14/checkpoint_step_010000.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 3309,
+   "support_lt_min_chunks": 4771,
+   "valid_features": 8304,
+   "median_active_chunks": 55,
+   "eval_tokens": 500000,
+   "n_chunks": 1000
+  },
+  "qwen": {
+   "checkpoint": "data/sae-runs/qwen-3b-layer18/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 9398,
+   "support_lt_min_chunks": 22,
+   "valid_features": 6964,
+   "median_active_chunks": 0,
+   "eval_tokens": 500000,
+   "n_chunks": 1000
+  },
+  "mistral": {
+   "checkpoint": "data/sae-runs/mistral-7b-layer16/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 24,
+   "support_lt_min_chunks": 10881,
+   "valid_features": 5479,
+   "median_active_chunks": 26,
+   "eval_tokens": 500000,
+   "n_chunks": 1000
+  }
+ },
+ "universal_features": []
+}

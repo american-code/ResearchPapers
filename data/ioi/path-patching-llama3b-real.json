@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "model": "mlx-community/Llama-3.2-3B-bf16",
+    "n_layers": 28,
+    "n_heads": 24,
+    "n_examples": 100,
+    "metric": "normalized_path_patching_score",
+    "description": "Edge-level path patching. Protocol: 4-pass per edge (clean baseline; corrupted + capture sender; intermediate clean with sender patched + capture receiver; patched clean with receiver replaced). Score = (clean_LD - patched_LD) / (clean_LD - corrupted_LD). Implements PathPatching.swift from SwiftSci/Interp, translated to Python/MLX.",
+    "heads_tested": [
+      "L15H20",
+      "L24H15",
+      "L14H0",
+      "L19H1",
+      "L17H17"
+    ],
+    "edges_tested": 10,
+    "mean_clean_logit_diff": 5.668125,
+    "mean_corrupt_logit_diff": -5.75375,
+    "synthetic": false
+  },
+  "edges": [
+    {
+      "sender": "L14H0",
+      "receiver": "L15H20",
+      "sender_layer": 14,
+      "sender_head": 0,
+      "receiver_layer": 15,
+      "receiver_head": 20,
+      "normalized_patching_score": 0.1652290532318266,
+      "mean_patched_logit_diff": 3.78875,
+      "absolute_change": -1.879375,
+      "n_examples": 100
+    },
+    {
+      "sender": "L14H0",
+      "receiver": "L17H17",
+      "sender_layer": 14,
+      "sender_head": 0,
+      "receiver_layer": 17,
+      "receiver_head": 17,
+      "normalized_patching_score": -0.055474179968474216,
+      "mean_patched_logit_diff": 6.295,
+      "absolute_change": 0.6268750000000001,
+      "n_examples": 100
+    },
+    {
+      "sender": "L14H0",
+      "receiver": "L19H1",
+      "sender_layer": 14,
+      "sender_head": 0,
+      "receiver_layer": 19,
+      "receiver_head": 1,
+      "normalized_patching_score": 0.013718341265282187,
+      "mean_patched_logit_diff": 5.51375,
+      "absolute_change": -0.15437499999999993,
+      "n_examples": 100
+    },
+    {
+      "sender": "L14H0",
+      "receiver": "L24H15",
+      "sender_layer": 14,
+      "sender_head": 0,
+      "receiver_layer": 24,
+      "receiver_head": 15,
+      "normalized_patching_score": 0.017442555192984384,
+      "mean_patched_logit_diff": 5.473125,
+      "absolute_change": -0.19500000000000028,
+      "n_examples": 100
+    },
+    {
+      "sender": "L15H20",
+      "receiver": "L17H17",
+      "sender_layer": 15,
+      "sender_head": 20,
+      "receiver_layer": 17,
+      "receiver_head": 17,
+      "normalized_patching_score": -0.11290288617338884,
+      "mean_patched_logit_diff": 6.94125,
+      "absolute_change": 1.2731250000000003,
+      "n_examples": 100
+    },
+    {
+      "sender": "L15H20",
+      "receiver": "L19H1",
+      "sender_layer": 15,
+      "sender_head": 20,
+      "receiver_layer": 19,
+      "receiver_head": 1,
+      "normalized_patching_score": 0.03789803294353948,
+      "mean_patched_logit_diff": 5.236875,
+      "absolute_change": -0.43124999999999947,
+      "n_examples": 100
+    },
+    {
+      "sender": "L15H20",
+      "receiver": "L24H15",
+      "sender_layer": 15,
+      "sender_head": 20,
+      "receiver_layer": 24,
+      "receiver_head": 15,
+      "normalized_patching_score": 0.03717122135885126,
+      "mean_patched_logit_diff": 5.248125,
+      "absolute_change": -0.41999999999999993,
+      "n_examples": 100
+    },
+    {
+      "sender": "L17H17",
+      "receiver": "L19H1",
+      "sender_layer": 17,
+      "sender_head": 17,
+      "receiver_layer": 19,
+      "receiver_head": 1,
+      "normalized_patching_score": 0.021191034624034086,
+      "mean_patched_logit_diff": 5.4275,
+      "absolute_change": -0.24062499999999964,
+      "n_examples": 100
+    },
+    {
+      "sender": "L17H17",
+      "receiver": "L24H15",
+      "sender_layer": 17,
+      "sender_head": 17,
+      "receiver_layer": 24,
+      "receiver_head": 15,
+      "normalized_patching_score": 0.014970259733302443,
+      "mean_patched_logit_diff": 5.499375,
+      "absolute_change": -0.16875000000000018,
+      "n_examples": 100
+    },
+    {
+      "sender": "L19H1",
+      "receiver": "L24H15",
+      "sender_layer": 19,
+      "sender_head": 1,
+      "receiver_layer": 24,
+      "receiver_head": 15,
+      "normalized_patching_score": 0.015975260445068928,
+      "mean_patched_logit_diff": 5.49,
+      "absolute_change": -0.17812499999999964,
+      "n_examples": 100
+    }
+  ]
+}
