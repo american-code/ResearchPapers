@@ -37,7 +37,7 @@ h_layer ← h_layer + α · v_concept,layer
 
 The model is prompted with neutral open-ended queries and generates 20 completions per α value. Alpha is swept over {−2, −1, −0.5, 0, 0.5, 1, 2}.
 
-A separate per-layer isolation run applies the vector at exactly one layer per generation, enabling direct per-layer behavioral comparison; results for three concepts are reported in Section 3.3.
+A separate per-layer isolation run applies the vector at exactly one layer per generation, enabling direct per-layer behavioral comparison. The run completed for `positive_sentiment` (all three layers), `negative_sentiment` (all three layers), and `french_language` (layers 8 and 16 only); `python_coding` and `refusal_behavior` were not reached before the run was interrupted at 1,120/2,100 prompts. PPL-based side-effect scoring was not re-run for this mode; only keyword hit-rates are available. Per-layer behavioral results are in Section 3.3.
 
 ### Scoring
 
@@ -125,17 +125,17 @@ Patching exactly one layer per generation disentangles each depth's behavioral c
 
 | Concept | Layer 8 | Layer 16 | Layer 24 |
 |---|---|---|---|
-| positive_sentiment | 0.60 at α=+2.0 | **0.90 at α=+2.0** | 0.75 at α=+0.5 |
-| negative_sentiment | 0.15 at α=+1.0 | 0.15 at α=+0.5 | 0.15 at α=+2.0 |
-| french_language† | 1.00 at α=+1.0 | 0.95 at α=+1.0 | — |
+| positive_sentiment | 0.70 at α=+2.0 | **0.95 at α=+2.0** | 0.80 at α=+0.5 |
+| negative_sentiment | 0.20 at α=−0.5 | 0.20 at α=+0.5 | 0.25 at α=+2.0 |
+| french_language† | 1.00 at α≤+1.0 | 0.95 at α=+1.0 | — |
 
-*Values are keyword hit-rate (fraction of 20 completions containing ≥1 target keyword). † french_language baseline at α=0 is ~0.95 due to keyword overlap with English text; keyword density is a more informative metric: at α=+1, L8 achieves 30.1 per 100 words (vs. baseline 3.4) and L16 achieves 25.5 per 100 words (vs. baseline 4.3).*
+*Values are keyword hit-rate (fraction of 20 completions containing ≥1 target keyword). † french_language baseline at α=0 is 1.00 at both layers due to short French function-word overlap with English text; keyword density is a more informative metric: at α=+1, L8 achieves 46.6 per 100 words (vs. unsteered baseline 13.5) and L16 achieves 34.6 per 100 words (vs. unsteered baseline 19.8).*
 
-**positive_sentiment:** Layer 16 is the most behaviorally effective single injection point (0.90 at α=+2), outperforming both layer 24 (0.75) and layer 8 (0.60). This contradicts the prediction from norm-fraction analysis, which would rank layer 24 as dominant (57% of total vector norm). Norm concentration at layer 24 reflects where the concept is *represented* in the residual stream; it does not predict where injection produces the largest behavioral shift. Layer 24 peaks at a lower alpha (0.75 at α=+0.5) and does not improve with stronger interventions, while layer 16 responds monotonically up to α=+2.
+**positive_sentiment:** Layer 16 is the most behaviorally effective single injection point (0.95 at α=+2), outperforming both layer 8 (0.70) and layer 24 (0.80). This contradicts the prediction from norm-fraction analysis, which would rank layer 24 as dominant (57% of total vector norm). Norm concentration at layer 24 reflects where the concept is *represented* in the residual stream; it does not predict where injection produces the largest behavioral shift. Layer 24 peaks at a lower alpha (0.80 at α=+0.5) and does not improve at α=+2, while layer 16 responds monotonically up to α=+2.
 
-**negative_sentiment:** All three layers plateau at 15% hit rate regardless of injection point or alpha. The behavioral ceiling is flat across depth, consistent with the RLHF suppression interpretation: suppression is a distributional property of the output space, not localized to any single layer.
+**negative_sentiment:** All three layers individually remain below 0.25 hit-rate, well below the 0.50 combined-layer result from Section 2. No single injection point is effective in isolation. The combined-layer result required simultaneous injection at all three layers, suggesting negative sentiment steering is a cooperative multi-layer effect rather than dominated by any single depth. The best single-layer result (0.25 at layer 24, α=+2) is barely above unsteered baseline (0.00–0.15 across layers), consistent with the RLHF suppression interpretation.
 
-**french_language (layers 8 and 16):** At α=+1, layer 8 achieves a keyword density of 30.1 per 100 words (vs. baseline 3.4) and layer 16 achieves 25.5 per 100 words (vs. baseline 4.3). Layer 8 is more effective in the positive-alpha direction despite lower vector norm (L8: 7.24 vs. L16: 8.88). At α=+2, both collapse — layer 8 more catastrophically (hit rate drops to 0.20) than layer 16 (0.50). Layer 24 results are not available from the isolation run.
+**french_language (layers 8 and 16):** The keyword hit-rate is saturated at baseline (1.00 at α=0 for both layers), making hit-rate uninformative. Keyword density is the discriminating metric: at α=+1, layer 8 achieves 46.6 per 100 words vs. its unsteered baseline of 13.5, and layer 16 achieves 34.6 per 100 words vs. its baseline of 19.8. Layer 8 achieves higher absolute density at α=+1 despite lower vector norm (7.24 vs. 8.88). At α=+2, both collapse (hit rate: L8 drops to 0.45, L16 drops to 0.45). Layer 24 results are not available from this partial run.
 
 ---
 
