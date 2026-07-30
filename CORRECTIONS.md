@@ -276,3 +276,100 @@ for p in circuit-tracing distributed-interp sae-comparison; do
   (cd papers/$p/submission && tectonic -X compile main.tex)
 done
 ```
+
+---
+
+# Addendum — 2026-07-30 (later): results were stranded on lab-02
+
+Everything above was computed on **partial checkpoints**. The full-spec training had
+already completed on lab-02 and was never retrieved.
+
+| Model | MacBook (used for all analysis above) | lab-02 (actual) |
+|---|---|---|
+| Llama-3.2-3B | checkpoint @ **10,000** steps | **50,000 steps**, 4.1 h, final FVE 0.9939 |
+| Mistral-7B | **1,000** steps / 50k tokens | **50,000 steps / 500k tokens**, 6.6 h, FVE 0.9712 |
+| Qwen2.5-3B | 50,000 steps ✓ | 22,400 (partial re-run; local copy is the good one) |
+
+Llama and Mistral finished on **2026-07-29** (checkpoints timestamped 08:43 and 13:53)
+and sat on lab-02 untouched.
+
+## Why nothing came back
+
+Three layers, all failing the same way:
+
+1. **`DONE` means "launcher exited 0", not "job finished."** The remote preamble
+   (`ClaudePacer/Sources/pacer-daemon/main.swift:107`) instructs: *"exit 0 immediately.
+   DO NOT wait for the job to finish."* The daemon logs DONE on that exit. Pass 1 logged
+   DONE in **13 minutes** and pass 3 in **42 seconds**, for an 8-hour job.
+2. **The completion sentinel never fired.** The preamble tells the wrapper to write
+   `~/.pacer-done/<taskId>.json`. That directory on lab-02 is **empty**, and was created
+   2026-07-30 02:04 — *after* the 07-29 training runs. The backstop was added later and
+   has never been exercised.
+3. **No artifact retrieval exists anywhere.** `grep -rniE "rsync|scp|sync.?back|fetch.*result"`
+   over `Sources/` returns nothing. The preamble asserts *"The repo is synced at
+   /Users/lab-02/ResearchPapers"* as a precondition; that was a one-time push. lab-02's
+   git is still at `2ea326e` (07-28), many commits behind.
+
+The `BacklogTask` Codable bug is **already fixed** — every field decodes with
+`decodeIfPresent`. It was not the cause this time.
+
+**Compounding effect:** the daemon log records `n_universal=3577 (from fully-trained
+checkpoints)` — computed on lab-02 with the real checkpoints. The local
+`universal-features.json` said 3,753, computed on partials. Two numbers, and the
+MacBook kept the wrong one. Later cleanup tasks deleted the model weights while
+correctly preserving checkpoints — but the checkpoints preserved were on the wrong host.
+
+## What changed after retrieval
+
+Checkpoints pulled; both analyses re-run. The partial-checkpoint versions are preserved
+as `mistral-7b-layer16/*_PARTIAL_1k.*` and `llama-3b-layer14/checkpoint_step_010000.npz`.
+
+**Universality: the negative result survives, and is now much stronger.** The confound
+that previously blocked any conclusion — "these SAEs are too degraded to detect what
+these models share" — is largely removed:
+
+| | Partial checkpoints | Fully trained |
+|---|---|---|
+| Llama matchable features | 8,304 (50.7%) | **12,127 (74.0%)** |
+| Mistral matchable features | 5,479 (33.4%) | **8,175 (49.9%)** |
+| Pairwise matches | 22 / 10 / 12 | 16 / 23 / 15 |
+| Expected false positives | 7.0 / 4.9 / 5.6 | 7.4 / 7.1 / 8.7 |
+| **Three-way universal** | **0** | **1** (null 0.15, Pr(≥1) = 0.14) |
+
+Zero became one, against a null that produces at least one 14% of the time. Undertraining
+was not the explanation for the negative result.
+
+The permutation-null means also rose (0.39–0.57 → **0.59–0.74**), so τ = 0.80 now sits
+below the noise floor for *every* pair, not just two of three. Llama–Mistral is the
+extreme case: null mean 0.744, calibrated τ = 0.980. That pair went from the *highest*
+naive count (12,174) to the *fewest* corrected matches (15) and lowest enrichment (1.7×).
+
+**Dictionary collapse: now a three-model replication, and my mechanism was wrong.**
+Mistral at 50k steps confirms the collapse independently (292 → 12,082 dead, a 41×
+rise). All three peak between steps 5,200 and 5,800 despite pre-collapse dead counts
+differing tenfold.
+
+But the earlier draft claimed collapse is a permanent ratchet — that a feature outside
+top-*k* gets zero encoder gradient and can never return. **That is contradicted by the
+data:** 16–57% of collapsed features recover, near-monotonically. The correct mechanism
+is that `b_dec` keeps receiving gradient from firing features, so a silent feature's
+pre-activation drifts even while its own encoder row is frozen. Section rewritten.
+
+This also means a dead-feature count read mid-training overstates permanent loss — ours
+did, recording 5,278 dead for Llama at step 13,000 against 3,753 at convergence.
+
+**Loss:** Mistral now trains on all 500k tokens, so the one genuine held-out split in
+the workspace is gone. `checkpoint_final_PARTIAL_1k.npz` is retained so that measurement
+(held-out FVE 0.9252 vs in-sample 0.9273) stays reproducible.
+
+## Infrastructure fix needed
+
+Not code-changed here, since ClaudePacer is a separate project:
+
+1. Add an artifact sync-back step to the remote preamble — the wrapper should `rsync`
+   named outputs to the MacBook *before* writing its sentinel.
+2. Make remote-task completion verify a declared artifact path exists locally, not just
+   that the launcher exited 0. `looksLikeBlocked()` catches BLOCKED-but-exit-0; there is
+   no equivalent for LAUNCHED-but-never-retrieved.
+3. Have the cleanup task verify artifacts against the *filesystem*, not the backlog. The
+   07-30 cleanup reasoned over an empty backlog and concluded the models were unneeded.

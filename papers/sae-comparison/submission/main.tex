@@ -50,12 +50,14 @@ model families---Llama-3.2-3B, Mistral-7B-v0.3 and Qwen2.5-3B---and report three
 findings, two of them negative.
 
 First, TopK training without an auxiliary revival loss undergoes an abrupt
-\emph{dictionary collapse}. In both runs long enough to exhibit it, dead features
-roughly quadruple between step 2,000 and step 5,000 (Llama: 1,078 $\to$ 6,857; Qwen:
-2,893 $\to$ 11,178) and never recover, because a feature below the top-$k$ threshold on
-every batch receives exactly zero encoder gradient. Reconstruction quality is unharmed
-and in fact continues improving throughout, so the collapse is invisible to the metric
-practitioners usually monitor. Qwen ends at 57.4\% of its dictionary permanently dead.
+\emph{dictionary collapse} followed by partial recovery. In all three runs, dead
+features rise by $3.9\times$ to $41\times$ shortly after step 2,000, peaking between
+steps 5,200 and 5,800---a 600-step band shared across three source models with
+pre-collapse dead counts differing tenfold. Between 16\% and 57\% of collapsed features
+subsequently return over the remaining 45,000 steps. Reconstruction quality gives no
+warning: two models show a transient FVE dip that fully recovers, and Mistral's FVE
+\emph{rises} through its collapse while three-quarters of its dictionary goes silent.
+Qwen ends at 57.4\% dead.
 
 Second, the surviving code is dominated by a small set of dense directions. With
 $k/D = 0.78\%$, a feature should fire on under 1\% of tokens if activation were spread
@@ -65,12 +67,13 @@ selects features by activation frequency---a common first step in feature labell
 in feature-based classifiers---selects almost entirely from this degenerate head.
 
 Third, cross-architecture feature matching by activation-pattern similarity finds
-nothing. Under a chunk-permutation null, the best-of-16{,}384 match similarity between
-\emph{unrelated} features averages 0.39--0.57 and has a 99th percentile of 0.83--0.94,
-so the conventional fixed threshold of 0.8 sits at or below the noise floor. With
-one-to-one reciprocal matching, a closed-triangle requirement and a null-calibrated
-threshold, the number of features shared across all three models is zero; an earlier
-uncalibrated analysis of the same checkpoints reported 3,753.
+essentially nothing. Under a chunk-permutation null, the best-of-16{,}384 match
+similarity between \emph{unrelated} features averages 0.59--0.74 and has a 99th
+percentile of 0.94--0.98, so the conventional fixed threshold of 0.8 sits below the
+noise floor for every model pair. With one-to-one reciprocal matching, a
+closed-triangle requirement and a null-calibrated threshold, exactly one feature triple
+is shared across all three models---against a null that yields at least one 14\% of the
+time. An uncalibrated analysis of the same checkpoints reported 3,753.
 
 We report a comparison of training objectives as \emph{not conducted}: only TopK was
 trained, and \S\ref{sec:notrun} states plainly which planned experiments do not exist.
@@ -100,25 +103,30 @@ three models---fails in a way that we think is instructive.
 from three organizations, have different hidden dimensions (3{,}072 / 4{,}096 /
 2{,}048), different attention schemes, and no publicly shared training data. Holding
 dictionary size fixed at 16{,}384 across them means the expansion ratio varies
-(5.33$\times$ / 4.0$\times$ / 8.0$\times$), which turns out to matter: the model with
-the largest expansion ratio collapses hardest.
+(5.33$\times$ / 4.0$\times$ / 8.0$\times$). The model with the largest ratio ends with
+the worst dead-feature rate, though as \S\ref{sec:collapse} notes, ratio and source
+model are confounded across only three runs.
 
 \paragraph{Contributions.}
 \begin{enumerate}
-  \item \textbf{Dictionary collapse is abrupt, mid-training, and invisible to FVE.} We
-    characterize a sharp transition between steps 2,000 and 5,000 in which dead
-    features quadruple while reconstruction quality continues to improve
-    (\S\ref{sec:collapse}).
+  \item \textbf{Dictionary collapse is abrupt, consistently timed, partially
+    reversible, and invisible to FVE.} We characterize a sharp transition peaking
+    between steps 5,200 and 5,800 in all three models, in which dead features rise
+    $3.9\times$--$41\times$ before 16--57\% of them recover, while reconstruction
+    quality gives no signal (\S\ref{sec:collapse}).
   \item \textbf{Quantification of dense-feature degeneracy.} We measure how much of the
     sparse code's activation mass is carried by its most frequent features, and show
     the concentration is severe enough to invalidate frequency-based feature selection
     (\S\ref{sec:dense}).
   \item \textbf{A permutation null for cross-model feature matching, and a negative
-    result.} We show that the standard protocol---fixed cosine threshold, nearest-neighbour
-    matching---produces thousands of spurious matches, and that nothing survives proper
-    calibration (\S\ref{sec:matching}).
-  \item \textbf{A held-out generalization measurement} for the one SAE that has unseen
-    data, and an explicit statement of why the other two do not (\S\ref{sec:heldout}).
+    result.} We show that the standard protocol---fixed cosine threshold,
+    nearest-neighbour matching---produces thousands of spurious matches, and that
+    essentially nothing survives proper calibration (\S\ref{sec:matching}).
+  \item \textbf{An honest account of what these numbers do not establish.} With all
+    three SAEs trained over 205 epochs of their entire activation dump, no held-out
+    reconstruction measurement is available for any of them. We report the one held-out
+    number we do have---from a superseded partial checkpoint---and explain why it is
+    weak evidence (\S\ref{sec:heldout}).
 \end{enumerate}
 
 % ── 2. Related Work ──────────────────────────────────────────────────────────
@@ -202,23 +210,24 @@ $z = \operatorname{TopK}(\operatorname{ReLU}(W_{\text{enc}}(x - b_{\text{dec}})
 decoder columns unit-normalized. The loss is plain MSE; there is no auxiliary
 dead-feature loss and no re-initialization scheme.
 
-Training runs differ in length, and not by design (Table~\ref{tab:runs}). Only the Qwen
-run reached its 50{,}000-step target. This unevenness limits cross-model comparison
-throughout, and we do not attribute differences between models to architecture where
-training length is a plausible alternative explanation.
+All three runs completed the same 50{,}000 steps over the same 500{,}000-token corpus
+(Table~\ref{tab:runs}), so training length is not a confound for any cross-model
+comparison below. The remaining asymmetry is expansion ratio, which varies because
+dictionary size is held fixed while hidden dimension does not.
 
 \begin{table}[t]
   \centering
-  \caption{The three training runs. Only Qwen reached the step target. ``Epochs'' is
-    the number of passes over the source token set implied by steps $\times$ batch.}
+  \caption{The three training runs, all completed to the same specification.
+    ``Epochs'' is the number of passes over the source token set implied by
+    steps $\times$ batch.}
   \label{tab:runs}
   \smallskip
   \begin{tabular}{llrrrrr}
     \toprule
     Model & Layer & $d$ & Expansion & Source tokens & Steps & Epochs \\
     \midrule
-    Llama-3.2-3B      & 14 & 3{,}072 & 5.33$\times$ & 500{,}000 & 13{,}000 & 53 \\
-    Mistral-7B$^\ddagger$ & 16 & 4{,}096 & 4.0$\times$  &  50{,}000 &  1{,}000 & 41 \\
+    Llama-3.2-3B      & 14 & 3{,}072 & 5.33$\times$ & 500{,}000 & 50{,}000 & 205 \\
+    Mistral-7B$^\ddagger$ & 16 & 4{,}096 & 4.0$\times$  & 500{,}000 & 50{,}000 & 205 \\
     Qwen2.5-3B        & 18 & 2{,}048 & 8.0$\times$  & 500{,}000 & 50{,}000 & 205 \\
     \bottomrule
   \end{tabular}
@@ -277,66 +286,73 @@ intermediate model.
 \section{Results}
 \label{sec:results}
 
-\subsection{Dictionary Collapse}
+\subsection{Dictionary Collapse and Partial Recovery}
 \label{sec:collapse}
 
-Table~\ref{tab:collapse} tracks dead features---those with no activation over a rolling
-5{,}000-step window---through training.
+All three runs undergo the same three-phase trajectory in dictionary utilization: a
+slow decline in dead features through roughly step 2{,}000, an abrupt collapse peaking
+between steps 5{,}200 and 5{,}800, and a long partial recovery through the remainder of
+training. Table~\ref{tab:collapse} gives the shape.
 
 \begin{table}[t]
   \centering
-  \caption{Dead-feature count (of 16{,}384) over training. Both runs long enough to
-    show it undergo a sharp transition between steps 2{,}000 and 5{,}000. FVE is the
-    batch estimate at that step; note that it does not degrade across the transition.
-    Data: \texttt{data/sae-runs/*/training.jsonl}.}
+  \caption{Dead-feature count (of 16{,}384) over training, from the rolling 5{,}000-step
+    \texttt{dead\_5k} window. All three models collapse within a 600-step band and then
+    partially recover. Data: \texttt{data/sae-runs/*/training.jsonl}.}
   \label{tab:collapse}
   \smallskip
-  \begin{tabular}{rrrrrrr}
+  \begin{tabular}{lrrrrrr}
     \toprule
-    & \multicolumn{2}{c}{Llama-3.2-3B} & \multicolumn{2}{c}{Qwen2.5-3B}
-    & \multicolumn{2}{c}{Mistral-7B} \\
-    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
-    Step & Dead & FVE & Dead & FVE & Dead & FVE \\
+    Model & Pre-collapse & Peak & at step & Final (50k) & Collapse & Recovered \\
     \midrule
-        1 &  1{,}381 & $-0.109$ &  3{,}220 & $-0.096$ & 748 & $-0.088$ \\
-      200 &  1{,}245 &   0.624  &  3{,}091 &   0.743  & 468 &   0.829  \\
-    1{,}000 &  1{,}145 &   0.955  &  2{,}975 &   0.948  & 339 &   0.965  \\
-    2{,}000 &  1{,}078 &   0.986  &  2{,}893 &   0.982  & --- & --- \\
-    \midrule
-    5{,}000 & \textbf{6{,}857} & 0.775 & \textbf{11{,}178} & 0.841 & --- & --- \\
-    \midrule
-    10{,}000 &  6{,}273 & 0.992 &  9{,}622 & 0.989 & --- & --- \\
-    13{,}000 &  5{,}278 & 0.984 &  9{,}538 & 0.979 & --- & --- \\
-    50{,}000 & --- & --- &  9{,}401 & 0.984 & --- & --- \\
+    Llama-3.2-3B & 1{,}078 &  8{,}671 & 5{,}400 & 3{,}753 & $8.0\times$  & 57\% \\
+    Qwen2.5-3B   & 2{,}893 & 11{,}242 & 5{,}200 & 9{,}401 & $3.9\times$  & 16\% \\
+    Mistral-7B   &    292  & 12{,}082 & 5{,}800 & 5{,}272 & $41.4\times$ & 56\% \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Three features of this are worth stating explicitly.
+\paragraph{The collapse is abrupt and its timing is consistent.} Dead features are flat
+or slowly declining through step 2{,}000 in every run, then rise by between $3.9\times$
+and $41\times$ within about 3{,}000 steps. The peak falls between steps 5{,}200 and
+5{,}800 in all three models, despite pre-collapse dead counts differing by a factor of
+ten (292 to 2{,}893) and despite three different source models, hidden dimensions and
+expansion ratios. Whatever drives the transition is a property of the training
+procedure rather than of the model being decomposed.
 
-\paragraph{The collapse is abrupt.} Dead features are roughly flat and slowly
-\emph{declining} through step 2{,}000 in both long runs, then jump by a factor of
-$6.4\times$ (Llama) and $3.9\times$ (Qwen) by step 5{,}000. This is not gradual
-attrition. The mechanism is a ratchet: under a hard top-$k$ constraint, a feature that
-falls outside the top $k$ on every batch in the window receives an encoder gradient of
-exactly zero, so it cannot be pushed back into contention by training. Once the
-learning rate has annealed enough that the surviving features stop reshuffling, the
-set of live features is frozen.
+\paragraph{Recovery is real, substantial, and slow.} This corrects an account we gave in
+an earlier draft. We had argued that collapse is a ratchet---that a feature outside the
+top-$k$ on every batch receives exactly zero encoder gradient and therefore can never
+return. The first half of that is true of $W_{\mathrm{enc}}$'s row for a silent feature,
+but the conclusion does not follow: the encoder input is $x - b_{\mathrm{dec}}$, and
+$b_{\mathrm{dec}}$ continues to receive gradient from the features that \emph{are}
+firing. A silent feature's pre-activation therefore keeps moving even though its own
+weights do not, and it can drift back into contention. Empirically it does, for 16\% to
+57\% of collapsed features, and the recovery is close to monotone---after the peak,
+Llama shows 30 increases across 224 logged points and Mistral 18 across 222.
 
-\paragraph{Reconstruction quality does not warn you.} FVE at step 5{,}000 dips (0.775,
-0.841) but this is batch noise, not signal: by step 10{,}000 both runs are at 0.99,
-higher than before the collapse, and they stay there. A practitioner monitoring FVE
-would see a healthy, monotonically improving run. The dictionary lost 40--60\% of its
-capacity and the loss curve did not notice, because the surviving features simply
-absorbed the reconstruction work.
+The practical consequence is that a dead-feature count read at any single step between
+roughly 4{,}000 and 15{,}000 badly overstates permanent loss. Ours did: an earlier
+reading of the Llama run at step 13{,}000 recorded 5{,}278 dead, against 3{,}753 at
+convergence.
 
-\paragraph{Higher expansion collapses harder.} Qwen (8.0$\times$ expansion) ends with
-57.4\% of its dictionary dead against Llama's 20.2\% (5.33$\times$), measured over the
-full corpus. This is the expected direction---a larger dictionary relative to $d$ has
-more features competing for the same $k$ slots---but with two long runs we cannot
-separate it from the confound that Qwen also trained nearly four times as long. Mistral
-(4.0$\times$, 1{,}000 steps) shows 0.1\% dead, which reflects only that it stopped
-before the transition.
+\paragraph{Reconstruction quality does not warn you, and for one model it improves
+through the collapse.} Llama and Qwen both show an FVE dip at step 5{,}000 (0.986 to
+0.775, and 0.982 to 0.841), but both are back above 0.98 by step 10{,}000 and stay
+there. Mistral shows no dip at all: its FVE \emph{rises} from 0.933 at step 2{,}000 to
+0.966 at step 5{,}000 while its dead count goes from 292 to 3{,}500 on its way to
+12{,}082. A practitioner watching reconstruction quality on that run would have seen a
+healthy, monotonically improving curve while three-quarters of the dictionary went
+silent. Dictionary utilization has to be logged separately; it is not recoverable from
+the loss.
+
+\paragraph{Expansion ratio does not straightforwardly predict severity.} Qwen has the
+largest expansion ratio ($8.0\times$) and the worst final dead rate (57.4\%), which is
+the expected direction. But Mistral has the \emph{smallest} ratio ($4.0\times$) and the
+largest collapse magnitude ($41\times$), and recovers to a better final state than Qwen.
+With three runs at three different ratios and no replicates, we can report the ordering
+but cannot attribute it: source model, activation norm distribution and expansion ratio
+are all confounded here.
 
 \subsection{Dense-Feature Degeneracy}
 \label{sec:dense}
@@ -357,23 +373,29 @@ uniformly. Table~\ref{tab:dense} shows the actual distribution.
     \toprule
     Model & Uniform expectation & Features firing $>$50\% of tokens & Top-200 mass \\
     \midrule
-    Llama-3.2-3B & 0.78\% & 34 & 40.3\% \\
+    Llama-3.2-3B & 0.78\% & 25 & 30.9\% \\
     Qwen2.5-3B   & 0.78\% & 20 & 38.6\% \\
-    Mistral-7B   & 0.78\% & 34 & 57.2\% \\
+    Mistral-7B   & 0.78\% & 16 & 29.0\% \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-In every model, 1.2\% of the dictionary carries roughly two-fifths of the sparse code,
-and a few dozen features fire on the majority of all tokens. A feature firing on 97\% of
-tokens---the maximum we observe in both Llama and Qwen---is not a feature in any useful
-sense; it is closer to a learned bias absorbed into the dictionary.
+In every model, 1.2\% of the dictionary carries between 29\% and 39\% of the sparse
+code, and 16 to 25 features fire on the majority of all tokens. A feature firing on
+97\% of tokens---the maximum we observe in both Llama and Qwen---is not a feature in any
+useful sense; it is closer to a learned bias absorbed into the dictionary.
+
+Training to convergence dilutes this but does not remove it. Measured on the partial
+checkpoints these runs superseded, the top-200 share was 40\% (Llama) and 57\%
+(Mistral); at 50{,}000 steps it is 31\% and 29\%. The concentration falls as features
+specialise, and then stops falling: a third of the code still sits in 1.2\% of the
+dictionary at convergence.
 
 \paragraph{Consequence for feature selection.} The standard first step in feature
 labelling is to take the top-$N$ features by activation frequency and inspect their
 maximally activating contexts. Table~\ref{tab:dense} says that this procedure draws
-almost exclusively from the degenerate head: of the 200 most frequent Llama features,
-34 fire on more than half of all tokens. In separate work we built a feature-based
+heavily from the degenerate head: of the 200 most frequent Llama features, 25 fire on
+more than half of all tokens, and those 200 features carry 31\% of the entire code. In separate work we built a feature-based
 safety classifier on exactly this selection and obtained ROC-AUC 0.564 with a 95\%
 confidence interval spanning chance. Selecting by \emph{differential} activation
 between contrastive corpora, and imposing a density ceiling, are both necessary; neither
@@ -384,37 +406,48 @@ is standard practice.
 
 \begin{table}[t]
   \centering
-  \caption{Reconstruction over the full corpus. Only Mistral has unseen data, because
-    it was trained on the first 50{,}000 tokens of a 500{,}000-token dump; its held-out
-    row covers tokens 50k--500k. Dead-feature counts here are features that fire nowhere
-    in the corpus, a stricter criterion than the rolling window of
-    Table~\ref{tab:collapse}.}
+  \caption{Reconstruction over the full 500{,}000-token corpus. All three converged runs
+    are in-sample: each made 205 passes over its entire dump. The rows marked $\ast$ come
+    from a superseded 1{,}000-step Mistral checkpoint that saw only the first 50{,}000
+    tokens, and are the only genuine held-out measurement available. Dead-feature counts
+    here are features that fire nowhere in the corpus, a stricter criterion than the
+    rolling window of Table~\ref{tab:collapse}.}
   \label{tab:heldout}
   \smallskip
   \begin{tabular}{llrrrl}
     \toprule
     Model & Split & MSE & FVE & Dead features & \\
     \midrule
-    Llama-3.2-3B & in-sample & 0.00788 & 0.9865 & 3{,}309 (20.2\%) & 53 epochs \\
+    Llama-3.2-3B & in-sample & 0.00617 & 0.9895 & 3{,}344 (20.4\%) & 205 epochs \\
     Qwen2.5-3B   & in-sample & 0.27532 & 0.9839 & 9{,}398 (57.4\%) & 205 epochs \\
-    Mistral-7B   & in-sample & 0.00415 & 0.9273 &     24 (0.1\%)  & 41 epochs \\
-    Mistral-7B   & \textbf{held-out} & 0.00426 & \textbf{0.9252} & 26 (0.2\%) & unseen \\
+    Mistral-7B   & in-sample & 0.00195 & 0.9659 & 2{,}346 (14.3\%) & 205 epochs \\
+    \midrule
+    \multicolumn{6}{l}{\emph{Superseded 1{,}000-step Mistral checkpoint, retained for the held-out measurement:}} \\
+    Mistral-7B$^\ast$ & in-sample & 0.00415 & 0.9273 & 24 (0.1\%) & 41 epochs \\
+    Mistral-7B$^\ast$ & \textbf{held-out} & 0.00426 & \textbf{0.9252} & 26 (0.2\%) & unseen \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The Llama and Qwen SAEs each made 53 and 205 passes over their entire activation dump.
-There is no unseen data for them, and at that level of repetition an SAE can in
-principle memorize the corpus. We report their FVE as the best available
+All three SAEs made 205 passes over their entire 500{,}000-token activation dump.
+There is no unseen data for any of them, and at that level of repetition an SAE can in
+principle memorize the corpus rather than learn a dictionary. Every FVE in the top half
+of Table~\ref{tab:heldout} is in-sample, and we report them as the best available
 characterization, not as evidence of generalization.
 
-Mistral is the exception, by accident: trained on only the first 50{,}000 tokens, it
-leaves 450{,}000 unseen. Its held-out FVE is 0.9252 against an in-sample 0.9273---a gap
-of 0.2 percentage points. A 1{,}000-step SAE has many problems, but overfitting its
-training corpus is not among them. This is weak evidence that the other two figures are
-not purely memorization; it comes from the least-trained model in the set and should
-not carry much weight. Reserving a held-out split before training is the cheapest fix
-available to this work.
+One genuine held-out measurement exists, and only by accident. An earlier Mistral run
+trained on just the first 50{,}000 tokens of the dump, leaving 450{,}000 unseen. That
+checkpoint reconstructs held-out activations at FVE 0.9252 against an in-sample
+0.9273---a gap of 0.2 percentage points. Whatever else is wrong with a 1{,}000-step SAE,
+it is not overfitting its training corpus.
+
+We retain that checkpoint (\texttt{checkpoint\_final\_PARTIAL\_1k.npz}) precisely so the
+measurement stays reproducible, but we are careful about how much it carries. It comes
+from the least-trained model in the set, at a point where features have barely
+specialised; a converged SAE has far more capacity to memorize. It is suggestive that
+the in-sample figures are not pure memorization artifacts, and no more than that.
+Reserving a held-out token split \emph{before} training is the cheapest fix available
+to this work, and none of these three runs did it.
 
 \subsection{Cross-Architecture Feature Matching}
 \label{sec:matching}
@@ -430,21 +463,23 @@ available to this work.
     \toprule
     Model & Dictionary & Dead & Low support & \textbf{Matchable} \\
     \midrule
-    Llama-3.2-3B & 16{,}384 & 3{,}309 &  4{,}771 & \textbf{8{,}304} (50.7\%) \\
-    Qwen2.5-3B   & 16{,}384 & 9{,}398 &      22 & \textbf{6{,}964} (42.5\%) \\
-    Mistral-7B   & 16{,}384 &     24 & 10{,}881 & \textbf{5{,}479} (33.4\%) \\
+    Llama-3.2-3B & 16{,}384 & 3{,}344 &    913 & \textbf{12{,}127} (74.0\%) \\
+    Qwen2.5-3B   & 16{,}384 & 9{,}398 &     22 & \textbf{6{,}964} (42.5\%) \\
+    Mistral-7B   & 16{,}384 & 2{,}346 & 5{,}863 & \textbf{8{,}175} (49.9\%) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Between a third and a half of each dictionary is usable (Table~\ref{tab:inventory}),
-and the two failure modes are the ones diagnosed above: Qwen is half dead from
-collapse, Mistral is overwhelmingly low-support because its features never specialized.
+Between 43\% and 74\% of each dictionary is usable (Table~\ref{tab:inventory}). The
+attrition traces directly to the collapse of \S\ref{sec:collapse}: Qwen is 57\% dead,
+and Mistral---which reaches 32\% dead by step 50{,}000---additionally carries a large
+low-support tail. Neither is an artifact of insufficient training; all three runs
+completed 50{,}000 steps.
 
 \paragraph{The null.} Table~\ref{tab:null} reports the chunk-permutation null. The
 number to attend to is the mean: two features from different models with no functional
 relationship, matched reciprocally over a 1{,}000-dimensional fingerprint, correlate at
-0.39--0.57 on average.
+0.59--0.74 on average.
 
 \begin{table}[t]
   \centering
@@ -457,9 +492,9 @@ relationship, matched reciprocally over a 1{,}000-dimensional fingerprint, corre
     \toprule
     Pair & Null mean & Null p99 ($= \tau$) & Null matches/replicate & Expected FP \\
     \midrule
-    Llama--Qwen    & 0.574 & 0.939 & 700 & 7.0 \\
-    Mistral--Qwen  & 0.393 & 0.832 & 486 & 4.9 \\
-    Llama--Mistral & 0.464 & 0.894 & 557 & 5.6 \\
+    Llama--Qwen    & 0.595 & 0.950 & 736 & 7.4 \\
+    Mistral--Qwen  & 0.594 & 0.944 & 706 & 7.1 \\
+    Llama--Mistral & 0.744 & 0.980 & 872 & 8.7 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -486,21 +521,24 @@ statistic with no discriminative power whatsoever.
     \toprule
     Pair & Uncalibrated & \textbf{Corrected} & Expected FP & Enrichment \\
     \midrule
-    Llama--Qwen    &  5{,}923 & \textbf{22} & 7.0 & $3.1\times$ \\
-    Mistral--Qwen  &  8{,}099 & \textbf{10} & 4.9 & $2.0\times$ \\
-    Llama--Mistral & 12{,}174 & \textbf{12} & 5.6 & $2.1\times$ \\
+    Llama--Qwen    &  5{,}923 & \textbf{16} & 7.4 & $2.2\times$ \\
+    Mistral--Qwen  &  8{,}099 & \textbf{23} & 7.1 & $3.2\times$ \\
+    Llama--Mistral & 12{,}174 & \textbf{15} & 8.7 & $1.7\times$ \\
     \midrule
-    \textbf{Three-way universal} & \textbf{3{,}753} & \textbf{0} & 0.15 & --- \\
+    \textbf{Three-way universal} & \textbf{3{,}753} & \textbf{1} & 0.15 & --- \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-No feature matches across all three models. The closed-triangle count is zero against a
-null expectation of 0.15 per replicate. Pairwise, 10--22 pairs survive per model pair
-against 5--7 expected by chance---an enrichment of 2--3$\times$, or on the order of
-5--15 genuine pairs out of 5{,}000--8{,}000 matchable features (0.1--0.3\%). At these
-counts Poisson uncertainty alone spans a factor of two, and we do not think the
-pairwise numbers support a quantitative claim.
+Exactly one feature triple matches across all three models, against a null expectation
+of 0.15 closed triangles per replicate. Under a Poisson model with that rate,
+$\Pr(\geq 1) = 0.14$; under the cosine metric the null rate is 0.55 and
+$\Pr(\geq 1) = 0.42$. One match is what this procedure produces from noise a
+substantial fraction of the time. Pairwise, 15--23 pairs survive per model pair against
+7--9 expected by chance---an enrichment of 1.7--3.2$\times$, or roughly 7--16 genuine
+pairs out of 7{,}000--12{,}000 matchable features (about 0.1\%). At these counts
+Poisson uncertainty alone spans a factor of two, and we do not think the pairwise
+numbers support a quantitative claim.
 
 The three corrections compound and none is individually sufficient. Reciprocal matching
 alone reduces the Llama--Mistral count from 12{,}174 to 40 at the \emph{same} threshold,
@@ -511,11 +549,19 @@ collapsed onto 644 distinct Qwen and 341 distinct Mistral features. Null calibra
 removes the remainder.
 
 \paragraph{What this does and does not show.} It does not show that these three models
-fail to share representational structure. Two of the three SAEs are undertrained, all
-three have degraded dictionaries, and the fingerprint statistic---mean activation over
-500-token chunks---discards within-chunk structure, so a feature responding to a rare
-token is indistinguishable from one responding to a chunk's topic. The negative result
-is confounded with the quality of the instruments.
+fail to share representational structure, but the case is stronger than it was. An
+earlier run of this analysis used partial checkpoints (Llama at 20\% of its step
+target, Mistral at under 2\% on a ten-times-smaller corpus) and returned zero universal
+features, which we could not distinguish from instrument failure. With all three SAEs
+trained to the same specification the usable dictionary fraction rises from 51\% to
+74\% (Llama) and 33\% to 50\% (Mistral), and the answer moves from zero to one---i.e.\
+not at all. Undertraining was not the explanation.
+
+Two confounds remain. A third to a half of each dictionary is still dead or
+low-support, so the analysis cannot see it; and the fingerprint statistic---mean
+activation over 500-token chunks---discards within-chunk structure, so a feature
+responding to a rare token is indistinguishable from one responding to a chunk's topic.
+A negative result from a coarse statistic is weak evidence of absence.
 
 What it does show is methodological and transfers beyond this dataset: cross-model
 feature matching by activation-pattern similarity requires a permutation null. Without
@@ -586,12 +632,15 @@ finding. It affects any pipeline whose first step is ``take the most active feat
 auxiliary loss. The collapse dynamics in particular are specific to hard-sparsity
 training; L1 SAEs fail differently.
 
-\textbf{Uneven and insufficient training.} One of three runs reached its target. The
-Mistral SAE trained for 1{,}000 steps on a corpus ten times smaller than the others.
-Cross-model differences are confounded with training length throughout, and we have
-avoided attributing any difference to architecture.
+\textbf{Confounded cross-model comparison.} All three runs are matched on steps,
+corpus, batch size, $k$ and dictionary size, so training length is not a confound. But
+expansion ratio, source model, layer depth and activation-norm scale all vary together
+across only three runs with one seed each. We report orderings and avoid attributing
+any of them to a single factor.
 
-\textbf{No held-out data for two of three models.} See \S\ref{sec:heldout}.
+\textbf{No held-out data for any converged model.} All three trained over 205 epochs
+of their full dump. The single held-out measurement comes from a superseded 1{,}000-step
+checkpoint. See \S\ref{sec:heldout}.
 
 \textbf{Quantization confound.} Mistral activations come from 4-bit weights.
 

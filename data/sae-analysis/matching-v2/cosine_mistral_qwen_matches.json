@@ -4,50 +4,105 @@
  "fingerprint": "chunk-averaged TopK-SAE activations, 1000 chunks x 500 tokens = 500000 tokens",
  "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
  "min_active_chunks": 50,
- "tau_calibrated": 0.8715,
+ "tau_calibrated": 0.9536,
  "permutation_null": {
-  "null_p99": 0.8715,
-  "null_mean": 0.4501,
-  "null_max": 0.9831,
-  "n_null_samples": 7808
+  "null_p99": 0.9536,
+  "null_mean": 0.6128,
+  "null_max": 0.9897,
+  "n_null_samples": 13639
  },
- "n_matches_tau_0.80": 20,
- "n_matches_tau_calibrated": 7,
+ "n_matches_tau_0.80": 215,
+ "n_matches_tau_calibrated": 18,
  "matches": [
   {
-   "feat_a": 3773,
-   "feat_b": 2401,
-   "sim": 0.8951
+   "feat_a": 3135,
+   "feat_b": 1718,
+   "sim": 0.966
   },
   {
-   "feat_a": 5615,
+   "feat_a": 3644,
+   "feat_b": 5049,
+   "sim": 0.9764
+  },
+  {
+   "feat_a": 5187,
+   "feat_b": 1279,
+   "sim": 0.9783
+  },
+  {
+   "feat_a": 5313,
+   "feat_b": 1834,
+   "sim": 0.9832
+  },
+  {
+   "feat_a": 7023,
+   "feat_b": 9644,
+   "sim": 0.9726
+  },
+  {
+   "feat_a": 9394,
    "feat_b": 5109,
-   "sim": 0.9743
+   "sim": 0.9935
   },
   {
-   "feat_a": 5787,
+   "feat_a": 9539,
+   "feat_b": 9102,
+   "sim": 0.9631
+  },
+  {
+   "feat_a": 10477,
+   "feat_b": 4977,
+   "sim": 0.9745
+  },
+  {
+   "feat_a": 10581,
+   "feat_b": 1889,
+   "sim": 0.9666
+  },
+  {
+   "feat_a": 10764,
+   "feat_b": 1329,
+   "sim": 0.9538
+  },
+  {
+   "feat_a": 10921,
+   "feat_b": 626,
+   "sim": 0.9569
+  },
+  {
+   "feat_a": 11532,
+   "feat_b": 3254,
+   "sim": 0.9641
+  },
+  {
+   "feat_a": 11838,
+   "feat_b": 8958,
+   "sim": 0.9622
+  },
+  {
+   "feat_a": 11977,
+   "feat_b": 1326,
+   "sim": 0.9551
+  },
+  {
+   "feat_a": 12069,
+   "feat_b": 3831,
+   "sim": 0.9558
+  },
+  {
+   "feat_a": 12668,
    "feat_b": 7337,
-   "sim": 0.9827
+   "sim": 0.9894
   },
   {
-   "feat_a": 11675,
-   "feat_b": 9880,
-   "sim": 0.9529
+   "feat_a": 15407,
+   "feat_b": 3444,
+   "sim": 0.9891
   },
   {
-   "feat_a": 11852,
-   "feat_b": 6582,
-   "sim": 0.888
-  },
-  {
-   "feat_a": 13136,
-   "feat_b": 5890,
-   "sim": 0.8945
-  },
-  {
-   "feat_a": 15143,
-   "feat_b": 10611,
-   "sim": 0.8963
+   "feat_a": 15966,
+   "feat_b": 10183,
+   "sim": 0.9702
   }
  ]
 }

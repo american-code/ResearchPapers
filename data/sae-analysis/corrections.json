@@ -7,13 +7,13 @@
    "trained_on_tokens": 500000,
    "in_sample_full_corpus": {
     "n_tokens": 500000,
-    "mse": 0.00788,
-    "fve": 0.9865,
-    "dead_features": 3309,
-    "dead_rate": 0.202,
+    "mse": 0.006169,
+    "fve": 0.9895,
+    "dead_features": 3344,
+    "dead_rate": 0.2041,
     "mean_l0": 128.0,
-    "features_firing_over_50pct_of_tokens": 34,
-    "top200_share_of_activation_mass": 0.4034
+    "features_firing_over_50pct_of_tokens": 25,
+    "top200_share_of_activation_mass": 0.3085
    },
    "held_out": null,
    "held_out_note": "No held-out data: the SAE was trained on the entire 500k-token dump (204 epochs), so every reported figure is in-sample."
@@ -38,31 +38,19 @@
   "mistral": {
    "model": "Mistral-7B-v0.3 (4-bit)",
    "layer": 16,
-   "trained_on_tokens": 50000,
+   "trained_on_tokens": 500000,
    "in_sample_full_corpus": {
     "n_tokens": 500000,
-    "mse": 0.004153,
-    "fve": 0.9273,
-    "dead_features": 24,
-    "dead_rate": 0.0015,
+    "mse": 0.001949,
+    "fve": 0.9659,
+    "dead_features": 2346,
+    "dead_rate": 0.1432,
     "mean_l0": 128.0,
-    "features_firing_over_50pct_of_tokens": 34,
-    "top200_share_of_activation_mass": 0.5721
+    "features_firing_over_50pct_of_tokens": 16,
+    "top200_share_of_activation_mass": 0.2901
    },
-   "held_out": {
-    "n_tokens": 450000,
-    "mse": 0.004264,
-    "fve": 0.9252,
-    "dead_features": 26,
-    "dead_rate": 0.0016,
-    "mean_l0": 128.0,
-    "features_firing_over_50pct_of_tokens": 36,
-    "top200_share_of_activation_mass": 0.5738,
-    "token_range": [
-     50000,
-     500000
-    ]
-   }
+   "held_out": null,
+   "held_out_note": "No held-out data: the SAE was trained on the entire 500k-token dump (204 epochs), so every reported figure is in-sample."
   }
  },
  "safety_classifier": {

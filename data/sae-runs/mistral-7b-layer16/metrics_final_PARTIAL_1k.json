@@ -6,13 +6,13 @@
   "k": 128,
   "expansion": 4.0,
   "peak_lr": 0.0001,
-  "steps": 50000,
+  "steps": 1000,
   "batch": 2048,
-  "warmup": 500,
+  "warmup": 100,
   "seed": 42,
-  "n_source_tokens": 500000,
-  "total_tokens": 102400000,
-  "epochs_equiv": 204.8,
-  "training_elapsed_s": 0.4,
-  "training_elapsed_min": 0.0
+  "n_source_tokens": 50000,
+  "total_tokens": 2048000,
+  "epochs_equiv": 41.0,
+  "training_elapsed_s": 1241.4,
+  "training_elapsed_min": 20.7
 }

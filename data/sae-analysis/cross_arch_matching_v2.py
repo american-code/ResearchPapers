@@ -68,7 +68,7 @@ SEED              = 42
 
 MODELS = {
     "llama":   {"acts": ACTS_DIR / "llama-3b-layer14",
-                "ckpt": SAE_DIR / "llama-3b-layer14/checkpoint_step_010000.npz",
+                "ckpt": SAE_DIR / "llama-3b-layer14/checkpoint_final.npz",
                 "d_in": 3072},
     "qwen":    {"acts": ACTS_DIR / "qwen-3b-layer18",
                 "ckpt": SAE_DIR / "qwen-3b-layer18/checkpoint_final.npz",

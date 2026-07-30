@@ -30,7 +30,7 @@ OUT = WS / "data/sae-analysis/corrections.json"
 SEED = 42
 
 SAES = {
-    "llama": {"ckpt": "data/sae-runs/llama-3b-layer14/checkpoint_step_010000.npz",
+    "llama": {"ckpt": "data/sae-runs/llama-3b-layer14/checkpoint_final.npz",
               "acts": "data/activations/llama-3b-layer14/activations.npy",
               "d_in": 3072, "k": 128, "trained_on_tokens": 500_000,
               "layer": 14, "model": "Llama-3.2-3B"},
@@ -40,7 +40,7 @@ SAES = {
              "layer": 18, "model": "Qwen2.5-3B"},
     "mistral": {"ckpt": "data/sae-runs/mistral-7b-layer16/checkpoint_final.npz",
                 "acts": "data/activations/mistral-7b-layer16/activations.npy",
-                "d_in": 4096, "k": 128, "trained_on_tokens": 50_000,
+                "d_in": 4096, "k": 128, "trained_on_tokens": 500_000,
                 "layer": 16, "model": "Mistral-7B-v0.3 (4-bit)"},
 }
 N_EVAL = 500_000

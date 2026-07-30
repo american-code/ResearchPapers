@@ -1,5 +1,5 @@
-Loading activations: data/activations/mistral-7b-layer16/activations_50k.npy
-  shape     : (50000, 4096)  dtype=float16
+Loading activations: data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
   model     : mlx-community/Mistral-7B-v0.3-4bit
   layer     : 16
 
@@ -12,31 +12,1013 @@ Config:
   "k": 128,
   "expansion": 4.0,
   "peak_lr": 0.0001,
-  "steps": 1000,
+  "steps": 50000,
   "batch": 2048,
-  "warmup": 100,
+  "warmup": 500,
   "seed": 42,
-  "n_source_tokens": 50000,
-  "total_tokens": 2048000,
-  "epochs_equiv": 41.0
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
 }
 
-Training  steps=1,000  dict=16384  K=128  lr=0.0001  batch=2048
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048
 
-step      1/1,000  loss=0.0622  L0=128.0  FVE=-0.088  dead=  748  lr=1.00e-06       675 tok/s
-step    100/1,000  loss=0.0464  L0=128.0  FVE=0.601  dead=  522  lr=1.00e-04     1,470 tok/s
-step    200/1,000  loss=0.0089  L0=128.0  FVE=0.829  dead=  468  lr=9.72e-05     1,512 tok/s
-step    300/1,000  loss=0.0042  L0=128.0  FVE=0.944  dead=  440  lr=8.90e-05     1,664 tok/s
-step    400/1,000  loss=0.0037  L0=128.0  FVE=0.936  dead=  418  lr=7.64e-05     1,685 tok/s
-step    500/1,000  loss=0.0035  L0=128.0  FVE=0.922  dead=  404  lr=6.09e-05     1,717 tok/s
-  [saved checkpoint_step_000500.npz]
-step    600/1,000  loss=0.0033  L0=128.0  FVE=0.896  dead=  384  lr=4.44e-05     1,662 tok/s
-step    700/1,000  loss=0.0033  L0=128.0  FVE=0.944  dead=  376  lr=2.89e-05     1,581 tok/s
-step    800/1,000  loss=0.0032  L0=128.0  FVE=0.930  dead=  361  lr=1.62e-05     1,587 tok/s
-step    900/1,000  loss=0.0032  L0=128.0  FVE=0.944  dead=  346  lr=7.92e-06     1,620 tok/s
-step  1,000/1,000  loss=0.0032  L0=128.0  FVE=0.965  dead=  339  lr=5.00e-06     1,654 tok/s
-  [saved checkpoint_step_001000.npz]
+step      1/50,000  loss=0.0486  L0=128.0  FVE=-0.088  dead=  629  lr=2.00e-07       671 tok/s
+step    200/50,000  loss=0.0504  L0=128.0  FVE=0.345  dead=  325  lr=4.00e-05     4,162 tok/s
+step    400/50,000  loss=0.0185  L0=128.0  FVE=0.887  dead=  309  lr=8.00e-05     4,212 tok/s
+step    600/50,000  loss=0.0050  L0=128.0  FVE=0.937  dead=  307  lr=1.00e-04     4,230 tok/s
+step    800/50,000  loss=0.0043  L0=128.0  FVE=0.950  dead=  305  lr=1.00e-04     4,242 tok/s
+step  1,000/50,000  loss=0.0041  L0=128.0  FVE=0.915  dead=  302  lr=1.00e-04     4,248 tok/s
+step  1,200/50,000  loss=0.0039  L0=128.0  FVE=0.878  dead=  301  lr=1.00e-04     4,251 tok/s
+step  1,400/50,000  loss=0.0038  L0=128.0  FVE=0.935  dead=  297  lr=9.99e-05     4,252 tok/s
+step  1,600/50,000  loss=0.0037  L0=128.0  FVE=0.891  dead=  295  lr=9.99e-05     4,252 tok/s
+step  1,800/50,000  loss=0.0037  L0=128.0  FVE=0.920  dead=  292  lr=9.98e-05     4,255 tok/s
+step  2,000/50,000  loss=0.0037  L0=128.0  FVE=0.933  dead=  292  lr=9.98e-05     4,257 tok/s
+step  2,200/50,000  loss=0.0036  L0=128.0  FVE=0.947  dead=  292  lr=9.97e-05     4,257 tok/s
+step  2,400/50,000  loss=0.0036  L0=128.0  FVE=0.938  dead=  291  lr=9.97e-05     4,258 tok/s
+step  2,600/50,000  loss=0.0035  L0=128.0  FVE=0.966  dead=  289  lr=9.96e-05     4,259 tok/s
+step  2,800/50,000  loss=0.0035  L0=128.0  FVE=0.923  dead=  287  lr=9.95e-05     4,260 tok/s
+step  3,000/50,000  loss=0.0035  L0=128.0  FVE=0.896  dead=  285  lr=9.94e-05     4,261 tok/s
+step  3,200/50,000  loss=0.0035  L0=128.0  FVE=0.940  dead=  284  lr=9.93e-05     4,262 tok/s
+step  3,400/50,000  loss=0.0034  L0=128.0  FVE=0.958  dead=  284  lr=9.92e-05     4,262 tok/s
+step  3,600/50,000  loss=0.0034  L0=128.0  FVE=0.923  dead=  281  lr=9.91e-05     4,262 tok/s
+step  3,800/50,000  loss=0.0034  L0=128.0  FVE=0.976  dead=  281  lr=9.90e-05     4,262 tok/s
+step  4,000/50,000  loss=0.0034  L0=128.0  FVE=0.958  dead=  281  lr=9.88e-05     4,263 tok/s
+step  4,200/50,000  loss=0.0033  L0=128.0  FVE=0.830  dead=  281  lr=9.87e-05     4,264 tok/s
+step  4,400/50,000  loss=0.0033  L0=128.0  FVE=0.964  dead=  280  lr=9.86e-05     4,264 tok/s
+step  4,600/50,000  loss=0.0033  L0=128.0  FVE=0.902  dead=  278  lr=9.84e-05     4,264 tok/s
+step  4,800/50,000  loss=0.0033  L0=128.0  FVE=0.969  dead=  277  lr=9.82e-05     4,265 tok/s
+step  5,000/50,000  loss=0.0032  L0=128.0  FVE=0.966  dead=3,500  lr=9.81e-05     4,265 tok/s
+step  5,200/50,000  loss=0.0032  L0=128.0  FVE=0.615  dead=11,156  lr=9.79e-05     4,265 tok/s
+step  5,400/50,000  loss=0.0032  L0=128.0  FVE=0.955  dead=12,022  lr=9.77e-05     4,266 tok/s
+step  5,600/50,000  loss=0.0032  L0=128.0  FVE=0.844  dead=12,071  lr=9.75e-05     4,266 tok/s
+step  5,800/50,000  loss=0.0032  L0=128.0  FVE=0.966  dead=12,082  lr=9.73e-05     4,266 tok/s
+step  6,000/50,000  loss=0.0031  L0=128.0  FVE=0.932  dead=12,041  lr=9.71e-05     4,266 tok/s
+step  6,200/50,000  loss=0.0031  L0=128.0  FVE=0.919  dead=12,041  lr=9.69e-05     4,266 tok/s
+step  6,400/50,000  loss=0.0031  L0=128.0  FVE=0.946  dead=12,021  lr=9.67e-05     4,266 tok/s
+step  6,600/50,000  loss=0.0031  L0=128.0  FVE=0.851  dead=11,957  lr=9.65e-05     4,266 tok/s
+step  6,800/50,000  loss=0.0030  L0=128.0  FVE=0.908  dead=11,854  lr=9.63e-05     4,267 tok/s
+step  7,000/50,000  loss=0.0030  L0=128.0  FVE=0.905  dead=11,757  lr=9.60e-05     4,267 tok/s
+step  7,200/50,000  loss=0.0030  L0=128.0  FVE=0.957  dead=11,644  lr=9.58e-05     4,267 tok/s
+step  7,400/50,000  loss=0.0030  L0=128.0  FVE=0.857  dead=11,585  lr=9.55e-05     4,267 tok/s
+step  7,600/50,000  loss=0.0030  L0=128.0  FVE=0.935  dead=11,531  lr=9.53e-05     4,267 tok/s
+step  7,800/50,000  loss=0.0029  L0=128.0  FVE=0.850  dead=11,473  lr=9.50e-05     4,267 tok/s
+step  8,000/50,000  loss=0.0029  L0=128.0  FVE=0.935  dead=11,391  lr=9.47e-05     4,267 tok/s
+step  8,200/50,000  loss=0.0029  L0=128.0  FVE=0.956  dead=11,307  lr=9.44e-05     4,267 tok/s
+step  8,400/50,000  loss=0.0029  L0=128.0  FVE=0.915  dead=11,210  lr=9.42e-05     4,267 tok/s
+step  8,600/50,000  loss=0.0029  L0=128.0  FVE=0.936  dead=11,105  lr=9.39e-05     4,267 tok/s
+step  8,800/50,000  loss=0.0028  L0=128.0  FVE=0.915  dead=11,018  lr=9.36e-05     4,267 tok/s
+step  9,000/50,000  loss=0.0028  L0=128.0  FVE=0.913  dead=10,926  lr=9.33e-05     4,267 tok/s
+step  9,200/50,000  loss=0.0028  L0=128.0  FVE=0.965  dead=10,832  lr=9.29e-05     4,267 tok/s
+step  9,400/50,000  loss=0.0028  L0=128.0  FVE=0.960  dead=10,772  lr=9.26e-05     4,268 tok/s
+step  9,600/50,000  loss=0.0028  L0=128.0  FVE=0.667  dead=10,711  lr=9.23e-05     4,268 tok/s
+step  9,800/50,000  loss=0.0027  L0=128.0  FVE=0.866  dead=10,635  lr=9.20e-05     4,268 tok/s
+step 10,000/50,000  loss=0.0027  L0=128.0  FVE=0.961  dead=10,560  lr=9.16e-05     4,268 tok/s
+  [saved checkpoint_step_010000.npz]
+step 10,200/50,000  loss=0.0027  L0=128.0  FVE=0.967  dead=10,474  lr=9.13e-05     4,268 tok/s
+step 10,400/50,000  loss=0.0027  L0=128.0  FVE=0.952  dead=10,421  lr=9.09e-05     4,268 tok/s
+step 10,600/50,000  loss=0.0027  L0=128.0  FVE=0.976  dead=10,334  lr=9.06e-05     4,268 tok/s
+step 10,800/50,000  loss=0.0027  L0=128.0  FVE=0.971  dead=10,261  lr=9.02e-05     4,268 tok/s
+step 11,000/50,000  loss=0.0027  L0=128.0  FVE=0.953  dead=10,203  lr=8.98e-05     4,268 tok/s
+step 11,200/50,000  loss=0.0026  L0=128.0  FVE=0.862  dead=10,120  lr=8.95e-05     4,268 tok/s
+step 11,400/50,000  loss=0.0026  L0=128.0  FVE=0.921  dead=10,044  lr=8.91e-05     4,268 tok/s
+step 11,600/50,000  loss=0.0026  L0=128.0  FVE=0.967  dead=9,958  lr=8.87e-05     4,268 tok/s
+step 11,800/50,000  loss=0.0026  L0=128.0  FVE=0.973  dead=9,906  lr=8.83e-05     4,269 tok/s
+step 12,000/50,000  loss=0.0026  L0=128.0  FVE=0.955  dead=9,836  lr=8.79e-05     4,269 tok/s
+step 12,200/50,000  loss=0.0026  L0=128.0  FVE=0.954  dead=9,765  lr=8.75e-05     4,269 tok/s
+step 12,400/50,000  loss=0.0026  L0=128.0  FVE=0.876  dead=9,685  lr=8.71e-05     4,269 tok/s
+step 12,600/50,000  loss=0.0025  L0=128.0  FVE=0.969  dead=9,587  lr=8.67e-05     4,270 tok/s
+step 12,800/50,000  loss=0.0025  L0=128.0  FVE=0.955  dead=9,497  lr=8.62e-05     4,270 tok/s
+step 13,000/50,000  loss=0.0025  L0=128.0  FVE=0.969  dead=9,451  lr=8.58e-05     4,270 tok/s
+step 13,200/50,000  loss=0.0025  L0=128.0  FVE=0.969  dead=9,392  lr=8.54e-05     4,270 tok/s
+step 13,400/50,000  loss=0.0025  L0=128.0  FVE=0.925  dead=9,313  lr=8.50e-05     4,270 tok/s
+step 13,600/50,000  loss=0.0025  L0=128.0  FVE=0.955  dead=9,252  lr=8.45e-05     4,271 tok/s
+step 13,800/50,000  loss=0.0025  L0=128.0  FVE=0.964  dead=9,149  lr=8.41e-05     4,271 tok/s
+step 14,000/50,000  loss=0.0025  L0=128.0  FVE=0.957  dead=9,111  lr=8.36e-05     4,271 tok/s
+step 14,200/50,000  loss=0.0025  L0=128.0  FVE=0.969  dead=9,055  lr=8.32e-05     4,271 tok/s
+step 14,400/50,000  loss=0.0025  L0=128.0  FVE=0.883  dead=9,011  lr=8.27e-05     4,271 tok/s
+step 14,600/50,000  loss=0.0024  L0=128.0  FVE=0.970  dead=8,914  lr=8.22e-05     4,272 tok/s
+step 14,800/50,000  loss=0.0024  L0=128.0  FVE=0.969  dead=8,857  lr=8.17e-05     4,272 tok/s
+step 15,000/50,000  loss=0.0024  L0=128.0  FVE=0.885  dead=8,821  lr=8.13e-05     4,272 tok/s
+step 15,200/50,000  loss=0.0024  L0=128.0  FVE=0.977  dead=8,774  lr=8.08e-05     4,272 tok/s
+step 15,400/50,000  loss=0.0024  L0=128.0  FVE=0.975  dead=8,713  lr=8.03e-05     4,272 tok/s
+step 15,600/50,000  loss=0.0024  L0=128.0  FVE=0.714  dead=8,626  lr=7.98e-05     4,272 tok/s
+step 15,800/50,000  loss=0.0024  L0=128.0  FVE=0.977  dead=8,535  lr=7.93e-05     4,272 tok/s
+step 16,000/50,000  loss=0.0024  L0=128.0  FVE=0.978  dead=8,446  lr=7.88e-05     4,272 tok/s
+step 16,200/50,000  loss=0.0024  L0=128.0  FVE=0.978  dead=8,402  lr=7.83e-05     4,273 tok/s
+step 16,400/50,000  loss=0.0024  L0=128.0  FVE=0.929  dead=8,354  lr=7.78e-05     4,273 tok/s
+step 16,600/50,000  loss=0.0023  L0=128.0  FVE=0.967  dead=8,286  lr=7.73e-05     4,273 tok/s
+step 16,800/50,000  loss=0.0023  L0=128.0  FVE=0.960  dead=8,233  lr=7.68e-05     4,273 tok/s
+step 17,000/50,000  loss=0.0023  L0=128.0  FVE=0.882  dead=8,188  lr=7.63e-05     4,273 tok/s
+step 17,200/50,000  loss=0.0023  L0=128.0  FVE=0.967  dead=8,136  lr=7.57e-05     4,273 tok/s
+step 17,400/50,000  loss=0.0023  L0=128.0  FVE=0.949  dead=8,094  lr=7.52e-05     4,274 tok/s
+step 17,600/50,000  loss=0.0023  L0=128.0  FVE=0.971  dead=8,043  lr=7.47e-05     4,274 tok/s
+step 17,800/50,000  loss=0.0023  L0=128.0  FVE=0.960  dead=8,000  lr=7.41e-05     4,274 tok/s
+step 18,000/50,000  loss=0.0023  L0=128.0  FVE=0.967  dead=7,941  lr=7.36e-05     4,274 tok/s
+step 18,200/50,000  loss=0.0023  L0=128.0  FVE=0.949  dead=7,881  lr=7.31e-05     4,274 tok/s
+step 18,400/50,000  loss=0.0023  L0=128.0  FVE=0.960  dead=7,835  lr=7.25e-05     4,274 tok/s
+step 18,600/50,000  loss=0.0023  L0=128.0  FVE=0.961  dead=7,793  lr=7.20e-05     4,274 tok/s
+step 18,800/50,000  loss=0.0023  L0=128.0  FVE=0.972  dead=7,771  lr=7.14e-05     4,274 tok/s
+step 19,000/50,000  loss=0.0023  L0=128.0  FVE=0.961  dead=7,733  lr=7.09e-05     4,274 tok/s
+step 19,200/50,000  loss=0.0022  L0=128.0  FVE=0.960  dead=7,693  lr=7.03e-05     4,274 tok/s
+step 19,400/50,000  loss=0.0022  L0=128.0  FVE=0.950  dead=7,625  lr=6.97e-05     4,274 tok/s
+step 19,600/50,000  loss=0.0022  L0=128.0  FVE=0.931  dead=7,597  lr=6.92e-05     4,274 tok/s
+step 19,800/50,000  loss=0.0022  L0=128.0  FVE=0.950  dead=7,557  lr=6.86e-05     4,274 tok/s
+step 20,000/50,000  loss=0.0022  L0=128.0  FVE=0.976  dead=7,495  lr=6.80e-05     4,274 tok/s
+  [saved checkpoint_step_020000.npz]
+step 20,200/50,000  loss=0.0022  L0=128.0  FVE=0.950  dead=7,440  lr=6.75e-05     4,273 tok/s
+step 20,400/50,000  loss=0.0022  L0=128.0  FVE=0.891  dead=7,417  lr=6.69e-05     4,273 tok/s
+step 20,600/50,000  loss=0.0022  L0=128.0  FVE=0.963  dead=7,386  lr=6.63e-05     4,273 tok/s
+step 20,800/50,000  loss=0.0022  L0=128.0  FVE=0.962  dead=7,358  lr=6.57e-05     4,273 tok/s
+step 21,000/50,000  loss=0.0022  L0=128.0  FVE=0.962  dead=7,350  lr=6.52e-05     4,273 tok/s
+step 21,200/50,000  loss=0.0022  L0=128.0  FVE=0.961  dead=7,297  lr=6.46e-05     4,273 tok/s
+step 21,400/50,000  loss=0.0022  L0=128.0  FVE=0.958  dead=7,251  lr=6.40e-05     4,273 tok/s
+step 21,600/50,000  loss=0.0022  L0=128.0  FVE=0.962  dead=7,226  lr=6.34e-05     4,273 tok/s
+step 21,800/50,000  loss=0.0022  L0=128.0  FVE=0.894  dead=7,202  lr=6.28e-05     4,273 tok/s
+step 22,000/50,000  loss=0.0022  L0=128.0  FVE=0.935  dead=7,171  lr=6.22e-05     4,273 tok/s
+step 22,200/50,000  loss=0.0022  L0=128.0  FVE=0.977  dead=7,122  lr=6.16e-05     4,273 tok/s
+step 22,400/50,000  loss=0.0022  L0=128.0  FVE=0.962  dead=7,054  lr=6.10e-05     4,273 tok/s
+step 22,600/50,000  loss=0.0022  L0=128.0  FVE=0.979  dead=7,029  lr=6.05e-05     4,273 tok/s
+step 22,800/50,000  loss=0.0022  L0=128.0  FVE=0.953  dead=7,008  lr=5.99e-05     4,273 tok/s
+step 23,000/50,000  loss=0.0021  L0=128.0  FVE=0.969  dead=6,970  lr=5.93e-05     4,273 tok/s
+step 23,200/50,000  loss=0.0021  L0=128.0  FVE=0.933  dead=6,954  lr=5.87e-05     4,273 tok/s
+step 23,400/50,000  loss=0.0021  L0=128.0  FVE=0.951  dead=6,940  lr=5.81e-05     4,274 tok/s
+step 23,600/50,000  loss=0.0021  L0=128.0  FVE=0.974  dead=6,890  lr=5.75e-05     4,274 tok/s
+step 23,800/50,000  loss=0.0021  L0=128.0  FVE=0.952  dead=6,846  lr=5.69e-05     4,274 tok/s
+step 24,000/50,000  loss=0.0021  L0=128.0  FVE=0.953  dead=6,818  lr=5.63e-05     4,274 tok/s
+step 24,200/50,000  loss=0.0021  L0=128.0  FVE=0.977  dead=6,795  lr=5.57e-05     4,274 tok/s
+step 24,400/50,000  loss=0.0021  L0=128.0  FVE=0.952  dead=6,773  lr=5.51e-05     4,274 tok/s
+step 24,600/50,000  loss=0.0021  L0=128.0  FVE=0.987  dead=6,746  lr=5.45e-05     4,274 tok/s
+step 24,800/50,000  loss=0.0021  L0=128.0  FVE=0.969  dead=6,712  lr=5.39e-05     4,274 tok/s
+step 25,000/50,000  loss=0.0021  L0=128.0  FVE=0.954  dead=6,667  lr=5.33e-05     4,274 tok/s
+step 25,200/50,000  loss=0.0021  L0=128.0  FVE=0.980  dead=6,635  lr=5.27e-05     4,275 tok/s
+step 25,400/50,000  loss=0.0021  L0=128.0  FVE=0.951  dead=6,622  lr=5.21e-05     4,275 tok/s
+step 25,600/50,000  loss=0.0021  L0=128.0  FVE=0.970  dead=6,593  lr=5.14e-05     4,275 tok/s
+step 25,800/50,000  loss=0.0021  L0=128.0  FVE=0.952  dead=6,560  lr=5.08e-05     4,275 tok/s
+step 26,000/50,000  loss=0.0021  L0=128.0  FVE=0.974  dead=6,529  lr=5.02e-05     4,275 tok/s
+step 26,200/50,000  loss=0.0021  L0=128.0  FVE=0.962  dead=6,518  lr=4.96e-05     4,275 tok/s
+step 26,400/50,000  loss=0.0021  L0=128.0  FVE=0.964  dead=6,500  lr=4.90e-05     4,275 tok/s
+step 26,600/50,000  loss=0.0021  L0=128.0  FVE=0.964  dead=6,481  lr=4.84e-05     4,275 tok/s
+step 26,800/50,000  loss=0.0021  L0=128.0  FVE=0.962  dead=6,447  lr=4.78e-05     4,275 tok/s
+step 27,000/50,000  loss=0.0021  L0=128.0  FVE=0.963  dead=6,421  lr=4.72e-05     4,275 tok/s
+step 27,200/50,000  loss=0.0021  L0=128.0  FVE=0.955  dead=6,404  lr=4.66e-05     4,275 tok/s
+step 27,400/50,000  loss=0.0021  L0=128.0  FVE=0.975  dead=6,413  lr=4.60e-05     4,275 tok/s
+step 27,600/50,000  loss=0.0021  L0=128.0  FVE=0.970  dead=6,392  lr=4.54e-05     4,275 tok/s
+step 27,800/50,000  loss=0.0021  L0=128.0  FVE=0.975  dead=6,354  lr=4.48e-05     4,275 tok/s
+step 28,000/50,000  loss=0.0021  L0=128.0  FVE=0.962  dead=6,339  lr=4.43e-05     4,275 tok/s
+step 28,200/50,000  loss=0.0021  L0=128.0  FVE=0.978  dead=6,297  lr=4.37e-05     4,275 tok/s
+step 28,400/50,000  loss=0.0021  L0=128.0  FVE=0.955  dead=6,260  lr=4.31e-05     4,276 tok/s
+step 28,600/50,000  loss=0.0021  L0=128.0  FVE=0.974  dead=6,247  lr=4.25e-05     4,276 tok/s
+step 28,800/50,000  loss=0.0021  L0=128.0  FVE=0.975  dead=6,235  lr=4.19e-05     4,276 tok/s
+step 29,000/50,000  loss=0.0020  L0=128.0  FVE=0.938  dead=6,219  lr=4.13e-05     4,276 tok/s
+step 29,200/50,000  loss=0.0020  L0=128.0  FVE=0.955  dead=6,193  lr=4.07e-05     4,276 tok/s
+step 29,400/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=6,178  lr=4.01e-05     4,276 tok/s
+step 29,600/50,000  loss=0.0020  L0=128.0  FVE=0.975  dead=6,160  lr=3.96e-05     4,276 tok/s
+step 29,800/50,000  loss=0.0020  L0=128.0  FVE=0.955  dead=6,142  lr=3.90e-05     4,276 tok/s
+step 30,000/50,000  loss=0.0020  L0=128.0  FVE=0.970  dead=6,128  lr=3.84e-05     4,276 tok/s
+  [saved checkpoint_step_030000.npz]
+step 30,200/50,000  loss=0.0020  L0=128.0  FVE=0.964  dead=6,119  lr=3.78e-05     4,276 tok/s
+step 30,400/50,000  loss=0.0020  L0=128.0  FVE=0.978  dead=6,095  lr=3.73e-05     4,276 tok/s
+step 30,600/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=6,099  lr=3.67e-05     4,276 tok/s
+step 30,800/50,000  loss=0.0020  L0=128.0  FVE=0.901  dead=6,101  lr=3.61e-05     4,276 tok/s
+step 31,000/50,000  loss=0.0020  L0=128.0  FVE=0.902  dead=6,108  lr=3.56e-05     4,276 tok/s
+step 31,200/50,000  loss=0.0020  L0=128.0  FVE=0.970  dead=6,081  lr=3.50e-05     4,276 tok/s
+step 31,400/50,000  loss=0.0020  L0=128.0  FVE=0.938  dead=6,054  lr=3.44e-05     4,276 tok/s
+step 31,600/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=6,035  lr=3.39e-05     4,276 tok/s
+step 31,800/50,000  loss=0.0020  L0=128.0  FVE=0.975  dead=6,030  lr=3.33e-05     4,276 tok/s
+step 32,000/50,000  loss=0.0020  L0=128.0  FVE=0.936  dead=6,024  lr=3.28e-05     4,277 tok/s
+step 32,200/50,000  loss=0.0020  L0=128.0  FVE=0.955  dead=5,987  lr=3.22e-05     4,277 tok/s
+step 32,400/50,000  loss=0.0020  L0=128.0  FVE=0.978  dead=5,968  lr=3.17e-05     4,276 tok/s
+step 32,600/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,951  lr=3.11e-05     4,277 tok/s
+step 32,800/50,000  loss=0.0020  L0=128.0  FVE=0.978  dead=5,956  lr=3.06e-05     4,276 tok/s
+step 33,000/50,000  loss=0.0020  L0=128.0  FVE=0.955  dead=5,941  lr=3.01e-05     4,276 tok/s
+step 33,200/50,000  loss=0.0020  L0=128.0  FVE=0.904  dead=5,933  lr=2.95e-05     4,276 tok/s
+step 33,400/50,000  loss=0.0020  L0=128.0  FVE=0.983  dead=5,915  lr=2.90e-05     4,276 tok/s
+step 33,600/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,888  lr=2.85e-05     4,276 tok/s
+step 33,800/50,000  loss=0.0020  L0=128.0  FVE=0.902  dead=5,880  lr=2.80e-05     4,276 tok/s
+step 34,000/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,866  lr=2.75e-05     4,277 tok/s
+step 34,200/50,000  loss=0.0020  L0=128.0  FVE=0.938  dead=5,850  lr=2.69e-05     4,277 tok/s
+step 34,400/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,808  lr=2.64e-05     4,277 tok/s
+step 34,600/50,000  loss=0.0020  L0=128.0  FVE=0.981  dead=5,780  lr=2.59e-05     4,277 tok/s
+step 34,800/50,000  loss=0.0020  L0=128.0  FVE=0.937  dead=5,771  lr=2.54e-05     4,277 tok/s
+step 35,000/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,745  lr=2.49e-05     4,277 tok/s
+step 35,200/50,000  loss=0.0020  L0=128.0  FVE=0.936  dead=5,721  lr=2.45e-05     4,277 tok/s
+step 35,400/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,713  lr=2.40e-05     4,277 tok/s
+step 35,600/50,000  loss=0.0020  L0=128.0  FVE=0.981  dead=5,690  lr=2.35e-05     4,277 tok/s
+step 35,800/50,000  loss=0.0020  L0=128.0  FVE=0.978  dead=5,678  lr=2.30e-05     4,277 tok/s
+step 36,000/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,658  lr=2.26e-05     4,277 tok/s
+step 36,200/50,000  loss=0.0020  L0=128.0  FVE=0.981  dead=5,641  lr=2.21e-05     4,277 tok/s
+step 36,400/50,000  loss=0.0020  L0=128.0  FVE=0.952  dead=5,656  lr=2.16e-05     4,277 tok/s
+step 36,600/50,000  loss=0.0020  L0=128.0  FVE=0.759  dead=5,646  lr=2.12e-05     4,277 tok/s
+step 36,800/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,632  lr=2.07e-05     4,277 tok/s
+step 37,000/50,000  loss=0.0020  L0=128.0  FVE=0.970  dead=5,626  lr=2.03e-05     4,277 tok/s
+step 37,200/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,635  lr=1.98e-05     4,277 tok/s
+step 37,400/50,000  loss=0.0020  L0=128.0  FVE=0.975  dead=5,629  lr=1.94e-05     4,277 tok/s
+step 37,600/50,000  loss=0.0020  L0=128.0  FVE=0.979  dead=5,632  lr=1.90e-05     4,277 tok/s
+step 37,800/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,627  lr=1.85e-05     4,277 tok/s
+step 38,000/50,000  loss=0.0020  L0=128.0  FVE=0.972  dead=5,606  lr=1.81e-05     4,277 tok/s
+step 38,200/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,598  lr=1.77e-05     4,277 tok/s
+step 38,400/50,000  loss=0.0020  L0=128.0  FVE=0.939  dead=5,596  lr=1.73e-05     4,277 tok/s
+step 38,600/50,000  loss=0.0020  L0=128.0  FVE=0.904  dead=5,593  lr=1.69e-05     4,277 tok/s
+step 38,800/50,000  loss=0.0020  L0=128.0  FVE=0.978  dead=5,605  lr=1.65e-05     4,277 tok/s
+step 39,000/50,000  loss=0.0020  L0=128.0  FVE=0.940  dead=5,607  lr=1.61e-05     4,277 tok/s
+step 39,200/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,591  lr=1.57e-05     4,277 tok/s
+step 39,400/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,581  lr=1.54e-05     4,277 tok/s
+step 39,600/50,000  loss=0.0020  L0=128.0  FVE=0.941  dead=5,572  lr=1.50e-05     4,277 tok/s
+step 39,800/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,556  lr=1.46e-05     4,277 tok/s
+step 40,000/50,000  loss=0.0020  L0=128.0  FVE=0.981  dead=5,536  lr=1.43e-05     4,277 tok/s
+  [saved checkpoint_step_040000.npz]
+step 40,200/50,000  loss=0.0020  L0=128.0  FVE=0.904  dead=5,521  lr=1.39e-05     4,277 tok/s
+step 40,400/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,513  lr=1.35e-05     4,277 tok/s
+step 40,600/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,506  lr=1.32e-05     4,277 tok/s
+step 40,800/50,000  loss=0.0020  L0=128.0  FVE=0.970  dead=5,504  lr=1.29e-05     4,277 tok/s
+step 41,000/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,501  lr=1.25e-05     4,277 tok/s
+step 41,200/50,000  loss=0.0020  L0=128.0  FVE=0.964  dead=5,499  lr=1.22e-05     4,277 tok/s
+step 41,400/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,474  lr=1.19e-05     4,277 tok/s
+step 41,600/50,000  loss=0.0020  L0=128.0  FVE=0.941  dead=5,490  lr=1.16e-05     4,277 tok/s
+step 41,800/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,484  lr=1.13e-05     4,277 tok/s
+step 42,000/50,000  loss=0.0020  L0=128.0  FVE=0.966  dead=5,465  lr=1.10e-05     4,277 tok/s
+step 42,200/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,457  lr=1.07e-05     4,277 tok/s
+step 42,400/50,000  loss=0.0020  L0=128.0  FVE=0.966  dead=5,456  lr=1.04e-05     4,277 tok/s
+step 42,600/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,439  lr=1.01e-05     4,277 tok/s
+step 42,800/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,435  lr=9.87e-06     4,278 tok/s
+step 43,000/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,424  lr=9.61e-06     4,278 tok/s
+step 43,200/50,000  loss=0.0020  L0=128.0  FVE=0.957  dead=5,420  lr=9.36e-06     4,278 tok/s
+step 43,400/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,418  lr=9.11e-06     4,278 tok/s
+step 43,600/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,401  lr=8.87e-06     4,278 tok/s
+step 43,800/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,390  lr=8.63e-06     4,278 tok/s
+step 44,000/50,000  loss=0.0020  L0=128.0  FVE=0.906  dead=5,387  lr=8.40e-06     4,278 tok/s
+step 44,200/50,000  loss=0.0020  L0=128.0  FVE=0.975  dead=5,389  lr=8.18e-06     4,278 tok/s
+step 44,400/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,389  lr=7.97e-06     4,278 tok/s
+step 44,600/50,000  loss=0.0020  L0=128.0  FVE=0.939  dead=5,382  lr=7.76e-06     4,278 tok/s
+step 44,800/50,000  loss=0.0020  L0=128.0  FVE=0.979  dead=5,356  lr=7.56e-06     4,278 tok/s
+step 45,000/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,347  lr=7.37e-06     4,278 tok/s
+step 45,200/50,000  loss=0.0020  L0=128.0  FVE=0.956  dead=5,354  lr=7.19e-06     4,278 tok/s
+step 45,400/50,000  loss=0.0020  L0=128.0  FVE=0.966  dead=5,352  lr=7.01e-06     4,278 tok/s
+step 45,600/50,000  loss=0.0020  L0=128.0  FVE=0.972  dead=5,346  lr=6.84e-06     4,278 tok/s
+step 45,800/50,000  loss=0.0020  L0=128.0  FVE=0.972  dead=5,339  lr=6.68e-06     4,278 tok/s
+step 46,000/50,000  loss=0.0020  L0=128.0  FVE=0.979  dead=5,326  lr=6.52e-06     4,278 tok/s
+step 46,200/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,323  lr=6.38e-06     4,278 tok/s
+step 46,400/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,335  lr=6.24e-06     4,278 tok/s
+step 46,600/50,000  loss=0.0020  L0=128.0  FVE=0.966  dead=5,324  lr=6.10e-06     4,278 tok/s
+step 46,800/50,000  loss=0.0020  L0=128.0  FVE=0.972  dead=5,322  lr=5.98e-06     4,278 tok/s
+step 47,000/50,000  loss=0.0020  L0=128.0  FVE=0.966  dead=5,315  lr=5.86e-06     4,278 tok/s
+step 47,200/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,311  lr=5.75e-06     4,278 tok/s
+step 47,400/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,306  lr=5.65e-06     4,278 tok/s
+step 47,600/50,000  loss=0.0020  L0=128.0  FVE=0.972  dead=5,296  lr=5.55e-06     4,278 tok/s
+step 47,800/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,286  lr=5.46e-06     4,278 tok/s
+step 48,000/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,302  lr=5.38e-06     4,278 tok/s
+step 48,200/50,000  loss=0.0020  L0=128.0  FVE=0.965  dead=5,292  lr=5.31e-06     4,278 tok/s
+step 48,400/50,000  loss=0.0020  L0=128.0  FVE=0.976  dead=5,279  lr=5.24e-06     4,278 tok/s
+step 48,600/50,000  loss=0.0020  L0=128.0  FVE=0.971  dead=5,284  lr=5.19e-06     4,278 tok/s
+step 48,800/50,000  loss=0.0020  L0=128.0  FVE=0.966  dead=5,271  lr=5.14e-06     4,278 tok/s
+step 49,000/50,000  loss=0.0020  L0=128.0  FVE=0.957  dead=5,269  lr=5.10e-06     4,279 tok/s
+step 49,200/50,000  loss=0.0020  L0=128.0  FVE=0.983  dead=5,279  lr=5.06e-06     4,279 tok/s
+step 49,400/50,000  loss=0.0020  L0=128.0  FVE=0.955  dead=5,278  lr=5.03e-06     4,279 tok/s
+step 49,600/50,000  loss=0.0020  L0=128.0  FVE=0.972  dead=5,278  lr=5.02e-06     4,279 tok/s
+step 49,800/50,000  loss=0.0020  L0=128.0  FVE=0.975  dead=5,289  lr=5.00e-06     4,279 tok/s
+step 50,000/50,000  loss=0.0019  L0=128.0  FVE=0.971  dead=5,272  lr=5.00e-06     4,279 tok/s
+  [saved checkpoint_step_050000.npz]
   [saved checkpoint_final.npz]
 
-Done — 1,000 steps in 20.7 min
+Done — 50,000 steps in 398.9 min
 Output : data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
+  done.
+  [log truncated to 251 entries (step ≤ 50,000)]
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048  resuming_from=50,000
+
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 0.0 min
+Output : /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16
+Loading activations: /Users/lab-02/ResearchPapers/data/activations/mistral-7b-layer16/activations.npy
+  shape     : (500000, 4096)  dtype=float16
+  model     : mlx-community/Mistral-7B-v0.3-4bit
+  layer     : 16
+
+Config:
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+Resuming from /Users/lab-02/ResearchPapers/data/sae-runs/mistral-7b-layer16/checkpoint_step_050000.npz  (start_step=50,000)
+  [loaded checkpoint: checkpoint_step_050000.npz]
+Advancing data iterator by 50,000 steps...
