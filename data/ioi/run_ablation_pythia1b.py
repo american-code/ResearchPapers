@@ -18,6 +18,7 @@ Architecture notes (GPT-NeoX vs Llama)
 - Attention block at layer.attention (not layer.self_attn)
 - Pythia-1.4B: 24 layers, 16 heads, head_dim=128
 """
+import argparse
 import json, time
 from pathlib import Path
 from typing import Optional, Any
@@ -144,7 +145,7 @@ def main() -> None:
     print(f"Replaced {len(attns)} attention modules with AblationAttention")
 
     # ── Load dataset ──────────────────────────────────────────────────────────
-    dataset  = json.loads((DATA_DIR / "dataset.json").read_text())
+    dataset  = json.loads((DATA_DIR / ARGS.dataset).read_text())
     examples = dataset["examples"]
     print(f"Dataset: {len(examples)} examples")
 
@@ -245,7 +246,7 @@ def main() -> None:
         "drop_scores":    drop_scores,
     }
 
-    out_path = DATA_DIR / "ablation-pythia1b.json"
+    out_path = DATA_DIR / ARGS.out
     out_path.write_text(json.dumps(output, indent=2))
     print(f"Saved → {out_path}")
 
@@ -258,6 +259,19 @@ def main() -> None:
     print(f"\nTop-10 heads by logit-diff drop (ablation sensitivity):")
     for drop, l, h in top10:
         print(f"  L{l:02d}·H{h:02d}: drop={drop:.4f}  (ablated_mean={ablation_diffs[l][h]:.4f})")
+
+
+def _parse_args():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dataset", default="dataset.json",
+                    help="dataset filename inside data/ioi/")
+    ap.add_argument("--out", default="ablation-pythia1b.json",
+                    help="output filename inside data/ioi/")
+    return ap.parse_args()
+
+
+ARGS = _parse_args() if __name__ == "__main__" else argparse.Namespace(
+    dataset="dataset.json", out="ablation-pythia1b.json")
 
 
 if __name__ == "__main__":

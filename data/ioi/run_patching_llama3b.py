@@ -22,6 +22,7 @@ Strategy
    layer l with the cached clean SDPA output → compute recovery.
 Total: 2 + 28*24 = 674 forward passes over the batch.
 """
+import argparse
 import json, time
 from pathlib import Path
 from typing import Optional, Any
@@ -167,7 +168,7 @@ def main() -> None:
     print(f"  validation pass OK — output shape {test_logits.shape}")
 
     # ── Load dataset ──────────────────────────────────────────────────────────
-    dataset  = json.loads((DATA_DIR / "dataset.json").read_text())
+    dataset  = json.loads((DATA_DIR / ARGS.dataset).read_text())
     examples = dataset["examples"]
     template = dataset["meta"]["template"]  # "When {S} and {IO} went to the store, {S} gave a bottle to"
     print(f"Dataset: {len(examples)} examples")
@@ -297,7 +298,7 @@ def main() -> None:
         "patching_scores": patching_scores,
     }
 
-    out_path = DATA_DIR / "patching-llama3b.json"
+    out_path = DATA_DIR / ARGS.out
     out_path.write_text(json.dumps(output, indent=2))
     print(f"Saved → {out_path}")
 
@@ -311,6 +312,19 @@ def main() -> None:
     print("\nTop-10 heads by patching score:")
     for score, l, h in top10:
         print(f"  L{l:02d}·H{h:02d}: {score:.4f}")
+
+
+def _parse_args():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dataset", default="dataset.json",
+                    help="dataset filename inside data/ioi/")
+    ap.add_argument("--out", default="patching-llama3b.json",
+                    help="output filename inside data/ioi/")
+    return ap.parse_args()
+
+
+ARGS = _parse_args() if __name__ == "__main__" else argparse.Namespace(
+    dataset="dataset.json", out="patching-llama3b.json")
 
 
 if __name__ == "__main__":
