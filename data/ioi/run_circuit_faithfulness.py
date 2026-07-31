@@ -222,7 +222,11 @@ def main() -> None:
         chunk = examples[i:i + BATCH]
         seqs, last, io_t, s_t = [], [], [], []
         for e in chunk:
-            ids = tokenizer.encode(e["prompt"], add_special_tokens=False)
+            # BOS matters for Llama; the patching/ablation harness in this
+            # directory uses add_special_tokens=True for prompts and False for
+            # the name tokens. Match it, or clean LD does not line up with the
+            # rest of the paper (4.77 vs 5.64 on the v1 dataset).
+            ids = tokenizer.encode(e["prompt"], add_special_tokens=True)
             seqs.append(ids)
             last.append(len(ids) - 1)
             io_t.append(tokenizer.encode(" " + e["io_name"], add_special_tokens=False)[0])

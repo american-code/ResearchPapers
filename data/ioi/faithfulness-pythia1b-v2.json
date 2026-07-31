@@ -1,0 +1,226 @@
+{
+ "meta": {
+  "model": "EleutherAI/pythia-1.4b",
+  "dataset": "dataset-v2.json",
+  "n_examples": 200,
+  "n_layers": 24,
+  "n_heads": 16,
+  "circuit": [
+   "L1H11",
+   "L10H0",
+   "L10H7",
+   "L12H15",
+   "L13H6",
+   "L15H15",
+   "L16H13",
+   "L17H7",
+   "L21H3",
+   "L22H2"
+  ],
+  "circuit_size": 10,
+  "seed": 42,
+  "synthetic": false,
+  "normalization": "F(X) = (LD(X) - LD_all_ablated) / (LD_clean - LD_all_ablated)"
+ },
+ "logit_diffs": {
+  "clean": 3.8883,
+  "all_heads_ablated": 0.0184,
+  "circuit_only": -0.0914
+ },
+ "faithfulness": -0.0284,
+ "minimality": [
+  {
+   "head": "L10H7",
+   "layer": 10,
+   "head_idx": 7,
+   "F_without": -0.1287,
+   "delta_F": 0.1003
+  },
+  {
+   "head": "L17H7",
+   "layer": 17,
+   "head_idx": 7,
+   "F_without": -0.0483,
+   "delta_F": 0.02
+  },
+  {
+   "head": "L21H3",
+   "layer": 21,
+   "head_idx": 3,
+   "F_without": -0.0445,
+   "delta_F": 0.0161
+  },
+  {
+   "head": "L22H2",
+   "layer": 22,
+   "head_idx": 2,
+   "F_without": -0.0319,
+   "delta_F": 0.0035
+  },
+  {
+   "head": "L1H11",
+   "layer": 1,
+   "head_idx": 11,
+   "F_without": -0.0251,
+   "delta_F": -0.0033
+  },
+  {
+   "head": "L10H0",
+   "layer": 10,
+   "head_idx": 0,
+   "F_without": -0.0201,
+   "delta_F": -0.0083
+  },
+  {
+   "head": "L12H15",
+   "layer": 12,
+   "head_idx": 15,
+   "F_without": -0.0139,
+   "delta_F": -0.0144
+  },
+  {
+   "head": "L16H13",
+   "layer": 16,
+   "head_idx": 13,
+   "F_without": -0.0113,
+   "delta_F": -0.0171
+  },
+  {
+   "head": "L13H6",
+   "layer": 13,
+   "head_idx": 6,
+   "F_without": -0.0059,
+   "delta_F": -0.0225
+  },
+  {
+   "head": "L15H15",
+   "layer": 15,
+   "head_idx": 15,
+   "F_without": 0.0423,
+   "delta_F": -0.0707
+  }
+ ],
+ "completeness": {
+  "n_subsets": 12,
+  "mean_gap": 0.7891,
+  "max_gap": 1.0114,
+  "subsets": [
+   {
+    "K": [
+     "L1H11"
+    ],
+    "F_circuit_minus_K": -0.0251,
+    "F_model_minus_K": 0.7887,
+    "gap": 0.8137
+   },
+   {
+    "K": [
+     "L10H7",
+     "L12H15",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": -0.1067,
+    "F_model_minus_K": 0.524,
+    "gap": 0.6308
+   },
+   {
+    "K": [
+     "L21H3"
+    ],
+    "F_circuit_minus_K": -0.0445,
+    "F_model_minus_K": 0.9479,
+    "gap": 0.9924
+   },
+   {
+    "K": [
+     "L22H2"
+    ],
+    "F_circuit_minus_K": -0.0319,
+    "F_model_minus_K": 0.9796,
+    "gap": 1.0114
+   },
+   {
+    "K": [
+     "L1H11",
+     "L10H0",
+     "L17H7",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": -0.0404,
+    "F_model_minus_K": 0.7489,
+    "gap": 0.7893
+   },
+   {
+    "K": [
+     "L1H11",
+     "L21H3"
+    ],
+    "F_circuit_minus_K": -0.0417,
+    "F_model_minus_K": 0.7309,
+    "gap": 0.7725
+   },
+   {
+    "K": [
+     "L10H0",
+     "L12H15",
+     "L16H13",
+     "L21H3",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": -0.0049,
+    "F_model_minus_K": 0.8947,
+    "gap": 0.8996
+   },
+   {
+    "K": [
+     "L1H11",
+     "L10H7",
+     "L12H15",
+     "L13H6",
+     "L15H15"
+    ],
+    "F_circuit_minus_K": -0.0018,
+    "F_model_minus_K": 0.3879,
+    "gap": 0.3897
+   },
+   {
+    "K": [
+     "L10H7",
+     "L12H15",
+     "L13H6"
+    ],
+    "F_circuit_minus_K": -0.0895,
+    "F_model_minus_K": 0.5017,
+    "gap": 0.5912
+   },
+   {
+    "K": [
+     "L10H0",
+     "L16H13",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": -0.0066,
+    "F_model_minus_K": 0.9664,
+    "gap": 0.973
+   },
+   {
+    "K": [
+     "L15H15"
+    ],
+    "F_circuit_minus_K": 0.0423,
+    "F_model_minus_K": 0.915,
+    "gap": 0.8727
+   },
+   {
+    "K": [
+     "L1H11",
+     "L13H6",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": -0.0093,
+    "F_model_minus_K": 0.7233,
+    "gap": 0.7327
+   }
+  ]
+ }
+}

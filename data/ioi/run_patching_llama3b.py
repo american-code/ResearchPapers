@@ -170,7 +170,10 @@ def main() -> None:
     # ── Load dataset ──────────────────────────────────────────────────────────
     dataset  = json.loads((DATA_DIR / ARGS.dataset).read_text())
     examples = dataset["examples"]
-    template = dataset["meta"]["template"]  # "When {S} and {IO} went to the store, {S} gave a bottle to"
+    # v1 datasets carry a single meta.template and the corrupt prompt is
+    # reconstructed from it. v2 has 15 templates and stores a per-example
+    # corrupt_prompt instead, so prefer that when present.
+    template = dataset.get("meta", {}).get("template")
     print(f"Dataset: {len(examples)} examples")
 
     # ── Tokenise ──────────────────────────────────────────────────────────────
@@ -183,7 +186,12 @@ def main() -> None:
         io_name = ex["io_name"]
         s_name  = ex["subject_name"]
         clean_encs.append(tokenizer.encode(ex["prompt"], add_special_tokens=True))
-        corrupt_prompt = template.format(S=io_name, IO=s_name)
+        if "corrupt_prompt" in ex:
+            corrupt_prompt = ex["corrupt_prompt"]
+        elif template is not None:
+            corrupt_prompt = template.format(S=io_name, IO=s_name)
+        else:
+            raise KeyError("example lacks 'corrupt_prompt' and dataset lacks meta.template")
         corrupt_encs.append(tokenizer.encode(corrupt_prompt, add_special_tokens=True))
         io_tids.append(name_token_id(tokenizer, io_name))
         s_tids.append(name_token_id(tokenizer, s_name))

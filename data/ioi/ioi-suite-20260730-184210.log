@@ -1,0 +1,281 @@
+=== ioi-suite-20260730-184210 started 2026-07-30T23:42:13Z ===
+
+--- STAGE pythia-path-patching  2026-07-30T23:42:13Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b...
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:00<00:00,  4.09it/s]Fetching 5 files:  40%|████      | 2/5 [01:03<01:51, 37.18s/it]Fetching 5 files: 100%|██████████| 5/5 [01:03<00:00, 12.66s/it]
+  loaded in 64.3s
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/ioi/run_path_patching_pythia1b.py", line 364, in <module>
+    main()
+  File "/Users/lab-02/ResearchPapers/data/ioi/run_path_patching_pythia1b.py", line 156, in main
+    n_layers = len(model.model.layers)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx/nn/layers/base.py", line 103, in __getattr__
+    super(Module, self).__getattribute__(key)
+AttributeError: 'GPTNeoXModel' object has no attribute 'layers'
+--- STAGE pythia-path-patching exit=1 ---
+  ship: MISSING /Users/lab-02/ResearchPapers/data/ioi/path-patching-pythia1b-real.json
+
+--- STAGE faithfulness-llama-v1  2026-07-30T23:43:18Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading mlx-community/Llama-3.2-3B-bf16 …
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:01,  4.01it/s]Fetching 7 files:  29%|██▊       | 2/7 [02:03<06:01, 72.40s/it]Fetching 7 files: 100%|██████████| 7/7 [02:03<00:00, 17.59s/it]
+  installed 28 maskable attention layers
+clean LD = 4.7663
+all-heads-ablated LD = 0.0000
+faithfulness: LD=3.6206  F(C)=0.7596  (2s)
+  minimality L13H14: dF=+0.0332
+  minimality L14H0: dF=+0.1018
+  minimality L15H20: dF=+0.1022
+  minimality L17H17: dF=+0.0666
+  minimality L18H10: dF=+0.0265
+  minimality L19H1: dF=+0.0345
+  minimality L21H20: dF=+0.1056
+  minimality L24H15: dF=+0.3513
+  minimality L26H23: dF=+0.0783
+  minimality L27H17: dF=+0.1303
+
+faithfulness=0.7596  mean completeness gap=0.2577
+wrote /Users/lab-02/ResearchPapers/data/ioi/faithfulness-llama3b.json
+--- STAGE faithfulness-llama-v1 exit=0 ---
+
+--- STAGE faithfulness-pythia-v1  2026-07-30T23:46:28Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b …
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 113359.57it/s]
+  installed 24 maskable attention layers
+clean LD = 4.1251
+all-heads-ablated LD = 0.0000
+faithfulness: LD=3.5234  F(C)=0.8541  (1s)
+  minimality L1H11: dF=-0.0012
+  minimality L10H0: dF=+0.1036
+  minimality L10H7: dF=+0.3876
+  minimality L12H15: dF=+0.0758
+  minimality L13H6: dF=+0.0681
+  minimality L15H15: dF=+0.2959
+  minimality L16H13: dF=+0.0350
+  minimality L17H7: dF=+0.0521
+  minimality L21H3: dF=+0.0598
+  minimality L22H2: dF=+0.0990
+
+faithfulness=0.8541  mean completeness gap=0.2159
+wrote /Users/lab-02/ResearchPapers/data/ioi/faithfulness-pythia1b.json
+--- STAGE faithfulness-pythia-v1 exit=0 ---
+
+--- STAGE build-dataset-v2  2026-07-30T23:46:54Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Filtering names to single-token under all target tokenizers …
+  34 usable names: ['Alice', 'Andrew', 'Anna', 'Bob', 'Carol', 'Chris', 'Claire', 'Daniel', 'David', 'Diana', 'Emma', 'George', 'Helen', 'James', 'John', 'Julia', 'Kate', 'Kevin', 'Laura', 'Lisa', 'Mark', 'Mary', 'Michael', 'Nicole', 'Paul', 'Peter', 'Rachel', 'Robert', 'Sarah', 'Simon', 'Sophie', 'Steve', 'Susan', 'Tom']
+
+200 examples, 15 templates, order balance {'ABBA': 105, 'BABA': 95}
+wrote /Users/lab-02/ResearchPapers/data/ioi/dataset-v2.json
+--- STAGE build-dataset-v2 exit=0 ---
+
+--- STAGE patching-llama3b-v2  2026-07-30T23:46:57Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading mlx-community/Llama-3.2-3B-bf16...
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 179025.17it/s]
+  loaded in 0.9s
+  n_layers=28  n_heads=24
+Replaced 28 attention modules with PatchableAttention
+  validation pass OK — output shape (1, 3, 128256)
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/ioi/run_patching_llama3b.py", line 331, in <module>
+    main()
+  File "/Users/lab-02/ResearchPapers/data/ioi/run_patching_llama3b.py", line 173, in main
+    template = dataset["meta"]["template"]  # "When {S} and {IO} went to the store, {S} gave a bottle to"
+KeyError: 'template'
+--- STAGE patching-llama3b-v2 exit=1 ---
+  ship: MISSING /Users/lab-02/ResearchPapers/data/ioi/patching-llama3b-v2.json
+
+--- STAGE ablation-llama3b-v2  2026-07-30T23:46:59Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading mlx-community/Llama-3.2-3B-bf16...
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 156170.89it/s]
+  loaded in 0.8s
+  n_layers=28  n_heads=24  head_dim=128
+Replaced 28 attention modules with AblationAttention
+Dataset: 200 examples
+  sequence lengths: min=13  max=15
+  WARNING: variable-length sequences; mean computed over padded positions
+
+Clean forward pass (batch=100) → computing per-head means...
+  3.4s  mean logit diff (clean) = 5.5206
+  per-head means computed and cached
+
+Ablation sweep: 28 layers × 24 heads = 672 passes
+  L00 done  top_head=H07 (drop=0.030)  elapsed=79s  eta=2138s
+  L01 done  top_head=H15 (drop=0.595)  elapsed=158s  eta=2059s
+  L02 done  top_head=H20 (drop=0.050)  elapsed=238s  eta=1980s
+  L03 done  top_head=H14 (drop=0.037)  elapsed=317s  eta=1901s
+  L04 done  top_head=H04 (drop=0.058)  elapsed=396s  eta=1822s
+  L05 done  top_head=H12 (drop=0.081)  elapsed=475s  eta=1742s
+  L06 done  top_head=H10 (drop=0.027)  elapsed=554s  eta=1663s
+  L07 done  top_head=H14 (drop=0.042)  elapsed=634s  eta=1584s
+  L08 done  top_head=H08 (drop=0.138)  elapsed=713s  eta=1505s
+  L09 done  top_head=H23 (drop=0.074)  elapsed=792s  eta=1426s
+  L10 done  top_head=H19 (drop=0.098)  elapsed=871s  eta=1346s
+  L11 done  top_head=H22 (drop=0.084)  elapsed=950s  eta=1267s
+  L12 done  top_head=H06 (drop=0.049)  elapsed=1030s  eta=1188s
+  L13 done  top_head=H14 (drop=0.514)  elapsed=1109s  eta=1109s
+  L14 done  top_head=H00 (drop=0.443)  elapsed=1188s  eta=1030s
+  L15 done  top_head=H20 (drop=0.788)  elapsed=1267s  eta=950s
+  L16 done  top_head=H21 (drop=0.252)  elapsed=1346s  eta=871s
+  L17 done  top_head=H17 (drop=0.715)  elapsed=1426s  eta=792s
+  L18 done  top_head=H10 (drop=0.211)  elapsed=1505s  eta=713s
+  L19 done  top_head=H01 (drop=0.520)  elapsed=1584s  eta=634s
+  L20 done  top_head=H04 (drop=0.093)  elapsed=1663s  eta=554s
+  L21 done  top_head=H20 (drop=0.488)  elapsed=1742s  eta=475s
+  L22 done  top_head=H11 (drop=0.079)  elapsed=1822s  eta=396s
+  L23 done  top_head=H11 (drop=0.196)  elapsed=1901s  eta=317s
+  L24 done  top_head=H16 (drop=0.376)  elapsed=1980s  eta=238s
+  L25 done  top_head=H18 (drop=0.025)  elapsed=2059s  eta=158s
+  L26 done  top_head=H23 (drop=0.475)  elapsed=2138s  eta=79s
+  L27 done  top_head=H17 (drop=0.382)  elapsed=2218s  eta=0s
+
+Sweep completed in 2218s (37.0 min)
+Saved → /Users/lab-02/ResearchPapers/data/ioi/ablation-llama3b-v2.json
+
+Top-10 heads by logit-diff drop (ablation sensitivity):
+  L15·H20: drop=0.7884  (ablated_mean=4.7322)
+  L17·H17: drop=0.7147  (ablated_mean=4.8059)
+  L01·H15: drop=0.5953  (ablated_mean=4.9253)
+  L19·H01: drop=0.5203  (ablated_mean=5.0003)
+  L13·H14: drop=0.5144  (ablated_mean=5.0062)
+  L21·H20: drop=0.4878  (ablated_mean=5.0328)
+  L26·H23: drop=0.4753  (ablated_mean=5.0453)
+  L14·H00: drop=0.4431  (ablated_mean=5.0775)
+  L27·H17: drop=0.3819  (ablated_mean=5.1387)
+  L24·H16: drop=0.3762  (ablated_mean=5.1444)
+--- STAGE ablation-llama3b-v2 exit=0 ---
+
+--- STAGE patching-pythia1b-v2  2026-07-31T00:24:02Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b...
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 132731.14it/s]
+  loaded in 0.8s
+  n_layers=24  n_heads=16
+Replaced 24 attention modules with PatchableAttention
+  validation pass OK — output shape (1, 2, 50304)
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/ioi/run_patching_pythia1b.py", line 319, in <module>
+    main()
+  File "/Users/lab-02/ResearchPapers/data/ioi/run_patching_pythia1b.py", line 165, in main
+    template = dataset["meta"]["template"]
+KeyError: 'template'
+--- STAGE patching-pythia1b-v2 exit=1 ---
+  ship: MISSING /Users/lab-02/ResearchPapers/data/ioi/patching-pythia1b-v2.json
+
+--- STAGE ablation-pythia1b-v2  2026-07-31T00:24:04Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b...
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 57456.22it/s]
+  loaded in 0.4s
+  n_layers=24  n_heads=16  head_dim=128
+Replaced 24 attention modules with AblationAttention
+Dataset: 200 examples
+  sequence lengths: min=12  max=14
+  WARNING: variable-length sequences; mean computed over padded positions
+
+Clean forward pass (batch=100) → computing per-head means...
+  1.1s  mean logit diff (clean) = 3.8883
+  per-head means computed and cached
+
+Ablation sweep: 24 layers × 16 heads = 384 passes
+  L00 done  top_head=H03 (drop=0.127)  elapsed=18s  eta=411s
+  L01 done  top_head=H06 (drop=2.550)  elapsed=36s  eta=393s
+  L02 done  top_head=H13 (drop=0.033)  elapsed=54s  eta=376s
+  L03 done  top_head=H05 (drop=0.069)  elapsed=72s  eta=358s
+  L04 done  top_head=H15 (drop=0.134)  elapsed=89s  eta=340s
+  L05 done  top_head=H08 (drop=0.076)  elapsed=107s  eta=322s
+  L06 done  top_head=H12 (drop=0.025)  elapsed=125s  eta=304s
+  L07 done  top_head=H15 (drop=0.218)  elapsed=143s  eta=286s
+  L08 done  top_head=H09 (drop=0.076)  elapsed=161s  eta=268s
+  L09 done  top_head=H01 (drop=0.439)  elapsed=179s  eta=251s
+  L10 done  top_head=H07 (drop=1.824)  elapsed=197s  eta=233s
+  L11 done  top_head=H08 (drop=0.233)  elapsed=215s  eta=215s
+  L12 done  top_head=H15 (drop=0.077)  elapsed=233s  eta=197s
+  L13 done  top_head=H06 (drop=0.235)  elapsed=251s  eta=179s
+  L14 done  top_head=H01 (drop=0.075)  elapsed=269s  eta=161s
+  L15 done  top_head=H15 (drop=0.327)  elapsed=286s  eta=143s
+  L16 done  top_head=H13 (drop=0.057)  elapsed=304s  eta=125s
+  L17 done  top_head=H00 (drop=0.108)  elapsed=322s  eta=107s
+  L18 done  top_head=H11 (drop=0.011)  elapsed=340s  eta=90s
+  L19 done  top_head=H01 (drop=0.063)  elapsed=358s  eta=72s
+  L20 done  top_head=H08 (drop=0.013)  elapsed=376s  eta=54s
+  L21 done  top_head=H03 (drop=0.201)  elapsed=394s  eta=36s
+  L22 done  top_head=H10 (drop=0.083)  elapsed=412s  eta=18s
+  L23 done  top_head=H09 (drop=0.033)  elapsed=430s  eta=0s
+
+Sweep completed in 430s (7.2 min)
+Saved → /Users/lab-02/ResearchPapers/data/ioi/ablation-pythia1b-v2.json
+
+Top-10 heads by logit-diff drop (ablation sensitivity):
+  L01·H06: drop=2.5503  (ablated_mean=1.3380)
+  L10·H07: drop=1.8237  (ablated_mean=2.0646)
+  L01·H11: drop=0.8401  (ablated_mean=3.0483)
+  L09·H01: drop=0.4393  (ablated_mean=3.4490)
+  L15·H15: drop=0.3266  (ablated_mean=3.5617)
+  L13·H06: drop=0.2350  (ablated_mean=3.6533)
+  L11·H08: drop=0.2333  (ablated_mean=3.6550)
+  L07·H15: drop=0.2181  (ablated_mean=3.6702)
+  L21·H03: drop=0.2006  (ablated_mean=3.6877)
+  L09·H15: drop=0.1622  (ablated_mean=3.7261)
+--- STAGE ablation-pythia1b-v2 exit=0 ---
+
+--- STAGE faithfulness-llama-v2  2026-07-31T00:31:17Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading mlx-community/Llama-3.2-3B-bf16 …
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 109552.72it/s]
+  installed 28 maskable attention layers
+clean LD = 5.5206
+all-heads-ablated LD = 0.0078
+faithfulness: LD=1.2641  F(C)=0.2279  (3s)
+  minimality L13H14: dF=+0.0162
+  minimality L14H0: dF=+0.0355
+  minimality L15H20: dF=-0.0828
+  minimality L17H17: dF=+0.0300
+  minimality L18H10: dF=+0.0052
+  minimality L19H1: dF=-0.0061
+  minimality L21H20: dF=+0.0223
+  minimality L24H15: dF=+0.0548
+  minimality L26H23: dF=+0.0548
+  minimality L27H17: dF=+0.0683
+
+faithfulness=0.2279  mean completeness gap=0.6055
+wrote /Users/lab-02/ResearchPapers/data/ioi/faithfulness-llama3b.json
+--- STAGE faithfulness-llama-v2 exit=0 ---
+
+--- STAGE faithfulness-pythia-v2  2026-07-31T00:33:25Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b …
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 119156.36it/s]
+  installed 24 maskable attention layers
+clean LD = 3.8883
+all-heads-ablated LD = 0.0184
+faithfulness: LD=-0.0914  F(C)=-0.0284  (1s)
+  minimality L1H11: dF=-0.0033
+  minimality L10H0: dF=-0.0083
+  minimality L10H7: dF=+0.1003
+  minimality L12H15: dF=-0.0144
+  minimality L13H6: dF=-0.0225
+  minimality L15H15: dF=-0.0707
+  minimality L16H13: dF=-0.0171
+  minimality L17H7: dF=+0.0200
+  minimality L21H3: dF=+0.0161
+  minimality L22H2: dF=+0.0035
+
+faithfulness=-0.0284  mean completeness gap=0.7891
+wrote /Users/lab-02/ResearchPapers/data/ioi/faithfulness-pythia1b.json
+--- STAGE faithfulness-pythia-v2 exit=0 ---
