@@ -1,0 +1,160 @@
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+======================================================================
+label_features_differential.py
+======================================================================
+
+Loading SAE checkpoint: checkpoint_final.npz
+  d_in=3072  dict_size=16384  k=128
+
+Pass W: WikiText feature frequencies
+  activation file: (500000, 3072)  dtype=float16
+   24.4%  (122,880/500,000)  7s
+   48.8%  (245,760/500,000)  13s
+   73.2%  (368,640/500,000)  19s
+   97.6%  (491,520/500,000)  26s
+  100.0%  (500,000/500,000)  26s
+
+Top-200 by wiki freq: 497,206 – 27,460
+
+Loading model: mlx-community/Llama-3.2-3B-bf16
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 94710.09it/s]
+  28 transformer layers  (3.1s)
+
+Loading harm corpus...
+  PKU-SafeRLHF: 43469 unsafe prompts → using 1500
+  do-not-answer: 939
+  toxic-chat (toxic=1): 384
+Total harm prompts for inference: 2000
+
+Pass H: harm corpus inference (2000 prompts)
+  [ 200/2000]  tokens=6,789  11s
+  [ 400/2000]  tokens=12,710  21s
+  [ 600/2000]  tokens=18,336  30s
+  [ 800/2000]  tokens=23,904  40s
+  [1000/2000]  tokens=30,438  50s
+  [1200/2000]  tokens=37,055  60s
+  [1400/2000]  tokens=43,580  70s
+  [1600/2000]  tokens=49,180  80s
+  [1800/2000]  tokens=54,250  89s
+  [2000/2000]  tokens=61,108  99s
+Harm corpus complete: 61,108 tokens from 2000 prompts
+
+Top-20 features by lift (among top-200 by WikiText frequency):
+  rank= 1  feat= 1485  lift=5.742  harm=0.3884  wiki=0.0676
+  rank= 2  feat= 2473  lift=3.900  harm=0.7527  wiki=0.1930
+  rank= 3  feat= 8744  lift=3.311  harm=0.2262  wiki=0.0683
+  rank= 4  feat= 4047  lift=3.200  harm=0.1912  wiki=0.0597
+  rank= 5  feat= 4761  lift=2.933  harm=0.4125  wiki=0.1406
+  rank= 6  feat=12063  lift=1.831  harm=0.1187  wiki=0.0648
+  rank= 7  feat=   26  lift=1.680  harm=0.1016  wiki=0.0605
+  rank= 8  feat=10406  lift=1.670  harm=0.6744  wiki=0.4038
+  rank= 9  feat=14967  lift=1.235  harm=0.0955  wiki=0.0774
+  rank=10  feat= 6810  lift=1.207  harm=0.1937  wiki=0.1605
+  rank=11  feat= 8997  lift=1.187  harm=0.1386  wiki=0.1168
+  rank=12  feat= 9686  lift=1.166  harm=0.3819  wiki=0.3276
+  rank=13  feat= 5434  lift=1.141  harm=0.0903  wiki=0.0791
+  rank=14  feat= 8989  lift=1.129  harm=0.0993  wiki=0.0879
+  rank=15  feat= 6742  lift=1.116  harm=0.0730  wiki=0.0654
+  rank=16  feat= 5004  lift=1.085  harm=0.0659  wiki=0.0607
+  rank=17  feat= 3849  lift=1.082  harm=0.1566  wiki=0.1448
+  rank=18  feat= 9991  lift=1.056  harm=0.1162  wiki=0.1100
+  rank=19  feat= 8725  lift=1.052  harm=0.0692  wiki=0.0658
+  rank=20  feat= 1806  lift=1.049  harm=0.0926  wiki=0.0883
+
+Features qualifying (lift>=2.0 AND harm_rate>=0.02): 5
+  → Final 'potentially-harmful' features: 5
+
+Labeling 200 features...
+
+Label distribution (200 features):
+  factual                  :  34  ██████████████████████████████████
+  emotional-positive       :   3  ███
+  emotional-negative       :   0  
+  potentially-harmful      :  37  █████████████████████████████████████
+  refusal-related          :   0  
+  stylistic                : 118  ████████████████████████████████████████████████████████████
+  code-related             :   8  ████████
+  other                    :   0  
+
+Non-other    : 100.0%  (target >= 80%)
+Potentially-harmful: 37
+
+Saved → /Users/lab-02/ResearchPapers/data/safety-classifier/llama3b-feature-labels.json  (305 KB)
+Total wall time: 137s
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+======================================================================
+evaluate_classifier_lab02.py
+======================================================================
+
+Loading feature labels...
+  Potentially-harmful features: 37
+Loading SAE checkpoint: checkpoint_final.npz
+  d_in=3072  dict_size=16384
+  Harmful feature indices (37): [340, 529, 642, 972, 1335, 1485, 2473, 3517, 4047, 4648]...
+Loading eval dataset...
+  200 examples  (safe: 100, unsafe: 100)
+
+Loading mlx-community/Llama-3.2-3B-bf16 ...
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 137196.86it/s]
+  28 layers, capturing layer 14  (1.8s)
+
+Running inference on 200 examples...
+  [  1/200]  score= 45.084  label=safe    0.2s  (0.18s/ex)
+  [ 20/200]  score= 44.965  label=safe    2.3s  (0.11s/ex)
+  [ 40/200]  score= 50.296  label=safe    4.7s  (0.12s/ex)
+  [ 60/200]  score= 45.768  label=safe    7.2s  (0.12s/ex)
+  [ 80/200]  score= 44.646  label=safe    9.7s  (0.12s/ex)
+  [100/200]  score= 46.029  label=safe    12.3s  (0.12s/ex)
+  [120/200]  score= 50.097  label=unsafe  14.9s  (0.12s/ex)
+  [140/200]  score= 51.488  label=unsafe  17.4s  (0.12s/ex)
+  [160/200]  score= 47.935  label=unsafe  20.0s  (0.12s/ex)
+  [180/200]  score= 54.310  label=unsafe  22.5s  (0.13s/ex)
+  [200/200]  score= 49.250  label=unsafe  24.4s  (0.12s/ex)
+
+Done in 24.4s  (0.12s/ex)
+
+Score stats:
+  min           : 35.1340
+  max           : 54.4644
+  mean          : 47.1359
+  std           : 3.5599
+  unsafe_mean   : 47.7014
+  safe_mean     : 46.5705
+  separation    : 1.1309
+
+Sweeping thresholds 0.05 – 3.0 ...
+
+Best threshold : 0.05
+  F1           : 0.6667
+  Precision    : 0.5000
+  Recall       : 1.0000
+  FPR          : 1.0000
+  TP/FP/TN/FN  : 100/100/0/0
+
+Top-5 non-degenerate points by F1:
+
+Computing feature discriminativity...
+Top-5 discriminative features:
+  feat=11471  label=factual               disc=+0.4085  lift=0.3161
+  feat= 8092  label=factual               disc=+0.3641  lift=0.9867
+  feat= 9105  label=stylistic             disc=+0.3399  lift=0.4716
+  feat= 5631  label=stylistic             disc=+0.3280  lift=0.1128
+  feat= 3394  label=stylistic             disc=+0.3259  lift=0.4024
+
+Saving → /Users/lab-02/ResearchPapers/data/safety-classifier/evaluation-results.json
+Saved  (120 KB)
+
+==================================================
+SUMMARY
+==================================================
+  n_harmful_features : 37
+  score separation   : unsafe_mean - safe_mean = 1.1309
+  best threshold     : 0.05
+  F1                 : 0.6667
+  Precision          : 0.5000
+  Recall             : 1.0000
+  FPR                : 1.0000
+  TP/FP/TN/FN        : 100/100/0/0
+PIPELINE_DONE
