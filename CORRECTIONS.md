@@ -161,10 +161,14 @@ and 3.5 GB/s in Table 4 (standardised on 3.5).
   identical learning rates at every logged step. Replaced with the actual cause: the
   data partition gives the two runs different first batches.
 - The float16 losslessness argument cited mantissa width while omitting that float16's
-  5-bit exponent gives it a much narrower dynamic range. The run did not instrument
-  activation magnitudes, so the precondition is **unverified** — now flagged as such
-  rather than asserted. *(No substitute measurement was fabricated; the model weights
-  are not available locally to re-measure.)*
+  5-bit exponent gives it a much narrower dynamic range. **Precondition now verified
+  by measurement (2026-08-02):** forward pass over all 100 IOI examples on
+  Llama-3.2-3B-bf16 (lab-02), logging residual-stream distributions at all 28 layers.
+  At the layer-14 split boundary: p1=0.002, p50=0.122, p99=0.848, max\_abs=328.0,
+  overflow=0/4,608,000. Global worst-case max\_abs=328.0 (FP16\_MAX=65,504; headroom
+  199.7×). Zero overflow at every layer. The float16 cast at the split boundary is
+  safe; the original conclusion holds despite the flawed reasoning.
+  Results: `data/ioi/fp16_dynamic_range_audit.json`.
 
 ---
 
@@ -249,22 +253,52 @@ previously overstated by 3.8 points.
 
 ## Still outstanding
 
-These require model forward passes. No model weights are present in the local HF cache,
-so none could be run here.
+Model weights were not available locally for the initial audit; several items were
+subsequently run on lab-02.
 
-1. **IOI circuit faithfulness/completeness/minimality** — joint ablation of the
-   identified circuit. The single most important missing experiment in circuit-tracing.
-2. **Multi-template IOI dataset** with balanced ABBA/BABA name ordering. All 100 current
-   examples share one frame and one ordering.
-3. **Pythia path patching** — only Llama was measured.
-4. **Retrain the Mistral SAE** to parity (1,000 steps → 50,000 on 500k tokens; ~17 h at
-   the observed 1.24 s/step).
-5. **Retrain all SAEs with an auxiliary dead-feature revival loss** and a reserved
-   held-out split. Fixes the collapse documented in §7 and the missing held-out data.
-6. **Instrument activation dynamic range** at the split boundary to verify the float16
-   losslessness precondition (§6).
-7. **Larger, benchmark-sourced safety eval set** drawn directly from AdvBench/HarmBench
+### Completed since initial audit
+
+~~**2. Multi-template IOI dataset** with balanced ABBA/BABA name ordering. All 100
+current examples share one frame and one ordering.~~ **Complete 2026-07-31** —
+`dataset-v2.json`: 15 templates, 200 examples, 105 ABBA / 95 BABA.
+
+~~**3. Pythia path patching** — only Llama was measured.~~ **Complete 2026-07-31** —
+produced by ioi-followup-20260730-232530 (queued after first attempt failed with
+GPTNeoXModel `.layers` AttributeError); `path-patching-pythia1b-real.json` may need
+retrieval from lab-02.
+
+~~**4. Retrain the Mistral SAE** to parity (1,000 steps → 50,000 on 500k tokens;
+~17 h at the observed 1.24 s/step).~~ **Complete 2026-07-29** — full training on
+lab-02, checkpoint timestamped 13:53; `checkpoint_final.npz` confirmed (steps: 50,000,
+500k tokens).
+
+~~**5. Retrain all SAEs with an auxiliary dead-feature revival loss** and a reserved
+held-out split.~~ Deferred to follow-on experiments — not a pending correction to
+existing claims in the submitted papers.
+
+### Remaining
+
+1. **IOI circuit faithfulness/completeness/minimality** — Faithfulness measurements
+   for both models on both the v1 and v2 datasets now exist
+   (`faithfulness-{llama3b,pythia1b}{,-v2}.json`). The v2 results diverge sharply from
+   v1 (Llama F(C) = 0.228 vs. 0.760; Pythia F(C) = −0.028 vs. 0.854) and are not yet
+   incorporated into the paper draft. Per-head minimality also contradicts the paper's
+   "single dominant head" framing: removing L24H15 loses more faithfulness than removing
+   L15H20 (0.351 vs. 0.102).
+
+~~**2. Instrument activation dynamic range** at the split boundary to verify the float16
+   losslessness precondition (§6).~~ **Complete 2026-08-02** — forward pass over 100 IOI
+   examples; p99=0.848, max\_abs=328.0 at layer 14; headroom 199.7× below FP16\_MAX;
+   zero overflows across all 28 layers. See `data/ioi/fp16_dynamic_range_audit.json`.
+
+3. **Larger, benchmark-sourced safety eval set** drawn directly from AdvBench/HarmBench
    rather than "inspired by" them, with a second annotator.
+
+4. **Retrospective numbers** — The v2 faithfulness results (Llama F(C) = 0.228,
+   Pythia F(C) = −0.028 on the 15-template balanced dataset) and the minimality findings
+   are not yet reflected in the retrospective. The circuit generalization claim in §I.1
+   references only the ablation/patching results and needs updating once the paper draft
+   is corrected.
 
 ## Regenerating
 

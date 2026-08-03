@@ -1,10 +1,9 @@
 # Feature Universality in Open-Weight LLMs: A Cross-Architecture Sparse Autoencoder Study
 
-> **DRAFT NOTES (v2)** — Reassembled from corrected source files: `methods.md` (§3), `results.md` (§4), `intro-related-work.md` (§1–2), `outline.md` (Abstract, Discussion structure, Conclusion). Open items before submission:
-> 1. All `[EXP]` markers in §4 must be replaced with measurements from `data/sae-runs/`.
-> 2. **Model mismatch:** §1–2 and the Abstract use Llama-3.2-3B / Mistral-7B / Qwen2.5-3B (from `outline.md` and `intro-related-work.md`). §3 and §4 use GPT-2 Small / Pythia-1.4B / Llama-3.2-3B (from `methods.md` and `results.md`). Update `methods.md` and `results.md` to the Llama / Mistral / Qwen model set before reintegrating.
-> 3. Figure files referenced in §4.2 and §4.4 do not yet exist; generate from `data/sae-runs/`.
-> 4. References list is provisional — verify JumpReLU citation, Zou et al. (2023), Llama 3 technical report, FAISS, and Hungarian algorithm entries before submission.
+> **DRAFT NOTES (v2, updated 2026-08-02)** — §4 replaced with actual measured results; all `[EXP]` markers resolved. This markdown is a working draft; the authoritative rescoped submission is `submission/main.tex`. Remaining open items:
+> 1. §1–2 (intro/related work) and the Abstract still reference the original study design (objective comparison, human study). Update to match the rescoped paper in `submission/main.tex` before treating this file as a complete draft.
+> 2. Figure files referenced in §4.2 do not yet exist; generate from `data/sae-analysis/matching-v2/`.
+> 3. References list is provisional — verify JumpReLU citation, Zou et al. (2023), Llama 3 technical report, FAISS, and Hungarian algorithm entries before submission.
 
 ---
 
@@ -189,90 +188,63 @@ A high $R^2$ in this regression indicates that the between-variant variation in 
 
 ## 4. Results
 
-> **Working draft.** Quantitative values in this section are illustrative targets derived from the SAE literature at matched hyperparameters. All values marked `[EXP]` are to be replaced with measurements from `data/sae-runs/` before submission. Section structure, table layout, and figure descriptions are final.
-
----
-
 ### 4.1 SAE Training Metrics
 
-Table 1 reports training-end metrics for all three TopK SAEs. Variance explained (VarExp) is $1 - \mathbb{E}[\|x - \hat{x}\|_2^2] / \mathbb{E}[\|x\|_2^2]$ evaluated on the held-out evaluation corpus. Dead feature rate is the fraction of dictionary directions whose running activation frequency remains below $10^{-4}$ at the final training step, after the auxiliary loss has had full opportunity to revive them. All three training runs converged without instability; learning curves (not shown) exhibit a characteristic two-phase profile: rapid reconstruction loss reduction in the first $2 \times 10^4$ steps, followed by slow improvement as infrequent features are finetuned.
+Table 1 reports training-end metrics for all three TopK SAEs, evaluated over the full 500,000-token WikiText-103 training corpus. No held-out split exists: each SAE was trained for 50,000 steps (204 epochs over the 500k-token dump), so all figures are in-sample. VarExp = $1 - \mathbb{E}[\|x - \hat{x}\|_2^2] / \mathbb{E}[\|x\|_2^2]$. Dead feature rate is the fraction of dictionary directions with activation frequency $< 10^{-4}$ on the evaluation corpus. Source: `data/sae-analysis/corrections.json`.
 
-**Table 1.** TopK SAE training metrics on held-out evaluation corpus. L0 = $k$ (exact by construction for TopK). VarExp = variance explained. MSE = mean squared reconstruction error in original activation units. Dead = fraction of dictionary features with activation frequency $< 10^{-4}$.
+**Table 1.** TopK SAE training metrics ($k = 128$ for all three; L0 = $k$ by construction). VarExp and MSE are in-sample. Dead = fraction of features with activation frequency $< 10^{-4}$ on the 500k-token evaluation corpus.
 
-| Model | Layer | $k$ (L0) | VarExp `[EXP]` | MSE `[EXP]` | Dead features `[EXP]` | Training steps |
+| Model | Layer | $k$ (L0) | VarExp | MSE | Dead features | Training steps |
 |---|---|---|---|---|---|---|
-| GPT-2 Small | 6 | 25 | 0.831 | 0.169 | 2.3% | 122,070 |
-| Pythia-1.4B | 12 | 40 | 0.784 | 0.216 | 3.1% | 122,070 |
-| Llama-3.2-3B | 14 | 50 | 0.762 | 0.238 | 4.7% | 122,070 |
+| Llama-3.2-3B | 14 | 128 | 0.9895 | 0.0062 | 20.4% (3,344/16,384) | 50,000 |
+| Qwen2.5-3B | 18 | 128 | 0.9839 | 0.2753 | 57.4% (9,398/16,384) | 50,000 |
+| Mistral-7B-v0.3 (4-bit) | 16 | 128 | 0.9659 | 0.0019 | 14.3% (2,346/16,384) | 50,000 |
 
-Variance explained decreases monotonically with model scale (0.831 → 0.784 → 0.762), consistent with larger residual stream dimensions requiring larger dictionaries to capture the same fraction of variance at fixed expansion factor. The modest increase in dead feature rate from GPT-2 Small to Llama-3.2-3B (2.3% → 4.7%) suggests that the auxiliary loss is less effective at reviving features in higher-dimensional spaces where the per-feature gradient contribution to the reconstruction loss is smaller in expectation. Both of the larger models remain well below the 10% dead-feature rates reported by Bricken et al. (2023) for L1 SAEs at comparable dictionary sizes without auxiliary losses, confirming the effectiveness of the resurrection mechanism.
+All three SAEs achieve high in-sample variance explained (0.966–0.990). Dead feature rates vary substantially. Qwen shows severe dictionary collapse: 57.4% of features are dead, leaving only 6,964 active features. An additional 20 features fire on more than 50% of tokens and the top-200 features carry 38.6% of all activation mass, indicating broad-spectrum non-sparse directions dominate. Llama and Mistral show more moderate collapse (20.4% and 14.3% respectively). The dynamics and partial recovery from the collapse peak (steps 5,000–6,000 in all three models) are analyzed in Section 5.
 
-The absolute MSE values are not directly comparable across models because the residual stream norm scales with model dimension; MSE expressed as a fraction of total variance (i.e., $1 - \text{VarExp}$) is the appropriate cross-model comparison. On this measure, Llama-3.2-3B's TopK SAE leaves 23.8% of total variance unaccounted for at $k = 50$, compared to 16.9% for GPT-2 Small at $k = 25$. The ratio $k / N$ (dictionary occupancy) is nearly identical across all three models (0.30%, 0.12%, 0.10%), confirming that the SAEs operate in comparably sparse regimes relative to their dictionary sizes.
+MSE values are not directly comparable across models because residual stream norms scale with model width. The relevant cross-model comparison is $1 - \text{VarExp}$: Llama leaves 1.05% of variance unexplained, Qwen 1.61%, and Mistral 3.41%. The Mistral figure should be interpreted cautiously: training used a 4-bit quantized checkpoint, and quantization introduces distributional variance the SAE cannot reconstruct.
 
 ---
 
-### 4.2 Cross-Architecture Feature Similarity Distribution
+### 4.2 Cross-Architecture Feature Similarity
 
-**Figure 1.** Distribution of pairwise functional similarity (FunSim) scores for (a) randomly sampled cross-model feature pairs (permutation null), (b) Hungarian-matched pairs, and (c) Hungarian-matched pairs exceeding the $\tau = 0.65$ universal feature threshold `[EXP — update threshold from actual null distribution]`, for each of the three pairwise model comparisons. See `figures/sae-comparison/sae-similarity-distribution.svg` (to be generated from `data/sae-runs/`).
+Feature fingerprints are chunk-averaged activation vectors over 1,000 chunks × 500 tokens = 500,000 tokens of WikiText-103 (train). Matching uses reciprocal best match (mutual nearest neighbour) with a 5%-support floor (features firing on fewer than 50/1,000 chunks are excluded). Similarity is cosine distance between centered fingerprints (Pearson correlation of the raw activations). Threshold $\tau$ is the permutation-null 99th percentile: for each pair, $\tau$ is derived from a chunk-permutation null calibrated to this corpus and these dictionaries. Source: `data/sae-analysis/matching-v2/`.
 
-The permutation null distribution of FunSim peaks sharply near zero for all three model pairs, confirming that cross-model feature correspondence cannot arise by chance at the evaluation corpus size. The matched distribution is bimodal: a large mass near zero corresponds to features that are model-specific (no cross-model counterpart), and a distinct upper tail extending from $\approx 0.5$ to $\approx 0.95$ corresponds to functionally universal features.
+**Critical note on the null.** The permutation-null mean cosine similarity is 0.61–0.74 across pairs — far from zero. This reflects a positive-orthant baseline from the TopK non-negativity constraint. The calibrated threshold $\tau$ is correspondingly high (0.983–0.995); any threshold below this (e.g., $\tau = 0.65$ or $\tau = 0.80$ from prior literature) would lie at or below the noise floor and produce inflated match counts.
 
-**Table 2.** Cross-architecture matching summary statistics `[EXP]`. $|\mathcal{U}_{m,m'}|$ = number of universal pairs (FunSim $> \tau$). $\mu_{\text{match}}$ and $\sigma_{\text{match}}$ = mean and SD of FunSim among matched pairs. $\tau$ = permutation-null 99th percentile threshold.
+**Table 2.** Cross-architecture matching statistics (cosine similarity, permutation-calibrated threshold). Valid features = features with adequate support (≥5% of chunks). $|\mathcal{U}_{m,m'}|$ = calibrated matched pairs.
 
-| Pair | $\tau$ `[EXP]` | $\mu_{\text{match}}$ `[EXP]` | $\sigma_{\text{match}}$ `[EXP]` | $|\mathcal{U}_{m,m'}|$ `[EXP]` | % of matched |
+| Pair | $\tau$ | $\mu_{\rm match}$ | $\sigma_{\rm match}$ | $|\mathcal{U}_{m,m'}|$ | % of smaller valid set |
 |---|---|---|---|---|---|
-| GPT-2 Small ↔ Pythia-1.4B | 0.065 | 0.387 | 0.214 | 1,241 | 15.1% |
-| GPT-2 Small ↔ Llama-3.2-3B | 0.067 | 0.341 | 0.209 | 1,094 | 13.3% |
-| Pythia-1.4B ↔ Llama-3.2-3B | 0.061 | 0.419 | 0.221 | 1,389 | 16.9% |
+| Llama-3.2-3B ↔ Qwen2.5-3B | 0.983 | 0.993 | 0.004 | 15 | 0.22% |
+| Mistral-7B ↔ Qwen2.5-3B | 0.988 | 0.994 | 0.002 | 8 | 0.11% |
+| Llama-3.2-3B ↔ Mistral-7B | 0.995 | 0.997 | 0.001 | 6 | 0.07% |
 
-The higher matching rate between Pythia-1.4B and Llama-3.2-3B relative to either model's match rate with GPT-2 Small is consistent with the larger models sharing more of a common training distribution (both trained on substantially more tokens than GPT-2 Small, though on different corpora). Three-way universal features — those exceeding $\tau$ in all three pairwise matchings — number `[EXP]` (approximately 8–12% of the GPT-2 Small dictionary, based on the overlap estimate; exact count from experiment). Three-way universal features are substantially enriched for syntactic and positional coarse categories relative to the dictionary as a whole ($p < 0.001$ by Fisher's exact test `[EXP]`), confirming that structural linguistic regularities are the primary driver of cross-architecture feature universality.
+The matched counts are very sparse: 6–15 reciprocal pairs per pair, out of 6,964–12,127 valid features. This constitutes a negative result for the cross-architecture feature universality hypothesis under this matching protocol: the vast majority of features in each model have no statistically reliable counterpart in either other model.
 
----
-
-### 4.3 Top-10 Universal Feature Pairs
-
-Table 3 reports the top-10 three-way universal features ranked by mean FunSim across all three pairwise comparisons. For each feature, we report the semantic label assigned by the joint inspection protocol (Section 3.5), the mean and minimum pairwise FunSim, and three representative maximally activating token contexts from the evaluation corpus. Contexts are presented as a 10-token window centered on the activating token, with the target token in **bold**.
-
-**Table 3.** Top-10 three-way universal SAE features. FunSim values are from the held-out evaluation corpus `[EXP — all specific values to be replaced]`. Feature indices shown are for GPT-2 Small; matched indices for Pythia-1.4B and Llama-3.2-3B are listed in Appendix B.
-
-| Rank | Semantic label | Mean FunSim `[EXP]` | Min FunSim `[EXP]` | Representative contexts |
-|---|---|---|---|---|
-| 1 | Numeric token — isolated digits | 0.921 | 0.907 | `the year **1997** , when` / `approximately **42** percent of` / `on **3** occasions during` |
-| 2 | Sentence-final punctuation (`.`, `?`, `!`) | 0.904 | 0.889 | `he replied carefully **.**  The` / `is this true **?** I` / `the crowd roared **!** Everyone` |
-| 3 | Uppercase after sentence boundary | 0.887 | 0.871 | `. **The** president announced` / `! **We** need to act` / `? **How** did this happen` |
-| 4 | Determiner before noun (`the`, `a`, `an`) | 0.876 | 0.851 | `visited **the** museum yesterday` / `bought **a** small red` / `saw **an** enormous crowd` |
-| 5 | Open parenthesis / bracket | 0.861 | 0.843 | `United Nations **(**UN**)** peacekeeping` / `function foo **(**x**, y)` / `born in Berlin **(**1943**)** he` |
-| 6 | Preposition of location (`in`, `at`, `on`) | 0.849 | 0.817 | `arrived **in** Paris last` / `meeting **at** the corner` / `written **on** the board` |
-| 7 | Past-tense verb suffix (`-ed`) | 0.832 | 0.804 | `the army march**ed** through` / `she decid**ed** to leave` / `prices increas**ed** sharply during` |
-| 8 | Possessive marker (`'s`) | 0.824 | 0.797 | `the president **'s** speech` / `London **'s** transportation network` / `the company **'s** annual report` |
-| 9 | Named entity — person first name | 0.811 | 0.779 | `CEO **James** Carter announced` / `professor **Maria** Gonzalez said` / `by **John** Smith in 1984` |
-| 10 | Python keyword (`def`, `return`, `import`) | 0.798 | 0.771 | `**def** calculate_loss(**self**` / `**return** outputs . logits` / `**import** numpy as np` |
-
-Several patterns are notable. First, the highest-similarity universal features (ranks 1–3) are highly structural: isolated digit tokens, sentence-final punctuation, and capitalized sentence-initial tokens are all sequence-positional or morphological cues with no semantic ambiguity, making them trivially learnable from any sufficiently large text corpus regardless of model architecture. Second, the code-specific feature (rank 10) appearing among the top-10 universal features despite Python source constituting only 3–5% of The Pile by token count suggests that code syntax produces highly distinctive activation patterns that are easy for the matching procedure to align across architectures. Third, person-name features (rank 9) appear in the top-10 despite spanning a large and heterogeneous token set; inspection of the top-50 activating contexts reveals that this feature fires specifically on given names in subject position, not on all name-like tokens, consistent with a syntactic-role interpretation rather than a purely lexical one.
-
-Features ranked 11–30 are dominated by semantic categories: country names, food items, temporal expressions (months, days of the week), and medical terminology. These features show lower minimum pairwise FunSim (range 0.65–0.77) and higher variance, reflecting the greater dependence of semantic feature decompositions on training corpus composition and tokenization conventions. Full rankings are in Appendix B.
+Three-way universal features — requiring all three pairwise edges to exceed their respective $\tau$ — number **1** (null expectation: 0.15; $\Pr(\geq 1) = 0.14$). One three-way match is statistically indistinguishable from chance. The single triple is: Llama feature 4850, Qwen feature 5648, Mistral feature 5615, with pairwise cosine similarities 0.991 (Llama–Qwen), 0.996 (Llama–Mistral), 0.992 (Mistral–Qwen). Its semantic content cannot be identified without running the SAE on labeled examples, which requires the base model weights (not available locally).
 
 ---
 
-### 4.4 Evaluation Confound Analysis
+### 4.3 The Universality Null Result
 
-The central finding of this paper is that prior claims about between-objective differences in SAE feature interpretability are largely attributable to between-objective differences in reconstruction quality, not to the inductive biases of the training objective itself.
+The cross-architecture matching analysis yields a null result: there is no evidence for a substantial population of functionally universal SAE features across Llama-3.2-3B, Qwen2.5-3B, and Mistral-7B at mid-network layers under this protocol. The single three-way match is not distinguishable from chance.
 
-**Within-model confound strength.** For each model, we trained TopK, Gated, and L1 SAEs at matched $k$ (or matched mean L0 for Gated and L1) and evaluated probe accuracy and variance explained on the held-out corpus. Figure 2 shows the probe-accuracy vs. variance-explained scatter across all three objectives and all three models (see `figures/sae-comparison/probe-vs-varexp.svg`, to be generated from `data/sae-runs/`). The relationship is approximately linear: $R^2 = 0.91$ (GPT-2 Small), $R^2 = 0.87$ (Pythia-1.4B), and $R^2 = 0.89$ (Llama-3.2-3B) `[EXP]`. In all three models, variance explained accounts for more than 85% of the variance in probe accuracy across training objectives.
+This result does not rule out feature universality in principle. Three confounds limit the interpretation:
 
-**Table 4.** Regression of probe accuracy on SAE objective type and variance explained `[EXP]`. $\beta_{\text{obj}}$ is the coefficient on SAE objective (TopK = 0, Gated = 1, L1 = 2) in a simple regression without variance-explained control; $\beta_{\text{obj|VE}}$ is the partial coefficient after controlling for variance explained. All regressions are pooled across models with model as a fixed effect.
+1. **Dictionary collapse.** Qwen's 57% dead-feature rate drastically reduces the matchable feature set. The 6,964 active Qwen features are the bottleneck for all three pairwise comparisons.
+2. **Corpus overlap without held-out split.** All SAEs were trained on the same 500k-token WikiText-103 excerpt for 204 epochs. Fingerprints computed on the same data used for training measure corpus-specific representations, not generalizable features.
+3. **Quantization confound.** The Mistral SAE was trained on a 4-bit checkpoint; its fingerprints may reflect quantization artifacts in addition to model representations.
 
-| Predictor | $\beta$ | 95% CI | $p$ | Interpretation |
-|---|---|---|---|---|
-| Objective type only | +0.031 `[EXP]` | `[EXP]` | `[EXP]` | Significant: TopK > Gated > L1 when VarExp uncontrolled |
-| Variance explained only | +0.847 `[EXP]` | `[EXP]` | `[EXP]` | Highly significant predictor |
-| Objective type \| VarExp | +0.004 `[EXP]` | `[EXP]` | $p = 0.61$ `[EXP]` | Non-significant after VarExp control |
+A valid test would require: (a) SAEs trained on large, diverse corpora with a genuine held-out evaluation split; (b) a dead-feature revival loss preventing collapse; (c) unquantized model weights. None of these conditions hold in the current workspace. Section 7 of `submission/main.tex` lists these as the highest-priority future experiments.
 
-The key result is in the final row: after controlling for variance explained, objective type has no statistically significant effect on probe accuracy ($\beta = 0.004$, $p = 0.61$ `[EXP]`). This directly replicates the pattern reported by Rajamanoharan et al. (2024) for probe accuracy, extends it to the cross-model setting, and identifies the mechanism: objectives that achieve lower reconstruction loss at a given L0 also score higher on probe accuracy, but the objective itself contributes nothing to interpretability beyond its effect on reconstruction quality.
+---
 
-**Partial correlation summary.** The partial correlation between objective type and probe accuracy (controlling for variance explained) is $r_{\text{partial}} = 0.07$ (95% CI: $[-0.11, 0.25]$) across models `[EXP]`, compared to the zero-order correlation of $r = 0.62$. The 89% reduction in correlation (from 0.62 to 0.07) after removing reconstruction variance quantifies the confound magnitude: nearly all of the apparent objective-level effect on interpretability is transmitted through reconstruction quality.
+### 4.4 Objective Comparison: Not Conducted
 
-**Implication for prior comparisons.** Published claims that TopK features are more interpretable than L1 features (e.g., Gao et al., 2024, Table 3; Bricken et al., 2023, Figure 6) are likely confounded: TopK achieves higher variance explained at matched L0 because the TopK operator does not apply $L_1$ shrinkage to active features, improving reconstruction fidelity without changing the number of active features. When reconstruction quality is held fixed by comparing objectives at matched VarExp (rather than matched L0), the interpretability gap disappears. This implies that prior comparative evaluations were inadvertently measuring which objective reconstructs better, not which objective produces more interpretable features — a distinction with significant consequences for how the SAE literature should interpret its benchmarks.
+The original study design called for training TopK, Gated, and L1 SAEs at matched L0 on each of the three models, then regressing probe accuracy on SAE objective type and variance explained to quantify the reconstruction-quality confound. This experiment was not conducted. Only TopK SAEs were trained.
+
+The multi-objective comparison and the probe-accuracy confound analysis are the primary missing experiments for this paper's central thesis. They remain future work. See Section 7 (Planned Experiments Not Conducted) of `submission/main.tex` for a full enumeration.
 
 ---
 
