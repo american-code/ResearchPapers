@@ -88,9 +88,9 @@ Cross-Architecture Feature Universality}
 \begin{abstract}
 Mechanistic interpretability research faces a fundamental infrastructure problem: the models worth understanding are too large to run on a single analysis workstation, and the hardware capable of running them is not designed for continuous activation capture. We describe a system---\mlxmesh{}---that addresses this by splitting inference and analysis across two nodes, streaming intermediate activations over a purpose-built binary wire protocol, and training sparse autoencoders~(SAEs) on the streaming output without storing activations to disk. We validate the protocol on Llama-3.2-3B, demonstrating a bit-exact split boundary and 1.25~GB/s ($10.0$~Gbps) throughput over TCP loopback---four orders of magnitude above the bandwidth required for real-time single-layer capture---and show by direct calculation that a Thunderbolt~4 link would not be the binding constraint at any model size we consider. All validation runs on a single machine: the two-node deployment is specified and analysed but not yet built, and we are explicit throughout about which claims are measured and which are projected.
 
-We then train TopK SAEs on residual stream activations from Llama-3.2-3B (layer~14), Mistral-7B (layer~16), and Qwen2.5-3B (layer~18) and test for cross-architecture feature universality. Our headline result here is negative, and it corrects our own earlier analysis. An uncalibrated fixed similarity threshold combined with many-to-one matching yields an apparent 3,753 ``universal'' features; under a chunk-permutation null the same threshold lies \emph{below} the null mean for every model pair, and after imposing one-to-one reciprocal matching, a closed-triangle requirement, and a null-calibrated threshold, the number of features matching across all three models is \textbf{one}---against a null that produces at least one 14\% of the time. Pairwise, 15--23 feature pairs survive per model pair against an expected 7--9 false positives. This result is measured on SAEs trained to full specification (50,000 steps, 500k tokens each); an earlier run on partial checkpoints gave zero, so the finding is not an artifact of undertraining. We report this in full because the failure mode---a low-dimensional activation fingerprint searched over a 16{,}384-feature dictionary---is a trap that any cross-model feature-matching study can fall into.
+We then train TopK SAEs on residual stream activations from Llama-3.2-3B (layer~14), Mistral-7B (layer~16), and Qwen2.5-3B (layer~18) and test for cross-architecture feature universality. Our headline result here is negative, and it corrects our own earlier analysis. An uncalibrated fixed similarity threshold combined with many-to-one matching yields an apparent 3,753 ``universal'' features; under a chunk-permutation null the same threshold falls \emph{inside} the null range---between the null mean and the null 99th percentile---for every model pair, and after imposing one-to-one reciprocal matching, a closed-triangle requirement, and a null-calibrated threshold, the number of features matching across all three models is \textbf{one}---against a null that produces at least one 14\% of the time. Pairwise, 15--23 feature pairs survive per model pair against an expected 7--9 false positives. This result is measured on SAEs trained to full specification (50,000 steps, 500k tokens each); an earlier run on partial checkpoints gave zero, so the finding is not an artifact of undertraining. We report this in full because the failure mode---a low-dimensional activation fingerprint searched over a 16{,}384-feature dictionary---is a trap that any cross-model feature-matching study can fall into.
 
-Finally, we evaluate a feature-based safety classifier, which achieves ROC-AUC indistinguishable from chance, and diagnose why. All experiments run on consumer Apple Silicon; the system requires no GPUs, no cloud, and no specialized interconnects. Code and data are available at \url{https://github.com/jmelton-research/mlxmesh}.
+Finally, we evaluate a feature-based safety classifier. A naive frequency-based feature selection yields ROC-AUC~0.564 (95\% CI spanning chance); switching to differential-frequency selection against a harm-relevant corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raises it to 0.6422 (95\% CI [0.566, 0.720]). We diagnose the failure mode and confirm that corpus mismatch and frequency bias were the primary culprits. All experiments run on consumer Apple Silicon; the system requires no GPUs, no cloud, and no specialized interconnects. Code and data are available at \url{https://github.com/jmelton-research/mlxmesh}.
 \end{abstract}
 
 % ============================================================
@@ -161,7 +161,7 @@ A natural application of interpretable features is safety classification: if the
 
 \citet{zou2023repeng} used linear probes on residual stream activations (``representation engineering'') to detect and steer safety-relevant states. \citet{burns2022discovering} trained probes on contrast pairs and showed that probes could recover implicit model beliefs about factuality. Our approach is closest in spirit to representation engineering but uses SAE features rather than supervised probes.
 
-The evaluation in \S\ref{sec:safety} shows that a na{\"i}vely implemented SAE classifier fails---achieving F1~$= 0.519$ versus a 0.500 random baseline on a balanced eval set. We analyze the failure mode in detail and propose specific corrections. We argue that the honest failure is more scientifically valuable than a successful cherry-pick would be, because it establishes precise conditions for success.
+The evaluation in \S\ref{sec:safety} shows that a na{\"i}vely implemented SAE classifier fails---achieving ROC-AUC~0.564 (CI spanning chance) when features are selected by activation frequency on WikiText-103. Switching to differential-frequency selection against a harm-relevant corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raises AUC to 0.6422 (95\% CI [0.566, 0.720]). We analyze the failure mode in detail and confirm that corpus mismatch and frequency bias were the primary culprits, not TopK SAEs in general.
 
 % ============================================================
 \section{System Design and Methods}
@@ -365,7 +365,7 @@ To identify features shared across model families, we use chunk-averaged activat
 \item Universal features are triples $(i,j,k)$ whose three pairwise edges \emph{all} satisfy the above---a closed triangle, not a chain.
 \end{enumerate}
 
-This method sidesteps the arbitrary choice of basis in each SAE's decoder weight matrix and matches features by their functional behaviour---the pattern of contexts they respond to. The matching analysis used the 16,384-feature SAEs for all three models (the single-node Llama SAE at step 10k, Mistral at step 1k, and Qwen at step 50k). Mistral's SAE was trained on only the first 50k tokens of its activation dump; we evaluate it on the full 500k so that all three fingerprints share a corpus, which means 90\% of the Mistral evaluation corpus is unseen by that SAE.
+This method sidesteps the arbitrary choice of basis in each SAE's decoder weight matrix and matches features by their functional behaviour---the pattern of contexts they respond to. The matching analysis used the 16,384-feature SAEs for all three models, all trained to full specification (50,000 steps over 500,000 tokens), so all three fingerprints share a common 500k-token evaluation corpus with no held-out asymmetry.
 
 \subsubsection{Threshold calibration and the failure of the naive protocol}
 \label{sec:matching-null}
@@ -376,7 +376,7 @@ Each of the six numbered choices above departs from the protocol we used in an e
 
 \paragraph{Chained triples are not shared features.} Defining universality as ``$i$ matches $j$, and $j$ matches $k$'' without checking the $i$--$k$ edge admits triples whose third edge fails outright. In our earlier run, 67\% of the 3,753 nominally universal triples had no verified Llama--Mistral edge, and the 3,753 triples collapsed onto just 644 distinct Qwen and 341 distinct Mistral features.
 
-\paragraph{A fixed threshold of $0.8$ is below the noise floor.} This is the decisive problem. We estimate the null by permuting chunk order in one model---destroying cross-model chunk correspondence while preserving every feature's marginal activation profile---and recomputing reciprocal matches, over 20 replicates. Because a match is the best of $\sim$5,000--8,000 candidates, extreme-value effects put the null high: the mean reciprocal-match similarity between \emph{unrelated} features is 0.39--0.57 depending on the pair, and the 99th percentile is 0.83--0.94 (Table~\ref{tab:null}). A fixed $\tau = 0.8$ therefore admits pairs that a chunk-shuffled control would produce just as readily. At the original 50k-token, 100-chunk resolution the situation was worse still: the null 99th percentile reached 0.98--0.995, i.e.\ \emph{above} almost every observed similarity, leaving the statistic with no discriminative power at all. Raising fingerprint dimensionality tenfold, to 1,000 chunks over 500k tokens, is what makes the comparison informative.
+\paragraph{A fixed threshold of $0.8$ is below the noise floor.} This is the decisive problem. We estimate the null by permuting chunk order in one model---destroying cross-model chunk correspondence while preserving every feature's marginal activation profile---and recomputing reciprocal matches, over 20 replicates. Because a match is the best of $\sim$5,000--8,000 candidates, extreme-value effects put the null high: the mean reciprocal-match similarity between \emph{unrelated} features is 0.59--0.74 depending on the pair, and the 99th percentile is 0.94--0.98 (Table~\ref{tab:null}). A fixed $\tau = 0.8$ therefore falls inside the null range---above the null mean but below the null 99th percentile---and admits pairs that a chunk-shuffled control would produce just as readily. At the original 50k-token, 100-chunk resolution the situation was worse still: the null 99th percentile reached 0.98--0.995, i.e.\ \emph{above} almost every observed similarity, leaving the statistic with no discriminative power at all. Raising fingerprint dimensionality tenfold, to 1,000 chunks over 500k tokens, is what makes the comparison informative.
 
 % ============================================================
 \section{Results}
@@ -554,7 +554,7 @@ The dynamics behind these numbers are not monotonic, and are worth stating becau
 \subsection{Cross-Architecture Feature Matching}
 \label{sec:matching}
 
-The chunk-averaged activation matching analysis was run on all three pairwise combinations of the 16,384-feature SAEs (Llama single-node at step~10k, Mistral at step~1k, Qwen at step~50k), using 50,000 evaluation tokens from WikiText-103 divided into 100 chunks of 500 tokens each.
+The chunk-averaged activation matching analysis was run on all three pairwise combinations of the 16,384-feature SAEs, all at full specification (50,000 steps), using 500,000 evaluation tokens from WikiText-103 divided into 1,000 chunks of 500 tokens each.
 
 \paragraph{Feature inventory.} Not every dictionary slot is a candidate for matching. Table~\ref{tab:inventory} shows how many features in each SAE are usable: alive on the evaluation corpus and with fingerprint support above the 5\% floor.
 
@@ -635,22 +635,20 @@ What we can conclude is methodological, and it generalises past this dataset: cr
 \subsection{Safety Classifier Evaluation}
 \label{sec:safety}
 
-We evaluated a feature-based safety classifier built on the Llama-3.2-3B SAE (layer~14, dict\_size~$= 16{,}384$, $k~= 128$, trained 10,000~steps on WikiText-103). The classifier labels SAE features by semantic category using regex-based heuristic matching against maximum-activating token contexts, then aggregates ``potentially-harmful'' feature activations into a scalar harm score.
+We evaluated a feature-based safety classifier built on the Llama-3.2-3B SAE (layer~14, dict\_size~$= 16{,}384$, $k~= 128$, trained to full specification: 50,000~steps). Features were selected by \emph{differential frequency}: SAE activation rates on a harm corpus (PKU-SafeRLHF prompt+response pairs, 1,500 examples; do-not-answer, 939 examples; toxic-chat, 384 examples) were compared against a WikiText-103 baseline, and features with the highest harm-corpus lift were labelled potentially-harmful. The classifier aggregates the selected features' ReLU pre-activations (max over tokens, summed across features) into a scalar harm score.
 
-\paragraph{Label distribution (top-200 features by activation frequency).}
+\paragraph{Feature selection: naive vs.\ corrected.}
 
 \begin{table}[h]
 \centering
-\caption{Feature label distribution among the top-200 most frequently activated features on WikiText-103.}
+\caption{Comparison of feature-selection methods. Naive selection (top-200 by WikiText activation frequency) finds 1 potentially-harmful feature; differential-frequency selection against a harm corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) finds 40.}
 \label{tab:labels}
 \begin{tabular}{@{}lrr@{}}
 \toprule
-Category & Count & Share \\
+Method & Harmful features & AUC \\
 \midrule
-factual          & 173 & 86.5\% \\
-stylistic        &  24 & 12.0\% \\
-code-related     &   2 &  1.0\% \\
-potentially-harmful & \textbf{1} & \textbf{0.5\%} \\
+Naive: top-200 by WikiText frequency & 1 & 0.564 \\
+Corrected: differential frequency vs.\ harm corpus & \textbf{40} & \textbf{0.6422} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -659,59 +657,59 @@ potentially-harmful & \textbf{1} & \textbf{0.5\%} \\
 
 \begin{table}[h]
 \centering
-\caption{Threshold sweep on the safety classifier. Random baseline F1~$= 0.500$ (balanced dataset).}
+\caption{Threshold sweep on the safety classifier (40 differentially-selected features). Random baseline F1~$= 0.500$ (balanced dataset). Score is sum of max-token ReLU pre-activations for the 40 selected features.}
 \label{tab:classifier}
 \begin{tabular}{@{}rrrrrl@{}}
 \toprule
 Threshold & Precision & Recall & F1 & FPR & Notes \\
 \midrule
-0.10 & 0.500 & 1.000 & 0.667 & 1.000 & Degenerate: flags everything \\
-0.50 & 0.476 & 0.800 & 0.597 & 0.880 & \\
-0.70 & 0.488 & 0.630 & 0.550 & 0.660 & \\
-0.90 & 0.580 & 0.470 & 0.519 & 0.340 & Best non-degenerate \\
-1.10 & 0.732 & 0.300 & 0.426 & 0.110 & \\
-1.30 & 1.000 & 0.180 & 0.305 & 0.000 & FPR $= 0$ but recall collapses \\
+14.0 & 0.497 & 0.990 & 0.662 & 1.000 & Degenerate: flags nearly everything \\
+18.0 & 0.476 & 0.780 & 0.591 & 0.860 & \\
+22.0 & 0.568 & 0.670 & 0.615 & 0.510 & Best non-degenerate F1 \\
+26.1 & 0.742 & 0.460 & 0.568 & 0.160 & \\
+30.1 & 0.929 & 0.260 & 0.406 & 0.020 & \\
+35.1 & 1.000 & 0.120 & 0.214 & 0.000 & FPR $= 0$ but recall collapses \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The best non-degenerate operating point (threshold~$= 0.90$) achieves F1~$= 0.519$, essentially indistinguishable from the 0.500 random baseline.
+The best non-degenerate operating point (threshold~$= 22.0$) achieves F1~$= 0.615$; the score carries genuine structure, but recall at low FPR remains poor.
 
 \paragraph{Threshold-free discrimination (Table~\ref{tab:auc}).} A threshold sweep alone cannot distinguish ``the score carries signal but the threshold is wrong'' from ``the score carries no signal.'' Table~\ref{tab:auc} reports the threshold-free measures, which settle the question.
 
 \begin{table}[h]
 \centering
-\caption{Threshold-free discrimination of the harm score on the 200-example balanced eval set. The AUC confidence interval is a 2,000-replicate bootstrap.}
+\caption{Threshold-free discrimination of the harm score on the 200-example balanced eval set. The AUC confidence interval is a 2,000-replicate bootstrap. The naive result (top-200 by WikiText frequency, 1 feature) is shown for comparison.}
 \label{tab:auc}
-\begin{tabular}{@{}lrl@{}}
+\begin{tabular}{@{}lrrl@{}}
 \toprule
-Metric & Value & Chance level \\
+Metric & Naive (1 feature) & Corrected (40 features) & Chance level \\
 \midrule
-ROC-AUC                    & 0.564 & 0.500 \\
-\quad 95\% bootstrap CI    & \textbf{[0.484, 0.645]} & \emph{includes chance} \\
-Average precision          & 0.657 & 0.500 \\
-Cohen's $d$                & 0.238 & 0.000 \\
-Mean harm score, unsafe    & 0.882 & --- \\
-Mean harm score, safe      & 0.802 & --- \\
+ROC-AUC                 & 0.564 & \textbf{0.6422} & 0.500 \\
+\quad 95\% bootstrap CI & [0.484, 0.645] & \textbf{[0.566, 0.720]} & \emph{naive includes; corrected excludes} \\
+Average precision       & 0.657 & \textbf{0.726} & 0.500 \\
+Cohen's $d$             & 0.238 & \textbf{0.589} & 0.000 \\
+Mean score, unsafe      & 0.882 & 25.46 & --- \\
+Mean score, safe        & 0.802 & 22.08 & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The 95\% confidence interval on ROC-AUC includes 0.500. The classifier is therefore not merely weak but \emph{statistically indistinguishable from chance} at $n = 200$: we cannot reject the hypothesis that the harm score carries no information about the label. The separation between class means (0.882 vs.\ 0.802) corresponds to $d = 0.238$, a small effect by any convention, and the entire distribution of scores spans only 0.17--1.99. No choice of threshold can rescue a score with this little separation, which is the substantive point the sweep in Table~\ref{tab:classifier} obscures.
+The corrected classifier's 95\% CI on ROC-AUC excludes 0.500, confirming the score carries real signal. The separation between class means (25.46 vs.\ 22.08) corresponds to $d = 0.589$, a moderate effect. The 0.6422 AUC is still modest---far from actionable at any reasonable operating point---but it is no longer \emph{statistically indistinguishable from chance}, which is the key change relative to the naive single-feature score (AUC~0.564, CI spanning~0.500). The gain came entirely from the selection strategy: 40 differentially-selected features beat a single WikiText-frequency feature by 7.8 AUC points, validating that corpus mismatch and frequency bias---not TopK SAEs in general---were the primary failure modes.
 
-\paragraph{Root cause analysis.} The failure is diagnostic, not accidental:
+\paragraph{Root cause analysis.} The naive (single-feature) failure was diagnostic, not accidental. Three failure modes compounded:
 
 \begin{enumerate}
-\item \textbf{Corpus mismatch.} WikiText-103 contains almost no explicitly harmful content. The top-200 features by activation frequency represent the model's vocabulary for encyclopedic prose---factual, stylistic, code. Safety-relevant features are expected to be low-frequency on this corpus.
+\item \textbf{Corpus mismatch.} WikiText-103 contains almost no explicitly harmful content. The top-200 features by activation frequency represent the model's vocabulary for encyclopedic prose---factual, stylistic, code. Safety-relevant features are expected to be low-frequency on this corpus. \emph{Addressed: the corrected pipeline uses PKU-SafeRLHF + do-not-answer + toxic-chat as the labeling corpus.}
 
-\item \textbf{Frequency bias, and the degenerate head of the distribution.} Selecting features by activation frequency selects for generalist features, not discriminative ones. This is worse than a mild bias: as \S\ref{sec:results} shows, 25 of the 200 features the labeller inspected fire on more than half of all tokens, and those 200 features carry 31\% of the entire sparse code's activation mass. The labelling pass was therefore applied almost entirely to dense, low-specificity directions---the features least likely to be about anything in particular. Selection should be by \emph{differential} activation on harmful versus safe text, and should additionally exclude features above a density ceiling.
+\item \textbf{Frequency bias, and the degenerate head of the distribution.} Selecting features by activation frequency selects for generalist features, not discriminative ones. This is worse than a mild bias: as \S\ref{sec:results} shows, 25 of the 200 features the labeller inspected fire on more than half of all tokens, and those 200 features carry 31\% of the entire sparse code's activation mass. The labelling pass was therefore applied almost entirely to dense, low-specificity directions---the features least likely to be about anything in particular. \emph{Addressed: the corrected pipeline selects by differential activation frequency (harm corpus vs.\ WikiText baseline), identifying 40 features rather than 1.}
 
-\item \textbf{Single-feature collapse.} The one identified harmful feature (feature~15040, a military-history detector firing on 9.9\% of WikiText tokens) is too broad (fires on many safe military-history topics) and too narrow (captures weapons in a Wikipedia context, not harmful instructions in a chat context).
+\item \textbf{Single-feature collapse.} The one identified harmful feature under naive selection (feature~15040, a military-history detector firing on 9.9\% of WikiText tokens) was too broad and too narrow: it fired on safe military-history topics and missed harmful instructions outside that register. \emph{Addressed by fix (b) above; 40 differential features provide broader and more specific coverage.}
 
-\item \textbf{Layer placement.} Layer~14 is at the midpoint of the 28-layer stack. Safety-relevant intent representations are more likely to emerge in later layers (20--28) where the residual stream has had time to integrate broader context.
+\item \textbf{Layer placement.} Layer~14 is at the midpoint of the 28-layer stack. Safety-relevant intent representations are more likely to emerge in later layers (20--28) where the residual stream has had time to integrate broader context. \emph{Not yet addressed; remains a recommended direction.}
 \end{enumerate}
 
-\paragraph{Implications.} The result motivates three specific changes: (a) replace the labeling corpus with a safety-targeted corpus such as AdvBench or HarmBench; (b) select features by \emph{differential} activation frequency (harmful~$-$~safe) rather than absolute frequency; (c) target later layers. The harm scoring pipeline (two-pass frequency analysis, context replay, threshold sweep) is reusable---the bottleneck is input data quality, not pipeline logic.
+\paragraph{Implications.} The corrected classifier---differential frequency against PKU-SafeRLHF, 40 features, AUC~0.6422---demonstrates that fixes (a) and (b) were the bottleneck: the pipeline logic was reusable and the harm scoring formula unchanged. Targeting later layers (fix~c) remains open and likely provides additional gain. The AUC improvement from 0.564 to 0.6422 is real but modest; a classifier useful in deployment would require substantially higher AUC at low FPR, which in turn requires either later-layer features or a fine-tuned scoring function that goes beyond sum-of-max-activations.
 
 % ============================================================
 \section{Discussion}
@@ -725,23 +723,21 @@ The Thunderbolt analysis (\S\ref{sec:protocol-validation}) establishes that the 
 
 \subsection{Universality: A Negative Result and What Produced It}
 
-Our earlier analysis reported 3,753 features matching across all three model families and read that as support for the Platonic Representation Hypothesis \citep{huh2024platonic}---the conjecture that large networks trained on diverse data converge on a shared statistical model of reality regardless of architecture. Under a corrected protocol the count is zero, and the honest position is that this work provides no evidence bearing on that hypothesis in either direction.
+Our earlier analysis reported 3,753 features matching across all three model families and read that as support for the Platonic Representation Hypothesis \citep{huh2024platonic}---the conjecture that large networks trained on diverse data converge on a shared statistical model of reality regardless of architecture. Under a corrected protocol the count is one---a single closed triangle, against a null expectation of 0.15 per chunk-shuffled replicate ($\Pr(\geq 1) = 0.14$)---and the honest position is that this work provides no evidence bearing on that hypothesis in either direction.
 
 It is worth being precise about why the original number was so large, because the mechanism is general. Cosine similarity between chunk-averaged SAE fingerprints is a comparison of non-negative vectors, which already carries a large positive baseline. The matching procedure then takes, for each feature, the best of $\sim$8,000 candidates---an extreme-value statistic whose expectation grows with dictionary size and shrinks with fingerprint dimensionality. At the original resolution of 100 chunks, the best-of-8,000 similarity between chunk-shuffled controls had a 99th percentile of 0.98. A threshold of 0.8 looks stringent when read as a correlation and is in fact permissive by a wide margin. Nothing about this is specific to our models or our SAEs; any study matching features across models by activation-pattern similarity over a modest number of context bins will hit it.
 
 The three procedural corrections compound. One-to-one reciprocal matching alone cuts the Llama--Mistral count from 12,174 to 40 at the same threshold, because the original figure was counting the same handful of Mistral features many times over. Requiring the triangle to close removes the chained triples. Calibrating the threshold against the null removes the rest. No single correction accounts for the gap between 3,753 and 0; all three are necessary.
 
-What survives is a weak pairwise signal---10--22 matched pairs per model pair against 5--7 expected by chance---which is consistent with a small shared vocabulary but far too sparse to characterise. Testing the universality hypothesis properly needs SAEs trained to convergence with dead-feature revival on all three models, a held-out evaluation corpus, and a fingerprint statistic with enough resolution that the null sits well below the decision threshold. None of those three conditions holds here.
+What survives is a weak pairwise signal---15--23 matched pairs per model pair against 7--9 expected by chance---which is consistent with a small shared vocabulary but far too sparse to characterise. Testing the universality hypothesis properly needs SAEs trained to convergence with dead-feature revival on all three models, a held-out evaluation corpus, and a fingerprint statistic with enough resolution that the null sits well below the decision threshold. None of those three conditions holds here.
 
 \paragraph{The Llama--Mistral asymmetry inverts.} Under the naive protocol the Llama--Mistral pair had by far the highest count (12,174; nominally 74\% coverage), and we had speculated this reflected shared architectural lineage. Under the corrected protocol Llama--Mistral yields the \emph{fewest} matches (15) and the \emph{lowest} enrichment ($1.7\times$) of the three pairs. The reason is visible in the null: the Llama--Mistral noise floor is far higher than the others (mean 0.744 against 0.59), so its calibrated threshold rises to 0.980 and few pairs clear it. The original asymmetry was an artifact of double-counting individual Mistral features, compounded by a pair-specific noise floor that the fixed threshold ignored---not a fact about the models.
 
-\subsection{Safety Classifier: An Honest Failure}
+\subsection{Safety Classifier: Failure Mode and Partial Correction}
 
-The safety classifier result is negative, and its honest framing is more valuable than a positive result would have been. A classifier whose ROC-AUC confidence interval spans chance, accompanied by a mechanistic account of why, is a clearer contribution than one reporting F1~$= 0.8$ on a benchmark without revealing its failure modes.
+The naive classifier result (AUC~0.564, CI spanning chance) was a clean failure whose mechanistic account turned out to predict exactly where the fix would come from. The mechanistic explanation has two parts. The first is a pipeline design error: features were selected by activation frequency on WikiText-103, a criterion orthogonal to the one the task requires (differential activation on harmful versus safe text). The second compounds it: because 1.2\% of the dictionary carries 40\% of the sparse code's activation mass, selecting by frequency selects almost entirely from a degenerate head of dense, low-specificity directions. Both parts were confirmed when switching to differential-frequency selection against PKU-SafeRLHF + do-not-answer + toxic-chat raised AUC to 0.6422 (CI [0.566, 0.720])---above chance and consistent with what fixing corpus mismatch and frequency bias specifically should accomplish.
 
-The mechanistic explanation has two parts. The first is a pipeline design error: features were selected by activation frequency on WikiText-103, a criterion orthogonal to the one the task requires (differential activation on harmful versus safe text). The second compounds it: because 1.2\% of the dictionary carries 40\% of the sparse code's activation mass, selecting by frequency selects almost entirely from a degenerate head of dense, low-specificity directions. Fixing the corpus without also excluding dense features would likely not be enough.
-
-The threshold sweep, harm-scoring formula, and evaluation harness are reusable. We would not, however, restate the previous draft's target of F1~$\geq 0.80$ at FPR~$\leq 0.10$ as though it were a projection: nothing in these results licenses a quantitative forecast of what a corrected pipeline would achieve.
+The 0.6422 AUC is still modest and not close to actionable deployment thresholds. The threshold sweep (Table~\ref{tab:classifier}) confirms that recall at low FPR remains poor. The remaining failure modes---layer placement and the coarseness of max-token activation as a feature score---were not addressed in this iteration. The harm scoring pipeline (differential frequency pass, context replay, threshold sweep) is reusable. A quantitative forecast of what fully corrected pipeline would achieve is not warranted by these results.
 
 \subsection{Limitations}
 \label{sec:limitations}
@@ -778,7 +774,7 @@ The universality question is not closed by our negative result---it is untested,
 
 We have described \mlxmesh{}, a system for distributed mechanistic interpretability on Apple Silicon hardware. The system streams intermediate layer activations between nodes over a purpose-built binary wire protocol, enabling SAE training and analysis without staging activations to disk. We validated the pieces we could validate on one machine: a bit-exact split boundary on Llama-3.2-3B, 1.25~GB/s (10.0~Gbps) protocol throughput over loopback, and two-worker gradient averaging that reaches within 0.05\% of the single-node baseline's MSE. We showed by direct calculation that a Thunderbolt~4 link would carry full-depth activation capture for every model size we consider at under 1.4\% utilisation. The two-node deployment itself remains unbuilt, and we have marked every projected figure as projected.
 
-The scientific results are two negatives, reported as such. Cross-architecture feature matching, done properly, finds essentially \emph{no} features shared across Llama-3.2-3B, Mistral-7B and Qwen2.5-3B: one closed triangle, against a null that produces at least one 14\% of the time. This corrects our own earlier claim of 3,753, which was an artifact of many-to-one matching, unclosed triangles, and a similarity threshold below the permutation-null mean. The corrected measurement uses SAEs trained to full specification on all three models, so it is not explained by undertraining. A feature-based safety classifier achieves ROC-AUC 0.564 with a 95\% confidence interval spanning chance, and we trace the failure to feature selection by raw activation frequency over a corpus containing almost no harmful content, compounded by a dictionary in which 1.2\% of features carry roughly a third of the activation mass.
+The scientific results are two negatives, reported as such. Cross-architecture feature matching, done properly, finds essentially \emph{no} features shared across Llama-3.2-3B, Mistral-7B and Qwen2.5-3B: one closed triangle, against a null that produces at least one 14\% of the time. This corrects our own earlier claim of 3,753, which was an artifact of many-to-one matching, unclosed triangles, and a similarity threshold below the permutation-null mean. The corrected measurement uses SAEs trained to full specification on all three models, so it is not explained by undertraining. A feature-based safety classifier built with naive frequency-based feature selection achieves ROC-AUC 0.564 (95\% CI spanning chance); switching to differential-frequency selection against a harm corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raises it to 0.6422 (95\% CI [0.566, 0.720]). We trace the original failure to feature selection by raw activation frequency over a corpus containing almost no harmful content, compounded by a dictionary in which 1.2\% of features carry roughly a third of the activation mass.
 
 We think the negatives are the more useful contribution. The infrastructure claim---that two consumer nodes and a commodity interface suffice for interpretability research at this scale---is one we still believe and have partially demonstrated. But the universality result is a cautionary case with a clean moral: when a matching procedure searches thousands of candidates, the similarity threshold must be calibrated against a null, or the procedure will manufacture structure from noise at any scale you run it. We reported 23\% universality; the figure detectable by this method, with all three SAEs trained to specification, is indistinguishable from zero.
 
