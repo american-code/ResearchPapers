@@ -203,6 +203,11 @@ previously overstated by 3.8 points.
   Corrected to the per-head breakdown, plus a new paragraph on the absence of
   multiple-comparison correction across 672/384 tested heads and the winner's-curse
   bias from selecting and estimating on the same 100 examples.
+  **L1H11 bootstrap backing:** L1H11 appears as Pythia Table 4 entry #4 but its actual
+  patching score in `patching-pythia1b.json` is −0.00279 (Pythia) and −0.000024 (Llama),
+  both well below the ≥ 0.03 threshold, so `run_statistical_validation.py` never computed
+  its CI. Added to `FORCE_INCLUDE` in that script and bootstrapped via
+  `data/ioi/add_l1h11_ci.py` on lab-02; results merged into `statistical-validation.json`.
 - **Factual-association dataset was misdescribed** as "drawn from Meng et al. (2022)'s
   CounterFact evaluation set". It is 25 hand-built `capital_of` + 25
   `official_language_of` items. §6.2 also described only the capitals, silently omitting
@@ -211,10 +216,21 @@ previously overstated by 3.8 points.
   `data/ioi/path-patching-llama3b-real.json` contained 10 real edges at *n* = 100. Now
   reported as new §6.2 with the full edge table, including two suppressive edges
   (L15H20→L17H17, score −0.113) that support a negative-name-mover reading.
-- **Three values for one quantity**: mean clean logit difference was 5.649 (paper),
-  5.6431 (`baseline-llama3b.json`), 5.668 (`path-patching-llama3b-real.json`).
-  Standardised on 5.643; dependent percentages recomputed (L15H20 27.9%→28.0%,
-  L17H17 16.4%→16.5%).
+- **Four values for one quantity**: mean clean logit difference (Llama-3.2-3B, n=100)
+  appears as four distinct numbers across files:
+
+  | Value   | Source | Root cause |
+  |---------|--------|------------|
+  | 5.6431  | `data/ioi/baseline-llama3b.json` `.meta.logit_diff_mean` | Per-example forward passes; mean of individual logit diffs (exact: 5.643125) |
+  | 5.6494  | `data/ioi/ablation-llama3b.json` `.meta.clean_logit_diff_mean`; `results-summary.md` | Batched inference (100 examples together); padding changes attention mask, shifting logit values (exact: 5.649375) |
+  | 5.668   | `papers/circuit-tracing/submission/main.tex` §6.2; `path-patching-llama3b-real.json` `.mean_clean_logit_diff` | Path-patching script batching (exact: 5.668125) |
+  | 4.7663  | `data/ioi/faithfulness-llama3b.json` `.logit_diffs.clean` | **Different quantity**: faithfulness script uses BATCH=25 with padding; `last_pos` drawn from padded (max) length rather than per-example actual length, giving incorrect position lookup for variable-length prompts. Not the same as the above three. |
+
+  Standardised on **5.643** (per-example, no padding artifacts); dependent percentages
+  recomputed (L15H20 27.9%→28.0%, L17H17 16.4%→16.5%). The 4.7663 value in
+  `faithfulness-llama3b.json` is an artefact of the batched last-token addressing and is
+  not a valid clean-LD measurement; the faithfulness file is noted as unreliable.
+
 - Llama-3.2-3B called "instruction-tuned"; the model used is the base bf16 checkpoint.
 - Added a Related Work subsection covering the prior art whose omission reviewers would
   flag: Merullo et al. 2024 (cross-task circuit reuse — closest prior work to §6.3),
@@ -225,7 +241,14 @@ previously overstated by 3.8 points.
   Limitations. Per-head patching scores sum to 1.013, so they cannot substitute for a
   joint circuit measurement. This requires model forward passes and **was not run** —
   the weights are not available locally.
-- `REPO_URL_HERE` ×2 replaced.
+- **GitHub repo URLs are 404**: `https://github.com/jmelton-research/swiftsci-interp`
+  (circuit-tracing, ×2 in main.tex lines 380 and 1440) and
+  `https://github.com/jmelton-research/mlxmesh` (distributed-interp),
+  `https://github.com/jmelton-research/sae-crossarch` (sae-comparison) all return HTTP
+  404 as of 2026-08-04. The `jmelton-research` GitHub organization does not exist.
+  URLs remain as placeholders pending repository creation; they were written from a
+  prior correction pass that did not verify liveness.
+- **`REPO_URL_HERE` ×2** placeholder text was replaced in a prior pass (see above).
 
 ---
 
@@ -264,8 +287,10 @@ current examples share one frame and one ordering.~~ **Complete 2026-07-31** —
 
 ~~**3. Pythia path patching** — only Llama was measured.~~ **Complete 2026-07-31** —
 produced by ioi-followup-20260730-232530 (queued after first attempt failed with
-GPTNeoXModel `.layers` AttributeError); `path-patching-pythia1b-real.json` may need
-retrieval from lab-02.
+GPTNeoXModel `.layers` AttributeError). **`path-patching-pythia1b-real.json` not found
+on lab-02 as of 2026-08-04** (checked `/Users/melton/ResearchPapers/data/ioi/` on
+lab-02); file may have been lost or never synced. The claim "Complete" is provisional
+pending file recovery.
 
 ~~**4. Retrain the Mistral SAE** to parity (1,000 steps → 50,000 on 500k tokens;
 ~17 h at the observed 1.24 s/step).~~ **Complete 2026-07-29** — full training on
