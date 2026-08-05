@@ -1,0 +1,104 @@
+============================================================
+Circuit-Feature Bridge: L15H20 x IOI, Llama-3.2-3B layer-14 SAE
+============================================================
+
+[1] Loading SAE...
+   d_in=3072  dict_size=16384  k=128
+
+[2] Loading model (may take ~30s)...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 194437.93it/s]
+   Model loaded.
+   W_V_20 (128, 3072)  W_O_20 (3072, 128)
+
+[3] Computing OV-projected write features (static weight analysis)...
+   Top-20 features by |write_vec| (OV norm):
+     feat_10136: ov_norm=1.7627  max_cos=0.4055
+     feat_01884: ov_norm=1.7059  max_cos=0.3894
+     feat_06758: ov_norm=1.6728  max_cos=0.1417
+     feat_00646: ov_norm=1.6286  max_cos=0.1437
+     feat_11313: ov_norm=1.6113  max_cos=0.1702
+     feat_13812: ov_norm=1.6110  max_cos=0.2453
+     feat_00512: ov_norm=1.5892  max_cos=0.1406
+     feat_10066: ov_norm=1.5810  max_cos=0.2539
+     feat_12853: ov_norm=1.5741  max_cos=0.2863
+     feat_11010: ov_norm=1.5718  max_cos=0.3332
+     feat_00686: ov_norm=1.5676  max_cos=0.1621
+     feat_15538: ov_norm=1.5564  max_cos=0.2278
+     feat_09175: ov_norm=1.5514  max_cos=0.2604
+     feat_15869: ov_norm=1.5318  max_cos=0.1981
+     feat_04243: ov_norm=1.5283  max_cos=0.3870
+     feat_11079: ov_norm=1.5229  max_cos=0.2447
+     feat_04472: ov_norm=1.5203  max_cos=0.1217
+     feat_08929: ov_norm=1.5117  max_cos=0.2805
+     feat_03196: ov_norm=1.5030  max_cos=0.3606
+     feat_15950: ov_norm=1.4871  max_cos=0.1369
+
+[4] Installing hook on layer 14...
+   Hook installed.
+
+[5] Loading IOI dataset...
+   Using 100 examples.
+
+[6] Running forward passes...
+   10/100 done...
+   20/100 done...
+   30/100 done...
+   40/100 done...
+   50/100 done...
+   60/100 done...
+   70/100 done...
+   80/100 done...
+   90/100 done...
+   100/100 done...
+
+   Processed 100 examples successfully.
+
+[7] Computing universal features...
+
+  [io_pos] 11 universal features (freq > 0.4):
+    feat_12321  freq=1.00  mean_act=3.125
+    feat_05528  freq=1.00  mean_act=3.458
+    feat_13830  freq=0.99  mean_act=2.138
+    feat_02473  freq=0.93  mean_act=1.250
+    feat_12776  freq=0.89  mean_act=1.795
+    feat_06679  freq=0.85  mean_act=1.194
+    feat_14897  freq=0.78  mean_act=1.379
+    feat_01485  freq=0.55  mean_act=1.241
+    feat_04662  freq=0.53  mean_act=1.267
+    feat_15078  freq=0.45  mean_act=1.764
+
+  [subj_pos] 14 universal features (freq > 0.4):
+    feat_13830  freq=1.00  mean_act=2.141
+    feat_12321  freq=1.00  mean_act=2.202
+    feat_05528  freq=1.00  mean_act=3.603
+    feat_12776  freq=0.98  mean_act=1.651
+    feat_14897  freq=0.94  mean_act=1.382
+    feat_06679  freq=0.94  mean_act=1.129
+    feat_06412  freq=0.84  mean_act=1.044
+    feat_02473  freq=0.75  mean_act=0.991
+    feat_11027  freq=0.71  mean_act=1.185
+    feat_06351  freq=0.67  mean_act=1.065
+
+  [query_pos] 16 universal features (freq > 0.4):
+    feat_14897  freq=1.00  mean_act=2.149
+    feat_13830  freq=1.00  mean_act=1.880
+    feat_12776  freq=1.00  mean_act=2.080
+    feat_12546  freq=1.00  mean_act=2.328
+    feat_05528  freq=1.00  mean_act=3.454
+    feat_11027  freq=0.95  mean_act=1.496
+    feat_08283  freq=0.69  mean_act=1.246
+    feat_08092  freq=0.66  mean_act=1.226
+    feat_12774  freq=0.60  mean_act=1.282
+    feat_09090  freq=0.53  mean_act=1.292
+
+  IO ∩ query:           [5528, 12776, 13830, 14897]
+  Subject ∩ query:      [5528, 11027, 12776, 13830, 14897]
+  IO ∩ Subject ∩ query: [5528, 12776, 13830, 14897]
+  READ(all) ∩ WRITE:    []  ← bridge candidates
+
+[8] Saving results...
+   Saved bridge_results.json and per_example.json to /Users/lab-02/ResearchPapers/data/circuit-feature-bridge
+
+=== Done ===

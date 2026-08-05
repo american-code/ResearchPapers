@@ -1,0 +1,351 @@
+{
+  "meta": {
+    "model": "mlx-community/Llama-3.2-3B-bf16",
+    "sae_layer": 14,
+    "head_layer": 15,
+    "head_idx": 20,
+    "n_examples": 100,
+    "universal_thresh": 0.4,
+    "top_k": 20,
+    "kv_head_for_h20": 6,
+    "kv_group_size": 3,
+    "description": "Read features: layer-14 SAE features active in top-20 at IO/Subject/query token positions, averaged over examples. Universal = appears for \u226540% of examples. Write features: SAE-feature write-vectors obtained via OV circuit (W_dec[j] @ W_V_20.T @ W_O_20.T), ranked by L2 norm."
+  },
+  "universal_read": {
+    "io_pos": [
+      {
+        "feat_idx": 12321,
+        "freq": 1.0,
+        "mean_act": 3.1249707433436615
+      },
+      {
+        "feat_idx": 5528,
+        "freq": 1.0,
+        "mean_act": 3.458218714845066
+      },
+      {
+        "feat_idx": 13830,
+        "freq": 0.99,
+        "mean_act": 2.1384448111907575
+      },
+      {
+        "feat_idx": 2473,
+        "freq": 0.93,
+        "mean_act": 1.250004308063679
+      },
+      {
+        "feat_idx": 12776,
+        "freq": 0.89,
+        "mean_act": 1.795229910263058
+      },
+      {
+        "feat_idx": 6679,
+        "freq": 0.85,
+        "mean_act": 1.194024605470318
+      },
+      {
+        "feat_idx": 14897,
+        "freq": 0.78,
+        "mean_act": 1.3794073873365338
+      },
+      {
+        "feat_idx": 1485,
+        "freq": 0.55,
+        "mean_act": 1.2407438980360874
+      },
+      {
+        "feat_idx": 4662,
+        "freq": 0.53,
+        "mean_act": 1.2672102077810241
+      },
+      {
+        "feat_idx": 15078,
+        "freq": 0.45,
+        "mean_act": 1.763779313967078
+      },
+      {
+        "feat_idx": 11996,
+        "freq": 0.45,
+        "mean_act": 2.3737953869524837
+      }
+    ],
+    "subj_pos": [
+      {
+        "feat_idx": 13830,
+        "freq": 1.0,
+        "mean_act": 2.1408439729457056
+      },
+      {
+        "feat_idx": 12321,
+        "freq": 1.0,
+        "mean_act": 2.2024889180841947
+      },
+      {
+        "feat_idx": 5528,
+        "freq": 1.0,
+        "mean_act": 3.603105165598094
+      },
+      {
+        "feat_idx": 12776,
+        "freq": 0.98,
+        "mean_act": 1.651296567991655
+      },
+      {
+        "feat_idx": 14897,
+        "freq": 0.94,
+        "mean_act": 1.382434266531763
+      },
+      {
+        "feat_idx": 6679,
+        "freq": 0.94,
+        "mean_act": 1.1293896422807967
+      },
+      {
+        "feat_idx": 6412,
+        "freq": 0.84,
+        "mean_act": 1.0438590474248426
+      },
+      {
+        "feat_idx": 2473,
+        "freq": 0.75,
+        "mean_act": 0.9910359778672313
+      },
+      {
+        "feat_idx": 11027,
+        "freq": 0.71,
+        "mean_act": 1.184619592781851
+      },
+      {
+        "feat_idx": 6351,
+        "freq": 0.67,
+        "mean_act": 1.0651109661818476
+      },
+      {
+        "feat_idx": 824,
+        "freq": 0.62,
+        "mean_act": 1.0344460383792546
+      },
+      {
+        "feat_idx": 11996,
+        "freq": 0.51,
+        "mean_act": 1.611285377635291
+      },
+      {
+        "feat_idx": 26,
+        "freq": 0.51,
+        "mean_act": 1.547892897433284
+      },
+      {
+        "feat_idx": 11067,
+        "freq": 0.42,
+        "mean_act": 1.018266569757977
+      }
+    ],
+    "query_pos": [
+      {
+        "feat_idx": 14897,
+        "freq": 1.0,
+        "mean_act": 2.1487413583037265
+      },
+      {
+        "feat_idx": 13830,
+        "freq": 1.0,
+        "mean_act": 1.880135277321676
+      },
+      {
+        "feat_idx": 12776,
+        "freq": 1.0,
+        "mean_act": 2.0804030094450514
+      },
+      {
+        "feat_idx": 12546,
+        "freq": 1.0,
+        "mean_act": 2.3284868536051184
+      },
+      {
+        "feat_idx": 5528,
+        "freq": 1.0,
+        "mean_act": 3.454160192859464
+      },
+      {
+        "feat_idx": 11027,
+        "freq": 0.95,
+        "mean_act": 1.4955616648254184
+      },
+      {
+        "feat_idx": 8283,
+        "freq": 0.69,
+        "mean_act": 1.2457065364511162
+      },
+      {
+        "feat_idx": 8092,
+        "freq": 0.66,
+        "mean_act": 1.2257336114341166
+      },
+      {
+        "feat_idx": 12774,
+        "freq": 0.6,
+        "mean_act": 1.282452638730248
+      },
+      {
+        "feat_idx": 9090,
+        "freq": 0.53,
+        "mean_act": 1.2923871197601235
+      },
+      {
+        "feat_idx": 15636,
+        "freq": 0.49,
+        "mean_act": 1.0917009258961714
+      },
+      {
+        "feat_idx": 5165,
+        "freq": 0.48,
+        "mean_act": 1.225609021626881
+      },
+      {
+        "feat_idx": 16007,
+        "freq": 0.47,
+        "mean_act": 1.202938837952031
+      },
+      {
+        "feat_idx": 7325,
+        "freq": 0.42,
+        "mean_act": 1.5280652624420228
+      },
+      {
+        "feat_idx": 142,
+        "freq": 0.42,
+        "mean_act": 1.6133731230799937
+      },
+      {
+        "feat_idx": 6255,
+        "freq": 0.41,
+        "mean_act": 1.3994812293244658
+      }
+    ]
+  },
+  "cross_position": {
+    "io_and_query": [
+      5528,
+      12776,
+      13830,
+      14897
+    ],
+    "subj_and_query": [
+      5528,
+      11027,
+      12776,
+      13830,
+      14897
+    ],
+    "io_and_subj_and_query": [
+      5528,
+      12776,
+      13830,
+      14897
+    ]
+  },
+  "top_write_features": [
+    {
+      "feat_idx": 10136,
+      "ov_write_norm": 1.7626570463180542,
+      "max_write_cos": 0.4054914712905884
+    },
+    {
+      "feat_idx": 1884,
+      "ov_write_norm": 1.7058731317520142,
+      "max_write_cos": 0.3894113004207611
+    },
+    {
+      "feat_idx": 6758,
+      "ov_write_norm": 1.6728321313858032,
+      "max_write_cos": 0.14169766008853912
+    },
+    {
+      "feat_idx": 646,
+      "ov_write_norm": 1.6286025047302246,
+      "max_write_cos": 0.14366598427295685
+    },
+    {
+      "feat_idx": 11313,
+      "ov_write_norm": 1.611303687095642,
+      "max_write_cos": 0.17021384835243225
+    },
+    {
+      "feat_idx": 13812,
+      "ov_write_norm": 1.6110321283340454,
+      "max_write_cos": 0.24529577791690826
+    },
+    {
+      "feat_idx": 512,
+      "ov_write_norm": 1.589152216911316,
+      "max_write_cos": 0.14058569073677063
+    },
+    {
+      "feat_idx": 10066,
+      "ov_write_norm": 1.58095383644104,
+      "max_write_cos": 0.25388333201408386
+    },
+    {
+      "feat_idx": 12853,
+      "ov_write_norm": 1.5741336345672607,
+      "max_write_cos": 0.2862951159477234
+    },
+    {
+      "feat_idx": 11010,
+      "ov_write_norm": 1.5718034505844116,
+      "max_write_cos": 0.3331747353076935
+    },
+    {
+      "feat_idx": 686,
+      "ov_write_norm": 1.5676442384719849,
+      "max_write_cos": 0.16214261949062347
+    },
+    {
+      "feat_idx": 15538,
+      "ov_write_norm": 1.5564444065093994,
+      "max_write_cos": 0.2278086394071579
+    },
+    {
+      "feat_idx": 9175,
+      "ov_write_norm": 1.5513674020767212,
+      "max_write_cos": 0.2604488730430603
+    },
+    {
+      "feat_idx": 15869,
+      "ov_write_norm": 1.5317704677581787,
+      "max_write_cos": 0.19806496798992157
+    },
+    {
+      "feat_idx": 4243,
+      "ov_write_norm": 1.5283465385437012,
+      "max_write_cos": 0.3870149552822113
+    },
+    {
+      "feat_idx": 11079,
+      "ov_write_norm": 1.5228526592254639,
+      "max_write_cos": 0.2446817308664322
+    },
+    {
+      "feat_idx": 4472,
+      "ov_write_norm": 1.5203255414962769,
+      "max_write_cos": 0.12170713394880295
+    },
+    {
+      "feat_idx": 8929,
+      "ov_write_norm": 1.5116701126098633,
+      "max_write_cos": 0.28054121136665344
+    },
+    {
+      "feat_idx": 3196,
+      "ov_write_norm": 1.5030380487442017,
+      "max_write_cos": 0.36056336760520935
+    },
+    {
+      "feat_idx": 15950,
+      "ov_write_norm": 1.487061858177185,
+      "max_write_cos": 0.13691429793834686
+    }
+  ],
+  "bridge_features": []
+}
