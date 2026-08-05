@@ -13,7 +13,7 @@ The program spans three interconnected studies: mechanistic circuit analysis of 
 
 ## I. Experiment Outcomes: Confirmed vs. Surprising
 
-### 1. IOI Circuit Topology Generalizes — Confirmed (with a major structural twist)
+### 1. IOI Circuit Topology Generalizes — Zone Level (depth conservation not confirmed)
 
 **Hypothesis:** The three-zone IOI circuit topology documented by Wang et al. (2022) for GPT-2 Small generalizes to modern billion-parameter models at compatible relative depths.
 
@@ -57,7 +57,7 @@ The objective-comparison hypothesis — whether training objective produces inte
 
 **Hypothesis:** Splitting Llama-3.2-3B inference across two processes at the layer-15/16 boundary introduces no meaningful reconstruction error.
 
-**Result:** Confirmed exactly, not just approximately. max_abs_error = 0.0 at both the handoff tensor (layer 15 output) and the final tensor (layer 27 output) across 512 tokens. The "nearly lossless" framing in the writeup is too conservative; within float16 precision, the split is numerically identical to single-process inference. The mlxMesh v1.0.0 protocol overhead is 0.20%; localhost throughput is 1.25 Gbps, approximately 3,000× the required bandwidth for real-time single-layer activation capture.
+**Result:** Confirmed exactly, not just approximately. max_abs_error = 0.0 at both the handoff tensor (layer 15 output) and the final tensor (layer 27 output) across 512 tokens. The "nearly lossless" framing in the writeup is too conservative; within float16 precision, the split is numerically identical to single-process inference. The mlxMesh v1.0.0 protocol overhead is 0.20 GB/s; localhost throughput is 1.25 GB/s, approximately 3,000× the required bandwidth for real-time single-layer activation capture.
 
 ---
 
@@ -76,6 +76,8 @@ The objective-comparison hypothesis — whether training objective produces inte
 **Result:** Failed. Best non-degenerate F1: 0.519 at threshold 0.90 (precision 0.580, recall 0.470, FPR 0.340). Random baseline: F1 = 0.500. Of the top-200 features by activation frequency over WikiText-103, only 1 was labeled "potentially harmful" (feature 15040, firing on military history encyclopedic text). The most discriminative feature (5528) is labeled "factual" and shows a mean activation gap of 0.576 units between unsafe and safe examples — but this is a general-content signal, not a harm signal.
 
 **Why this failure is informative:** The diagnosis is specific. The failure is not a pipeline problem — the infrastructure (feature labeling, threshold sweep, evaluation set) worked as designed. The failure is a corpus mismatch: labeling features by activation frequency over a neutral encyclopedic corpus (WikiText-103) will find features corresponding to the surface regularities of encyclopedic text, not features corresponding to harm-relevant content. Feature selection by differential activation frequency over a safety-relevant corpus is the prescribed fix. The paper states this failure as a finding rather than hiding it, which is the right call.
+
+**v2 classifier (domain-matched corpus):** Following the diagnosed fix, a v2 classifier was evaluated using differential feature activation over a domain-matched safety corpus (PKU-SafeRLHF / do-not-answer / toxic-chat). ROC-AUC: 0.6422, 95% CI [0.566, 0.720]. This is reliably above chance but falls short of the ≥0.75 threshold specified in Experiment D. The result confirms that corpus mismatch was the primary failure mode — switching to a harm-relevant labeling corpus produces an above-chance classifier — but the improvement is modest, indicating that further work is needed (feature selection refinement, threshold tuning, or a larger safety corpus) before the approach reaches practical utility.
 
 ---
 
