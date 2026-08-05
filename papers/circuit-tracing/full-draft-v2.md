@@ -1,3 +1,5 @@
+> **SUPERSEDED — see submission/main.tex for the current version. Do not cite or submit this draft.**
+
 # Efficient Mechanistic Circuit Analysis of Open-Weight LLMs on Apple Silicon
 
 > **REVISION NOTES (v2)** — Issues marked inline with `[[NOTE: ...]]`. Open items:

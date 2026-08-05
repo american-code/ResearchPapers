@@ -1,3 +1,5 @@
+> **SUPERSEDED — see submission/main.tex for the current version. Do not cite or submit this draft.**
+
 # Feature Universality in Open-Weight LLMs: A Cross-Architecture Sparse Autoencoder Study
 
 > **DRAFT NOTES (v2, updated 2026-08-02)** — §4 replaced with actual measured results; all `[EXP]` markers resolved. This markdown is a working draft; the authoritative rescoped submission is `submission/main.tex`. Remaining open items:

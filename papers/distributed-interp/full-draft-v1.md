@@ -1,3 +1,5 @@
+> **SUPERSEDED — see submission/main.tex for the current version. Do not cite or submit this draft.**
+
 # Distributed Mechanistic Interpretability at Scale: Activation Streaming, Split-Layer Inference, and Cross-Architecture Feature Universality
 
 **Draft v1** — 2026-07-29  
