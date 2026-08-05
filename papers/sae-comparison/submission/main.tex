@@ -73,7 +73,7 @@ percentile of 0.94--0.98, so the conventional fixed threshold of 0.8 sits below 
 noise floor for every model pair. With one-to-one reciprocal matching, a
 closed-triangle requirement and a null-calibrated threshold, exactly one feature triple
 is shared across all three models---against a null that yields at least one 14\% of the
-time. An uncalibrated analysis of the same checkpoints reported 3,753.
+time. An uncalibrated analysis of partial checkpoints reported 3,753.
 
 We report a comparison of training objectives as \emph{not conducted}: only TopK was
 trained, and \S\ref{sec:notrun} states plainly which planned experiments do not exist.
@@ -398,8 +398,8 @@ heavily from the degenerate head: of the 200 most frequent Llama features, 25 fi
 more than half of all tokens, and those 200 features carry 31\% of the entire code. In separate work we built a feature-based
 safety classifier on exactly this selection and obtained ROC-AUC 0.564 with a 95\%
 confidence interval spanning chance. Switching to differential-frequency labelling
-against a harm-relevant contrastive corpus (AdvBench/HarmBench) raised ROC-AUC to
-0.643---still modest but now clearly above chance, confirming that the degenerate
+against a harm-relevant contrastive corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raised ROC-AUC to
+0.6422 (95\% CI [0.566, 0.720])---still modest but now clearly above chance, confirming that the degenerate
 feature head is the primary culprit rather than TopK SAEs in general. Selecting by
 \emph{differential} activation between contrastive corpora, and imposing a density
 ceiling, are both necessary; neither is standard practice.
@@ -662,15 +662,15 @@ question does not arise.
 
 We trained TopK SAEs at matched sparsity and dictionary size on three model families and
 instrumented the training rather than only its endpoint. Without an auxiliary revival
-loss, the dictionary collapses abruptly between steps 2{,}000 and 5{,}000, losing
-40--60\% of its capacity while reconstruction quality continues to improve---a failure
-mode that the usual metrics conceal. What survives is dominated by dense directions:
+loss, the dictionary collapses abruptly between steps 2{,}000 and 5{,}800,
+leaving 14.3--57.4\% of features permanently dead at convergence while reconstruction quality continues to
+improve---a failure mode that the usual metrics conceal. What survives is dominated by dense directions:
 1.2\% of the dictionary carries roughly 40\% of the sparse code, which invalidates
 frequency-based feature selection.
 
-Cross-architecture feature matching finds nothing that survives a permutation null. The
-conventional protocol applied to these same checkpoints reports 3{,}753 shared features;
-the corrected count is zero. The gap is entirely attributable to three procedural
+Cross-architecture feature matching finds essentially nothing that survives a permutation null. The
+conventional protocol applied to partial checkpoints reports 3{,}753 shared features;
+the corrected count is one---not statistically distinguishable from null ($\Pr(\geq 1) = 0.14$). The gap is largely attributable to three procedural
 choices---many-to-one matching, chained rather than closed triples, and an uncalibrated
 threshold---each of which is easy to make and none of which is visible in the output.
 
