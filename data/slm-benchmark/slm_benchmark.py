@@ -407,6 +407,18 @@ def extract_code(response: str) -> str:
     return response.strip()
 
 
+def indent_body(code: str) -> str:
+    """Indent a bare function body so it can be appended to a HumanEval stub.
+
+    Models that follow "return only the body" sometimes emit it unindented, which
+    turns a correct answer into a SyntaxError and scores it as a failure.
+    """
+    lines = code.split("\n")
+    if any(ln.strip() and not ln.startswith((" ", "\t")) for ln in lines):
+        return "\n".join("    " + ln if ln.strip() else ln for ln in lines)
+    return code
+
+
 # ─── Execution harness ────────────────────────────────────────────────────────
 
 def run_code(full_code: str) -> bool:
@@ -426,12 +438,20 @@ def run_code(full_code: str) -> bool:
 
 # ─── Generation ───────────────────────────────────────────────────────────────
 
-def make_chat_prompt(tokenizer, user_text: str) -> str:
+SYS_COMPLETE_STUB = (
+    "You are an expert Python programmer. "
+    "Complete the function. Return only the function body with correct indentation—no explanation."
+)
+
+SYS_WRITE_FUNCTION = (
+    "You are an expert Python programmer. "
+    "Write the complete function, including the `def` line and any imports it needs. "
+    "Return only code—no explanation."
+)
+
+
+def make_chat_prompt(tokenizer, user_text: str, sys_msg: str = SYS_COMPLETE_STUB) -> str:
     """Apply the model's chat template. Falls back to bare text if it errors."""
-    sys_msg = (
-        "You are an expert Python programmer. "
-        "Complete the function. Return only the function body with correct indentation—no explanation."
-    )
     try:
         msgs = [{"role": "system", "content": sys_msg},
                 {"role": "user", "content": user_text}]
@@ -485,7 +505,7 @@ def run_humaneval(model, tokenizer) -> dict:
 
     for i, prob in enumerate(ds):
         user_msg = f"Complete the following Python function:\n\n{prob['prompt']}"
-        chat_prompt = make_chat_prompt(tokenizer, user_msg)
+        chat_prompt = make_chat_prompt(tokenizer, user_msg, sys_msg=SYS_WRITE_FUNCTION)
         response, tps, pmem = generate_timed(model, tokenizer, chat_prompt)
         tps_list.append(tps)
         peak_mem = max(peak_mem, pmem)
@@ -496,7 +516,7 @@ def run_humaneval(model, tokenizer) -> dict:
         if f"def {prob['entry_point']}" in code:
             full_code = code
         else:
-            full_code = prob["prompt"] + "\n" + code
+            full_code = prob["prompt"] + "\n" + indent_body(code)
         full_code += f"\n\n{prob['test']}\n\ncheck({prob['entry_point']})\n"
 
         ok = run_code(full_code)
@@ -528,18 +548,23 @@ def run_mbpp(model, tokenizer) -> dict:
     peak_mem = 0.0
 
     for i, prob in enumerate(ds):
+        # The MBPP task description never names the function, but test_list asserts an
+        # exact name and signature. Showing the tests is the dataset's intended protocol —
+        # without them the model cannot know what to call the function and always fails.
+        tests = "\n".join(prob["test_list"])
         user_msg = (
-            f"Write a Python function for the following task:\n\n{prob["prompt"]}\n\n"
-            "Return only the complete function definition."
+            f"You are an expert Python programmer, and here is your task:\n\n"
+            f"{prob['prompt']}\n\n"
+            f"Your code should pass these tests:\n\n{tests}"
         )
-        chat_prompt = make_chat_prompt(tokenizer, user_msg)
+        chat_prompt = make_chat_prompt(tokenizer, user_msg, sys_msg=SYS_WRITE_FUNCTION)
         response, tps, pmem = generate_timed(model, tokenizer, chat_prompt)
         tps_list.append(tps)
         peak_mem = max(peak_mem, pmem)
 
         code = extract_code(response)
-        tests = "\n".join(prob["test_list"])
-        full_code = f"{code}\n\n{tests}\n"
+        imports = "\n".join(prob["test_imports"])
+        full_code = f"{code}\n\n{imports}\n\n{tests}\n"
 
         ok = run_code(full_code)
         passed += ok
