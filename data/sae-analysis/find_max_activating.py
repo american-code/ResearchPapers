@@ -24,8 +24,8 @@ WORKSPACE = Path("/Users/melton/ResearchPapers")
 CONFIGS = {
     "llama3b": {
         "model_id":   "mlx-community/Llama-3.2-3B-bf16",
-        "acts_dir":   WORKSPACE / "data/activations/llama-3b-layer16",
-        "sae_ckpt":   WORKSPACE / "data/sae-runs/llama-3b-layer16/checkpoint_step_010000.npz",
+        "acts_dir":   WORKSPACE / "data/activations/llama-3b-layer14",
+        "sae_ckpt":   WORKSPACE / "data/sae-runs/llama-3b-layer14/checkpoint_step_010000.npz",
         "output":     WORKSPACE / "data/sae-analysis/llama3b-feature-examples.json",
         "k":          128,
     },
@@ -283,7 +283,7 @@ if __name__ == "__main__":
         "note": (
             "Mistral-7B activations were collected (500k tokens, layer 16, 4096 hidden). "
             "No SAE has been trained on these activations — data/sae-runs/ contains only "
-            "llama-3b-layer16 and qwen-3b-layer18 checkpoints. "
+            "llama-3b-layer14 and qwen-3b-layer18 checkpoints. "
             "To train: python data/sae-runs/train_sae.py "
             "--activations data/activations/mistral-7b-layer16 "
             "--output data/sae-runs/mistral-7b-layer16 "

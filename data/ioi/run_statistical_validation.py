@@ -24,6 +24,10 @@ DATA_DIR = Path(__file__).parent
 N_BOOTSTRAP = 1000
 TOP_K = 10
 THRESHOLD = 0.03  # also include any head with mean score >= this
+# Force-include L1H11: cited in paper Table 4 (Pythia) as ranked #4, but its mean
+# patching score (~-0.003) falls below THRESHOLD.  Must be included so the CI has
+# real bootstrap backing rather than being a fabricated value.
+FORCE_INCLUDE = [(1, 11)]
 
 
 # ── Shared helpers ────────────────────────────────────────────────────────────
@@ -72,6 +76,11 @@ def select_critical_heads(patching_json_path, top_k=TOP_K, threshold=THRESHOLD):
     # Also include anything above threshold not already in top-k
     extra = [(s, l, h) for s, l, h in all_vals[top_k:] if s >= threshold]
     combined = top + extra
+    # Force-include specific heads regardless of score or threshold
+    already = {(l, h) for _, l, h in combined}
+    for fl, fh in FORCE_INCLUDE:
+        if (fl, fh) not in already:
+            combined.append((scores[fl][fh], fl, fh))
     return combined, d["meta"]
 
 
@@ -318,7 +327,10 @@ def main():
             "n_bootstrap": N_BOOTSTRAP,
             "ci_level": 0.95,
             "random_seed": 42,
-            "selection_criteria": f"top-{TOP_K} heads by mean patching score, plus any head >= {THRESHOLD}",
+            "selection_criteria": (
+                f"top-{TOP_K} heads by mean patching score, plus any head >= {THRESHOLD}, "
+                f"plus force-included {['L%02d.H%02d' % (l, h) for l, h in FORCE_INCLUDE]}"
+            ),
         },
         "models": results,
     }

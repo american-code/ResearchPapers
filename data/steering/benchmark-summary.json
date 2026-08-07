@@ -1,20 +1,18 @@
 {
   "model": "mlx-community/Llama-3.2-3B-bf16",
   "generated_date": "2026-07-29",
-  "per_layer_isolation": true,
   "baselines": {
-    "alpha_0_math_ppl": 11.9313,
-    "alpha_0_fluency_ppl": 21.2146
+    "alpha_0_math_ppl": 11.9424,
+    "alpha_0_fluency_ppl": 21.0934
   },
-  "method_note": "Steering vectors applied at EXACTLY ONE layer at a time. behavior_score = keyword hit-rate at best_alpha (best positive alpha); side_effect_score = math-probe perplexity ratio vs unsteered baseline; fluency_score = neutral-sentence perplexity ratio vs unsteered baseline. optimal_layer = layer with highest behavior_score at its individual best_alpha.",
+  "method_note": "Steering vectors applied simultaneously to layers 8, 16, 24. behavior_score = keyword hit-rate at best_alpha; side_effect_score = math-probe perplexity ratio vs unsteered baseline; fluency_score = neutral-sentence perplexity ratio vs unsteered baseline. vector_norm and norm_fraction are per-layer diagnostics; optimal_layer = layer with highest steering vector L2-norm (dominant contribution).",
   "concept_summary": {
     "positive_sentiment": {
-      "best_alpha": 2,
-      "behavior_score": 0.9,
-      "side_effect_score": 1.0804,
-      "fluency_score": 1.2132,
-      "keyword_density_per_100w": 3.1724,
-      "optimal_layer": 16,
+      "best_alpha": 1.0,
+      "behavior_score": 0.95,
+      "side_effect_score": 1.0488,
+      "fluency_score": 1.3269,
+      "keyword_density_per_100w": 6.5006,
       "vector_norms_by_layer": {
         "8": 2.1107,
         "16": 4.3439,
@@ -24,15 +22,15 @@
         "8": 0.1391,
         "16": 0.2862,
         "24": 0.5747
-      }
+      },
+      "optimal_layer": 24
     },
     "negative_sentiment": {
-      "best_alpha": 2,
-      "behavior_score": 0.45,
-      "side_effect_score": 1.1591,
-      "fluency_score": 1.3145,
-      "keyword_density_per_100w": 1.2249,
-      "optimal_layer": 24,
+      "best_alpha": 1.0,
+      "behavior_score": 0.5,
+      "side_effect_score": 1.2138,
+      "fluency_score": 1.4626,
+      "keyword_density_per_100w": 1.0679,
       "vector_norms_by_layer": {
         "8": 2.1107,
         "16": 4.3439,
@@ -42,15 +40,15 @@
         "8": 0.1391,
         "16": 0.2862,
         "24": 0.5747
-      }
+      },
+      "optimal_layer": 24
     },
     "french_language": {
-      "best_alpha": 1,
-      "behavior_score": 1.0,
-      "side_effect_score": 6.9173,
-      "fluency_score": 13.931,
-      "keyword_density_per_100w": 23.5551,
-      "optimal_layer": 8,
+      "best_alpha": 0.5,
+      "behavior_score": 0.85,
+      "side_effect_score": 13.4357,
+      "fluency_score": 21.8026,
+      "keyword_density_per_100w": 16.5682,
       "vector_norms_by_layer": {
         "8": 7.2368,
         "16": 8.8814,
@@ -60,15 +58,15 @@
         "8": 0.1995,
         "16": 0.2449,
         "24": 0.5556
-      }
+      },
+      "optimal_layer": 24
     },
     "python_coding": {
-      "best_alpha": 0.5,
-      "behavior_score": 0.6,
-      "side_effect_score": 1.1678,
-      "fluency_score": 1.1637,
-      "keyword_density_per_100w": 1.4438,
-      "optimal_layer": 24,
+      "best_alpha": 2.0,
+      "behavior_score": 0.4,
+      "side_effect_score": 2400.8181,
+      "fluency_score": 2325.2027,
+      "keyword_density_per_100w": 0.9744,
       "vector_norms_by_layer": {
         "8": 17.7054,
         "16": 19.1084,
@@ -78,15 +76,15 @@
         "8": 0.2895,
         "16": 0.3124,
         "24": 0.3981
-      }
+      },
+      "optimal_layer": 24
     },
     "refusal_behavior": {
-      "best_alpha": 2,
-      "behavior_score": 0.45,
-      "side_effect_score": 1.3549,
-      "fluency_score": 1.5545,
-      "keyword_density_per_100w": 1.2668,
-      "optimal_layer": 16,
+      "best_alpha": 1.0,
+      "behavior_score": 0.55,
+      "side_effect_score": 1.4655,
+      "fluency_score": 1.6215,
+      "keyword_density_per_100w": 1.6942,
       "vector_norms_by_layer": {
         "8": 3.192,
         "16": 5.2556,
@@ -96,17 +94,18 @@
         "8": 0.1827,
         "16": 0.3009,
         "24": 0.5164
-      }
+      },
+      "optimal_layer": 24
     }
   },
   "summary_table": [
     {
       "concept": "positive_sentiment",
       "layer": 8,
-      "best_alpha": 2,
-      "behavior_score": 0.65,
-      "side_effect_score": 1.3248,
-      "fluency_score": 1.2995,
+      "best_alpha": 1.0,
+      "behavior_score": 0.95,
+      "side_effect_score": 1.0488,
+      "fluency_score": 1.3269,
       "vector_norm": 2.1107,
       "norm_fraction": 0.1391,
       "is_dominant_layer": false,
@@ -115,34 +114,34 @@
     {
       "concept": "positive_sentiment",
       "layer": 16,
-      "best_alpha": 2,
-      "behavior_score": 0.9,
-      "side_effect_score": 1.0804,
-      "fluency_score": 1.2132,
+      "best_alpha": 1.0,
+      "behavior_score": 0.95,
+      "side_effect_score": 1.0488,
+      "fluency_score": 1.3269,
       "vector_norm": 4.3439,
       "norm_fraction": 0.2862,
-      "is_dominant_layer": true,
+      "is_dominant_layer": false,
       "is_earliest_significant_layer": true
     },
     {
       "concept": "positive_sentiment",
       "layer": 24,
-      "best_alpha": 2,
-      "behavior_score": 0.85,
-      "side_effect_score": 1.0401,
-      "fluency_score": 1.1564,
+      "best_alpha": 1.0,
+      "behavior_score": 0.95,
+      "side_effect_score": 1.0488,
+      "fluency_score": 1.3269,
       "vector_norm": 8.723,
       "norm_fraction": 0.5747,
-      "is_dominant_layer": false,
+      "is_dominant_layer": true,
       "is_earliest_significant_layer": false
     },
     {
       "concept": "negative_sentiment",
       "layer": 8,
-      "best_alpha": 2,
-      "behavior_score": 0.2,
-      "side_effect_score": 1.4936,
-      "fluency_score": 1.2381,
+      "best_alpha": 1.0,
+      "behavior_score": 0.5,
+      "side_effect_score": 1.2138,
+      "fluency_score": 1.4626,
       "vector_norm": 2.1107,
       "norm_fraction": 0.1391,
       "is_dominant_layer": false,
@@ -151,10 +150,10 @@
     {
       "concept": "negative_sentiment",
       "layer": 16,
-      "best_alpha": 0.5,
-      "behavior_score": 0.2,
-      "side_effect_score": 0.9894,
-      "fluency_score": 1.035,
+      "best_alpha": 1.0,
+      "behavior_score": 0.5,
+      "side_effect_score": 1.2138,
+      "fluency_score": 1.4626,
       "vector_norm": 4.3439,
       "norm_fraction": 0.2862,
       "is_dominant_layer": false,
@@ -163,10 +162,10 @@
     {
       "concept": "negative_sentiment",
       "layer": 24,
-      "best_alpha": 2,
-      "behavior_score": 0.45,
-      "side_effect_score": 1.1591,
-      "fluency_score": 1.3145,
+      "best_alpha": 1.0,
+      "behavior_score": 0.5,
+      "side_effect_score": 1.2138,
+      "fluency_score": 1.4626,
       "vector_norm": 8.723,
       "norm_fraction": 0.5747,
       "is_dominant_layer": true,
@@ -175,22 +174,22 @@
     {
       "concept": "french_language",
       "layer": 8,
-      "best_alpha": 1,
-      "behavior_score": 1.0,
-      "side_effect_score": 6.9173,
-      "fluency_score": 13.931,
+      "best_alpha": 0.5,
+      "behavior_score": 0.85,
+      "side_effect_score": 13.4357,
+      "fluency_score": 21.8026,
       "vector_norm": 7.2368,
       "norm_fraction": 0.1995,
-      "is_dominant_layer": true,
-      "is_earliest_significant_layer": true
+      "is_dominant_layer": false,
+      "is_earliest_significant_layer": false
     },
     {
       "concept": "french_language",
       "layer": 16,
       "best_alpha": 0.5,
-      "behavior_score": 0.95,
-      "side_effect_score": 1.136,
-      "fluency_score": 1.0745,
+      "behavior_score": 0.85,
+      "side_effect_score": 13.4357,
+      "fluency_score": 21.8026,
       "vector_norm": 8.8814,
       "norm_fraction": 0.2449,
       "is_dominant_layer": false,
@@ -199,22 +198,22 @@
     {
       "concept": "french_language",
       "layer": 24,
-      "best_alpha": 2,
-      "behavior_score": 1.0,
-      "side_effect_score": 31.0803,
-      "fluency_score": 453.1149,
+      "best_alpha": 0.5,
+      "behavior_score": 0.85,
+      "side_effect_score": 13.4357,
+      "fluency_score": 21.8026,
       "vector_norm": 20.1525,
       "norm_fraction": 0.5556,
-      "is_dominant_layer": false,
-      "is_earliest_significant_layer": false
+      "is_dominant_layer": true,
+      "is_earliest_significant_layer": true
     },
     {
       "concept": "python_coding",
       "layer": 8,
-      "best_alpha": 0.5,
-      "behavior_score": 0.35,
-      "side_effect_score": 2.9566,
-      "fluency_score": 2.973,
+      "best_alpha": 2.0,
+      "behavior_score": 0.4,
+      "side_effect_score": 2400.8181,
+      "fluency_score": 2325.2027,
       "vector_norm": 17.7054,
       "norm_fraction": 0.2895,
       "is_dominant_layer": false,
@@ -223,10 +222,10 @@
     {
       "concept": "python_coding",
       "layer": 16,
-      "best_alpha": 0.5,
+      "best_alpha": 2.0,
       "behavior_score": 0.4,
-      "side_effect_score": 1.6419,
-      "fluency_score": 1.5598,
+      "side_effect_score": 2400.8181,
+      "fluency_score": 2325.2027,
       "vector_norm": 19.1084,
       "norm_fraction": 0.3124,
       "is_dominant_layer": false,
@@ -235,10 +234,10 @@
     {
       "concept": "python_coding",
       "layer": 24,
-      "best_alpha": 0.5,
-      "behavior_score": 0.6,
-      "side_effect_score": 1.1678,
-      "fluency_score": 1.1637,
+      "best_alpha": 2.0,
+      "behavior_score": 0.4,
+      "side_effect_score": 2400.8181,
+      "fluency_score": 2325.2027,
       "vector_norm": 24.3529,
       "norm_fraction": 0.3981,
       "is_dominant_layer": true,
@@ -247,45 +246,45 @@
     {
       "concept": "refusal_behavior",
       "layer": 8,
-      "best_alpha": 2,
-      "behavior_score": 0.35,
-      "side_effect_score": 1.287,
-      "fluency_score": 1.3934,
+      "best_alpha": 1.0,
+      "behavior_score": 0.55,
+      "side_effect_score": 1.4655,
+      "fluency_score": 1.6215,
       "vector_norm": 3.192,
       "norm_fraction": 0.1827,
+      "is_dominant_layer": false,
+      "is_earliest_significant_layer": false
+    },
+    {
+      "concept": "refusal_behavior",
+      "layer": 16,
+      "best_alpha": 1.0,
+      "behavior_score": 0.55,
+      "side_effect_score": 1.4655,
+      "fluency_score": 1.6215,
+      "vector_norm": 5.2556,
+      "norm_fraction": 0.3009,
       "is_dominant_layer": false,
       "is_earliest_significant_layer": true
     },
     {
       "concept": "refusal_behavior",
-      "layer": 16,
-      "best_alpha": 2,
-      "behavior_score": 0.45,
-      "side_effect_score": 1.3549,
-      "fluency_score": 1.5545,
-      "vector_norm": 5.2556,
-      "norm_fraction": 0.3009,
-      "is_dominant_layer": true,
-      "is_earliest_significant_layer": false
-    },
-    {
-      "concept": "refusal_behavior",
       "layer": 24,
-      "best_alpha": 2,
-      "behavior_score": 0.4,
-      "side_effect_score": 1.2725,
-      "fluency_score": 1.364,
+      "best_alpha": 1.0,
+      "behavior_score": 0.55,
+      "side_effect_score": 1.4655,
+      "fluency_score": 1.6215,
       "vector_norm": 9.0198,
       "norm_fraction": 0.5164,
-      "is_dominant_layer": false,
+      "is_dominant_layer": true,
       "is_earliest_significant_layer": false
     }
   ],
   "optimal_layers": {
-    "positive_sentiment": 16,
+    "positive_sentiment": 24,
     "negative_sentiment": 24,
-    "french_language": 8,
+    "french_language": 24,
     "python_coding": 24,
-    "refusal_behavior": 16
+    "refusal_behavior": 24
   }
 }

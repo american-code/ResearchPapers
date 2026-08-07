@@ -14,11 +14,11 @@ OUT      = REPO / "data/sae-rules-v2"
 OUT.mkdir(parents=True, exist_ok=True)
 
 ACT_M    = REPO / "data/activations/mistral-7b-layer16/activations.npy"
-ACT_L    = REPO / "data/activations/llama-3b-layer16/activations.npy"
+ACT_L    = REPO / "data/activations/llama-3b-layer14/activations.npy"
 META_M   = REPO / "data/activations/mistral-7b-layer16/metadata.json"
-META_L   = REPO / "data/activations/llama-3b-layer16/metadata.json"
+META_L   = REPO / "data/activations/llama-3b-layer14/metadata.json"
 SAE_M    = REPO / "data/sae-runs/mistral-7b-layer16/checkpoint_final.npz"
-SAE_L    = REPO / "data/sae-runs/llama-3b-layer16/checkpoint_final.npz"
+SAE_L    = REPO / "data/sae-runs/llama-3b-layer14/checkpoint_final.npz"
 
 N_TOKENS        = 100_000
 N_CKA           = 8_000    # subsample for CKA (full 100k × 16384 is ~100GB kernel)

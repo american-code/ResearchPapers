@@ -11,8 +11,8 @@ LR       : linear warmup → cosine decay to 5% of peak
 Usage
 -----
 python data/sae-runs/train_sae.py \\
-    --activations data/activations/llama-3b-layer16/ \\
-    --output      data/sae-runs/llama-3b-layer16/ \\
+    --activations data/activations/llama-3b-layer14/ \\
+    --output      data/sae-runs/llama-3b-layer14/ \\
     [--dict-size 16384] [--k 128] [--lr 1e-4] [--steps 50000] [--batch 2048]
 """
 

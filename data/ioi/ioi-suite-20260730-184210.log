@@ -279,4 +279,3 @@ faithfulness: LD=-0.0914  F(C)=-0.0284  (1s)
 faithfulness=-0.0284  mean completeness gap=0.7891
 wrote /Users/lab-02/ResearchPapers/data/ioi/faithfulness-pythia1b.json
 --- STAGE faithfulness-pythia-v2 exit=0 ---
-=== ioi-suite-20260730-184210 finished 2026-07-31T00:34:15Z failed:' pythia-path-patching patching-llama3b-v2 patching-pythia1b-v2' ===
