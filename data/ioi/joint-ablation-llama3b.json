@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "model": "mlx-community/Llama-3.2-3B-bf16",
+    "dataset": "dataset-v2.json",
+    "n_examples": 200,
+    "n_layers": 28,
+    "n_heads": 24,
+    "circuit": [
+      "L13H14",
+      "L14H0",
+      "L15H20",
+      "L17H17",
+      "L18H10",
+      "L19H1",
+      "L21H20",
+      "L24H15",
+      "L26H23",
+      "L27H17"
+    ],
+    "circuit_size": 10,
+    "synthetic": false,
+    "normalization": "F(X) = (LD(X) - LD_all_ablated) / (LD_clean - LD_all_ablated)",
+    "description": "Joint ablation: all 10 circuit heads ablated simultaneously from the full model (all non-circuit heads active). Leave-one-in: ablate 9 of 10 circuit heads while leaving each head active in turn."
+  },
+  "baselines": {
+    "LD_clean": 5.5206,
+    "LD_all_ablated": 0.0078,
+    "LD_circuit_only": 1.2641,
+    "F_faithfulness": 0.2279,
+    "source": "clean/floor/circuit_only from faithfulness-llama3b-v2.json; LD_clean re-verified this run"
+  },
+  "joint_ablation": {
+    "LD_model_minus_circuit": 1.1838,
+    "F_complete": 0.2133,
+    "interpretation": "Fraction of clean LD that survives removing all 10 circuit heads simultaneously. Low value (\u21920) means the circuit accounts for most of the model's IOI behaviour (high completeness). Compare with F_faithfulness=0.2279 (circuit-only direction)."
+  },
+  "leave_one_in": {
+    "description": "For each circuit head h: ablate the other 9 circuit heads while leaving h active (all non-circuit heads also active). delta_F = F_leave_in - F_complete. Large positive delta_F means h alone can restore significant performance \u2014 h is the dominant contributor.",
+    "F_complete_reference": 0.2133,
+    "heads": [
+      {
+        "head": "L17H17",
+        "layer": 17,
+        "head_idx": 17,
+        "LD_leave_in": 2.1391,
+        "F_leave_in": 0.3866,
+        "delta_F": 0.1733
+      },
+      {
+        "head": "L26H23",
+        "layer": 26,
+        "head_idx": 23,
+        "LD_leave_in": 1.6338,
+        "F_leave_in": 0.2949,
+        "delta_F": 0.0816
+      },
+      {
+        "head": "L15H20",
+        "layer": 15,
+        "head_idx": 20,
+        "LD_leave_in": 1.5722,
+        "F_leave_in": 0.2838,
+        "delta_F": 0.0705
+      },
+      {
+        "head": "L27H17",
+        "layer": 27,
+        "head_idx": 17,
+        "LD_leave_in": 1.5491,
+        "F_leave_in": 0.2796,
+        "delta_F": 0.0663
+      },
+      {
+        "head": "L21H20",
+        "layer": 21,
+        "head_idx": 20,
+        "LD_leave_in": 1.4484,
+        "F_leave_in": 0.2613,
+        "delta_F": 0.048
+      },
+      {
+        "head": "L13H14",
+        "layer": 13,
+        "head_idx": 14,
+        "LD_leave_in": 1.4087,
+        "F_leave_in": 0.2541,
+        "delta_F": 0.0408
+      },
+      {
+        "head": "L19H1",
+        "layer": 19,
+        "head_idx": 1,
+        "LD_leave_in": 1.385,
+        "F_leave_in": 0.2498,
+        "delta_F": 0.0365
+      },
+      {
+        "head": "L18H10",
+        "layer": 18,
+        "head_idx": 10,
+        "LD_leave_in": 1.3125,
+        "F_leave_in": 0.2367,
+        "delta_F": 0.0234
+      },
+      {
+        "head": "L14H0",
+        "layer": 14,
+        "head_idx": 0,
+        "LD_leave_in": 1.1606,
+        "F_leave_in": 0.2091,
+        "delta_F": -0.0042
+      },
+      {
+        "head": "L24H15",
+        "layer": 24,
+        "head_idx": 15,
+        "LD_leave_in": 0.9769,
+        "F_leave_in": 0.1758,
+        "delta_F": -0.0375
+      }
+    ]
+  },
+  "runtime_seconds": 47.2,
+  "timestamp": "2026-08-02T20:44:17"
+}

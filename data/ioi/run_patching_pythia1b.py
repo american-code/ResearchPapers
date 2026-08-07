@@ -20,6 +20,7 @@ Architecture notes (GPT-NeoX vs Llama)
 - Attention block at layer.attention (not layer.self_attn)
 - Pythia-1.4B: 24 layers, 16 heads, head_dim=128
 """
+import argparse
 import json, time
 from pathlib import Path
 from typing import Optional, Any
@@ -159,9 +160,12 @@ def main() -> None:
     print(f"  validation pass OK — output shape {test_logits.shape}")
 
     # ── Load dataset ──────────────────────────────────────────────────────────
-    dataset  = json.loads((DATA_DIR / "dataset.json").read_text())
+    dataset  = json.loads((DATA_DIR / ARGS.dataset).read_text())
     examples = dataset["examples"]
-    template = dataset["meta"]["template"]
+    # v1 datasets carry a single meta.template and the corrupt prompt is
+    # reconstructed from it. v2 has 15 templates and stores a per-example
+    # corrupt_prompt instead, so prefer that when present.
+    template = dataset.get("meta", {}).get("template")
     print(f"Dataset: {len(examples)} examples")
 
     # ── Tokenise ──────────────────────────────────────────────────────────────
@@ -174,7 +178,12 @@ def main() -> None:
         io_name = ex["io_name"]
         s_name  = ex["subject_name"]
         clean_encs.append(tokenizer.encode(ex["prompt"], add_special_tokens=True))
-        corrupt_prompt = template.format(S=io_name, IO=s_name)
+        if "corrupt_prompt" in ex:
+            corrupt_prompt = ex["corrupt_prompt"]
+        elif template is not None:
+            corrupt_prompt = template.format(S=io_name, IO=s_name)
+        else:
+            raise KeyError("example lacks 'corrupt_prompt' and dataset lacks meta.template")
         corrupt_encs.append(tokenizer.encode(corrupt_prompt, add_special_tokens=True))
         io_tids.append(name_token_id(tokenizer, io_name))
         s_tids.append(name_token_id(tokenizer, s_name))
@@ -286,7 +295,7 @@ def main() -> None:
         "patching_scores": patching_scores,
     }
 
-    out_path = DATA_DIR / "patching-pythia1b.json"
+    out_path = DATA_DIR / ARGS.out
     out_path.write_text(json.dumps(output, indent=2))
     print(f"Saved → {out_path}")
 
@@ -299,6 +308,19 @@ def main() -> None:
     print("\nTop-10 heads by patching score:")
     for score, l, h in top10:
         print(f"  L{l:02d}·H{h:02d}: {score:.4f}")
+
+
+def _parse_args():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dataset", default="dataset.json",
+                    help="dataset filename inside data/ioi/")
+    ap.add_argument("--out", default="patching-pythia1b.json",
+                    help="output filename inside data/ioi/")
+    return ap.parse_args()
+
+
+ARGS = _parse_args() if __name__ == "__main__" else argparse.Namespace(
+    dataset="dataset.json", out="patching-pythia1b.json")
 
 
 if __name__ == "__main__":

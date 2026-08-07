@@ -1,0 +1,118 @@
+Power Analysis: Minimum Detectable Effect Size for SAE Feature Universality
+===========================================================================
+
+Context
+-------
+  Three-model cross-architecture SAE feature universality test.
+  Method: reciprocal best match, Pearson fingerprints, permutation-calibrated τ.
+  Real result (N_CHUNKS=1000, 500k tokens per model):
+    Closed-triangle universal features found: 1
+    Triangle null mean: 0.15  →  1 found ≈ chance
+
+Simulation Setup
+----------------
+  Null: real Mistral-7B SAE fingerprints (D=16384, N_CHUNKS=100)
+  Valid features: 8208 / 16384  (support ≥ 5 chunks)
+  Null model: chunk-order permutation (same as real analysis calibration)
+  50 planted pairs × 300 trials × 11 α levels per dict size
+
+  Note: N_CHUNKS=100 vs 1000 in the full analysis. MDES estimates are
+  conservative upper bounds (noisier fingerprints → harder detection).
+
+Dictionary size D = 256
+  τ = 0.9256  (null best-match mean = 0.4947)
+
+       α    Detection rate        SE    ≥80%?
+  ──────  ────────────────  ────────  ───────
+    0.50             0.000    0.0000         
+    0.55             0.000    0.0000         
+    0.60             0.000    0.0000         
+    0.65             0.000    0.0000         
+    0.70             0.000    0.0000         
+    0.75             0.000    0.0000         
+    0.80             0.000    0.0000         
+    0.85             0.000    0.0000         
+    0.90             0.000    0.0000         
+    0.95             0.993    0.0007      YES
+    1.00             1.000    0.0000      YES
+
+  MDES at 80% power: α = 0.95
+
+Dictionary size D = 1024
+  τ = 0.9470  (null best-match mean = 0.5669)
+
+       α    Detection rate        SE    ≥80%?
+  ──────  ────────────────  ────────  ───────
+    0.50             0.000    0.0000         
+    0.55             0.000    0.0000         
+    0.60             0.000    0.0000         
+    0.65             0.000    0.0000         
+    0.70             0.000    0.0000         
+    0.75             0.000    0.0000         
+    0.80             0.000    0.0000         
+    0.85             0.000    0.0000         
+    0.90             0.000    0.0000         
+    0.95             0.985    0.0009      YES
+    1.00             1.000    0.0000      YES
+
+  MDES at 80% power: α = 0.95
+
+Dictionary size D = 4096
+  τ = 0.9587  (null best-match mean = 0.6091)
+
+       α    Detection rate        SE    ≥80%?
+  ──────  ────────────────  ────────  ───────
+    0.50             0.000    0.0000         
+    0.55             0.000    0.0000         
+    0.60             0.000    0.0000         
+    0.65             0.000    0.0000         
+    0.70             0.000    0.0000         
+    0.75             0.000    0.0000         
+    0.80             0.000    0.0000         
+    0.85             0.000    0.0000         
+    0.90             0.000    0.0000         
+    0.95             0.000    0.0000         
+    1.00             1.000    0.0000      YES
+
+  MDES at 80% power: α = 1.0
+
+Dictionary size D = 8208
+  τ = 0.9576  (null best-match mean = 0.6492)
+
+       α    Detection rate        SE    ≥80%?
+  ──────  ────────────────  ────────  ───────
+    0.50             0.000    0.0000         
+    0.55             0.000    0.0000         
+    0.60             0.000    0.0000         
+    0.65             0.000    0.0000         
+    0.70             0.000    0.0000         
+    0.75             0.000    0.0000         
+    0.80             0.000    0.0000         
+    0.85             0.000    0.0000         
+    0.90             0.000    0.0000         
+    0.95             0.000    0.0000         
+    1.00             1.000    0.0000      YES
+
+  MDES at 80% power: α = 1.0
+
+Summary: MDES at 80% Power by Dictionary Size
+----------------------------------------------
+         D         τ    MDES (α)
+  ────────  ────────  ──────────
+       256    0.9256        0.95
+      1024    0.9470        0.95
+      4096    0.9587         1.0
+      8208    0.9576         1.0
+
+Interpretation
+--------------
+  Universal SAE features (if present) that have cross-model Pearson
+  correlation α below the MDES cannot be reliably detected by this method.
+  Since only 1 universal feature was found (≈ chance), any true universal
+  features must have α below the MDES for the relevant dictionary size.
+  This converts the null result into a quantified upper bound.
+
+  Caveat: all MDES values are conservative (N_CHUNKS=100 here vs 1000
+  in the real analysis). True MDES at full scale may be lower.
+
+Elapsed: 1710.7s

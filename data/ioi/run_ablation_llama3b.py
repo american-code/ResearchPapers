@@ -19,6 +19,7 @@ Strategy
    by its mean → compute ablated logit diffs.
 Total: 1 + 28*24 = 673 forward passes over the batch.
 """
+import argparse
 import json, time
 from pathlib import Path
 from typing import Optional, Any
@@ -153,7 +154,7 @@ def main() -> None:
     print(f"Replaced {len(attns)} attention modules with AblationAttention")
 
     # ── Load dataset ──────────────────────────────────────────────────────────
-    dataset  = json.loads((DATA_DIR / "dataset.json").read_text())
+    dataset  = json.loads((DATA_DIR / ARGS.dataset).read_text())
     examples = dataset["examples"]
     print(f"Dataset: {len(examples)} examples")
 
@@ -257,7 +258,7 @@ def main() -> None:
         "drop_scores":    drop_scores,       # clean_mean - ablated_mean per (layer, head)
     }
 
-    out_path = DATA_DIR / "ablation-llama3b.json"
+    out_path = DATA_DIR / ARGS.out
     out_path.write_text(json.dumps(output, indent=2))
     print(f"Saved → {out_path}")
 
@@ -271,6 +272,19 @@ def main() -> None:
     print(f"\nTop-10 heads by logit-diff drop (ablation sensitivity):")
     for drop, l, h in top10:
         print(f"  L{l:02d}·H{h:02d}: drop={drop:.4f}  (ablated_mean={ablation_diffs[l][h]:.4f})")
+
+
+def _parse_args():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dataset", default="dataset.json",
+                    help="dataset filename inside data/ioi/")
+    ap.add_argument("--out", default="ablation-llama3b.json",
+                    help="output filename inside data/ioi/")
+    return ap.parse_args()
+
+
+ARGS = _parse_args() if __name__ == "__main__" else argparse.Namespace(
+    dataset="dataset.json", out="ablation-llama3b.json")
 
 
 if __name__ == "__main__":

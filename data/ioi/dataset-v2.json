@@ -1,0 +1,1870 @@
+{
+ "meta": {
+  "version": 2,
+  "description": "Multi-template IOI dataset with balanced ABBA/BABA name ordering. Supersedes dataset.json, which used a single template and one ordering.",
+  "n_examples": 200,
+  "n_templates": 15,
+  "n_names": 34,
+  "names": [
+   "Alice",
+   "Andrew",
+   "Anna",
+   "Bob",
+   "Carol",
+   "Chris",
+   "Claire",
+   "Daniel",
+   "David",
+   "Diana",
+   "Emma",
+   "George",
+   "Helen",
+   "James",
+   "John",
+   "Julia",
+   "Kate",
+   "Kevin",
+   "Laura",
+   "Lisa",
+   "Mark",
+   "Mary",
+   "Michael",
+   "Nicole",
+   "Paul",
+   "Peter",
+   "Rachel",
+   "Robert",
+   "Sarah",
+   "Simon",
+   "Sophie",
+   "Steve",
+   "Susan",
+   "Tom"
+  ],
+  "order_balance": {
+   "ABBA": 105,
+   "BABA": 95
+  },
+  "seed": 42,
+  "templates": [
+   "When {first} and {second} went to the store, {subject} gave a bottle to",
+   "When {first} and {second} went to the park, {subject} handed a ball to",
+   "After {first} and {second} finished lunch, {subject} passed the plate to",
+   "While {first} and {second} were at the office, {subject} sent an email to",
+   "Then {first} and {second} had a long argument, {subject} apologised to",
+   "When {first} and {second} arrived at the party, {subject} offered a drink to",
+   "After {first} and {second} left the museum, {subject} showed the ticket to",
+   "While {first} and {second} waited at the station, {subject} lent a phone to",
+   "When {first} and {second} got to the beach, {subject} threw a towel to",
+   "After {first} and {second} met at the cafe, {subject} read the letter to",
+   "When {first} and {second} were working late, {subject} brought coffee to",
+   "While {first} and {second} sat in the garden, {subject} described the plan to",
+   "After {first} and {second} watched the film, {subject} explained the ending to",
+   "When {first} and {second} visited the library, {subject} returned the book to",
+   "While {first} and {second} walked downtown, {subject} pointed the way to"
+  ],
+  "corruption_strategy": "swap IO and subject roles, preserving sequence length"
+ },
+ "examples": [
+  {
+   "id": 0,
+   "template_id": 0,
+   "order": "ABBA",
+   "prompt": "When Daniel and Andrew went to the store, Andrew gave a bottle to",
+   "corrupt_prompt": "When Andrew and Daniel went to the store, Daniel gave a bottle to",
+   "io_name": "Daniel",
+   "subject_name": "Andrew"
+  },
+  {
+   "id": 1,
+   "template_id": 1,
+   "order": "ABBA",
+   "prompt": "When Kevin and Julia went to the park, Julia handed a ball to",
+   "corrupt_prompt": "When Julia and Kevin went to the park, Kevin handed a ball to",
+   "io_name": "Kevin",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 2,
+   "template_id": 2,
+   "order": "ABBA",
+   "prompt": "After John and David finished lunch, David passed the plate to",
+   "corrupt_prompt": "After David and John finished lunch, John passed the plate to",
+   "io_name": "John",
+   "subject_name": "David"
+  },
+  {
+   "id": 3,
+   "template_id": 3,
+   "order": "ABBA",
+   "prompt": "While Claire and Chris were at the office, Chris sent an email to",
+   "corrupt_prompt": "While Chris and Claire were at the office, Claire sent an email to",
+   "io_name": "Claire",
+   "subject_name": "Chris"
+  },
+  {
+   "id": 4,
+   "template_id": 4,
+   "order": "ABBA",
+   "prompt": "Then Robert and Anna had a long argument, Anna apologised to",
+   "corrupt_prompt": "Then Anna and Robert had a long argument, Robert apologised to",
+   "io_name": "Robert",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 5,
+   "template_id": 5,
+   "order": "ABBA",
+   "prompt": "When Andrew and Chris arrived at the party, Chris offered a drink to",
+   "corrupt_prompt": "When Chris and Andrew arrived at the party, Andrew offered a drink to",
+   "io_name": "Andrew",
+   "subject_name": "Chris"
+  },
+  {
+   "id": 6,
+   "template_id": 6,
+   "order": "ABBA",
+   "prompt": "After James and John left the museum, John showed the ticket to",
+   "corrupt_prompt": "After John and James left the museum, James showed the ticket to",
+   "io_name": "James",
+   "subject_name": "John"
+  },
+  {
+   "id": 7,
+   "template_id": 7,
+   "order": "ABBA",
+   "prompt": "While Susan and Andrew waited at the station, Andrew lent a phone to",
+   "corrupt_prompt": "While Andrew and Susan waited at the station, Susan lent a phone to",
+   "io_name": "Susan",
+   "subject_name": "Andrew"
+  },
+  {
+   "id": 8,
+   "template_id": 8,
+   "order": "ABBA",
+   "prompt": "When Helen and Rachel got to the beach, Rachel threw a towel to",
+   "corrupt_prompt": "When Rachel and Helen got to the beach, Helen threw a towel to",
+   "io_name": "Helen",
+   "subject_name": "Rachel"
+  },
+  {
+   "id": 9,
+   "template_id": 9,
+   "order": "ABBA",
+   "prompt": "After John and Sarah met at the cafe, Sarah read the letter to",
+   "corrupt_prompt": "After Sarah and John met at the cafe, John read the letter to",
+   "io_name": "John",
+   "subject_name": "Sarah"
+  },
+  {
+   "id": 10,
+   "template_id": 10,
+   "order": "ABBA",
+   "prompt": "When Kevin and Alice were working late, Alice brought coffee to",
+   "corrupt_prompt": "When Alice and Kevin were working late, Kevin brought coffee to",
+   "io_name": "Kevin",
+   "subject_name": "Alice"
+  },
+  {
+   "id": 11,
+   "template_id": 11,
+   "order": "ABBA",
+   "prompt": "While Emma and Robert sat in the garden, Robert described the plan to",
+   "corrupt_prompt": "While Robert and Emma sat in the garden, Emma described the plan to",
+   "io_name": "Emma",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 12,
+   "template_id": 12,
+   "order": "ABBA",
+   "prompt": "After Mary and Kevin watched the film, Kevin explained the ending to",
+   "corrupt_prompt": "After Kevin and Mary watched the film, Mary explained the ending to",
+   "io_name": "Mary",
+   "subject_name": "Kevin"
+  },
+  {
+   "id": 13,
+   "template_id": 13,
+   "order": "ABBA",
+   "prompt": "When Diana and James visited the library, James returned the book to",
+   "corrupt_prompt": "When James and Diana visited the library, Diana returned the book to",
+   "io_name": "Diana",
+   "subject_name": "James"
+  },
+  {
+   "id": 14,
+   "template_id": 14,
+   "order": "ABBA",
+   "prompt": "While Mary and Claire walked downtown, Claire pointed the way to",
+   "corrupt_prompt": "While Claire and Mary walked downtown, Mary pointed the way to",
+   "io_name": "Mary",
+   "subject_name": "Claire"
+  },
+  {
+   "id": 15,
+   "template_id": 0,
+   "order": "BABA",
+   "prompt": "When Paul and Chris went to the store, Paul gave a bottle to",
+   "corrupt_prompt": "When Chris and Paul went to the store, Chris gave a bottle to",
+   "io_name": "Chris",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 16,
+   "template_id": 1,
+   "order": "BABA",
+   "prompt": "When Michael and Claire went to the park, Michael handed a ball to",
+   "corrupt_prompt": "When Claire and Michael went to the park, Claire handed a ball to",
+   "io_name": "Claire",
+   "subject_name": "Michael"
+  },
+  {
+   "id": 17,
+   "template_id": 2,
+   "order": "BABA",
+   "prompt": "After Kate and Michael finished lunch, Kate passed the plate to",
+   "corrupt_prompt": "After Michael and Kate finished lunch, Michael passed the plate to",
+   "io_name": "Michael",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 18,
+   "template_id": 3,
+   "order": "BABA",
+   "prompt": "While Simon and Anna were at the office, Simon sent an email to",
+   "corrupt_prompt": "While Anna and Simon were at the office, Anna sent an email to",
+   "io_name": "Anna",
+   "subject_name": "Simon"
+  },
+  {
+   "id": 19,
+   "template_id": 4,
+   "order": "BABA",
+   "prompt": "Then Paul and Daniel had a long argument, Paul apologised to",
+   "corrupt_prompt": "Then Daniel and Paul had a long argument, Daniel apologised to",
+   "io_name": "Daniel",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 20,
+   "template_id": 5,
+   "order": "BABA",
+   "prompt": "When Laura and Chris arrived at the party, Laura offered a drink to",
+   "corrupt_prompt": "When Chris and Laura arrived at the party, Chris offered a drink to",
+   "io_name": "Chris",
+   "subject_name": "Laura"
+  },
+  {
+   "id": 21,
+   "template_id": 6,
+   "order": "BABA",
+   "prompt": "After Helen and Nicole left the museum, Helen showed the ticket to",
+   "corrupt_prompt": "After Nicole and Helen left the museum, Nicole showed the ticket to",
+   "io_name": "Nicole",
+   "subject_name": "Helen"
+  },
+  {
+   "id": 22,
+   "template_id": 7,
+   "order": "BABA",
+   "prompt": "While Anna and Carol waited at the station, Anna lent a phone to",
+   "corrupt_prompt": "While Carol and Anna waited at the station, Carol lent a phone to",
+   "io_name": "Carol",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 23,
+   "template_id": 8,
+   "order": "BABA",
+   "prompt": "When Laura and John got to the beach, Laura threw a towel to",
+   "corrupt_prompt": "When John and Laura got to the beach, John threw a towel to",
+   "io_name": "John",
+   "subject_name": "Laura"
+  },
+  {
+   "id": 24,
+   "template_id": 9,
+   "order": "BABA",
+   "prompt": "After John and Chris met at the cafe, John read the letter to",
+   "corrupt_prompt": "After Chris and John met at the cafe, Chris read the letter to",
+   "io_name": "Chris",
+   "subject_name": "John"
+  },
+  {
+   "id": 25,
+   "template_id": 10,
+   "order": "BABA",
+   "prompt": "When Paul and Claire were working late, Paul brought coffee to",
+   "corrupt_prompt": "When Claire and Paul were working late, Claire brought coffee to",
+   "io_name": "Claire",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 26,
+   "template_id": 11,
+   "order": "BABA",
+   "prompt": "While Simon and Kevin sat in the garden, Simon described the plan to",
+   "corrupt_prompt": "While Kevin and Simon sat in the garden, Kevin described the plan to",
+   "io_name": "Kevin",
+   "subject_name": "Simon"
+  },
+  {
+   "id": 27,
+   "template_id": 12,
+   "order": "BABA",
+   "prompt": "After Emma and Nicole watched the film, Emma explained the ending to",
+   "corrupt_prompt": "After Nicole and Emma watched the film, Nicole explained the ending to",
+   "io_name": "Nicole",
+   "subject_name": "Emma"
+  },
+  {
+   "id": 28,
+   "template_id": 13,
+   "order": "BABA",
+   "prompt": "When Michael and Nicole visited the library, Michael returned the book to",
+   "corrupt_prompt": "When Nicole and Michael visited the library, Nicole returned the book to",
+   "io_name": "Nicole",
+   "subject_name": "Michael"
+  },
+  {
+   "id": 29,
+   "template_id": 14,
+   "order": "BABA",
+   "prompt": "While Kevin and James walked downtown, Kevin pointed the way to",
+   "corrupt_prompt": "While James and Kevin walked downtown, James pointed the way to",
+   "io_name": "James",
+   "subject_name": "Kevin"
+  },
+  {
+   "id": 30,
+   "template_id": 0,
+   "order": "ABBA",
+   "prompt": "When Carol and Emma went to the store, Emma gave a bottle to",
+   "corrupt_prompt": "When Emma and Carol went to the store, Carol gave a bottle to",
+   "io_name": "Carol",
+   "subject_name": "Emma"
+  },
+  {
+   "id": 31,
+   "template_id": 1,
+   "order": "ABBA",
+   "prompt": "When Julia and Emma went to the park, Emma handed a ball to",
+   "corrupt_prompt": "When Emma and Julia went to the park, Julia handed a ball to",
+   "io_name": "Julia",
+   "subject_name": "Emma"
+  },
+  {
+   "id": 32,
+   "template_id": 2,
+   "order": "ABBA",
+   "prompt": "After Simon and Paul finished lunch, Paul passed the plate to",
+   "corrupt_prompt": "After Paul and Simon finished lunch, Simon passed the plate to",
+   "io_name": "Simon",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 33,
+   "template_id": 3,
+   "order": "ABBA",
+   "prompt": "While Kevin and John were at the office, John sent an email to",
+   "corrupt_prompt": "While John and Kevin were at the office, Kevin sent an email to",
+   "io_name": "Kevin",
+   "subject_name": "John"
+  },
+  {
+   "id": 34,
+   "template_id": 4,
+   "order": "ABBA",
+   "prompt": "Then Mark and Bob had a long argument, Bob apologised to",
+   "corrupt_prompt": "Then Bob and Mark had a long argument, Mark apologised to",
+   "io_name": "Mark",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 35,
+   "template_id": 5,
+   "order": "ABBA",
+   "prompt": "When John and Anna arrived at the party, Anna offered a drink to",
+   "corrupt_prompt": "When Anna and John arrived at the party, John offered a drink to",
+   "io_name": "John",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 36,
+   "template_id": 6,
+   "order": "ABBA",
+   "prompt": "After Mark and Peter left the museum, Peter showed the ticket to",
+   "corrupt_prompt": "After Peter and Mark left the museum, Mark showed the ticket to",
+   "io_name": "Mark",
+   "subject_name": "Peter"
+  },
+  {
+   "id": 37,
+   "template_id": 7,
+   "order": "ABBA",
+   "prompt": "While Kevin and Carol waited at the station, Carol lent a phone to",
+   "corrupt_prompt": "While Carol and Kevin waited at the station, Kevin lent a phone to",
+   "io_name": "Kevin",
+   "subject_name": "Carol"
+  },
+  {
+   "id": 38,
+   "template_id": 8,
+   "order": "ABBA",
+   "prompt": "When James and Mark got to the beach, Mark threw a towel to",
+   "corrupt_prompt": "When Mark and James got to the beach, James threw a towel to",
+   "io_name": "James",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 39,
+   "template_id": 9,
+   "order": "ABBA",
+   "prompt": "After James and Steve met at the cafe, Steve read the letter to",
+   "corrupt_prompt": "After Steve and James met at the cafe, James read the letter to",
+   "io_name": "James",
+   "subject_name": "Steve"
+  },
+  {
+   "id": 40,
+   "template_id": 10,
+   "order": "ABBA",
+   "prompt": "When Peter and Simon were working late, Simon brought coffee to",
+   "corrupt_prompt": "When Simon and Peter were working late, Peter brought coffee to",
+   "io_name": "Peter",
+   "subject_name": "Simon"
+  },
+  {
+   "id": 41,
+   "template_id": 11,
+   "order": "ABBA",
+   "prompt": "While Diana and Kate sat in the garden, Kate described the plan to",
+   "corrupt_prompt": "While Kate and Diana sat in the garden, Diana described the plan to",
+   "io_name": "Diana",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 42,
+   "template_id": 12,
+   "order": "ABBA",
+   "prompt": "After David and Julia watched the film, Julia explained the ending to",
+   "corrupt_prompt": "After Julia and David watched the film, David explained the ending to",
+   "io_name": "David",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 43,
+   "template_id": 13,
+   "order": "ABBA",
+   "prompt": "When Kate and Robert visited the library, Robert returned the book to",
+   "corrupt_prompt": "When Robert and Kate visited the library, Kate returned the book to",
+   "io_name": "Kate",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 44,
+   "template_id": 14,
+   "order": "ABBA",
+   "prompt": "While Peter and Nicole walked downtown, Nicole pointed the way to",
+   "corrupt_prompt": "While Nicole and Peter walked downtown, Peter pointed the way to",
+   "io_name": "Peter",
+   "subject_name": "Nicole"
+  },
+  {
+   "id": 45,
+   "template_id": 0,
+   "order": "BABA",
+   "prompt": "When David and John went to the store, David gave a bottle to",
+   "corrupt_prompt": "When John and David went to the store, John gave a bottle to",
+   "io_name": "John",
+   "subject_name": "David"
+  },
+  {
+   "id": 46,
+   "template_id": 1,
+   "order": "BABA",
+   "prompt": "When Steve and Susan went to the park, Steve handed a ball to",
+   "corrupt_prompt": "When Susan and Steve went to the park, Susan handed a ball to",
+   "io_name": "Susan",
+   "subject_name": "Steve"
+  },
+  {
+   "id": 47,
+   "template_id": 2,
+   "order": "BABA",
+   "prompt": "After Bob and Chris finished lunch, Bob passed the plate to",
+   "corrupt_prompt": "After Chris and Bob finished lunch, Chris passed the plate to",
+   "io_name": "Chris",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 48,
+   "template_id": 3,
+   "order": "BABA",
+   "prompt": "While Diana and Daniel were at the office, Diana sent an email to",
+   "corrupt_prompt": "While Daniel and Diana were at the office, Daniel sent an email to",
+   "io_name": "Daniel",
+   "subject_name": "Diana"
+  },
+  {
+   "id": 49,
+   "template_id": 4,
+   "order": "BABA",
+   "prompt": "Then Robert and Emma had a long argument, Robert apologised to",
+   "corrupt_prompt": "Then Emma and Robert had a long argument, Emma apologised to",
+   "io_name": "Emma",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 50,
+   "template_id": 5,
+   "order": "BABA",
+   "prompt": "When Paul and Carol arrived at the party, Paul offered a drink to",
+   "corrupt_prompt": "When Carol and Paul arrived at the party, Carol offered a drink to",
+   "io_name": "Carol",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 51,
+   "template_id": 6,
+   "order": "BABA",
+   "prompt": "After Simon and Paul left the museum, Simon showed the ticket to",
+   "corrupt_prompt": "After Paul and Simon left the museum, Paul showed the ticket to",
+   "io_name": "Paul",
+   "subject_name": "Simon"
+  },
+  {
+   "id": 52,
+   "template_id": 7,
+   "order": "BABA",
+   "prompt": "While Kate and Tom waited at the station, Kate lent a phone to",
+   "corrupt_prompt": "While Tom and Kate waited at the station, Tom lent a phone to",
+   "io_name": "Tom",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 53,
+   "template_id": 8,
+   "order": "BABA",
+   "prompt": "When Daniel and Alice got to the beach, Daniel threw a towel to",
+   "corrupt_prompt": "When Alice and Daniel got to the beach, Alice threw a towel to",
+   "io_name": "Alice",
+   "subject_name": "Daniel"
+  },
+  {
+   "id": 54,
+   "template_id": 9,
+   "order": "BABA",
+   "prompt": "After Mary and Kevin met at the cafe, Mary read the letter to",
+   "corrupt_prompt": "After Kevin and Mary met at the cafe, Kevin read the letter to",
+   "io_name": "Kevin",
+   "subject_name": "Mary"
+  },
+  {
+   "id": 55,
+   "template_id": 10,
+   "order": "BABA",
+   "prompt": "When Laura and Daniel were working late, Laura brought coffee to",
+   "corrupt_prompt": "When Daniel and Laura were working late, Daniel brought coffee to",
+   "io_name": "Daniel",
+   "subject_name": "Laura"
+  },
+  {
+   "id": 56,
+   "template_id": 11,
+   "order": "BABA",
+   "prompt": "While Emma and Robert sat in the garden, Emma described the plan to",
+   "corrupt_prompt": "While Robert and Emma sat in the garden, Robert described the plan to",
+   "io_name": "Robert",
+   "subject_name": "Emma"
+  },
+  {
+   "id": 57,
+   "template_id": 12,
+   "order": "BABA",
+   "prompt": "After Alice and Simon watched the film, Alice explained the ending to",
+   "corrupt_prompt": "After Simon and Alice watched the film, Simon explained the ending to",
+   "io_name": "Simon",
+   "subject_name": "Alice"
+  },
+  {
+   "id": 58,
+   "template_id": 13,
+   "order": "BABA",
+   "prompt": "When Susan and Kate visited the library, Susan returned the book to",
+   "corrupt_prompt": "When Kate and Susan visited the library, Kate returned the book to",
+   "io_name": "Kate",
+   "subject_name": "Susan"
+  },
+  {
+   "id": 59,
+   "template_id": 14,
+   "order": "BABA",
+   "prompt": "While Susan and George walked downtown, Susan pointed the way to",
+   "corrupt_prompt": "While George and Susan walked downtown, George pointed the way to",
+   "io_name": "George",
+   "subject_name": "Susan"
+  },
+  {
+   "id": 60,
+   "template_id": 0,
+   "order": "ABBA",
+   "prompt": "When Claire and Lisa went to the store, Lisa gave a bottle to",
+   "corrupt_prompt": "When Lisa and Claire went to the store, Claire gave a bottle to",
+   "io_name": "Claire",
+   "subject_name": "Lisa"
+  },
+  {
+   "id": 61,
+   "template_id": 1,
+   "order": "ABBA",
+   "prompt": "When Susan and Helen went to the park, Helen handed a ball to",
+   "corrupt_prompt": "When Helen and Susan went to the park, Susan handed a ball to",
+   "io_name": "Susan",
+   "subject_name": "Helen"
+  },
+  {
+   "id": 62,
+   "template_id": 2,
+   "order": "ABBA",
+   "prompt": "After Diana and Nicole finished lunch, Nicole passed the plate to",
+   "corrupt_prompt": "After Nicole and Diana finished lunch, Diana passed the plate to",
+   "io_name": "Diana",
+   "subject_name": "Nicole"
+  },
+  {
+   "id": 63,
+   "template_id": 3,
+   "order": "ABBA",
+   "prompt": "While Emma and Tom were at the office, Tom sent an email to",
+   "corrupt_prompt": "While Tom and Emma were at the office, Emma sent an email to",
+   "io_name": "Emma",
+   "subject_name": "Tom"
+  },
+  {
+   "id": 64,
+   "template_id": 4,
+   "order": "ABBA",
+   "prompt": "Then Alice and Mark had a long argument, Mark apologised to",
+   "corrupt_prompt": "Then Mark and Alice had a long argument, Alice apologised to",
+   "io_name": "Alice",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 65,
+   "template_id": 5,
+   "order": "ABBA",
+   "prompt": "When Steve and Andrew arrived at the party, Andrew offered a drink to",
+   "corrupt_prompt": "When Andrew and Steve arrived at the party, Steve offered a drink to",
+   "io_name": "Steve",
+   "subject_name": "Andrew"
+  },
+  {
+   "id": 66,
+   "template_id": 6,
+   "order": "ABBA",
+   "prompt": "After Daniel and Nicole left the museum, Nicole showed the ticket to",
+   "corrupt_prompt": "After Nicole and Daniel left the museum, Daniel showed the ticket to",
+   "io_name": "Daniel",
+   "subject_name": "Nicole"
+  },
+  {
+   "id": 67,
+   "template_id": 7,
+   "order": "ABBA",
+   "prompt": "While Lisa and Julia waited at the station, Julia lent a phone to",
+   "corrupt_prompt": "While Julia and Lisa waited at the station, Lisa lent a phone to",
+   "io_name": "Lisa",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 68,
+   "template_id": 8,
+   "order": "ABBA",
+   "prompt": "When Bob and Julia got to the beach, Julia threw a towel to",
+   "corrupt_prompt": "When Julia and Bob got to the beach, Bob threw a towel to",
+   "io_name": "Bob",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 69,
+   "template_id": 9,
+   "order": "ABBA",
+   "prompt": "After Chris and Steve met at the cafe, Steve read the letter to",
+   "corrupt_prompt": "After Steve and Chris met at the cafe, Chris read the letter to",
+   "io_name": "Chris",
+   "subject_name": "Steve"
+  },
+  {
+   "id": 70,
+   "template_id": 10,
+   "order": "ABBA",
+   "prompt": "When Carol and David were working late, David brought coffee to",
+   "corrupt_prompt": "When David and Carol were working late, Carol brought coffee to",
+   "io_name": "Carol",
+   "subject_name": "David"
+  },
+  {
+   "id": 71,
+   "template_id": 11,
+   "order": "ABBA",
+   "prompt": "While David and Sophie sat in the garden, Sophie described the plan to",
+   "corrupt_prompt": "While Sophie and David sat in the garden, David described the plan to",
+   "io_name": "David",
+   "subject_name": "Sophie"
+  },
+  {
+   "id": 72,
+   "template_id": 12,
+   "order": "ABBA",
+   "prompt": "After Emma and Kate watched the film, Kate explained the ending to",
+   "corrupt_prompt": "After Kate and Emma watched the film, Emma explained the ending to",
+   "io_name": "Emma",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 73,
+   "template_id": 13,
+   "order": "ABBA",
+   "prompt": "When Tom and Robert visited the library, Robert returned the book to",
+   "corrupt_prompt": "When Robert and Tom visited the library, Tom returned the book to",
+   "io_name": "Tom",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 74,
+   "template_id": 14,
+   "order": "ABBA",
+   "prompt": "While James and Helen walked downtown, Helen pointed the way to",
+   "corrupt_prompt": "While Helen and James walked downtown, James pointed the way to",
+   "io_name": "James",
+   "subject_name": "Helen"
+  },
+  {
+   "id": 75,
+   "template_id": 0,
+   "order": "BABA",
+   "prompt": "When Peter and Lisa went to the store, Peter gave a bottle to",
+   "corrupt_prompt": "When Lisa and Peter went to the store, Lisa gave a bottle to",
+   "io_name": "Lisa",
+   "subject_name": "Peter"
+  },
+  {
+   "id": 76,
+   "template_id": 1,
+   "order": "BABA",
+   "prompt": "When Sarah and Nicole went to the park, Sarah handed a ball to",
+   "corrupt_prompt": "When Nicole and Sarah went to the park, Nicole handed a ball to",
+   "io_name": "Nicole",
+   "subject_name": "Sarah"
+  },
+  {
+   "id": 77,
+   "template_id": 2,
+   "order": "BABA",
+   "prompt": "After Sarah and Tom finished lunch, Sarah passed the plate to",
+   "corrupt_prompt": "After Tom and Sarah finished lunch, Tom passed the plate to",
+   "io_name": "Tom",
+   "subject_name": "Sarah"
+  },
+  {
+   "id": 78,
+   "template_id": 3,
+   "order": "BABA",
+   "prompt": "While Julia and Daniel were at the office, Julia sent an email to",
+   "corrupt_prompt": "While Daniel and Julia were at the office, Daniel sent an email to",
+   "io_name": "Daniel",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 79,
+   "template_id": 4,
+   "order": "BABA",
+   "prompt": "Then Carol and John had a long argument, Carol apologised to",
+   "corrupt_prompt": "Then John and Carol had a long argument, John apologised to",
+   "io_name": "John",
+   "subject_name": "Carol"
+  },
+  {
+   "id": 80,
+   "template_id": 5,
+   "order": "BABA",
+   "prompt": "When Andrew and Mary arrived at the party, Andrew offered a drink to",
+   "corrupt_prompt": "When Mary and Andrew arrived at the party, Mary offered a drink to",
+   "io_name": "Mary",
+   "subject_name": "Andrew"
+  },
+  {
+   "id": 81,
+   "template_id": 6,
+   "order": "BABA",
+   "prompt": "After Alice and John left the museum, Alice showed the ticket to",
+   "corrupt_prompt": "After John and Alice left the museum, John showed the ticket to",
+   "io_name": "John",
+   "subject_name": "Alice"
+  },
+  {
+   "id": 82,
+   "template_id": 7,
+   "order": "BABA",
+   "prompt": "While Bob and Carol waited at the station, Bob lent a phone to",
+   "corrupt_prompt": "While Carol and Bob waited at the station, Carol lent a phone to",
+   "io_name": "Carol",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 83,
+   "template_id": 8,
+   "order": "BABA",
+   "prompt": "When Carol and John got to the beach, Carol threw a towel to",
+   "corrupt_prompt": "When John and Carol got to the beach, John threw a towel to",
+   "io_name": "John",
+   "subject_name": "Carol"
+  },
+  {
+   "id": 84,
+   "template_id": 9,
+   "order": "BABA",
+   "prompt": "After Mary and Anna met at the cafe, Mary read the letter to",
+   "corrupt_prompt": "After Anna and Mary met at the cafe, Anna read the letter to",
+   "io_name": "Anna",
+   "subject_name": "Mary"
+  },
+  {
+   "id": 85,
+   "template_id": 10,
+   "order": "BABA",
+   "prompt": "When Susan and Carol were working late, Susan brought coffee to",
+   "corrupt_prompt": "When Carol and Susan were working late, Carol brought coffee to",
+   "io_name": "Carol",
+   "subject_name": "Susan"
+  },
+  {
+   "id": 86,
+   "template_id": 11,
+   "order": "BABA",
+   "prompt": "While Kevin and Julia sat in the garden, Kevin described the plan to",
+   "corrupt_prompt": "While Julia and Kevin sat in the garden, Julia described the plan to",
+   "io_name": "Julia",
+   "subject_name": "Kevin"
+  },
+  {
+   "id": 87,
+   "template_id": 12,
+   "order": "BABA",
+   "prompt": "After James and Steve watched the film, James explained the ending to",
+   "corrupt_prompt": "After Steve and James watched the film, Steve explained the ending to",
+   "io_name": "Steve",
+   "subject_name": "James"
+  },
+  {
+   "id": 88,
+   "template_id": 13,
+   "order": "BABA",
+   "prompt": "When Sophie and David visited the library, Sophie returned the book to",
+   "corrupt_prompt": "When David and Sophie visited the library, David returned the book to",
+   "io_name": "David",
+   "subject_name": "Sophie"
+  },
+  {
+   "id": 89,
+   "template_id": 14,
+   "order": "BABA",
+   "prompt": "While Sophie and Julia walked downtown, Sophie pointed the way to",
+   "corrupt_prompt": "While Julia and Sophie walked downtown, Julia pointed the way to",
+   "io_name": "Julia",
+   "subject_name": "Sophie"
+  },
+  {
+   "id": 90,
+   "template_id": 0,
+   "order": "ABBA",
+   "prompt": "When Rachel and Helen went to the store, Helen gave a bottle to",
+   "corrupt_prompt": "When Helen and Rachel went to the store, Rachel gave a bottle to",
+   "io_name": "Rachel",
+   "subject_name": "Helen"
+  },
+  {
+   "id": 91,
+   "template_id": 1,
+   "order": "ABBA",
+   "prompt": "When Claire and Robert went to the park, Robert handed a ball to",
+   "corrupt_prompt": "When Robert and Claire went to the park, Claire handed a ball to",
+   "io_name": "Claire",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 92,
+   "template_id": 2,
+   "order": "ABBA",
+   "prompt": "After Michael and Robert finished lunch, Robert passed the plate to",
+   "corrupt_prompt": "After Robert and Michael finished lunch, Michael passed the plate to",
+   "io_name": "Michael",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 93,
+   "template_id": 3,
+   "order": "ABBA",
+   "prompt": "While Rachel and Simon were at the office, Simon sent an email to",
+   "corrupt_prompt": "While Simon and Rachel were at the office, Rachel sent an email to",
+   "io_name": "Rachel",
+   "subject_name": "Simon"
+  },
+  {
+   "id": 94,
+   "template_id": 4,
+   "order": "ABBA",
+   "prompt": "Then Bob and Claire had a long argument, Claire apologised to",
+   "corrupt_prompt": "Then Claire and Bob had a long argument, Bob apologised to",
+   "io_name": "Bob",
+   "subject_name": "Claire"
+  },
+  {
+   "id": 95,
+   "template_id": 5,
+   "order": "ABBA",
+   "prompt": "When Bob and Peter arrived at the party, Peter offered a drink to",
+   "corrupt_prompt": "When Peter and Bob arrived at the party, Bob offered a drink to",
+   "io_name": "Bob",
+   "subject_name": "Peter"
+  },
+  {
+   "id": 96,
+   "template_id": 6,
+   "order": "ABBA",
+   "prompt": "After Mary and Claire left the museum, Claire showed the ticket to",
+   "corrupt_prompt": "After Claire and Mary left the museum, Mary showed the ticket to",
+   "io_name": "Mary",
+   "subject_name": "Claire"
+  },
+  {
+   "id": 97,
+   "template_id": 7,
+   "order": "ABBA",
+   "prompt": "While Julia and Helen waited at the station, Helen lent a phone to",
+   "corrupt_prompt": "While Helen and Julia waited at the station, Julia lent a phone to",
+   "io_name": "Julia",
+   "subject_name": "Helen"
+  },
+  {
+   "id": 98,
+   "template_id": 8,
+   "order": "ABBA",
+   "prompt": "When Helen and Sarah got to the beach, Sarah threw a towel to",
+   "corrupt_prompt": "When Sarah and Helen got to the beach, Helen threw a towel to",
+   "io_name": "Helen",
+   "subject_name": "Sarah"
+  },
+  {
+   "id": 99,
+   "template_id": 9,
+   "order": "ABBA",
+   "prompt": "After David and Robert met at the cafe, Robert read the letter to",
+   "corrupt_prompt": "After Robert and David met at the cafe, David read the letter to",
+   "io_name": "David",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 100,
+   "template_id": 10,
+   "order": "ABBA",
+   "prompt": "When George and Kevin were working late, Kevin brought coffee to",
+   "corrupt_prompt": "When Kevin and George were working late, George brought coffee to",
+   "io_name": "George",
+   "subject_name": "Kevin"
+  },
+  {
+   "id": 101,
+   "template_id": 11,
+   "order": "ABBA",
+   "prompt": "While Simon and Julia sat in the garden, Julia described the plan to",
+   "corrupt_prompt": "While Julia and Simon sat in the garden, Simon described the plan to",
+   "io_name": "Simon",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 102,
+   "template_id": 12,
+   "order": "ABBA",
+   "prompt": "After Carol and Sarah watched the film, Sarah explained the ending to",
+   "corrupt_prompt": "After Sarah and Carol watched the film, Carol explained the ending to",
+   "io_name": "Carol",
+   "subject_name": "Sarah"
+  },
+  {
+   "id": 103,
+   "template_id": 13,
+   "order": "ABBA",
+   "prompt": "When Claire and Bob visited the library, Bob returned the book to",
+   "corrupt_prompt": "When Bob and Claire visited the library, Claire returned the book to",
+   "io_name": "Claire",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 104,
+   "template_id": 14,
+   "order": "ABBA",
+   "prompt": "While Alice and Chris walked downtown, Chris pointed the way to",
+   "corrupt_prompt": "While Chris and Alice walked downtown, Alice pointed the way to",
+   "io_name": "Alice",
+   "subject_name": "Chris"
+  },
+  {
+   "id": 105,
+   "template_id": 0,
+   "order": "BABA",
+   "prompt": "When Emma and Julia went to the store, Emma gave a bottle to",
+   "corrupt_prompt": "When Julia and Emma went to the store, Julia gave a bottle to",
+   "io_name": "Julia",
+   "subject_name": "Emma"
+  },
+  {
+   "id": 106,
+   "template_id": 1,
+   "order": "BABA",
+   "prompt": "When Steve and Rachel went to the park, Steve handed a ball to",
+   "corrupt_prompt": "When Rachel and Steve went to the park, Rachel handed a ball to",
+   "io_name": "Rachel",
+   "subject_name": "Steve"
+  },
+  {
+   "id": 107,
+   "template_id": 2,
+   "order": "BABA",
+   "prompt": "After James and Sophie finished lunch, James passed the plate to",
+   "corrupt_prompt": "After Sophie and James finished lunch, Sophie passed the plate to",
+   "io_name": "Sophie",
+   "subject_name": "James"
+  },
+  {
+   "id": 108,
+   "template_id": 3,
+   "order": "BABA",
+   "prompt": "While Bob and Peter were at the office, Bob sent an email to",
+   "corrupt_prompt": "While Peter and Bob were at the office, Peter sent an email to",
+   "io_name": "Peter",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 109,
+   "template_id": 4,
+   "order": "BABA",
+   "prompt": "Then Paul and Emma had a long argument, Paul apologised to",
+   "corrupt_prompt": "Then Emma and Paul had a long argument, Emma apologised to",
+   "io_name": "Emma",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 110,
+   "template_id": 5,
+   "order": "BABA",
+   "prompt": "When Paul and Alice arrived at the party, Paul offered a drink to",
+   "corrupt_prompt": "When Alice and Paul arrived at the party, Alice offered a drink to",
+   "io_name": "Alice",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 111,
+   "template_id": 6,
+   "order": "BABA",
+   "prompt": "After Simon and Kate left the museum, Simon showed the ticket to",
+   "corrupt_prompt": "After Kate and Simon left the museum, Kate showed the ticket to",
+   "io_name": "Kate",
+   "subject_name": "Simon"
+  },
+  {
+   "id": 112,
+   "template_id": 7,
+   "order": "BABA",
+   "prompt": "While Robert and Laura waited at the station, Robert lent a phone to",
+   "corrupt_prompt": "While Laura and Robert waited at the station, Laura lent a phone to",
+   "io_name": "Laura",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 113,
+   "template_id": 8,
+   "order": "BABA",
+   "prompt": "When Diana and Steve got to the beach, Diana threw a towel to",
+   "corrupt_prompt": "When Steve and Diana got to the beach, Steve threw a towel to",
+   "io_name": "Steve",
+   "subject_name": "Diana"
+  },
+  {
+   "id": 114,
+   "template_id": 9,
+   "order": "BABA",
+   "prompt": "After Laura and Helen met at the cafe, Laura read the letter to",
+   "corrupt_prompt": "After Helen and Laura met at the cafe, Helen read the letter to",
+   "io_name": "Helen",
+   "subject_name": "Laura"
+  },
+  {
+   "id": 115,
+   "template_id": 10,
+   "order": "BABA",
+   "prompt": "When Bob and James were working late, Bob brought coffee to",
+   "corrupt_prompt": "When James and Bob were working late, James brought coffee to",
+   "io_name": "James",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 116,
+   "template_id": 11,
+   "order": "BABA",
+   "prompt": "While Mark and Bob sat in the garden, Mark described the plan to",
+   "corrupt_prompt": "While Bob and Mark sat in the garden, Bob described the plan to",
+   "io_name": "Bob",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 117,
+   "template_id": 12,
+   "order": "BABA",
+   "prompt": "After Sophie and Bob watched the film, Sophie explained the ending to",
+   "corrupt_prompt": "After Bob and Sophie watched the film, Bob explained the ending to",
+   "io_name": "Bob",
+   "subject_name": "Sophie"
+  },
+  {
+   "id": 118,
+   "template_id": 13,
+   "order": "BABA",
+   "prompt": "When Tom and Susan visited the library, Tom returned the book to",
+   "corrupt_prompt": "When Susan and Tom visited the library, Susan returned the book to",
+   "io_name": "Susan",
+   "subject_name": "Tom"
+  },
+  {
+   "id": 119,
+   "template_id": 14,
+   "order": "BABA",
+   "prompt": "While Bob and Emma walked downtown, Bob pointed the way to",
+   "corrupt_prompt": "While Emma and Bob walked downtown, Emma pointed the way to",
+   "io_name": "Emma",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 120,
+   "template_id": 0,
+   "order": "ABBA",
+   "prompt": "When Susan and Chris went to the store, Chris gave a bottle to",
+   "corrupt_prompt": "When Chris and Susan went to the store, Susan gave a bottle to",
+   "io_name": "Susan",
+   "subject_name": "Chris"
+  },
+  {
+   "id": 121,
+   "template_id": 1,
+   "order": "ABBA",
+   "prompt": "When George and Carol went to the park, Carol handed a ball to",
+   "corrupt_prompt": "When Carol and George went to the park, George handed a ball to",
+   "io_name": "George",
+   "subject_name": "Carol"
+  },
+  {
+   "id": 122,
+   "template_id": 2,
+   "order": "ABBA",
+   "prompt": "After Carol and Julia finished lunch, Julia passed the plate to",
+   "corrupt_prompt": "After Julia and Carol finished lunch, Carol passed the plate to",
+   "io_name": "Carol",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 123,
+   "template_id": 3,
+   "order": "ABBA",
+   "prompt": "While Peter and Daniel were at the office, Daniel sent an email to",
+   "corrupt_prompt": "While Daniel and Peter were at the office, Peter sent an email to",
+   "io_name": "Peter",
+   "subject_name": "Daniel"
+  },
+  {
+   "id": 124,
+   "template_id": 4,
+   "order": "ABBA",
+   "prompt": "Then Julia and Anna had a long argument, Anna apologised to",
+   "corrupt_prompt": "Then Anna and Julia had a long argument, Julia apologised to",
+   "io_name": "Julia",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 125,
+   "template_id": 5,
+   "order": "ABBA",
+   "prompt": "When Chris and Rachel arrived at the party, Rachel offered a drink to",
+   "corrupt_prompt": "When Rachel and Chris arrived at the party, Chris offered a drink to",
+   "io_name": "Chris",
+   "subject_name": "Rachel"
+  },
+  {
+   "id": 126,
+   "template_id": 6,
+   "order": "ABBA",
+   "prompt": "After Tom and Mark left the museum, Mark showed the ticket to",
+   "corrupt_prompt": "After Mark and Tom left the museum, Tom showed the ticket to",
+   "io_name": "Tom",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 127,
+   "template_id": 7,
+   "order": "ABBA",
+   "prompt": "While Kate and James waited at the station, James lent a phone to",
+   "corrupt_prompt": "While James and Kate waited at the station, Kate lent a phone to",
+   "io_name": "Kate",
+   "subject_name": "James"
+  },
+  {
+   "id": 128,
+   "template_id": 8,
+   "order": "ABBA",
+   "prompt": "When Mark and Julia got to the beach, Julia threw a towel to",
+   "corrupt_prompt": "When Julia and Mark got to the beach, Mark threw a towel to",
+   "io_name": "Mark",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 129,
+   "template_id": 9,
+   "order": "ABBA",
+   "prompt": "After Kate and Peter met at the cafe, Peter read the letter to",
+   "corrupt_prompt": "After Peter and Kate met at the cafe, Kate read the letter to",
+   "io_name": "Kate",
+   "subject_name": "Peter"
+  },
+  {
+   "id": 130,
+   "template_id": 10,
+   "order": "ABBA",
+   "prompt": "When David and Lisa were working late, Lisa brought coffee to",
+   "corrupt_prompt": "When Lisa and David were working late, David brought coffee to",
+   "io_name": "David",
+   "subject_name": "Lisa"
+  },
+  {
+   "id": 131,
+   "template_id": 11,
+   "order": "ABBA",
+   "prompt": "While Simon and Mark sat in the garden, Mark described the plan to",
+   "corrupt_prompt": "While Mark and Simon sat in the garden, Simon described the plan to",
+   "io_name": "Simon",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 132,
+   "template_id": 12,
+   "order": "ABBA",
+   "prompt": "After Carol and Alice watched the film, Alice explained the ending to",
+   "corrupt_prompt": "After Alice and Carol watched the film, Carol explained the ending to",
+   "io_name": "Carol",
+   "subject_name": "Alice"
+  },
+  {
+   "id": 133,
+   "template_id": 13,
+   "order": "ABBA",
+   "prompt": "When Simon and Claire visited the library, Claire returned the book to",
+   "corrupt_prompt": "When Claire and Simon visited the library, Simon returned the book to",
+   "io_name": "Simon",
+   "subject_name": "Claire"
+  },
+  {
+   "id": 134,
+   "template_id": 14,
+   "order": "ABBA",
+   "prompt": "While Carol and James walked downtown, James pointed the way to",
+   "corrupt_prompt": "While James and Carol walked downtown, Carol pointed the way to",
+   "io_name": "Carol",
+   "subject_name": "James"
+  },
+  {
+   "id": 135,
+   "template_id": 0,
+   "order": "BABA",
+   "prompt": "When Kate and Susan went to the store, Kate gave a bottle to",
+   "corrupt_prompt": "When Susan and Kate went to the store, Susan gave a bottle to",
+   "io_name": "Susan",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 136,
+   "template_id": 1,
+   "order": "BABA",
+   "prompt": "When Michael and David went to the park, Michael handed a ball to",
+   "corrupt_prompt": "When David and Michael went to the park, David handed a ball to",
+   "io_name": "David",
+   "subject_name": "Michael"
+  },
+  {
+   "id": 137,
+   "template_id": 2,
+   "order": "BABA",
+   "prompt": "After Julia and Carol finished lunch, Julia passed the plate to",
+   "corrupt_prompt": "After Carol and Julia finished lunch, Carol passed the plate to",
+   "io_name": "Carol",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 138,
+   "template_id": 3,
+   "order": "BABA",
+   "prompt": "While Laura and Nicole were at the office, Laura sent an email to",
+   "corrupt_prompt": "While Nicole and Laura were at the office, Nicole sent an email to",
+   "io_name": "Nicole",
+   "subject_name": "Laura"
+  },
+  {
+   "id": 139,
+   "template_id": 4,
+   "order": "BABA",
+   "prompt": "Then Sarah and Emma had a long argument, Sarah apologised to",
+   "corrupt_prompt": "Then Emma and Sarah had a long argument, Emma apologised to",
+   "io_name": "Emma",
+   "subject_name": "Sarah"
+  },
+  {
+   "id": 140,
+   "template_id": 5,
+   "order": "BABA",
+   "prompt": "When Tom and Lisa arrived at the party, Tom offered a drink to",
+   "corrupt_prompt": "When Lisa and Tom arrived at the party, Lisa offered a drink to",
+   "io_name": "Lisa",
+   "subject_name": "Tom"
+  },
+  {
+   "id": 141,
+   "template_id": 6,
+   "order": "BABA",
+   "prompt": "After Lisa and Alice left the museum, Lisa showed the ticket to",
+   "corrupt_prompt": "After Alice and Lisa left the museum, Alice showed the ticket to",
+   "io_name": "Alice",
+   "subject_name": "Lisa"
+  },
+  {
+   "id": 142,
+   "template_id": 7,
+   "order": "BABA",
+   "prompt": "While David and Claire waited at the station, David lent a phone to",
+   "corrupt_prompt": "While Claire and David waited at the station, Claire lent a phone to",
+   "io_name": "Claire",
+   "subject_name": "David"
+  },
+  {
+   "id": 143,
+   "template_id": 8,
+   "order": "BABA",
+   "prompt": "When Daniel and Kate got to the beach, Daniel threw a towel to",
+   "corrupt_prompt": "When Kate and Daniel got to the beach, Kate threw a towel to",
+   "io_name": "Kate",
+   "subject_name": "Daniel"
+  },
+  {
+   "id": 144,
+   "template_id": 9,
+   "order": "BABA",
+   "prompt": "After Diana and Claire met at the cafe, Diana read the letter to",
+   "corrupt_prompt": "After Claire and Diana met at the cafe, Claire read the letter to",
+   "io_name": "Claire",
+   "subject_name": "Diana"
+  },
+  {
+   "id": 145,
+   "template_id": 10,
+   "order": "BABA",
+   "prompt": "When Laura and Kevin were working late, Laura brought coffee to",
+   "corrupt_prompt": "When Kevin and Laura were working late, Kevin brought coffee to",
+   "io_name": "Kevin",
+   "subject_name": "Laura"
+  },
+  {
+   "id": 146,
+   "template_id": 11,
+   "order": "BABA",
+   "prompt": "While Mary and James sat in the garden, Mary described the plan to",
+   "corrupt_prompt": "While James and Mary sat in the garden, James described the plan to",
+   "io_name": "James",
+   "subject_name": "Mary"
+  },
+  {
+   "id": 147,
+   "template_id": 12,
+   "order": "BABA",
+   "prompt": "After Kate and James watched the film, Kate explained the ending to",
+   "corrupt_prompt": "After James and Kate watched the film, James explained the ending to",
+   "io_name": "James",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 148,
+   "template_id": 13,
+   "order": "BABA",
+   "prompt": "When Steve and Susan visited the library, Steve returned the book to",
+   "corrupt_prompt": "When Susan and Steve visited the library, Susan returned the book to",
+   "io_name": "Susan",
+   "subject_name": "Steve"
+  },
+  {
+   "id": 149,
+   "template_id": 14,
+   "order": "BABA",
+   "prompt": "While Bob and Kate walked downtown, Bob pointed the way to",
+   "corrupt_prompt": "While Kate and Bob walked downtown, Kate pointed the way to",
+   "io_name": "Kate",
+   "subject_name": "Bob"
+  },
+  {
+   "id": 150,
+   "template_id": 0,
+   "order": "ABBA",
+   "prompt": "When Chris and Robert went to the store, Robert gave a bottle to",
+   "corrupt_prompt": "When Robert and Chris went to the store, Chris gave a bottle to",
+   "io_name": "Chris",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 151,
+   "template_id": 1,
+   "order": "ABBA",
+   "prompt": "When Kevin and Anna went to the park, Anna handed a ball to",
+   "corrupt_prompt": "When Anna and Kevin went to the park, Kevin handed a ball to",
+   "io_name": "Kevin",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 152,
+   "template_id": 2,
+   "order": "ABBA",
+   "prompt": "After Alice and Mary finished lunch, Mary passed the plate to",
+   "corrupt_prompt": "After Mary and Alice finished lunch, Alice passed the plate to",
+   "io_name": "Alice",
+   "subject_name": "Mary"
+  },
+  {
+   "id": 153,
+   "template_id": 3,
+   "order": "ABBA",
+   "prompt": "While David and Kate were at the office, Kate sent an email to",
+   "corrupt_prompt": "While Kate and David were at the office, David sent an email to",
+   "io_name": "David",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 154,
+   "template_id": 4,
+   "order": "ABBA",
+   "prompt": "Then Emma and Sarah had a long argument, Sarah apologised to",
+   "corrupt_prompt": "Then Sarah and Emma had a long argument, Emma apologised to",
+   "io_name": "Emma",
+   "subject_name": "Sarah"
+  },
+  {
+   "id": 155,
+   "template_id": 5,
+   "order": "ABBA",
+   "prompt": "When Robert and Alice arrived at the party, Alice offered a drink to",
+   "corrupt_prompt": "When Alice and Robert arrived at the party, Robert offered a drink to",
+   "io_name": "Robert",
+   "subject_name": "Alice"
+  },
+  {
+   "id": 156,
+   "template_id": 6,
+   "order": "ABBA",
+   "prompt": "After Daniel and Carol left the museum, Carol showed the ticket to",
+   "corrupt_prompt": "After Carol and Daniel left the museum, Daniel showed the ticket to",
+   "io_name": "Daniel",
+   "subject_name": "Carol"
+  },
+  {
+   "id": 157,
+   "template_id": 7,
+   "order": "ABBA",
+   "prompt": "While Diana and Anna waited at the station, Anna lent a phone to",
+   "corrupt_prompt": "While Anna and Diana waited at the station, Diana lent a phone to",
+   "io_name": "Diana",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 158,
+   "template_id": 8,
+   "order": "ABBA",
+   "prompt": "When Nicole and Diana got to the beach, Diana threw a towel to",
+   "corrupt_prompt": "When Diana and Nicole got to the beach, Nicole threw a towel to",
+   "io_name": "Nicole",
+   "subject_name": "Diana"
+  },
+  {
+   "id": 159,
+   "template_id": 9,
+   "order": "ABBA",
+   "prompt": "After Robert and David met at the cafe, David read the letter to",
+   "corrupt_prompt": "After David and Robert met at the cafe, Robert read the letter to",
+   "io_name": "Robert",
+   "subject_name": "David"
+  },
+  {
+   "id": 160,
+   "template_id": 10,
+   "order": "ABBA",
+   "prompt": "When Anna and Lisa were working late, Lisa brought coffee to",
+   "corrupt_prompt": "When Lisa and Anna were working late, Anna brought coffee to",
+   "io_name": "Anna",
+   "subject_name": "Lisa"
+  },
+  {
+   "id": 161,
+   "template_id": 11,
+   "order": "ABBA",
+   "prompt": "While Nicole and Anna sat in the garden, Anna described the plan to",
+   "corrupt_prompt": "While Anna and Nicole sat in the garden, Nicole described the plan to",
+   "io_name": "Nicole",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 162,
+   "template_id": 12,
+   "order": "ABBA",
+   "prompt": "After Michael and James watched the film, James explained the ending to",
+   "corrupt_prompt": "After James and Michael watched the film, Michael explained the ending to",
+   "io_name": "Michael",
+   "subject_name": "James"
+  },
+  {
+   "id": 163,
+   "template_id": 13,
+   "order": "ABBA",
+   "prompt": "When Julia and Claire visited the library, Claire returned the book to",
+   "corrupt_prompt": "When Claire and Julia visited the library, Julia returned the book to",
+   "io_name": "Julia",
+   "subject_name": "Claire"
+  },
+  {
+   "id": 164,
+   "template_id": 14,
+   "order": "ABBA",
+   "prompt": "While Michael and Rachel walked downtown, Rachel pointed the way to",
+   "corrupt_prompt": "While Rachel and Michael walked downtown, Michael pointed the way to",
+   "io_name": "Michael",
+   "subject_name": "Rachel"
+  },
+  {
+   "id": 165,
+   "template_id": 0,
+   "order": "BABA",
+   "prompt": "When Julia and Diana went to the store, Julia gave a bottle to",
+   "corrupt_prompt": "When Diana and Julia went to the store, Diana gave a bottle to",
+   "io_name": "Diana",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 166,
+   "template_id": 1,
+   "order": "BABA",
+   "prompt": "When George and Emma went to the park, George handed a ball to",
+   "corrupt_prompt": "When Emma and George went to the park, Emma handed a ball to",
+   "io_name": "Emma",
+   "subject_name": "George"
+  },
+  {
+   "id": 167,
+   "template_id": 2,
+   "order": "BABA",
+   "prompt": "After Andrew and Rachel finished lunch, Andrew passed the plate to",
+   "corrupt_prompt": "After Rachel and Andrew finished lunch, Rachel passed the plate to",
+   "io_name": "Rachel",
+   "subject_name": "Andrew"
+  },
+  {
+   "id": 168,
+   "template_id": 3,
+   "order": "BABA",
+   "prompt": "While Mary and George were at the office, Mary sent an email to",
+   "corrupt_prompt": "While George and Mary were at the office, George sent an email to",
+   "io_name": "George",
+   "subject_name": "Mary"
+  },
+  {
+   "id": 169,
+   "template_id": 4,
+   "order": "BABA",
+   "prompt": "Then Julia and Rachel had a long argument, Julia apologised to",
+   "corrupt_prompt": "Then Rachel and Julia had a long argument, Rachel apologised to",
+   "io_name": "Rachel",
+   "subject_name": "Julia"
+  },
+  {
+   "id": 170,
+   "template_id": 5,
+   "order": "BABA",
+   "prompt": "When Emma and Kevin arrived at the party, Emma offered a drink to",
+   "corrupt_prompt": "When Kevin and Emma arrived at the party, Kevin offered a drink to",
+   "io_name": "Kevin",
+   "subject_name": "Emma"
+  },
+  {
+   "id": 171,
+   "template_id": 6,
+   "order": "BABA",
+   "prompt": "After Paul and Claire left the museum, Paul showed the ticket to",
+   "corrupt_prompt": "After Claire and Paul left the museum, Claire showed the ticket to",
+   "io_name": "Claire",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 172,
+   "template_id": 7,
+   "order": "BABA",
+   "prompt": "While Sophie and Anna waited at the station, Sophie lent a phone to",
+   "corrupt_prompt": "While Anna and Sophie waited at the station, Anna lent a phone to",
+   "io_name": "Anna",
+   "subject_name": "Sophie"
+  },
+  {
+   "id": 173,
+   "template_id": 8,
+   "order": "BABA",
+   "prompt": "When Helen and John got to the beach, Helen threw a towel to",
+   "corrupt_prompt": "When John and Helen got to the beach, John threw a towel to",
+   "io_name": "John",
+   "subject_name": "Helen"
+  },
+  {
+   "id": 174,
+   "template_id": 9,
+   "order": "BABA",
+   "prompt": "After Michael and Simon met at the cafe, Michael read the letter to",
+   "corrupt_prompt": "After Simon and Michael met at the cafe, Simon read the letter to",
+   "io_name": "Simon",
+   "subject_name": "Michael"
+  },
+  {
+   "id": 175,
+   "template_id": 10,
+   "order": "BABA",
+   "prompt": "When John and Lisa were working late, John brought coffee to",
+   "corrupt_prompt": "When Lisa and John were working late, Lisa brought coffee to",
+   "io_name": "Lisa",
+   "subject_name": "John"
+  },
+  {
+   "id": 176,
+   "template_id": 11,
+   "order": "BABA",
+   "prompt": "While Andrew and John sat in the garden, Andrew described the plan to",
+   "corrupt_prompt": "While John and Andrew sat in the garden, John described the plan to",
+   "io_name": "John",
+   "subject_name": "Andrew"
+  },
+  {
+   "id": 177,
+   "template_id": 12,
+   "order": "BABA",
+   "prompt": "After Peter and Helen watched the film, Peter explained the ending to",
+   "corrupt_prompt": "After Helen and Peter watched the film, Helen explained the ending to",
+   "io_name": "Helen",
+   "subject_name": "Peter"
+  },
+  {
+   "id": 178,
+   "template_id": 13,
+   "order": "BABA",
+   "prompt": "When Kevin and Mary visited the library, Kevin returned the book to",
+   "corrupt_prompt": "When Mary and Kevin visited the library, Mary returned the book to",
+   "io_name": "Mary",
+   "subject_name": "Kevin"
+  },
+  {
+   "id": 179,
+   "template_id": 14,
+   "order": "BABA",
+   "prompt": "While Kevin and Carol walked downtown, Kevin pointed the way to",
+   "corrupt_prompt": "While Carol and Kevin walked downtown, Carol pointed the way to",
+   "io_name": "Carol",
+   "subject_name": "Kevin"
+  },
+  {
+   "id": 180,
+   "template_id": 0,
+   "order": "ABBA",
+   "prompt": "When Michael and Susan went to the store, Susan gave a bottle to",
+   "corrupt_prompt": "When Susan and Michael went to the store, Michael gave a bottle to",
+   "io_name": "Michael",
+   "subject_name": "Susan"
+  },
+  {
+   "id": 181,
+   "template_id": 1,
+   "order": "ABBA",
+   "prompt": "When Peter and Mary went to the park, Mary handed a ball to",
+   "corrupt_prompt": "When Mary and Peter went to the park, Peter handed a ball to",
+   "io_name": "Peter",
+   "subject_name": "Mary"
+  },
+  {
+   "id": 182,
+   "template_id": 2,
+   "order": "ABBA",
+   "prompt": "After Andrew and Daniel finished lunch, Daniel passed the plate to",
+   "corrupt_prompt": "After Daniel and Andrew finished lunch, Andrew passed the plate to",
+   "io_name": "Andrew",
+   "subject_name": "Daniel"
+  },
+  {
+   "id": 183,
+   "template_id": 3,
+   "order": "ABBA",
+   "prompt": "While Kate and George were at the office, George sent an email to",
+   "corrupt_prompt": "While George and Kate were at the office, Kate sent an email to",
+   "io_name": "Kate",
+   "subject_name": "George"
+  },
+  {
+   "id": 184,
+   "template_id": 4,
+   "order": "ABBA",
+   "prompt": "Then Kate and Anna had a long argument, Anna apologised to",
+   "corrupt_prompt": "Then Anna and Kate had a long argument, Kate apologised to",
+   "io_name": "Kate",
+   "subject_name": "Anna"
+  },
+  {
+   "id": 185,
+   "template_id": 5,
+   "order": "ABBA",
+   "prompt": "When Claire and Robert arrived at the party, Robert offered a drink to",
+   "corrupt_prompt": "When Robert and Claire arrived at the party, Claire offered a drink to",
+   "io_name": "Claire",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 186,
+   "template_id": 6,
+   "order": "ABBA",
+   "prompt": "After Michael and Mark left the museum, Mark showed the ticket to",
+   "corrupt_prompt": "After Mark and Michael left the museum, Michael showed the ticket to",
+   "io_name": "Michael",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 187,
+   "template_id": 7,
+   "order": "ABBA",
+   "prompt": "While Robert and Susan waited at the station, Susan lent a phone to",
+   "corrupt_prompt": "While Susan and Robert waited at the station, Robert lent a phone to",
+   "io_name": "Robert",
+   "subject_name": "Susan"
+  },
+  {
+   "id": 188,
+   "template_id": 8,
+   "order": "ABBA",
+   "prompt": "When Daniel and Paul got to the beach, Paul threw a towel to",
+   "corrupt_prompt": "When Paul and Daniel got to the beach, Daniel threw a towel to",
+   "io_name": "Daniel",
+   "subject_name": "Paul"
+  },
+  {
+   "id": 189,
+   "template_id": 9,
+   "order": "ABBA",
+   "prompt": "After Helen and Kate met at the cafe, Kate read the letter to",
+   "corrupt_prompt": "After Kate and Helen met at the cafe, Helen read the letter to",
+   "io_name": "Helen",
+   "subject_name": "Kate"
+  },
+  {
+   "id": 190,
+   "template_id": 10,
+   "order": "ABBA",
+   "prompt": "When Anna and Robert were working late, Robert brought coffee to",
+   "corrupt_prompt": "When Robert and Anna were working late, Anna brought coffee to",
+   "io_name": "Anna",
+   "subject_name": "Robert"
+  },
+  {
+   "id": 191,
+   "template_id": 11,
+   "order": "ABBA",
+   "prompt": "While Alice and Tom sat in the garden, Tom described the plan to",
+   "corrupt_prompt": "While Tom and Alice sat in the garden, Alice described the plan to",
+   "io_name": "Alice",
+   "subject_name": "Tom"
+  },
+  {
+   "id": 192,
+   "template_id": 12,
+   "order": "ABBA",
+   "prompt": "After Helen and Nicole watched the film, Nicole explained the ending to",
+   "corrupt_prompt": "After Nicole and Helen watched the film, Helen explained the ending to",
+   "io_name": "Helen",
+   "subject_name": "Nicole"
+  },
+  {
+   "id": 193,
+   "template_id": 13,
+   "order": "ABBA",
+   "prompt": "When Robert and Carol visited the library, Carol returned the book to",
+   "corrupt_prompt": "When Carol and Robert visited the library, Robert returned the book to",
+   "io_name": "Robert",
+   "subject_name": "Carol"
+  },
+  {
+   "id": 194,
+   "template_id": 14,
+   "order": "ABBA",
+   "prompt": "While Mary and Mark walked downtown, Mark pointed the way to",
+   "corrupt_prompt": "While Mark and Mary walked downtown, Mary pointed the way to",
+   "io_name": "Mary",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 195,
+   "template_id": 0,
+   "order": "BABA",
+   "prompt": "When Lisa and Daniel went to the store, Lisa gave a bottle to",
+   "corrupt_prompt": "When Daniel and Lisa went to the store, Daniel gave a bottle to",
+   "io_name": "Daniel",
+   "subject_name": "Lisa"
+  },
+  {
+   "id": 196,
+   "template_id": 1,
+   "order": "BABA",
+   "prompt": "When Lisa and Susan went to the park, Lisa handed a ball to",
+   "corrupt_prompt": "When Susan and Lisa went to the park, Susan handed a ball to",
+   "io_name": "Susan",
+   "subject_name": "Lisa"
+  },
+  {
+   "id": 197,
+   "template_id": 2,
+   "order": "BABA",
+   "prompt": "After Mark and Rachel finished lunch, Mark passed the plate to",
+   "corrupt_prompt": "After Rachel and Mark finished lunch, Rachel passed the plate to",
+   "io_name": "Rachel",
+   "subject_name": "Mark"
+  },
+  {
+   "id": 198,
+   "template_id": 3,
+   "order": "BABA",
+   "prompt": "While Laura and Peter were at the office, Laura sent an email to",
+   "corrupt_prompt": "While Peter and Laura were at the office, Peter sent an email to",
+   "io_name": "Peter",
+   "subject_name": "Laura"
+  },
+  {
+   "id": 199,
+   "template_id": 4,
+   "order": "BABA",
+   "prompt": "Then Helen and David had a long argument, Helen apologised to",
+   "corrupt_prompt": "Then David and Helen had a long argument, David apologised to",
+   "io_name": "David",
+   "subject_name": "Helen"
+  }
+ ]
+}

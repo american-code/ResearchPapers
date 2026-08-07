@@ -1,0 +1,226 @@
+{
+ "meta": {
+  "model": "EleutherAI/pythia-1.4b",
+  "dataset": "dataset.json",
+  "n_examples": 100,
+  "n_layers": 24,
+  "n_heads": 16,
+  "circuit": [
+   "L1H11",
+   "L10H0",
+   "L10H7",
+   "L12H15",
+   "L13H6",
+   "L15H15",
+   "L16H13",
+   "L17H7",
+   "L21H3",
+   "L22H2"
+  ],
+  "circuit_size": 10,
+  "seed": 42,
+  "synthetic": false,
+  "normalization": "F(X) = (LD(X) - LD_all_ablated) / (LD_clean - LD_all_ablated)"
+ },
+ "logit_diffs": {
+  "clean": 4.1251,
+  "all_heads_ablated": 0.0,
+  "circuit_only": 3.5234
+ },
+ "faithfulness": 0.8541,
+ "minimality": [
+  {
+   "head": "L10H7",
+   "layer": 10,
+   "head_idx": 7,
+   "F_without": 0.4666,
+   "delta_F": 0.3876
+  },
+  {
+   "head": "L15H15",
+   "layer": 15,
+   "head_idx": 15,
+   "F_without": 0.5583,
+   "delta_F": 0.2959
+  },
+  {
+   "head": "L10H0",
+   "layer": 10,
+   "head_idx": 0,
+   "F_without": 0.7506,
+   "delta_F": 0.1036
+  },
+  {
+   "head": "L22H2",
+   "layer": 22,
+   "head_idx": 2,
+   "F_without": 0.7551,
+   "delta_F": 0.099
+  },
+  {
+   "head": "L12H15",
+   "layer": 12,
+   "head_idx": 15,
+   "F_without": 0.7784,
+   "delta_F": 0.0758
+  },
+  {
+   "head": "L13H6",
+   "layer": 13,
+   "head_idx": 6,
+   "F_without": 0.7861,
+   "delta_F": 0.0681
+  },
+  {
+   "head": "L21H3",
+   "layer": 21,
+   "head_idx": 3,
+   "F_without": 0.7943,
+   "delta_F": 0.0598
+  },
+  {
+   "head": "L17H7",
+   "layer": 17,
+   "head_idx": 7,
+   "F_without": 0.802,
+   "delta_F": 0.0521
+  },
+  {
+   "head": "L16H13",
+   "layer": 16,
+   "head_idx": 13,
+   "F_without": 0.8191,
+   "delta_F": 0.035
+  },
+  {
+   "head": "L1H11",
+   "layer": 1,
+   "head_idx": 11,
+   "F_without": 0.8553,
+   "delta_F": -0.0012
+  }
+ ],
+ "completeness": {
+  "n_subsets": 12,
+  "mean_gap": 0.2159,
+  "max_gap": 0.4649,
+  "subsets": [
+   {
+    "K": [
+     "L1H11"
+    ],
+    "F_circuit_minus_K": 0.8553,
+    "F_model_minus_K": 0.9142,
+    "gap": 0.0589
+   },
+   {
+    "K": [
+     "L10H7",
+     "L12H15",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": 0.3685,
+    "F_model_minus_K": 0.6783,
+    "gap": 0.3098
+   },
+   {
+    "K": [
+     "L21H3"
+    ],
+    "F_circuit_minus_K": 0.7943,
+    "F_model_minus_K": 0.9441,
+    "gap": 0.1498
+   },
+   {
+    "K": [
+     "L22H2"
+    ],
+    "F_circuit_minus_K": 0.7551,
+    "F_model_minus_K": 0.8997,
+    "gap": 0.1446
+   },
+   {
+    "K": [
+     "L1H11",
+     "L10H0",
+     "L17H7",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": 0.6245,
+    "F_model_minus_K": 0.7605,
+    "gap": 0.1361
+   },
+   {
+    "K": [
+     "L1H11",
+     "L21H3"
+    ],
+    "F_circuit_minus_K": 0.7952,
+    "F_model_minus_K": 0.8465,
+    "gap": 0.0513
+   },
+   {
+    "K": [
+     "L10H0",
+     "L12H15",
+     "L16H13",
+     "L21H3",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": 0.5259,
+    "F_model_minus_K": 0.7527,
+    "gap": 0.2269
+   },
+   {
+    "K": [
+     "L1H11",
+     "L10H7",
+     "L12H15",
+     "L13H6",
+     "L15H15"
+    ],
+    "F_circuit_minus_K": 0.1416,
+    "F_model_minus_K": 0.6064,
+    "gap": 0.4649
+   },
+   {
+    "K": [
+     "L10H7",
+     "L12H15",
+     "L13H6"
+    ],
+    "F_circuit_minus_K": 0.3033,
+    "F_model_minus_K": 0.7114,
+    "gap": 0.4081
+   },
+   {
+    "K": [
+     "L10H0",
+     "L16H13",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": 0.635,
+    "F_model_minus_K": 0.8391,
+    "gap": 0.2041
+   },
+   {
+    "K": [
+     "L15H15"
+    ],
+    "F_circuit_minus_K": 0.5583,
+    "F_model_minus_K": 0.8685,
+    "gap": 0.3102
+   },
+   {
+    "K": [
+     "L1H11",
+     "L13H6",
+     "L22H2"
+    ],
+    "F_circuit_minus_K": 0.6979,
+    "F_model_minus_K": 0.8244,
+    "gap": 0.1266
+   }
+  ]
+ }
+}

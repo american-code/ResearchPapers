@@ -4,7 +4,7 @@
     "n_bootstrap": 1000,
     "ci_level": 0.95,
     "random_seed": 42,
-    "selection_criteria": "top-10 heads by mean patching score, plus any head >= 0.03"
+    "selection_criteria": "top-10 heads by mean patching score, plus any head >= 0.03; plus force-included L01.H11 (cited in paper table, excluded by threshold)"
   },
   "models": [
     {
@@ -252,6 +252,19 @@
           "ci_width": 0.021915937050371873,
           "n_examples": 100,
           "n_bootstrap": 1000
+        },
+        {
+          "layer": 1,
+          "head": 11,
+          "label": "L01.H11",
+          "mean_score": 0.0006066119787822739,
+          "stored_mean": null,
+          "ci_95_lo": -0.0006567283543348865,
+          "ci_95_hi": 0.0018120142635551942,
+          "ci_width": 0.0024687426178900806,
+          "n_examples": 100,
+          "n_bootstrap": 1000,
+          "note": "force-included: excluded by >= 0.03 threshold but cited in paper Table 4 (Pythia) as ranked #4"
         }
       ]
     },
@@ -380,6 +393,19 @@
           "ci_width": 0.014323064897811908,
           "n_examples": 100,
           "n_bootstrap": 1000
+        },
+        {
+          "layer": 1,
+          "head": 11,
+          "label": "L01.H11",
+          "mean_score": -0.0034742977557411796,
+          "stored_mean": null,
+          "ci_95_lo": -0.007523519631093064,
+          "ci_95_hi": 0.00024137481006646143,
+          "ci_width": 0.007764894441159526,
+          "n_examples": 100,
+          "n_bootstrap": 1000,
+          "note": "force-included: excluded by >= 0.03 threshold but cited in paper Table 4 (Pythia) as ranked #4"
         }
       ]
     }

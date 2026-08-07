@@ -1,0 +1,18 @@
+{
+  "source_model": "mlx-community/Mistral-7B-v0.3-4bit",
+  "source_layer": 16,
+  "d_in": 4096,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 4.0,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 42,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8,
+  "training_elapsed_s": 0.4,
+  "training_elapsed_min": 0.0
+}

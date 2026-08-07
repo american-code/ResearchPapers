@@ -1,0 +1,93 @@
+{
+ "metric": "pearson",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 1000 chunks x 500 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "min_active_chunks": 50,
+ "tau_calibrated": 0.9803,
+ "permutation_null": {
+  "null_p99": 0.9803,
+  "null_mean": 0.7436,
+  "null_max": 0.9937,
+  "n_null_samples": 17395
+ },
+ "n_matches_tau_0.80": 538,
+ "n_matches_tau_calibrated": 15,
+ "matches": [
+  {
+   "feat_a": 1006,
+   "feat_b": 14633,
+   "sim": 0.9809
+  },
+  {
+   "feat_a": 2481,
+   "feat_b": 6048,
+   "sim": 0.9862
+  },
+  {
+   "feat_a": 2798,
+   "feat_b": 15839,
+   "sim": 0.9873
+  },
+  {
+   "feat_a": 3495,
+   "feat_b": 6571,
+   "sim": 0.9853
+  },
+  {
+   "feat_a": 3695,
+   "feat_b": 15556,
+   "sim": 0.9805
+  },
+  {
+   "feat_a": 3832,
+   "feat_b": 15379,
+   "sim": 0.9806
+  },
+  {
+   "feat_a": 3840,
+   "feat_b": 10387,
+   "sim": 0.9903
+  },
+  {
+   "feat_a": 3880,
+   "feat_b": 12354,
+   "sim": 0.9867
+  },
+  {
+   "feat_a": 5100,
+   "feat_b": 9394,
+   "sim": 0.9957
+  },
+  {
+   "feat_a": 7469,
+   "feat_b": 11116,
+   "sim": 0.981
+  },
+  {
+   "feat_a": 8001,
+   "feat_b": 15691,
+   "sim": 0.9888
+  },
+  {
+   "feat_a": 9520,
+   "feat_b": 9735,
+   "sim": 0.9814
+  },
+  {
+   "feat_a": 10758,
+   "feat_b": 5187,
+   "sim": 0.9899
+  },
+  {
+   "feat_a": 12908,
+   "feat_b": 5772,
+   "sim": 0.9952
+  },
+  {
+   "feat_a": 13619,
+   "feat_b": 12506,
+   "sim": 0.9858
+  }
+ ]
+}
