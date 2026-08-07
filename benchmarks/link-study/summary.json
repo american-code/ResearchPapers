@@ -1,0 +1,46 @@
+{
+ "test": "three-transport link study, lab-01 <-> lab-02 (two Mac Studio M1 Max, 32 GB each)",
+ "date": "2026-08-06",
+ "method": "benchmarks/link_benchmark.py \u2014 7-point log-spaced payload ladder, 40 reps/size, 8 warm-up discarded, 200 latency round-trips, seed 42, TCP_NODELAY, 4 MiB socket buffers. Each rep is a full round trip. Source interface forced with --bind-local and the kernel route recorded.",
+ "transports": {
+  "lo": {
+   "label": "lab01-loopback",
+   "route_interface": "lo0",
+   "peak_median_GB_per_s": 6.5288,
+   "peak_median_Gbps": 52.2303,
+   "peak_at_payload_KiB": 4096,
+   "latency_median_ms": 0.105937,
+   "latency_p99_ms": 0.2885,
+   "jitter_p99_over_median": 2.72
+  },
+  "tb": {
+   "label": "lab01-to-lab02-TB",
+   "route_interface": "en4",
+   "peak_median_GB_per_s": 2.1495,
+   "peak_median_Gbps": 17.1958,
+   "peak_at_payload_KiB": 16384,
+   "latency_median_ms": 0.194875,
+   "latency_p99_ms": 0.299583,
+   "jitter_p99_over_median": 1.54
+  },
+  "lan": {
+   "label": "lab01-to-lab02-LAN",
+   "route_interface": "en1",
+   "peak_median_GB_per_s": 0.0827,
+   "peak_median_Gbps": 0.662,
+   "peak_at_payload_KiB": 4096,
+   "latency_median_ms": 4.978042,
+   "latency_p99_ms": 52.450208,
+   "jitter_p99_over_median": 10.54
+  }
+ },
+ "headline_findings": {
+  "tb_vs_lan_throughput": "26.0x",
+  "tb_vs_lan_p99_latency": "175x better",
+  "tb_efficiency_of_negotiated_link": "86% of 20 Gb/s",
+  "tb_vs_in_machine_loopback": "3.0x slower",
+  "note_link_negotiated_at_20Gbps_not_40": true
+ },
+ "corroboration": "Published Thunderbolt Bridge throughput is ~10-20 Gbps against a 40 Gb/s nominal spec. This link negotiated at 20 Gb/s and delivered 17.2 Gbps (86%), placing it inside the expected band. A result near the 40 Gb/s nominal would have indicated a measurement error.",
+ "caveat": "Payload is fixed-seed pseudorandom bytes, not model activations. This measures transport only; it does not include SAE forward-pass or inference cost."
+}

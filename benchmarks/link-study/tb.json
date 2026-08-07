@@ -1,0 +1,185 @@
+{
+ "test": "link_benchmark",
+ "label": "lab01-to-lab02-TB",
+ "transport": "thunderbolt",
+ "note": "Payload is fixed-seed pseudorandom bytes, not model activations. This measures the transport, not inference. Each rep is a full round trip: the reported rate includes the receiver having the bytes and acknowledging.",
+ "parameters": {
+  "payload_ladder_bytes": [
+   4096,
+   16384,
+   65536,
+   262144,
+   1048576,
+   4194304,
+   16777216
+  ],
+  "reps_per_size": 40,
+  "warmup_discarded": 8,
+  "latency_pings": 200,
+  "seed": 42,
+  "tcp_nodelay": true,
+  "sock_buf_bytes": 4194304
+ },
+ "endpoints": {
+  "local": {
+   "hostname": "lab-01.local",
+   "model": "Mac13,1",
+   "cpu": "Apple M1 Max",
+   "mem_gb": 32.0,
+   "os": "macOS-26.5.1-arm64-arm-64bit",
+   "ip": "169.254.82.106"
+  },
+  "remote_host": "169.254.23.203"
+ },
+ "route": {
+  "host": "169.254.23.203",
+  "route to": "169.254.23.203",
+  "interface": "en4"
+ },
+ "link": {
+  "interface": "en4",
+  "media": "media: autoselect <full-duplex>",
+  "thunderbolt_negotiated": [
+   "Speed: 20 Gb/s",
+   "Speed: 20 Gb/s",
+   "Speed: 20 Gb/s"
+  ]
+ },
+ "latency_ms": {
+  "n": 200,
+  "median": 0.194875,
+  "mean": 0.189009,
+  "iqr_lo": 0.154177,
+  "iqr_hi": 0.214584,
+  "p99": 0.299583,
+  "min": 0.122458,
+  "max": 0.320084
+ },
+ "throughput": [
+  {
+   "payload_bytes": 4096,
+   "reps": 40,
+   "bytes_per_s": {
+    "n": 40,
+    "median": 25821990.17402,
+    "mean": 26168787.854256,
+    "iqr_lo": 24319139.04407,
+    "iqr_hi": 27909490.65211,
+    "p99": 33379784.69387,
+    "min": 22803061.93457,
+    "max": 33379784.69387
+   },
+   "median_GB_per_s": 0.0258,
+   "median_Gbps": 0.2066,
+   "p99_GB_per_s": 0.0334
+  },
+  {
+   "payload_bytes": 16384,
+   "reps": 40,
+   "bytes_per_s": {
+    "n": 40,
+    "median": 120177147.555723,
+    "mean": 122554669.569647,
+    "iqr_lo": 109051905.992969,
+    "iqr_hi": 132876942.702776,
+    "p99": 185654390.934586,
+    "min": 97499434.66522,
+    "max": 185654390.934586
+   },
+   "median_GB_per_s": 0.1202,
+   "median_Gbps": 0.9614,
+   "p99_GB_per_s": 0.1857
+  },
+  {
+   "payload_bytes": 65536,
+   "reps": 40,
+   "bytes_per_s": {
+    "n": 40,
+    "median": 406797381.84649,
+    "mean": 418676870.243281,
+    "iqr_lo": 360645259.866675,
+    "iqr_hi": 489206552.750922,
+    "p99": 585362368.029877,
+    "min": 306542370.820153,
+    "max": 585362368.029877
+   },
+   "median_GB_per_s": 0.4068,
+   "median_Gbps": 3.2544,
+   "p99_GB_per_s": 0.5854
+  },
+  {
+   "payload_bytes": 262144,
+   "reps": 40,
+   "bytes_per_s": {
+    "n": 40,
+    "median": 961600734.651794,
+    "mean": 970131639.480349,
+    "iqr_lo": 880134645.84827,
+    "iqr_hi": 1047189482.696395,
+    "p99": 1244110332.782785,
+    "min": 728598745.942048,
+    "max": 1244110332.782785
+   },
+   "median_GB_per_s": 0.9616,
+   "median_Gbps": 7.6928,
+   "p99_GB_per_s": 1.2441
+  },
+  {
+   "payload_bytes": 1048576,
+   "reps": 40,
+   "bytes_per_s": {
+    "n": 40,
+    "median": 1563636991.298834,
+    "mean": 1582631510.647281,
+    "iqr_lo": 1453362183.139855,
+    "iqr_hi": 1713029635.56236,
+    "p99": 1842840070.298635,
+    "min": 1349230408.947388,
+    "max": 1842840070.298635
+   },
+   "median_GB_per_s": 1.5636,
+   "median_Gbps": 12.5091,
+   "p99_GB_per_s": 1.8428
+  },
+  {
+   "payload_bytes": 4194304,
+   "reps": 40,
+   "bytes_per_s": {
+    "n": 40,
+    "median": 2034547075.308883,
+    "mean": 2029922628.098822,
+    "iqr_lo": 2011326848.477699,
+    "iqr_hi": 2051234283.450708,
+    "p99": 2105795236.548391,
+    "min": 1883633649.479929,
+    "max": 2105795236.548391
+   },
+   "median_GB_per_s": 2.0345,
+   "median_Gbps": 16.2764,
+   "p99_GB_per_s": 2.1058
+  },
+  {
+   "payload_bytes": 16777216,
+   "reps": 40,
+   "bytes_per_s": {
+    "n": 40,
+    "median": 2149478386.05317,
+    "mean": 2149742032.854844,
+    "iqr_lo": 2143999008.079893,
+    "iqr_hi": 2158850853.85992,
+    "p99": 2173296428.660697,
+    "min": 2107182981.184043,
+    "max": 2173296428.660697
+   },
+   "median_GB_per_s": 2.1495,
+   "median_Gbps": 17.1958,
+   "p99_GB_per_s": 2.1733
+  }
+ ],
+ "headline": {
+  "best_median_GB_per_s": 2.1495,
+  "best_median_Gbps": 17.1958,
+  "at_payload_bytes": 16777216
+ },
+ "timestamp": "2026-08-07T02:47:06Z"
+}
