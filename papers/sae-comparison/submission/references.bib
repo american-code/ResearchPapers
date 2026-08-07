@@ -1,8 +1,5 @@
 % SAE Comparison Paper — Bibliography
 % Last updated: 2026-07-27
-%
-% INCOMPLETE: Entries marked TODO need full details verified before submission.
-% Do not submit to arXiv until all TODO entries are resolved.
 
 % ── Foundational Mechanistic Interpretability ──────────────────────────────────
 
@@ -78,14 +75,13 @@
   url={https://arxiv.org/abs/2404.16014}
 }
 
-% TODO: Verify JumpReLU SAE citation — may be a separate paper by Rajamanoharan et al.
-% or may be included in the Gated SAE paper above. Check arXiv.
 @article{rajamanoharan2024jumprelu,
-  title={JumpReLU: A Retrofit Defense Strategy for Adversarial Attacks},  % TODO: this title is WRONG — find correct title
-  author={Rajamanoharan, Senthooran and others},  % TODO: verify full author list
-  journal={arXiv preprint},  % TODO: find arXiv ID
+  title={Jumping Ahead: Improving Reconstruction Fidelity with {JumpReLU} Sparse Autoencoders},
+  author={Rajamanoharan, Senthooran and Lieberum, Tom and Sonnerat, Nicolas and
+          Conmy, Arthur and Varma, Vikrant and Kram{\'a}r, J{\'a}nos and Nanda, Neel},
+  journal={arXiv preprint arXiv:2407.14435},
   year={2024},
-  note={TODO: verify full citation before submission}
+  url={https://arxiv.org/abs/2407.14435}
 }
 
 % ── Activation Steering ────────────────────────────────────────────────────────
@@ -99,16 +95,10 @@
   url={https://arxiv.org/abs/2308.10248}
 }
 
-% TODO: Verify "Zou et al. 2023" representation engineering citation
 @article{zou2023representation,
   title={Representation Engineering: A Top-Down Approach to AI Transparency},
   author={Zou, Andy and Phan, Long and Chen, Sarah and Campbell, James
-          and Guo, Phillip and Ren, Richard and Pan, Alexander
-          and Yin, Xuwang and Mazeika, Mantas and Dombrowski, Ann-Kathrin
-          and Goel, Shashwat and Li, Nathaniel and Byun, Michael J.
-          and Wang, Zifan and Mallen, Alex and Zou, Steven
-          and Basart, Sumit and Korbak, Tomasz and Khashabi, Daniel
-          and Hendrycks, Dan},
+          and Guo, Phillip and Ren, Richard and others},
   journal={arXiv preprint arXiv:2310.01405},
   year={2023},
   url={https://arxiv.org/abs/2310.01405}
@@ -128,13 +118,26 @@
 
 % ── Models ────────────────────────────────────────────────────────────────────
 
-% TODO: Llama 3 technical report — verify exact citation for Llama-3.2-3B
-@article{meta2024llama3,
-  title={The {Llama} 3 Herd of Models},
-  author={{Meta AI}},
-  journal={arXiv preprint arXiv:2407.21783},  % TODO: confirm arXiv ID for Llama 3.2
-  year={2024},
-  note={TODO: verify this is the correct report covering the 3.2-3B model}
+% The Llama 3 Herd of Models report covers the 3.1 series (8B/70B/405B). The 3.2
+% lightweight models (1B/3B) are a later release, pruned and distilled from
+% Llama 3.1 8B/70B, and are not described in that report; they are cited here
+% from the release announcement and model card.
+@misc{meta2024llama32,
+  title  = {{Llama} 3.2: Revolutionizing Edge {AI} and Vision with Open,
+            Customizable Models},
+  author = {{Meta AI}},
+  year   = {2024},
+  note   = {Model release, 25 September 2024; model card at
+            \url{https://huggingface.co/meta-llama/Llama-3.2-3B}},
+  url    = {https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/}
+}
+
+@article{dubey2024llama3,
+  title   = {The {Llama} 3 Herd of Models},
+  author  = {Dubey, Abhimanyu and Jauhri, Abhinav and Pandey, Abhinav and others},
+  journal = {arXiv preprint arXiv:2407.21783},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2407.21783}
 }
 
 % ── Evaluation Methods ────────────────────────────────────────────────────────
@@ -147,12 +150,23 @@
   url={https://arxiv.org/abs/1610.01644}
 }
 
-@inproceedings{belinkov2022probing,
+@article{belinkov2022probing,
   title={Probing Classifiers: Promises, Shortcomings, and Advances},
   author={Belinkov, Yonatan},
-  booktitle={Computational Linguistics},
+  journal={Computational Linguistics},
   volume={48},
   number={1},
   pages={207--219},
   year={2022}
+}
+
+@misc{melton2026mlxmesh,
+  author = {Melton, J.},
+  title  = {Distributed Mechanistic Interpretability at Scale: Activation
+            Streaming, Split-Layer Inference, and Distributed Sparse
+            Autoencoder Training},
+  year   = {2026},
+  note   = {Companion paper. Describes the two-node activation-streaming system
+            and the distributed SAE trainer that produced the checkpoints and
+            fingerprints analysed here.}
 }

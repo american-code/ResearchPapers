@@ -74,7 +74,7 @@
 % ============================================================
 \title{Distributed Mechanistic Interpretability at Scale:\\
 Activation Streaming, Split-Layer Inference, and\\
-Cross-Architecture Feature Universality}
+Distributed Sparse Autoencoder Training}
 
 \author[1]{J. Melton\thanks{Correspondence: \href{mailto:jacob@paydirt.solutions}{jacob@paydirt.solutions}}}
 \affil[1]{Independent Researcher}
@@ -88,7 +88,7 @@ Cross-Architecture Feature Universality}
 \begin{abstract}
 Mechanistic interpretability research faces a fundamental infrastructure problem: the models worth understanding are too large to run on a single analysis workstation, and the hardware capable of running them is not designed for continuous activation capture. We describe a system---\mlxmesh{}---that addresses this by splitting inference and analysis across two nodes, streaming intermediate activations over a purpose-built binary wire protocol, and training sparse autoencoders~(SAEs) on the streaming output without storing activations to disk. We validate the protocol on Llama-3.2-3B, demonstrating a bit-exact split boundary, and we measure the interconnect on the built two-node system: two Mac Studio M1 Max joined by Thunderbolt. Against an in-machine loopback control and the LAN path the same machines share, the Thunderbolt link sustains \textbf{2.150~GB/s (17.20~Gbps)}---86\% of its negotiated 20~Gb/s rate, $26\times$ the LAN path, and only $3.0\times$ below in-machine memory. The more consequential figure is tail latency: Thunderbolt holds p99 within $1.5\times$ of median where the LAN spreads to $10.5\times$ with a 52~ms tail, and a credit-windowed streaming protocol sizes its window on the tail. This measurement also corrects our own earlier framing: at the 20~tokens/second rate we previously assumed, even the LAN path has 16--24$\times$ headroom and the interconnect is unnecessary; at the 300~tokens/second a Mac Studio actually reaches, the LAN falls to 1.1--1.6$\times$ and, at 34B, below unity.
 
-We then train TopK SAEs on residual stream activations from Llama-3.2-3B (layer~14), Mistral-7B (layer~16), and Qwen2.5-3B (layer~18) and test for cross-architecture feature universality. Our headline result here is negative, and it corrects our own earlier analysis. An uncalibrated fixed similarity threshold combined with many-to-one matching yields an apparent 3,753 ``universal'' features; under a chunk-permutation null the same threshold falls \emph{inside} the null range---between the null mean and the null 99th percentile---for every model pair, and after imposing one-to-one reciprocal matching, a closed-triangle requirement, and a null-calibrated threshold, the number of features matching across all three models is \textbf{one}---against a null that produces at least one 14\% of the time. A planted-signal power analysis bounds what that null result means: the procedure's minimum detectable effect size is a correlation of 0.95--1.00, so the finding is ``no feature shared at correlation $\geq 0.95$'', not ``no shared structure''. Pairwise, 15--23 feature pairs survive per model pair against an expected 7--9 false positives. This result is measured on SAEs trained to full specification (50,000 steps, 500k tokens each); an earlier run on partial checkpoints gave zero, so the finding is not an artifact of undertraining. We report this in full because the failure mode---a low-dimensional activation fingerprint searched over a 16{,}384-feature dictionary---is a trap that any cross-model feature-matching study can fall into.
+We then exercise the system on a real workload: training TopK SAEs on residual stream activations from Llama-3.2-3B (layer~14), Mistral-7B (layer~16), and Qwen2.5-3B (layer~18) to a common specification (50,000 steps, 500k tokens, dictionary 16{,}384), and extracting the chunk-averaged feature fingerprints for a cross-architecture universality study. We separately validate the aggregation rule that makes such training distributable: over 50,000~steps, two workers stepped on a partitioned corpus and parameter-averaged match the single-node baseline to within 0.05\% on MSE and to three decimal places on L0 and FVE. The universality analysis those fingerprints feed is reported in a companion paper \citep{melton2026saecomparison}; its result is negative---one feature triple matches across all three models, against a null that produces at least one 14\% of the time, correcting an apparent 3{,}753 under an uncalibrated protocol---and we cite it rather than restate it. What matters here is that the workload is the kind this system exists to serve: 49{,}152 feature fingerprints over three model families and 1.5M tokens of activation, none of it staged to disk.
 
 Finally, we evaluate a feature-based safety classifier. Naive frequency-based feature selection yields ROC-AUC~0.564 (95\% CI spanning chance); differential-frequency selection against a harm-relevant corpus raises it to 0.6422, and on the held-out PKU-SafeRLHF test split ($n = 600$) the same 40-feature classifier reaches \textbf{0.7206} (95\% CI [0.679, 0.760]). An LLM-judge baseline scores higher still (0.8545), so SAE features do not beat simply asking an instruction-tuned model---but the two agree on only 54\% of examples ($\kappa = 0.083$), and where they disagree ground truth is near a coin flip, indicating close to orthogonal failure modes. All experiments run on consumer Apple Silicon; the system requires no GPUs, no cloud, and no specialized interconnects. Code and data are available at \url{https://github.com/jmelton-research/mlxmesh}.
 \end{abstract}
@@ -116,7 +116,7 @@ This paper describes the full stack for distributed interpretability on this har
 \begin{itemize}
 \item \S\ref{sec:background} surveys related work in distributed ML, SAE training, and interpretability at scale.
 \item \S\ref{sec:system} specifies the \mlxmesh{} wire protocol and distributed training architecture, with pseudocode and diagrams.
-\item \S\ref{sec:results} presents results: bandwidth profiling, zero-error split validation, convergence comparison between distributed and single-node SAE training, SAE quality metrics across three model families, cross-architecture feature matching, and a safety classifier evaluation.
+\item \S\ref{sec:results} presents results: bandwidth profiling, zero-error split validation, convergence comparison between distributed and single-node SAE training, SAE quality metrics across three model families, and a safety classifier evaluation. The cross-architecture feature-matching study the pipeline was built to serve is summarised in \S\ref{sec:matching} and reported in full in a companion paper \citep{melton2026saecomparison}.
 \item \S\ref{sec:discussion} discusses implications, limitations, and the path to production.
 \item \S\ref{sec:conclusion} concludes.
 \end{itemize}
@@ -153,7 +153,7 @@ The question of whether different neural networks learn the same internal repres
 
 For interpretability, the more specific question is whether individual \emph{features}---specific directions in activation space---correspond across models. \citet{elhage2022superposition} conjectured that features learned by superposition are universal across model families, in the same sense that Gabor filters appear to be universal across vision models. Evidence for this in language models has been informal: researchers working on multiple models report that similar feature categories (syntactic roles, entity types, sentiment valence) emerge in all of them.
 
-Our cross-architecture matching analysis (\S\ref{sec:matching}) provides quantitative evidence for this claim using chunk-averaged activation pattern matching---a method that identifies feature pairs across models by the similarity of their activation patterns over a shared evaluation corpus---rather than decoder weight comparison, which is confounded by the arbitrary choice of basis in each SAE's latent space.
+Testing this quantitatively is the workload that motivated the system described here, and it is the reason the SAE training in \S\ref{sec:dist-training} spans three model families rather than one. The matching method---comparing features by the similarity of their activation patterns over a shared corpus, rather than by decoder weights, which are confounded by the arbitrary choice of basis in each SAE's latent space---and its results are reported in the companion paper \citep{melton2026saecomparison}. We summarise the outcome in \S\ref{sec:matching} only as far as it bears on what the infrastructure was asked to do.
 
 \subsection{Safety Applications of SAE Features}
 
@@ -349,34 +349,16 @@ Qwen2.5-3B & 18 & 2,048 & 16,384 & 128 & 50,000 & 500k & Quality metrics + match
 $\ddagger$~Activations extracted from a 4-bit quantized model (\texttt{mlx-community/Mistral-7B-v0.3-4bit}); bf16 variant requires HuggingFace authentication.
 \end{table}
 
-\subsection{Cross-Architecture Feature Matching}
+\subsection{Feature-Fingerprint Extraction}
 \label{sec:matching-method}
 
-To identify features shared across model families, we use chunk-averaged activation pattern matching:
+The cross-architecture study that motivated this system consumes one product of the SAE pipeline: a \emph{fingerprint} per feature. We describe its extraction here because it is the workload the infrastructure carries. The matching procedure applied to those fingerprints---the support filter, the reciprocal one-to-one criterion, the permutation-null calibration of the similarity threshold, and the closed-triangle definition of three-way universality---is developed and evaluated in the companion paper \citep{melton2026saecomparison}, together with its results.
 
-\begin{enumerate}
-\item Define an evaluation corpus of 500,000 tokens of WikiText-103, identical across models.
-\item Divide into $N_{\mathrm{chunks}} = 1{,}000$ non-overlapping chunks of 500 tokens each.
-\item For each model, collect SAE encoder outputs (post-TopK) for every chunk, then average over the token dimension. This yields $A \in \mathbb{R}^{N_{\mathrm{chunks}} \times D}$, where $D = 16{,}384$ is the dictionary size.
-\item Treat each column of $A$ as a ``fingerprint'' of the corresponding feature over the evaluation corpus, and centre it (subtract its mean across chunks) before normalising, so that the similarity statistic is a Pearson correlation over chunks rather than a cosine between non-negative vectors.
-\item Discard features whose fingerprint support is below 5\% of chunks. These cannot be matched meaningfully: a feature active in a handful of chunks attains correlation near $1$ with any other feature active in the same chunks, by construction rather than by shared function.
-\item For a pair of models, declare a match only when features $i$ and $j$ are \emph{mutual} nearest neighbours---$j$ is $i$'s best match in model~2 \emph{and} $i$ is $j$'s best match in model~1---and their similarity exceeds $\tau$. Reciprocal matching is one-to-one by construction.
-\item Set $\tau$ from a permutation null rather than by hand (\S\ref{sec:matching-null}).
-\item Universal features are triples $(i,j,k)$ whose three pairwise edges \emph{all} satisfy the above---a closed triangle, not a chain.
-\end{enumerate}
+For each model we encode a common evaluation corpus of 500,000 tokens of WikiText-103, partition it into $N_{\mathrm{chunks}} = 1{,}000$ non-overlapping chunks of 500 tokens, and average post-TopK encoder activations within each chunk. This yields $A \in \mathbb{R}^{1{,}000 \times 16{,}384}$ per model, whose column $j$ is the fingerprint of feature $j$: a 1,000-dimensional summary of which contexts that feature responds to. Comparing features this way, by functional behaviour, sidesteps the arbitrary choice of basis in each SAE's decoder that makes direct weight comparison uninformative.
 
-This method sidesteps the arbitrary choice of basis in each SAE's decoder weight matrix and matches features by their functional behaviour---the pattern of contexts they respond to. The matching analysis used the 16,384-feature SAEs for all three models, all trained to full specification (50,000 steps over 500,000 tokens), so all three fingerprints share a common 500k-token evaluation corpus with no held-out asymmetry.
+Two properties of this workload set requirements on the system. The corpus must be token-identical across all three models, so the encodes cannot be scheduled opportunistically against whatever data a node happens to hold---a shared corpus is a synchronisation constraint, not just a configuration choice. And the activations consumed are large relative to the fingerprints produced: 500,000 tokens at hidden dimension 2,048--4,096 per model, reduced to a 1,000-vector per feature. A pipeline that stages the intermediate to disk pays for the full activation volume three times over; one that reduces in stream pays for the fingerprints. That asymmetry is the case the streaming design targets, though we note that the extraction reported here ran within a single node---\S\ref{sec:limitations} states precisely which stages have and have not been run across the physical link.
 
-\subsubsection{Threshold calibration and the failure of the naive protocol}
-\label{sec:matching-null}
-
-Each of the six numbered choices above departs from the protocol we used in an earlier version of this analysis, and each departure was forced by a specific defect. Because the defects are easy to reproduce and their combined effect is large, we state them explicitly.
-
-\paragraph{Many-to-one matching inflates counts without bound.} Taking the union of the model-1$\to$model-2 and model-2$\to$model-1 nearest-neighbour sets---rather than requiring mutual agreement---lets a single feature in one model serve as the recorded match for arbitrarily many features in the other. In our earlier run one Mistral feature was the recorded partner of 137 distinct Llama features, and the reported ``match count'' exceeded the dictionary size, so the derived ``coverage'' percentages were not fractions of anything.
-
-\paragraph{Chained triples are not shared features.} Defining universality as ``$i$ matches $j$, and $j$ matches $k$'' without checking the $i$--$k$ edge admits triples whose third edge fails outright. In our earlier run, 67\% of the 3,753 nominally universal triples had no verified Llama--Mistral edge, and the 3,753 triples collapsed onto just 644 distinct Qwen and 341 distinct Mistral features.
-
-\paragraph{A fixed threshold of $0.8$ is below the noise floor.} This is the decisive problem. We estimate the null by permuting chunk order in one model---destroying cross-model chunk correspondence while preserving every feature's marginal activation profile---and recomputing reciprocal matches, over 20 replicates. Because a match is the best of $\sim$5,000--8,000 candidates, extreme-value effects put the null high: the mean reciprocal-match similarity between \emph{unrelated} features is 0.59--0.74 depending on the pair, and the 99th percentile is 0.94--0.98 (Table~\ref{tab:null}). A fixed $\tau = 0.8$ therefore falls inside the null range---above the null mean but below the null 99th percentile---and admits pairs that a chunk-shuffled control would produce just as readily. At the original 50k-token, 100-chunk resolution the situation was worse still: the null 99th percentile reached 0.98--0.995, i.e.\ \emph{above} almost every observed similarity, leaving the statistic with no discriminative power at all. Raising fingerprint dimensionality tenfold, to 1,000 chunks over 500k tokens, is what makes the comparison informative.
+All three SAEs were trained to a common specification (50,000 steps over 500,000 tokens, dictionary 16,384, $k = 128$) before extraction, so the fingerprints carry no training asymmetry between models. An earlier version of this work extracted fingerprints from partial checkpoints at 100 chunks over 50,000 tokens; the companion paper reports why that resolution left the comparison without discriminative power.
 
 % ============================================================
 \section{Results}
@@ -574,6 +556,7 @@ Figure~\ref{fig:convergence} plots both trajectories. After the first few hundre
 \end{figure}
 
 \subsection{SAE Quality Metrics}
+\label{sec:quality}
 
 Table~\ref{tab:quality} reports reconstruction quality for the three 16,384-feature SAEs used in the cross-architecture analysis. Every figure is computed over the full 500,000-token corpus rather than read off the last training batch. This distinction matters more than it might appear: the per-batch \texttt{fve} logged during training swings by several points between adjacent steps (Qwen's last ten logged values span 0.895--0.992), so a final-step reading is a sample from a wide distribution, not a summary of it. Our earlier draft quoted those single-batch values; for Mistral the difference is 3.8 percentage points.
 
@@ -613,131 +596,16 @@ The dynamics behind these numbers are not monotonic, and are worth stating becau
 
 \paragraph{Dense features dominate the sparse code.} A further pathology cuts across all three SAEs and bears directly on the safety-classifier result in \S\ref{sec:safety}. With $k = 128$ of 16,384 features active per token, a feature should fire on roughly 0.78\% of tokens if activation were spread evenly. Instead, 25 Llama features, 20 Qwen features and 16 Mistral features fire on more than half of all tokens, and the 200 most frequent features absorb 31\%, 39\% and 29\% of total activation mass respectively---1.2\% of the dictionary carrying roughly a third of the code. These are dense, low-specificity directions closer to a learned bias than to an interpretable feature. Any procedure that selects features by activation frequency draws heavily from this degenerate head. Training to convergence dilutes the concentration but does not remove it: on the superseded partial checkpoints the top-200 share was 40\% (Llama) and 57\% (Mistral).
 
-\subsection{Cross-Architecture Feature Matching}
+\subsection{Cross-Architecture Matching: The Workload and Its Outcome}
 \label{sec:matching}
 
-The chunk-averaged activation matching analysis was run on all three pairwise combinations of the 16,384-feature SAEs, all at full specification (50,000 steps), using 500,000 evaluation tokens from WikiText-103 divided into 1,000 chunks of 500 tokens each.
+Fingerprints were extracted for all three 16,384-feature SAEs over the shared 500,000-token corpus (\S\ref{sec:matching-method})---49,152 feature fingerprints in total, of which 27,266 clear the support floor and enter the analysis. The matching analysis over them, its permutation-null calibration, and the planted-signal power analysis that bounds its sensitivity are reported in full in the companion paper \citep{melton2026saecomparison}. We state the outcome here without restating the derivation, because it bears directly on two claims this paper does make.
 
-\paragraph{Feature inventory.} Not every dictionary slot is a candidate for matching. Table~\ref{tab:inventory} shows how many features in each SAE are usable: alive on the evaluation corpus and with fingerprint support above the 5\% floor.
+\paragraph{The result is negative, and it corrects our own earlier report.} Exactly one feature triple matches across all three models, against a null expectation of 0.15 closed triangles per chunk-shuffled replicate; under a Poisson model with that rate, observing at least one has probability 0.14. Pairwise, 15--23 matches survive per model pair against 7--9 expected by chance---an enrichment of 1.7--3.2$\times$ over roughly 7,000--12,000 matchable features per model. An earlier version of this analysis reported 3,753 universal features. That figure was an artifact of three compounding protocol defects: many-to-one matching, triples chained through an intermediate model without checking the third edge, and a fixed similarity threshold of 0.8 that sits \emph{inside} the permutation null for every model pair. The companion paper's power analysis bounds what the corrected number means---the procedure's minimum detectable effect size is a correlation of 0.95--1.00---so the supported claim is ``no feature triple shared at correlation $\geq 0.95$'', not ``no shared structure''.
 
-\begin{table}[h]
-\centering
-\caption{Matchable feature inventory over the 500k-token evaluation corpus. ``Dead'' features never fire; ``low support'' features fire in fewer than 50 of 1,000 chunks and cannot be matched meaningfully. Only the final column enters the matching analysis.}
-\label{tab:inventory}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Model & Dict & Dead on eval & Low support & \textbf{Matchable} \\
-\midrule
-Llama-3.2-3B  & 16,384 & 3,344 &   913  & \textbf{12,127} (74.0\%) \\
-Qwen2.5-3B    & 16,384 & 9,398 &    22  & \textbf{6,964} (42.5\%) \\
-Mistral-7B    & 16,384 & 2,346 & 5,863  & \textbf{8,175} (49.9\%) \\
-\bottomrule
-\end{tabular}
-\end{table}
+\paragraph{What the workload establishes about the infrastructure.} The pipeline delivered analysis-grade artifacts across three model families on consumer hardware: three SAEs trained to a common specification, and 1.5M tokens of activation reduced to fingerprints, at a scale where the answer turned out to hinge on protocol details rather than on compute. It also produced the 3,753-feature figure while functioning correctly at every stage it is responsible for, which is the more instructive outcome and which we take up in \S\ref{sec:pipeline-limits}.
 
-All three SAEs are now trained to the same specification---50,000 steps over 500,000 tokens---and between 43\% and 74\% of each dictionary is usable. The residual attrition has a single cause: none of the runs used an auxiliary dead-feature revival loss, so Qwen ends 57\% dead and Mistral carries a large low-support tail. These are imperfect instruments, but they are no longer \emph{undertrained} instruments, which is what previously blocked any conclusion from the matching analysis.
-
-\paragraph{Permutation null (Table~\ref{tab:null}).} 
-
-\begin{table}[h]
-\centering
-\caption{Chunk-permutation null over 20 replicates, Pearson metric. $\tau$ is set to the null 99th percentile. The rightmost column is the number of matches a chunk-shuffled control produces above that threshold, i.e.\ the expected false-positive count.}
-\label{tab:null}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Pair & Null mean & Null p99 ($=\tau$) & Null matches/replicate & Expected FP \\
-\midrule
-Llama--Qwen    & 0.595 & 0.950 & 736 & 7.4 \\
-Mistral--Qwen  & 0.594 & 0.944 & 706 & 7.1 \\
-Llama--Mistral & 0.744 & 0.980 & 872 & 8.7 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The null mean is the number to sit with. Two features drawn from different models with no functional relationship, matched reciprocally over a 1,000-dimensional fingerprint, correlate at 0.59--0.74 on average. The threshold of $0.8$ used in our earlier analysis is at or below that noise floor for \emph{every} pair. The Llama--Mistral pair is the extreme case: its null mean of 0.744 sits within 0.06 of the threshold that analysis used to declare a match, and its calibrated threshold rises to 0.980. Figure~\ref{fig:null} shows the relationship directly.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.92\textwidth]{figures/matching-null}
-  \caption{Permutation-null similarity ranges against the two candidate thresholds. For every model pair, the naive fixed threshold $\tau = 0.80$ (dashed) falls \emph{inside} the null range---between the mean and the 99th percentile of similarities produced by chunk-shuffled controls. The calibrated threshold is the null 99th percentile. Match counts at the calibrated threshold are shown at right. Data: \texttt{data/sae-analysis/matching-v2/matching-report.json}.}
-  \label{fig:null}
-\end{figure}
-
-\paragraph{Matches under the corrected protocol (Table~\ref{tab:pairs}).}
-
-\begin{table}[h]
-\centering
-\caption{Cross-architecture feature matches under reciprocal one-to-one matching at the null-calibrated threshold, with the naive protocol's counts for comparison. Enrichment is observed matches divided by the expected false-positive count from Table~\ref{tab:null}.}
-\label{tab:pairs}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Pair & Naive protocol & \textbf{Corrected} & Expected FP & Enrichment \\
-\midrule
-Llama--Qwen    &  5,923 & \textbf{16} & 7.4 & $2.2\times$ \\
-Mistral--Qwen  &  8,099 & \textbf{23} & 7.1 & $3.2\times$ \\
-Llama--Mistral & 12,174 & \textbf{15} & 8.7 & $1.7\times$ \\
-\midrule
-\textbf{All three (universal)} & \textbf{3,753} & \textbf{1} & 0.15 & --- \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph{The universality result is negative.} Under the corrected protocol, \textbf{exactly one feature triple matches across all three models}. Against a null expectation of 0.15 closed triangles per chunk-shuffled replicate, observing one is unremarkable: under a Poisson model with that rate, $\Pr(\geq 1) = 0.14$. Under the cosine metric the null rate is 0.55 and $\Pr(\geq 1) = 0.42$. A single match is what this procedure produces from noise a substantial fraction of the time, and we do not treat it as a finding. The naive protocol's 3,753 ``universal'' features do not survive any one of the three corrections, let alone all three.
-
-Pairwise, a residue survives: 15--23 matched pairs per model pair, against 7--9 expected by chance. The enrichment is real but small---1.7--3.2$\times$, or on the order of 7--16 genuine pairs out of 7,000--12,000 matchable features per model, i.e.\ roughly 0.1\%. With counts this low the Poisson uncertainty alone spans a factor of two, and we do not think the pairwise numbers support a quantitative claim about universality rates. What they support is an upper bound: whatever shared representational vocabulary exists between these three models, this method detects it in well under 1\% of the dictionary, not the 23\% we previously reported.
-
-\paragraph{Venn structure.} With one universal feature the three-circle Venn reduces to near-disjoint sets. Under the Pearson metric, 15 Llama features match Qwen only, 14 match Mistral only, one matches both, and 16,354 of 16,384 match neither. We report this rather than a diagram because a Venn figure at these proportions would be illegible. Note that the corrected region counts partition each dictionary exactly---the naive protocol's did not, summing to 18,258 regions for a 16,384-feature Qwen dictionary, which was itself a signal that the many-to-one matching had broken the set algebra.
-
-\paragraph{How large a shared feature would we have detected? (Table~\ref{tab:mdes}).}
-A null result is only as informative as the power behind it, so we measured the
-procedure's sensitivity directly rather than asserting it. Taking real Mistral SAE
-fingerprints as the null population, we planted $K = 50$ synthetic cross-model pairs at a
-known correlation $\alpha$, ran the identical reciprocal-best-match detector, and recorded
-the fraction recovered over 300 trials per point, sweeping $\alpha$ from 0.5 to 1.0 and
-dictionary size from 256 to the full 8,208 matchable features.
-
-\begin{table}[h]
-\centering
-\caption{Minimum detectable effect size at 80\% power. $\tau$ is the permutation-calibrated
-threshold at each dictionary size; MDES is the smallest planted correlation the detector
-recovers 80\% of the time. Data: \texttt{data/power-analysis/power\_table.json}, harness
-\texttt{scripts/power\_analysis\_universality.py}.}
-\label{tab:mdes}
-\begin{tabular}{@{}rrrr@{}}
-\toprule
-Dictionary size & Null best-match mean & $\tau$ (null p99) & MDES @ 80\% power \\
-\midrule
-256   & 0.495 & 0.926 & 0.95 \\
-1,024 & 0.567 & 0.947 & 0.95 \\
-4,096 & 0.609 & 0.959 & 1.00 \\
-8,208 & 0.649 & 0.958 & 1.00 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\textbf{MDES tracks $\tau$ almost exactly, and this is the central limitation of the
-method.} Because the threshold must be set above a null whose mean rises with dictionary
-size, the detector only recovers planted pairs whose correlation is at or above that
-threshold---$\alpha \geq 0.95$ at small dictionaries, and effectively $\alpha = 1.0$ at the
-full 8,208. A genuinely shared feature realised at correlation 0.8, which most
-practitioners would regard as a strong correspondence, is invisible.
-
-This reframes the negative result precisely. ``Zero universal features'' does not mean
-these three models share no representational structure. It means \emph{no feature triple
-is shared at correlation $\geq 0.95$}, which is a far weaker statement and the only one
-the data supports. Any shared vocabulary below that correlation would have gone
-undetected, and we cannot bound how much of it there is.
-
-The estimate is conservative in one direction: the simulation ran at 100 chunks against
-the 1,000 used in the main analysis, so its fingerprints are noisier, $\tau$ is higher, and
-the true MDES at full resolution may be somewhat lower. It is not conservative enough to
-change the conclusion---detection remains confined to near-perfect correspondence.
-
-\paragraph{What we can and cannot conclude.} An earlier version of this analysis ran on partial checkpoints---the Llama SAE at 20\% of its step target, the Mistral SAE at under 2\% on a ten-times-smaller corpus---and we could not then separate ``these models share little'' from ``these SAEs are too degraded to detect what they share.'' That confound is now substantially removed. All three SAEs are trained to the same specification, and the usable fraction of each dictionary rose from 51\% to 74\% (Llama) and from 33\% to 50\% (Mistral). The answer did not move: zero universal features became one, against a null that produces at least one 14\% of the time.
-
-We still stop short of concluding that these three models share no representational structure, for two reasons that remain. Qwen's dictionary is 57\% dead and Mistral retains a large low-support tail, both consequences of training without an auxiliary revival loss---so a third to a half of each dictionary is still invisible to the analysis. And the fingerprint statistic itself, mean activation over 500-token chunks, discards within-chunk structure: two features responding to the same rare token in different syntactic contexts are indistinguishable from two features responding to a chunk's overall topic. A negative result from a coarse statistic is weak evidence of absence.
-
-What we can conclude is methodological, and it generalises past this dataset: cross-model feature matching by activation-pattern similarity requires a permutation null. Without one, the search over a large dictionary manufactures high similarities from nothing, and a threshold chosen by intuition---0.8 is the natural choice, and the one we made---can sit below the noise floor while appearing stringent. For the Llama--Mistral pair the null mean is 0.744, within 0.06 of that threshold. The gap between 3,753 and 1 is almost entirely attributable to that omission, and training the SAEs properly did not close it.
+\paragraph{The instruments remain imperfect.} The negative result is not explained by undertraining: an earlier run on partial checkpoints returned zero universal features, and training all three SAEs to full specification moved the count to one. It may still be explained by collapse. Qwen's dictionary is 57.4\% dead and Mistral carries a large low-support tail (\S\ref{sec:quality}), so between a third and a half of each dictionary is invisible to the analysis regardless of protocol. The companion paper treats this, and the coarseness of the chunk-averaged statistic itself, as the two open confounds.
 
 \subsection{Safety Classifier Evaluation}
 \label{sec:safety}
@@ -880,17 +748,14 @@ The primary contribution of this work is not any individual experimental result 
 
 The Thunderbolt analysis (\S\ref{sec:protocol-validation}) establishes that the link is not a bottleneck under any foreseeable workload. The binding constraints are compute-side: inference speed on Node~A and SAE forward-pass throughput on Node~B. Future work should focus on these (larger batches, INT8 quantization for the SAE encoder) rather than the interconnect.
 
-\subsection{Universality: A Negative Result and What Produced It}
+\subsection{What a Cheap Pipeline Does Not Buy}
+\label{sec:pipeline-limits}
 
-Our earlier analysis reported 3,753 features matching across all three model families and read that as support for the Platonic Representation Hypothesis \citep{huh2024platonic}---the conjecture that large networks trained on diverse data converge on a shared statistical model of reality regardless of architecture. Under a corrected protocol the count is one---a single closed triangle, against a null expectation of 0.15 per chunk-shuffled replicate ($\Pr(\geq 1) = 0.14$)---and the honest position is that this work provides no evidence bearing on that hypothesis in either direction.
+Our earlier analysis reported 3,753 features matching across all three model families and read that as support for the Platonic Representation Hypothesis \citep{huh2024platonic}---the conjecture that large networks trained on diverse data converge on a shared statistical model of reality regardless of architecture. Under a corrected protocol the count is one, and the honest position is that this work provides no evidence bearing on that hypothesis in either direction. The companion paper \citep{melton2026saecomparison} gives the corrections and the evidence for each; we withdraw the claim here and take up what it means for a paper whose subject is the infrastructure.
 
-It is worth being precise about why the original number was so large, because the mechanism is general. Cosine similarity between chunk-averaged SAE fingerprints is a comparison of non-negative vectors, which already carries a large positive baseline. The matching procedure then takes, for each feature, the best of $\sim$8,000 candidates---an extreme-value statistic whose expectation grows with dictionary size and shrinks with fingerprint dimensionality. At the original resolution of 100 chunks, the best-of-8,000 similarity between chunk-shuffled controls had a 99th percentile of 0.98. A threshold of 0.8 looks stringent when read as a correlation and is in fact permissive by a wide margin. Nothing about this is specific to our models or our SAEs; any study matching features across models by activation-pattern similarity over a modest number of context bins will hit it.
+The retraction is not an infrastructure failure, and that is the uncomfortable part. Every stage this system is responsible for behaved correctly. Activations were captured faithfully---the split boundary is bit-exact (\S\ref{sec:protocol-validation}). The SAEs trained to their specification and their reconstruction figures are unremarkable (\S\ref{sec:quality}). The fingerprints were extracted over a token-identical corpus with no asymmetry between models. The error entered at the analysis layer, in a similarity threshold chosen by intuition, and no measurement the pipeline takes of itself could have caught it.
 
-The three procedural corrections compound. One-to-one reciprocal matching alone cuts the Llama--Mistral count from 12,174 to 40 at the same threshold, because the original figure was counting the same handful of Mistral features many times over. Requiring the triangle to close removes the chained triples. Calibrating the threshold against the null removes the rest. No single correction accounts for the gap between 3,753 and 0; all three are necessary.
-
-What survives is a weak pairwise signal---15--23 matched pairs per model pair against 7--9 expected by chance---which is consistent with a small shared vocabulary but far too sparse to characterise. Testing the universality hypothesis properly needs SAEs trained to convergence with dead-feature revival on all three models, a held-out evaluation corpus, and a fingerprint statistic with enough resolution that the null sits well below the decision threshold. None of those three conditions holds here.
-
-\paragraph{The Llama--Mistral asymmetry inverts.} Under the naive protocol the Llama--Mistral pair had by far the highest count (12,174; nominally 74\% coverage), and we had speculated this reflected shared architectural lineage. Under the corrected protocol Llama--Mistral yields the \emph{fewest} matches (15) and the \emph{lowest} enrichment ($1.7\times$) of the three pairs. The reason is visible in the null: the Llama--Mistral noise floor is far higher than the others (mean 0.744 against 0.59), so its calibrated threshold rises to 0.980 and few pairs clear it. The original asymmetry was an artifact of double-counting individual Mistral features, compounded by a pair-specific noise floor that the fixed threshold ignored---not a fact about the models.
+The general form of the problem is worth naming, because it is a property of cheap infrastructure rather than of this particular bug. A system that makes a large analysis inexpensive to run makes an incorrect one inexpensive to run at the same scale, and scale is precisely what lends an incorrect result its credibility: 3,753 matched features across three model families reads as a finding in a way that three matched features would not. The mitigations are cheap and they are analysis-layer, not transport-layer. A permutation null costs 20 extra passes over data already in memory. A set-algebra check---do the match regions sum to the dictionary size?---costs nothing and would have flagged the original run on its own, since its regions summed to 18,258 members for a 16,384-feature dictionary. Neither was in the pipeline. Both should have been, and we would now argue that a distributed interpretability system should ship its nulls as a first-class stage rather than leaving them to the analyst.
 
 \subsection{Safety Classifier: Failure Mode and Partial Correction}
 
@@ -905,15 +770,13 @@ The 0.6422 AUC is still modest and not close to actionable deployment thresholds
 
 \paragraph{No held-out evaluation for two of three SAEs.} The Llama and Qwen SAEs were trained for 204 epochs over their entire activation dump, so every reconstruction figure for them is in-sample. Only Mistral has genuine held-out data, and only because it was undertrained. This is a data-collection oversight, not a fundamental constraint---the fix is to reserve a token split before training.
 
-\paragraph{Collapsed dictionaries.} All three SAEs now train to the same specification, so undertraining is no longer a confound---an earlier version of this work ran on partial checkpoints and could not make that claim. What remains is collapse: the trainer implements no auxiliary revival loss, and Qwen ends with 57.4\% of its dictionary dead while Mistral retains a large low-support tail. Between 43\% and 74\% of each dictionary is usable (Table~\ref{tab:inventory}), so a third to a half remains invisible to the matching analysis. We can now say the negative universality result is not explained by undertraining; we cannot yet say it is not explained by collapse.
-
-\paragraph{The fingerprint statistic is coarse.} Mean activation over 500-token chunks discards within-chunk structure. Two features that respond to the same rare token in different syntactic contexts are indistinguishable from two features that respond to a chunk's general topic. A token-level or context-level fingerprint would be more discriminative, at higher cost.
+\paragraph{Collapsed dictionaries.} All three SAEs now train to the same specification, so undertraining is no longer a confound---an earlier version of this work ran on partial checkpoints and could not make that claim. What remains is collapse: the trainer implements no auxiliary revival loss, and Qwen ends with 57.4\% of its dictionary dead (Table~\ref{tab:quality}) while Mistral retains a large low-support tail. Between 43\% and 74\% of each dictionary survives into the downstream analysis, so a third to a half of what the pipeline produces is unusable. This is a limitation of the artifacts this system delivers, independent of what any particular analysis does with them.
 
 \paragraph{Quantization confound.} The Mistral-7B activations were extracted from a 4-bit quantized model, due to authentication constraints on the bf16 base weights. Quantization reduces the precision of individual activations and may suppress features that rely on fine-grained magnitude differences. Our earlier draft argued that the high Llama--Mistral match count showed the representational structure survived quantization; since that count was an artifact, no such reassurance is available, and the confound is unresolved.
 
 \paragraph{Safety evaluation.} The 200-example set was authored and labelled by a single researcher, with unsafe items written after published red-teaming datasets rather than drawn from them; its numbers are not comparable to any external result and its bootstrap CI spans 0.16. The PKU-SafeRLHF evaluation (\S\ref{sec:safety}) addresses both problems---public labels, $n = 600$, CI width 0.08---and we treat it as the primary safety result. Two limitations remain. Both scorers were evaluated on a single benchmark drawn from one annotation pipeline, so their agreement with each other is confounded with agreement with that pipeline's conventions. And the near-orthogonal error structure we report ($\kappa = 0.083$) is an observation, not an explanation: we have not identified what distinguishes the cases each scorer gets right.
 
-\paragraph{Detection floor on universality.} The matching procedure's minimum detectable effect size is a correlation of 0.95--1.00 (\S\ref{sec:matching}). Our null result therefore bounds shared structure only above that correlation; a shared vocabulary realised at, say, 0.8 would be invisible to this method and we cannot say how large it is. Lowering the floor requires a similarity statistic whose null does not rise with dictionary size---higher-resolution fingerprints help, but the extreme-value problem is structural, not merely a matter of more tokens.
+\paragraph{Detection floor on universality.} The matching procedure applied downstream of this pipeline has a minimum detectable effect size of correlation 0.95--1.00 \citep{melton2026saecomparison}. The negative universality result we cite in \S\ref{sec:matching} therefore bounds shared structure only above that correlation. This is a limitation of the analysis, not of the system, but it constrains what we may claim the system has demonstrated: it has run the study, not settled the question.
 
 \textbf{No held-out data.} All three SAEs trained over 205 epochs of their full activation dump, so every converged reconstruction figure is in-sample. The one held-out measurement comes from a superseded 1,000-step checkpoint. Reserving a split before training is the fix.
 
@@ -927,7 +790,7 @@ The immediate next step is implementing the system in Swift/MLX rather than Pyth
 
 Beyond that, the natural extension is online SAE training: rather than collecting activations offline and training on stored data, the SAE trainer on Node~B processes the activation stream as it arrives, updating weights continuously. This eliminates the two-stage collect$\to$train pipeline and reduces the hyperparameter tuning cycle from hours to minutes.
 
-The universality question is not closed by our negative result---it is untested, because the instruments were inadequate. Settling it requires, in order: SAEs trained to convergence on all three models with an auxiliary dead-feature revival loss; a held-out activation split reserved before training; and a fingerprint statistic with enough resolution that the permutation null sits well below any threshold of interest. Only then does the ``universal SAE'' experiment become meaningful---training a single dictionary, initialised from matched features, jointly on all three models' activations, and asking whether it achieves comparable FVE on each.
+Two changes to the pipeline follow from \S\ref{sec:matching}, and both are cheap. An auxiliary dead-feature revival loss \citep{gao2024scaling} belongs in the trainer: it is the single change that would most improve the artifacts this system produces, since a third to a half of every dictionary is currently dead or low-support. And a held-out token split should be reserved by the activation collector before training rather than left to the analyst, which is the only reason none of these runs has one. Beyond that, we would add permutation nulls as a pipeline stage rather than an analysis step, for the reason argued in \S\ref{sec:pipeline-limits}.
 
 % ============================================================
 \section{Conclusion}
@@ -935,9 +798,9 @@ The universality question is not closed by our negative result---it is untested,
 
 We have described \mlxmesh{}, a system for distributed mechanistic interpretability on Apple Silicon hardware. The system streams intermediate layer activations between nodes over a purpose-built binary wire protocol, enabling SAE training and analysis without staging activations to disk. We measured the interconnect on the built two-node system---2.150~GB/s (17.20~Gbps) over Thunderbolt, 86\% of the negotiated link rate, $26\times$ the LAN path and $175\times$ better on p99 latency---and validated the remaining pieces on one machine: a bit-exact split boundary on Llama-3.2-3B and two-worker gradient averaging within 0.05\% of the single-node baseline's MSE. The pipeline has not yet been run end-to-end across the physical link, and we mark clearly which figures are transport measurements and which are end-to-end.
 
-The scientific results are two negatives, reported as such. Cross-architecture feature matching, done properly, finds essentially \emph{no} features shared across Llama-3.2-3B, Mistral-7B and Qwen2.5-3B: one closed triangle, against a null that produces at least one 14\% of the time. This corrects our own earlier claim of 3,753, which was an artifact of many-to-one matching, unclosed triangles, and a similarity threshold below the permutation-null mean. The corrected measurement uses SAEs trained to full specification on all three models, so it is not explained by undertraining. A feature-based safety classifier built with naive frequency-based feature selection achieves ROC-AUC 0.564 (95\% CI spanning chance); switching to differential-frequency selection against a harm corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raises it to 0.6422 (95\% CI [0.566, 0.720]). We trace the original failure to feature selection by raw activation frequency over a corpus containing almost no harmful content, compounded by a dictionary in which 1.2\% of features carry roughly a third of the activation mass.
+We drove the pipeline with two downstream studies. The first, a cross-architecture universality analysis over 49,152 feature fingerprints from three model families, is reported in the companion paper \citep{melton2026saecomparison}; its result is negative, and it corrects our own earlier claim of 3,753 universal features to one. The second is a feature-based safety classifier, reported here. Built with naive frequency-based feature selection it achieves ROC-AUC 0.564 (95\% CI spanning chance); switching to differential-frequency selection against a harm corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raises it to 0.6422 (95\% CI [0.566, 0.720]), and on the held-out PKU-SafeRLHF test split ($n = 600$) to 0.7206. We trace the original failure to feature selection by raw activation frequency over a corpus containing almost no harmful content, compounded by a dictionary in which 1.2\% of features carry roughly a third of the activation mass.
 
-We think the negatives are the more useful contribution. The infrastructure claim---that two consumer nodes and a commodity interface suffice for interpretability research at this scale---is one we still believe and have partially demonstrated. But the universality result is a cautionary case with a clean moral: when a matching procedure searches thousands of candidates, the similarity threshold must be calibrated against a null, or the procedure will manufacture structure from noise at any scale you run it. We reported 23\% universality; the figure detectable by this method, with all three SAEs trained to specification, is indistinguishable from zero.
+Both studies produced a correction rather than a discovery, and neither error was visible anywhere the infrastructure looks: the split boundary was bit-exact, the SAEs trained to specification, the activations were collected faithfully, and the results were still wrong---in a similarity threshold set by intuition, and in a feature-selection criterion orthogonal to its task. That is the paper's most transferable point, argued in \S\ref{sec:pipeline-limits}. Cheap infrastructure lowers the cost of a wrong analysis exactly as much as a right one, while scale is what makes a wrong result persuasive. The audits that caught both errors cost a small fraction of the runs they check, and we would now build them into the pipeline rather than leave them to the analyst.
 
 \section*{Acknowledgments}
 
@@ -946,7 +809,7 @@ This work was conducted independently using consumer hardware. We thank the deve
 % ============================================================
 \section*{Data Availability}
 
-All experimental data, training logs, benchmark results, and analysis scripts produced in this work are available at \url{https://github.com/jmelton-research/mlxmesh}. This includes: activation collection scripts and metadata; SAE training checkpoints and training logs for all four runs; the cross-architecture matching results, including both the superseded v1 outputs and the corrected v2 outputs with permutation nulls (\texttt{data/sae-analysis/matching-v2/}); the three-transport link study with its full payload ladder and per-transport route records (\texttt{benchmarks/link-study/}, harness \texttt{benchmarks/link\_benchmark.py}), clearly labeled as using synthetic payloads; the distributed-capture validation JSON; and the safety classifier evaluation dataset and results. The mlxMesh wire protocol specification is documented in \texttt{docs/activation-streaming-protocol.md}.
+All experimental data, training logs, benchmark results, and analysis scripts produced in this work are available at \url{https://github.com/jmelton-research/mlxmesh}. This includes: activation collection scripts and metadata; SAE training checkpoints and training logs for all four runs; the feature fingerprints and the cross-architecture matching outputs they feed, including both the superseded v1 results and the corrected v2 results with permutation nulls (\texttt{data/sae-analysis/matching-v2/}), which are analysed in the companion paper \citep{melton2026saecomparison}; the three-transport link study with its full payload ladder and per-transport route records (\texttt{benchmarks/link-study/}, harness \texttt{benchmarks/link\_benchmark.py}), clearly labeled as using synthetic payloads; the distributed-capture validation JSON; and the safety classifier evaluation dataset and results. The mlxMesh wire protocol specification is documented in \texttt{docs/activation-streaming-protocol.md}.
 
 % ============================================================
 \bibliographystyle{plainnat}

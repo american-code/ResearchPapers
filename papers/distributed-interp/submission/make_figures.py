@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """
-Generate the figures for the distributed-interpretability paper.
+Generate the figures for the two SAE-infrastructure papers.
 
-Writes PDF (for LaTeX) into papers/distributed-interp/submission/figures/.
 No matplotlib dependency: emits vector PDF directly.
 
   convergence-5k  : two-worker vs single-node SAE loss trajectories
+                    -> papers/distributed-interp/submission/figures/
   matching-null   : observed vs permutation-null match similarity, per pair
+                    -> papers/sae-comparison/submission/figures/
+
+The matching figure belongs to the sae-comparison paper, which is where the
+cross-architecture matching analysis is reported; it is generated here because
+this script already loads the shared matching report.
 """
 
 import json
@@ -14,7 +19,9 @@ from pathlib import Path
 
 WS = Path("/Users/melton/ResearchPapers")
 OUT = WS / "papers/distributed-interp/submission/figures"
-OUT.mkdir(parents=True, exist_ok=True)
+OUT_MATCHING = WS / "papers/sae-comparison/submission/figures"
+for _d in (OUT, OUT_MATCHING):
+    _d.mkdir(parents=True, exist_ok=True)
 
 
 # ── minimal PDF writer ───────────────────────────────────────────────────────
@@ -200,7 +207,7 @@ def fig_matching_null():
                       "percentile.", 7, DARK)
     p.text(L, H - 21, "The naive fixed threshold falls inside the null range for every "
                       "pair.", 7, DARK)
-    p.save(OUT / "matching-null.pdf")
+    p.save(OUT_MATCHING / "matching-null.pdf")
 
 
 if __name__ == "__main__":
