@@ -404,8 +404,9 @@ dictionary at convergence.
 labelling is to take the top-$N$ features by activation frequency and inspect their
 maximally activating contexts. Table~\ref{tab:dense} says that this procedure draws
 heavily from the degenerate head: of the 200 most frequent Llama features, 25 fire on
-more than half of all tokens, and those 200 features carry 31\% of the entire code. In separate work we built a feature-based
-safety classifier on exactly this selection and obtained ROC-AUC 0.564 with a 95\%
+more than half of all tokens, and those 200 features carry 31\% of the entire code. In a companion paper
+\citep{melton2026mlxmesh} we built a feature-based safety classifier on exactly this
+selection and obtained ROC-AUC 0.564 with a 95\%
 confidence interval spanning chance. Switching to differential-frequency labelling
 against a harm-relevant contrastive corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raised ROC-AUC to
 0.6422 (95\% CI [0.566, 0.720])---still modest but now clearly above chance, confirming that the degenerate
