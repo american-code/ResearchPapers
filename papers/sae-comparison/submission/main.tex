@@ -73,7 +73,12 @@ percentile of 0.94--0.98, so the conventional fixed threshold of 0.8 sits below 
 noise floor for every model pair. With one-to-one reciprocal matching, a
 closed-triangle requirement and a null-calibrated threshold, exactly one feature triple
 is shared across all three models---against a null that yields at least one 14\% of the
-time. An uncalibrated analysis of partial checkpoints reported 3,753.
+time. An uncalibrated analysis of partial checkpoints reported 3,753. A planted-signal
+power analysis bounds what that null means: minimum detectable effect size tracks the
+calibrated threshold, reaching a correlation of 0.95--1.00, so the finding is ``no triple
+shared at correlation $\geq 0.95$'' rather than ``no shared structure''. Because the
+threshold must clear a null whose mean grows with dictionary size, that floor is
+structural to dictionary-scale matching rather than a consequence of our choices.
 
 We report a comparison of training objectives as \emph{not conducted}: only TopK was
 trained, and \S\ref{sec:notrun} states plainly which planned experiments do not exist.
@@ -118,10 +123,14 @@ model are confounded across only three runs.
     sparse code's activation mass is carried by its most frequent features, and show
     the concentration is severe enough to invalidate frequency-based feature selection
     (\S\ref{sec:dense}).
-  \item \textbf{A permutation null for cross-model feature matching, and a negative
-    result.} We show that the standard protocol---fixed cosine threshold,
-    nearest-neighbour matching---produces thousands of spurious matches, and that
-    essentially nothing survives proper calibration (\S\ref{sec:matching}).
+  \item \textbf{A permutation null for cross-model feature matching, its detection
+    floor, and a negative result.} We show that the standard protocol---fixed cosine
+    threshold, nearest-neighbour matching---produces thousands of spurious matches, and
+    that essentially nothing survives proper calibration (\S\ref{sec:matching}). We then
+    measure what the calibrated procedure could have found: minimum detectable effect
+    size equals the threshold, 0.95--1.00, so the method sees near-duplicates and little
+    else (\S\ref{sec:mdes}). Reporting that floor should be standard practice for
+    cross-model matching claims in either direction.
   \item \textbf{An honest account of what these numbers do not establish.} With all
     three SAEs trained over 205 epochs of their entire activation dump, no held-out
     reconstruction measurement is available for any of them. We report the one held-out
@@ -551,6 +560,59 @@ nominally universal triples had no verified Llama--Mistral edge, and the 3{,}753
 collapsed onto 644 distinct Qwen and 341 distinct Mistral features. Null calibration
 removes the remainder.
 
+\subsection{What the Method Could Have Detected}
+\label{sec:mdes}
+
+A null result is a statement about a detector as much as about the data, so we measured
+this detector's sensitivity rather than assuming it. Real Mistral SAE fingerprints supply
+the null population; into it we plant $K = 50$ synthetic cross-model pairs at a known
+correlation $\alpha$, run the identical reciprocal-best-match procedure with the identical
+permutation calibration, and record the fraction recovered. 300 trials per point, $\alpha$
+swept from 0.5 to 1.0, dictionary size swept from 256 to the full 8,208 matchable
+features.
+
+\begin{table}[t]
+  \centering
+  \caption{Minimum detectable effect size at 80\% power. $\tau$ is the
+    permutation-calibrated threshold; MDES is the smallest planted correlation the
+    procedure recovers 80\% of the time. Data:
+    \texttt{data/power-analysis/power\_table.json}.}
+  \label{tab:mdes}
+  \smallskip
+  \begin{tabular}{rrrr}
+    \toprule
+    Dictionary size & Null best-match mean & $\tau$ (null p99) & MDES @ 80\% power \\
+    \midrule
+      256 & 0.495 & 0.926 & 0.95 \\
+    1{,}024 & 0.567 & 0.947 & 0.95 \\
+    4{,}096 & 0.609 & 0.959 & 1.00 \\
+    8{,}208 & 0.649 & 0.958 & 1.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{MDES tracks $\tau$.} At every dictionary size the smallest detectable correlation
+sits at or just above the calibrated threshold. This is not a tuning failure that a better
+choice of $\tau$ would fix---it is forced. The threshold must clear a null whose mean rises
+with dictionary size (0.495 at $D = 256$, 0.649 at $D = 8{,}208$), because the statistic is
+a maximum over $D$ candidates and the expectation of a maximum grows with the number of
+draws. Raising $\tau$ to control false positives necessarily raises the floor on what can
+be found. The two move together by construction.
+
+The practical consequence is severe and, we think, underappreciated. A pair of features
+genuinely corresponding at correlation 0.8---a correspondence most practitioners would
+call strong---is invisible to this method at any dictionary size we tested. The band the
+method can see, roughly $[0.95, 1.0]$, is narrow enough that it detects near-duplicates
+and little else.
+
+Two caveats on the estimate itself. The simulation ran at 100 chunks against the 1,000
+used in the main analysis, so its fingerprints are noisier, its $\tau$ higher, and the true
+MDES at full resolution is likely somewhat lower---the figures here are an upper bound. And
+planted pairs are synthetic: a real shared feature might differ from its counterpart in
+ways a fixed-correlation construction does not capture. Neither caveat is large enough to
+move the conclusion, because the mechanism---threshold chasing a growing null---does not
+depend on either.
+
 \paragraph{What this does and does not show.} It does not show that these three models
 fail to share representational structure, but the case is stronger than it was. An
 earlier run of this analysis used partial checkpoints (Llama at 20\% of its step
@@ -566,10 +628,20 @@ activation over 500-token chunks---discards within-chunk structure, so a feature
 responding to a rare token is indistinguishable from one responding to a chunk's topic.
 A negative result from a coarse statistic is weak evidence of absence.
 
-What it does show is methodological and transfers beyond this dataset: cross-model
-feature matching by activation-pattern similarity requires a permutation null. Without
+The power analysis (\S\ref{sec:mdes}) sharpens what the null result claims. It is not
+``these models share no features'' but ``no feature triple is shared at correlation
+$\geq 0.95$'' --- everything below that floor is outside the method's reach, and we
+cannot bound how much lives there. Stated that way the finding is considerably weaker
+than a bare zero suggests, and it is the strongest form the evidence supports.
+
+What it does show is methodological and transfers beyond this dataset. Cross-model
+feature matching by activation-pattern similarity requires a permutation null: without
 one, the search over a large dictionary manufactures high similarities from nothing, and
-a threshold that reads as stringent can sit below the noise floor.
+a threshold that reads as stringent can sit below the noise floor. But the null is not
+only a correction to apply---it is also a diagnostic. Where it lands tells you the
+method's detection floor, and if that floor sits at 0.95 the method is answering a much
+narrower question than the one being asked. We would encourage anyone reporting a
+cross-model matching result, positive or negative, to report the floor alongside it.
 
 % ── 5. What Was Not Run ──────────────────────────────────────────────────────
 \section{Planned Experiments Not Conducted}
@@ -625,11 +697,26 @@ comparison ``controlled''---silently varies expansion ratio, and the model with 
 highest ratio collapsed hardest. Whether expansion ratio drives collapse or merely
 correlates with it here, we cannot say with two long runs.
 
+\paragraph{Report the detection floor, not just the threshold.} A cross-model matching
+result---positive or negative---is uninterpretable without knowing the smallest
+correspondence the procedure could have found. Ours is 0.95--1.00 (\S\ref{sec:mdes}),
+which means our zero is compatible with a substantial shared vocabulary sitting just
+below it. The measurement costs one simulation against fingerprints you already have, and
+it converts an unfalsifiable ``we found nothing'' into a bounded claim.
+
 \paragraph{Frequency-based feature selection selects the wrong features.} This follows
 directly from \S\ref{sec:dense} and is, we suspect, the most transferable practical
 finding. It affects any pipeline whose first step is ``take the most active features.''
 
 \subsection{Limitations}
+
+\textbf{The matching method has a high detection floor.} Minimum detectable effect size
+is a correlation of 0.95--1.00 (\S\ref{sec:mdes}), so our negative universality result
+bounds shared structure only above that level. Lowering the floor is not a matter of more
+tokens: the null rises with dictionary size because the statistic is a maximum over
+candidates, so it needs a similarity measure whose null does not grow that way, or a
+matching procedure that does not search the whole dictionary per feature.
+
 
 \textbf{Only one objective.} Everything reported here is about TopK SAEs without an
 auxiliary loss. The collapse dynamics in particular are specific to hard-sparsity
