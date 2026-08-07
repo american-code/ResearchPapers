@@ -3,7 +3,6 @@
 %
 % OPEN ITEMS BEFORE FINAL SUBMISSION:
 %   1. Resolve L24H15 vs. L24H16 discrepancy (cross-model-comparison.md vs. results-summary.md ablation rank table).
-%   2. Standardize L1H11 CI upper bound (+0.005 or +0.006); verify against data/ioi/statistical-validation.json.
 %   4. Table 2 is ordered by ablation drop, not combined rank — caption notes this but consider reordering.
 %   5. Confirm SwiftSci Interp repository URL and insert below (search for REPO_URL_HERE).
 %   6. Collect and add efficiency benchmark data for Section 6.
@@ -111,13 +110,24 @@ and the matching is functionally uninformative besides: it pairs Llama's dominan
 with Pythia's weakest. We report the null because the depth-conservation claim is the
 one a reader is most likely to take away, and it does not hold.
 
-Path patching over the five highest-scoring Llama heads shows that L15H20 receives a
-substantial direct contribution from L14H0 and is largely independent of the later
-heads, consistent with its role as an early bottleneck. Factual-association patching
-recovers heads in five of the same layers as IOI but at different head indices. Our
-positive claims are that IOI admits a sparse, bottlenecked circuit in both models, and
-that Apple Silicon is a viable substrate for reproducible mech-interp research at the
-1--3B parameter scale.
+Validated as a set rather than head-by-head, the ten-head circuits are faithful---they
+recover 66\% (Llama) and 85\% (Pythia) of clean logit difference with all other heads
+mean-ablated, the latter within two points of Wang et al.'s GPT-2 Small figure---but not
+complete, with mean completeness gaps of 0.28 and 0.22 and a fifth of performance
+surviving the circuit's total removal. Minimality contradicts the marginal ranking:
+L15H20 dominates single-head ablation (28\% of clean logit difference) yet removing it
+from the circuit costs less than a third of what removing L24H15 costs, and alone it
+restores little.
+
+The paper's main negative result concerns generality. Re-evaluating the same circuits on
+a 15-template dataset with balanced name ordering, faithfulness falls from 0.663 to
+\textbf{0.228} for Llama and from 0.854 to \textbf{$-$0.028} for Pythia---the latter
+recovering nothing at all---while both models still perform the task at over 90\% of
+their original logit difference. An independent run on Llama-3.1-8B reproduces the effect
+(0.265). Head rankings move with it: Pythia retains 5 of 10 heads, and the top head on the
+diverse dataset (L1H6) appears nowhere in the single-template circuit. Circuits identified
+on a single sentence frame---still common practice---substantially overstate their own
+generality, and we quantify by how much.
 \end{abstract}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -198,10 +208,21 @@ mechanistic interpretability experiments at the 1--7B parameter scale.
     nulls). We report the null, the reason the tolerance is too permissive to be
     informative, and what a valid test of depth conservation would require.
 
-  \item \textbf{Edge-level path patching of the Llama bottleneck.}  We path-patch the
-    ten sender--receiver edges among Llama's five highest-scoring heads, finding that
-    L15H20's dominance is fed substantially by L14H0 (normalized score 0.165) and is
-    largely decoupled from the later heads.
+  \item \textbf{Circuit-level validation, and a reordering.}  We compute faithfulness,
+    minimality and completeness for both circuits (\S\ref{sec:faithfulness}). They are
+    faithful (0.663 / 0.854) but incomplete, and minimality inverts the marginal ranking:
+    the head with the largest single-head ablation drop is not the head the circuit can
+    least afford to lose.
+
+  \item \textbf{Edge-level path patching in both models.}  Ten sender--receiver edges
+    among each model's five highest-scoring heads. Llama shows one dominant edge
+    (L14H0~$\to$~L15H20, 0.165) plus two suppressive ones; Pythia's edges all fall below
+    0.022, making its faithful ten-head set a parallel ensemble rather than a circuit.
+
+  \item \textbf{Quantifying single-template fragility.}  On a 15-template dataset with
+    balanced name ordering, faithfulness collapses from 0.663 to 0.228 (Llama) and 0.854
+    to $-$0.028 (Pythia) while task performance is retained, and half of Pythia's circuit
+    is replaced (\S\ref{sec:template}).
 
   \item \textbf{Layer-level overlap across tasks.}  Factual-association patching in
     Llama-3.2-3B recovers top-5 heads occupying five of the same layers as five of the
@@ -634,7 +655,7 @@ bound exceeds the CI width by a factor of at least 3.
 
 \paragraph{Anomalous patching scores.}
 Pythia-1.4B's L1H11 presents a dissociation: its mean patching score is slightly
-negative ($-0.003$, 95\% CI $[-0.011, +0.005]$, straddling zero), yet its ablation
+negative ($-0.0035$, 95\% CI $[-0.008, +0.000]$, straddling zero), yet its ablation
 drop is substantial ($0.327$, rank 4 by ablation). This dissociation is consistent
 with a suppression role: the head reduces logit difference when ablated (its absence
 degrades performance), but restoring its clean activation in a corrupt context does not
@@ -824,7 +845,7 @@ LD.
 
 \paragraph{Anomalous early head: L1H11.}
 One Pythia-specific finding stands out: L1H11 at relative depth 0.042 (layer 1 of 24)
-scores $-0.003$ on activation patching (95\% CI $[-0.011, +0.005]$, straddling zero)
+scores $-0.0035$ on activation patching (95\% CI $[-0.008, +0.000]$, straddling zero)
 yet produces the fourth-largest ablation drop in the model (0.327, 7.9\% of clean LD).
 This dissociation between sufficiency (near zero or slightly negative) and necessity
 (substantial) is inconsistent with the role profile of name-mover or S-inhibition
@@ -926,13 +947,127 @@ the intervals should not be read as calibrated. A clean fix is available and che
 select heads on one half of the example set and estimate effects on the other.
 
 The Pythia L1H11 anomaly is confirmed: its patching
-CI $[-0.011, +0.005]$ straddles zero (the only such case in either model's top-10),
+CI $[-0.008, +0.000]$ straddles zero (the only such case in either model's top-10),
 whereas its ablation drop (0.327) is large and unambiguous. This dissociation is the
 empirical signature of necessity without sufficiency, and constitutes a primary
 verification in our results: by simultaneously measuring what happens when a head's
 activation is \emph{replaced} (patching; sufficiency) versus \emph{removed} (ablation;
 necessity), we detect heads whose role is suppressive rather than generative---a
 distinction that patching-only or ablation-only protocols would miss.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Circuit Validation: Faithfulness, Minimality, Completeness}
+\label{sec:faithfulness}
+
+Everything reported so far is a \emph{marginal} effect: what happens to one head at a
+time. Marginal effects do not compose. Our Llama top-10 patching scores sum to 1.013,
+which cannot be a fraction of anything recovered, so per-head tables cannot answer the
+question a circuit claim actually makes---what do these ten heads explain \emph{together}?
+Wang et al.\ (2022) answer it by validating their circuit as a set, reporting 87\%
+faithfulness for GPT-2 Small. We compute the same three quantities.
+
+We mean-ablate every head \emph{outside} the circuit $C$ and measure the recovered logit
+difference, normalising against a floor in which all heads are ablated:
+\begin{equation}
+  F(X) = \frac{\mathrm{LD}(X) - \mathrm{LD}_{\text{all ablated}}}
+              {\mathrm{LD}_{\text{clean}} - \mathrm{LD}_{\text{all ablated}}}
+\end{equation}
+The floor is $\mathrm{LD} = 0.000$ for both models on the single-template dataset, which
+is the expected value rather than a coincidence: with every head ablated no information
+about which name is the indirect object reaches the final position, and the dataset's
+name pairs are symmetric, so the per-example logit differences cancel in the mean.
+
+\begin{table}[H]
+  \centering
+  \caption{Circuit-level validation of the top-10 head sets. $F(C)$ is faithfulness;
+    the completeness gap is the mean $|F(C \setminus K) - F(M \setminus K)|$ over 12
+    random subsets $K \subseteq C$. Data: \texttt{data/ioi/faithfulness-*.json}.}
+  \label{tab:faithfulness}
+  \smallskip
+  \begin{tabular}{lccccc}
+    \toprule
+    Model & Clean LD & Floor LD & Circuit-only LD & $F(C)$ & Completeness gap \\
+    \midrule
+    Llama-3.2-3B & 5.668 & 0.000 & 3.759 & \textbf{0.663} & 0.276 \\
+    Pythia-1.4B  & 4.125 & 0.000 & 3.523 & \textbf{0.854} & 0.216 \\
+    \midrule
+    \multicolumn{6}{l}{\emph{Wang et al.\ (2022), GPT-2 Small, for reference:} $F \approx 0.87$} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{The circuits are faithful.} Ten heads recover 66\% (Llama) and 85\% (Pythia)
+of clean logit difference with the other 662 and 374 heads mean-ablated. Pythia's figure
+is within two points of Wang et al.'s GPT-2 Small result. On this dataset, the sparse
+bottleneck story holds.
+
+\paragraph{They are not complete.} Completeness asks whether removing a subset $K$ hurts
+the circuit and the full model comparably; a large gap means the full model has machinery
+outside $C$ that compensates when $K$ is gone. The mean gaps are 0.276 and 0.216, and for
+Llama the worst subset reaches 0.640: removing $\{$L13H14, L14H0, L24H15, L27H17$\}$
+leaves the circuit at $F = 0.245$ but the full model at 0.884. Ten heads is an aggressive
+cut, and the residue outside them is not inert.
+
+A separate joint-ablation run makes the same point from the other side. Ablating all ten
+circuit heads simultaneously and leaving everything else intact leaves $F = 0.213$ of
+clean performance. The circuit carries most of the behaviour, but a fifth of it survives
+the circuit's complete removal.
+
+\paragraph{Minimality reorders the circuit, and contradicts the marginal ranking.}
+Table~\ref{tab:minimality} reports $\Delta F = F(C) - F(C \setminus \{v\})$ for each head:
+what the circuit loses when that head alone is dropped from it.
+
+\begin{table}[H]
+  \centering
+  \caption{Minimality (single-template dataset). $\Delta F$ is the faithfulness lost when
+    a head is removed from the circuit; the marginal ablation drop from
+    Table~\ref{tab:llama-circuit} is repeated for comparison. The two orderings disagree.}
+  \label{tab:minimality}
+  \smallskip
+  \begin{tabular}{llcc|llcc}
+    \toprule
+    \multicolumn{4}{c|}{Llama-3.2-3B} & \multicolumn{4}{c}{Pythia-1.4B} \\
+    Rank & Head & $\Delta F$ & Marg.\ abl. & Rank & Head & $\Delta F$ & Marg.\ abl. \\
+    \midrule
+    1 & L24H15 & \textbf{0.325} & 0.276 & 1 & L10H7  & \textbf{0.388} & 0.893 \\
+    2 & L21H20 & 0.104 & 0.417 & 2 & L15H15 & 0.296 & 0.551 \\
+    3 & L27H17 & 0.100 & 0.373 & 3 & L10H0  & 0.104 & 0.128 \\
+    4 & L15H20 & 0.091 & \textbf{1.578} & 4 & L22H2  & 0.099 & 0.411 \\
+    5 & L17H17 & 0.075 & 0.929 & 5 & L12H15 & 0.076 & 0.124 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+For Llama the two rankings disagree sharply. L15H20 has by far the largest marginal
+ablation drop (1.578, 28\% of clean LD) and is the head we called a hard bottleneck in
+\S\ref{sec:llama-ioi}; within the circuit, removing it costs $\Delta F = 0.091$, less than
+a third of what removing L24H15 costs (0.325). The reconciliation is that marginal
+ablation measures a head against the \emph{full} model, where the other 671 heads cannot
+compensate for L15H20's loss, while $\Delta F$ measures it against the reduced circuit,
+where the remaining nine largely can. Both numbers are correct; they answer different
+questions, and only the second is about the circuit.
+
+A leave-one-in analysis sharpens this. Activating a single circuit head while ablating
+the other nine, L17H17 alone restores the most ($\Delta F = +0.173$), while L24H15 alone
+restores \emph{less than nothing} ($\Delta F = -0.038$)---the head whose removal hurts
+the circuit most cannot do anything on its own. Every dominant head in this circuit is
+dominant only in company.
+
+No head has $\Delta F \le 0$ under the removal test, so the circuits are minimal in the
+weak sense that no member is free. But the ordering by which a reader would identify
+``the important head'' depends entirely on which test is run, and the marginal test---the
+one the interpretability literature most often reports, and the one we reported in
+\S\ref{sec:llama-ioi}---is the one that answers the wrong question.
+
+\paragraph{Pythia's heads barely interact.} Path-patching all ten ordered edges among
+Pythia's five highest-scoring heads (same protocol as \S\ref{sec:path-results}, $n = 100$,
+$\mathrm{LD}_{\text{clean}} = 4.125$, $\mathrm{LD}_{\text{corrupt}} = -4.106$) gives a
+maximum edge score of 0.022 (L10H7~$\to$~L22H2), an order of magnitude below Llama's
+dominant L14H0~$\to$~L15H20 edge (0.165), with every remaining edge below 0.01. Pythia's
+top-10 recovers 85\% of clean performance while its members exchange almost nothing:
+functionally it is ten heads operating in parallel rather than a circuit with internal
+structure. Full edge table: \texttt{data/ioi/path-patching-pythia1b-real.json}.
+
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Results: Cross-Architecture and Cross-Task Generalization}
@@ -1135,6 +1270,99 @@ taxonomy that our data directly supports.
 these scores carry no confidence intervals---the path-patching run recorded per-edge
 means only. Pythia was not measured at all. We report the structure as a directional
 finding, not a validated circuit diagram.
+
+\subsection{Template Generalization: The Circuits Do Not Transfer}
+\label{sec:template}
+
+Every result to this point uses the single-template dataset of \S\ref{sec:dataset}: one
+sentence frame, one name ordering, 100 examples. Wang et al.\ (2022) deliberately use 15
+templates with balanced ABBA/BABA orderings, and we listed the single frame as our first
+limitation. This section measures what that limitation costs, and the answer is most of
+the paper's generality claim.
+
+We built a second dataset (\texttt{data/ioi/dataset-v2.json}) with 15 sentence frames
+spanning different verbs, objects and locations, name order balanced 105/95 between ABBA
+and BABA, 200 examples over 34 names filtered to be single-token under both tokenizers.
+Corruption swaps the subject and indirect-object roles as before. Both models still
+perform the task on it: clean logit difference is 5.521 for Llama and 3.888 for Pythia,
+against 5.668 and 4.125 on the single-template set. The behaviour transfers.
+
+The circuits do not.
+
+\begin{table}[H]
+  \centering
+  \caption{Circuit validation on both datasets, identical protocol and tokenization.
+    The circuits are the same top-10 head sets throughout; only the evaluation data
+    changes. Llama-3.1-8B is an independent replication on a third model.}
+  \label{tab:template}
+  \smallskip
+  \begin{tabular}{lccc}
+    \toprule
+    Model & $F(C)$, 1 template & $F(C)$, 15 templates & Completeness gap (1 $\to$ 15) \\
+    \midrule
+    Llama-3.2-3B & 0.663 & \textbf{0.228} & 0.276 $\to$ 0.606 \\
+    Pythia-1.4B  & 0.854 & \textbf{$-$0.028} & 0.216 $\to$ 0.789 \\
+    Llama-3.1-8B & --- & 0.265 & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Pythia's circuit recovers nothing.} At $F = -0.028$ the circuit-only model
+performs marginally \emph{below} the all-heads-ablated floor. The ten heads that recovered
+85\% of clean performance on one sentence frame recover none of it across fifteen, while
+the model itself still does the task at 94\% of its single-template logit difference.
+Llama's circuit retains a third of its faithfulness. An independent run on Llama-3.1-8B
+lands at 0.265, close to the 3B figure, so the effect is not specific to one model.
+
+\paragraph{The head rankings move too, and the ablation sweep is not confounded by
+tokenization.} Both sweeps used \texttt{add\_special\_tokens=True} throughout, so the
+comparison in Table~\ref{tab:rankmove} is clean.
+
+\begin{table}[H]
+  \centering
+  \caption{Stability of head rankings between the two datasets. Spearman $\rho$ is over
+    all (layer, head) pairs; retention counts how many of the original top-10 remain in
+    the multi-template top-10.}
+  \label{tab:rankmove}
+  \smallskip
+  \begin{tabular}{lccc}
+    \toprule
+    Model & Spearman $\rho$ (patching) & Top-10 retained & New head entering top-5 (ablation) \\
+    \midrule
+    Llama-3.2-3B & 0.577 & 9/10 & L1H15 (drop 0.60, rank 3) \\
+    Pythia-1.4B  & 0.380 & 5/10 & L1H6 (drop 2.55, \textbf{rank 1}) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Llama's circuit is moderately stable---nine of ten heads survive, and L15H20 remains
+rank~1 by ablation though its drop halves from 1.578 to 0.79. Pythia's is not: half its
+heads leave the top-10, and the head with the largest ablation drop on the diverse dataset
+is \textbf{L1H6}, which does not appear anywhere in the single-template top-10 and is
+therefore absent from every table in \S\ref{sec:pythia-ioi}. Its drop, 2.55, is larger
+than L10H7's 1.82.
+
+\paragraph{The work moves earlier.} The heads gaining most on the diverse dataset are
+early ones: L1H15 in Llama (rank 3 by ablation, previously outside the top-10), and in
+Pythia both L1H6 and L1H11---the latter being the head we singled out in
+\S\ref{sec:pythia-ioi} as an anomaly, whose drop rises from 0.33 to 0.84 and which enters
+the top-4 by patching. Late heads lose ground correspondingly.
+
+The natural reading is that on a single frame, heads at fixed positions late in the stack
+can key on token position rather than on the IOI computation, and score highly for doing
+so. Diversify the frame and that shortcut stops working, so attribution shifts toward
+early heads doing position-independent work. We offer this as the most economical
+explanation of the pattern, not as a demonstration: establishing it would require
+attention-pattern analysis per head across the two datasets, which we have not done.
+
+\paragraph{What this means for the paper's claims.} The bottleneck structure, the
+faithfulness figures, the depth clusters, and the minimality ordering in
+\S\ref{sec:faithfulness} are all properties of a circuit identified on one sentence frame,
+and at least the Pythia circuit does not survive contact with a second. We are not
+withdrawing those results---they are correctly measured and correctly reported for the
+data they were measured on---but their scope is narrower than the earlier framing of this
+paper implied, and single-template IOI should be read as a lower bound on circuit
+fragility rather than a characterisation of the task.
 
 \subsection{Cross-Task Transfer: Factual Association}
 \label{sec:cross-task}
@@ -1342,13 +1570,17 @@ additive (our Llama top-10 sum to 1.013), and faithfulness of individual heads d
 not imply faithfulness of the set on a different distribution. The v1$\to$v2 collapse
 is a direct consequence of the single-template design flagged above.
 
-\textbf{Single template, single name ordering.} All 100 IOI examples instantiate one
-sentence frame, ``When \{S\} and \{IO\} went to the store, \{S\} gave a bottle to'',
-over 20 names. Wang et al.\ use 15 templates and balance both name orderings (ABBA and
-BABA) precisely because a single frame confounds circuit structure with positional
-structure. Heads we identify as circuit-critical may be responding to a fixed token
-position rather than to the IOI computation. This limitation applies to every result
-in the paper and is the first thing a replication should change.
+\textbf{Circuit validation rests on two datasets.} Faithfulness, minimality and
+completeness are now measured (\S\ref{sec:faithfulness}) on both the single-template and
+15-template sets. Two points establish that the circuit is frame-dependent; they do not
+map how it varies with frame diversity, and we cannot say whether 15 templates approaches
+an asymptote or is merely a second sample.
+
+\textbf{The mechanism behind the template effect is unverified.} We attribute the shift
+toward early heads to late heads keying on token position when the frame is fixed. That
+is the most economical explanation of the pattern, but we have not tested it;
+attention-pattern analysis for the affected heads across both datasets would, and is not
+done here.
 
 \textbf{Selection and inference on the same data.} Heads were chosen by ranking 672
 (Llama) and 384 (Pythia) candidates, and their confidence intervals were then
@@ -1385,39 +1617,42 @@ Apple Silicon.
 
 \paragraph{Conclusion.}
 We set out to test whether the IOI circuit Wang et al.\ (2022) found in GPT-2 Small
-generalizes to modern architectures. The answer we can support is narrower than the
-one we initially drew.
+generalizes to modern architectures. The answer is narrower than we first drew, and the
+narrowing is the contribution.
 
-What holds: both Llama-3.2-3B and Pythia-1.4B solve IOI with a sparse, strongly
-bottlenecked circuit. A single head in each (L15H20, L10H7) accounts for 22--28\% of
-clean logit difference on its own, well above any single head's share of the
-distributed 26-component GPT-2 Small circuit. Critical heads in both models fall into
-three depth clusters broadly compatible with Wang et al.'s functional zones. Path
-patching in Llama shows L15H20 fed dominantly by L14H0, weakly connected forward, and
-receiving suppressive input paths---a shape consistent with direct output writing.
+\textbf{On a single sentence frame, both models solve IOI with a sparse circuit that
+validates as a set.} Ten heads recover 66\% (Llama) and 85\% (Pythia) of clean logit
+difference with everything else ablated---Pythia within two points of Wang et al.'s 0.87.
+Both circuits are bottlenecked, with one head carrying 22--28\% of clean logit difference
+under single-head ablation, and both occupy three depth clusters broadly compatible with
+Wang et al.'s functional zones. Path patching shows Llama's L15H20 fed dominantly by
+L14H0 and receiving suppressive input, while Pythia's ten heads exchange almost nothing.
 
-What does not hold: the quantitative depth-conservation claim. Matching head positions
-across the two models at $\pm$0.075 relative depth succeeds for 8 of 10 heads, but
-random head sets achieve 59--69\% under the same procedure, and the observed rate is
-not significant under either null we tested ($p = 0.098$, $p = 0.32$). The matching
-also pairs Llama's dominant head with Pythia's weakest, so it carries no functional
-information. We report this because ``80\% of positions conserved'' is a memorable
-number, and it should not be carried forward.
+\textbf{That circuit is a property of the frame, not of the task.} On 15 templates with
+balanced name ordering, faithfulness falls to 0.228 (Llama) and $-0.028$ (Pythia) while
+both models still perform IOI at over 90\% of their original logit difference.
+Llama-3.1-8B independently reproduces the collapse. Half of Pythia's circuit is replaced,
+and the top head on the diverse data appears nowhere in the single-template analysis. The
+attribution moves earlier in the stack, consistent with late heads on a fixed frame
+keying on position rather than on the computation.
 
-The largest gap revealed by the circuit-level evaluation is generalization: circuit
-faithfulness drops from 0.760 (Llama) and 0.854 (Pythia) on the original
-100-example dataset to 0.228 and $-0.028$ respectively on a held-out 200-example
-set. The circuits are real on the training distribution---joint ablation confirms
-they account for the bulk of IOI performance---but they do not describe the models'
-general IOI behaviour. Combined with a single-template dataset, that leaves the
-central question---whether these are the same circuit as Wang et al.'s or merely
-circuits in similar places---open.
+\textbf{Two claims we withdraw.} The quantitative depth-conservation result---8 of 10
+positions matching within $\pm$0.075---does not exceed a permutation null ($p = 0.098$
+uniform, $p = 0.32$ informed), and pairs Llama's dominant head with Pythia's weakest. And
+the framing of L15H20 as the circuit's critical component is an artifact of the marginal
+test: within the circuit, removing L24H15 costs three times as much, and L15H20 alone
+restores little.
+
+The practical lesson is that a faithfulness number is not a generality number. Ours were
+0.66 and 0.85, comparable to the literature's, on data that turned out to support almost
+none of the generalization we wanted to claim. Circuit work reporting faithfulness on a
+single template---still common---should report it on a second one before claiming the
+circuit is a property of the task.
 
 All experiments ran on Apple Silicon using MLX, and the SwiftSci Interp harness is
 released alongside this paper to make circuit analysis accessible without GPU cluster
 infrastructure. That part of the contribution we regard as demonstrated.
 
-% ─────────────────────────────────────────────────────────────────────────────
 \section*{Acknowledgments}
 
 The author thanks the SwiftSci community for support with the MLX activation-patching
