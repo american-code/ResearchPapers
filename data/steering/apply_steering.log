@@ -1,0 +1,92 @@
+Loading mlx-community/Llama-3.2-3B-bf16...
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 1103.76it/s]
+Loaded in 9.7s
+Concepts:        ['positive_sentiment', 'negative_sentiment', 'french_language', 'python_coding', 'refusal_behavior']
+Steering layers: [8, 16, 24]
+Alphas:          [-2, -1, -0.5, 0, 0.5, 1, 2]
+Per-layer isolation: ONE layer patched at a time
+
+=== positive_sentiment  layer=8 ===
+  alpha=-2.0 .................... [20/2100 prompts, ~10443s left]
+  alpha=-1.0 .................... [40/2100 prompts, ~10323s left]
+  alpha=-0.5 .................... [60/2100 prompts, ~10172s left]
+  alpha=+0.0 .................... [80/2100 prompts, ~10416s left]
+  alpha=+0.5 .................... [100/2100 prompts, ~10169s left]
+  alpha=+1.0 .................... [120/2100 prompts, ~10076s left]
+  alpha=+2.0 .................... [140/2100 prompts, ~10026s left]
+  [checkpoint saved]
+
+=== positive_sentiment  layer=16 ===
+  alpha=-2.0 .................... [160/2100 prompts, ~9894s left]
+  alpha=-1.0 .................... [180/2100 prompts, ~9749s left]
+  alpha=-0.5 .................... [200/2100 prompts, ~9616s left]
+  alpha=+0.0 .................... [220/2100 prompts, ~9463s left]
+  alpha=+0.5 .................... [240/2100 prompts, ~9339s left]
+  alpha=+1.0 .................... [260/2100 prompts, ~9235s left]
+  alpha=+2.0 .................... [280/2100 prompts, ~9077s left]
+  [checkpoint saved]
+
+=== positive_sentiment  layer=24 ===
+  alpha=-2.0 .................... [300/2100 prompts, ~8965s left]
+  alpha=-1.0 .................... [320/2100 prompts, ~8865s left]
+  alpha=-0.5 .................... [340/2100 prompts, ~8744s left]
+  alpha=+0.0 .................... [360/2100 prompts, ~8646s left]
+  alpha=+0.5 .................... [380/2100 prompts, ~8518s left]
+  alpha=+1.0 .................... [400/2100 prompts, ~8407s left]
+  alpha=+2.0 .................... [420/2100 prompts, ~8312s left]
+  [checkpoint saved]
+
+=== negative_sentiment  layer=8 ===
+  alpha=-2.0 .................... [440/2100 prompts, ~8364s left]
+  alpha=-1.0 .................... [460/2100 prompts, ~8327s left]
+  alpha=-0.5 .................... [480/2100 prompts, ~8297s left]
+  alpha=+0.0 .................... [500/2100 prompts, ~8223s left]
+  alpha=+0.5 .................... [520/2100 prompts, ~8183s left]
+  alpha=+1.0 .................... [540/2100 prompts, ~8084s left]
+  alpha=+2.0 .................... [560/2100 prompts, ~8076s left]
+  [checkpoint saved]
+
+=== negative_sentiment  layer=16 ===
+  alpha=-2.0 .................... [580/2100 prompts, ~8133s left]
+  alpha=-1.0 .................... [600/2100 prompts, ~8047s left]
+  alpha=-0.5 .................... [620/2100 prompts, ~7928s left]
+  alpha=+0.0 .................... [640/2100 prompts, ~7804s left]
+  alpha=+0.5 .................... [660/2100 prompts, ~7689s left]
+  alpha=+1.0 .................... [680/2100 prompts, ~7586s left]
+  alpha=+2.0 .................... [700/2100 prompts, ~7466s left]
+  [checkpoint saved]
+
+=== negative_sentiment  layer=24 ===
+  alpha=-2.0 .................... [720/2100 prompts, ~7353s left]
+  alpha=-1.0 .................... [740/2100 prompts, ~7235s left]
+  alpha=-0.5 .................... [760/2100 prompts, ~7121s left]
+  alpha=+0.0 .................... [780/2100 prompts, ~6999s left]
+  alpha=+0.5 .................... [800/2100 prompts, ~6896s left]
+  alpha=+1.0 .................... [820/2100 prompts, ~6774s left]
+  alpha=+2.0 .................... [840/2100 prompts, ~6648s left]
+  [checkpoint saved]
+
+=== french_language  layer=8 ===
+  alpha=-2.0 .................... [860/2100 prompts, ~6503s left]
+  alpha=-1.0 .................... [880/2100 prompts, ~6490s left]
+  alpha=-0.5 .................... [900/2100 prompts, ~6428s left]
+  alpha=+0.0 .................... [920/2100 prompts, ~6330s left]
+  alpha=+0.5 .................... [940/2100 prompts, ~6223s left]
+  alpha=+1.0 .................... [960/2100 prompts, ~6219s left]
+  alpha=+2.0 .................... [980/2100 prompts, ~6113s left]
+  [checkpoint saved]
+
+=== french_language  layer=16 ===
+  alpha=-2.0 .................... [1000/2100 prompts, ~6025s left]
+  alpha=-1.0 .................... [1020/2100 prompts, ~5919s left]
+  alpha=-0.5 .................... [1040/2100 prompts, ~5810s left]
+  alpha=+0.0 .................... [1060/2100 prompts, ~5712s left]
+  alpha=+0.5 .................... [1080/2100 prompts, ~5600s left]
+  alpha=+1.0 .................... [1100/2100 prompts, ~5487s left]
+  alpha=+2.0 .................... [1120/2100 prompts, ~5387s left]
+  [checkpoint saved]
+
+=== french_language  layer=24 ===
+  alpha=-2.0 .................... [1140/2100 prompts, ~5296s left]
+  alpha=-1.0 .................... [1160/2100 prompts, ~5193s left]
+  alpha=-0.5 ......

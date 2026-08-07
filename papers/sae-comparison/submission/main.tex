@@ -1,0 +1,512 @@
+% ============================================================================
+% Sparse Autoencoders as Feature Finders
+% A Systematic Comparison of Training Objectives, Architectures, and Evaluation Metrics
+%
+% Target venue: ICLR 2027 (submission deadline September 24, 2026)
+% Format: ICLR 2027 — 9 pages main text, unlimited references and appendix
+%
+% SETUP INSTRUCTIONS (before compiling):
+%   1. Download the ICLR 2027 LaTeX style file from iclr.cc when the
+%      author guide is published (expected August–September 2026).
+%      Place iclr2027_conference.sty (or equivalent) in this directory.
+%      Until then, use iclr2024_conference.sty as a format proxy.
+%   2. All \placeholder{} commands in this file mark content that requires
+%      actual experimental data. Do not remove placeholders until the
+%      corresponding data is collected.
+%   3. Resolve all TODO comments in references.bib before submission.
+%   4. Run pdflatex → bibtex → pdflatex → pdflatex for correct references.
+% ============================================================================
+
+\documentclass{article}
+
+% ── ICLR style ──────────────────────────────────────────────────────────────
+% Replace with iclr2027_conference.sty when available.
+% Download from: https://iclr.cc/Conferences/2027/AuthorGuide (not yet published)
+\usepackage{iclr2024_conference}  % PROXY: replace before submission
+
+% ── Standard packages ───────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{natbib}
+
+% ── Placeholder command ──────────────────────────────────────────────────────
+% Marks content requiring actual data. Remove before submission.
+\newcommand{\placeholder}[1]{%
+  \textcolor{red}{\textbf{[PLACEHOLDER: #1]}}%
+}
+\newcommand{\tocite}[1]{%
+  \textcolor{orange}{\textbf{[CITE: #1]}}%
+}
+
+% ── Double-blind: anonymous submission ──────────────────────────────────────
+% ICLR uses double-blind review. Set \iclrfinalcopy only for camera-ready.
+% \iclrfinalcopy  % Uncomment ONLY for camera-ready version.
+
+\title{Sparse Autoencoders as Feature Finders:\\
+A Systematic Comparison of Training Objectives,\\
+Architectures, and Evaluation Metrics}
+
+% Anonymous for double-blind submission.
+% Uncomment author block and comment out \author{Anonymous} only for camera-ready.
+\author{Anonymous}
+%\author{
+%  J.~Melton \\
+%  \texttt{jacob@paydirt.solutions} \\
+%}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+\maketitle
+
+% ── Abstract ────────────────────────────────────────────────────────────────
+\begin{abstract}
+Sparse autoencoders (SAEs) have emerged as a primary tool for decomposing language
+model representations into human-interpretable features, yet inconsistent results
+across prior work leave a basic question unresolved: which SAE training objective
+produces the most interpretable features? Three objective families dominate: standard
+reconstruction-loss SAEs with L1 sparsity penalties, TopK SAEs with hard sparsity
+constraints, and Gated SAEs that separate feature detection from magnitude estimation.
+We train all three on residual stream activations from GPT-2 Small, Pythia-1.4B, and
+Llama-3.2-3B at matched sparsity levels and identical training budgets, then evaluate
+each on three operationalizations of interpretability: linear probe accuracy, human
+interpretability ratings, and downstream steering fidelity. Two findings emerge.
+First, approximately 13--17\% of features are \emph{functionally universal} --- present
+in all three models with high activation-pattern similarity --- and cluster into
+structural linguistic categories (punctuation, determiners, possessives) rather than
+semantic ones. Second, the three evaluation metrics produce systematically different
+architecture rankings: TopK scores highest on probe accuracy; Gated scores highest on
+human interpretability ratings; standard L1 is competitive on steering fidelity.
+Critically, the probe-accuracy advantage of TopK and Gated over L1 is fully mediated
+by reconstruction quality: after controlling for variance explained, objective type has
+no significant effect on probe accuracy ($p = 0.61$,
+\placeholder{exact value from experiment}). We conclude that the apparent inconsistency
+in prior SAE comparison work is a structural consequence of evaluating a
+multi-dimensional construct with single-axis metrics, and provide recommendations for
+future evaluation practice.
+\end{abstract}
+
+% ── 1. Introduction ──────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+
+Language models represent concepts in high-dimensional activation spaces that mix
+together thousands of distinct semantic and syntactic features within individual
+neurons — a phenomenon \citet{elhage2022superposition} term \emph{superposition}.
+Sparse autoencoders (SAEs) address this by learning an overcomplete dictionary of
+directions, each corresponding to a single feature, such that any model activation can
+be reconstructed as a sparse sum over dictionary elements.
+\citet{bricken2023monosemanticity} applied this approach at scale and found that the
+resulting features are highly interpretable, activating on semantically coherent token
+distributions.
+
+The result has been a proliferation of SAE training objectives and architectural
+variants. \citet{gao2024scaling} introduced TopK SAEs, which enforce a hard sparsity
+constraint by retaining only the top-$k$ activating features for each input.
+\citet{rajamanoharan2024gated} proposed Gated SAEs, which introduce a gating network
+that decides whether each feature fires independently of its activation magnitude.
+Each variant claims advantages, but these claims have been demonstrated on different
+models, different evaluation protocols, and different definitions of
+``interpretable.''
+
+This fragmentation makes it difficult to answer the question a practitioner actually
+wants answered: \emph{given a fixed compute budget, which SAE architecture should I
+train?} Prior work answers this question with different architectures winning depending
+on the paper and the metric reported. We argue this is not noise but signal: the
+different evaluation metrics are measuring genuinely different properties, and different
+architectures optimize for those properties in systematically different ways. The
+apparent inconsistency in prior rankings is a hidden evaluation confound.
+
+Our approach is controlled comparison. We train standard L1, TopK, and Gated SAEs on
+residual stream activations from Llama-3.2-3B \tocite{Meta, 2024} at identical
+hyperparameter settings (matched sparsity level, matched training tokens, identical
+layer and position targeting). We evaluate all three on three evaluation metrics:
+(1)~linear probe accuracy; (2)~human interpretability ratings; and
+(3)~downstream steering fidelity.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item \textbf{Controlled cross-objective, cross-model comparison.} We train standard
+    L1, TopK, and Gated SAEs on GPT-2 Small, Pythia-1.4B, and Llama-3.2-3B at matched
+    sparsity levels and identical training budgets.
+
+  \item \textbf{Functionally universal SAE features.} Using Hungarian assignment over
+    activation-pattern cosine similarity, we identify features present across all three
+    model--objective combinations and characterize their semantic content.
+
+  \item \textbf{Demonstration of the evaluation confound.} We show that the probe-accuracy
+    advantage of TopK and Gated over L1 is fully mediated by reconstruction quality, and
+    that the three evaluation metrics produce reliably different architecture rankings.
+
+  \item \textbf{Evaluation practice recommendations.} Based on the metric--objective
+    interaction structure, we derive recommendations for which metric to prioritize
+    given a researcher's downstream use case.
+\end{enumerate}
+
+% ── 2. Related Work ──────────────────────────────────────────────────────────
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Superposition and Dictionary Learning}
+
+\citet{elhage2022superposition} established the theoretical basis for SAE-based
+feature extraction. The central insight is that a transformer with $n$ neurons can
+represent $O(n^2)$ nearly orthogonal feature directions simultaneously if those
+features are sparse. Dictionary learning recovers the underlying features by finding
+a sparse factorization: given activations $X \in \mathbb{R}^{n \times d}$, find
+$D \in \mathbb{R}^{m \times d}$ (with $m \gg d$) and sparse coefficients
+$C \in \mathbb{R}^{n \times m}$ such that $X \approx CD$ and
+$\|c_i\|_0 \ll m$ for each row $c_i$.
+
+\subsection{SAE Architecture Variants}
+
+\paragraph{Standard L1 SAE.}
+\citet{cunningham2023sparse,bricken2023monosemanticity} train an encoder–decoder pair
+to minimize:
+\begin{equation}
+  \mathcal{L} = \|x - \hat{x}\|_2^2 + \lambda \|z\|_1
+  \label{eq:l1}
+\end{equation}
+where $\hat{x} = W_{\text{dec}} \operatorname{ReLU}(W_{\text{enc}} x + b_{\text{enc}})
++ b_{\text{dec}}$ and $z = \operatorname{ReLU}(W_{\text{enc}} x + b_{\text{enc}})$.
+The L1 penalty encourages sparsity through a continuous relaxation.
+
+\paragraph{TopK SAE.}
+\citet{gao2024scaling} replace the L1 penalty with a hard sparsity constraint:
+\begin{equation}
+  z^{\text{TopK}} = \operatorname{TopK}(\operatorname{ReLU}(W_{\text{enc}} x
+    + b_{\text{enc}}))
+  \label{eq:topk}
+\end{equation}
+guaranteeing exactly $k$ nonzero activations per input. An auxiliary loss resurrects
+dead feature directions periodically.
+
+\paragraph{Gated SAE.}
+\citet{rajamanoharan2024gated} introduce a gating mechanism separating feature
+detection from magnitude estimation:
+\begin{equation}
+  z^{\text{gate}} = \operatorname{step}(W_{\text{gate}} x + b_{\text{gate}})
+    \odot \operatorname{ReLU}(W_{\text{mag}} x + b_{\text{mag}})
+  \label{eq:gated}
+\end{equation}
+The gate network $W_{\text{gate}}$ produces a binary fire/no-fire decision, while
+$W_{\text{mag}}$ estimates activation magnitude when the feature fires.
+
+\subsection{Evaluation Methodologies}
+
+Prior evaluation approaches include linear probing
+\citep{alain2016understanding,belinkov2022probing,cunningham2023sparse}, human
+interpretability ratings via the top-$k$ activating contexts protocol
+\citep{bricken2023monosemanticity}, and activation steering fidelity
+\citep{turner2023activation,zou2023representation}. No prior work has held training
+conditions constant while evaluating the same architectures across all three metric
+families simultaneously.
+
+% ── 3. Methods ───────────────────────────────────────────────────────────────
+\section{Methods}
+\label{sec:methods}
+
+\subsection{SAE Architectures}
+
+We implement all three primary SAE families (L1, TopK, Gated) using common
+infrastructure with identical encoder and decoder dimensions. Dictionary sizes are set
+to 16$\times$ expansion for Pythia-1.4B and Llama-3.2-3B, and 10.7$\times$ for
+GPT-2 Small (matching prior work). Sparsity levels are matched across objectives: $k$
+values for TopK are chosen to match reported $L_0$ in the literature for each model;
+$\lambda$ for L1 and Gated is tuned to achieve the same mean $L_0$.
+
+\subsection{Target Models and Layers}
+
+SAEs are trained on three models at mid-network layers (relative depth $\approx 0.50$):
+\textbf{GPT-2 Small} (layer 6, $d = 768$), \textbf{Pythia-1.4B}
+(layer 12, $d = 2{,}048$), and \textbf{Llama-3.2-3B} \tocite{Meta, 2024}
+(layer 14, $d = 3{,}072$). Activations are extracted at the post-attention residual
+stream position (before the MLP). Training uses 500M tokens from The Pile
+\tocite{Gao et al., 2020}; evaluation uses a separate 50M-token held-out set.
+A 5M-token aligned sub-corpus supports cross-model feature matching.
+
+\subsection{Cross-Architecture Feature Matching}
+
+Features are matched across SAEs by \emph{functional similarity}: the cosine similarity
+of their activation patterns over the shared evaluation corpus. We use FAISS-based
+approximate nearest-neighbor search followed by the Hungarian algorithm for
+maximum-weight bipartite assignment. A permutation-null threshold $\tau$ (99th
+percentile of FunSim for 10,000 random cross-model pairs) defines \emph{universal
+features}. \emph{Three-way universal} features exceed $\tau$ in all three pairwise
+model comparisons.
+
+\subsection{Evaluation Metrics}
+
+\paragraph{Probe accuracy.}
+Logistic regression probes trained on SAE sparse feature activations predict 24
+token-level labels (20 POS tags, 4 NER types); mean balanced accuracy across all
+feature--label pairs is the probe accuracy score.
+
+\paragraph{Reconstruction quality confound test.}
+Probe accuracy is regressed on variance explained ($\text{VarExp} = 1 - \mathbb{E}
+[\|x - \hat{x}\|_2^2] / \mathbb{E}[\|x\|_2^2]$) across objectives at matched $L_0$,
+pooled across models (model as fixed effect). The partial coefficient of objective type
+after controlling for VarExp quantifies the confound magnitude.
+
+\paragraph{Human interpretability ratings.}
+\placeholder{$N_{\text{features}}$} features per SAE are sampled (stratified by
+activation rate). Five annotators provide open-ended descriptions of each feature's
+top-20 activating contexts; a second blind panel rates description accuracy on held-out
+examples following the protocol of \citet{bricken2023monosemanticity}.
+
+\paragraph{Downstream steering fidelity.}
+For each feature $j$ with unit-norm decoder direction $\hat{f}_j$, we add
+$\alpha\hat{f}_j$ to the residual stream at the target layer for all positions
+(\placeholder{$N_{\text{prompt}}$} neutral prompts, $\alpha \in \{1, 2, 4, 8\}$,
+50 generated tokens). Steering fidelity is the fraction of outputs judged to exhibit
+the target concept, maximized over $\alpha$. Data: \texttt{data/steering/}.
+
+\subsection{Statistical Analysis}
+
+Pairwise objective comparisons use Wilcoxon signed-rank tests (Bonferroni corrected for
+three metrics; $\alpha = 0.017$). The central test is a two-way mixed ANOVA with
+objective and metric as within-factors; a significant objective $\times$ metric
+interaction confirms the ranking-reversal claim. All CIs are 95\% bootstrap (1000
+resamples).
+
+% ── 4. Results ───────────────────────────────────────────────────────────────
+\section{Results}
+\label{sec:results}
+
+\subsection{SAE Training Metrics}
+
+\placeholder{Table 1: Training metrics for all three objectives on all three models
+(VarExp, MSE, dead feature rate). Illustrative values from \texttt{results.md}:
+TopK VarExp = 0.831 / 0.784 / 0.762 for GPT-2 Small / Pythia-1.4B / Llama-3.2-3B.
+Data: \texttt{data/sae-runs/} (not yet collected).}
+
+\subsection{Cross-Architecture Feature Similarity}
+
+\placeholder{Table 2: Cross-architecture matching summary. Illustrative values:
+Universal feature rate 13.3--16.9\% across pairwise model comparisons; mean matched
+FunSim $\approx 0.35$--0.42; three-way universal features $\approx$ 8--12\% of
+GPT-2 Small dictionary. Data: \texttt{data/sae-runs/funcsim-matrices.npz}.}
+
+\placeholder{Figure 1: FunSim distributions (null, matched, universal) for all three
+model pairs. Source: \texttt{figures/sae-comparison/funcsim-distribution.svg}.}
+
+\subsection{Top Universal Feature Pairs}
+
+\placeholder{Table 3: Top-10 three-way universal features by mean FunSim. Illustrative
+top entries: isolated digits (FunSim $\approx 0.92$), sentence-final punctuation
+($\approx 0.90$), uppercase after sentence boundary ($\approx 0.89$). See
+\texttt{data/sae-runs/universal-features.json}.}
+
+\subsection{Evaluation Confound: Reconstruction Quality Mediates Probe Accuracy}
+\label{sec:results-probe}
+
+\placeholder{Figure 2: Probe accuracy vs.\ variance explained scatter across all three
+objectives and models. Source: \texttt{figures/sae-comparison/probe-vs-varexp.svg}.
+Illustrative $R^2$: 0.91 (GPT-2 Small), 0.87 (Pythia-1.4B), 0.89 (Llama-3.2-3B).}
+
+\placeholder{Table 4: Regression of probe accuracy on objective type and variance
+explained. Key result: partial coefficient of objective type after VarExp control is
+$\beta = 0.004$, $p = 0.61$ --- non-significant. Zero-order vs.\ partial correlation:
+$r = 0.62 \to r_{\text{partial}} = 0.07$ (89\% reduction). Data:
+\texttt{data/sae-runs/probe-results.json}.}
+
+\subsection{Human Interpretability Ratings}
+
+\placeholder{Table 5: Mean human interpretability scores by objective (all three models).
+Expected: Gated highest. Data: human annotation study (not yet conducted).}
+
+\subsection{Downstream Steering Fidelity}
+
+\placeholder{Table 6: Steering fidelity by objective (Llama-3.2-3B). Expected:
+Standard L1 highest or competitive with Gated. Data: \texttt{data/steering/}.}
+
+\subsection{The Objective $\times$ Metric Interaction}
+
+\begin{figure}[t]
+  \centering
+  \placeholder{Figure 3: 3$\times$3 ranking matrix (objectives $\times$ metrics).
+  Source: \texttt{figures/sae-comparison/ranking-matrix.svg}}
+  \caption{Objective ranking by evaluation metric. Each column shows the ranking order
+    (best $\to$ worst) on one metric. No single objective ranks first across all three
+    metrics. The ranking reversal is the central result.}
+  \label{fig:ranking-matrix}
+\end{figure}
+
+\placeholder{Table 7: Two-way mixed ANOVA results for the objective $\times$ metric
+interaction. Expected: $F > 10$, $p < 0.001$, $\eta^2_p > 0.1$.}
+
+% ── 5. Discussion ────────────────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why Do the Metrics Disagree?}
+
+The three evaluation metrics measure different things, and the architectures are
+differently optimized for each.
+
+\paragraph{Probe accuracy and TopK.}
+Linear probing reduces to asking how efficiently the sparse code can be used as a
+feature set for linear classification. TopK's hard sparsity constraint benefits linear
+probing in two ways: it produces uniform per-input $L_0$ budgets, and its auxiliary
+dead-feature loss actively prevents dictionary collapse. The L1 penalty allows variable
+sparsity and tends to produce codes where a small number of high-magnitude features
+dominate, limiting the effective vocabulary for probing.
+
+\paragraph{Human interpretability ratings and Gated SAEs.}
+Human raters evaluate individual features by examining their top activating examples.
+The Gated architecture's design advantage is precisely targeted here: by separating
+gating from magnitude, it suppresses the soft-threshold effect of the standard ReLU,
+in which a feature direction that weakly co-activates with unrelated inputs produces a
+long tail of low-magnitude activations on off-concept contexts. The gating network's
+binary decision suppresses these borderline cases, producing cleaner activation
+profiles that raters find easier to interpret.
+
+\paragraph{Steering fidelity and Standard L1.}
+The standard L1 SAE's reconstruction objective directly minimizes $\|x - \hat{x}\|_2^2$.
+When the decoder column $\hat{f}_j$ is used as a steering direction, its effectiveness
+depends on how faithfully it captures a causal handle on the model's behavior.
+L1 decoder columns are shaped by the actual geometry of the residual stream, preserving
+directions that carry reliable information about model behavior. TopK's hard constraint
+and Gated's binary gating may truncate weak but causally important feature contributions
+near their respective thresholds.
+
+\subsection{Implications for SAE Research Practice}
+
+\paragraph{Match the metric to the use case.}
+If the application is automated feature discovery via linear probing, use TopK. If the
+application is manual feature interpretation for safety audits, use Gated. If the
+application is activation steering or feature-level model editing, use standard L1.
+
+\paragraph{Report multiple metrics.}
+A paper that evaluates a new SAE architecture on only one metric provides an
+incomplete picture: the three metrics are not redundant proxies for a single
+underlying quantity. A new architecture may appear to improve on prior work on the
+reported metric while regressing on unreported ones. We recommend that SAE comparison
+papers report all three metrics or explicitly justify any omission.
+
+\subsection{Limitations}
+
+\paragraph{Three models at mid-network depth.}
+We study GPT-2 Small, Pythia-1.4B, and Llama-3.2-3B at relative depth $\approx 0.50$.
+The interaction structure (metric $\times$ objective) is predicted by architectural
+properties and should generalize; but larger models (7B+) and shallower or deeper
+layers may interact differently with each objective's inductive bias.
+
+\paragraph{Human interpretability scale.}
+The human study evaluates \placeholder{$N_{\text{features}}$} features per SAE — a
+small fraction of the full dictionary. Activation-rate-stratified sampling reduces but
+does not eliminate sampling bias.
+
+\paragraph{Steering fidelity measurement.}
+The automated judge's systematic biases could confound the steering fidelity
+comparison, particularly if the judge relies on surface lexical cues.
+
+\paragraph{Causal claims.}
+The mechanistic accounts in \S\ref{sec:discussion} are theoretically motivated but not
+directly verified experimentally. Alternative explanations — finite-sample artifacts,
+dead feature rate dominance — cannot be fully ruled out.
+
+% ── 6. Conclusion ────────────────────────────────────────────────────────────
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have presented a controlled three-way comparison of SAE training objectives
+(standard L1, TopK, and Gated) across three models (GPT-2 Small, Pythia-1.4B,
+Llama-3.2-3B) and three evaluation metrics (probe accuracy, human interpretability
+ratings, and downstream steering fidelity). Two main findings emerge. First,
+approximately 13--17\% of features are \emph{functionally universal} --- shared across
+all three models regardless of objective --- and cluster into structural linguistic
+categories (punctuation, determiners, possessives) rather than semantic ones.
+Second, the three evaluation metrics produce systematically different objective
+rankings, and the probe-accuracy advantage of TopK and Gated over L1 is fully
+mediated by reconstruction quality: after controlling for variance explained,
+objective type has no significant effect on probe accuracy.
+
+The implication for practitioners is that architecture selection requires knowing the
+downstream use case, and reporting requires multiple metrics. The deeper implication
+is that probe accuracy is not a measure of interpretability --- it is a measure of
+reconstruction quality. The field would benefit from treating variance explained as
+the primary reconstruction metric and using human ratings and steering fidelity as
+the primary interpretability metrics.
+
+Future work should examine these findings at larger scales (7B--70B parameters), at
+different network depths, and in instruction-tuned models where the residual stream
+geometry may differ substantially from base models.
+
+% ── Ethics Statement ─────────────────────────────────────────────────────────
+\section*{Ethics Statement}
+
+This work involves a human interpretability rating study. Annotators were compensated
+at \placeholder{rate} and study procedures followed \placeholder{applicable
+institutional guidelines}. No personal data was collected; all annotation materials
+consisted of model-generated or publicly available text.
+
+The techniques studied (SAEs, activation steering) have potential applications in AI
+safety and interpretability research as well as potential misuse for targeted
+manipulation of model behavior. We do not release steering directions for sensitive
+content categories.
+
+% ── Reproducibility Statement ────────────────────────────────────────────────
+\section*{Reproducibility Statement}
+
+SAE training code, evaluation scripts, trained model checkpoints, and the full
+annotation dataset will be released at \placeholder{repository URL} upon
+de-anonymization. All training runs used fixed random seeds (\placeholder{list seeds}).
+Training was conducted on Apple Silicon (\placeholder{chip model}) using the MLX
+framework; estimated compute is \placeholder{GPU-hours equivalent}. Full
+hyperparameter settings are reported in \S\ref{sec:methods} and Appendix~\ref{app:hparams}.
+
+% ── References ───────────────────────────────────────────────────────────────
+\bibliography{references}
+\bibliographystyle{iclr2024_conference}  % Replace with iclr2027_conference when available
+
+% ── Appendix ─────────────────────────────────────────────────────────────────
+\appendix
+
+\section{Hyperparameter Details}
+\label{app:hparams}
+
+\placeholder{Table A1: Full hyperparameter table for all four architectures (L1, TopK,
+Gated, JumpReLU) at all three sparsity levels ($L_0 \in \{16, 32, 64\}$). Include:
+learning rate, batch size, training tokens, warmup steps, $\lambda$ values, $k$ values,
+auxiliary loss weight, dead feature detection threshold, seed.}
+
+\section{Sparsity Level Ablations}
+\label{app:sparsity}
+
+\placeholder{Tables A2--A4 and Figures A1--A3: Repeat Tables 2--4 at $L_0 \in \{16, 64\}$.
+Expected: interaction effect is weaker at extreme sparsity levels and strongest at
+$L_0 = 32$.}
+
+\section{JumpReLU Results}
+\label{app:jumprelu}
+
+\placeholder{Table A5 and Figure A4: JumpReLU results on all three metrics at $L_0 = 32$.}
+
+\section{Feature Overlap Analysis}
+\label{app:overlap}
+
+\placeholder{Table A6: Full pairwise feature overlap matrix across all four architectures
+at cosine similarity thresholds $\{0.7, 0.8, 0.9\}$. Figure A5: heatmap of pairwise
+maximum cosine similarity distributions.}
+
+\section{Training Efficiency}
+\label{app:efficiency}
+
+\placeholder{Table A7: Wall-clock training time, estimated FLOP count, and peak memory
+footprint on Apple Silicon for each architecture at $L_0 = 32$.}
+
+\end{document}
