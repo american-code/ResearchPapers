@@ -1,0 +1,110 @@
+{
+ "qwen1.5b": {
+  "bf16": {
+   "he": 0.6707,
+   "he_plus": 0.622,
+   "mbpp": 0.7037,
+   "mbpp_plus": 0.6243,
+   "tps": 89.9,
+   "realtasks": "2/26"
+  },
+  "4bit-rtn": {
+   "he": 0.6159,
+   "he_plus": 0.5793,
+   "mbpp": 0.6799,
+   "mbpp_plus": 0.5899,
+   "tps": 161.9,
+   "realtasks": "3/26"
+  },
+  "4bit-community": {
+   "he": 0.6463,
+   "he_plus": 0.6037,
+   "mbpp": 0.6905,
+   "mbpp_plus": 0.6085,
+   "tps": 198.7,
+   "realtasks": null
+  }
+ },
+ "qwen3b": {
+  "bf16": {
+   "he": 0.8415,
+   "he_plus": 0.7927,
+   "mbpp": 0.7725,
+   "mbpp_plus": 0.6534,
+   "tps": 47.7,
+   "realtasks": "5/26"
+  },
+  "4bit-rtn": {
+   "he": 0.811,
+   "he_plus": 0.7683,
+   "mbpp": 0.7275,
+   "mbpp_plus": 0.619,
+   "tps": 119.8,
+   "realtasks": "4/26"
+  }
+ },
+ "phi4mini": {
+  "bf16": {
+   "he": 0.6646,
+   "he_plus": 0.622,
+   "mbpp": 0.6455,
+   "mbpp_plus": 0.5635,
+   "tps": 39.2,
+   "realtasks": "7/26"
+  },
+  "4bit-rtn": {
+   "he": null,
+   "he_plus": null,
+   "mbpp": null,
+   "mbpp_plus": null,
+   "tps": null,
+   "realtasks": null
+  }
+ },
+ "qwen7b": {
+  "bf16": {
+   "he": 0.8963,
+   "he_plus": 0.8537,
+   "mbpp": 0.8492,
+   "mbpp_plus": 0.7407,
+   "tps": 22.8,
+   "realtasks": "11/26"
+  },
+  "4bit-rtn": {
+   "he": null,
+   "he_plus": null,
+   "mbpp": null,
+   "mbpp_plus": null,
+   "tps": null,
+   "realtasks": null
+  }
+ },
+ "granite8b": {
+  "bf16": {
+   "he": 0.5915,
+   "he_plus": 0.5366,
+   "mbpp": 0.672,
+   "mbpp_plus": 0.5688,
+   "tps": 19.6,
+   "realtasks": "6/26"
+  },
+  "4bit-rtn": {
+   "he": null,
+   "he_plus": null,
+   "mbpp": null,
+   "mbpp_plus": null,
+   "tps": null,
+   "realtasks": null
+  }
+ },
+ "deepseek16b": {
+  "4bit-rtn": {
+   "he": 0.7622,
+   "he_plus": 0.7134,
+   "mbpp": 0.8254,
+   "mbpp_plus": 0.6984,
+   "tps": 80.4,
+   "realtasks": "7/26"
+  }
+ }
+}
