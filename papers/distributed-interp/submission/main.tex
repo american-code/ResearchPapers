@@ -584,7 +584,7 @@ Fingerprints were extracted for all three 16,384-feature SAEs over the shared 50
 
 We evaluated a feature-based safety classifier built on the Llama-3.2-3B SAE (layer~14, dict\_size~$= 16{,}384$, $k~= 128$, trained to full specification: 50,000~steps). Features were selected by \emph{differential frequency}: SAE activation rates on a harm corpus (PKU-SafeRLHF prompt+response pairs, 1,500 examples; do-not-answer, 939 examples; toxic-chat, 384 examples) were compared against a WikiText-103 baseline, and features with the highest harm-corpus lift were labelled potentially-harmful. The classifier aggregates the selected features' ReLU pre-activations (max over tokens, summed across features) into a scalar harm score.
 
-\paragraph{Feature selection: naive vs.\ corrected.}
+\paragraph{Feature selection: naive vs.\ corrected.} Table~\ref{tab:labels} compares the two selection criteria on the same dictionary.
 
 \begin{table}[h]
 \centering
