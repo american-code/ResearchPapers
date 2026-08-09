@@ -69,15 +69,14 @@
 % ── Hyperlinks ────────────────────────────────────────────────────────────────
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
             pdftitle={Efficient Mechanistic Circuit Analysis of Open-Weight LLMs on Apple Silicon},
-            pdfauthor={J. Melton}]{hyperref}
+            pdfauthor={American Code Labs}]{hyperref}
 
 % ─────────────────────────────────────────────────────────────────────────────
 
 \title{\textbf{Efficient Mechanistic Circuit Analysis of\\Open-Weight LLMs on Apple Silicon}}
 
 \author{
-  J.\ Melton \\[4pt]
-  Independent Researcher \\
+  American Code Labs \\[4pt]
   \texttt{jacob@paydirt.solutions}
 }
 
@@ -398,7 +397,7 @@ extension.
 
 All experiments were conducted using SwiftSci Interp, an activation-patching harness
 for Apple Silicon built on the MLX framework.\footnote{SwiftSci Interp is available
-at \url{https://github.com/jmelton-research/swiftsci-interp}.
+at \url{https://github.com/american-code/swiftsci-interp}.
 } The library implements a hook-compatible interface analogous to TransformerLens's
 activation interception API, targeting MLX-native model implementations loaded via
 \texttt{mlx-lm}. Its core design principle is that every attention module in a model
@@ -709,9 +708,9 @@ restricted to those tokenizing to a single token under the Llama-3.2-3B tokenize
 Corruptions substitute a different country that predicts a different object
 (e.g.\ France/Paris $\to$ Germany/Berlin), preserving sequence length.
 
-We note this dataset is \emph{not} drawn from Meng et al.\ (2022)'s CounterFact set,
-as an earlier draft stated. It was authored for this work, and its two relation types
-are far narrower than CounterFact's. This limits the cross-task claim in
+This dataset was authored for this work and is \emph{not} drawn from Meng et al.\
+(2022)'s CounterFact set; its two relation types are far narrower than CounterFact's.
+This limits the cross-task claim in
 \S\ref{sec:cross-task} correspondingly: what we test is transfer from IOI to two
 geographic relation templates, not to factual recall in general. Factual association
 experiments were run on Llama-3.2-3B only. Full dataset:
@@ -720,6 +719,18 @@ experiments were run on Llama-3.2-3B only. Full dataset:
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Results: IOI Circuit Identification}
 \label{sec:ioi}
+
+Every result in this section is measured on the 100-example single-template dataset of
+\S\ref{sec:dataset}---one sentence frame, one name ordering. We state this at the outset
+because \S\ref{sec:generalization} shows the scope matters more than we expected: the
+circuits identified here are faithful on this frame and largely stop being faithful on a
+second, while the models' behaviour on the task is unaffected. The head sets, depth
+clusters, and minimality orderings below should therefore be read throughout as
+properties of a circuit-on-a-frame. They are not thereby uninteresting---the frame is the
+one the IOI literature has used since \citet{wang2022interpretability}, and the sparse
+bottleneck it produces is real---but the generalization result is what bounds their
+interpretation, and it is easier to read these tables correctly with that bound already
+in hand.
 
 \subsection{Baseline Task Performance}
 
@@ -934,9 +945,9 @@ seven of ten Llama heads and six of ten Pythia heads exceed $3\times$. The remai
 do not---L27H17 ($2.7\times$) and L26H23 ($1.8\times$) in Llama, and L17H7
 ($0.9\times$) in Pythia, whose interval $[0.027, 0.056]$ is wide relative to its mean.
 These four heads (including L1H11, below) are the weakest members of their circuits and
-should be read as tentative. An earlier draft asserted the $3\times$ margin for all
-top-10 heads in both models; that was wrong, and contradicted by the tables in this
-same section.
+should be read as tentative. The $3\times$ separation therefore characterises most of
+each circuit, not all of it, and a blanket statement of it would be contradicted by the
+tables in this same section.
 
 \paragraph{No correction for multiple comparisons.} The bootstrap intervals above are
 computed on the same 100 examples used to select the heads, after screening 672
@@ -1364,8 +1375,8 @@ faithfulness figures, the depth clusters, and the minimality ordering in
 \S\ref{sec:faithfulness} are all properties of a circuit identified on one sentence frame,
 and at least the Pythia circuit does not survive contact with a second. We are not
 withdrawing those results---they are correctly measured and correctly reported for the
-data they were measured on---but their scope is narrower than the earlier framing of this
-paper implied, and single-template IOI should be read as a lower bound on circuit
+data they were measured on---but their scope is one sentence frame, not the IOI task,
+and single-template IOI should be read as a lower bound on circuit
 fragility rather than a characterisation of the task.
 
 \subsection{Cross-Task Transfer: Factual Association}
@@ -1558,11 +1569,10 @@ circuit analyses without requiring institutional compute resources.
 
 \textbf{Circuit faithfulness collapses on held-out data.} Wang et al.\ validate their
 circuit as a \emph{set}, reporting that it recovers 87\% of clean performance when
-everything outside it is ablated. We ran the same evaluation. On the original
-100-example single-template dataset (v1), Llama's circuit-only logit difference
-recovers $F_\text{faithfulness} = 0.760$ and Pythia's recovers $0.854$---both
-competitive with Wang et al.\ On the held-out 200-example dataset (v2, expanded name
-set), faithfulness collapses: Llama drops to $F_\text{faithfulness} = 0.228$ and
+everything outside it is ablated. We ran the same evaluation. On the
+100-example single-template dataset, Llama's circuit-only logit difference recovers
+$F_\text{faithfulness} = 0.663$ and Pythia's recovers $0.854$---the latter competitive
+with Wang et al.\ On the 200-example 15-template dataset, faithfulness collapses: Llama drops to $F_\text{faithfulness} = 0.228$ and
 Pythia to $-0.028$. Pythia's circuit-only model scores \emph{below} the
 fully-ablated baseline on v2, meaning the ten heads selected on v1 are collectively
 anti-predictive on out-of-distribution names. Joint ablation of all ten Llama heads on
@@ -1598,8 +1608,8 @@ functionally dissimilar heads. We retain the three-cluster observation as descri
 and withdraw the quantitative claim.
 
 \textbf{Narrow factual-association probe.} The cross-task experiment uses 50
-hand-built examples across two geographic relation templates on one model---not
-CounterFact, as an earlier draft stated. The layer-overlap statistic also lacks a
+hand-built examples across two geographic relation templates on one model, authored
+for this work rather than drawn from CounterFact. The layer-overlap statistic also lacks a
 null: both tasks' heads concentrate in layers 13--27, so some overlap is expected by
 construction. Replication on Pythia and on genuinely diverse relations is needed.
 
@@ -1659,7 +1669,7 @@ infrastructure. That part of the contribution we regard as demonstrated.
 
 \section*{Acknowledgments}
 
-The author thanks the SwiftSci community for support with the MLX activation-patching
+We thank the SwiftSci community for support with the MLX activation-patching
 infrastructure, and the mechanistic interpretability research community for making
 foundational datasets, models, and tools publicly available. The IOI dataset
 construction followed the protocol of Wang et al.\ (2022); the CounterFact evaluation
@@ -1676,7 +1686,7 @@ project data repository. The SwiftSci Interp activation-patching library, includ
 the \texttt{PatchableAttention} module for Llama and Pythia and the MLX-compatible
 patching sweep harness, is available at:
 \begin{center}
-  \url{https://github.com/jmelton-research/swiftsci-interp}
+  \url{https://github.com/american-code/swiftsci-interp}
 \end{center}
 Figure source files are in \texttt{figures/circuit-tracing/}. Raw data files are in
 \texttt{data/ioi/} and \texttt{data/factual-assoc/}. All data was generated with seed

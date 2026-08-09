@@ -33,8 +33,7 @@
 Dictionary Collapse, Dense-Feature Degeneracy, and the\\
 Limits of Activation-Pattern Feature Matching}
 
-\author{J.~Melton \\
-  Independent Researcher \\
+\author{American Code Labs \\
   \texttt{jacob@paydirt.solutions}}
 
 \date{July 2026 \\ \smallskip \small Preprint.}
@@ -73,7 +72,8 @@ percentile of 0.94--0.98, so the conventional fixed threshold of 0.8 sits below 
 noise floor for every model pair. With one-to-one reciprocal matching, a
 closed-triangle requirement and a null-calibrated threshold, exactly one feature triple
 is shared across all three models---against a null that yields at least one 14\% of the
-time. An uncalibrated analysis of partial checkpoints reported 3,753. A planted-signal
+time. The conventional protocol applied to the same fingerprints yields 3,753. A
+planted-signal
 power analysis bounds what that null means: minimum detectable effect size tracks the
 calibrated threshold, reaching a correlation of 0.95--1.00, so the finding is ``no triple
 shared at correlation $\geq 0.95$'' rather than ``no shared structure''. Because the
@@ -134,7 +134,7 @@ model are confounded across only three runs.
   \item \textbf{An honest account of what these numbers do not establish.} With all
     three SAEs trained over 205 epochs of their entire activation dump, no held-out
     reconstruction measurement is available for any of them. We report the one held-out
-    number we do have---from a superseded partial checkpoint---and explain why it is
+    number we do have---from a partial 1{,}000-step checkpoint---and explain why it is
     weak evidence (\S\ref{sec:heldout}).
 \end{enumerate}
 
@@ -329,11 +329,12 @@ ten (292 to 2{,}893) and despite three different source models, hidden dimension
 expansion ratios. Whatever drives the transition is a property of the training
 procedure rather than of the model being decomposed.
 
-\paragraph{Recovery is real, substantial, and slow.} This corrects an account we gave in
-an earlier draft. We had argued that collapse is a ratchet---that a feature outside the
-top-$k$ on every batch receives exactly zero encoder gradient and therefore can never
-return. The first half of that is true of $W_{\mathrm{enc}}$'s row for a silent feature,
-but the conclusion does not follow: the encoder input is $x - b_{\mathrm{dec}}$, and
+\paragraph{Recovery is real, substantial, and slow.} Collapse is not a ratchet, and the
+argument that it must be does not survive the data. That argument runs: a feature outside
+the top-$k$ on every batch receives exactly zero encoder gradient, so it can never return.
+Its first half holds---$W_{\mathrm{enc}}$'s row for a silent feature does stop
+updating---but the conclusion does not follow, because the encoder input is
+$x - b_{\mathrm{dec}}$, and
 $b_{\mathrm{dec}}$ continues to receive gradient from the features that \emph{are}
 firing. A silent feature's pre-activation therefore keeps moving even though its own
 weights do not, and it can drift back into contention. Empirically it does, for 16\% to
@@ -341,9 +342,10 @@ weights do not, and it can drift back into contention. Empirically it does, for 
 Llama shows 30 increases across 224 logged points and Mistral 18 across 222.
 
 The practical consequence is that a dead-feature count read at any single step between
-roughly 4{,}000 and 15{,}000 badly overstates permanent loss. Ours did: an earlier
-reading of the Llama run at step 13{,}000 recorded 5{,}278 dead, against 3{,}753 at
-convergence.
+roughly 4{,}000 and 15{,}000 badly overstates permanent loss. Read the Llama run at step
+13{,}000 and it records 5{,}278 dead; read it at convergence and the figure is 3{,}753.
+A single-checkpoint dead count is not a property of the trained SAE unless the checkpoint
+is the final one.
 
 \paragraph{Reconstruction quality does not warn you, and for one model it improves
 through the collapse.} Llama and Qwen both show an FVE dip at step 5{,}000 (0.986 to
@@ -394,9 +396,8 @@ code, and 16 to 25 features fire on the majority of all tokens. A feature firing
 97\% of tokens---the maximum we observe in both Llama and Qwen---is not a feature in any
 useful sense; it is closer to a learned bias absorbed into the dictionary.
 
-Training to convergence dilutes this but does not remove it. Measured on the partial
-checkpoints these runs superseded, the top-200 share was 40\% (Llama) and 57\%
-(Mistral); at 50{,}000 steps it is 31\% and 29\%. The concentration falls as features
+Training to convergence dilutes this but does not remove it. At 1{,}000 steps the
+top-200 share is 40\% (Llama) and 57\% (Mistral); at 50{,}000 steps it is 31\% and 29\%. The concentration falls as features
 specialise, and then stops falling: a third of the code still sits in 1.2\% of the
 dictionary at convergence.
 
@@ -405,7 +406,7 @@ labelling is to take the top-$N$ features by activation frequency and inspect th
 maximally activating contexts. Table~\ref{tab:dense} says that this procedure draws
 heavily from the degenerate head: of the 200 most frequent Llama features, 25 fire on
 more than half of all tokens, and those 200 features carry 31\% of the entire code. In a companion paper
-\citep{melton2026mlxmesh} we built a feature-based safety classifier on exactly this
+\citep{acl2026mlxmesh} we built a feature-based safety classifier on exactly this
 selection and obtained ROC-AUC 0.564 with a 95\%
 confidence interval spanning chance. Switching to differential-frequency labelling
 against a harm-relevant contrastive corpus (PKU-SafeRLHF + do-not-answer + toxic-chat) raised ROC-AUC to
@@ -421,7 +422,7 @@ ceiling, are both necessary; neither is standard practice.
   \centering
   \caption{Reconstruction over the full 500{,}000-token corpus. All three converged runs
     are in-sample: each made 205 passes over its entire dump. The rows marked $\ast$ come
-    from a superseded 1{,}000-step Mistral checkpoint that saw only the first 50{,}000
+    from a partial 1{,}000-step Mistral checkpoint that saw only the first 50{,}000
     tokens, and are the only genuine held-out measurement available. Dead-feature counts
     here are features that fire nowhere in the corpus, a stricter criterion than the
     rolling window of Table~\ref{tab:collapse}.}
@@ -448,9 +449,9 @@ principle memorize the corpus rather than learn a dictionary. Every FVE in the t
 of Table~\ref{tab:heldout} is in-sample, and we report them as the best available
 characterization, not as evidence of generalization.
 
-One genuine held-out measurement exists, and only by accident. An earlier Mistral run
-trained on just the first 50{,}000 tokens of the dump, leaving 450{,}000 unseen. That
-checkpoint reconstructs held-out activations at FVE 0.9252 against an in-sample
+One genuine held-out measurement exists, and only by accident. A 1{,}000-step Mistral
+checkpoint was trained on just the first 50{,}000 tokens of the dump, leaving 450{,}000
+unseen. It reconstructs held-out activations at FVE 0.9252 against an in-sample
 0.9273---a gap of 0.2 percentage points. Whatever else is wrong with a 1{,}000-step SAE,
 it is not overfitting its training corpus.
 
@@ -512,9 +513,8 @@ relationship, matched reciprocally over a 1{,}000-dimensional fingerprint, corre
   \end{tabular}
 \end{table}
 
-A fixed threshold of $\tau = 0.8$---the conventional choice, and the one used in an
-earlier analysis of these same checkpoints---is at or below that noise floor for two of
-three pairs. The problem is structural rather than a matter of picking a better number:
+A fixed threshold of $\tau = 0.8$---the conventional choice---is at or below that noise
+floor for two of three pairs. The problem is structural rather than a matter of picking a better number:
 a match is the best of $\sim$5{,}000--8{,}000 candidates, and the expectation of an
 extreme-value statistic grows with the size of the search and shrinks with fingerprint
 dimensionality. At a lower resolution we also tested (100 chunks over 50{,}000 tokens,
@@ -571,7 +571,7 @@ numbers support a quantitative claim.
 
 The three corrections compound and none is individually sufficient. Reciprocal matching
 alone reduces the Llama--Mistral count from 12{,}174 to 40 at the \emph{same} threshold,
-because the original figure counted a handful of Mistral features many times over. The
+because the uncalibrated count recorded a handful of Mistral features many times over. The
 closed-triangle requirement removes chained triples---in the uncalibrated run, 67\% of
 nominally universal triples had no verified Llama--Mistral edge, and the 3{,}753 triples
 collapsed onto 644 distinct Qwen and 341 distinct Mistral features. Null calibration
@@ -654,13 +654,15 @@ move the conclusion, because the mechanism---threshold chasing a growing null---
 depend on either.
 
 \paragraph{What this does and does not show.} It does not show that these three models
-fail to share representational structure, but the case is stronger than it was. An
-earlier run of this analysis used partial checkpoints (Llama at 20\% of its step
-target, Mistral at under 2\% on a ten-times-smaller corpus) and returned zero universal
-features, which we could not distinguish from instrument failure. With all three SAEs
-trained to the same specification the usable dictionary fraction rises from 51\% to
-74\% (Llama) and 33\% to 50\% (Mistral), and the answer moves from zero to one---i.e.\
-not at all. Undertraining was not the explanation.
+fail to share representational structure. The obvious rival explanation for a near-zero
+count is instrument failure---that the SAEs are simply too degraded to detect what is
+there---and we can rule out one form of it directly. Running the identical analysis on
+partial checkpoints (Llama at 20\% of its step target, Mistral at under 2\% on a
+ten-times-smaller corpus) returns zero universal features. Training all three to the same
+specification raises the usable dictionary fraction from 51\% to 74\% (Llama) and 33\% to
+50\% (Mistral), and moves the answer from zero to one---which is to say, not at all. A
+70\%-larger usable dictionary buys no additional matches, so undertraining is not what
+suppresses them.
 
 Two confounds remain. A third to a half of each dictionary is still dead or
 low-support, so the analysis cannot see it; and the fingerprint statistic---mean
@@ -687,10 +689,12 @@ cross-model matching result, positive or negative, to report the floor alongside
 \section{Planned Experiments Not Conducted}
 \label{sec:notrun}
 
-An earlier version of this document was framed as a three-way comparison of SAE
-training objectives across three evaluation metrics, and stated results for that
-comparison in its abstract. Those results did not exist. We list here what was planned
-and not run, so that no reader has to reconstruct it.
+This paper reports what three TopK SAEs show. It is worth being explicit about the
+boundary of that evidence, because the questions immediately adjacent to it---how TopK
+compares to other objectives, whether its features probe or steer better---are the ones a
+reader is most likely to assume have been answered here. They have not. The following
+were planned for this work and not run, and no claim anywhere in this document rests on
+them.
 
 \begin{itemize}
   \item \textbf{L1, Gated and JumpReLU SAEs were never trained.} Only TopK exists. Every
@@ -699,16 +703,15 @@ and not run, so that no reader has to reconstruct it.
   \item \textbf{No linear probing study.} No probes were trained on SAE features, so
     there is no probe-accuracy result and no mediation analysis.
   \item \textbf{No human interpretability study.} No annotators were recruited, no
-    features were rated, and no inter-rater agreement was computed. The ethics statement
-    in the earlier draft described compensation and institutional approval for a study
-    that did not take place.
+    features were rated, and no inter-rater agreement was computed. See the Ethics
+    Statement for a correction issued on this point.
   \item \textbf{No steering-fidelity evaluation of SAE features.} Separate steering
     experiments exist in this workspace, but they use contrastive mean-difference
     vectors, not SAE decoder directions, and do not bear on the objective comparison.
   \item \textbf{No sparsity-level ablation.} All runs use $k = 128$; the planned
     $L_0 \in \{16, 32, 64\}$ sweep was not run.
-  \item \textbf{GPT-2 Small and Pythia-1.4B were never used.} The earlier draft named
-    them as the model set. No SAE was trained on either.
+  \item \textbf{GPT-2 Small and Pythia-1.4B were never used.} The model set is
+    Llama-3.2-3B, Mistral-7B-v0.3 and Qwen2.5-3B, and no SAE was trained on any other.
 \end{itemize}
 
 The objective comparison remains, in our view, the right experiment---the fragmentation
@@ -769,7 +772,7 @@ across only three runs with one seed each. We report orderings and avoid attribu
 any of them to a single factor.
 
 \textbf{No held-out data for any converged model.} All three trained over 205 epochs
-of their full dump. The single held-out measurement comes from a superseded 1{,}000-step
+of their full dump. The single held-out measurement comes from a partial 1{,}000-step
 checkpoint. See \S\ref{sec:heldout}.
 
 \textbf{Quantization confound.} Mistral activations come from 4-bit weights.
@@ -801,15 +804,14 @@ the corrected count is one---not statistically distinguishable from null ($\Pr(\
 choices---many-to-one matching, chained rather than closed triples, and an uncalibrated
 threshold---each of which is easy to make and none of which is visible in the output.
 
-We report the objective comparison this paper was originally framed around as not
-conducted.
+We report the adjacent objective comparison as not conducted.
 
 % ── Reproducibility ──────────────────────────────────────────────────────────
 \section*{Reproducibility Statement}
 
 All SAE training code, activation collection scripts, training logs, checkpoints, and
 analysis scripts are available at
-\url{https://github.com/jmelton-research/sae-crossarch}. All runs used seed 42.
+\url{https://github.com/american-code/sae-crossarch}. All runs used seed 42.
 Training was conducted on Apple Silicon using the MLX framework. The corrected matching
 analysis is \texttt{data/sae-analysis/cross\_arch\_matching\_v2.py} and the superseded
 version is retained as \texttt{cross\_arch\_matching.py} for comparison; reconstruction
@@ -817,7 +819,7 @@ and null statistics are regenerated by
 \texttt{data/sae-analysis/recompute\_corrections.py}.
 
 The activation collection and SAE training that produced these checkpoints ran on the
-two-node streaming system described in a companion paper \citep{melton2026mlxmesh},
+two-node streaming system described in a companion paper \citep{acl2026mlxmesh},
 which reports the transport measurements, the bit-exactness of the split boundary, and
 the validation of the parameter-averaging rule used by the distributed trainer. Nothing
 in this paper's analysis depends on that system---the checkpoints and fingerprints it
