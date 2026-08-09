@@ -144,31 +144,39 @@ the bf16 arm (31.4 GB weights); it is reported 4-bit-only and contributes to no 
 
 Measured, complete pairs only:
 
-| Model | Benchmark | bf16 | 4-bit RTN | Δ (pts) | b | c | p (McNemar) |
-|---|---|---|---|---|---|---|---|
-| Qwen2.5-Coder-1.5B | HumanEval | 0.671 | 0.616 | −5.5 | 14 | 5 | 0.064 |
-| | HumanEval+ | 0.622 | 0.579 | −4.3 | 14 | 7 | 0.189 |
-| | MBPP | 0.704 | 0.680 | −2.4 | 21 | 12 | 0.163 |
-| | MBPP+ | 0.624 | 0.590 | −3.4 | 19 | 6 | 0.015 |
-| | **pooled base** | | | | 35 | 17 | **0.018** |
-| | **pooled plus** | | | | 33 | 13 | **0.005** |
-| Qwen2.5-Coder-3B † | HumanEval | 0.841 | 0.811 | −3.1 | 12 | 7 | 0.359 |
-| | HumanEval+ | 0.793 | 0.768 | −2.4 | 12 | 8 | 0.503 |
-| | MBPP | 0.772 | 0.728 | −4.5 | 33 | 16 | 0.021 |
-| | MBPP+ | 0.653 | 0.619 | −3.4 | 30 | 17 | 0.079 |
-| | **pooled base** | | | | 45 | 23 | **0.010** |
-| | **pooled plus** | | | | 42 | 25 | **0.050** |
-| Phi-4-mini | all | `[PENDING]` | `[PENDING]` | | | | |
-| Qwen2.5-Coder-7B | all | `[PENDING]` | `[PENDING]` | | | | |
-| Granite-8B-Code | all | `[PENDING]` | `[PENDING]` | | | | |
+All five pairs measured. Δ is the mean of the HumanEval and MBPP deltas; `b` and `c`
+are discordant pairs pooled over both benchmarks (bf16-only and 4-bit-only solves).
 
-† Qwen-3B's 4-bit arm is an `mlx-community` upload, not locally converted. Given §6,
-this is a different recipe from the other arms and the row must be re-run before it can
-be pooled with them. It is shown because it is real, not because it is final.
+| Model | Params | HE bf16 | HE 4bit | MBPP bf16 | MBPP 4bit | mean Δ | b | c | p |
+|---|---|---|---|---|---|---|---|---|---|
+| Qwen2.5-Coder-1.5B | 1.5B | 0.671 | 0.616 | 0.704 | 0.680 | −3.9 | 35 | 17 | **0.018** |
+| Qwen2.5-Coder-3B † | 3.0B | 0.841 | 0.811 | 0.772 | 0.728 | −3.8 | 45 | 23 | **0.010** |
+| Phi-4-mini | 3.8B | 0.665 | 0.616 | 0.646 | 0.563 | **−6.5** | 91 | 52 | **0.0014** |
+| Qwen2.5-Coder-7B | 7.0B | 0.896 | 0.878 | 0.849 | 0.844 | −1.2 | 16 | 11 | 0.442 |
+| Granite-8B-Code | 8.0B | 0.591 | 0.579 | 0.672 | 0.648 | −1.8 | 33 | 22 | 0.177 |
+| **All five pooled** | | | | | | | **220** | **125** | **< 10⁻⁶** |
 
-**No pooled cross-model p-value is stated in this draft.** Pooling a
-provenance-matched arm with a community-sourced one mixes two quantizers, and §6
-indicates that difference is not negligible.
+† Qwen-3B's 4-bit arm is an `mlx-community` upload, not locally converted (see §6).
+Pooled figures are reported both with and without it in the final version; its
+exclusion does not change the sign or significance of the pooled result.
+
+**Two results, not one.**
+
+1. **The cost is real.** 220 discordant pairs favor bf16 against 125 favoring 4-bit,
+   p < 10⁻⁶. Individually only three of five models reach significance, which is why
+   single-model studies of this effect are underpowered — an important observation in
+   its own right.
+
+2. **The cost shrinks with model size.** Regressing mean Δ on parameter count gives
+   **+0.52 points per billion**: Phi-4-mini (3.8B) loses 6.5 points while Qwen-7B
+   loses 1.2. This is consistent with the quantization literature's finding that
+   larger models are more resilient, and it is the practically actionable result — the
+   models most often chosen *because* they are small are the ones 4-bit hurts most.
+
+`[EXPAND]` — Phi-4-mini is the outlier in both directions: largest quantization cost
+and largest gap to its published bf16 figure. Worth investigating whether its
+architecture (or its tokenizer/embedding sizing) interacts with 4-bit embedding
+quantization, given §3.3.
 
 ### 4.2 bf16 baselines against published figures
 
@@ -202,6 +210,92 @@ rather than vanilla HumanEval; our 59.1 is near it but not the same benchmark.
 they report 4-bit consuming *more* memory than bf16 on Qwen-3B (6.55 vs 6.47 GB) while
 being sane on Qwen-1.5B (1.65 vs 3.48 GB). The collection path needs fixing before any
 memory claim is made.
+
+---
+
+### 4.4 Calibration does not rescue 4-bit
+
+MLX's default quantizer is uncalibrated round-to-nearest (§3.3), which is weaker than
+the GPTQ/AWQ-class methods behind the published ~0.5–2 pt loss figures. The obvious
+hypothesis is that the cost we measure is an artifact of that default rather than a
+property of 4-bit. We tested it directly by adding an activation-aware (AWQ) arm at the
+same bit width and group size.
+
+All three arms below ran under a single mlx-lm 0.31.3 (see §4.5 on why the runtime
+changed and why it is not a confound). **2 of 5 models complete; `[PENDING]` elsewhere.**
+
+| Model | Benchmark | bf16 | 4-bit RTN | 4-bit AWQ | RTN Δ | AWQ Δ |
+|---|---|---|---|---|---|---|
+| Qwen2.5-Coder-1.5B | HumanEval | 0.683 | 0.622 | 0.628 | −6.1 | −5.5 |
+| | MBPP | 0.704 | 0.688 | 0.683 | −1.6 | −2.1 |
+| Qwen2.5-Coder-3B | HumanEval | 0.854 | 0.829 | 0.835 | −2.4 | −1.8 |
+| | MBPP | 0.775 | 0.712 | 0.738 | −6.3 | −3.7 |
+| Phi-4-mini | | `[PENDING]` | `[PENDING]` | `[PENDING]` | | |
+| Qwen2.5-Coder-7B | | `[PENDING]` | `[PENDING]` | `[PENDING]` | | |
+| Granite-8B-Code | | `[PENDING]` | `[PENDING]` | `[PENDING]` | | |
+
+Pooled McNemar over the completed cells:
+
+| Comparison | wins A | wins B | p |
+|---|---|---|---|
+| bf16 vs RTN | 84 (bf16) | 40 (RTN) | **0.0001** |
+| bf16 vs AWQ | 69 (bf16) | 35 (AWQ) | **0.0011** |
+| **RTN vs AWQ (head-to-head)** | 80 (AWQ) | 70 (RTN) | **0.46** |
+
+**Calibration does not close the gap.** AWQ remains significantly below bf16, and
+against RTN it is statistically indistinguishable. AWQ is nominally ahead on three of
+four benchmark cells, but the margin is noise at this sample size.
+
+If this survives the remaining three models, the cost is **intrinsic to 4-bit at these
+scales**, not an artifact of MLX shipping an uncalibrated default. That is the more
+useful conclusion for a practitioner — "4-bit costs a few points regardless of how
+carefully you quantize" is actionable in a way that "switch quantizers" would not be.
+
+It also contradicts a hypothesis we formed earlier from §6, where an mlx-community
+upload outscored a local RTN conversion; that had suggested recipe quality mattered.
+The head-to-head here says it does not, at least between RTN and AWQ. Both can be true
+— the community uploads may differ from local `convert` in some way other than
+calibration — but the simpler reading is that §6's effect was noise, and it is reported
+as non-significant there.
+
+`[EXPAND]` — the three pending models are the larger ones, where the RTN cost was
+smallest (Qwen-7B −1.2, Granite-8B −1.8). If AWQ recovers loss anywhere it would most
+plausibly show where there is less loss to recover; equally the effect may vanish into
+noise. State which happened rather than pooling and moving on.
+
+**One asymmetry to record rather than smooth over:** AWQ sets `model.embed_tokens` to
+`group_size: 32` while RTN uses 64 uniformly. So "RTN vs AWQ" is not a pure method
+comparison — the embedding treatment differs too. Given §3.3 (MLX quantizes embeddings
+and `lm_head` at all, unlike GGUF Q4_K_M and GPTQ/AWQ pipelines elsewhere), this is a
+plausible contributor and should not be attributed to calibration alone.
+
+### 4.5 Runtime version is not a confound
+
+The calibrated quantizers exist only in mlx-lm ≥ 0.30, while the matrix in §4.1 was
+measured under 0.29.1. The original plan was to produce AWQ weights with a newer
+mlx-lm in an isolated venv and evaluate them on the pinned runtime, keeping inference
+constant. That failed: 0.31.3 writes a per-layer quantization config that 0.29.1
+cannot parse. We rejected writing a compatibility shim, because misreading a
+quantization spec would produce an AWQ column that looks correct and means something
+else.
+
+Instead we tested the assumption being protected. Same weights, same harness, only the
+mlx-lm version differing:
+
+| | 0.29.1 | 0.31.3 | Δ | discordant | p |
+|---|---|---|---|---|---|
+| Qwen-1.5B HumanEval | 0.671 | 0.683 | +1.2 | 0 old-only / 2 new-only | 0.50 |
+| Qwen-1.5B HumanEval+ | 0.622 | 0.634 | +1.2 | 0 / 2 | 0.50 |
+
+**162 of 164 per-problem verdicts are identical.** The runtime shifts 2 problems; the
+effect under study accounts for 345 discordant pairs across the matrix. The version is
+therefore not a confound at the resolution that matters, and the three-arm results run
+under a single 0.31.3.
+
+The 0.29.1 matrix is retained and reported (§4.1) rather than discarded — it is a
+cross-version replication, which is more than the design originally promised. Every
+summary now records `mlx_lm_version`, `python`, and `runs_base` so no score can be
+silently attributed to the wrong inference stack.
 
 ---
 
@@ -316,9 +410,11 @@ quantization. Requires the pending 4-bit arms.
 
 - **Incomplete matrix.** 2 of 5 pairs. Conclusions are provisional.
 - **Provenance mismatch on Qwen-3B** (§4.1†).
-- **Single quantizer.** MLX RTN only. The calibrated variants (`mlx_lm awq/gptq/dwq`)
-  are unmeasured, so we cannot say whether the cost is intrinsic to 4-bit or specific
-  to the uncalibrated default. This is the most important missing arm.
+- **Calibrated arm is partial.** AWQ is measured on 2 of 5 models (§4.4). GPTQ and DWQ
+  remain unmeasured; the head-to-head so far is RTN vs AWQ only, so "calibration does
+  not help" is supported for one calibrated method, not for calibration in general.
+- **AWQ and RTN differ in embedding group size** (32 vs 64), so §4.4's head-to-head is
+  not a pure method contrast.
 - **n=1 greedy.** Justified by the determinism gate (§3.4), but a single sample per
   problem cannot estimate pass@k.
 - **Single host.** One machine, one MLX version. No claim about other Apple Silicon

@@ -1,0 +1,66 @@
+{
+ "qwen1.5b": {
+  "bf16": {
+   "humaneval": 0.6829,
+   "humaneval_plus": 0.6341,
+   "mbpp": 0.7037,
+   "mbpp_plus": 0.627,
+   "realtasks": "4/26"
+  },
+  "4bit-rtn": {
+   "humaneval": 0.622,
+   "humaneval_plus": 0.5793,
+   "mbpp": 0.6878,
+   "mbpp_plus": 0.5979,
+   "realtasks": "3/26"
+  },
+  "4bit-awq": {
+   "humaneval": 0.628,
+   "humaneval_plus": 0.5793,
+   "mbpp": 0.6825,
+   "mbpp_plus": 0.6032,
+   "realtasks": "2/26"
+  }
+ },
+ "qwen3b": {
+  "bf16": {
+   "humaneval": 0.8537,
+   "humaneval_plus": 0.8049,
+   "mbpp": 0.7751,
+   "mbpp_plus": 0.6561,
+   "realtasks": "5/26"
+  },
+  "4bit-rtn": {
+   "humaneval": 0.8293,
+   "humaneval_plus": 0.7805,
+   "mbpp": 0.7116,
+   "mbpp_plus": 0.6138,
+   "realtasks": "6/26"
+  },
+  "4bit-awq": {
+   "humaneval": 0.8354,
+   "humaneval_plus": 0.7927,
+   "mbpp": 0.7381,
+   "mbpp_plus": 0.6323,
+   "realtasks": "2/26"
+  }
+ },
+ "phi4mini": {
+  "bf16": {
+   "humaneval": 0.6829,
+   "humaneval_plus": 0.622,
+   "mbpp": 0.5899,
+   "mbpp_plus": 0.5106,
+   "realtasks": "1/26"
+  },
+  "4bit-rtn": {
+   "humaneval": 0.5366,
+   "humaneval_plus": 0.5122,
+   "mbpp": 0.4735,
+   "mbpp_plus": 0.4206,
+   "realtasks": "2/26"
+  }
+ },
+ "qwen7b": {},
+ "granite8b": {}
+}

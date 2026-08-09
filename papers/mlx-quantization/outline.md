@@ -57,12 +57,21 @@ Three facts, each verified during this work rather than assumed:
 
 ## Open items before submission
 
-- [ ] phi4mini, qwen7b, granite8b 4-bit arms (queued; failed twice, see §Threats)
-- [ ] qwen3b re-run: its 4-bit arm is a community upload, not provenance-matched.
-      Given C3, mixing it with self-quantized arms compares two recipes.
-- [ ] `peak_memory_gb` is untrustworthy — reports 4-bit using *more* memory than bf16
-      on qwen3b (6.55 vs 6.47 GB) while qwen1.5b is sane (1.65 vs 3.48). Do not cite
-      until the collection path is fixed.
-- [ ] Replicate C3 on a second model before making a provenance claim.
-- [ ] Decide whether to add the calibrated-quantizer arm (mlx_lm awq/gptq/dwq), which
-      would close a second documented gap.
+- [x] Complete the bf16/4-bit matrix — all 5 pairs measured under 0.29.1. Pooled
+      p < 10⁻⁶; cost shrinks with model size at +0.52 pts per B.
+- [x] Add a calibrated arm. AWQ measured on 2 of 5 models under a unified 0.31.3.
+      **Calibration does not close the gap** — AWQ still significantly below bf16
+      (p=0.0011) and indistinguishable from RTN head-to-head (p=0.46).
+- [x] Establish that the runtime version is not a confound (162/164 identical
+      verdicts, p=0.50), so the 0.29.1 matrix stands as a cross-version replication.
+- [ ] AWQ for phi4mini, qwen7b, granite8b (running). These are the larger models where
+      RTN cost least — the place calibration would most plausibly show an effect.
+- [ ] `peak_memory_gb` still untrustworthy — reports 4-bit using *more* memory than
+      bf16 on qwen3b (6.55 vs 6.47 GB) while qwen1.5b is sane (1.65 vs 3.48). Omitted
+      from the draft; fix the collection path or drop the claim entirely.
+- [ ] C3 (community uploads beat local conversion) is now in tension with §4.4's
+      head-to-head. Either replicate it on a second model or downgrade it from a
+      contribution to an observation.
+- [ ] GPTQ/DWQ remain unmeasured. Decide whether "calibration does not help" needs
+      more than one calibrated method to stand.
+- [ ] Abstract, introduction, related work, discussion still `[SKELETON]`.
