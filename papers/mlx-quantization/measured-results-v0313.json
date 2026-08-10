@@ -77,6 +77,22 @@
    "mbpp_plus": 0.746,
    "realtasks": "12/26",
    "tps": 22.8
+  },
+  "4bit-rtn": {
+   "humaneval": 0.878,
+   "humaneval_plus": 0.8354,
+   "mbpp": 0.8439,
+   "mbpp_plus": 0.7381,
+   "realtasks": "11/26",
+   "tps": 57.3
+  },
+  "4bit-awq": {
+   "humaneval": 0.8902,
+   "humaneval_plus": 0.8537,
+   "mbpp": 0.8413,
+   "mbpp_plus": 0.7354,
+   "realtasks": "8/26",
+   "tps": 57.2
   }
  },
  "granite8b": {

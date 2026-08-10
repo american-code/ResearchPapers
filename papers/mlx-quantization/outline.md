@@ -1,6 +1,7 @@
 # Outline — What Does MLX 4-bit Cost? A Controlled Audit for Code Generation
 
-Status: **skeleton**, started 2026-08-08. Data collection in progress (2 of 5 pairs complete).
+Status: **draft**, started 2026-08-08. **Data collection COMPLETE**: 5/5 bf16-vs-4bit pairs,
+4/5 with a calibrated AWQ arm (Phi-4-mini excluded — tool does not support phi3).
 
 ## Claim
 
@@ -29,7 +30,7 @@ Three facts, each verified during this work rather than assumed:
 ## Contributions
 
 - **C1.** First paired bf16-vs-MLX-4-bit measurement on code benchmarks, same harness,
-  same machine, one variable changed. [2/5 pairs complete]
+  same machine, one variable changed. [5/5 complete; plus a calibrated AWQ arm on 4]
 - **C2.** Quantification of the vendor-subtraction confound: the naive method reports
   −6.1 pts where the controlled comparison gives −2.5.
 - **C3.** Evidence that `mlx-community` uploads are **not** equivalent to local
@@ -71,14 +72,20 @@ Three facts, each verified during this work rather than assumed:
       model with the largest RTN cost is the one we cannot test calibration on.
 - [x] Establish that the runtime version is not a confound (162/164 identical
       verdicts, p=0.50), so the 0.29.1 matrix stands as a cross-version replication.
-- [ ] AWQ for phi4mini, qwen7b, granite8b (running). These are the larger models where
-      RTN cost least — the place calibration would most plausibly show an effect.
+- [x] AWQ complete for all models the tool supports. Final pooled over 8 cells:
+      bf16 vs RTN p=0.000009, bf16 vs AWQ p=0.00083, AWQ vs RTN 133-116 p=0.31.
+      Qwen-7B's own head-to-head is 14-13 (p=1.00). The loss is a property of the
+      bit width, not of the algorithm.
 - [ ] `peak_memory_gb` still untrustworthy — reports 4-bit using *more* memory than
       bf16 on qwen3b (6.55 vs 6.47 GB) while qwen1.5b is sane (1.65 vs 3.48). Omitted
       from the draft; fix the collection path or drop the claim entirely.
 - [ ] C3 (community uploads beat local conversion) is now in tension with §4.4's
       head-to-head. Either replicate it on a second model or downgrade it from a
       contribution to an observation.
-- [ ] GPTQ/DWQ remain unmeasured. Decide whether "calibration does not help" needs
-      more than one calibrated method to stand.
+- [ ] GPTQ/DWQ remain unmeasured. The head-to-head has been stable at p~0.31 across
+      three data additions, so a second calibrated method would strengthen but
+      probably not change the conclusion. Decide whether it is worth ~8h of GPU time.
+- [ ] Domain suite hints AWQ loses more capability than pass@1 shows (Qwen-7B 8/26 vs
+      RTN 11/26 while HumanEval differs by 0.6 pts). n=26 — expand the suite or drop
+      the observation.
 - [ ] Abstract, introduction, related work, discussion still `[SKELETON]`.
