@@ -522,25 +522,45 @@ corrected with a constant.
 
 ---
 
-## 6. Results: community uploads are not local conversions
+## 6. Observation: community uploads may not equal local conversions
 
-`mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit` and a local
-`mlx_lm.convert --q-bits 4` of the same base model, evaluated identically:
+**This section reports an observation, not a result.** It is retained because it
+motivates a methodological choice (§3.3) and because the alternative — omitting a
+measurement that did not reach significance — is the kind of selective reporting this
+paper argues against elsewhere.
 
-| Benchmark | community | self-converted | Δ | p |
+Early in this study the 4-bit arm was an `mlx-community` upload rather than a local
+conversion. Measuring both for Qwen2.5-Coder-1.5B, evaluated identically:
+
+| Benchmark | community upload | self-converted | Δ | p |
 |---|---|---|---|---|
-| HumanEval | 0.646 | 0.616 | −3.0 | 0.180 |
-| MBPP | 0.690 | 0.680 | −1.1 | 0.455 |
-| pooled | | | | 0.108 |
+| HumanEval | 0.646 | 0.616 | −3.0 | 0.18 |
+| MBPP | 0.690 | 0.680 | −1.1 | 0.46 |
+| pooled | | | | **0.11** |
 
-Not significant on one model, but consistently in one direction: the upload is better.
-"mlx-community 4-bit" is therefore not a synonym for `mlx_lm convert --q-bits 4`, and
-results measured on one should not be reported of the other.
+The upload scores higher on both benchmarks, but neither cell nor the pooled
+comparison reaches significance on a single model.
 
-**This needs replication on a second model before it is a claim.** If it holds, it has
-two consequences: it is the number practitioners actually want (they run the uploads),
-and it means our self-converted arms are a *lower bound* on the quality of what people
-deploy.
+**Why we do not claim this.** Two things argue against promoting it. First, it was
+never replicated: we switched to local conversion for provenance control (§3.3) and did
+not measure a second community upload, so this rests on one model where p = 0.11.
+Second, it sits in tension with §4.4. This observation suggests the conversion recipe
+matters; the AWQ head-to-head — a far larger recipe difference, on four models —
+found no significant effect (p = 0.31). The simplest reading consistent with both is
+that §6's difference is noise.
+
+**What it does justify** is the methodological choice. Whether or not the difference is
+real, a community upload's provenance cannot be verified: the base revision and
+conversion settings are not recorded on the auto-generated cards. Using one as the
+4-bit arm would place an unverifiable artifact on one side of a comparison whose entire
+value rests on differing in a single variable. Converting locally removes that risk at
+no cost, and we recommend it for any study of this kind.
+
+**If someone wants to settle it**, the experiment is cheap: evaluate the community
+upload and a local conversion of the same base weights across several models. It is
+worth settling, because if uploads really are better then every number in this paper is
+a lower bound on what practitioners actually deploy — they run the uploads, not local
+conversions.
 
 ---
 

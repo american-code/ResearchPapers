@@ -35,8 +35,10 @@ Three facts, each verified during this work rather than assumed:
 - **C2.** Quantification of the vendor-subtraction confound: the naive method reports
   −9.1 pts where the controlled comparison gives −5.5 (harness term −3.6, sign
   unstable across benchmarks).
-- **C3.** Evidence that `mlx-community` uploads are **not** equivalent to local
-  `mlx_lm convert` output — the upload scored higher. [1 model; needs replication]
+  (Former C3 — that `mlx-community` uploads outscore local conversions — has been
+  **downgraded to an observation** (§6). One model, p=0.11, never replicated, and in
+  tension with §4.4's much larger recipe comparison finding nothing. It is retained
+  because it justifies the provenance control in §3.3, not as a contribution.)
 - **C4.** A harness-defect catalogue: five independent ways a code-eval harness
   silently scores correct answers as failures, with measured magnitudes (one protocol
   choice moved MBPP pass@1 by 59 points).
@@ -81,9 +83,9 @@ Three facts, each verified during this work rather than assumed:
 - [ ] `peak_memory_gb` still untrustworthy — reports 4-bit using *more* memory than
       bf16 on qwen3b (6.55 vs 6.47 GB) while qwen1.5b is sane (1.65 vs 3.48). Omitted
       from the draft; fix the collection path or drop the claim entirely.
-- [ ] C3 (community uploads beat local conversion) is now in tension with §4.4's
-      head-to-head. Either replicate it on a second model or downgrade it from a
-      contribution to an observation.
+- [x] C3 downgraded to an observation (§6 retitled). Reported rather than dropped,
+      since omitting a non-significant measurement is the selective reporting this
+      paper argues against.
 - [ ] GPTQ/DWQ remain unmeasured. The head-to-head has been stable at p~0.31 across
       three data additions, so a second calibrated method would strengthen but
       probably not change the conclusion. Decide whether it is worth ~8h of GPU time.
