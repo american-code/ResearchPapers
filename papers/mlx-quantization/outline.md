@@ -91,4 +91,5 @@ Three facts, each verified during this work rather than assumed:
       RTN 11/26 while HumanEval differs by 0.6 pts). n=26 — expand the suite or drop
       the observation.
 - [x] Abstract and introduction written from measured figures.
-- [ ] Related work and discussion still `[SKELETON]`.
+- [x] Related work and discussion written.
+- [ ] References section still a bare list — expand to full citations.

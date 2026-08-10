@@ -1,11 +1,14 @@
 # What Does MLX 4-bit Cost? A Controlled Audit of Quantization for Code Generation on Apple Silicon
 
-**DRAFT — SKELETON. Started 2026-08-08.**
+**DRAFT v1 — complete prose, pending citation formatting. Started 2026-08-08.**
 
-**Data completeness: 2 of 5 bf16/4-bit pairs measured.** Every number below with a value
-is measured and traceable to an EvalPlus per-problem results file. Cells marked
-`[PENDING]` have no data — they are not estimates, defaults, or placeholders, and no
-number should be inferred for them. Sections marked `[SKELETON]` are structure only.
+**Data collection complete: 5 of 5 bf16-vs-4-bit pairs, 4 of 5 with a calibrated AWQ
+arm** (Phi-4-mini excluded — `mlx_lm.quant.awq` does not support its architecture).
+Every number below is measured and traceable to an EvalPlus per-problem results file;
+the cited figures are archived in `measured-results-v0313.json` (unified mlx-lm 0.31.3
+runtime) and `measured-results.json` (the earlier 0.29.1 matrix, retained as a
+cross-version replication). Cells marked `[PENDING]` have no data — they are not
+estimates, defaults, or placeholders, and no number should be inferred for them.
 
 ---
 
@@ -134,23 +137,93 @@ width itself.
 
 ## 2. Related Work
 
-`[SKELETON]`
+### 2.1 What HumanEval and MBPP actually measure
 
-- **Benchmark adequacy.** EvalPlus (Liu et al., NeurIPS 2023) adds 80x/35x more tests
-  to HumanEval/MBPP; pass@k falls 19.3–28.9% across 26 models. We report both base and
-  plus variants throughout for exactly this reason.
-- **Contamination.** HumanEval and MBPP are demonstrably present in common pretraining
-  corpora (12.2% verbatim in The Pile, 18.9% in The Stack; 50–63% semantic overlap).
-  This bounds what an absolute score means, but is largely *neutralized* by our design:
-  both arms are the same model, so contamination cancels in the paired difference.
-- **Quantization and code.** Calibrated 4-bit weight-only methods (AQLM, GPTQ-style
-  W4A16) cost ~0.5–2 pass@1 points in the 1B–34B range. Whether code is
-  disproportionately sensitive is contested. Crucially, MLX's default is *not* one of
-  these methods (§3.3).
-- **Scaling.** Low-bit degradation grows with training tokens and shrinks with model
-  size, placing modern heavily-trained 1–8B models in the worst quadrant.
-- **The empty cell.** No published HumanEval/MBPP for stock `mlx-community` 4-bit
-  weights against a bf16 baseline, from Apple, mlx-community, or a third party.
+The benchmarks this study uses are known to be inadequate in two distinct ways, and
+both shape how our results should be read.
+
+**Test adequacy.** EvalPlus (Liu et al., NeurIPS 2023) augments HumanEval with 80× more
+tests and MBPP with 35×, and finds pass@k falls by 19.3–28.9% across 26 models once
+the additional tests are applied. It also found 18 defects — roughly 11% of problems —
+in HumanEval's own reference solutions. We report both base and plus variants
+throughout for this reason, and use EvalPlus itself as the harness rather than a
+reimplementation (§3.2).
+
+**Contamination.** Both benchmarks are demonstrably present in common pretraining
+corpora: 12.2% of HumanEval appears verbatim in The Pile and 18.9% in The Stack
+(Matton et al., EMNLP Findings 2024), with semantic overlap measured at 50.8% for MBPP
+and 63.4% for HumanEval against Stack samples (Riddell et al., ACL 2024). Standard
+n-gram decontamination has low recall and is defeated by paraphrase (Yang et al.,
+2023). A leak-free replacement benchmark scores models up to 43% lower than HumanEval.
+
+This bounds what an absolute score means — but it is **largely neutralized by our
+design**. Both arms of every comparison are the same model on the same problems, so
+whatever contamination inflates the bf16 score inflates the 4-bit score too, and
+cancels in the paired difference. Contamination is a threat to the *level* of our
+numbers, not to the *deltas* that carry our claims.
+
+**Difficulty.** PythonSaga's taxonomy audit places 84.8% of HumanEval and 89.6% of MBPP
+problems in its lowest difficulty tier, with MBPP containing none in its highest.
+Harder or contamination-controlled alternatives consistently score models far lower:
+MHPP takes GPT-4o from 91.0% to 51.1% (ICLR 2025), EvoEval reports a 39.4% average
+drop across 51 models, and LiveCodeBench (ICLR 2025) shows the gap is concentrated in
+exactly the population we study — fine-tuned open models under ~7B, where one model
+scores 59.8% on HumanEval+ but 26.3% on LiveCodeBench-Easy. This motivates our domain
+suite (§3.6) as a discriminating instrument rather than a replacement.
+
+### 2.2 Quantization and code generation
+
+The prior for 4-bit weight-only quantization is a loss of roughly 0.5 to 2 pass@1
+points in the 1B–34B range. Giagnorio et al. (EMSE 2025) measure CodeLlama-7B at
+29.8 → 29.1 on MultiPL-E Python going from FP16 to 4-bit with AQLM, with the sharp
+degradation appearing only at 3 bits and below. Kurtić et al. (ACL 2025), across more
+than 500,000 evaluations, report W4A16 recovering 98.9% of BF16 HumanEval performance.
+Fang et al. (2025), whose model range most closely matches ours, find 4-bit costs
+1.19% of clean performance on average and conclude that smaller models tolerate
+quantization better than expected.
+
+Not all results agree. Shi and Ding (2025) report far larger degradation and argue
+coding and math are disproportionately fragile — though their catastrophic cases are
+dominated by activation quantization rather than the weight-only setting we study.
+Separately, scaling work finds low-bit degradation grows with training tokens and
+shrinks with model size, which places modern heavily-trained 1–8B models in the least
+favourable quadrant. **Our size trend (§4.1) is consistent with that prediction**;
+our absolute magnitudes sit at or slightly above the calibrated-method prior, which is
+what one would expect given that MLX's default is uncalibrated (§3.3).
+
+Critically, **every study above measures a calibrated quantizer.** None measures naive
+round-to-nearest with embeddings and the output head also quantized, which is what
+`mlx_lm.convert --q-bits 4` produces and what the artifacts on `mlx-community` are.
+
+### 2.3 Apple Silicon evaluation
+
+Published Apple Silicon LLM benchmarking is overwhelmingly about speed and memory
+rather than accuracy. Apple's own `mlx-lm` benchmark documentation contains the only
+first-party bf16-to-quantized accuracy comparison we located: two models, on MMLU Pro,
+with a bf16→4-bit delta of −3.33 points for a 4B model. Crowdsourced Apple Silicon
+performance tables and recent throughput studies report tokens/sec and memory across
+many models and report no accuracy figures at all. The `mlx-community` conversion cards
+are auto-generated and carry none either.
+
+**We could find no published HumanEval or MBPP result for stock `mlx-community` 4-bit
+weights against a bf16 baseline**, from Apple, from mlx-community, or from a third
+party. That intersection — MLX's default quantizer × code benchmarks × the 1–8B range —
+is the cell this paper fills.
+
+### 2.4 Reproducibility of code-model results
+
+Our harness findings (§7) sit in a small but consistent literature. Szalontai et al.
+(*Software*, 2025) attempted to reproduce 35 published results on a HumanEval variant
+and succeeded on 12, attributing failures to benchmark-variant confusion, temperature
+misconfiguration, and precision that papers never state. Ouyang et al. (TOSEM 2025)
+report that 47.56% of HumanEval tasks produce non-identical outputs across repeated
+requests even at temperature zero — a result we localize in §3.4 as an artifact of API
+serving rather than of greedy decoding. FormatSpread (ICLR 2024) demonstrates up to 76
+accuracy points of spread from prompt formatting alone, albeit on classification rather
+than code.
+
+What appears to be missing is a code-native account of how much the *harness* moves
+pass@1. §7 contributes five measured instances, the largest worth 59 points.
 
 ---
 
@@ -525,14 +598,92 @@ quantization. Requires the pending 4-bit arms.
 
 ## 9. Discussion
 
-`[SKELETON]`
+### 9.1 What this means if you are choosing weights
 
-- What a practitioner should conclude, stated as a decision rather than a p-value.
-- Cost is small relative to a ~2x throughput gain and a large memory reduction — but
-  "small" is measured, not assumed, and it grows with model scale in our two pairs
-  (−1.7 avg at 1.5B, −3.3 at 3B).
-- Do not compare your local numbers to a model card.
-- If you run community uploads, you are not running what `mlx_lm convert` produces.
+For most local coding work, **4-bit is the right default, and the reason is the
+exchange rate rather than the loss being negligible.** The loss is real and
+statistically unambiguous (p = 9 × 10⁻⁶ pooled), but it buys roughly a doubling of
+throughput and roughly half the memory. On a 32 GB machine that trade is often what
+makes a model usable at all: Qwen2.5-Coder-7B in bf16 leaves little headroom, while
+its 4-bit conversion runs comfortably alongside an editor and a browser.
+
+The more actionable finding is **where the cost falls.** It shrinks as models grow —
++0.52 points per billion parameters — so the penalty is largest exactly where users
+are most likely to accept it. Phi-4-mini at 3.8B loses 6.5 points; Qwen2.5-Coder-7B
+loses 1.2. A practitioner choosing a small model *because* it is small is paying the
+steepest quantization tax, and would often be better served by a larger model at 4
+bits than a smaller one at higher precision — a conclusion consistent with prior work
+finding that at equal memory, bigger-model-lower-bit beats smaller-model-higher-bit.
+
+### 9.2 "Use a better quantizer" is not the fix
+
+The intuitive response to a quantization loss is to reach for a better quantization
+method. Our data does not support that move. AWQ — activation-aware, calibrated, the
+class of method behind the published ~1-point figures — remains well below bf16
+(p = 8 × 10⁻⁴) and is statistically indistinguishable from the naive default
+(133–116, p = 0.31). That head-to-head held at p ≈ 0.31 across three successive
+additions of data, so it is stable rather than merely underpowered, and Qwen-7B's own
+head-to-head is 14–13.
+
+The cost side makes this decisive rather than merely inconclusive. AWQ quantization
+took up to 1h51m for an 8B model, scaling worse than linearly with parameter count,
+and produced **identical inference throughput** (57.2 vs 57.3 tok/s). A practitioner
+would be spending hours of GPU time for a benefit this study cannot detect.
+
+We state the conclusion as: at 4 bits and these scales, **the loss is a property of the
+bit width, not of the algorithm that produces it.** We are careful not to overreach.
+This is one calibrated method on four models; GPTQ and DWQ are unmeasured, and AWQ and
+RTN differ in embedding group size (32 vs 64) as well as in calibration, so the
+head-to-head is not a pure method contrast.
+
+### 9.3 Do not compare your numbers to a model card
+
+The single most transferable result here is negative. Differencing a locally measured
+4-bit score against a vendor's published bf16 figure is a natural thing to do and it
+does not work: on Qwen2.5-Coder-1.5B it reports −9.1 points where the controlled
+comparison gives −5.5. The harness-mismatch term is 3.6 points — the same order as the
+effect — and its sign is not stable across benchmarks, so it cannot be absorbed into a
+correction factor.
+
+The corollary is that a bf16 baseline is not optional. It is the majority of the
+experimental cost in this study, and it is the only part that makes the 4-bit number
+mean anything.
+
+### 9.4 The measurement is the hard part
+
+Five of the defects we found (§7) scored *correct* answers as failures, and none
+announced itself. The largest — whether the MBPP prompt conveys the function name its
+tests assert — was worth 59 points of pass@1, comfortably larger than every effect this
+paper reports. That we found it only because a 4.7% score was too implausible to
+accept is not reassuring; a defect of half that size would have produced a believable
+number and been published.
+
+This shaped our practice in ways we would recommend generally. Every task in the
+domain suite must pass with a known-correct reference **and** reject 21 hand-written
+wrong implementations, a two-sided check that caught one task whose trap was
+mathematically vacuous (it would have scored every model correct) and one that was
+unanswerable by construction. Scores are read from the harness's own per-problem
+verdict files rather than from any summary a runner wrote. And a benchmark sweep that
+returns 0/N is treated as a harness fault rather than a result.
+
+The same discipline applies to interim results. An earlier version of §4.4, written
+when only Granite-8B's HumanEval cell had completed, concluded that calibration
+"actively hurts". Its MBPP cell reversed that within the hour. Per-benchmark variance
+on a single model exceeded the method difference we were trying to characterize.
+
+### 9.5 What we would measure next
+
+Three directions follow directly. **A second calibrated method** (GPTQ or DWQ) would
+test whether "calibration does not help" generalizes beyond AWQ, though given the
+stability of the head-to-head we would expect it to strengthen rather than change the
+conclusion. **An expanded domain suite** would resolve the study's most intriguing
+loose end: Qwen-7B's AWQ arm solves 8 of 26 domain tasks against RTN's 11 and bf16's
+12, while its HumanEval scores differ by 0.6 points — hinting that aggregate pass@1 on
+saturated benchmarks may conceal capability loss that harder tasks expose. At n = 26
+that is an observation, not a result. **Mixture-of-experts models** are a genuinely
+different question: sparse activation and expert routing interact with quantization in
+ways dense-model results cannot predict, and the current generation of strong open
+coding models is increasingly MoE.
 
 ---
 
