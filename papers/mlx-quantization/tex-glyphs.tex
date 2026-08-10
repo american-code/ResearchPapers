@@ -1,0 +1,14 @@
+% Map the Unicode characters used in the source onto glyphs Latin Modern has.
+% Without this, pandoc+tectonic silently DROPS them — which would delete the
+% exponents from p-values like "9 x 10^-6" and leave a plausible-looking wrong number.
+\usepackage{newunicodechar}
+\usepackage{amsmath,amssymb}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{⁻}{\ensuremath{^{-}}}
+\newunicodechar{⁶}{\ensuremath{^{6}}}
+\newunicodechar{⁴}{\ensuremath{^{4}}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{−}{\ensuremath{-}}
