@@ -9,8 +9,9 @@ Practitioners running local code models on Apple Silicon overwhelmingly use
 `mlx-community/*-4bit` weights, and have no published figure for what that
 quantization costs on code benchmarks. We measure it under a controlled harness, and
 show that the obvious way to estimate it — subtracting a measured 4-bit score from a
-vendor's published bf16 number — overstates the cost by roughly 2.4x because the
-harness-mismatch term is larger than the effect.
+vendor's published bf16 number — is unsound: it reports -9.1 pts where the controlled
+comparison gives -5.5, because the harness-mismatch term (-3.6) is the same order as
+the effect and has no stable sign.
 
 ## Why this gap exists
 
@@ -32,7 +33,8 @@ Three facts, each verified during this work rather than assumed:
 - **C1.** First paired bf16-vs-MLX-4-bit measurement on code benchmarks, same harness,
   same machine, one variable changed. [5/5 complete; plus a calibrated AWQ arm on 4]
 - **C2.** Quantification of the vendor-subtraction confound: the naive method reports
-  −6.1 pts where the controlled comparison gives −2.5.
+  −9.1 pts where the controlled comparison gives −5.5 (harness term −3.6, sign
+  unstable across benchmarks).
 - **C3.** Evidence that `mlx-community` uploads are **not** equivalent to local
   `mlx_lm convert` output — the upload scored higher. [1 model; needs replication]
 - **C4.** A harness-defect catalogue: five independent ways a code-eval harness
@@ -88,4 +90,5 @@ Three facts, each verified during this work rather than assumed:
 - [ ] Domain suite hints AWQ loses more capability than pass@1 shows (Qwen-7B 8/26 vs
       RTN 11/26 while HumanEval differs by 0.6 pts). n=26 — expand the suite or drop
       the observation.
-- [ ] Abstract, introduction, related work, discussion still `[SKELETON]`.
+- [x] Abstract and introduction written from measured figures.
+- [ ] Related work and discussion still `[SKELETON]`.

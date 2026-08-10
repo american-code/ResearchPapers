@@ -11,33 +11,124 @@ number should be inferred for them. Sections marked `[SKELETON]` are structure o
 
 ## Abstract
 
-`[SKELETON]` — write last, once the remaining arms land.
+Developers running code models locally on Apple Silicon overwhelmingly use 4-bit
+weights from the `mlx-community` repository, yet no published figure states what that
+quantization costs on a code benchmark. Apple reports a single bf16-to-4-bit accuracy
+comparison, covering two models on one non-code benchmark; the conversion model cards
+carry no accuracy numbers at all. We measure the gap directly.
 
-Target claim: on a 32 GB Apple Silicon host, converting a small code model to 4-bit
-with MLX's default round-to-nearest quantizer costs a small but statistically
-detectable amount of accuracy on HumanEval and MBPP, while roughly doubling throughput.
-The naive way to estimate that cost — differencing a locally measured 4-bit score
-against the vendor's published bf16 figure — overstates it by about 2.4x, because
-harness mismatch is larger than the effect being measured.
+We evaluate five instruction-tuned code models from 1.5B to 8B parameters on
+HumanEval+, MBPP+, and a 26-task suite drawn from our own research codebase, comparing
+bf16 against 4-bit weights quantized from those same weights — one harness, one
+machine, one variable. Across eight paired benchmark cells, 4-bit round-to-nearest
+loses to bf16 on 134 problems and wins on 70 (McNemar p = 9 × 10⁻⁶), a mean cost of
+roughly 1 to 6 points that **shrinks as models grow** (+0.52 points per billion
+parameters): Phi-4-mini at 3.8B loses 6.5 points where Qwen2.5-Coder-7B loses 1.2.
+
+Adding an activation-aware (AWQ) arm does not recover the loss. AWQ remains well below
+bf16 (p = 8 × 10⁻⁴) and is statistically indistinguishable from the uncalibrated
+default (133–116, p = 0.31), while costing up to 1h51m of quantization time for
+identical inference throughput. At these bit widths and scales, **the loss is a
+property of the bit width rather than of the algorithm that produces it.**
+
+We also show that the intuitive way to estimate this cost — differencing a locally
+measured 4-bit score against a vendor's published bf16 figure — is unsound: on
+Qwen2.5-Coder-1.5B it reports −9.1 points where the controlled comparison gives −5.5,
+because the harness-mismatch term (−3.6) is the same order as the effect and does not
+even have a stable sign across benchmarks.
 
 ---
 
 ## 1. Introduction
 
-`[SKELETON]`
+A developer who wants a code model running locally on a Mac has, in practice, one
+path: download a 4-bit conversion from the `mlx-community` repository and load it with
+`mlx-lm`. The weights are small enough to fit in unified memory, they load in seconds,
+and they generate roughly twice as fast as the original bf16 checkpoint. This is the
+artifact people actually run.
 
-Framing beats to hit:
+What it costs them in accuracy is not published anywhere we could find.
 
-- Local code models on Apple Silicon are consumed almost entirely as
-  `mlx-community/*-4bit` weights. That is the artifact practitioners actually run.
-- No published figure states what that costs on a code benchmark. Apple's only
-  bf16→q4 accuracy table covers two models on MMLU Pro; the conversion cards carry no
-  accuracy numbers; the one MLX effort that does run HumanEval compares against
-  uniform-4bit rather than bf16.
-- The question is not merely unanswered but structurally hard to answer: the standard
-  harness does not run on the only operating system these weights target (§3.2).
-- The obvious shortcut — compare your 4-bit run to the model card — is wrong by more
-  than the effect size (§5).
+The vendor model cards for these conversions report no accuracy numbers; they are
+auto-generated conversion artifacts. Apple's own documentation contains exactly one
+bf16-to-quantized accuracy comparison — two models, on MMLU Pro, with no code
+benchmark. The one MLX project that does evaluate HumanEval compares its output
+against another 4-bit configuration rather than against full precision, which
+measures a recipe difference rather than the cost of quantizing at all. The
+quantization literature offers a prior of roughly 0.5 to 2 points lost at 4 bits, but
+every study behind that figure used a *calibrated* method such as GPTQ or AWQ, while
+MLX's default is uncalibrated round-to-nearest that additionally quantizes token
+embeddings and the output head — a configuration those papers did not measure.
+
+### Why the number is missing
+
+The gap is not simply an oversight; it is structurally awkward to close, for three
+reasons we encountered rather than anticipated.
+
+First, **the standard harness does not run on the relevant operating system.**
+EvalPlus caps executed code via `RLIMIT_AS`, which Darwin rejects, so every problem
+errors out with a resource-limit exception. Every MLX user is on macOS. A one-line
+environment variable works around it (§3.2), but the default experience of trying to
+evaluate MLX weights with the field's standard tool is that nothing runs.
+
+Second, **the obvious shortcut is wrong.** A practitioner who measures their 4-bit
+model locally and subtracts the model card's published bf16 score is not measuring
+quantization; they are measuring quantization plus every difference between their
+harness and the vendor's. On Qwen2.5-Coder-1.5B that shortcut reports a 9.1-point
+loss where the controlled comparison gives 5.5. The harness term is 3.6 points — the
+same order as the effect — and its sign is not stable: our harness scores below the
+published figure on HumanEval and above it on MBPP, so it cannot be corrected with a
+constant offset (§5).
+
+Third, **the measurement is easy to get wrong quietly.** Building the harness for this
+study surfaced five independent defects, each of which scored *correct* model answers
+as failures, and none of which announced itself. The largest was a single
+undocumented protocol choice — whether the MBPP prompt shows the test assertion, and
+therefore conveys the function name the tests require — worth 59 points of pass@1.
+This is not incidental to the paper; it is why we abandoned our own harness for
+EvalPlus, and it corroborates independent reports that only 12 of 35 published
+code-model results could be reproduced (§7).
+
+### What we do
+
+We evaluate five instruction-tuned code models spanning 1.5B to 8B parameters on a
+single 32 GB Apple Silicon host. Each model is measured in bf16 and in 4-bit weights
+produced by `mlx_lm.convert` **from those same weights**, so the two arms differ in
+exactly one variable. Community uploads are deliberately not used as the 4-bit arm:
+their provenance cannot be verified, and we show in §6 that they are not equivalent to
+a local conversion. Four of the five models additionally receive a calibrated AWQ arm;
+the fifth cannot, because the tool does not support its architecture — and it is, awkwardly,
+the model with the largest quantization loss in the study.
+
+Decoding is greedy with a single sample per problem. That choice requires
+determinism, which we verified rather than assumed: 40 of 40 completions were
+byte-identical across separate processes (§3.4). This localizes a prior result — that
+temperature-zero decoding is non-deterministic in 47.6% of HumanEval tasks — as an
+artifact of API serving rather than a property of greedy decoding.
+
+Alongside the public benchmarks we evaluate a 26-task suite derived from functions in
+our own research codebase. Public code benchmarks are documented as overwhelmingly
+easy — one audit finds 84.8% of HumanEval and 89.6% of MBPP problems fall in its
+lowest difficulty tier — and they are demonstrably present in pretraining corpora.
+The domain suite is uncontaminated by construction and discriminates far more sharply
+across this model range: it spreads the five models by a factor of 5.5 where HumanEval
+spreads them by 1.3.
+
+### What we find
+
+The cost of 4-bit is real, modest, and larger for smaller models. Pooled across eight
+paired cells, round-to-nearest loses 134 problems to bf16 and wins 70
+(p = 9 × 10⁻⁶). The per-model mean ranges from −1.2 to −6.5 points and regresses on
+parameter count at +0.52 points per billion — meaning the models most often chosen
+*because* they are small are the ones quantization hurts most.
+
+Calibration does not fix this. AWQ stays well below bf16 (p = 8 × 10⁻⁴) and is
+indistinguishable from the uncalibrated default in a head-to-head that has remained at
+p ≈ 0.31 across three successive additions of data. Its cost is paid entirely at build
+time — up to 1h51m of quantization for an 8B model — and inference throughput is
+identical. The useful conclusion for a practitioner is not "choose a better
+quantizer"; it is that at these bit widths and scales the loss belongs to the bit
+width itself.
 
 ---
 
