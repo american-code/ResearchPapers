@@ -2,7 +2,7 @@
 
 Version: 1.0  
 Date: 2026-07-29  
-Context: mlxMesh two-node Mac Studio topology over Thunderbolt
+Context: ActStream two-node Mac Studio topology over Thunderbolt
 
 ---
 
@@ -10,7 +10,7 @@ Context: mlxMesh two-node Mac Studio topology over Thunderbolt
 
 This document quantifies the data volumes and bandwidth demands of real-time activation streaming for transformer models in the 3B–34B parameter range. The target deployment is two Mac Studio nodes connected directly via Thunderbolt cable: one node runs inference; the other captures, buffers, and analyzes the activation stream (e.g. for SAE training or circuit tracing).
 
-All calculations assume the mlxMesh wire protocol (8-byte header + float16 payload per chunk) documented in `activation-streaming-protocol.md`. Data type is float16 throughout (2 bytes per element). Streaming residual-stream activations only; attention patterns and MLP intermediates are not included unless noted.
+All calculations assume the ActStream wire protocol (8-byte header + float16 payload per chunk) documented in `activation-streaming-protocol.md`. Data type is float16 throughout (2 bytes per element). Streaming residual-stream activations only; attention patterns and MLP intermediates are not included unless noted.
 
 ---
 
@@ -112,7 +112,7 @@ bandwidth = bytes_per_token_full × tokens_per_second
 
 ## 6. Protocol Overhead
 
-Using the mlxMesh wire format: 8-byte header + 8-byte sentinel per layer per chunk.
+Using the ActStream wire format: 8-byte header + 8-byte sentinel per layer per chunk.
 
 At 20 tok/s, with one chunk per layer per token (chunk size = 1 token):
 

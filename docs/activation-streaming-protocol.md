@@ -1,4 +1,4 @@
-# mlxMesh Activation Streaming Wire Protocol
+# ActStream Activation Streaming Wire Protocol
 
 Version: 1.0.0  
 Status: Draft  
@@ -8,7 +8,7 @@ Date: 2026-07-29
 
 ## 1. Overview
 
-The mlxMesh activation streaming protocol transmits intermediate layer activations between distributed inference nodes in real time. It is designed for low-latency, high-throughput delivery of float16 tensor payloads across a local network or shared-memory IPC channel, with explicit backpressure and clean failure semantics.
+The ActStream activation streaming protocol transmits intermediate layer activations between distributed inference nodes in real time. It is designed for low-latency, high-throughput delivery of float16 tensor payloads across a local network or shared-memory IPC channel, with explicit backpressure and clean failure semantics.
 
 The protocol is message-oriented and operates over a reliable, ordered byte stream (e.g. TCP, Unix domain socket, or RDMA reliable connection). Message delivery ordering is guaranteed by the transport; the protocol adds sequence numbers for gap detection and session integrity checks only.
 

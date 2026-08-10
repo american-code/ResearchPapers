@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Transport benchmark for the mlxMesh activation-streaming link.
+Transport benchmark for the ActStream activation-streaming link.
 
 Replaces benchmarks/run_localhost_test.py, which produced a single point estimate
 from one payload size on one transport, mislabelled GB/s as Gbps, and could not

@@ -3,7 +3,7 @@
 Node B — Llama-3.2-3B layers LAYER_SPLIT to num_layers-1.
 
 Binds Unix socket, loads model, then accepts one connection from Node A.
-Receives the handoff activation stream (mlxMesh wire protocol), runs the
+Receives the handoff activation stream (ActStream wire protocol), runs the
 second half of the model, saves final-layer activations.
 
 Args (JSON, sys.argv[1]):

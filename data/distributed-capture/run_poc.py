@@ -5,7 +5,7 @@ Two-node distributed activation collection PoC.
 Validates that split-layer inference (layers 0-15 in Node A, 16-27 in Node B)
 produces activations numerically matching a single-process reference.
 
-Wire protocol: mlxMesh v1.0.0 over Unix domain socket
+Wire protocol: ActStream v1.0.0 over Unix domain socket
   - 8-byte header (layer_idx uint16, token_start uint32, token_count uint16)
   - big-endian float16 payload
   - credit-based flow control with DATA_ACK
@@ -248,7 +248,7 @@ def main():
                 "n_tokens": NUM_TOKENS,
                 "chunk_size": CHUNK_SIZE,
                 "n_chunks": NUM_TOKENS // CHUNK_SIZE,
-                "protocol": "mlxMesh v1.0.0",
+                "protocol": "ActStream v1.0.0",
                 "transport": "Unix domain socket (AF_UNIX SOCK_STREAM)",
                 "wire_dtype": "float16 big-endian",
                 "model_dtype": "bfloat16",

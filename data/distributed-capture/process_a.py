@@ -4,7 +4,7 @@ Node A — Llama-3.2-3B layers 0 to LAYER_SPLIT-1.
 
 Reads token IDs, runs forward pass through first half of layers, saves the
 handoff activations locally, then streams them to Node B via Unix domain socket
-using the mlxMesh wire protocol (8-byte header + big-endian float16 payload).
+using the ActStream wire protocol (8-byte header + big-endian float16 payload).
 
 Args (JSON, sys.argv[1]):
   socket_path     Unix socket path Node B is listening on
