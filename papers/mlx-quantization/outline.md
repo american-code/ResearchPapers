@@ -92,4 +92,4 @@ Three facts, each verified during this work rather than assumed:
       the observation.
 - [x] Abstract and introduction written from measured figures.
 - [x] Related work and discussion written.
-- [ ] References section still a bare list — expand to full citations.
+- [x] References written: 26 entries with persistent identifiers, grouped by theme.
