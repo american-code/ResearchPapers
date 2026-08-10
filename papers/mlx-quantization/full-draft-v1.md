@@ -7,8 +7,10 @@ arm** (Phi-4-mini excluded — `mlx_lm.quant.awq` does not support its architect
 Every number below is measured and traceable to an EvalPlus per-problem results file;
 the cited figures are archived in `measured-results-v0313.json` (unified mlx-lm 0.31.3
 runtime) and `measured-results.json` (the earlier 0.29.1 matrix, retained as a
-cross-version replication). Cells marked `[PENDING]` have no data — they are not
-estimates, defaults, or placeholders, and no number should be inferred for them.
+cross-version replication). **No cell is estimated, interpolated, or carried over from
+a different configuration.** Where a measurement could not be made — Phi-4-mini's
+calibrated arm, and peak memory throughout — the text says so and states why, rather
+than substituting a plausible value.
 
 ---
 
@@ -337,10 +339,16 @@ exclusion does not change the sign or significance of the pooled result.
    larger models are more resilient, and it is the practically actionable result — the
    models most often chosen *because* they are small are the ones 4-bit hurts most.
 
-`[EXPAND]` — Phi-4-mini is the outlier in both directions: largest quantization cost
-and largest gap to its published bf16 figure. Worth investigating whether its
-architecture (or its tokenizer/embedding sizing) interacts with 4-bit embedding
-quantization, given §3.3.
+**Phi-4-mini is the outlier in both directions** — the largest quantization cost in the
+matrix (−6.5) and the largest gap to its published bf16 figure (−7.9, §4.2). We do not
+have an explanation. Two candidates are consistent with the evidence but untested here:
+its published figure comes from an internal pipeline using 3-shot MBPP where we use
+0-shot, which would inflate the reported baseline without affecting our paired delta;
+and MLX quantizes token embeddings and the output head (§3.3), so a model whose
+embedding matrix is unusually large relative to its body would be disproportionately
+affected. Distinguishing these would require an arm with embeddings held at higher
+precision, which `mlx_lm.convert` supports only through a non-default mixed recipe. We
+flag it rather than resolve it.
 
 ### 4.2 bf16 baselines against published figures
 
@@ -362,18 +370,33 @@ rather than vanilla HumanEval; our 59.1 is near it but not the same benchmark.
 
 ### 4.3 Throughput
 
-| Model | bf16 tok/s | 4-bit tok/s | speedup |
-|---|---|---|---|
-| Qwen2.5-Coder-1.5B | 89.9 | 161.9 | 1.8× |
-| Qwen2.5-Coder-3B | 47.7 | 119.8 | 2.5× |
-| Phi-4-mini | 39.2 | `[PENDING]` | |
-| Qwen2.5-Coder-7B | 22.8 | `[PENDING]` | |
-| Granite-8B-Code | 19.6 | `[PENDING]` | |
+Generation throughput during the HumanEval sweep, all arms, under the unified mlx-lm
+0.31.3 runtime:
 
-**Peak memory is deliberately omitted.** The collected figures are not trustworthy —
-they report 4-bit consuming *more* memory than bf16 on Qwen-3B (6.55 vs 6.47 GB) while
-being sane on Qwen-1.5B (1.65 vs 3.48 GB). The collection path needs fixing before any
-memory claim is made.
+| Model | bf16 | 4-bit RTN | 4-bit AWQ | speedup |
+|---|---|---|---|---|
+| Qwen2.5-Coder-1.5B | 90.6 | 164.8 | 164.8 | 1.82× |
+| Qwen2.5-Coder-3B | 48.1 | 97.8 | 97.5 | 2.03× |
+| Phi-4-mini | 41.0 | 88.9 | n/a | 2.17× |
+| Qwen2.5-Coder-7B | 22.8 | 57.3 | 57.2 | 2.51× |
+| Granite-8B-Code | 19.7 | 48.3 | 48.2 | 2.45× |
+
+4-bit is 1.8–2.5× faster, and **the speedup grows with model size** — the opposite of
+the accuracy cost, which shrinks with size (§4.1). The two trends compound in the same
+direction: larger models gain more throughput from quantization and lose less accuracy
+to it.
+
+**RTN and AWQ are throughput-identical** to within measurement noise (164.8 vs 164.8;
+57.3 vs 57.2; 48.3 vs 48.2). Whatever the calibrated quantizer costs is paid entirely
+at build time (§4.4), never at inference.
+
+**Memory was not measured reliably, and no memory claim is made.** Our collection path
+reports 4-bit consuming *more* peak memory than bf16 on Qwen-3B (6.55 vs 6.47 GB) while
+being sane on Qwen-1.5B (1.65 vs 3.48 GB) — an internal contradiction we did not
+resolve. Since the memory reduction is half the practical motivation for 4-bit, this is
+a substantive limitation rather than a footnote, and is restated in §10. Readers should
+take the well-established weight-footprint reduction (~4× on the quantized tensors) as
+the basis for memory reasoning, not any figure from this study.
 
 ---
 
@@ -386,7 +409,8 @@ property of 4-bit. We tested it directly by adding an activation-aware (AWQ) arm
 same bit width and group size.
 
 All three arms below ran under a single mlx-lm 0.31.3 (see §4.5 on why the runtime
-changed and why it is not a confound). **2 of 5 models complete; `[PENDING]` elsewhere.**
+changed and why it is not a confound). **Four of five models carry a calibrated arm;
+Phi-4-mini cannot (‡).**
 
 | Model | Benchmark | bf16 | 4-bit RTN | 4-bit AWQ | RTN Δ | AWQ Δ |
 |---|---|---|---|---|---|---|
@@ -518,7 +542,12 @@ scores *below* published on HumanEval for Qwen-1.5B but *above* published on MBP
 ruling out a simple "our prompt is worse" explanation and showing the bias cannot be
 corrected with a constant.
 
-`[EXPAND]` — restate with the qwen3b row once it is provenance-matched.
+The same comparison for Qwen2.5-Coder-3B, whose 4-bit arm is provenance-matched in the
+unified run: published bf16 0.841, measured bf16 0.854, measured 4-bit 0.829. The naive
+estimate gives −1.2 and the controlled one −2.5 — here the shortcut *understates* the
+cost, because our harness scores above the published figure on this model. The error
+does not have a consistent direction, which is precisely why it cannot be corrected
+for.
 
 ---
 
@@ -588,8 +617,14 @@ The practical rule this suggests: **a benchmark number is not evidence until the
 harness has been shown to score a known-correct reference answer as passing.** Our
 domain suite enforces this in both directions (§3.6).
 
-`[EXPAND]` — argue this belongs in the paper rather than an appendix: the field has no
-code-native harness-sensitivity study, and this is a measured instance.
+These belong in the body rather than an appendix. The reproducibility literature
+establishes that harness configuration moves scores — Szalontai et al. reproduced 12 of
+35 published results, FormatSpread measured 76 points of spread from formatting — but
+those are, respectively, a variant benchmark and a classification task. We could find
+no code-native measurement of how much the harness itself moves pass@1. Defect 1 is
+exactly that measurement: 59 points, from a protocol choice that papers do not
+document. A result of that magnitude, in the same units as every score this paper
+reports, is not supporting material.
 
 ---
 
@@ -611,8 +646,11 @@ The suite spreads this model range 5.5x (2 → 11) where HumanEval spreads it 1.
 the PythonSaga finding that public benchmarks are dominated by easy problems, and
 supports using an uncontaminated domain suite as the discriminating instrument.
 
-`[EXPAND]` — per-tier and per-trap-family breakdown; which trap families survive
-quantization. Requires the pending 4-bit arms.
+A per-tier and per-trap-family breakdown across arms is possible from the recorded
+per-task results, but at 26 tasks split three ways the cells are too small to support
+inference — a single task moves a tier by 10–12 percentage points. We report the
+aggregate only, and note that expanding the suite is the prerequisite for any
+finer-grained claim (§9.5).
 
 ---
 

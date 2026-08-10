@@ -80,9 +80,9 @@ Three facts, each verified during this work rather than assumed:
       bf16 vs RTN p=0.000009, bf16 vs AWQ p=0.00083, AWQ vs RTN 133-116 p=0.31.
       Qwen-7B's own head-to-head is 14-13 (p=1.00). The loss is a property of the
       bit width, not of the algorithm.
-- [ ] `peak_memory_gb` still untrustworthy — reports 4-bit using *more* memory than
-      bf16 on qwen3b (6.55 vs 6.47 GB) while qwen1.5b is sane (1.65 vs 3.48). Omitted
-      from the draft; fix the collection path or drop the claim entirely.
+- [x] `peak_memory_gb` resolved by exclusion: §4.3 now states plainly that memory was
+      not measured reliably, names the contradiction, and directs readers to the
+      known weight-footprint reduction instead. Restated as a limitation in §10.
 - [x] C3 downgraded to an observation (§6 retitled). Reported rather than dropped,
       since omitting a non-significant measurement is the selective reporting this
       paper argues against.
@@ -90,8 +90,11 @@ Three facts, each verified during this work rather than assumed:
       three data additions, so a second calibrated method would strengthen but
       probably not change the conclusion. Decide whether it is worth ~8h of GPU time.
 - [ ] Domain suite hints AWQ loses more capability than pass@1 shows (Qwen-7B 8/26 vs
-      RTN 11/26 while HumanEval differs by 0.6 pts). n=26 — expand the suite or drop
-      the observation.
+      RTN 11/26 while HumanEval differs by 0.6 pts). n=26 — kept as an observation in
+      §4.4 with the small-N caveat; expanding the suite is listed in §9.5.
+- [ ] Publish the harness, runner and domain suite. The repo has no remote, and a
+      paper arguing about harness fragility should ship its harness.
+- [ ] Convert to LaTeX and normalize citation style once a venue is chosen.
 - [x] Abstract and introduction written from measured figures.
 - [x] Related work and discussion written.
 - [x] References written: 26 entries with persistent identifiers, grouped by theme.
