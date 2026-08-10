@@ -62,5 +62,24 @@
   }
  },
  "qwen7b": {},
- "granite8b": {}
+ "granite8b": {
+  "bf16": {
+   "humaneval": 0.5976,
+   "humaneval_plus": 0.5366,
+   "mbpp": 0.6772,
+   "mbpp_plus": 0.5741,
+   "realtasks": "7/26"
+  },
+  "4bit-rtn": {
+   "humaneval": 0.5854,
+   "humaneval_plus": 0.5244,
+   "mbpp": 0.6481,
+   "mbpp_plus": 0.5503,
+   "realtasks": "6/26"
+  },
+  "4bit-awq": {
+   "humaneval": 0.5488,
+   "humaneval_plus": 0.5122
+  }
+ }
 }

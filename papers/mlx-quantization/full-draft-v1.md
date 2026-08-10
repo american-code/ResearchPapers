@@ -230,21 +230,35 @@ changed and why it is not a confound). **2 of 5 models complete; `[PENDING]` els
 | | MBPP | 0.704 | 0.688 | 0.683 | −1.6 | −2.1 |
 | Qwen2.5-Coder-3B | HumanEval | 0.854 | 0.829 | 0.835 | −2.4 | −1.8 |
 | | MBPP | 0.775 | 0.712 | 0.738 | −6.3 | −3.7 |
-| Phi-4-mini | | `[PENDING]` | `[PENDING]` | `[PENDING]` | | |
+| Granite-8B-Code | HumanEval | 0.598 | 0.585 | **0.549** | −1.2 | **−4.9** |
+| | MBPP | 0.677 | 0.648 | `[PENDING]` | −2.9 | |
+| Phi-4-mini | | 0.665 | 0.616 | **n/a** ‡ | −4.9 | |
 | Qwen2.5-Coder-7B | | `[PENDING]` | `[PENDING]` | `[PENDING]` | | |
-| Granite-8B-Code | | `[PENDING]` | `[PENDING]` | `[PENDING]` | | |
 
-Pooled McNemar over the completed cells:
+‡ **Phi-4-mini cannot have an AWQ arm.** `mlx_lm.quant.awq` raises
+`NotImplementedError: AWQ support for phi3 models NYI`. This is a hard limitation of
+the tool, not a transient failure. It matters because Phi-4-mini carries the *largest*
+RTN cost in the matrix (§4.1), so it is precisely the model where "a better quantizer
+would fix this" was most plausible — and it is the one model where we cannot test it.
+Reported as excluded with cause rather than silently dropped.
+
+Pooled McNemar over the 5 measured cells (3 models):
 
 | Comparison | wins A | wins B | p |
 |---|---|---|---|
-| bf16 vs RTN | 84 (bf16) | 40 (RTN) | **0.0001** |
-| bf16 vs AWQ | 69 (bf16) | 35 (AWQ) | **0.0011** |
-| **RTN vs AWQ (head-to-head)** | 80 (AWQ) | 70 (RTN) | **0.46** |
+| bf16 vs RTN | 95 (bf16) | 49 (RTN) | **0.00016** |
+| bf16 vs AWQ | 83 (bf16) | 41 (AWQ) | **0.00020** |
+| **RTN vs AWQ (head-to-head)** | 89 (AWQ) | 85 (RTN) | **0.82** |
 
-**Calibration does not close the gap.** AWQ remains significantly below bf16, and
-against RTN it is statistically indistinguishable. AWQ is nominally ahead on three of
-four benchmark cells, but the margin is noise at this sample size.
+**Calibration does not close the gap.** AWQ remains strongly below bf16, and against
+RTN it is now essentially a coin flip (89 vs 85, p=0.82) — the head-to-head moved
+*away* from AWQ as data was added, not toward it.
+
+Granite-8B is the sharpest case. It has the smallest RTN cost in the matrix (−1.2 on
+HumanEval), so there was almost nothing for calibration to recover — and AWQ instead
+scored **4.9 points below bf16, nearly four points worse than RTN**, at a cost of
+1h51m of GPU time for the quantization step alone. Paying for activation-aware
+calibration bought negative value on this model.
 
 If this survives the remaining three models, the cost is **intrinsic to 4-bit at these
 scales**, not an artifact of MLX shipping an uncalibrated default. That is the more
@@ -258,10 +272,14 @@ The head-to-head here says it does not, at least between RTN and AWQ. Both can b
 calibration — but the simpler reading is that §6's effect was noise, and it is reported
 as non-significant there.
 
-`[EXPAND]` — the three pending models are the larger ones, where the RTN cost was
-smallest (Qwen-7B −1.2, Granite-8B −1.8). If AWQ recovers loss anywhere it would most
-plausibly show where there is less loss to recover; equally the effect may vanish into
-noise. State which happened rather than pooling and moving on.
+**Cost of the calibrated arm.** AWQ quantization scales worse than linearly: 18 minutes
+for a 1.5B model, 1h51m for 8B — roughly 6× the time for 5.3× the parameters, since the
+grid search over scaling factors compounds with layer count. Any recommendation to
+"just use a calibrated quantizer" carries that price, and on this evidence buys nothing.
+
+`[EXPAND]` — only Qwen-7B remains. It is the other low-RTN-cost model (−1.2), so it is
+a direct replication of the Granite-8B case. If AWQ underperforms RTN there too, the
+"calibration can hurt" observation graduates from one model to a pattern.
 
 **One asymmetry to record rather than smooth over:** AWQ sets `model.embed_tokens` to
 `group_size: 32` while RTN uses 64 uniformly. So "RTN vs AWQ" is not a pure method

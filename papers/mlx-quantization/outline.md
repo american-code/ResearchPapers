@@ -59,9 +59,12 @@ Three facts, each verified during this work rather than assumed:
 
 - [x] Complete the bf16/4-bit matrix — all 5 pairs measured under 0.29.1. Pooled
       p < 10⁻⁶; cost shrinks with model size at +0.52 pts per B.
-- [x] Add a calibrated arm. AWQ measured on 2 of 5 models under a unified 0.31.3.
-      **Calibration does not close the gap** — AWQ still significantly below bf16
-      (p=0.0011) and indistinguishable from RTN head-to-head (p=0.46).
+- [x] Add a calibrated arm. AWQ measured on 3 of 5 models under a unified 0.31.3.
+      **Calibration does not close the gap** — AWQ still strongly below bf16
+      (p=0.0002) and a coin flip against RTN head-to-head (89 vs 85, p=0.82). On
+      Granite-8B it was *worse* than RTN by ~3.7 pts after 1h51m of quantization.
+- [x] Phi-4-mini AWQ is impossible — `mlx_lm.quant.awq` does not support phi3. The
+      model with the largest RTN cost is the one we cannot test calibration on.
 - [x] Establish that the runtime version is not a confound (162/164 identical
       verdicts, p=0.50), so the 0.29.1 matrix stands as a cross-version replication.
 - [ ] AWQ for phi4mini, qwen7b, granite8b (running). These are the larger models where
