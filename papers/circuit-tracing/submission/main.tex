@@ -1,12 +1,11 @@
 % arXiv submission — Efficient Mechanistic Circuit Analysis of Open-Weight LLMs on Apple Silicon
 % J. Melton — July 2026
 %
-% OPEN ITEMS BEFORE FINAL SUBMISSION:
-%   1. Resolve L24H15 vs. L24H16 discrepancy (cross-model-comparison.md vs. results-summary.md ablation rank table).
-%   4. Table 2 is ordered by ablation drop, not combined rank — caption notes this but consider reordering.
-%   5. Confirm SwiftSci Interp repository URL and insert below (search for REPO_URL_HERE).
-%   6. Collect and add efficiency benchmark data for Section 6.
-%   7. Complete path-patching experiments (Section 3.4) and revise Section 6/7 accordingly.
+% Notes:
+%   L24H15 vs L24H16: not a discrepancy. The circuit is the top-10 by COMBINED
+%   ablation+patching rank, so it contains L24H15 (patching rank 2, ablation rank 11).
+%   data/ioi/results-summary.md ranks by ablation alone, where rank 9 is L24H16
+%   (drop 0.301). Two orderings, two heads, both correct.
 
 \documentclass[11pt,a4paper]{article}
 
@@ -394,14 +393,14 @@ extension.
 \section{Methods}
 \label{sec:methods}
 
-\subsection{Experimental Infrastructure: SwiftSci Interp}
+\subsection{Experimental Infrastructure}
+\label{sec:infrastructure}
 
-All experiments were conducted using SwiftSci Interp, an activation-patching harness
-for Apple Silicon built on the MLX framework.\footnote{SwiftSci Interp is available
-at \url{https://github.com/american-code/swiftsci-interp}.
-} The library implements a hook-compatible interface analogous to TransformerLens's
-activation interception API, targeting MLX-native model implementations loaded via
-\texttt{mlx-lm}. Its core design principle is that every attention module in a model
+All experiments were conducted with an activation-patching harness written for this
+work in Python against MLX and \texttt{mlx-lm}, released with the project data (see
+Data Availability). It implements a hook-compatible interface analogous to
+TransformerLens's activation interception API, targeting MLX-native model
+implementations loaded via \texttt{mlx-lm}. Its core design principle is that every attention module in a model
 is hot-swapped at load time with a patchable drop-in replacement that shares the
 original weight tensors---no copies---and adds a mode-switched interception point
 around the scaled dot-product attention (SDPA) computation.
@@ -617,7 +616,7 @@ $A \to B$ connection, ruling out the mediated-path alternative.
 
 In our setting, path patching is used to characterize how the dominant head identified
 by activation patching (L15H20 in Llama) relates to the other high-scoring heads. Path
-patching is implemented within SwiftSci Interp by extending the \texttt{patch} mode to
+patching is implemented in the same harness by extending the \texttt{patch} mode to
 accept a target-receiver argument.
 
 Each edge is measured with a four-pass protocol: a clean baseline; a corrupted run
@@ -1562,9 +1561,9 @@ memory configuration can hold both model weights and activation caches without
 offloading, making the per-pass latency competitive with small GPU cluster runs. For
 models beyond 7B parameters, the memory constraint becomes binding on current
 hardware---a limitation that may be partially addressed by mixed-precision loading or
-activation recomputation at the cost of higher pass count. We hope that releasing the
-SwiftSci Interp tooling lowers the barrier for researchers to replicate and extend
-circuit analyses without requiring institutional compute resources.
+activation recomputation at the cost of higher pass count. We hope that releasing this
+tooling lowers the barrier for researchers to replicate and extend circuit analyses
+without requiring institutional compute resources.
 
 \paragraph{Limitations.}
 
@@ -1664,14 +1663,14 @@ none of the generalization we wanted to claim. Circuit work reporting faithfulne
 single template---still common---should report it on a second one before claiming the
 circuit is a property of the task.
 
-All experiments ran on Apple Silicon using MLX, and the SwiftSci Interp harness is
+All experiments ran on Apple Silicon using MLX, and the patching harness is
 released alongside this paper to make circuit analysis accessible without GPU cluster
 infrastructure. That part of the contribution we regard as demonstrated.
 
 \section*{Acknowledgments}
 
-We thank the SwiftSci community for support with the MLX activation-patching
-infrastructure, and the mechanistic interpretability research community for making
+We thank the developers of MLX and \texttt{mlx-lm}, and the mechanistic
+interpretability research community for making
 foundational datasets, models, and tools publicly available. The IOI dataset
 construction followed the protocol of Wang et al.\ (2022); the CounterFact evaluation
 set used in the factual association experiments was constructed by Meng et al.\ (2022).
@@ -1683,12 +1682,16 @@ is provided by Meta under the Llama 3.2 Community License Agreement.
 
 All experimental datasets, intermediate patching and ablation result arrays, and
 bootstrap confidence interval files referenced in this paper are available in the
-project data repository. The SwiftSci Interp activation-patching library, including
-the \texttt{PatchableAttention} module for Llama and Pythia and the MLX-compatible
-patching sweep harness, is available at:
+project data repository, together with the activation-patching harness itself---the
+\texttt{PatchableAttention} and \texttt{PythiaPatchableAttention} modules for Llama and
+Pythia and the MLX patching sweep driver:
 \begin{center}
-  \url{https://github.com/american-code/swiftsci-interp}
+  \url{https://github.com/american-code/circuit-tracing}
 \end{center}
+A Swift implementation of the same primitives (activation patching, path patching, mean
+ablation, hooked model wrappers) exists as the \texttt{Interp} module of SDSTK,
+\url{https://github.com/american-code/SDSTK}. It was not used for the experiments
+reported here and its results are not interchangeable with them.
 Figure source files are in \texttt{figures/circuit-tracing/}. Raw data files are in
 \texttt{data/ioi/} and \texttt{data/factual-assoc/}. All data was generated with seed
 42 and is exactly reproducible using the released code.
