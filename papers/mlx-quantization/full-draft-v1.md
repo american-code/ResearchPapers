@@ -230,8 +230,8 @@ changed and why it is not a confound). **2 of 5 models complete; `[PENDING]` els
 | | MBPP | 0.704 | 0.688 | 0.683 | −1.6 | −2.1 |
 | Qwen2.5-Coder-3B | HumanEval | 0.854 | 0.829 | 0.835 | −2.4 | −1.8 |
 | | MBPP | 0.775 | 0.712 | 0.738 | −6.3 | −3.7 |
-| Granite-8B-Code | HumanEval | 0.598 | 0.585 | **0.549** | −1.2 | **−4.9** |
-| | MBPP | 0.677 | 0.648 | `[PENDING]` | −2.9 | |
+| Granite-8B-Code | HumanEval | 0.598 | 0.585 | 0.549 | −1.2 | −4.9 |
+| | MBPP | 0.677 | 0.648 | **0.680** | −2.9 | **+0.3** |
 | Phi-4-mini | | 0.665 | 0.616 | **n/a** ‡ | −4.9 | |
 | Qwen2.5-Coder-7B | | `[PENDING]` | `[PENDING]` | `[PENDING]` | | |
 
@@ -242,23 +242,33 @@ RTN cost in the matrix (§4.1), so it is precisely the model where "a better qua
 would fix this" was most plausible — and it is the one model where we cannot test it.
 Reported as excluded with cause rather than silently dropped.
 
-Pooled McNemar over the 5 measured cells (3 models):
+Pooled McNemar over 6 complete cells (3 models × 2 benchmarks):
 
 | Comparison | wins A | wins B | p |
 |---|---|---|---|
-| bf16 vs RTN | 95 (bf16) | 49 (RTN) | **0.00016** |
-| bf16 vs AWQ | 83 (bf16) | 41 (AWQ) | **0.00020** |
-| **RTN vs AWQ (head-to-head)** | 89 (AWQ) | 85 (RTN) | **0.82** |
+| bf16 vs RTN | 117 (bf16) | 60 (RTN) | **0.000022** |
+| bf16 vs AWQ | 103 (bf16) | 62 (AWQ) | **0.0018** |
+| **RTN vs AWQ (head-to-head)** | 119 (AWQ) | 103 (RTN) | **0.31** |
 
-**Calibration does not close the gap.** AWQ remains strongly below bf16, and against
-RTN it is now essentially a coin flip (89 vs 85, p=0.82) — the head-to-head moved
-*away* from AWQ as data was added, not toward it.
+**Calibration does not close the gap, and does not consistently beat the naive
+default either.** AWQ remains strongly below bf16 (p=0.0018). Head-to-head against RTN
+it is nominally ahead but not significantly so (p=0.31).
 
-Granite-8B is the sharpest case. It has the smallest RTN cost in the matrix (−1.2 on
-HumanEval), so there was almost nothing for calibration to recover — and AWQ instead
-scored **4.9 points below bf16, nearly four points worse than RTN**, at a cost of
-1h51m of GPU time for the quantization step alone. Paying for activation-aware
-calibration bought negative value on this model.
+**The per-benchmark variance is larger than the method difference**, and Granite-8B is
+the clearest illustration: AWQ is 4.9 points *below* bf16 on HumanEval but *matches*
+bf16 on MBPP (+0.3) — while RTN loses on both. On the same model, with the same
+weights, the two benchmarks disagree about which quantizer is better. Its domain-suite
+result splits the same way (AWQ 7/26, tying bf16; RTN 6/26).
+
+This is the central caution of the section. An earlier draft of this analysis, written
+when only Granite-8B's HumanEval cell had finished, concluded that calibration
+"actively hurts". MBPP reversed it within the hour. **A single benchmark on a single
+model does not support a directional claim about quantizer quality** — which is the
+same failure mode this paper documents in §7, arriving from a different direction.
+
+What survives both cells is the weaker but sturdier statement: at 4 bits and these
+scales the loss is real, and choosing a calibrated quantizer does not reliably avoid
+it.
 
 If this survives the remaining three models, the cost is **intrinsic to 4-bit at these
 scales**, not an artifact of MLX shipping an uncalibrated default. That is the more
@@ -274,12 +284,13 @@ as non-significant there.
 
 **Cost of the calibrated arm.** AWQ quantization scales worse than linearly: 18 minutes
 for a 1.5B model, 1h51m for 8B — roughly 6× the time for 5.3× the parameters, since the
-grid search over scaling factors compounds with layer count. Any recommendation to
-"just use a calibrated quantizer" carries that price, and on this evidence buys nothing.
+grid search over scaling factors compounds with layer count. Inference throughput is
+unchanged (Granite-8B: 48.2 tok/s AWQ vs 48.3 RTN), so the price is paid entirely at
+build time. Any recommendation to "just use a calibrated quantizer" carries that cost
+for a benefit this data cannot demonstrate.
 
-`[EXPAND]` — only Qwen-7B remains. It is the other low-RTN-cost model (−1.2), so it is
-a direct replication of the Granite-8B case. If AWQ underperforms RTN there too, the
-"calibration can hurt" observation graduates from one model to a pattern.
+`[EXPAND]` — only Qwen-7B remains. Report both its benchmark cells before drawing any
+conclusion from it, given how sharply Granite-8B's two cells disagreed.
 
 **One asymmetry to record rather than smooth over:** AWQ sets `model.embed_tokens` to
 `group_size: 32` while RTN uses 64 uniformly. So "RTN vs AWQ" is not a pure method
