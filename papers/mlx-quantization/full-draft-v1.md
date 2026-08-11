@@ -1,6 +1,8 @@
 # What Does MLX 4-bit Cost? A Controlled Audit of Quantization for Code Generation on Apple Silicon
 
-**DRAFT v1 — complete prose, pending citation formatting. Started 2026-08-08.**
+J. Melton, American Code Labs — <jmelton@americancode.org>
+
+*Preprint. Data collection complete; citation formatting pending.*
 
 **Data collection complete: 5 of 5 bf16-vs-4-bit pairs, 4 of 5 with a calibrated AWQ
 arm** (Phi-4-mini excluded — `mlx_lm.quant.awq` does not support its architecture).
@@ -25,8 +27,8 @@ carry no accuracy numbers at all. We measure the gap directly.
 We evaluate five instruction-tuned code models from 1.5B to 8B parameters on
 HumanEval+, MBPP+, and a 26-task suite drawn from our own research codebase, comparing
 bf16 against 4-bit weights quantized from those same weights — one harness, one
-machine, one variable. Across eight paired benchmark cells, 4-bit round-to-nearest
-loses to bf16 on 134 problems and wins on 70 (McNemar p = 9 × 10⁻⁶), a mean cost of
+machine, one variable. Pooled across all five models and both benchmarks, 4-bit
+round-to-nearest loses to bf16 on 220 problems and wins on 125 (McNemar p < 10⁻⁶), a mean cost of
 roughly 1 to 6 points that **shrinks as models grow** (+0.52 points per billion
 parameters): Phi-4-mini at 3.8B loses 6.5 points where Qwen2.5-Coder-7B loses 1.2.
 
@@ -121,9 +123,9 @@ spreads them by 1.3.
 
 ### What we find
 
-The cost of 4-bit is real, modest, and larger for smaller models. Pooled across eight
-paired cells, round-to-nearest loses 134 problems to bf16 and wins 70
-(p = 9 × 10⁻⁶). The per-model mean ranges from −1.2 to −6.5 points and regresses on
+The cost of 4-bit is real, modest, and larger for smaller models. Pooled across all
+five models and both benchmarks, round-to-nearest loses 220 problems to bf16 and wins
+125 (p < 10⁻⁶). The per-model mean ranges from −1.2 to −6.5 points and regresses on
 parameter count at +0.52 points per billion — meaning the models most often chosen
 *because* they are small are the ones quantization hurts most.
 
@@ -323,8 +325,8 @@ are discordant pairs pooled over both benchmarks (bf16-only and 4-bit-only solve
 | **All five pooled** | | | | | | | **220** | **125** | **< 10⁻⁶** |
 
 † Qwen-3B's 4-bit arm is an `mlx-community` upload, not locally converted (see §6).
-Pooled figures are reported both with and without it in the final version; its
-exclusion does not change the sign or significance of the pooled result.
+Excluding it leaves 175 discordant pairs favouring bf16 against 102 favouring 4-bit —
+the sign and the significance of the pooled result are unchanged.
 
 **Two results, not one.**
 
@@ -431,7 +433,9 @@ RTN cost in the matrix (§4.1), so it is precisely the model where "a better qua
 would fix this" was most plausible — and it is the one model where we cannot test it.
 Reported as excluded with cause rather than silently dropped.
 
-Pooled McNemar over all 8 cells (4 models × 2 benchmarks):
+Pooled McNemar over the 8 cells where all three arms exist (4 models × 2 benchmarks;
+Phi-4-mini is absent because it has no AWQ arm). These counts are therefore a subset of
+the five-model totals in §4.1 and are not directly comparable to them:
 
 | Comparison | wins A | wins B | p |
 |---|---|---|---|
@@ -747,9 +751,9 @@ coding models is increasingly MoE.
 
 ## 10. Threats to validity
 
-- **Incomplete matrix.** 2 of 5 pairs. Conclusions are provisional.
 - **Provenance mismatch on Qwen-3B** (§4.1†).
-- **Calibrated arm is partial.** AWQ is measured on 2 of 5 models (§4.4). GPTQ and DWQ
+- **Calibrated arm is partial.** AWQ is measured on 4 of 5 models (§4.4) — Phi-4-mini
+  is excluded because `mlx_lm.quant.awq` does not support its architecture. GPTQ and DWQ
   remain unmeasured; the head-to-head so far is RTN vs AWQ only, so "calibration does
   not help" is supported for one calibrated method, not for calibration in general.
 - **AWQ and RTN differ in embedding group size** (32 vs 64), so §4.4's head-to-head is
@@ -759,11 +763,13 @@ coding models is increasingly MoE.
 - **Single host.** One machine, one MLX version. No claim about other Apple Silicon
   configurations.
 - **Memory figures unusable** (§4.3).
-- **Operational fragility.** The three missing arms failed twice for unrelated
-  infrastructure reasons — a runner bug that pre-created the conversion output
-  directory (which `mlx_lm convert` rejects), and a task daemon that silently accepted
-  work without persisting it. Neither affects the validity of measured numbers, but
-  both are recorded because they determined what got measured.
+- **Data collection was not first-time-clean.** Three arms of the matrix failed twice
+  before completing, for unrelated infrastructure reasons — a runner bug that
+  pre-created the conversion output directory (which `mlx_lm convert` rejects), and a
+  task daemon that silently accepted work without persisting it. All three were
+  subsequently re-run and are included in the results above. Neither failure affects
+  the validity of any measured number, but both are recorded because a silent
+  half-empty matrix is the failure mode this kind of audit is most exposed to.
 
 ---
 

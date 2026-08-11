@@ -11,6 +11,7 @@ pandoc full-draft-v1.md \
   -o mlx-quantization-draft-v1.pdf \
   --pdf-engine=tectonic \
   --metadata title="What Does MLX 4-bit Cost? A Controlled Audit of Quantization for Code Generation on Apple Silicon" \
+  --metadata author="J. Melton, American Code Labs (jmelton@americancode.org)" \
   --metadata date="$(date +%Y-%m-%d)" \
   -H tex-glyphs.tex \
   -V geometry:margin=1in -V fontsize=10pt \
