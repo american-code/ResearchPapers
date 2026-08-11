@@ -69,6 +69,8 @@
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
             pdftitle={Efficient Mechanistic Circuit Analysis of Open-Weight LLMs on Apple Silicon},
             pdfauthor={J. Melton}]{hyperref}
+\usepackage[htt]{hyphenat}   % allow breaks inside \texttt identifiers
+\emergencystretch=2em
 
 % ─────────────────────────────────────────────────────────────────────────────
 
@@ -443,8 +445,8 @@ stores the full 24-head output, not the 8-head compressed form. This means each 
 implicitly alter the other two heads sharing the same KV pair.
 
 \paragraph{Pythia module layout.}
-MLX-LM exposes Pythia's layers as \texttt{model.layers[i].attention} rather than
-\texttt{model.model.layers[i].self\_attn}. The patchable replacement reuses the
+MLX-LM exposes Pythia's layers as \texttt{model.\allowbreak layers[i].\allowbreak attention} rather than
+\texttt{model.\allowbreak model.\allowbreak layers[i].\allowbreak self\_attn}. The patchable replacement reuses the
 \texttt{dense} (output projection) attribute rather than \texttt{o\_proj}. All other
 behavior is identical; the mode-switch logic is shared.
 
@@ -829,6 +831,7 @@ anomalous L1H11 entry discussed below.
     \texttt{data/ioi/statistical-validation.json}.}
   \label{tab:pythia-circuit}
   \smallskip
+  \small\setlength{\tabcolsep}{4pt}
   \begin{tabular}{clccccr}
     \toprule
     Rank & Head   & Patch score & 95\% CI             & Abl.\ drop & \% clean LD & Rel.\ depth \\
@@ -888,6 +891,7 @@ where these zones fall in our two models.
   \label{tab:zones}
   \smallskip
   \small
+  \small\setlength{\tabcolsep}{4pt}
   \begin{tabular}{p{3.6cm}p{2.4cm}p{3.6cm}p{3.6cm}}
     \toprule
     Zone                    & GPT-2 Small         & Llama-3.2-3B             & Pythia-1.4B \\
@@ -1311,6 +1315,7 @@ The circuits do not (Table~\ref{tab:template}).
     changes. Llama-3.1-8B is an independent replication on a third model.}
   \label{tab:template}
   \smallskip
+  \small\setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccc}
     \toprule
     Model & $F(C)$, 1 template & $F(C)$, 15 templates & Completeness gap (1 $\to$ 15) \\
@@ -1347,6 +1352,7 @@ comparison in Table~\ref{tab:rankmove} is clean.
     the multi-template top-10.}
   \label{tab:rankmove}
   \smallskip
+  \footnotesize\setlength{\tabcolsep}{4pt}
   \begin{tabular}{lccc}
     \toprule
     Model & Spearman $\rho$ (patching) & Top-10 retained & New head entering top-5 (ablation) \\

@@ -28,6 +28,8 @@
 \usepackage[colorlinks=true, linkcolor=blue!70!black,
             citecolor=blue!70!black, urlcolor=blue!70!black]{hyperref}
 \usepackage[numbers, sort&compress]{natbib}
+\usepackage[htt]{hyphenat}   % allow breaks inside \texttt identifiers
+\emergencystretch=2em
 
 \title{TopK Sparse Autoencoders Across Three Model Architectures:\\
 Dictionary Collapse, Dense-Feature Degeneracy, and the\\
@@ -205,7 +207,7 @@ $d = 2{,}048$). Activations are collected from 500{,}000 tokens of WikiText-103
 model, and stored as float16.
 
 Mistral activations were extracted from 4-bit quantized weights
-(\texttt{mlx-community/Mistral-7B-v0.3-4bit}); the bf16 base model requires
+(\texttt{mlx-community/\allowbreak Mistral-7B-v0.3-4bit}); the bf16 base model requires
 authentication we did not have. This is a confound we cannot rule out and flag wherever
 Mistral results appear.
 

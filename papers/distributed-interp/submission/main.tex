@@ -24,6 +24,8 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{multirow}
+\usepackage[htt]{hyphenat}   % allow breaks inside \texttt identifiers
+\emergencystretch=2em
 
 % --- Code listing style ---
 \lstdefinestyle{pycode}{
@@ -340,6 +342,7 @@ Dead feature detection monitors the number of features that have not fired over 
 \centering
 \caption{SAEs trained in this work. All experiments used WikiText-103 as the source corpus.}
 \label{tab:training}
+  \small\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}llrrrrrl@{}}
 \toprule
 Model & Layer & $d_{\mathrm{in}}$ & Dict & $k$ & Steps & Corpus & Purpose \\
@@ -383,6 +386,7 @@ We validated the wire protocol using a two-process simulation of the Node~A / No
 \centering
 \caption{Split-inference correctness validation. Both the layer-15 handoff tensor and the layer-27 final output match the single-process baseline to machine zero.}
 \label{tab:correctness}
+  \footnotesize\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}llrrrr@{}}
 \toprule
 Checkpoint & Tensor shape & max\_abs\_error & mean\_abs\_error & rms\_error & Pass \\
@@ -641,6 +645,7 @@ The best non-degenerate operating point (threshold~$= 22.0$) achieves F1~$= 0.61
 \centering
 \caption{Threshold-free discrimination of the harm score on the 200-example balanced eval set. The AUC confidence interval is a 2,000-replicate bootstrap. The naive result (top-200 by WikiText frequency, 1 feature) is shown for comparison.}
 \label{tab:auc}
+  \footnotesize\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrl@{}}
 \toprule
 Metric & Naive (1 feature) & Corrected (40 features) & Chance level \\
