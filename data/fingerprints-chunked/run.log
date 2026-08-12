@@ -1,0 +1,44 @@
+Chunked fingerprint analysis: 100-token chunks, 5000 chunks per model, 500,000 tokens total
+MIN_ACTIVE_CHUNKS=250  NULL_PERMUTATIONS=20  NULL_PERCENTILE=99.0
+
+[llama] loading activations and SAE checkpoint …
+  encoded in 2665s
+  dict=16384  dead=3344  support<250=2655  valid=10385  median_active=490
+
+[qwen] loading activations and SAE checkpoint …
+  encoded in 1413s
+  dict=16384  dead=9398  support<250=228  valid=6758  median_active=0
+
+[mistral] loading activations and SAE checkpoint …
+  encoded in 2447s
+  dict=16384  dead=2346  support<250=7512  valid=6526  median_active=62
+
+=== metric: cosine ===
+  [cosine] llama_qwen        null mean=0.3187 p99=0.6494  @tau0.80=   21  @cal(0.8000)=   21
+  [cosine] mistral_qwen      null mean=0.3172 p99=0.6563  @tau0.80=   23  @cal(0.8000)=   23
+  [cosine] llama_mistral     null mean=0.3688 p99=0.7621  @tau0.80=   38  @cal(0.8000)=   38
+  [cosine] universal=4  tri_null_mean=0.80  (4970s)
+
+=== metric: pearson ===
+  [pearson] llama_qwen        null mean=0.2840 p99=0.6209  @tau0.80=   18  @cal(0.6209)=  123
+  [pearson] mistral_qwen      null mean=0.2840 p99=0.6320  @tau0.80=   22  @cal(0.6320)=  112
+  [pearson] llama_mistral     null mean=0.3510 p99=0.7477  @tau0.80=   36  @cal(0.7477)=   82
+  [pearson] universal=7  tri_null_mean=0.45  (5099s)
+
+============================================================
+chunk_tokens=100  n_chunks=5000
+
+metric=cosine:
+  llama_qwen          tau=0.8000  matches@0.80=   21  matches@cal=   21
+  mistral_qwen        tau=0.8000  matches@0.80=   23  matches@cal=   23
+  llama_mistral       tau=0.8000  matches@0.80=   38  matches@cal=   38
+  universal (closed triangle) = 4  tri_null_mean=0.80
+
+metric=pearson:
+  llama_qwen          tau=0.6209  matches@0.80=   18  matches@cal=  123
+  mistral_qwen        tau=0.6320  matches@0.80=   22  matches@cal=  112
+  llama_mistral       tau=0.7477  matches@0.80=   36  matches@cal=   82
+  universal (closed triangle) = 7  tri_null_mean=0.45
+
+elapsed 16598s  (276.6 min)
+Results in /Users/melton/ResearchPapers/data/fingerprints-chunked/

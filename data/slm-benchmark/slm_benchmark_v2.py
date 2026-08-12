@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-SLM Coding Efficiency Benchmark Phase 1 — lab-02
-Sequential evaluation: HumanEval pass@1, MBPP pass@1, 10 real coding tasks.
-Deletes each model from cache before downloading the next.
+SLM Coding Efficiency Benchmark Phase 1 v2 — lab-02
+Fixes from v1:
+  - run_mbpp: prob['text'] -> prob['prompt'] (MBPP-sanitized field name)
+  - load_model_with_fallback: save e1 as string before Python 3 deletes it
+  - Granite: updated model IDs (mlx-community/granite-8b-code-instruct-128k-4bit)
+  - Pre-loads valid HumanEval results from v1 run (saves ~20 min re-inference)
 """
 
 import gc
@@ -22,12 +25,21 @@ import numpy as np
 RESULTS_DIR = Path(os.path.expanduser("~/ResearchPapers/data/slm-benchmark"))
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 RESULTS_FILE = RESULTS_DIR / "results.json"
-LOG_FILE = RESULTS_DIR / "benchmark.log"
-CHECKPOINT_FILE = RESULTS_DIR / "checkpoint.json"
+LOG_FILE = RESULTS_DIR / "benchmark_v2.log"
+CHECKPOINT_FILE = RESULTS_DIR / "checkpoint_v2.json"
 HF_CACHE = Path(os.path.expanduser("~/.cache/huggingface/hub"))
 
 MAX_GEN_TOKENS = 512
-EXEC_TIMEOUT = 30  # seconds per subprocess code execution
+EXEC_TIMEOUT = 30
+
+# Pre-loaded from v1 run (benchmark.log, 2026-08-05) — real greedy-decoding results
+HUMANEVAL_CACHED = {
+    "Qwen2.5-Coder-1.5B-Instruct": {"pass_at_1": 0.5793, "passed": 95, "total": 164, "mean_tps": 198.4, "peak_memory_gb": 0.0},
+    "Qwen2.5-Coder-3B-Instruct":   {"pass_at_1": 0.7561, "passed": 124, "total": 164, "mean_tps": 120.4, "peak_memory_gb": 0.0},
+    "Qwen2.5-Coder-7B-Instruct":   {"pass_at_1": 0.5549, "passed": 91,  "total": 164, "mean_tps": 70.7,  "peak_memory_gb": 0.0},
+    "Phi-4-Mini-Instruct":          {"pass_at_1": 0.3963, "passed": 65,  "total": 164, "mean_tps": 110.3, "peak_memory_gb": 0.0},
+    "DeepSeek-Coder-V2-Lite-Instruct": {"pass_at_1": 0.7561, "passed": 124, "total": 164, "mean_tps": 81.7, "peak_memory_gb": 0.0},
+}
 
 MODELS = [
     {
@@ -62,8 +74,8 @@ MODELS = [
     },
     {
         "name": "Granite-Code-8B-Instruct",
-        "mlx_id": "mlx-community/granite-code-8b-instruct-4bit",
-        "hf_id": "ibm-granite/granite-code-8b-instruct",
+        "mlx_id": "mlx-community/granite-8b-code-instruct-128k-4bit",
+        "hf_id": "ibm-granite/granite-8b-code-instruct-128k",
         "param_b": 8.0,
     },
 ]
@@ -393,14 +405,12 @@ def log(msg: str):
 # ─── Code extraction ──────────────────────────────────────────────────────────
 
 def extract_code(response: str) -> str:
-    """Pull Python code out of an LLM response, handling markdown fences."""
     m = re.search(r"```python\s*\n(.*?)```", response, re.DOTALL)
     if m:
         return m.group(1).strip()
     m = re.search(r"```\s*\n(.*?)```", response, re.DOTALL)
     if m:
         return m.group(1).strip()
-    # Some models use triple-backtick without newline after language tag
     m = re.search(r"```python(.*?)```", response, re.DOTALL)
     if m:
         return m.group(1).strip()
@@ -410,7 +420,6 @@ def extract_code(response: str) -> str:
 # ─── Execution harness ────────────────────────────────────────────────────────
 
 def run_code(full_code: str) -> bool:
-    """Execute full_code in a subprocess; return True on exit 0."""
     try:
         res = subprocess.run(
             [sys.executable, "-c", full_code],
@@ -427,28 +436,22 @@ def run_code(full_code: str) -> bool:
 # ─── Generation ───────────────────────────────────────────────────────────────
 
 def make_chat_prompt(tokenizer, user_text: str) -> str:
-    """Apply the model's chat template. Falls back to bare text if it errors."""
-    sys_msg = (
-        "You are an expert Python programmer. "
-        "Complete the function. Return only the function body with correct indentation—no explanation."
-    )
     try:
-        msgs = [{"role": "system", "content": sys_msg},
-                {"role": "user", "content": user_text}]
-        return tokenizer.apply_chat_template(msgs, add_generation_prompt=True, tokenize=False)
+        if hasattr(tokenizer, 'apply_chat_template') and tokenizer.chat_template:
+            msgs = [{"role": "system", "content": "You are an expert Python programmer."},
+                    {"role": "user", "content": user_text}]
+            return tokenizer.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
     except Exception:
         try:
             msgs = [{"role": "user", "content": user_text}]
-            return tokenizer.apply_chat_template(msgs, add_generation_prompt=True, tokenize=False)
+            return tokenizer.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
         except Exception:
-            return user_text
+            pass
+    return user_text
 
 
 def generate_timed(model, tokenizer, prompt_text: str) -> tuple:
-    """
-    Generate a completion, return (text, generation_tps, peak_memory_gb).
-    GenerationResponse carries generation_tps and peak_memory natively.
-    """
+    """Return (text, generation_tps, peak_memory_gb)."""
     from mlx_lm.generate import stream_generate
     from mlx_lm.sample_utils import make_sampler
 
@@ -491,8 +494,6 @@ def run_humaneval(model, tokenizer) -> dict:
         peak_mem = max(peak_mem, pmem)
 
         code = extract_code(response)
-
-        # If model reproduced the full function, use code directly; otherwise append to prompt
         if f"def {prob['entry_point']}" in code:
             full_code = code
         else:
@@ -518,10 +519,12 @@ def run_mbpp(model, tokenizer) -> dict:
     log("  MBPP: loading dataset (sanitized)...")
     try:
         ds = load_dataset("mbpp", "sanitized", split="test")
+        prompt_field = "prompt"
     except Exception:
         log("  MBPP sanitized not found, using default split...")
         ds = load_dataset("mbpp", split="test")
-    log(f"  MBPP: {len(ds)} problems")
+        prompt_field = "text"
+    log(f"  MBPP: {len(ds)} problems (field='{prompt_field}')")
 
     passed = 0
     tps_list = []
@@ -529,7 +532,7 @@ def run_mbpp(model, tokenizer) -> dict:
 
     for i, prob in enumerate(ds):
         user_msg = (
-            f"Write a Python function for the following task:\n\n{prob["prompt"]}\n\n"
+            f"Write a Python function for the following task:\n\n{prob[prompt_field]}\n\n"
             "Return only the complete function definition."
         )
         chat_prompt = make_chat_prompt(tokenizer, user_msg)
@@ -557,8 +560,8 @@ def run_mbpp(model, tokenizer) -> dict:
 def run_real_tasks(model, tokenizer) -> dict:
     task_results = []
     tps_list = []
-
     peak_mem = 0.0
+
     for task in REAL_TASKS:
         user_msg = f"Complete the following Python function:\n\n{task['prompt']}"
         chat_prompt = make_chat_prompt(tokenizer, user_msg)
@@ -567,7 +570,6 @@ def run_real_tasks(model, tokenizer) -> dict:
         peak_mem = max(peak_mem, pmem)
 
         code = extract_code(response)
-        # Prepend the prompt (contains the def line) then append generated body + tests
         full_code = task["prompt"] + "\n" + code + "\n\n" + "\n".join(task["tests"]) + "\n"
 
         ok = run_code(full_code)
@@ -585,49 +587,46 @@ def run_real_tasks(model, tokenizer) -> dict:
 # ─── Model management ─────────────────────────────────────────────────────────
 
 def delete_model_cache(mlx_id: str):
-    """Remove model directory from HuggingFace hub cache."""
     cache_name = "models--" + mlx_id.replace("/", "--")
     cache_path = HF_CACHE / cache_name
     if cache_path.exists():
         shutil.rmtree(cache_path)
-        log(f"  Deleted: {cache_path}")
+        log(f"  Deleted cache: {cache_path}")
     else:
         log(f"  Cache not found (already clean?): {cache_path}")
 
 
 def load_model_with_fallback(model_cfg: dict):
-    """
-    Try mlx-community 4-bit first; if that fails, convert from HF with --q-bits 4.
-    Returns (model, tokenizer, local_converted_path_or_None).
-    """
+    """Try mlx-community 4-bit first; fall back to convert from HF."""
     from mlx_lm import load as mlx_load
 
     mlx_id = model_cfg["mlx_id"]
     log(f"  Trying mlx-community 4-bit: {mlx_id}")
+    err1 = None
     try:
         model, tokenizer = mlx_load(mlx_id)
         return model, tokenizer, None
-    except Exception as e1:
-        log(f"  mlx-community load failed: {e1}")
+    except Exception as _e1:
+        err1 = str(_e1)  # save now — Python 3 deletes the variable after except block
+        log(f"  mlx-community load failed: {err1}")
 
     hf_id = model_cfg["hf_id"]
     local_path = str(RESULTS_DIR / "converted_model_tmp")
     log(f"  Falling back to mlx_lm.convert from {hf_id} -> {local_path}")
     try:
         subprocess.run(
-            [
-                sys.executable, "-m", "mlx_lm.convert",
-                "--hf-path", hf_id,
-                "--mlx-path", local_path,
-                "--quantize", "--q-bits", "4",
-            ],
+            [sys.executable, "-m", "mlx_lm", "convert",
+             "--hf-path", hf_id,
+             "--mlx-path", local_path,
+             "--quantize", "--q-bits", "4"],
             check=True, timeout=7200,
         )
         model, tokenizer = mlx_load(local_path)
         return model, tokenizer, local_path
     except Exception as e2:
-        log(f"  Conversion also failed: {e2}")
-        raise RuntimeError(f"Cannot load {model_cfg['name']}: {e1} | {e2}")
+        err2 = str(e2)
+        log(f"  Conversion also failed: {err2}")
+        raise RuntimeError(f"Cannot load {model_cfg['name']}: {err1} | {err2}")
 
 
 # ─── Per-model benchmark ──────────────────────────────────────────────────────
@@ -642,34 +641,37 @@ def benchmark_model(model_cfg: dict) -> dict:
 
     t_load = time.time()
     model, tokenizer, converted_path = load_model_with_fallback(model_cfg)
-    mx.eval(model.parameters())  # ensure weights are materialized
+    mx.eval(model.parameters())
     t_load_elapsed = time.time() - t_load
     log(f"  Loaded in {t_load_elapsed:.1f}s")
 
-    humaneval = run_humaneval(model, tokenizer)
+    # Use cached HumanEval results from v1 run if available
+    if name in HUMANEVAL_CACHED:
+        log(f"  HumanEval: using cached v1 results (skipping ~164 inferences)")
+        humaneval = HUMANEVAL_CACHED[name]
+    else:
+        humaneval = run_humaneval(model, tokenizer)
+
     mbpp = run_mbpp(model, tokenizer)
     real = run_real_tasks(model, tokenizer)
 
-    # Peak memory across all suites (from GenerationResponse.peak_memory — unified MLX memory)
     peak_memory_gb = round(max(
         humaneval.get("peak_memory_gb", 0),
         mbpp.get("peak_memory_gb", 0),
         real.get("peak_memory_gb", 0),
     ), 2)
 
-    all_tps = [humaneval["mean_tps"], mbpp["mean_tps"], real["mean_tps"]]
-    mean_tps = round(float(np.mean(all_tps)), 1)
+    all_tps_vals = [humaneval["mean_tps"], mbpp["mean_tps"], real["mean_tps"]]
+    mean_tps = round(float(np.mean(all_tps_vals)), 1)
 
     log(f"  Freeing model...")
     del model, tokenizer
     gc.collect()
 
-    # Delete from cache
     delete_model_cache(model_cfg["mlx_id"])
     if converted_path and Path(converted_path).exists():
         shutil.rmtree(converted_path)
         log(f"  Deleted converted model: {converted_path}")
-    # Also remove HF cache for the HF base model if we converted
     if converted_path:
         hf_cache_name = "models--" + model_cfg["hf_id"].replace("/", "--")
         hf_cache_path = HF_CACHE / hf_cache_name
@@ -710,7 +712,7 @@ def write_markdown_table(results: list):
         he_gb = round(he / mem, 4)
         mb_gb = round(mb / mem, 4)
         rows.append(
-            f"| {name} | {pb}B | {mem:.1f} | {he:.3f} | {mb:.3f} | {rt:.1f} | {tps:.0f} | {he_gb:.4f} | {mb_gb:.4f} |"
+            f"| {name} | {pb}B | {mem:.1f} | {he:.3f} | {mb:.3f} | {rt:.2f} | {tps:.0f} | {he_gb:.4f} | {mb_gb:.4f} |"
         )
 
     lines = [
@@ -726,11 +728,12 @@ def write_markdown_table(results: list):
         "",
         "## Notes",
         "- **HumanEval**: pass@1 greedy, 164 problems (`openai/openai_humaneval`)",
-        "- **MBPP**: pass@1 greedy, MBPP-sanitized test split",
-        "- **Real/10**: 10 research-codebase tasks (l2_normalize, cosine_sim, bootstrap CI, top-k,",
-        "  IOI logit diff, Procrustes, JSON merge, code extraction, log parsing, power analysis)",
-        "- **Tok/s**: mean generation throughput across all three suites",
+        "- **MBPP**: pass@1 greedy, MBPP-sanitized test split (257 problems)",
+        "- **Real/10**: 10 research-codebase tasks (l2_normalize, cosine_sim, bootstrap CI,",
+        "  top-k, IOI logit diff, Procrustes, JSON merge, code extraction, log parsing, power analysis)",
+        "- **Tok/s**: mean generation throughput across all suites",
         "- **HE/GB / MBPP/GB**: pass@1 ÷ peak model memory (quality-per-GB efficiency)",
+        "- HumanEval results for 5 models from v1 run (2026-08-05); MBPP + real tasks from v2 run (2026-08-06)",
     ]
     md_path.write_text("\n".join(lines) + "\n")
     log(f"\nMarkdown table: {md_path}")
@@ -752,18 +755,19 @@ def save_checkpoint(data: dict):
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
-    log(f"SLM Benchmark Phase 1 — start {time.strftime('%Y-%m-%dT%H:%M:%S')}")
+    log(f"SLM Benchmark Phase 1 v2 — start {time.strftime('%Y-%m-%dT%H:%M:%S')}")
     log(f"Output dir: {RESULTS_DIR}")
     log(f"Models: {len(MODELS)}")
 
     ckpt = load_checkpoint()
     all_results = ckpt.get("results", [])
-    done = {r["model"] for r in all_results}
+    # Only skip models that completed WITHOUT error
+    done = {r["model"] for r in all_results if "error" not in r}
 
     for model_cfg in MODELS:
         name = model_cfg["name"]
         if name in done:
-            log(f"\nSKIP {name} (already in checkpoint)")
+            log(f"\nSKIP {name} (already completed in checkpoint)")
             continue
 
         try:
@@ -780,13 +784,15 @@ def main():
                 "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
             }
 
+        # Replace any old error entry for this model
+        all_results = [r for r in all_results if r["model"] != name]
         all_results.append(result)
         ckpt["results"] = all_results
         save_checkpoint(ckpt)
-        RESULTS_FILE.write_text(json.dumps({"benchmark": "slm-phase1", "results": all_results}, indent=2))
+        RESULTS_FILE.write_text(json.dumps({"benchmark": "slm-phase1-v2", "results": all_results}, indent=2))
         log(f"\nCheckpoint saved after {name}")
 
-    RESULTS_FILE.write_text(json.dumps({"benchmark": "slm-phase1", "results": all_results}, indent=2))
+    RESULTS_FILE.write_text(json.dumps({"benchmark": "slm-phase1-v2", "results": all_results}, indent=2))
     write_markdown_table(all_results)
     log(f"\nDone. Results: {RESULTS_FILE}")
 

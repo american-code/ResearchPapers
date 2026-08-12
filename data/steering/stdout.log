@@ -1,0 +1,408 @@
+=== apply_steering.py START Wed Jul 29 22:59:47 CDT 2026 ===
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading mlx-community/Llama-3.2-3B-bf16...
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:01,  4.28it/s]Fetching 7 files:  29%|██▊       | 2/7 [02:05<06:07, 73.59s/it]Fetching 7 files: 100%|██████████| 7/7 [02:05<00:00, 17.88s/it]
+Loaded in 127.9s
+Concepts:        ['positive_sentiment', 'negative_sentiment', 'french_language', 'python_coding', 'refusal_behavior']
+Steering layers: [8, 16, 24]
+Alphas:          [-2, -1, -0.5, 0, 0.5, 1, 2]
+Per-layer isolation: ONE layer patched at a time
+
+Resuming from checkpoint /Users/lab-02/ResearchPapers/data/steering/samples-llama3b.ckpt.json
+
+=== positive_sentiment  layer=8 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== positive_sentiment  layer=16 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== positive_sentiment  layer=24 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== negative_sentiment  layer=8 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== negative_sentiment  layer=16 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== negative_sentiment  layer=24 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== french_language  layer=8 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== french_language  layer=16 ===
+  alpha=-2.0  [SKIP — 20 completions already]
+  alpha=-1.0  [SKIP — 20 completions already]
+  alpha=-0.5  [SKIP — 20 completions already]
+  alpha=+0.0  [SKIP — 20 completions already]
+  alpha=+0.5  [SKIP — 20 completions already]
+  alpha=+1.0  [SKIP — 20 completions already]
+  alpha=+2.0  [SKIP — 20 completions already]
+  [checkpoint saved]
+
+=== french_language  layer=24 ===
+  alpha=-2.0 .................... [1140/2100 prompts, ~40s left]
+  alpha=-1.0 .................... [1160/2100 prompts, ~76s left]
+  alpha=-0.5 .................... [1180/2100 prompts, ~109s left]
+  alpha=+0.0 .................... [1200/2100 prompts, ~139s left]
+  alpha=+0.5 .................... [1220/2100 prompts, ~167s left]
+  alpha=+1.0 .................... [1240/2100 prompts, ~192s left]
+  alpha=+2.0 .................... [1260/2100 prompts, ~215s left]
+  [checkpoint saved]
+
+=== python_coding  layer=8 ===
+  alpha=-2.0 .................... [1280/2100 prompts, ~236s left]
+  alpha=-1.0 .................... [1300/2100 prompts, ~255s left]
+  alpha=-0.5 .................... [1320/2100 prompts, ~271s left]
+  alpha=+0.0 .................... [1340/2100 prompts, ~286s left]
+  alpha=+0.5 .................... [1360/2100 prompts, ~299s left]
+  alpha=+1.0 .................... [1380/2100 prompts, ~304s left]
+  alpha=+2.0 .................... [1400/2100 prompts, ~310s left]
+  [checkpoint saved]
+
+=== python_coding  layer=16 ===
+  alpha=-2.0 .................... [1420/2100 prompts, ~319s left]
+  alpha=-1.0 .................... [1440/2100 prompts, ~326s left]
+  alpha=-0.5 .................... [1460/2100 prompts, ~332s left]
+  alpha=+0.0 .................... [1480/2100 prompts, ~336s left]
+  alpha=+0.5 .................... [1500/2100 prompts, ~339s left]
+  alpha=+1.0 .................... [1520/2100 prompts, ~341s left]
+  alpha=+2.0 .................... [1540/2100 prompts, ~342s left]
+  [checkpoint saved]
+
+=== python_coding  layer=24 ===
+  alpha=-2.0 .................... [1560/2100 prompts, ~341s left]
+  alpha=-1.0 .................... [1580/2100 prompts, ~340s left]
+  alpha=-0.5 .................... [1600/2100 prompts, ~337s left]
+  alpha=+0.0 .................... [1620/2100 prompts, ~332s left]
+  alpha=+0.5 .................... [1640/2100 prompts, ~328s left]
+  alpha=+1.0 .................... [1660/2100 prompts, ~322s left]
+  alpha=+2.0 .................... [1680/2100 prompts, ~315s left]
+  [checkpoint saved]
+
+=== refusal_behavior  layer=8 ===
+  alpha=-2.0 .................... [1700/2100 prompts, ~306s left]
+  alpha=-1.0 .................... [1720/2100 prompts, ~298s left]
+  alpha=-0.5 .................... [1740/2100 prompts, ~288s left]
+  alpha=+0.0 .................... [1760/2100 prompts, ~278s left]
+  alpha=+0.5 .................... [1780/2100 prompts, ~267s left]
+  alpha=+1.0 .................... [1800/2100 prompts, ~255s left]
+  alpha=+2.0 .................... [1820/2100 prompts, ~242s left]
+  [checkpoint saved]
+
+=== refusal_behavior  layer=16 ===
+  alpha=-2.0 .................... [1840/2100 prompts, ~229s left]
+  alpha=-1.0 .................... [1860/2100 prompts, ~215s left]
+  alpha=-0.5 .................... [1880/2100 prompts, ~200s left]
+  alpha=+0.0 .................... [1900/2100 prompts, ~185s left]
+  alpha=+0.5 .................... [1920/2100 prompts, ~169s left]
+  alpha=+1.0 .................... [1940/2100 prompts, ~152s left]
+  alpha=+2.0 .................... [1960/2100 prompts, ~135s left]
+  [checkpoint saved]
+
+=== refusal_behavior  layer=24 ===
+  alpha=-2.0 .................... [1980/2100 prompts, ~117s left]
+  alpha=-1.0 .................... [2000/2100 prompts, ~99s left]
+  alpha=-0.5 .................... [2020/2100 prompts, ~80s left]
+  alpha=+0.0 .................... [2040/2100 prompts, ~61s left]
+  alpha=+0.5 .................... [2060/2100 prompts, ~41s left]
+  alpha=+1.0 .................... [2080/2100 prompts, ~21s left]
+  alpha=+2.0 .................... [2100/2100 prompts, ~0s left]
+  [checkpoint saved]
+
+Saved to /Users/lab-02/ResearchPapers/data/steering/samples-llama3b.json  (2067.1 KB)
+Total time: 2205.5s
+=== score_steering.py START Wed Jul 29 23:38:41 CDT 2026 ===
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading samples from /Users/lab-02/ResearchPapers/data/steering/samples-llama3b.json ...
+  Concepts: ['positive_sentiment', 'negative_sentiment', 'french_language', 'python_coding', 'refusal_behavior']
+  Layers:   [8, 16, 24]
+  Alphas:   [-2, -1, -0.5, 0, 0.5, 1, 2]
+
+── Pass 1: keyword scoring ──
+  positive_sentiment     L8  α=-2.0  hit=0.200  dens=0.257
+  positive_sentiment     L8  α=-1.0  hit=0.200  dens=0.359
+  positive_sentiment     L8  α=-0.5  hit=0.350  dens=0.537
+  positive_sentiment     L8  α=+0.0  hit=0.300  dens=0.470
+  positive_sentiment     L8  α=+0.5  hit=0.450  dens=0.966
+  positive_sentiment     L8  α=+1.0  hit=0.450  dens=2.406
+  positive_sentiment     L8  α=+2.0  hit=0.650  dens=1.593
+  positive_sentiment     L16  α=-2.0  hit=0.100  dens=0.294
+  positive_sentiment     L16  α=-1.0  hit=0.100  dens=0.167
+  positive_sentiment     L16  α=-0.5  hit=0.150  dens=0.176
+  positive_sentiment     L16  α=+0.0  hit=0.350  dens=0.421
+  positive_sentiment     L16  α=+0.5  hit=0.550  dens=1.198
+  positive_sentiment     L16  α=+1.0  hit=0.500  dens=1.504
+  positive_sentiment     L16  α=+2.0  hit=0.900  dens=3.172
+  positive_sentiment     L24  α=-2.0  hit=0.050  dens=0.088
+  positive_sentiment     L24  α=-1.0  hit=0.150  dens=0.293
+  positive_sentiment     L24  α=-0.5  hit=0.200  dens=0.407
+  positive_sentiment     L24  α=+0.0  hit=0.200  dens=0.419
+  positive_sentiment     L24  α=+0.5  hit=0.800  dens=2.026
+  positive_sentiment     L24  α=+1.0  hit=0.550  dens=1.235
+  positive_sentiment     L24  α=+2.0  hit=0.850  dens=4.202
+  negative_sentiment     L8  α=-2.0  hit=0.050  dens=0.055
+  negative_sentiment     L8  α=-1.0  hit=0.050  dens=0.061
+  negative_sentiment     L8  α=-0.5  hit=0.150  dens=0.252
+  negative_sentiment     L8  α=+0.0  hit=0.100  dens=0.116
+  negative_sentiment     L8  α=+0.5  hit=0.000  dens=0.000
+  negative_sentiment     L8  α=+1.0  hit=0.200  dens=0.384
+  negative_sentiment     L8  α=+2.0  hit=0.200  dens=0.397
+  negative_sentiment     L16  α=-2.0  hit=0.000  dens=0.000
+  negative_sentiment     L16  α=-1.0  hit=0.100  dens=0.111
+  negative_sentiment     L16  α=-0.5  hit=0.100  dens=0.248
+  negative_sentiment     L16  α=+0.0  hit=0.100  dens=0.176
+  negative_sentiment     L16  α=+0.5  hit=0.200  dens=0.325
+  negative_sentiment     L16  α=+1.0  hit=0.050  dens=0.291
+  negative_sentiment     L16  α=+2.0  hit=0.100  dens=0.114
+  negative_sentiment     L24  α=-2.0  hit=0.000  dens=0.000
+  negative_sentiment     L24  α=-1.0  hit=0.050  dens=0.058
+  negative_sentiment     L24  α=-0.5  hit=0.000  dens=0.000
+  negative_sentiment     L24  α=+0.0  hit=0.000  dens=0.000
+  negative_sentiment     L24  α=+0.5  hit=0.100  dens=0.123
+  negative_sentiment     L24  α=+1.0  hit=0.200  dens=0.291
+  negative_sentiment     L24  α=+2.0  hit=0.450  dens=1.225
+  french_language        L8  α=-2.0  hit=0.850  dens=6.617
+  french_language        L8  α=-1.0  hit=1.000  dens=6.701
+  french_language        L8  α=-0.5  hit=1.000  dens=5.112
+  french_language        L8  α=+0.0  hit=0.950  dens=5.777
+  french_language        L8  α=+0.5  hit=0.900  dens=4.984
+  french_language        L8  α=+1.0  hit=1.000  dens=23.555
+  french_language        L8  α=+2.0  hit=0.300  dens=1.449
+  french_language        L16  α=-2.0  hit=1.000  dens=6.222
+  french_language        L16  α=-1.0  hit=0.950  dens=6.818
+  french_language        L16  α=-0.5  hit=1.000  dens=6.226
+  french_language        L16  α=+0.0  hit=1.000  dens=7.908
+  french_language        L16  α=+0.5  hit=0.950  dens=7.282
+  french_language        L16  α=+1.0  hit=0.900  dens=15.247
+  french_language        L16  α=+2.0  hit=0.250  dens=6.232
+  french_language        L24  α=-2.0  hit=1.000  dens=6.303
+  french_language        L24  α=-1.0  hit=0.950  dens=6.336
+  french_language        L24  α=-0.5  hit=0.950  dens=4.730
+  french_language        L24  α=+0.0  hit=1.000  dens=7.055
+  french_language        L24  α=+0.5  hit=0.950  dens=9.263
+  french_language        L24  α=+1.0  hit=0.950  dens=26.594
+  french_language        L24  α=+2.0  hit=1.000  dens=43.629
+  python_coding          L8  α=-2.0  hit=0.150  dens=0.275
+  python_coding          L8  α=-1.0  hit=0.100  dens=0.121
+  python_coding          L8  α=-0.5  hit=0.500  dens=0.958
+  python_coding          L8  α=+0.0  hit=0.600  dens=1.185
+  python_coding          L8  α=+0.5  hit=0.350  dens=1.280
+  python_coding          L8  α=+1.0  hit=0.150  dens=0.357
+  python_coding          L8  α=+2.0  hit=0.050  dens=0.417
+  python_coding          L16  α=-2.0  hit=0.350  dens=0.494
+  python_coding          L16  α=-1.0  hit=0.200  dens=0.248
+  python_coding          L16  α=-0.5  hit=0.400  dens=0.645
+  python_coding          L16  α=+0.0  hit=0.600  dens=1.410
+  python_coding          L16  α=+0.5  hit=0.400  dens=1.543
+  python_coding          L16  α=+1.0  hit=0.000  dens=0.000
+  python_coding          L16  α=+2.0  hit=0.000  dens=0.000
+  python_coding          L24  α=-2.0  hit=0.100  dens=0.222
+  python_coding          L24  α=-1.0  hit=0.250  dens=0.433
+  python_coding          L24  α=-0.5  hit=0.600  dens=0.937
+  python_coding          L24  α=+0.0  hit=0.500  dens=1.329
+  python_coding          L24  α=+0.5  hit=0.600  dens=1.444
+  python_coding          L24  α=+1.0  hit=0.050  dens=0.213
+  python_coding          L24  α=+2.0  hit=0.000  dens=0.000
+  refusal_behavior       L8  α=-2.0  hit=0.050  dens=0.065
+  refusal_behavior       L8  α=-1.0  hit=0.200  dens=0.235
+  refusal_behavior       L8  α=-0.5  hit=0.050  dens=0.116
+  refusal_behavior       L8  α=+0.0  hit=0.000  dens=0.000
+  refusal_behavior       L8  α=+0.5  hit=0.200  dens=0.300
+  refusal_behavior       L8  α=+1.0  hit=0.100  dens=0.185
+  refusal_behavior       L8  α=+2.0  hit=0.350  dens=0.919
+  refusal_behavior       L16  α=-2.0  hit=0.000  dens=0.000
+  refusal_behavior       L16  α=-1.0  hit=0.050  dens=0.068
+  refusal_behavior       L16  α=-0.5  hit=0.050  dens=0.056
+  refusal_behavior       L16  α=+0.0  hit=0.050  dens=0.118
+  refusal_behavior       L16  α=+0.5  hit=0.100  dens=0.143
+  refusal_behavior       L16  α=+1.0  hit=0.100  dens=0.112
+  refusal_behavior       L16  α=+2.0  hit=0.450  dens=1.267
+  refusal_behavior       L24  α=-2.0  hit=0.000  dens=0.000
+  refusal_behavior       L24  α=-1.0  hit=0.050  dens=0.057
+  refusal_behavior       L24  α=-0.5  hit=0.050  dens=0.059
+  refusal_behavior       L24  α=+0.0  hit=0.100  dens=0.121
+  refusal_behavior       L24  α=+0.5  hit=0.150  dens=0.258
+  refusal_behavior       L24  α=+1.0  hit=0.050  dens=0.061
+  refusal_behavior       L24  α=+2.0  hit=0.400  dens=0.838
+
+Loading mlx-community/Llama-3.2-3B-bf16 ...
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 152125.02it/s]
+Loaded in 2.2s
+JIT warmup ...
+  Done.
+
+Baseline PPL (alpha=0, no steering) ...
+  math_ppl    = 11.9313
+  fluency_ppl = 21.2146  (1.8s)
+
+── Pass 2: PPL scoring ──
+  [  1/105]  positive_sentiment      L8  α=-2.0  math_ppl=17.82  flu_ppl=26.26  ETA 121s
+  [  2/105]  positive_sentiment      L8  α=-1.0  math_ppl=12.76  flu_ppl=22.20  ETA 120s
+  [  3/105]  positive_sentiment      L8  α=-0.5  math_ppl=12.28  flu_ppl=21.28  ETA 119s
+  [  4/105]  positive_sentiment      L8  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 88s
+  [  5/105]  positive_sentiment      L8  α=+0.5  math_ppl=11.66  flu_ppl=21.35  ETA 93s
+  [  6/105]  positive_sentiment      L8  α=+1.0  math_ppl=11.52  flu_ppl=22.34  ETA 96s
+  [  7/105]  positive_sentiment      L8  α=+2.0  math_ppl=15.81  flu_ppl=27.57  ETA 98s
+  [  8/105]  positive_sentiment      L16  α=-2.0  math_ppl=13.38  flu_ppl=28.63  ETA 99s
+  [  9/105]  positive_sentiment      L16  α=-1.0  math_ppl=12.22  flu_ppl=23.85  ETA 100s
+  [ 10/105]  positive_sentiment      L16  α=-0.5  math_ppl=11.80  flu_ppl=21.96  ETA 100s
+  [ 11/105]  positive_sentiment      L16  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 90s
+  [ 12/105]  positive_sentiment      L16  α=+0.5  math_ppl=11.75  flu_ppl=20.72  ETA 90s
+  [ 13/105]  positive_sentiment      L16  α=+1.0  math_ppl=11.65  flu_ppl=21.45  ETA 91s
+  [ 14/105]  positive_sentiment      L16  α=+2.0  math_ppl=12.89  flu_ppl=25.74  ETA 91s
+  [ 15/105]  positive_sentiment      L24  α=-2.0  math_ppl=13.83  flu_ppl=27.89  ETA 91s
+  [ 16/105]  positive_sentiment      L24  α=-1.0  math_ppl=12.68  flu_ppl=23.40  ETA 91s
+  [ 17/105]  positive_sentiment      L24  α=-0.5  math_ppl=12.24  flu_ppl=21.83  ETA 91s
+  [ 18/105]  positive_sentiment      L24  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 85s
+  [ 19/105]  positive_sentiment      L24  α=+0.5  math_ppl=11.71  flu_ppl=20.95  ETA 84s
+  [ 20/105]  positive_sentiment      L24  α=+1.0  math_ppl=11.61  flu_ppl=21.34  ETA 84s
+  [ 21/105]  positive_sentiment      L24  α=+2.0  math_ppl=12.41  flu_ppl=24.53  ETA 84s
+  [ 22/105]  negative_sentiment      L8  α=-2.0  math_ppl=15.81  flu_ppl=27.57  ETA 84s
+  [ 23/105]  negative_sentiment      L8  α=-1.0  math_ppl=11.52  flu_ppl=22.34  ETA 83s
+  [ 24/105]  negative_sentiment      L8  α=-0.5  math_ppl=11.66  flu_ppl=21.35  ETA 83s
+  [ 25/105]  negative_sentiment      L8  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 78s
+  [ 26/105]  negative_sentiment      L8  α=+0.5  math_ppl=12.28  flu_ppl=21.28  ETA 78s
+  [ 27/105]  negative_sentiment      L8  α=+1.0  math_ppl=12.76  flu_ppl=22.20  ETA 77s
+  [ 28/105]  negative_sentiment      L8  α=+2.0  math_ppl=17.82  flu_ppl=26.26  ETA 77s
+  [ 29/105]  negative_sentiment      L16  α=-2.0  math_ppl=12.89  flu_ppl=25.74  ETA 76s
+  [ 30/105]  negative_sentiment      L16  α=-1.0  math_ppl=11.65  flu_ppl=21.45  ETA 76s
+  [ 31/105]  negative_sentiment      L16  α=-0.5  math_ppl=11.75  flu_ppl=20.72  ETA 75s
+  [ 32/105]  negative_sentiment      L16  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 72s
+  [ 33/105]  negative_sentiment      L16  α=+0.5  math_ppl=11.80  flu_ppl=21.96  ETA 71s
+  [ 34/105]  negative_sentiment      L16  α=+1.0  math_ppl=12.22  flu_ppl=23.85  ETA 71s
+  [ 35/105]  negative_sentiment      L16  α=+2.0  math_ppl=13.38  flu_ppl=28.63  ETA 70s
+  [ 36/105]  negative_sentiment      L24  α=-2.0  math_ppl=12.41  flu_ppl=24.53  ETA 69s
+  [ 37/105]  negative_sentiment      L24  α=-1.0  math_ppl=11.61  flu_ppl=21.34  ETA 69s
+  [ 38/105]  negative_sentiment      L24  α=-0.5  math_ppl=11.71  flu_ppl=20.95  ETA 68s
+  [ 39/105]  negative_sentiment      L24  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 65s
+  [ 40/105]  negative_sentiment      L24  α=+0.5  math_ppl=12.24  flu_ppl=21.83  ETA 64s
+  [ 41/105]  negative_sentiment      L24  α=+1.0  math_ppl=12.68  flu_ppl=23.40  ETA 64s
+  [ 42/105]  negative_sentiment      L24  α=+2.0  math_ppl=13.83  flu_ppl=27.89  ETA 63s
+  [ 43/105]  french_language         L8  α=-2.0  math_ppl=106.07  flu_ppl=102.32  ETA 62s
+  [ 44/105]  french_language         L8  α=-1.0  math_ppl=17.20  flu_ppl=28.15  ETA 61s
+  [ 45/105]  french_language         L8  α=-0.5  math_ppl=12.12  flu_ppl=22.21  ETA 61s
+  [ 46/105]  french_language         L8  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 58s
+  [ 47/105]  french_language         L8  α=+0.5  math_ppl=12.67  flu_ppl=22.61  ETA 58s
+  [ 48/105]  french_language         L8  α=+1.0  math_ppl=82.53  flu_ppl=295.54  ETA 57s
+  [ 49/105]  french_language         L8  α=+2.0  math_ppl=269644.88  flu_ppl=3731391.08  ETA 56s
+  [ 50/105]  french_language         L16  α=-2.0  math_ppl=31.52  flu_ppl=39.68  ETA 55s
+  [ 51/105]  french_language         L16  α=-1.0  math_ppl=15.40  flu_ppl=24.82  ETA 54s
+  [ 52/105]  french_language         L16  α=-0.5  math_ppl=12.66  flu_ppl=22.20  ETA 53s
+  [ 53/105]  french_language         L16  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 51s
+  [ 54/105]  french_language         L16  α=+0.5  math_ppl=13.55  flu_ppl=22.80  ETA 51s
+  [ 55/105]  french_language         L16  α=+1.0  math_ppl=72.62  flu_ppl=806.71  ETA 50s
+  [ 56/105]  french_language         L16  α=+2.0  math_ppl=1843.54  flu_ppl=48753.45  ETA 49s
+  [ 57/105]  french_language         L24  α=-2.0  math_ppl=40.01  flu_ppl=36.51  ETA 48s
+  [ 58/105]  french_language         L24  α=-1.0  math_ppl=15.89  flu_ppl=24.82  ETA 47s
+  [ 59/105]  french_language         L24  α=-0.5  math_ppl=13.04  flu_ppl=21.93  ETA 46s
+  [ 60/105]  french_language         L24  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 45s
+  [ 61/105]  french_language         L24  α=+0.5  math_ppl=13.52  flu_ppl=25.67  ETA 44s
+  [ 62/105]  french_language         L24  α=+1.0  math_ppl=44.15  flu_ppl=130.53  ETA 43s
+  [ 63/105]  french_language         L24  α=+2.0  math_ppl=370.83  flu_ppl=9612.63  ETA 42s
+  [ 64/105]  python_coding           L8  α=-2.0  math_ppl=2332.35  flu_ppl=4649.58  ETA 41s
+  [ 65/105]  python_coding           L8  α=-1.0  math_ppl=529.16  flu_ppl=260.34  ETA 40s
+  [ 66/105]  python_coding           L8  α=-0.5  math_ppl=23.96  flu_ppl=32.70  ETA 39s
+  [ 67/105]  python_coding           L8  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 38s
+  [ 68/105]  python_coding           L8  α=+0.5  math_ppl=35.28  flu_ppl=63.07  ETA 37s
+  [ 69/105]  python_coding           L8  α=+1.0  math_ppl=354092.98  flu_ppl=510542.50  ETA 36s
+  [ 70/105]  python_coding           L8  α=+2.0  math_ppl=29329.31  flu_ppl=27562.70  ETA 35s
+  [ 71/105]  python_coding           L16  α=-2.0  math_ppl=2175.87  flu_ppl=2551.08  ETA 34s
+  [ 72/105]  python_coding           L16  α=-1.0  math_ppl=56.14  flu_ppl=46.90  ETA 33s
+  [ 73/105]  python_coding           L16  α=-0.5  math_ppl=19.35  flu_ppl=25.91  ETA 32s
+  [ 74/105]  python_coding           L16  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 31s
+  [ 75/105]  python_coding           L16  α=+0.5  math_ppl=19.59  flu_ppl=33.09  ETA 30s
+  [ 76/105]  python_coding           L16  α=+1.0  math_ppl=4553.32  flu_ppl=64857.51  ETA 29s
+  [ 77/105]  python_coding           L16  α=+2.0  math_ppl=6716.14  flu_ppl=71697.30  ETA 28s
+  [ 78/105]  python_coding           L24  α=-2.0  math_ppl=64821.86  flu_ppl=49302.46  ETA 27s
+  [ 79/105]  python_coding           L24  α=-1.0  math_ppl=3102.76  flu_ppl=113.20  ETA 26s
+  [ 80/105]  python_coding           L24  α=-0.5  math_ppl=16.39  flu_ppl=24.08  ETA 25s
+  [ 81/105]  python_coding           L24  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 24s
+  [ 82/105]  python_coding           L24  α=+0.5  math_ppl=13.93  flu_ppl=24.69  ETA 23s
+  [ 83/105]  python_coding           L24  α=+1.0  math_ppl=50.00  flu_ppl=76.94  ETA 22s
+  [ 84/105]  python_coding           L24  α=+2.0  math_ppl=430.64  flu_ppl=1986.26  ETA 21s
+  [ 85/105]  refusal_behavior        L8  α=-2.0  math_ppl=16.59  flu_ppl=27.92  ETA 20s
+  [ 86/105]  refusal_behavior        L8  α=-1.0  math_ppl=11.85  flu_ppl=21.28  ETA 19s
+  [ 87/105]  refusal_behavior        L8  α=-0.5  math_ppl=11.54  flu_ppl=20.85  ETA 18s
+  [ 88/105]  refusal_behavior        L8  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 17s
+  [ 89/105]  refusal_behavior        L8  α=+0.5  math_ppl=12.51  flu_ppl=21.60  ETA 16s
+  [ 90/105]  refusal_behavior        L8  α=+1.0  math_ppl=13.25  flu_ppl=22.89  ETA 15s
+  [ 91/105]  refusal_behavior        L8  α=+2.0  math_ppl=15.36  flu_ppl=29.56  ETA 14s
+  [ 92/105]  refusal_behavior        L16  α=-2.0  math_ppl=15.42  flu_ppl=28.18  ETA 13s
+  [ 93/105]  refusal_behavior        L16  α=-1.0  math_ppl=12.03  flu_ppl=22.63  ETA 12s
+  [ 94/105]  refusal_behavior        L16  α=-0.5  math_ppl=11.70  flu_ppl=21.49  ETA 11s
+  [ 95/105]  refusal_behavior        L16  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 10s
+  [ 96/105]  refusal_behavior        L16  α=+0.5  math_ppl=12.12  flu_ppl=21.47  ETA 9s
+  [ 97/105]  refusal_behavior        L16  α=+1.0  math_ppl=12.56  flu_ppl=23.25  ETA 8s
+  [ 98/105]  refusal_behavior        L16  α=+2.0  math_ppl=16.17  flu_ppl=32.98  ETA 7s
+  [ 99/105]  refusal_behavior        L24  α=-2.0  math_ppl=13.09  flu_ppl=25.40  ETA 6s
+  [100/105]  refusal_behavior        L24  α=-1.0  math_ppl=11.82  flu_ppl=21.74  ETA 5s
+  [101/105]  refusal_behavior        L24  α=-0.5  math_ppl=11.70  flu_ppl=20.93  ETA 4s
+  [102/105]  refusal_behavior        L24  α=+0.0  math_ppl=11.93  flu_ppl=21.21  ETA 3s
+  [103/105]  refusal_behavior        L24  α=+0.5  math_ppl=12.37  flu_ppl=21.68  ETA 2s
+  [104/105]  refusal_behavior        L24  α=+1.0  math_ppl=13.01  flu_ppl=23.29  ETA 1s
+  [105/105]  refusal_behavior        L24  α=+2.0  math_ppl=15.18  flu_ppl=28.94  ETA 0s
+
+Saved /Users/lab-02/ResearchPapers/data/steering/scores-llama3b.json  (31.8 KB)
+
+Building benchmark-summary.json ...
+Saved /Users/lab-02/ResearchPapers/data/steering/benchmark-summary.json  (7.7 KB)
+
+── Dominant layer results ──
+  positive_sentiment      dominant=L16  behavior=0.900  best_α=2
+  negative_sentiment      dominant=L24  behavior=0.450  best_α=2
+  french_language         dominant=L8  behavior=1.000  best_α=1
+  python_coding           dominant=L24  behavior=0.600  best_α=0.5
+  refusal_behavior        dominant=L16  behavior=0.450  best_α=2

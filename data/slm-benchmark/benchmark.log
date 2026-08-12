@@ -1,0 +1,144 @@
+[23:38:17] SLM Benchmark Phase 1 — start 2026-08-05T23:38:17
+[23:38:17] Output dir: /Users/lab-02/ResearchPapers/data/slm-benchmark
+[23:38:17] Models: 6
+[23:38:17] 
+================================================================
+[23:38:17]   MODEL: Qwen2.5-Coder-1.5B-Instruct  (1.5B params, 4-bit)
+[23:38:17] ================================================================
+[23:38:18]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit
+[23:38:40]   Loaded in 22.8s
+[23:38:40]   HumanEval: loading dataset...
+[23:38:43]   HumanEval: 164 problems
+[23:38:55]     HumanEval [20/164] pass=16 tps=199.0
+[23:39:06]     HumanEval [40/164] pass=27 tps=200.0
+[23:39:17]     HumanEval [60/164] pass=42 tps=200.3
+[23:39:28]     HumanEval [80/164] pass=55 tps=199.7
+[23:39:41]     HumanEval [100/164] pass=67 tps=199.3
+[23:39:52]     HumanEval [120/164] pass=73 tps=199.0
+[23:40:05]     HumanEval [140/164] pass=80 tps=198.6
+[23:40:18]     HumanEval [160/164] pass=93 tps=198.4
+[23:40:20]     HumanEval [164/164] pass=95 tps=198.4
+[23:40:20]   HumanEval pass@1 = 0.5793 (95/164)
+[23:40:20]   MBPP: loading dataset (sanitized)...
+[23:40:24]   MBPP: 257 problems
+[23:40:24] 
+ERROR on Qwen2.5-Coder-1.5B-Instruct: 'text'
+[23:40:24] 
+Checkpoint saved after Qwen2.5-Coder-1.5B-Instruct
+[23:40:24] 
+================================================================
+[23:40:24]   MODEL: Qwen2.5-Coder-3B-Instruct  (3.0B params, 4-bit)
+[23:40:24] ================================================================
+[23:40:24]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-3B-Instruct-4bit
+[23:41:04]   Loaded in 40.3s
+[23:41:04]   HumanEval: loading dataset...
+[23:41:05]   HumanEval: 164 problems
+[23:41:36]     HumanEval [20/164] pass=20 tps=120.7
+[23:42:09]     HumanEval [40/164] pass=38 tps=120.7
+[23:42:35]     HumanEval [60/164] pass=53 tps=121.0
+[23:43:02]     HumanEval [80/164] pass=68 tps=120.9
+[23:43:34]     HumanEval [100/164] pass=83 tps=120.7
+[23:44:07]     HumanEval [120/164] pass=96 tps=120.5
+[23:44:45]     HumanEval [140/164] pass=108 tps=120.4
+[23:45:14]     HumanEval [160/164] pass=122 tps=120.4
+[23:45:20]     HumanEval [164/164] pass=124 tps=120.4
+[23:45:20]   HumanEval pass@1 = 0.7561 (124/164)
+[23:45:20]   MBPP: loading dataset (sanitized)...
+[23:45:21]   MBPP: 257 problems
+[23:45:21] 
+ERROR on Qwen2.5-Coder-3B-Instruct: 'text'
+[23:45:21] 
+Checkpoint saved after Qwen2.5-Coder-3B-Instruct
+[23:45:21] 
+================================================================
+[23:45:21]   MODEL: Qwen2.5-Coder-7B-Instruct  (7.0B params, 4-bit)
+[23:45:21] ================================================================
+[23:45:21]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-7B-Instruct-4bit
+[23:47:00]   Loaded in 98.4s
+[23:47:00]   HumanEval: loading dataset...
+[23:47:01]   HumanEval: 164 problems
+[23:47:26]     HumanEval [20/164] pass=2 tps=71.5
+[23:47:57]     HumanEval [40/164] pass=6 tps=71.7
+[23:48:20]     HumanEval [60/164] pass=14 tps=71.6
+[23:48:49]     HumanEval [80/164] pass=30 tps=71.3
+[23:49:23]     HumanEval [100/164] pass=45 tps=71.1
+[23:49:56]     HumanEval [120/164] pass=62 tps=70.9
+[23:50:35]     HumanEval [140/164] pass=74 tps=70.8
+[23:51:10]     HumanEval [160/164] pass=89 tps=70.7
+[23:51:16]     HumanEval [164/164] pass=91 tps=70.7
+[23:51:16]   HumanEval pass@1 = 0.5549 (91/164)
+[23:51:16]   MBPP: loading dataset (sanitized)...
+[23:51:17]   MBPP: 257 problems
+[23:51:17] 
+ERROR on Qwen2.5-Coder-7B-Instruct: 'text'
+[23:51:17] 
+Checkpoint saved after Qwen2.5-Coder-7B-Instruct
+[23:51:17] 
+================================================================
+[23:51:17]   MODEL: Phi-4-Mini-Instruct  (3.8B params, 4-bit)
+[23:51:17] ================================================================
+[23:51:17]   Trying mlx-community 4-bit: mlx-community/phi-4-mini-instruct-4bit
+[23:52:08]   Loaded in 51.0s
+[23:52:08]   HumanEval: loading dataset...
+[23:52:09]   HumanEval: 164 problems
+[23:52:27]     HumanEval [20/164] pass=4 tps=111.6
+[23:52:44]     HumanEval [40/164] pass=11 tps=111.9
+[23:53:00]     HumanEval [60/164] pass=19 tps=111.9
+[23:53:20]     HumanEval [80/164] pass=29 tps=111.4
+[23:53:41]     HumanEval [100/164] pass=37 tps=111.1
+[23:54:04]     HumanEval [120/164] pass=47 tps=110.7
+[23:54:34]     HumanEval [140/164] pass=55 tps=110.5
+[23:55:02]     HumanEval [160/164] pass=63 tps=110.3
+[23:55:05]     HumanEval [164/164] pass=65 tps=110.3
+[23:55:05]   HumanEval pass@1 = 0.3963 (65/164)
+[23:55:05]   MBPP: loading dataset (sanitized)...
+[23:55:07]   MBPP: 257 problems
+[23:55:07] 
+ERROR on Phi-4-Mini-Instruct: 'text'
+[23:55:07] 
+Checkpoint saved after Phi-4-Mini-Instruct
+[23:55:07] 
+================================================================
+[23:55:07]   MODEL: DeepSeek-Coder-V2-Lite-Instruct  (16.0B params, 4-bit)
+[23:55:07] ================================================================
+[23:55:07]   Trying mlx-community 4-bit: mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit
+[23:58:29]   Loaded in 202.0s
+[23:58:29]   HumanEval: loading dataset...
+[23:58:29]   HumanEval: 164 problems
+[23:59:22]     HumanEval [20/164] pass=20 tps=82.2
+[00:00:42]     HumanEval [40/164] pass=36 tps=82.2
+[00:01:28]     HumanEval [60/164] pass=54 tps=82.2
+[00:02:16]     HumanEval [80/164] pass=68 tps=81.9
+[00:03:08]     HumanEval [100/164] pass=84 tps=81.9
+[00:03:57]     HumanEval [120/164] pass=99 tps=81.8
+[00:04:56]     HumanEval [140/164] pass=107 tps=81.8
+[00:06:02]     HumanEval [160/164] pass=122 tps=81.7
+[00:06:15]     HumanEval [164/164] pass=124 tps=81.7
+[00:06:15]   HumanEval pass@1 = 0.7561 (124/164)
+[00:06:15]   MBPP: loading dataset (sanitized)...
+[00:06:17]   MBPP: 257 problems
+[00:06:17] 
+ERROR on DeepSeek-Coder-V2-Lite-Instruct: 'text'
+[00:06:17] 
+Checkpoint saved after DeepSeek-Coder-V2-Lite-Instruct
+[00:06:17] 
+================================================================
+[00:06:17]   MODEL: Granite-Code-8B-Instruct  (8.0B params, 4-bit)
+[00:06:17] ================================================================
+[00:06:17]   Trying mlx-community 4-bit: mlx-community/granite-code-8b-instruct-4bit
+[00:06:17]   mlx-community load failed: 401 Client Error. (Request ID: Root=1-6a741649-0fde9f576a1d819228afde65;a1d38156-fb81-4af5-a7a8-0e80ea8848c1)
+
+Repository Not Found for url: https://huggingface.co/api/models/mlx-community/granite-code-8b-instruct-4bit/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password.
+[00:06:17]   Falling back to mlx_lm.convert from ibm-granite/granite-code-8b-instruct -> /Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp
+[00:06:18]   Conversion also failed: Command '['/Library/Developer/CommandLineTools/usr/bin/python3', '-m', 'mlx_lm.convert', '--hf-path', 'ibm-granite/granite-code-8b-instruct', '--mlx-path', '/Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp', '--quantize', '--q-bits', '4']' returned non-zero exit status 1.
+[00:06:18] 
+ERROR on Granite-Code-8B-Instruct: local variable 'e1' referenced before assignment
+[00:06:18] 
+Checkpoint saved after Granite-Code-8B-Instruct
+[00:06:18] 
+Markdown table: /Users/lab-02/ResearchPapers/data/slm-benchmark/quality_per_gb.md
+[00:06:18] 
+Done. Results: /Users/lab-02/ResearchPapers/data/slm-benchmark/results.json

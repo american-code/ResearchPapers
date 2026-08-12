@@ -1,0 +1,159 @@
+[18:32:18] === SAE Neurosymbolic Rule Extraction v2 ===
+[18:32:18] Output: /Users/lab-02/ResearchPapers/data/sae-rules-v2
+[18:32:18] [mistral] memmap activations.npy: shape=(500000, 4096) dtype=float16
+[18:32:18] [mistral] Encoding 100000 tokens → SAE features (D=16384) ...
+[18:32:19]   2000/100000
+[18:32:22]   22000/100000
+[18:32:26]   42000/100000
+[18:32:29]   62000/100000
+[18:32:32]   82000/100000
+[18:32:36] Saved activations_mistral.npy
+[18:32:36] [llama] memmap activations.npy: shape=(500000, 3072) dtype=float16
+[18:32:36] [llama] Encoding 100000 tokens → SAE features (D=16384) ...
+[18:32:37]   2000/100000
+[18:32:39]   22000/100000
+[18:32:42]   42000/100000
+[18:32:45]   62000/100000
+[18:32:48]   82000/100000
+[18:32:51] Saved activations_llama.npy
+[18:32:51] SAE activations: mistral=(100000, 16384) llama=(100000, 16384)
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[18:32:54] Loading tokenizer: mlx-community/Mistral-7B-v0.3-4bit
+[18:32:55] Loading wikitext-103 ...
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 113230.36 examples/s]
+Generating train split:   0%|          | 0/1801350 [00:00<?, ? examples/s]Generating train split:  18%|█▊        | 326000/1801350 [00:00<00:00, 3248208.48 examples/s]Generating train split:  38%|███▊      | 677000/1801350 [00:00<00:00, 3396330.04 examples/s]Generating train split:  59%|█████▉    | 1058675/1801350 [00:00<00:00, 3583648.19 examples/s]Generating train split:  81%|████████  | 1454675/1801350 [00:00<00:00, 3727459.04 examples/s]Generating train split: 100%|██████████| 1801350/1801350 [00:00<00:00, 3684074.01 examples/s]
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 1394146.31 examples/s]
+[18:33:21] Tokenizing full text with offset mapping ...
+[18:33:22]   100000 tokens spanning 401,059 chars
+[18:33:22] Running spacy on corpus ...
+[18:33:25]   spacy progress: 79,500/401,059 chars
+[18:33:32]   spacy progress: 477,000/401,059 chars
+[18:33:32]   Aligning labels to token positions ...
+[18:33:32] Saved tokens and labels
+[18:33:32] NER dist:  {'person': 2216, 'org': 2154, 'gpe': 831, 'date': 3435, 'number': 1837, 'other': 89527}
+[18:33:32] DEP dist:  {'nsubj': 2216, 'dobj': 1273, 'prep': 4954, 'det': 5, 'punct': 160, 'other': 91392}
+[18:33:32] IS_NE:     NE=11480 non-NE=88520
+[18:33:32] 
+============================================================
+[18:33:32] Processing: mistral
+[18:33:32] ============================================================
+[18:33:32] [mistral] Computing feature statistics ...
+[18:33:44]   Top 500 features selected by variance
+[18:33:44]   [mistral] feature 0/500: id=5787 label='@' var=2.2241 sparsity=0.004
+[18:33:44]   [mistral] feature 100/500: id=15856 label='of' var=0.3375 sparsity=0.004
+[18:33:44]   [mistral] feature 200/500: id=2435 label='was' var=0.0195 sparsity=0.020
+[18:33:44]   [mistral] feature 300/500: id=10304 label='of_the' var=0.0128 sparsity=0.121
+[18:33:45]   [mistral] feature 400/500: id=15784 label='was' var=0.0100 sparsity=0.047
+[18:33:45] Saved features_v2_mistral.json (500 features)
+[18:33:46] [mistral] 4959 features pass sparsity filter [0.005, 0.4]
+[18:33:55]   [mistral] Fitting ner probe ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 3 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[18:39:50] === SAE Neurosymbolic Rule Extraction v2 ===
+[18:39:50] Output: /Users/lab-02/ResearchPapers/data/sae-rules-v2
+[18:39:50] Loading cached SAE activations ...
+[18:39:51] SAE activations: mistral=(100000, 16384) llama=(100000, 16384)
+[18:39:51] Loading cached tokens and labels ...
+[18:39:51] NER dist:  {'person': 2216, 'org': 2154, 'gpe': 831, 'date': 3435, 'number': 1837, 'other': 89527}
+[18:39:51] DEP dist:  {'nsubj': 2216, 'dobj': 1273, 'prep': 4954, 'det': 5, 'punct': 160, 'other': 91392}
+[18:39:51] IS_NE:     NE=11480 non-NE=88520
+[18:39:51] 
+============================================================
+[18:39:51] Processing: mistral
+[18:39:51] ============================================================
+[18:39:51] [mistral] Computing feature statistics ...
+[18:40:02]   Top 500 features selected by variance
+[18:40:02]   [mistral] feature 0/500: id=5787 label='@' var=2.2241 sparsity=0.004
+[18:40:03]   [mistral] feature 100/500: id=15856 label='of' var=0.3375 sparsity=0.004
+[18:40:03]   [mistral] feature 200/500: id=2435 label='was' var=0.0195 sparsity=0.020
+[18:40:03]   [mistral] feature 300/500: id=10304 label='of_the' var=0.0128 sparsity=0.121
+[18:40:03]   [mistral] feature 400/500: id=15784 label='was' var=0.0100 sparsity=0.047
+[18:40:04] Saved features_v2_mistral.json (500 features)
+[18:40:05] [mistral] 4959 features pass sparsity filter [0.005, 0.4]
+[18:40:10]   [mistral] Fitting ner probe (n=30000, feats=4959) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:40:24]     AUC: {'person': 0.895, 'org': 0.89, 'gpe': 0.955, 'date': 0.875, 'number': 0.918, 'other': 0.779}
+[18:40:35]     Saved rules_v2_mistral_ner.txt
+[18:40:35]   [mistral] Fitting dep probe (n=30000, feats=4959) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:40:47]     AUC: {'nsubj': 0.887, 'dobj': 0.921, 'prep': 0.822, 'det': 0.998, 'punct': 0.993, 'other': 0.771}
+[18:40:58]     Saved rules_v2_mistral_dep.txt
+[18:40:58]   [mistral] Fitting is_ne probe (n=30000, feats=4959) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:41:02]     AUC: {'NE': 0.786}
+[18:41:13]     Saved rules_v2_mistral_is_ne.txt
+[18:41:13]   [mistral] Fitting pos_q probe (n=30000, feats=4959) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:41:27]     AUC: {'Q1': 0.736, 'Q2': 0.818, 'Q3': 0.825, 'Q4': 0.81}
+[18:41:38]     Saved rules_v2_mistral_pos_q.txt
+[18:41:38] 
+============================================================
+[18:41:38] Processing: llama
+[18:41:38] ============================================================
+[18:41:38] [llama] Computing feature statistics ...
+[18:41:49]   Top 500 features selected by variance
+[18:41:49]   [llama] feature 0/500: id=8544 label='with' var=10.6567 sparsity=0.002
+[18:41:49]   [llama] feature 100/500: id=4425 label='of' var=0.8480 sparsity=0.030
+[18:41:49]   [llama] feature 200/500: id=15517 label='a' var=0.0661 sparsity=0.034
+[18:41:49]   [llama] feature 300/500: id=6896 label='the' var=0.0370 sparsity=0.022
+[18:41:50]   [llama] feature 400/500: id=1956 label='and' var=0.0268 sparsity=0.014
+[18:41:50] Saved features_v2_llama.json (500 features)
+[18:41:50] [llama] 11555 features pass sparsity filter [0.005, 0.4]
+[18:42:01]   [llama] Fitting ner probe (n=30000, feats=11555) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:44:04]     AUC: {'person': 0.983, 'org': 0.984, 'gpe': 0.995, 'date': 0.974, 'number': 0.987, 'other': 0.942}
+[18:44:26]     Saved rules_v2_llama_ner.txt
+[18:44:26]   [llama] Fitting dep probe (n=30000, feats=11555) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:45:59]     AUC: {'nsubj': 0.979, 'dobj': 0.992, 'prep': 0.95, 'det': 1.0, 'punct': 1.0, 'other': 0.932}
+[18:46:21]     Saved rules_v2_llama_dep.txt
+[18:46:21]   [llama] Fitting is_ne probe (n=30000, feats=11555) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:47:03]     AUC: {'NE': 0.907}
+[18:47:24]     Saved rules_v2_llama_is_ne.txt
+[18:47:24]   [llama] Fitting pos_q probe (n=30000, feats=11555) ...
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_logistic.py:1256: FutureWarning: 'multi_class' was deprecated in version 1.5 and will be removed in 1.7. Use OneVsRestClassifier(LogisticRegression(..)) instead. Leave it to its default value to avoid this warning.
+  warnings.warn(
+[18:49:26]     AUC: {'Q1': 0.885, 'Q2': 0.941, 'Q3': 0.948, 'Q4': 0.933}
+[18:49:48]     Saved rules_v2_llama_pos_q.txt
+[18:49:49] Saved probe_metrics.json
+[18:49:49] Cross-model alignment: CKA (n=8000) + Pearson correlation ...
+[18:49:49]   Computing kernel matrices (N_CKA × N_CKA) ...
+[18:49:51]   Linear CKA score: 0.016921
+[18:49:51]   Pearson correlation matching (top 200 Mistral features) ...
+[18:50:11]   Found 2 cross-model feature pairs with r > 0.5
+[18:50:11] Saved alignment.json
+[18:50:11] Saved summary_v2.md
+[18:50:11] 
+=== DONE in 10.3 min ===
+[18:50:11] Outputs in /Users/lab-02/ResearchPapers/data/sae-rules-v2:
+[18:50:11]   activations_llama.npy  (3200000 KB)
+[18:50:11]   activations_mistral.npy  (3200000 KB)
+[18:50:11]   alignment.json  (0 KB)
+[18:50:11]   features_v2_llama.json  (1033 KB)
+[18:50:11]   features_v2_mistral.json  (1040 KB)
+[18:50:11]   labels_llama.npz  (391 KB)
+[18:50:11]   labels_mistral.npz  (391 KB)
+[18:50:11]   probe_metrics.json  (1 KB)
+[18:50:11]   rules_v2_llama_dep.txt  (1 KB)
+[18:50:11]   rules_v2_llama_is_ne.txt  (2 KB)
+[18:50:11]   rules_v2_llama_ner.txt  (2 KB)
+[18:50:11]   rules_v2_llama_pos_q.txt  (3 KB)
+[18:50:11]   rules_v2_mistral_dep.txt  (1 KB)
+[18:50:11]   rules_v2_mistral_is_ne.txt  (2 KB)
+[18:50:11]   rules_v2_mistral_ner.txt  (3 KB)
+[18:50:11]   rules_v2_mistral_pos_q.txt  (2 KB)
+[18:50:11]   stdout.log  (11 KB)
+[18:50:11]   summary_v2.md  (5 KB)
+[18:50:11]   tokens_mistral.json  (713 KB)

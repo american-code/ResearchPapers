@@ -1,0 +1,386 @@
+{
+  "results": [
+    {
+      "model": "Qwen2.5-Coder-1.5B-Instruct",
+      "mlx_id": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit",
+      "param_b": 1.5,
+      "load_time_sec": 1.5,
+      "peak_memory_gb": 1.27,
+      "mean_tokens_per_sec": 162.0,
+      "humaneval": {
+        "pass_at_1": 0.5793,
+        "passed": 95,
+        "total": 164,
+        "mean_tps": 198.4,
+        "peak_memory_gb": 0.0
+      },
+      "mbpp": {
+        "pass_at_1": 0.0467,
+        "passed": 12,
+        "total": 257,
+        "mean_tps": 148.7,
+        "peak_memory_gb": 1.04
+      },
+      "real_tasks": {
+        "pass_rate": 0.4,
+        "passed": 4,
+        "total": 10,
+        "mean_tps": 138.9,
+        "peak_memory_gb": 1.27,
+        "detail": [
+          {
+            "id": "rt_01",
+            "name": "l2_normalize_rows",
+            "passed": false,
+            "tps": 138.8
+          },
+          {
+            "id": "rt_02",
+            "name": "batched_cosine_similarity",
+            "passed": true,
+            "tps": 138.6
+          },
+          {
+            "id": "rt_03",
+            "name": "bootstrap_confidence_interval",
+            "passed": true,
+            "tps": 139.9
+          },
+          {
+            "id": "rt_04",
+            "name": "top_k_per_row",
+            "passed": false,
+            "tps": 151.0
+          },
+          {
+            "id": "rt_05",
+            "name": "ioi_logit_difference",
+            "passed": false,
+            "tps": 136.7
+          },
+          {
+            "id": "rt_06",
+            "name": "procrustes_alignment",
+            "passed": true,
+            "tps": 135.0
+          },
+          {
+            "id": "rt_07",
+            "name": "merge_json_metrics",
+            "passed": true,
+            "tps": 136.2
+          },
+          {
+            "id": "rt_08",
+            "name": "extract_code_block",
+            "passed": false,
+            "tps": 134.3
+          },
+          {
+            "id": "rt_09",
+            "name": "parse_training_log",
+            "passed": false,
+            "tps": 144.6
+          },
+          {
+            "id": "rt_10",
+            "name": "power_required_n",
+            "passed": false,
+            "tps": 133.3
+          }
+        ]
+      },
+      "timestamp": "2026-08-06T15:23:29"
+    },
+    {
+      "model": "Qwen2.5-Coder-3B-Instruct",
+      "mlx_id": "mlx-community/Qwen2.5-Coder-3B-Instruct-4bit",
+      "param_b": 3.0,
+      "load_time_sec": 0.8,
+      "peak_memory_gb": 2.25,
+      "mean_tokens_per_sec": 92.4,
+      "humaneval": {
+        "pass_at_1": 0.7561,
+        "passed": 124,
+        "total": 164,
+        "mean_tps": 120.4,
+        "peak_memory_gb": 0.0
+      },
+      "mbpp": {
+        "pass_at_1": 0.0623,
+        "passed": 16,
+        "total": 257,
+        "mean_tps": 79.6,
+        "peak_memory_gb": 1.95
+      },
+      "real_tasks": {
+        "pass_rate": 0.6,
+        "passed": 6,
+        "total": 10,
+        "mean_tps": 77.1,
+        "peak_memory_gb": 2.25,
+        "detail": [
+          {
+            "id": "rt_01",
+            "name": "l2_normalize_rows",
+            "passed": true,
+            "tps": 77.5
+          },
+          {
+            "id": "rt_02",
+            "name": "batched_cosine_similarity",
+            "passed": true,
+            "tps": 77.3
+          },
+          {
+            "id": "rt_03",
+            "name": "bootstrap_confidence_interval",
+            "passed": false,
+            "tps": 77.0
+          },
+          {
+            "id": "rt_04",
+            "name": "top_k_per_row",
+            "passed": true,
+            "tps": 77.2
+          },
+          {
+            "id": "rt_05",
+            "name": "ioi_logit_difference",
+            "passed": true,
+            "tps": 77.0
+          },
+          {
+            "id": "rt_06",
+            "name": "procrustes_alignment",
+            "passed": true,
+            "tps": 76.9
+          },
+          {
+            "id": "rt_07",
+            "name": "merge_json_metrics",
+            "passed": false,
+            "tps": 77.0
+          },
+          {
+            "id": "rt_08",
+            "name": "extract_code_block",
+            "passed": false,
+            "tps": 78.0
+          },
+          {
+            "id": "rt_09",
+            "name": "parse_training_log",
+            "passed": true,
+            "tps": 77.0
+          },
+          {
+            "id": "rt_10",
+            "name": "power_required_n",
+            "passed": false,
+            "tps": 76.6
+          }
+        ]
+      },
+      "timestamp": "2026-08-06T15:40:02"
+    },
+    {
+      "model": "Qwen2.5-Coder-7B-Instruct",
+      "mlx_id": "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit",
+      "param_b": 7.0,
+      "load_time_sec": 1.8,
+      "peak_memory_gb": 4.69,
+      "mean_tokens_per_sec": 50.9,
+      "humaneval": {
+        "pass_at_1": 0.5549,
+        "passed": 91,
+        "total": 164,
+        "mean_tps": 70.7,
+        "peak_memory_gb": 0.0
+      },
+      "mbpp": {
+        "pass_at_1": 0.07,
+        "passed": 18,
+        "total": 257,
+        "mean_tps": 42.5,
+        "peak_memory_gb": 4.52
+      },
+      "real_tasks": {
+        "pass_rate": 0.8,
+        "passed": 8,
+        "total": 10,
+        "mean_tps": 39.5,
+        "peak_memory_gb": 4.69,
+        "detail": [
+          {
+            "id": "rt_01",
+            "name": "l2_normalize_rows",
+            "passed": true,
+            "tps": 39.7
+          },
+          {
+            "id": "rt_02",
+            "name": "batched_cosine_similarity",
+            "passed": true,
+            "tps": 39.5
+          },
+          {
+            "id": "rt_03",
+            "name": "bootstrap_confidence_interval",
+            "passed": true,
+            "tps": 39.8
+          },
+          {
+            "id": "rt_04",
+            "name": "top_k_per_row",
+            "passed": true,
+            "tps": 40.0
+          },
+          {
+            "id": "rt_05",
+            "name": "ioi_logit_difference",
+            "passed": true,
+            "tps": 39.7
+          },
+          {
+            "id": "rt_06",
+            "name": "procrustes_alignment",
+            "passed": true,
+            "tps": 39.5
+          },
+          {
+            "id": "rt_07",
+            "name": "merge_json_metrics",
+            "passed": true,
+            "tps": 38.8
+          },
+          {
+            "id": "rt_08",
+            "name": "extract_code_block",
+            "passed": false,
+            "tps": 38.7
+          },
+          {
+            "id": "rt_09",
+            "name": "parse_training_log",
+            "passed": true,
+            "tps": 38.5
+          },
+          {
+            "id": "rt_10",
+            "name": "power_required_n",
+            "passed": false,
+            "tps": 40.5
+          }
+        ]
+      },
+      "timestamp": "2026-08-06T15:50:04"
+    },
+    {
+      "model": "Phi-4-Mini-Instruct",
+      "mlx_id": "mlx-community/phi-4-mini-instruct-4bit",
+      "param_b": 3.8,
+      "error": "[Errno 2] No such file or directory: 'dcecc4524288b351bbd0da8028e74e9b5bcdb9b5'",
+      "timestamp": "2026-08-06T15:59:37"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "mlx_id": "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit",
+      "param_b": 16.0,
+      "error": "[Errno 2] No such file or directory: 'special_tokens_map.json'",
+      "timestamp": "2026-08-06T16:12:27"
+    },
+    {
+      "model": "Granite-Code-8B-Instruct",
+      "mlx_id": "mlx-community/granite-8b-code-instruct-128k-4bit",
+      "param_b": 8.0,
+      "load_time_sec": 329.8,
+      "peak_memory_gb": 9.19,
+      "mean_tokens_per_sec": 27.5,
+      "humaneval": {
+        "pass_at_1": 0.5793,
+        "passed": 95,
+        "total": 164,
+        "mean_tps": 27.3,
+        "peak_memory_gb": 9.19
+      },
+      "mbpp": {
+        "pass_at_1": 0.0389,
+        "passed": 10,
+        "total": 257,
+        "mean_tps": 27.2,
+        "peak_memory_gb": 9.19
+      },
+      "real_tasks": {
+        "pass_rate": 0.7,
+        "passed": 7,
+        "total": 10,
+        "mean_tps": 28.1,
+        "peak_memory_gb": 9.19,
+        "detail": [
+          {
+            "id": "rt_01",
+            "name": "l2_normalize_rows",
+            "passed": true,
+            "tps": 28.4
+          },
+          {
+            "id": "rt_02",
+            "name": "batched_cosine_similarity",
+            "passed": true,
+            "tps": 26.3
+          },
+          {
+            "id": "rt_03",
+            "name": "bootstrap_confidence_interval",
+            "passed": true,
+            "tps": 27.2
+          },
+          {
+            "id": "rt_04",
+            "name": "top_k_per_row",
+            "passed": true,
+            "tps": 26.4
+          },
+          {
+            "id": "rt_05",
+            "name": "ioi_logit_difference",
+            "passed": true,
+            "tps": 26.6
+          },
+          {
+            "id": "rt_06",
+            "name": "procrustes_alignment",
+            "passed": true,
+            "tps": 25.7
+          },
+          {
+            "id": "rt_07",
+            "name": "merge_json_metrics",
+            "passed": true,
+            "tps": 27.0
+          },
+          {
+            "id": "rt_08",
+            "name": "extract_code_block",
+            "passed": false,
+            "tps": 27.2
+          },
+          {
+            "id": "rt_09",
+            "name": "parse_training_log",
+            "passed": false,
+            "tps": 28.0
+          },
+          {
+            "id": "rt_10",
+            "name": "power_required_n",
+            "passed": false,
+            "tps": 38.3
+          }
+        ]
+      },
+      "timestamp": "2026-08-06T16:57:58"
+    }
+  ]
+}

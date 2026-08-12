@@ -1,0 +1,156 @@
+{
+ "metric": "pearson",
+ "method": "closed-triangle reciprocal best match across three SAEs",
+ "definition": "triple (l,q,m) with l\u2194q, l\u2194m and m\u2194q all mutual nearest neighbours above permutation-calibrated threshold",
+ "chunk_tokens": 100,
+ "n_chunks": 5000,
+ "min_active_chunks": 250,
+ "eval_tokens": 500000,
+ "thresholds": {
+  "llama_qwen": 0.6209,
+  "mistral_qwen": 0.632,
+  "llama_mistral": 0.7477
+ },
+ "permutation_nulls": {
+  "llama_qwen": {
+   "null_p99": 0.6209,
+   "null_mean": 0.284,
+   "null_max": 0.8915,
+   "n_null_samples": 22984
+  },
+  "mistral_qwen": {
+   "null_p99": 0.632,
+   "null_mean": 0.284,
+   "null_max": 0.8979,
+   "n_null_samples": 21329
+  },
+  "llama_mistral": {
+   "null_p99": 0.7477,
+   "null_mean": 0.351,
+   "null_max": 0.9433,
+   "n_null_samples": 27930
+  }
+ },
+ "n_universal_features": 7,
+ "triangle_null": {
+  "n_permutations": 20,
+  "mean": 0.45,
+  "max": 2
+ },
+ "venn_counts": {
+  "llama": {
+   "matched_qwen_only": 114,
+   "matched_mistral_only": 73,
+   "matched_both_not_universal": 2,
+   "universal": 7,
+   "unmatched": 16188
+  },
+  "qwen": {
+   "matched_llama_only": 96,
+   "matched_mistral_only": 85,
+   "matched_both_not_universal": 20,
+   "universal": 7,
+   "unmatched": 16176
+  },
+  "mistral": {
+   "matched_llama_only": 70,
+   "matched_qwen_only": 100,
+   "matched_both_not_universal": 5,
+   "universal": 7,
+   "unmatched": 16202
+  }
+ },
+ "model_metadata": {
+  "llama": {
+   "checkpoint": "data/sae-runs/llama-3b-layer14/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 3344,
+   "support_lt_min_chunks": 2655,
+   "valid_features": 10385,
+   "median_active_chunks": 490,
+   "eval_tokens": 500000,
+   "n_chunks": 5000,
+   "chunk_tokens": 100
+  },
+  "qwen": {
+   "checkpoint": "data/sae-runs/qwen-3b-layer18/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 9398,
+   "support_lt_min_chunks": 228,
+   "valid_features": 6758,
+   "median_active_chunks": 0,
+   "eval_tokens": 500000,
+   "n_chunks": 5000,
+   "chunk_tokens": 100
+  },
+  "mistral": {
+   "checkpoint": "data/sae-runs/mistral-7b-layer16/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 2346,
+   "support_lt_min_chunks": 7512,
+   "valid_features": 6526,
+   "median_active_chunks": 62,
+   "eval_tokens": 500000,
+   "n_chunks": 5000,
+   "chunk_tokens": 100
+  }
+ },
+ "universal_features": [
+  {
+   "llama_feat": 13381,
+   "qwen_feat": 5109,
+   "mistral_feat": 5772,
+   "cosim_llama_qwen": 0.9874,
+   "cosim_llama_mistral": 0.9573,
+   "cosim_mistral_qwen": 0.9571
+  },
+  {
+   "llama_feat": 91,
+   "qwen_feat": 1638,
+   "mistral_feat": 12173,
+   "cosim_llama_qwen": 0.9708,
+   "cosim_llama_mistral": 0.932,
+   "cosim_mistral_qwen": 0.9373
+  },
+  {
+   "llama_feat": 5629,
+   "qwen_feat": 4977,
+   "mistral_feat": 10477,
+   "cosim_llama_qwen": 0.917,
+   "cosim_llama_mistral": 0.8814,
+   "cosim_mistral_qwen": 0.8765
+  },
+  {
+   "llama_feat": 2473,
+   "qwen_feat": 3474,
+   "mistral_feat": 14148,
+   "cosim_llama_qwen": 0.8582,
+   "cosim_llama_mistral": 0.8469,
+   "cosim_mistral_qwen": 0.8754
+  },
+  {
+   "llama_feat": 9549,
+   "qwen_feat": 16149,
+   "mistral_feat": 13519,
+   "cosim_llama_qwen": 0.7737,
+   "cosim_llama_mistral": 0.7714,
+   "cosim_mistral_qwen": 0.8213
+  },
+  {
+   "llama_feat": 781,
+   "qwen_feat": 6745,
+   "mistral_feat": 5447,
+   "cosim_llama_qwen": 0.6548,
+   "cosim_llama_mistral": 0.8147,
+   "cosim_mistral_qwen": 0.6866
+  },
+  {
+   "llama_feat": 13867,
+   "qwen_feat": 14732,
+   "mistral_feat": 9867,
+   "cosim_llama_qwen": 0.6271,
+   "cosim_llama_mistral": 0.8839,
+   "cosim_mistral_qwen": 0.6392
+  }
+ ]
+}

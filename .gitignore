@@ -13,3 +13,4 @@ wandb/
 .venv/
 *.npy
 *.npz
+*.bin

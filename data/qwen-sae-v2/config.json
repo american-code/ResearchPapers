@@ -10,9 +10,9 @@
   "batch": 2048,
   "warmup": 500,
   "seed": 42,
+  "lambda_aux": 0.1,
+  "k_aux": 512,
   "n_source_tokens": 500000,
   "total_tokens": 102400000,
-  "epochs_equiv": 204.8,
-  "training_elapsed_s": 0.3,
-  "training_elapsed_min": 0.0
+  "epochs_equiv": 204.8
 }

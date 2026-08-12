@@ -1,0 +1,255 @@
+=== ioi-followup-20260730-232530 started 2026-07-31T04:25:32Z ===
+
+--- STAGE pythia-path-patching  2026-07-31T04:25:32Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b...
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 111550.64it/s]
+  loaded in 0.5s
+  n_layers=24  n_heads=16
+Replaced 24 attention modules
+  validation pass OK — shape (1, 2, 50304)
+Dataset: 100 examples
+  all clean/corrupt lengths match ✓
+
+Edges to test (10 total):
+  L10H7 → L12H15
+  L10H7 → L15H15
+  L10H7 → L21H3
+  L10H7 → L22H2
+  L12H15 → L15H15
+  L12H15 → L21H3
+  L12H15 → L22H2
+  L15H15 → L21H3
+  L15H15 → L22H2
+  L21H3 → L22H2
+
+Pass 1: clean baseline...
+  0.6s  mean clean LD = 4.1251
+Pass 2: corrupted + capture sender heads...
+  0.6s  mean corrupt LD = -4.1060
+Pass 3.1: intermediate — L10H7 patched → capture ['L12H15', 'L15H15', 'L21H3', 'L22H2']...
+  0.5s
+Pass 3.2: intermediate — L12H15 patched → capture ['L15H15', 'L21H3', 'L22H2']...
+  0.5s
+Pass 3.3: intermediate — L15H15 patched → capture ['L21H3', 'L22H2']...
+  0.5s
+Pass 3.4: intermediate — L21H3 patched → capture ['L22H2']...
+  0.5s
+Pass 4.1: patched — L12H15 replaced → measure LD...
+  0.6s  score=0.0065  patched_LD=4.0725
+Pass 4.2: patched — L15H15 replaced → measure LD...
+  0.6s  score=0.0177  patched_LD=3.9813
+Pass 4.3: patched — L21H3 replaced → measure LD...
+  0.6s  score=-0.0013  patched_LD=4.1371
+Pass 4.4: patched — L22H2 replaced → measure LD...
+  0.6s  score=0.0216  patched_LD=3.9477
+Pass 4.5: patched — L15H15 replaced → measure LD...
+  0.6s  score=0.0055  patched_LD=4.0809
+Pass 4.6: patched — L21H3 replaced → measure LD...
+  0.6s  score=-0.0006  patched_LD=4.1299
+Pass 4.7: patched — L22H2 replaced → measure LD...
+  0.6s  score=0.0042  patched_LD=4.0923
+Pass 4.8: patched — L21H3 replaced → measure LD...
+  0.6s  score=0.0003  patched_LD=4.1230
+Pass 4.9: patched — L22H2 replaced → measure LD...
+  0.6s  score=0.0033  patched_LD=4.0987
+Pass 4.10: patched — L22H2 replaced → measure LD...
+  0.6s  score=0.0094  patched_LD=4.0491
+
+Saved → /Users/lab-02/ResearchPapers/data/ioi/path-patching-pythia1b-real.json
+
+Edge path patching scores (sorted):
+  Edge                     Score     |ΔLD|
+  L10H7 → L22H2           0.0216    0.1773
+  L10H7 → L15H15          0.0177    0.1438
+  L21H3 → L22H2           0.0094    0.0759
+  L10H7 → L12H15          0.0065    0.0526
+  L12H15 → L15H15         0.0055    0.0441
+  L12H15 → L22H2          0.0042    0.0327
+  L15H15 → L22H2          0.0033    0.0263
+  L15H15 → L21H3          0.0003    0.0021
+  L12H15 → L21H3         -0.0006    0.0048
+  L10H7 → L21H3          -0.0013    0.0120
+--- STAGE pythia-path-patching exit=0 ---
+  staged path-patching-pythia1b-real.json
+
+--- STAGE faithfulness-llama-v1-bos  2026-07-31T04:25:42Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading mlx-community/Llama-3.2-3B-bf16 …
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 28230.89it/s]
+  installed 28 maskable attention layers
+clean LD = 5.6681
+all-heads-ablated LD = 0.0000
+faithfulness: LD=3.7588  F(C)=0.6631  (2s)
+  minimality L13H14: dF=+0.0534
+  minimality L14H0: dF=+0.0733
+  minimality L15H20: dF=+0.0909
+  minimality L17H17: dF=+0.0750
+  minimality L18H10: dF=+0.0250
+  minimality L19H1: dF=+0.0327
+  minimality L21H20: dF=+0.1038
+  minimality L24H15: dF=+0.3245
+  minimality L26H23: dF=+0.0591
+  minimality L27H17: dF=+0.0996
+
+faithfulness=0.6631  mean completeness gap=0.2764
+wrote /Users/lab-02/ResearchPapers/data/ioi/faithfulness-llama3b.json
+--- STAGE faithfulness-llama-v1-bos exit=0 ---
+  staged faithfulness-llama3b-v1bos.json
+
+--- STAGE faithfulness-pythia-v1-bos  2026-07-31T04:26:48Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b …
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 73584.28it/s]
+  installed 24 maskable attention layers
+clean LD = 4.1251
+all-heads-ablated LD = 0.0000
+faithfulness: LD=3.5234  F(C)=0.8541  (1s)
+  minimality L1H11: dF=-0.0012
+  minimality L10H0: dF=+0.1036
+  minimality L10H7: dF=+0.3876
+  minimality L12H15: dF=+0.0758
+  minimality L13H6: dF=+0.0681
+  minimality L15H15: dF=+0.2959
+  minimality L16H13: dF=+0.0350
+  minimality L17H7: dF=+0.0521
+  minimality L21H3: dF=+0.0598
+  minimality L22H2: dF=+0.0990
+
+faithfulness=0.8541  mean completeness gap=0.2159
+wrote /Users/lab-02/ResearchPapers/data/ioi/faithfulness-pythia1b.json
+--- STAGE faithfulness-pythia-v1-bos exit=0 ---
+  staged faithfulness-pythia1b-v1bos.json
+
+--- STAGE patching-llama3b-v2  2026-07-31T04:27:14Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading mlx-community/Llama-3.2-3B-bf16...
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 175809.15it/s]
+  loaded in 0.8s
+  n_layers=28  n_heads=24
+Replaced 28 attention modules with PatchableAttention
+  validation pass OK — output shape (1, 3, 128256)
+Dataset: 200 examples
+  clean  lengths : min=13  max=15
+  corrupt lengths: min=13  max=15
+  all clean/corrupt lengths match ✓
+
+Clean forward pass (batch=100)...
+  3.3s  mean logit diff = 5.5206
+Corrupt forward pass (batch=100)...
+  3.3s  mean logit diff = -5.4675
+
+Patching sweep: 28 layers × 24 heads = 672 passes
+(all 100 examples batched per pass)
+  L00 done  top_head=H16 (0.001)  elapsed=79s  eta=2137s
+  L01 done  top_head=H15 (0.011)  elapsed=158s  eta=2058s
+  L02 done  top_head=H12 (0.001)  elapsed=237s  eta=1979s
+  L03 done  top_head=H15 (0.001)  elapsed=317s  eta=1900s
+  L04 done  top_head=H14 (0.005)  elapsed=396s  eta=1821s
+  L05 done  top_head=H09 (0.001)  elapsed=475s  eta=1742s
+  L06 done  top_head=H16 (0.003)  elapsed=554s  eta=1662s
+  L07 done  top_head=H00 (0.002)  elapsed=633s  eta=1583s
+  L08 done  top_head=H23 (0.006)  elapsed=713s  eta=1504s
+  L09 done  top_head=H21 (0.012)  elapsed=792s  eta=1425s
+  L10 done  top_head=H17 (0.006)  elapsed=871s  eta=1346s
+  L11 done  top_head=H10 (0.012)  elapsed=950s  eta=1267s
+  L12 done  top_head=H10 (0.006)  elapsed=1029s  eta=1188s
+  L13 done  top_head=H14 (0.058)  elapsed=1108s  eta=1108s
+  L14 done  top_head=H00 (0.259)  elapsed=1188s  eta=1029s
+  L15 done  top_head=H20 (0.155)  elapsed=1267s  eta=950s
+  L16 done  top_head=H21 (0.026)  elapsed=1346s  eta=871s
+  L17 done  top_head=H17 (0.077)  elapsed=1425s  eta=792s
+  L18 done  top_head=H10 (0.063)  elapsed=1504s  eta=713s
+  L19 done  top_head=H01 (0.103)  elapsed=1584s  eta=633s
+  L20 done  top_head=H04 (0.022)  elapsed=1663s  eta=554s
+  L21 done  top_head=H20 (0.056)  elapsed=1742s  eta=475s
+  L22 done  top_head=H09 (0.024)  elapsed=1821s  eta=396s
+  L23 done  top_head=H11 (0.036)  elapsed=1900s  eta=317s
+  L24 done  top_head=H15 (0.137)  elapsed=1979s  eta=238s
+  L25 done  top_head=H08 (0.038)  elapsed=2059s  eta=158s
+  L26 done  top_head=H23 (0.073)  elapsed=2138s  eta=79s
+  L27 done  top_head=H17 (0.055)  elapsed=2217s  eta=0s
+
+Sweep completed in 2217s (37.0 min)
+Saved → /Users/lab-02/ResearchPapers/data/ioi/patching-llama3b-v2.json
+
+Top-10 heads by patching score:
+  L14·H00: 0.2591
+  L15·H20: 0.1550
+  L24·H15: 0.1368
+  L19·H01: 0.1034
+  L17·H17: 0.0766
+  L26·H23: 0.0729
+  L18·H10: 0.0631
+  L13·H14: 0.0576
+  L21·H20: 0.0562
+  L26·H22: 0.0557
+--- STAGE patching-llama3b-v2 exit=0 ---
+  staged patching-llama3b-v2.json
+
+--- STAGE patching-pythia1b-v2  2026-07-31T05:04:19Z ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loading EleutherAI/pythia-1.4b...
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 125577.96it/s]
+  loaded in 0.9s
+  n_layers=24  n_heads=16
+Replaced 24 attention modules with PatchableAttention
+  validation pass OK — output shape (1, 2, 50304)
+Dataset: 200 examples
+  clean  lengths: min=12  max=14
+  corrupt lengths: min=12  max=14
+  all clean/corrupt lengths match ✓
+
+Clean forward pass (batch=100)...
+  1.1s  mean logit diff = 3.8883
+Corrupt forward pass (batch=100)...
+  1.1s  mean logit diff = -3.8546
+
+Patching sweep: 24 layers × 16 heads = 384 passes
+(all 100 examples batched per pass)
+  L00 done  top_head=H02 (0.048)  elapsed=18s  eta=411s
+  L01 done  top_head=H11 (0.060)  elapsed=36s  eta=394s
+  L02 done  top_head=H07 (0.003)  elapsed=54s  eta=376s
+  L03 done  top_head=H05 (0.016)  elapsed=72s  eta=358s
+  L04 done  top_head=H15 (0.014)  elapsed=89s  eta=340s
+  L05 done  top_head=H06 (0.007)  elapsed=107s  eta=322s
+  L06 done  top_head=H02 (0.008)  elapsed=125s  eta=304s
+  L07 done  top_head=H08 (0.005)  elapsed=143s  eta=286s
+  L08 done  top_head=H04 (0.004)  elapsed=161s  eta=268s
+  L09 done  top_head=H01 (0.015)  elapsed=179s  eta=251s
+  L10 done  top_head=H07 (0.319)  elapsed=197s  eta=233s
+  L11 done  top_head=H08 (0.028)  elapsed=215s  eta=215s
+  L12 done  top_head=H15 (0.028)  elapsed=233s  eta=197s
+  L13 done  top_head=H06 (0.085)  elapsed=251s  eta=179s
+  L14 done  top_head=H06 (0.035)  elapsed=269s  eta=161s
+  L15 done  top_head=H15 (0.102)  elapsed=286s  eta=143s
+  L16 done  top_head=H13 (0.025)  elapsed=304s  eta=125s
+  L17 done  top_head=H07 (0.030)  elapsed=322s  eta=107s
+  L18 done  top_head=H11 (0.006)  elapsed=340s  eta=90s
+  L19 done  top_head=H01 (0.018)  elapsed=358s  eta=72s
+  L20 done  top_head=H11 (0.002)  elapsed=376s  eta=54s
+  L21 done  top_head=H03 (0.057)  elapsed=394s  eta=36s
+  L22 done  top_head=H02 (0.025)  elapsed=412s  eta=18s
+  L23 done  top_head=H09 (0.011)  elapsed=430s  eta=0s
+
+Sweep completed in 430s (7.2 min)
+Saved → /Users/lab-02/ResearchPapers/data/ioi/patching-pythia1b-v2.json
+
+Top-10 heads by patching score:
+  L10·H07: 0.3188
+  L15·H15: 0.1020
+  L13·H06: 0.0851
+  L01·H11: 0.0599
+  L21·H03: 0.0574
+  L00·H02: 0.0479
+  L14·H06: 0.0349
+  L15·H09: 0.0339
+  L15·H03: 0.0321
+  L15·H11: 0.0316
+--- STAGE patching-pythia1b-v2 exit=0 ---
+  staged patching-pythia1b-v2.json

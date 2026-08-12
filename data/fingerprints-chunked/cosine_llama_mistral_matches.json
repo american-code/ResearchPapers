@@ -1,0 +1,210 @@
+{
+ "metric": "cosine",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 5000 chunks \u00d7 100 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "chunk_tokens": 100,
+ "n_chunks": 5000,
+ "min_active_chunks": 250,
+ "tau_calibrated": 0.8,
+ "permutation_null": {
+  "null_p99": 0.7621,
+  "null_mean": 0.3688,
+  "null_max": 0.9633,
+  "n_null_samples": 26192
+ },
+ "n_matches_tau_0.80": 38,
+ "n_matches_tau_cal": 38,
+ "matches": [
+  {
+   "feat_a": 91,
+   "feat_b": 12173,
+   "sim": 0.945
+  },
+  {
+   "feat_a": 261,
+   "feat_b": 6992,
+   "sim": 0.8613
+  },
+  {
+   "feat_a": 476,
+   "feat_b": 9723,
+   "sim": 0.8429
+  },
+  {
+   "feat_a": 640,
+   "feat_b": 13870,
+   "sim": 0.8258
+  },
+  {
+   "feat_a": 781,
+   "feat_b": 5447,
+   "sim": 0.8155
+  },
+  {
+   "feat_a": 908,
+   "feat_b": 15660,
+   "sim": 0.8687
+  },
+  {
+   "feat_a": 980,
+   "feat_b": 8398,
+   "sim": 0.8294
+  },
+  {
+   "feat_a": 1626,
+   "feat_b": 7521,
+   "sim": 0.8513
+  },
+  {
+   "feat_a": 2473,
+   "feat_b": 14148,
+   "sim": 0.8847
+  },
+  {
+   "feat_a": 2798,
+   "feat_b": 6099,
+   "sim": 0.8404
+  },
+  {
+   "feat_a": 3145,
+   "feat_b": 2295,
+   "sim": 0.8192
+  },
+  {
+   "feat_a": 3365,
+   "feat_b": 384,
+   "sim": 0.8391
+  },
+  {
+   "feat_a": 4203,
+   "feat_b": 6443,
+   "sim": 0.8728
+  },
+  {
+   "feat_a": 4320,
+   "feat_b": 8341,
+   "sim": 0.8102
+  },
+  {
+   "feat_a": 5037,
+   "feat_b": 7889,
+   "sim": 0.8057
+  },
+  {
+   "feat_a": 5114,
+   "feat_b": 10280,
+   "sim": 0.8316
+  },
+  {
+   "feat_a": 5528,
+   "feat_b": 15025,
+   "sim": 0.9645
+  },
+  {
+   "feat_a": 5629,
+   "feat_b": 10477,
+   "sim": 0.8818
+  },
+  {
+   "feat_a": 5683,
+   "feat_b": 42,
+   "sim": 0.816
+  },
+  {
+   "feat_a": 5798,
+   "feat_b": 3567,
+   "sim": 0.8325
+  },
+  {
+   "feat_a": 5949,
+   "feat_b": 8831,
+   "sim": 0.8526
+  },
+  {
+   "feat_a": 6529,
+   "feat_b": 10135,
+   "sim": 0.8893
+  },
+  {
+   "feat_a": 6536,
+   "feat_b": 3909,
+   "sim": 0.845
+  },
+  {
+   "feat_a": 6854,
+   "feat_b": 11535,
+   "sim": 0.8382
+  },
+  {
+   "feat_a": 7597,
+   "feat_b": 7991,
+   "sim": 0.8394
+  },
+  {
+   "feat_a": 8105,
+   "feat_b": 2032,
+   "sim": 0.8184
+  },
+  {
+   "feat_a": 10378,
+   "feat_b": 858,
+   "sim": 0.8173
+  },
+  {
+   "feat_a": 11578,
+   "feat_b": 10646,
+   "sim": 0.8111
+  },
+  {
+   "feat_a": 12284,
+   "feat_b": 7068,
+   "sim": 0.8951
+  },
+  {
+   "feat_a": 13381,
+   "feat_b": 5772,
+   "sim": 0.9575
+  },
+  {
+   "feat_a": 13710,
+   "feat_b": 8652,
+   "sim": 0.8181
+  },
+  {
+   "feat_a": 13791,
+   "feat_b": 15556,
+   "sim": 0.8939
+  },
+  {
+   "feat_a": 13867,
+   "feat_b": 9867,
+   "sim": 0.8843
+  },
+  {
+   "feat_a": 14144,
+   "feat_b": 417,
+   "sim": 0.8802
+  },
+  {
+   "feat_a": 14180,
+   "feat_b": 13176,
+   "sim": 0.8995
+  },
+  {
+   "feat_a": 14897,
+   "feat_b": 15407,
+   "sim": 0.9625
+  },
+  {
+   "feat_a": 15327,
+   "feat_b": 1917,
+   "sim": 0.8916
+  },
+  {
+   "feat_a": 16044,
+   "feat_b": 12224,
+   "sim": 0.8631
+  }
+ ]
+}

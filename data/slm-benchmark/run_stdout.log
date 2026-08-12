@@ -1,0 +1,265 @@
+[23:38:17] SLM Benchmark Phase 1 — start 2026-08-05T23:38:17
+[23:38:17] Output dir: /Users/lab-02/ResearchPapers/data/slm-benchmark
+[23:38:17] Models: 6
+[23:38:17] 
+================================================================
+[23:38:17]   MODEL: Qwen2.5-Coder-1.5B-Instruct  (1.5B params, 4-bit)
+[23:38:17] ================================================================
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[23:38:18]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files:  11%|█         | 1/9 [00:00<00:03,  2.40it/s]Fetching 9 files:  44%|████▍     | 4/9 [00:21<00:28,  5.71s/it]Fetching 9 files: 100%|██████████| 9/9 [00:21<00:00,  2.36s/it]
+[23:38:40]   Loaded in 22.8s
+[23:38:40]   HumanEval: loading dataset...
+Generating test split:   0%|          | 0/164 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 164/164 [00:00<00:00, 12089.03 examples/s]
+[23:38:43]   HumanEval: 164 problems
+[23:38:55]     HumanEval [20/164] pass=16 tps=199.0
+[23:39:06]     HumanEval [40/164] pass=27 tps=200.0
+[23:39:17]     HumanEval [60/164] pass=42 tps=200.3
+[23:39:28]     HumanEval [80/164] pass=55 tps=199.7
+[23:39:41]     HumanEval [100/164] pass=67 tps=199.3
+[23:39:52]     HumanEval [120/164] pass=73 tps=199.0
+[23:40:05]     HumanEval [140/164] pass=80 tps=198.6
+[23:40:18]     HumanEval [160/164] pass=93 tps=198.4
+[23:40:20]     HumanEval [164/164] pass=95 tps=198.4
+[23:40:20]   HumanEval pass@1 = 0.5793 (95/164)
+[23:40:20]   MBPP: loading dataset (sanitized)...
+Generating train split:   0%|          | 0/120 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 120/120 [00:00<00:00, 10975.06 examples/s]
+Generating test split:   0%|          | 0/257 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 257/257 [00:00<00:00, 31371.83 examples/s]
+Generating validation split:   0%|          | 0/43 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 43/43 [00:00<00:00, 13867.07 examples/s]
+Generating prompt split:   0%|          | 0/7 [00:00<?, ? examples/s]Generating prompt split: 100%|██████████| 7/7 [00:00<00:00, 3616.22 examples/s]
+[23:40:24]   MBPP: 257 problems
+[23:40:24] 
+ERROR on Qwen2.5-Coder-1.5B-Instruct: 'text'
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 770, in main
+    result = benchmark_model(model_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 650, in benchmark_model
+    mbpp = run_mbpp(model, tokenizer)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 532, in run_mbpp
+    f"Write a Python function for the following task:\n\n{prob['text']}\n\n"
+KeyError: 'text'
+[23:40:24] 
+Checkpoint saved after Qwen2.5-Coder-1.5B-Instruct
+[23:40:24] 
+================================================================
+[23:40:24]   MODEL: Qwen2.5-Coder-3B-Instruct  (3.0B params, 4-bit)
+[23:40:24] ================================================================
+[23:40:24]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-3B-Instruct-4bit
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files:  11%|█         | 1/9 [00:00<00:02,  2.74it/s]Fetching 9 files:  33%|███▎      | 3/9 [00:00<00:00,  7.26it/s]Fetching 9 files:  33%|███▎      | 3/9 [00:14<00:00,  7.26it/s]Fetching 9 files:  44%|████▍     | 4/9 [00:39<01:08, 13.66s/it]Fetching 9 files: 100%|██████████| 9/9 [00:39<00:00,  4.41s/it]
+[23:41:04]   Loaded in 40.3s
+[23:41:04]   HumanEval: loading dataset...
+[23:41:05]   HumanEval: 164 problems
+[23:41:36]     HumanEval [20/164] pass=20 tps=120.7
+[23:42:09]     HumanEval [40/164] pass=38 tps=120.7
+[23:42:35]     HumanEval [60/164] pass=53 tps=121.0
+[23:43:02]     HumanEval [80/164] pass=68 tps=120.9
+[23:43:34]     HumanEval [100/164] pass=83 tps=120.7
+[23:44:07]     HumanEval [120/164] pass=96 tps=120.5
+[23:44:45]     HumanEval [140/164] pass=108 tps=120.4
+[23:45:14]     HumanEval [160/164] pass=122 tps=120.4
+[23:45:20]     HumanEval [164/164] pass=124 tps=120.4
+[23:45:20]   HumanEval pass@1 = 0.7561 (124/164)
+[23:45:20]   MBPP: loading dataset (sanitized)...
+[23:45:21]   MBPP: 257 problems
+[23:45:21] 
+ERROR on Qwen2.5-Coder-3B-Instruct: 'text'
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 770, in main
+    result = benchmark_model(model_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 650, in benchmark_model
+    mbpp = run_mbpp(model, tokenizer)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 532, in run_mbpp
+    f"Write a Python function for the following task:\n\n{prob['text']}\n\n"
+KeyError: 'text'
+[23:45:21] 
+Checkpoint saved after Qwen2.5-Coder-3B-Instruct
+[23:45:21] 
+================================================================
+[23:45:21]   MODEL: Qwen2.5-Coder-7B-Instruct  (7.0B params, 4-bit)
+[23:45:21] ================================================================
+[23:45:21]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-7B-Instruct-4bit
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files:  11%|█         | 1/9 [00:00<00:01,  4.04it/s]Fetching 9 files:  33%|███▎      | 3/9 [00:00<00:00,  9.29it/s]Fetching 9 files:  33%|███▎      | 3/9 [00:16<00:00,  9.29it/s]Fetching 9 files:  44%|████▍     | 4/9 [01:37<02:48, 33.62s/it]Fetching 9 files: 100%|██████████| 9/9 [01:37<00:00, 10.81s/it]
+[23:47:00]   Loaded in 98.4s
+[23:47:00]   HumanEval: loading dataset...
+[23:47:01]   HumanEval: 164 problems
+[23:47:26]     HumanEval [20/164] pass=2 tps=71.5
+[23:47:57]     HumanEval [40/164] pass=6 tps=71.7
+[23:48:20]     HumanEval [60/164] pass=14 tps=71.6
+[23:48:49]     HumanEval [80/164] pass=30 tps=71.3
+[23:49:23]     HumanEval [100/164] pass=45 tps=71.1
+[23:49:56]     HumanEval [120/164] pass=62 tps=70.9
+[23:50:35]     HumanEval [140/164] pass=74 tps=70.8
+[23:51:10]     HumanEval [160/164] pass=89 tps=70.7
+[23:51:16]     HumanEval [164/164] pass=91 tps=70.7
+[23:51:16]   HumanEval pass@1 = 0.5549 (91/164)
+[23:51:16]   MBPP: loading dataset (sanitized)...
+[23:51:17]   MBPP: 257 problems
+[23:51:17] 
+ERROR on Qwen2.5-Coder-7B-Instruct: 'text'
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 770, in main
+    result = benchmark_model(model_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 650, in benchmark_model
+    mbpp = run_mbpp(model, tokenizer)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 532, in run_mbpp
+    f"Write a Python function for the following task:\n\n{prob['text']}\n\n"
+KeyError: 'text'
+[23:51:17] 
+Checkpoint saved after Qwen2.5-Coder-7B-Instruct
+[23:51:17] 
+================================================================
+[23:51:17]   MODEL: Phi-4-Mini-Instruct  (3.8B params, 4-bit)
+[23:51:17] ================================================================
+[23:51:17]   Trying mlx-community 4-bit: mlx-community/phi-4-mini-instruct-4bit
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files:   8%|▊         | 1/12 [00:00<00:03,  2.99it/s]Fetching 12 files:  33%|███▎      | 4/12 [00:00<00:00, 10.04it/s]Fetching 12 files:  33%|███▎      | 4/12 [00:11<00:00, 10.04it/s]Fetching 12 files:  42%|████▏     | 5/12 [00:50<01:37, 13.90s/it]Fetching 12 files: 100%|██████████| 12/12 [00:50<00:00,  4.18s/it]
+[23:52:08]   Loaded in 51.0s
+[23:52:08]   HumanEval: loading dataset...
+[23:52:09]   HumanEval: 164 problems
+[23:52:27]     HumanEval [20/164] pass=4 tps=111.6
+[23:52:44]     HumanEval [40/164] pass=11 tps=111.9
+[23:53:00]     HumanEval [60/164] pass=19 tps=111.9
+[23:53:20]     HumanEval [80/164] pass=29 tps=111.4
+[23:53:41]     HumanEval [100/164] pass=37 tps=111.1
+[23:54:04]     HumanEval [120/164] pass=47 tps=110.7
+[23:54:34]     HumanEval [140/164] pass=55 tps=110.5
+[23:55:02]     HumanEval [160/164] pass=63 tps=110.3
+[23:55:05]     HumanEval [164/164] pass=65 tps=110.3
+[23:55:05]   HumanEval pass@1 = 0.3963 (65/164)
+[23:55:05]   MBPP: loading dataset (sanitized)...
+[23:55:07]   MBPP: 257 problems
+[23:55:07] 
+ERROR on Phi-4-Mini-Instruct: 'text'
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 770, in main
+    result = benchmark_model(model_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 650, in benchmark_model
+    mbpp = run_mbpp(model, tokenizer)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 532, in run_mbpp
+    f"Write a Python function for the following task:\n\n{prob['text']}\n\n"
+KeyError: 'text'
+[23:55:07] 
+Checkpoint saved after Phi-4-Mini-Instruct
+[23:55:07] 
+================================================================
+[23:55:07]   MODEL: DeepSeek-Coder-V2-Lite-Instruct  (16.0B params, 4-bit)
+[23:55:07] ================================================================
+[23:55:07]   Trying mlx-community 4-bit: mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files:   9%|▉         | 1/11 [00:00<00:03,  2.64it/s]Fetching 11 files:  36%|███▋      | 4/11 [03:19<06:16, 53.77s/it]Fetching 11 files: 100%|██████████| 11/11 [03:19<00:00, 18.10s/it]
+[23:58:29]   Loaded in 202.0s
+[23:58:29]   HumanEval: loading dataset...
+[23:58:29]   HumanEval: 164 problems
+[23:59:22]     HumanEval [20/164] pass=20 tps=82.2
+[00:00:42]     HumanEval [40/164] pass=36 tps=82.2
+[00:01:28]     HumanEval [60/164] pass=54 tps=82.2
+[00:02:16]     HumanEval [80/164] pass=68 tps=81.9
+[00:03:08]     HumanEval [100/164] pass=84 tps=81.9
+[00:03:57]     HumanEval [120/164] pass=99 tps=81.8
+[00:04:56]     HumanEval [140/164] pass=107 tps=81.8
+[00:06:02]     HumanEval [160/164] pass=122 tps=81.7
+[00:06:15]     HumanEval [164/164] pass=124 tps=81.7
+[00:06:15]   HumanEval pass@1 = 0.7561 (124/164)
+[00:06:15]   MBPP: loading dataset (sanitized)...
+[00:06:17]   MBPP: 257 problems
+[00:06:17] 
+ERROR on DeepSeek-Coder-V2-Lite-Instruct: 'text'
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 770, in main
+    result = benchmark_model(model_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 650, in benchmark_model
+    mbpp = run_mbpp(model, tokenizer)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 532, in run_mbpp
+    f"Write a Python function for the following task:\n\n{prob['text']}\n\n"
+KeyError: 'text'
+[00:06:17] 
+Checkpoint saved after DeepSeek-Coder-V2-Lite-Instruct
+[00:06:17] 
+================================================================
+[00:06:17]   MODEL: Granite-Code-8B-Instruct  (8.0B params, 4-bit)
+[00:06:17] ================================================================
+[00:06:17]   Trying mlx-community 4-bit: mlx-community/granite-code-8b-instruct-4bit
+[00:06:17]   mlx-community load failed: 401 Client Error. (Request ID: Root=1-6a741649-0fde9f576a1d819228afde65;a1d38156-fb81-4af5-a7a8-0e80ea8848c1)
+
+Repository Not Found for url: https://huggingface.co/api/models/mlx-community/granite-code-8b-instruct-4bit/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password.
+[00:06:17]   Falling back to mlx_lm.convert from ibm-granite/granite-code-8b-instruct -> /Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py:127: RuntimeWarning: 'mlx_lm.convert' found in sys.modules after import of package 'mlx_lm', but prior to execution of 'mlx_lm.convert'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+Traceback (most recent call last):
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/utils/_http.py", line 403, in hf_raise_for_status
+    response.raise_for_status()
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/models/ibm-granite/granite-code-8b-instruct/revision/main
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/convert.py", line 249, in <module>
+    main()
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/convert.py", line 241, in main
+    convert(**vars(args))
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/convert.py", line 111, in convert
+    model, tokenizer, config = load(
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/utils.py", line 320, in load
+    model_path = _download(path_or_hf_repo, revision=revision)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/utils.py", line 133, in _download
+    snapshot_download(
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/_snapshot_download.py", line 245, in snapshot_download
+    raise api_call_error
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/_snapshot_download.py", line 165, in snapshot_download
+    repo_info = api.repo_info(repo_id=repo_id, repo_type=repo_type, revision=revision)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/hf_api.py", line 2867, in repo_info
+    return method(
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/hf_api.py", line 2661, in model_info
+    hf_raise_for_status(r)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/huggingface_hub/utils/_http.py", line 453, in hf_raise_for_status
+    raise _format(RepositoryNotFoundError, message, response) from e
+huggingface_hub.errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-6a74164a-6e151a19293c194b6815c867;49577294-cbc4-48d6-be6d-62cd2b0a5ee5)
+
+Repository Not Found for url: https://huggingface.co/api/models/ibm-granite/granite-code-8b-instruct/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password.
+Calling `python -m mlx_lm.convert ...` directly is deprecated. Use `mlx_lm.convert ...` or `python -m mlx_lm convert ...` instead.
+[INFO] Loading
+[00:06:18]   Conversion also failed: Command '['/Library/Developer/CommandLineTools/usr/bin/python3', '-m', 'mlx_lm.convert', '--hf-path', 'ibm-granite/granite-code-8b-instruct', '--mlx-path', '/Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp', '--quantize', '--q-bits', '4']' returned non-zero exit status 1.
+[00:06:18] 
+ERROR on Granite-Code-8B-Instruct: local variable 'e1' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 617, in load_model_with_fallback
+    subprocess.run(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Library/Developer/CommandLineTools/usr/bin/python3', '-m', 'mlx_lm.convert', '--hf-path', 'ibm-granite/granite-code-8b-instruct', '--mlx-path', '/Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp', '--quantize', '--q-bits', '4']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 770, in main
+    result = benchmark_model(model_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 644, in benchmark_model
+    model, tokenizer, converted_path = load_model_with_fallback(model_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/slm_benchmark.py", line 630, in load_model_with_fallback
+    raise RuntimeError(f"Cannot load {model_cfg['name']}: {e1} | {e2}")
+UnboundLocalError: local variable 'e1' referenced before assignment
+[00:06:18] 
+Checkpoint saved after Granite-Code-8B-Instruct
+[00:06:18] 
+Markdown table: /Users/lab-02/ResearchPapers/data/slm-benchmark/quality_per_gb.md
+[00:06:18] 
+Done. Results: /Users/lab-02/ResearchPapers/data/slm-benchmark/results.json

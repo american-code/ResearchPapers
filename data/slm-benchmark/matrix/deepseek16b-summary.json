@@ -1,0 +1,12 @@
+{
+  "model": "deepseek16b",
+  "display_name": "DeepSeek-Coder-V2-Lite-Instruct",
+  "hf": "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct",
+  "param_b": 16.0,
+  "run_date": "2026-08-07T05:19:48",
+  "arms": {
+    "4bit-rtn": {
+      "error": "Command '['/Library/Developer/CommandLineTools/usr/bin/python3', '-m', 'mlx_lm', 'convert', '--hf-path', 'deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct', '--mlx-path', '/tmp/evalplus_runs/_cvt_deepseek-ai_DeepSeek-Coder-V2-Lite-Instruct_4bit', '--quantize', '--q-bits', '4']' returned non-zero exit status 1."
+    }
+  }
+}

@@ -1,0 +1,426 @@
+[15:18:40] SLM Benchmark Phase 1 v2 — start 2026-08-06T15:18:40
+[15:18:40] Output dir: /Users/lab-02/ResearchPapers/data/slm-benchmark
+[15:18:40] Models: 6
+[15:18:40] 
+================================================================
+[15:18:40]   MODEL: Qwen2.5-Coder-1.5B-Instruct  (1.5B params, 4-bit)
+[15:18:40] ================================================================
+[15:18:41]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit
+[15:18:41]   Loaded in 1.5s
+[15:18:41]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:18:42]   MBPP: loading dataset (sanitized)...
+[15:18:44]   MBPP: 257 problems (field='prompt')
+[15:18:51] SLM Benchmark Phase 1 v2 — start 2026-08-06T15:18:51
+[15:18:51] Output dir: /Users/lab-02/ResearchPapers/data/slm-benchmark
+[15:18:51] Models: 6
+[15:18:51] 
+================================================================
+[15:18:51]   MODEL: Qwen2.5-Coder-1.5B-Instruct  (1.5B params, 4-bit)
+[15:18:51] ================================================================
+[15:18:52]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit
+[15:18:52]   Loaded in 1.4s
+[15:18:52]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:18:53]   MBPP: loading dataset (sanitized)...
+[15:18:55]   MBPP: 257 problems (field='prompt')
+[15:19:29]     MBPP [50/257] pass=3 tps=164.5
+[15:19:43]     MBPP [50/257] pass=3 tps=148.5
+[15:20:24]     MBPP [100/257] pass=4 tps=154.5
+[15:20:38]     MBPP [100/257] pass=4 tps=147.8
+[15:21:17]     MBPP [150/257] pass=5 tps=151.3
+[15:21:29]     MBPP [150/257] pass=5 tps=147.7
+[15:22:13]     MBPP [200/257] pass=6 tps=150.0
+[15:22:24]     MBPP [200/257] pass=6 tps=147.7
+[15:23:00]     MBPP [250/257] pass=11 tps=148.9
+[15:23:06]     MBPP [257/257] pass=12 tps=148.7
+[15:23:06]   MBPP pass@1 = 0.0467 (12/257)
+[15:23:08]     l2_normalize_rows: FAIL @ 138.8 tps
+[15:23:11]     batched_cosine_similarity: PASS @ 138.6 tps
+[15:23:11]     MBPP [250/257] pass=11 tps=147.4
+[15:23:14]     bootstrap_confidence_interval: PASS @ 139.9 tps
+[15:23:15]     top_k_per_row: FAIL @ 151.0 tps
+[15:23:17]     MBPP [257/257] pass=12 tps=147.3
+[15:23:17]   MBPP pass@1 = 0.0467 (12/257)
+[15:23:18]     ioi_logit_difference: FAIL @ 136.7 tps
+[15:23:19]     l2_normalize_rows: FAIL @ 137.5 tps
+[15:23:20]     procrustes_alignment: PASS @ 135.0 tps
+[15:23:22]     batched_cosine_similarity: PASS @ 135.2 tps
+[15:23:22]     merge_json_metrics: PASS @ 136.2 tps
+[15:23:25]     extract_code_block: FAIL @ 134.3 tps
+[15:23:25]     bootstrap_confidence_interval: PASS @ 134.5 tps
+[15:23:26]     top_k_per_row: FAIL @ 137.8 tps
+[15:23:26]     parse_training_log: FAIL @ 144.6 tps
+[15:23:29]     ioi_logit_difference: FAIL @ 132.3 tps
+[15:23:29]     power_required_n: FAIL @ 133.3 tps
+[15:23:29]   Real tasks: 4/10 passed
+[15:23:29]   Freeing model...
+[15:23:29]   Deleted cache: /Users/lab-02/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-1.5B-Instruct-4bit
+[15:23:29] 
+Checkpoint saved after Qwen2.5-Coder-1.5B-Instruct
+[15:23:29] 
+================================================================
+[15:23:29]   MODEL: Qwen2.5-Coder-3B-Instruct  (3.0B params, 4-bit)
+[15:23:29] ================================================================
+[15:23:29]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-3B-Instruct-4bit
+[15:23:30]   Loaded in 0.8s
+[15:23:30]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:23:30]   MBPP: loading dataset (sanitized)...
+[15:23:31]     procrustes_alignment: PASS @ 183.7 tps
+[15:23:31]   MBPP: 257 problems (field='prompt')
+[15:23:33]     merge_json_metrics: PASS @ 155.9 tps
+[15:23:35]     extract_code_block: FAIL @ 137.3 tps
+[15:23:37]     parse_training_log: FAIL @ 137.3 tps
+[15:23:40]     power_required_n: FAIL @ 133.3 tps
+[15:23:40]   Real tasks: 4/10 passed
+[15:23:40]   Freeing model...
+[15:23:40]   Cache not found (already clean?): /Users/lab-02/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-1.5B-Instruct-4bit
+[15:23:40] 
+Checkpoint saved after Qwen2.5-Coder-1.5B-Instruct
+[15:23:40] 
+================================================================
+[15:23:40]   MODEL: Qwen2.5-Coder-3B-Instruct  (3.0B params, 4-bit)
+[15:23:40] ================================================================
+[15:23:40]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-3B-Instruct-4bit
+[15:23:40]   Loaded in 0.6s
+[15:23:40]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:23:40]   MBPP: loading dataset (sanitized)...
+[15:23:42]   MBPP: 257 problems (field='prompt')
+[15:26:21]     MBPP [50/257] pass=6 tps=80.4
+[15:26:30]     MBPP [50/257] pass=6 tps=81.0
+[15:29:21]     MBPP [100/257] pass=10 tps=80.0
+[15:29:27]     MBPP [100/257] pass=10 tps=81.0
+[15:32:27]     MBPP [150/257] pass=11 tps=79.7
+[15:32:29]     MBPP [150/257] pass=11 tps=80.9
+[15:35:40]     MBPP [200/257] pass=14 tps=80.8
+[15:35:40]     MBPP [200/257] pass=14 tps=79.7
+[15:38:30]     MBPP [250/257] pass=16 tps=80.6
+[15:38:30]     MBPP [250/257] pass=16 tps=79.6
+[15:38:53]     MBPP [257/257] pass=16 tps=80.6
+[15:38:53]   MBPP pass@1 = 0.0623 (16/257)
+[15:38:53]     MBPP [257/257] pass=16 tps=79.6
+[15:38:53]   MBPP pass@1 = 0.0623 (16/257)
+[15:39:00]     l2_normalize_rows: PASS @ 78.2 tps
+[15:39:00]     l2_normalize_rows: PASS @ 77.5 tps
+[15:39:06]     batched_cosine_similarity: PASS @ 78.1 tps
+[15:39:06]     batched_cosine_similarity: PASS @ 77.3 tps
+[15:39:13]     bootstrap_confidence_interval: FAIL @ 77.8 tps
+[15:39:13]     bootstrap_confidence_interval: FAIL @ 77.0 tps
+[15:39:20]     top_k_per_row: PASS @ 77.9 tps
+[15:39:20]     top_k_per_row: PASS @ 77.2 tps
+[15:39:27]     ioi_logit_difference: PASS @ 77.2 tps
+[15:39:27]     ioi_logit_difference: PASS @ 77.0 tps
+[15:39:34]     procrustes_alignment: PASS @ 77.3 tps
+[15:39:34]     procrustes_alignment: PASS @ 76.9 tps
+[15:39:41]     merge_json_metrics: FAIL @ 77.7 tps
+[15:39:41]     merge_json_metrics: FAIL @ 77.0 tps
+[15:39:47]     extract_code_block: FAIL @ 77.9 tps
+[15:39:47]     extract_code_block: FAIL @ 78.0 tps
+[15:39:54]     parse_training_log: PASS @ 77.5 tps
+[15:39:54]     parse_training_log: PASS @ 77.0 tps
+[15:40:02]     power_required_n: FAIL @ 77.1 tps
+[15:40:02]   Real tasks: 6/10 passed
+[15:40:02]   Freeing model...
+[15:40:02]   Deleted cache: /Users/lab-02/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-3B-Instruct-4bit
+[15:40:02] 
+Checkpoint saved after Qwen2.5-Coder-3B-Instruct
+[15:40:02] 
+================================================================
+[15:40:02]   MODEL: Qwen2.5-Coder-7B-Instruct  (7.0B params, 4-bit)
+[15:40:02] ================================================================
+[15:40:02]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-7B-Instruct-4bit
+[15:40:02]     power_required_n: FAIL @ 76.6 tps
+[15:40:02]   Real tasks: 6/10 passed
+[15:40:02]   Freeing model...
+[15:40:02]   Cache not found (already clean?): /Users/lab-02/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-3B-Instruct-4bit
+[15:40:02] 
+Checkpoint saved after Qwen2.5-Coder-3B-Instruct
+[15:40:02] 
+================================================================
+[15:40:02]   MODEL: Qwen2.5-Coder-7B-Instruct  (7.0B params, 4-bit)
+[15:40:02] ================================================================
+[15:40:02]   Trying mlx-community 4-bit: mlx-community/Qwen2.5-Coder-7B-Instruct-4bit
+[15:40:03]   Loaded in 1.8s
+[15:40:03]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:40:03]   MBPP: loading dataset (sanitized)...
+[15:40:03]   Loaded in 1.9s
+[15:40:03]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:40:03]   MBPP: loading dataset (sanitized)...
+[15:40:05]   MBPP: 257 problems (field='prompt')
+[15:40:05]   MBPP: 257 problems (field='prompt')
+[15:41:26]     MBPP [50/257] pass=6 tps=43.1
+[15:41:26]     MBPP [50/257] pass=6 tps=42.6
+[15:43:01]     MBPP [100/257] pass=10 tps=42.6
+[15:43:01]     MBPP [100/257] pass=10 tps=43.0
+[15:44:37]     MBPP [150/257] pass=13 tps=43.0
+[15:44:37]     MBPP [150/257] pass=13 tps=42.6
+[15:46:16]     MBPP [200/257] pass=15 tps=43.0
+[15:46:16]     MBPP [200/257] pass=15 tps=42.6
+[15:47:42]     MBPP [250/257] pass=18 tps=42.5
+[15:47:42]     MBPP [250/257] pass=18 tps=43.0
+[15:47:51]     MBPP [257/257] pass=18 tps=43.0
+[15:47:51]   MBPP pass@1 = 0.0700 (18/257)
+[15:47:51]     MBPP [257/257] pass=18 tps=42.5
+[15:47:51]   MBPP pass@1 = 0.0700 (18/257)
+[15:48:04]     l2_normalize_rows: PASS @ 40.2 tps
+[15:48:04]     l2_normalize_rows: PASS @ 39.7 tps
+[15:48:18]     batched_cosine_similarity: PASS @ 39.9 tps
+[15:48:18]     batched_cosine_similarity: PASS @ 39.5 tps
+[15:48:31]     bootstrap_confidence_interval: PASS @ 39.8 tps
+[15:48:31]     bootstrap_confidence_interval: PASS @ 39.8 tps
+[15:48:42]     top_k_per_row: PASS @ 40.1 tps
+[15:48:42]     top_k_per_row: PASS @ 40.0 tps
+[15:48:55]     ioi_logit_difference: PASS @ 39.7 tps
+[15:48:56]     ioi_logit_difference: PASS @ 39.7 tps
+[15:49:09]     procrustes_alignment: PASS @ 40.0 tps
+[15:49:09]     procrustes_alignment: PASS @ 39.5 tps
+[15:49:22]     merge_json_metrics: PASS @ 39.6 tps
+[15:49:23]     merge_json_metrics: PASS @ 38.8 tps
+[15:49:36]     extract_code_block: FAIL @ 39.6 tps
+[15:49:37]     extract_code_block: FAIL @ 38.7 tps
+[15:49:50]     parse_training_log: PASS @ 39.3 tps
+[15:49:51]     parse_training_log: PASS @ 38.5 tps
+[15:50:04]     power_required_n: FAIL @ 39.0 tps
+[15:50:04]   Real tasks: 8/10 passed
+[15:50:04]   Freeing model...
+[15:50:04]   Deleted cache: /Users/lab-02/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-7B-Instruct-4bit
+[15:50:04] 
+Checkpoint saved after Qwen2.5-Coder-7B-Instruct
+[15:50:04] 
+================================================================
+[15:50:04]   MODEL: Phi-4-Mini-Instruct  (3.8B params, 4-bit)
+[15:50:04] ================================================================
+[15:50:04]   Trying mlx-community 4-bit: mlx-community/phi-4-mini-instruct-4bit
+[15:50:04]     power_required_n: FAIL @ 40.5 tps
+[15:50:04]   Real tasks: 8/10 passed
+[15:50:04]   Freeing model...
+[15:50:04]   Cache not found (already clean?): /Users/lab-02/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-7B-Instruct-4bit
+[15:50:04] 
+Checkpoint saved after Qwen2.5-Coder-7B-Instruct
+[15:50:04] 
+================================================================
+[15:50:04]   MODEL: Phi-4-Mini-Instruct  (3.8B params, 4-bit)
+[15:50:04] ================================================================
+[15:50:04]   Trying mlx-community 4-bit: mlx-community/phi-4-mini-instruct-4bit
+[15:50:05]   Loaded in 1.3s
+[15:50:05]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:50:05]   MBPP: loading dataset (sanitized)...
+[15:50:05]   Loaded in 0.9s
+[15:50:05]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:50:05]   MBPP: loading dataset (sanitized)...
+[15:50:06]   MBPP: 257 problems (field='prompt')
+[15:50:06]   MBPP: 257 problems (field='prompt')
+[15:51:39]     MBPP [50/257] pass=6 tps=71.1
+[15:51:39]     MBPP [50/257] pass=6 tps=70.7
+[15:53:21]     MBPP [100/257] pass=9 tps=71.2
+[15:53:21]     MBPP [100/257] pass=9 tps=70.8
+[15:54:43]     MBPP [150/257] pass=11 tps=71.3
+[15:54:43]     MBPP [150/257] pass=11 tps=70.8
+[15:56:35]     MBPP [200/257] pass=11 tps=71.2
+[15:56:35]     MBPP [200/257] pass=11 tps=70.8
+[15:58:21]     MBPP [250/257] pass=14 tps=71.3
+[15:58:21]     MBPP [250/257] pass=14 tps=70.8
+[15:58:32]     MBPP [257/257] pass=14 tps=70.8
+[15:58:32]   MBPP pass@1 = 0.0545 (14/257)
+[15:58:32]     MBPP [257/257] pass=14 tps=71.3
+[15:58:32]   MBPP pass@1 = 0.0545 (14/257)
+[15:58:37]     l2_normalize_rows: PASS @ 68.3 tps
+[15:58:37]     l2_normalize_rows: PASS @ 67.9 tps
+[15:58:45]     batched_cosine_similarity: PASS @ 66.7 tps
+[15:58:45]     batched_cosine_similarity: PASS @ 66.4 tps
+[15:58:52]     bootstrap_confidence_interval: PASS @ 67.1 tps
+[15:58:52]     bootstrap_confidence_interval: PASS @ 66.9 tps
+[15:58:57]     top_k_per_row: PASS @ 69.2 tps
+[15:58:57]     top_k_per_row: PASS @ 68.2 tps
+[15:59:02]     ioi_logit_difference: FAIL @ 68.7 tps
+[15:59:02]     ioi_logit_difference: FAIL @ 68.1 tps
+[15:59:08]     procrustes_alignment: PASS @ 67.4 tps
+[15:59:08]     procrustes_alignment: PASS @ 66.8 tps
+[15:59:16]     merge_json_metrics: PASS @ 66.8 tps
+[15:59:16]     merge_json_metrics: PASS @ 66.4 tps
+[15:59:23]     extract_code_block: FAIL @ 67.4 tps
+[15:59:23]     extract_code_block: FAIL @ 67.1 tps
+[15:59:30]     parse_training_log: FAIL @ 67.1 tps
+[15:59:30]     parse_training_log: FAIL @ 66.7 tps
+[15:59:37]     power_required_n: FAIL @ 67.8 tps
+[15:59:37]   Real tasks: 6/10 passed
+[15:59:37]   Freeing model...
+[15:59:37]     power_required_n: FAIL @ 67.3 tps
+[15:59:37]   Real tasks: 6/10 passed
+[15:59:37]   Freeing model...
+[15:59:37] 
+ERROR on Phi-4-Mini-Instruct: [Errno 2] No such file or directory: 'dcecc4524288b351bbd0da8028e74e9b5bcdb9b5'
+[15:59:37]   Deleted cache: /Users/lab-02/.cache/huggingface/hub/models--mlx-community--phi-4-mini-instruct-4bit
+[15:59:37] 
+Checkpoint saved after Phi-4-Mini-Instruct
+[15:59:37] 
+================================================================
+[15:59:37]   MODEL: DeepSeek-Coder-V2-Lite-Instruct  (16.0B params, 4-bit)
+[15:59:37] ================================================================
+[15:59:37]   Trying mlx-community 4-bit: mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit
+[15:59:37] 
+Checkpoint saved after Phi-4-Mini-Instruct
+[15:59:37] 
+================================================================
+[15:59:37]   MODEL: DeepSeek-Coder-V2-Lite-Instruct  (16.0B params, 4-bit)
+[15:59:37] ================================================================
+[15:59:37]   Trying mlx-community 4-bit: mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit
+[15:59:42]   Loaded in 5.5s
+[15:59:42]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:59:42]   MBPP: loading dataset (sanitized)...
+[15:59:42]   Loaded in 5.5s
+[15:59:42]   HumanEval: using cached v1 results (skipping ~164 inferences)
+[15:59:42]   MBPP: loading dataset (sanitized)...
+[15:59:44]   MBPP: 257 problems (field='prompt')
+[15:59:44]   MBPP: 257 problems (field='prompt')
+[16:01:49]     MBPP [50/257] pass=8 tps=57.5
+[16:01:49]     MBPP [50/257] pass=8 tps=57.1
+[16:04:01]     MBPP [100/257] pass=13 tps=59.2
+[16:04:01]     MBPP [100/257] pass=13 tps=58.8
+[16:06:22]     MBPP [150/257] pass=16 tps=59.8
+[16:06:22]     MBPP [150/257] pass=16 tps=59.4
+[16:08:55]     MBPP [200/257] pass=21 tps=60.0
+[16:08:55]     MBPP [200/257] pass=21 tps=59.6
+[16:10:47]     MBPP [250/257] pass=23 tps=60.2
+[16:10:47]     MBPP [250/257] pass=23 tps=59.8
+[16:10:59]     MBPP [257/257] pass=25 tps=60.3
+[16:10:59]   MBPP pass@1 = 0.0973 (25/257)
+[16:10:59]     MBPP [257/257] pass=25 tps=59.9
+[16:10:59]   MBPP pass@1 = 0.0973 (25/257)
+[16:11:07]     l2_normalize_rows: PASS @ 58.7 tps
+[16:11:07]     l2_normalize_rows: PASS @ 58.1 tps
+[16:11:17]     batched_cosine_similarity: PASS @ 58.0 tps
+[16:11:17]     batched_cosine_similarity: PASS @ 57.4 tps
+[16:11:25]     bootstrap_confidence_interval: PASS @ 57.9 tps
+[16:11:25]     bootstrap_confidence_interval: PASS @ 57.6 tps
+[16:11:31]     top_k_per_row: PASS @ 59.0 tps
+[16:11:31]     top_k_per_row: PASS @ 58.6 tps
+[16:11:41]     ioi_logit_difference: FAIL @ 57.9 tps
+[16:11:41]     ioi_logit_difference: FAIL @ 56.9 tps
+[16:11:48]     procrustes_alignment: PASS @ 58.5 tps
+[16:11:48]     procrustes_alignment: PASS @ 58.5 tps
+[16:11:58]     merge_json_metrics: PASS @ 58.0 tps
+[16:11:58]     merge_json_metrics: PASS @ 57.5 tps
+[16:12:06]     extract_code_block: FAIL @ 58.7 tps
+[16:12:06]     extract_code_block: FAIL @ 58.0 tps
+[16:12:16]     parse_training_log: PASS @ 57.8 tps
+[16:12:16]     parse_training_log: PASS @ 57.5 tps
+[16:12:27]     power_required_n: PASS @ 57.3 tps
+[16:12:27]   Real tasks: 8/10 passed
+[16:12:27]     power_required_n: PASS @ 56.7 tps
+[16:12:27]   Freeing model...
+[16:12:27]   Real tasks: 8/10 passed
+[16:12:27]   Freeing model...
+[16:12:27] 
+ERROR on DeepSeek-Coder-V2-Lite-Instruct: [Errno 2] No such file or directory: 'special_tokens_map.json'
+[16:12:27] 
+Checkpoint saved after DeepSeek-Coder-V2-Lite-Instruct
+[16:12:27] 
+================================================================
+[16:12:27]   MODEL: Granite-Code-8B-Instruct  (8.0B params, 4-bit)
+[16:12:27] ================================================================
+[16:12:27]   Trying mlx-community 4-bit: mlx-community/granite-8b-code-instruct-128k-4bit
+[16:12:27]   Deleted cache: /Users/lab-02/.cache/huggingface/hub/models--mlx-community--DeepSeek-Coder-V2-Lite-Instruct-4bit
+[16:12:27] 
+Checkpoint saved after DeepSeek-Coder-V2-Lite-Instruct
+[16:12:27] 
+================================================================
+[16:12:27]   MODEL: Granite-Code-8B-Instruct  (8.0B params, 4-bit)
+[16:12:27] ================================================================
+[16:12:27]   Trying mlx-community 4-bit: mlx-community/granite-8b-code-instruct-128k-4bit
+[16:12:27]   mlx-community load failed: 401 Client Error. (Request ID: Root=1-6a74f8bb-7f5155bc3f5d396c71cb0070;59b981c1-04f7-4aa1-b32e-ec051f4476c4)
+
+Repository Not Found for url: https://huggingface.co/api/models/mlx-community/granite-8b-code-instruct-128k-4bit/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password.
+[16:12:27]   Falling back to mlx_lm.convert from ibm-granite/granite-8b-code-instruct-128k -> /Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp
+[16:12:27]   mlx-community load failed: 401 Client Error. (Request ID: Root=1-6a74f8bb-5074bca948c4c62655b587c5;1caff21f-4baa-43ce-9ecb-10a19734356c)
+
+Repository Not Found for url: https://huggingface.co/api/models/mlx-community/granite-8b-code-instruct-128k-4bit/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password.
+[16:12:27]   Falling back to mlx_lm.convert from ibm-granite/granite-8b-code-instruct-128k -> /Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp
+[16:17:57]   Loaded in 329.8s
+[16:17:57]   HumanEval: loading dataset...
+[16:17:58]   HumanEval: 164 problems
+[16:17:59]   Loaded in 331.4s
+[16:17:59]   HumanEval: loading dataset...
+[16:18:00]   HumanEval: 164 problems
+[16:20:06]     HumanEval [20/164] pass=15 tps=31.0
+[16:20:33]     HumanEval [20/164] pass=15 tps=26.6
+[16:22:44]     HumanEval [40/164] pass=29 tps=28.5
+[16:22:57]     HumanEval [40/164] pass=29 tps=27.8
+[16:24:46]     HumanEval [60/164] pass=45 tps=29.1
+[16:25:02]     HumanEval [60/164] pass=45 tps=27.5
+[16:27:06]     HumanEval [80/164] pass=58 tps=28.2
+[16:27:23]     HumanEval [80/164] pass=58 tps=27.1
+[16:29:28]     HumanEval [100/164] pass=68 tps=27.6
+[16:29:37]     HumanEval [100/164] pass=68 tps=27.1
+[16:32:25]     HumanEval [120/164] pass=76 tps=27.8
+[16:32:36]     HumanEval [120/164] pass=76 tps=27.1
+[16:35:10]     HumanEval [140/164] pass=82 tps=27.5
+[16:35:18]     HumanEval [140/164] pass=82 tps=26.9
+[16:37:35]     HumanEval [160/164] pass=94 tps=27.3
+[16:37:42]     HumanEval [160/164] pass=94 tps=26.8
+[16:38:07]     HumanEval [164/164] pass=95 tps=27.3
+[16:38:07]   HumanEval pass@1 = 0.5793 (95/164)
+[16:38:07]   MBPP: loading dataset (sanitized)...
+[16:38:08]   MBPP: 257 problems (field='prompt')
+[16:38:11]     HumanEval [164/164] pass=95 tps=26.8
+[16:38:11]   HumanEval pass@1 = 0.5793 (95/164)
+[16:38:11]   MBPP: loading dataset (sanitized)...
+[16:38:12]   MBPP: 257 problems (field='prompt')
+[16:41:19]     MBPP [50/257] pass=4 tps=27.3
+[16:41:20]     MBPP [50/257] pass=4 tps=27.6
+[16:45:10]     MBPP [100/257] pass=6 tps=27.7
+[16:45:10]     MBPP [100/257] pass=6 tps=27.5
+[16:48:29]     MBPP [150/257] pass=7 tps=27.5
+[16:48:31]     MBPP [150/257] pass=7 tps=27.2
+[16:52:12]     MBPP [200/257] pass=8 tps=27.6
+[16:52:19]     MBPP [200/257] pass=8 tps=27.3
+[16:55:31]     MBPP [250/257] pass=10 tps=27.6
+[16:55:40]     MBPP [250/257] pass=10 tps=27.3
+[16:55:51]     MBPP [257/257] pass=10 tps=27.6
+[16:55:51]   MBPP pass@1 = 0.0389 (10/257)
+[16:55:56]     l2_normalize_rows: PASS @ 26.8 tps
+[16:56:02]     MBPP [257/257] pass=10 tps=27.2
+[16:56:02]   MBPP pass@1 = 0.0389 (10/257)
+[16:56:06]     l2_normalize_rows: PASS @ 28.4 tps
+[16:56:09]     batched_cosine_similarity: PASS @ 25.3 tps
+[16:56:19]     batched_cosine_similarity: PASS @ 26.3 tps
+[16:56:29]     bootstrap_confidence_interval: PASS @ 27.2 tps
+[16:56:38]     bootstrap_confidence_interval: PASS @ 27.2 tps
+[16:56:40]     top_k_per_row: PASS @ 27.6 tps
+[16:56:51]     top_k_per_row: PASS @ 26.4 tps
+[16:56:51]     ioi_logit_difference: PASS @ 27.2 tps
+[16:57:02]     ioi_logit_difference: PASS @ 26.6 tps
+[16:57:04]     procrustes_alignment: PASS @ 26.7 tps
+[16:57:12]     merge_json_metrics: PASS @ 28.6 tps
+[16:57:15]     procrustes_alignment: PASS @ 25.7 tps
+[16:57:23]     extract_code_block: FAIL @ 27.0 tps
+[16:57:24]     merge_json_metrics: PASS @ 27.0 tps
+[16:57:34]     parse_training_log: FAIL @ 28.3 tps
+[16:57:34]     extract_code_block: FAIL @ 27.2 tps
+[16:57:46]     parse_training_log: FAIL @ 28.0 tps
+[16:57:52]     power_required_n: FAIL @ 26.4 tps
+[16:57:52]   Real tasks: 7/10 passed
+[16:57:52]   Freeing model...
+[16:57:52]   Cache not found (already clean?): /Users/lab-02/.cache/huggingface/hub/models--mlx-community--granite-8b-code-instruct-128k-4bit
+[16:57:52]   Deleted converted model: /Users/lab-02/ResearchPapers/data/slm-benchmark/converted_model_tmp
+[16:57:52]   Deleted HF cache: /Users/lab-02/.cache/huggingface/hub/models--ibm-granite--granite-8b-code-instruct-128k
+[16:57:52] 
+Checkpoint saved after Granite-Code-8B-Instruct
+[16:57:52] 
+Markdown table: /Users/lab-02/ResearchPapers/data/slm-benchmark/quality_per_gb.md
+[16:57:52] 
+Done. Results: /Users/lab-02/ResearchPapers/data/slm-benchmark/results.json
+[16:57:58]     power_required_n: FAIL @ 38.3 tps
+[16:57:58]   Real tasks: 7/10 passed
+[16:57:58]   Freeing model...
+[16:57:58]   Cache not found (already clean?): /Users/lab-02/.cache/huggingface/hub/models--mlx-community--granite-8b-code-instruct-128k-4bit
+[16:57:58] 
+Checkpoint saved after Granite-Code-8B-Instruct
+[16:57:58] 
+Markdown table: /Users/lab-02/ResearchPapers/data/slm-benchmark/quality_per_gb.md
+[16:57:58] 
+Done. Results: /Users/lab-02/ResearchPapers/data/slm-benchmark/results.json

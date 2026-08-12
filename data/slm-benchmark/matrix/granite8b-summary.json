@@ -1,0 +1,270 @@
+{
+  "model": "granite8b",
+  "display_name": "Granite-8B-Code-Instruct-4k",
+  "hf": "ibm-granite/granite-8b-code-instruct-4k",
+  "param_b": 8.0,
+  "run_date": "2026-08-07T05:07:37",
+  "arms": {
+    "bf16": {
+      "humaneval": {
+        "pass_at_1": 0.5915,
+        "plus_pass_at_1": 0.5366,
+        "base_passed": 97,
+        "plus_passed": 88,
+        "total": 164,
+        "mean_tps": 19.6,
+        "peak_memory_gb": 16.4,
+        "results_file": "/tmp/evalplus_runs/granite8b-bf16/humaneval-samples_eval_results.json",
+        "elapsed_sec": 1245.4
+      },
+      "mbpp": {
+        "pass_at_1": 0.672,
+        "plus_pass_at_1": 0.5688,
+        "base_passed": 254,
+        "plus_passed": 215,
+        "total": 378,
+        "mean_tps": 19.8,
+        "peak_memory_gb": 16.4,
+        "results_file": "/tmp/evalplus_runs/granite8b-bf16/mbpp-samples_eval_results.json",
+        "elapsed_sec": 1876.6
+      },
+      "realtasks": {
+        "pass_rate": 0.2308,
+        "passed": 6,
+        "total": 26,
+        "mean_tps": 19.4,
+        "peak_memory_gb": 16.52,
+        "by_tier": {
+          "EASY": {
+            "passed": 4,
+            "total": 8
+          },
+          "MEDIUM": {
+            "passed": 1,
+            "total": 8
+          },
+          "HARD": {
+            "passed": 1,
+            "total": 10
+          }
+        },
+        "detail": [
+          {
+            "id": "rt_e01",
+            "tier": "EASY",
+            "name": "cosine_lr",
+            "passed": false,
+            "tps": 19.6,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e01_u07h6kfo.py\", line 33, in <module>\n    assert abs(cosine_lr(500, 1.0, 500, 50000) - 1.0) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_e02",
+            "tier": "EASY",
+            "name": "bootstrap_ci",
+            "passed": true,
+            "tps": 19.5,
+            "detail": ""
+          },
+          {
+            "id": "rt_e03",
+            "tier": "EASY",
+            "name": "quantiles_and_overflow",
+            "passed": false,
+            "tps": 19.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e03_iuhui4zd.py\", line 67, in <module>\n    assert isinstance(s['n_fp16_overflow'], int) and isinstance(s['n_total'], int)\nAssertionError"
+          },
+          {
+            "id": "rt_e04",
+            "tier": "EASY",
+            "name": "rel_depth_bucket",
+            "passed": true,
+            "tps": 19.8,
+            "detail": ""
+          },
+          {
+            "id": "rt_e05",
+            "tier": "EASY",
+            "name": "val_to_hex",
+            "passed": false,
+            "tps": 19.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e05_o9k512qz.py\", line 39, in <module>\n    assert val_to_hex(0.0) == '#fff5f0'\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e05_o9k512qz.py\", line 32, in val_to_hex\n    t = (v - v0) / (v1 - v0)\nZeroDivisionError: float division by zero"
+          },
+          {
+            "id": "rt_e06",
+            "tier": "EASY",
+            "name": "average_precision",
+            "passed": false,
+            "tps": 19.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e06_snvl3q95.py\", line 42, in <module>\n    assert abs(average_precision([1, 1, 0, 0], [4, 3, 2, 1]) - 1.0) < 1e-12\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e06_snvl3q95.py\", line 24, in average_precision\n    sorted_indices = np.argsort(-s)\nTypeError: bad operand type for unary -: 'list'"
+          },
+          {
+            "id": "rt_e07",
+            "tier": "EASY",
+            "name": "avg_grads",
+            "passed": true,
+            "tps": 19.6,
+            "detail": ""
+          },
+          {
+            "id": "rt_e08",
+            "tier": "EASY",
+            "name": "best_match",
+            "passed": true,
+            "tps": 19.5,
+            "detail": ""
+          },
+          {
+            "id": "rt_m01",
+            "tier": "MEDIUM",
+            "name": "roc_auc",
+            "passed": false,
+            "tps": 19.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m01_n_wgb0l0.py\", line 44, in <module>\n    assert abs(roc_auc([0, 0, 1, 1], [0.1, 0.2, 0.3, 0.4]) - 1.0) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_m02",
+            "tier": "MEDIUM",
+            "name": "topk_encode",
+            "passed": false,
+            "tps": 19.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m02_0sa2azzx.py\", line 75, in <module>\n    assert int((t != 0).sum()) == 2, t\nAssertionError: [[0. 1. 0. 0.]]"
+          },
+          {
+            "id": "rt_m03",
+            "tier": "MEDIUM",
+            "name": "reciprocal_matches",
+            "passed": false,
+            "tps": 19.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m03_i7ge2owx.py\", line 64, in <module>\n    res = reciprocal_matches(fp_a, fp_b, va, vb, 0.5)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m03_i7ge2owx.py\", line 51, in reciprocal_matches\n    feat_b = np.arange(len(valid_b))[valid_b][indices[1]]\nIndexError: tuple index out of range"
+          },
+          {
+            "id": "rt_m04",
+            "tier": "MEDIUM",
+            "name": "heuristic_pos",
+            "passed": false,
+            "tps": 19.1,
+            "detail": "File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m04_e8rnd177.py\", line 48\n    if tok and tok[0].isupper() and not tok.startswith(\"\n                                                        ^\nSyntaxError: EOL while scanning string literal"
+          },
+          {
+            "id": "rt_m05",
+            "tier": "MEDIUM",
+            "name": "drain_acks",
+            "passed": false,
+            "tps": 19.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m05_k2mau7o8.py\", line 42, in <module>\n    assert drain_acks([ack(1, 5), b'', ack(1, 5)], 0) == 5\nAssertionError"
+          },
+          {
+            "id": "rt_m06",
+            "tier": "MEDIUM",
+            "name": "find_shared_positions",
+            "passed": false,
+            "tps": 19.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m06_r2dbj63k.py\", line 44, in <module>\n    sh, oa, ob = find_shared_positions(a, b, tol=0.08)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m06_r2dbj63k.py\", line 31, in find_shared_positions\n    if best_score <= tol:\nTypeError: '<=' not supported between instances of 'NoneType' and 'float'"
+          },
+          {
+            "id": "rt_m07",
+            "tier": "MEDIUM",
+            "name": "detection_rate",
+            "passed": true,
+            "tps": 19.3,
+            "detail": ""
+          },
+          {
+            "id": "rt_m08",
+            "tier": "MEDIUM",
+            "name": "DeadTracker",
+            "passed": false,
+            "tps": 19.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m08_qjuo6ndu.py\", line 58, in <module>\n    assert isinstance(t.dead_count, int) and not isinstance(t.dead_count, bool)\nAssertionError"
+          },
+          {
+            "id": "rt_h01",
+            "tier": "HARD",
+            "name": "sae_eval",
+            "passed": false,
+            "tps": 19.1,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h01_sla8mws3.py\", line 80, in <module>\n    res = sae_eval(sae, acts, K, 0, 200, block=10000)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h01_sla8mws3.py\", line 73, in sae_eval\n    f[j] = pre[j] if pre[j] >= np.partition(pre[j], k)[k] else 0\nValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()"
+          },
+          {
+            "id": "rt_h02",
+            "tier": "HARD",
+            "name": "plant_signals_batch",
+            "passed": true,
+            "tps": 19.4,
+            "detail": ""
+          },
+          {
+            "id": "rt_h03",
+            "tier": "HARD",
+            "name": "procrustes_align",
+            "passed": false,
+            "tps": 19.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h03_12fy1tox.py\", line 52, in <module>\n    R, Wal = procrustes_align(raw, W_b, anchors_a, anchors_b)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h03_12fy1tox.py\", line 30, in procrustes_align\n    M = W_a.T @ W_b\nValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 30 is different from 40)"
+          },
+          {
+            "id": "rt_h04",
+            "tier": "HARD",
+            "name": "find_universal_triangles",
+            "passed": false,
+            "tps": 19.2,
+            "detail": "    r = find_universal_triangles([(1, 10, 0.9)], [(1, 100, 0.8)], [(100, 10, 0.7)])\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h04__eigskdt.py\", line 40, in find_universal_triangles\n    sorted_triangles = sorted(universal_triangles, key=lambda x: np.mean([x[\"cosim_llama_qwen\"], x[\"cosim_llama_mistral\"], x[\"cosim_mistral_qwen\"]]), reverse=True)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h04__eigskdt.py\", line 40, in <lambda>\n    sorted_triangles = sorted(universal_triangles, key=lambda x: np.mean([x[\"cosim_llama_qwen\"], x[\"cosim_llama_mistral\"], x[\"cosim_mistral_qwen\"]]), reverse=True)\nNameError: name 'np' is not defined"
+          },
+          {
+            "id": "rt_h05",
+            "tier": "HARD",
+            "name": "auxk_loss",
+            "passed": false,
+            "tps": 19.2,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h05_4gu8cvo5.py\", line 88, in <module>\n    assert abs(got - (main + 0.1 * aux)) < 1e-9, (got, main + 0.1 * aux)\nAssertionError: (np.float64(9.843326042584398e+17), 1.582228325569792)"
+          },
+          {
+            "id": "rt_h06",
+            "tier": "HARD",
+            "name": "parse_stream",
+            "passed": false,
+            "tps": 19.2,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h06_pg3pjq21.py\", line 83, in <module>\n    assert abs(r['checksum'] - 40.0) < 1e-6, r['checksum']\nAssertionError: 5.054e-05"
+          },
+          {
+            "id": "rt_h07",
+            "tier": "HARD",
+            "name": "contrastive_label",
+            "passed": false,
+            "tps": 19.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h07_td_hqexh.py\", line 89, in <module>\n    assert abs(r4 - (3 / 3) / (0.5 / 0.5)) < 1e-12, r4\nAssertionError: 0.75"
+          },
+          {
+            "id": "rt_h08",
+            "tier": "HARD",
+            "name": "depth_conservation_null",
+            "passed": false,
+            "tps": 19.1,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h08_47omohl4.py\", line 82, in <module>\n    d = depth_conservation_null([14], 28, [12], 24, tol=0.01, n_perm=200, seed=1)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h08_47omohl4.py\", line 60, in depth_conservation_null\n    observed_matches = greedy_depth_match(a_layers / n_a, b_layers / n_b, tol)\nTypeError: unsupported operand type(s) for /: 'list' and 'int'"
+          },
+          {
+            "id": "rt_h09",
+            "tier": "HARD",
+            "name": "null_threshold",
+            "passed": false,
+            "tps": 19.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h09_d_fzacnl.py\", line 58, in <module>\n    tau, allv = null_threshold(FA, FB, va, vb, np.random.default_rng(7), n_perm=6)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h09_d_fzacnl.py\", line 35, in null_threshold\n    fp_b_perm = fp_b[:, valid_b] @ np.diag(perm)\nIndexError: boolean index did not match indexed array along axis 1; size of axis is 24 but size of corresponding boolean axis is 26"
+          },
+          {
+            "id": "rt_h10",
+            "tier": "HARD",
+            "name": "build_pdf",
+            "passed": false,
+            "tps": 19.2,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h10_bme4bc6p.py\", line 60, in <module>\n    assert data.endswith(b'%%EOF\\n')\nAssertionError"
+          }
+        ],
+        "timestamp": "2026-08-07T05:07:36",
+        "elapsed_sec": 725.5
+      },
+      "load_sec": 311.0
+    },
+    "4bit-rtn": {
+      "error": "Command '['/Library/Developer/CommandLineTools/usr/bin/python3', '-m', 'mlx_lm', 'convert', '--hf-path', 'ibm-granite/granite-8b-code-instruct-4k', '--mlx-path', '/tmp/evalplus_runs/_cvt_ibm-granite_granite-8b-code-instruct-4k_4bit', '--quantize', '--q-bits', '4']' returned non-zero exit status 1."
+    }
+  }
+}

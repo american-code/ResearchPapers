@@ -1,0 +1,113 @@
+# Semantic Rules — llama — target: ner
+
+## AUC-ROC per class
+  person: 0.9832
+  org: 0.9837
+  gpe: 0.9953
+  date: 0.9744
+  number: 0.9868
+  other: 0.9419
+
+## Top-5 Predictive Features per Class (by |coefficient|)
+
+  person:
+    feature  2240  coef=-0.6418
+    feature 14775  coef=+0.5308
+    feature  9055  coef=+0.4284
+    feature  3256  coef=+0.4262
+    feature  1844  coef=+0.4152
+
+  org:
+    feature  5121  coef=+0.5401
+    feature  2633  coef=+0.5079
+    feature  6663  coef=+0.4320
+    feature  1498  coef=+0.4274
+    feature  1694  coef=+0.4063
+
+  gpe:
+    feature 12516  coef=+0.6260
+    feature  5563  coef=+0.5263
+    feature 11737  coef=+0.4143
+    feature   461  coef=+0.3767
+    feature  7967  coef=+0.3463
+
+  date:
+    feature  2445  coef=+0.5999
+    feature  9923  coef=+0.5936
+    feature 12824  coef=+0.5463
+    feature 11705  coef=-0.5128
+    feature 14972  coef=+0.4762
+
+  number:
+    feature  3445  coef=+0.8304
+    feature  1492  coef=-0.5616
+    feature 10202  coef=+0.5359
+    feature 14453  coef=-0.5105
+    feature  8103  coef=+0.5040
+
+  other:
+    feature 13749  coef=-0.6520
+    feature  9923  coef=-0.5797
+    feature  8335  coef=+0.5352
+    feature  8525  coef=+0.5347
+    feature   369  coef=-0.5218
+
+## Decision Tree Rules
+```
+|--- f12824 <= 0.37
+|   |--- f13366 <= 0.83
+|   |   |--- f11510 <= 1.27
+|   |   |   |--- f13901 <= 0.32
+|   |   |   |   |--- f9249 <= 1.23
+|   |   |   |   |   |--- class: 5
+|   |   |   |   |--- f9249 >  1.23
+|   |   |   |   |   |--- class: 3
+|   |   |   |--- f13901 >  0.32
+|   |   |   |   |--- f5327 <= 0.25
+|   |   |   |   |   |--- class: 5
+|   |   |   |   |--- f5327 >  0.25
+|   |   |   |   |   |--- class: 3
+|   |   |--- f11510 >  1.27
+|   |   |   |--- f1516 <= 0.09
+|   |   |   |   |--- f6644 <= 0.00
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- f6644 >  0.00
+|   |   |   |   |   |--- class: 3
+|   |   |   |--- f1516 >  0.09
+|   |   |   |   |--- f7063 <= 0.02
+|   |   |   |   |   |--- class: 5
+|   |   |   |   |--- f7063 >  0.02
+|   |   |   |   |   |--- class: 4
+|   |--- f13366 >  0.83
+|   |   |--- f3702 <= 0.01
+|   |   |   |--- f12251 <= 0.04
+|   |   |   |   |--- class: 5
+|   |   |   |--- f12251 >  0.04
+|   |   |   |   |--- class: 4
+|   |   |--- f3702 >  0.01
+|   |   |   |--- class: 4
+|--- f12824 >  0.37
+|   |--- f9554 <= 0.09
+|   |   |--- f95 <= 0.06
+|   |   |   |--- f16214 <= 0.00
+|   |   |   |   |--- f2954 <= 0.14
+|   |   |   |   |   |--- class: 5
+|   |   |   |   |--- f2954 >  0.14
+|   |   |   |   |   |--- class: 3
+|   |   |   |--- f16214 >  0.00
+|   |   |   |   |--- f13096 <= 0.08
+|   |   |   |   |   |--- class: 3
+|   |   |   |   |--- f13096 >  0.08
+|   |   |   |   |   |--- class: 0
+|   |   |--- f95 >  0.06
+|   |   |   |--- f1162 <= 0.03
+|   |   |   |   |--- f13505 <= 0.00
+|   |   |   |   |   |--- class: 3
+|   |   |   |   |--- f13505 >  0.00
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- f1162 >  0.03
+|   |   |   |   |--- class: 0
+|   |--- f9554 >  0.09
+|   |   |--- class: 3
+
+```

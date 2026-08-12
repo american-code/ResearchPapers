@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "model": "EleutherAI/pythia-1.4b",
+    "dataset": "dataset-v2.json",
+    "n_examples": 200,
+    "n_templates": 15,
+    "n_layers": 24,
+    "n_heads": 16,
+    "circuit": [
+      "L0H2",
+      "L10H7",
+      "L13H6",
+      "L14H6",
+      "L15H11",
+      "L15H15",
+      "L15H3",
+      "L15H9",
+      "L1H11",
+      "L21H3"
+    ],
+    "circuit_size": 10,
+    "synthetic": false,
+    "normalization": "F(X) = (LD(X) - LD_all_ablated) / (LD_clean - LD_all_ablated)"
+  },
+  "baselines": {
+    "LD_clean": 3.8883,
+    "LD_all_ablated": 0.0184,
+    "LD_circuit_only": -0.1988,
+    "F_faithfulness": -0.0561
+  },
+  "joint_ablation": {
+    "LD_model_minus_circuit": 1.2394,
+    "F_complete": 0.3155
+  },
+  "leave_one_in": {
+    "F_complete_reference": 0.3155,
+    "heads": [
+      {
+        "head": "L10H7",
+        "layer": 10,
+        "head_idx": 7,
+        "LD_leave_in": 2.2008,
+        "F_leave_in": 0.5639,
+        "delta_F": 0.2484
+      },
+      {
+        "head": "L1H11",
+        "layer": 1,
+        "head_idx": 11,
+        "LD_leave_in": 1.5054,
+        "F_leave_in": 0.3842,
+        "delta_F": 0.0687
+      },
+      {
+        "head": "L21H3",
+        "layer": 21,
+        "head_idx": 3,
+        "LD_leave_in": 1.4782,
+        "F_leave_in": 0.3772,
+        "delta_F": 0.0617
+      },
+      {
+        "head": "L15H15",
+        "layer": 15,
+        "head_idx": 15,
+        "LD_leave_in": 1.3973,
+        "F_leave_in": 0.3563,
+        "delta_F": 0.0408
+      },
+      {
+        "head": "L13H6",
+        "layer": 13,
+        "head_idx": 6,
+        "LD_leave_in": 1.3133,
+        "F_leave_in": 0.3346,
+        "delta_F": 0.0191
+      },
+      {
+        "head": "L15H9",
+        "layer": 15,
+        "head_idx": 9,
+        "LD_leave_in": 1.3025,
+        "F_leave_in": 0.3318,
+        "delta_F": 0.0163
+      },
+      {
+        "head": "L15H3",
+        "layer": 15,
+        "head_idx": 3,
+        "LD_leave_in": 1.2747,
+        "F_leave_in": 0.3246,
+        "delta_F": 0.0091
+      },
+      {
+        "head": "L0H2",
+        "layer": 0,
+        "head_idx": 2,
+        "LD_leave_in": 1.2414,
+        "F_leave_in": 0.316,
+        "delta_F": 0.0005
+      },
+      {
+        "head": "L15H11",
+        "layer": 15,
+        "head_idx": 11,
+        "LD_leave_in": 1.2405,
+        "F_leave_in": 0.3158,
+        "delta_F": 0.0003
+      },
+      {
+        "head": "L14H6",
+        "layer": 14,
+        "head_idx": 6,
+        "LD_leave_in": 1.2169,
+        "F_leave_in": 0.3097,
+        "delta_F": -0.0058
+      }
+    ]
+  },
+  "runtime_seconds": 503.4,
+  "timestamp": "2026-08-05T01:17:35"
+}

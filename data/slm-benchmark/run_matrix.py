@@ -182,11 +182,17 @@ def load_arm(arm_cfg: dict):
 
     if q_bits:
         local_path = EVALPLUS_RUNS_BASE / f"_cvt_{hf_id.replace('/', '_')}_{q_bits}bit"
-        if local_path.exists():
+        # A valid converted model must have config.json; an empty dir from a prior
+        # failed attempt is not valid — delete it so mlx_lm convert can recreate it.
+        is_valid = local_path.exists() and (local_path / "config.json").exists()
+        if is_valid:
             log(f"  Loading existing converted model at {local_path}")
         else:
+            if local_path.exists():
+                import shutil
+                log(f"  Removing incomplete conversion dir {local_path}")
+                shutil.rmtree(local_path)
             log(f"  Converting {hf_id} → {q_bits}-bit RTN")
-            local_path.mkdir(parents=True, exist_ok=True)
             subprocess.run(
                 [sys.executable, "-m", "mlx_lm", "convert",
                  "--hf-path", hf_id, "--mlx-path", str(local_path),

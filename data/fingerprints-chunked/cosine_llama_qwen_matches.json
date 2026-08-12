@@ -1,0 +1,125 @@
+{
+ "metric": "cosine",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 5000 chunks \u00d7 100 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "chunk_tokens": 100,
+ "n_chunks": 5000,
+ "min_active_chunks": 250,
+ "tau_calibrated": 0.8,
+ "permutation_null": {
+  "null_p99": 0.6494,
+  "null_mean": 0.3187,
+  "null_max": 0.9706,
+  "n_null_samples": 18524
+ },
+ "n_matches_tau_0.80": 21,
+ "n_matches_tau_cal": 21,
+ "matches": [
+  {
+   "feat_a": 91,
+   "feat_b": 1638,
+   "sim": 0.9763
+  },
+  {
+   "feat_a": 168,
+   "feat_b": 4205,
+   "sim": 0.8742
+  },
+  {
+   "feat_a": 339,
+   "feat_b": 4339,
+   "sim": 0.828
+  },
+  {
+   "feat_a": 388,
+   "feat_b": 15819,
+   "sim": 0.8019
+  },
+  {
+   "feat_a": 2473,
+   "feat_b": 3474,
+   "sim": 0.8991
+  },
+  {
+   "feat_a": 4865,
+   "feat_b": 14603,
+   "sim": 0.8206
+  },
+  {
+   "feat_a": 5140,
+   "feat_b": 2517,
+   "sim": 0.8178
+  },
+  {
+   "feat_a": 5528,
+   "feat_b": 7337,
+   "sim": 0.9746
+  },
+  {
+   "feat_a": 5629,
+   "feat_b": 4977,
+   "sim": 0.9176
+  },
+  {
+   "feat_a": 6561,
+   "feat_b": 5648,
+   "sim": 0.851
+  },
+  {
+   "feat_a": 11593,
+   "feat_b": 11651,
+   "sim": 0.9059
+  },
+  {
+   "feat_a": 12055,
+   "feat_b": 5110,
+   "sim": 0.8911
+  },
+  {
+   "feat_a": 12332,
+   "feat_b": 837,
+   "sim": 0.8449
+  },
+  {
+   "feat_a": 13381,
+   "feat_b": 5109,
+   "sim": 0.9874
+  },
+  {
+   "feat_a": 14033,
+   "feat_b": 2657,
+   "sim": 0.8236
+  },
+  {
+   "feat_a": 14242,
+   "feat_b": 3825,
+   "sim": 0.8122
+  },
+  {
+   "feat_a": 14308,
+   "feat_b": 2223,
+   "sim": 0.8725
+  },
+  {
+   "feat_a": 14595,
+   "feat_b": 4202,
+   "sim": 0.9042
+  },
+  {
+   "feat_a": 15224,
+   "feat_b": 8249,
+   "sim": 0.9198
+  },
+  {
+   "feat_a": 15431,
+   "feat_b": 849,
+   "sim": 0.8001
+  },
+  {
+   "feat_a": 16092,
+   "feat_b": 4928,
+   "sim": 0.8959
+  }
+ ]
+}

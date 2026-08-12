@@ -1,0 +1,20 @@
+{
+  "cka_score": 0.016921321478488027,
+  "n_cka_tokens": 8000,
+  "matched_features": [
+    {
+      "mistral_id": 1917,
+      "llama_id": 15327,
+      "pearson_r": 0.6841,
+      "mistral_label": "game",
+      "llama_label": "was"
+    },
+    {
+      "mistral_id": 8369,
+      "llama_id": 4425,
+      "pearson_r": 0.5517,
+      "mistral_label": "were",
+      "llama_label": "of"
+    }
+  ]
+}

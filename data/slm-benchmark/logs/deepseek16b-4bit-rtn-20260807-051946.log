@@ -1,0 +1,42 @@
+[05:19:46] ================================================================
+[05:19:46] MLX Quantization Audit: DeepSeek-Coder-V2-Lite-Instruct
+[05:19:46] Arms: ['4bit-rtn']
+[05:19:46] Datasets: ['humaneval', 'mbpp', 'realtasks']
+[05:19:46] Log: /tmp/evalplus_runs/deepseek16b-run.log
+[05:19:46] ================================================================
+[05:19:46] 
+================================================================
+[05:19:46] ARM: 4bit-rtn
+[05:19:46] ================================================================
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[05:19:47]   Converting deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct → 4-bit RTN
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/__main__.py", line 30, in <module>
+    submodule.main()
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/convert.py", line 241, in main
+    convert(**vars(args))
+  File "/Users/lab-02/Library/Python/3.9/lib/python/site-packages/mlx_lm/convert.py", line 105, in convert
+    raise ValueError(
+ValueError: Cannot save to the path /tmp/evalplus_runs/_cvt_deepseek-ai_DeepSeek-Coder-V2-Lite-Instruct_4bit as it already exists. Please delete the file/directory or specify a new path to save to.
+[05:19:48] FATAL ERROR in arm 4bit-rtn: Command '['/Library/Developer/CommandLineTools/usr/bin/python3', '-m', 'mlx_lm', 'convert', '--hf-path', 'deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct', '--mlx-path', '/tmp/evalplus_runs/_cvt_deepseek-ai_DeepSeek-Coder-V2-Lite-Instruct_4bit', '--quantize', '--q-bits', '4']' returned non-zero exit status 1.
+Traceback (most recent call last):
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/run_matrix.py", line 602, in main
+    arm_result = run_arm(model_key, arm_key, model_cfg["arms"][arm_key], datasets)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/run_matrix.py", line 485, in run_arm
+    model, tokenizer = load_arm(arm_cfg)
+  File "/Users/lab-02/ResearchPapers/data/slm-benchmark/run_matrix.py", line 190, in load_arm
+    subprocess.run(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Library/Developer/CommandLineTools/usr/bin/python3', '-m', 'mlx_lm', 'convert', '--hf-path', 'deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct', '--mlx-path', '/tmp/evalplus_runs/_cvt_deepseek-ai_DeepSeek-Coder-V2-Lite-Instruct_4bit', '--quantize', '--q-bits', '4']' returned non-zero exit status 1.
+[05:19:48] 
+Summary → /Users/lab-02/ResearchPapers/data/slm-benchmark/matrix/deepseek16b-summary.json
+[05:19:48] Sentinel → /tmp/evalplus_runs/deepseek16b.done
+[05:19:48] Run complete — 2026-08-07T05:19:48

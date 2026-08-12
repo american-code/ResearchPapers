@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "model": "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit",
+    "dataset": "dataset-v2.json",
+    "n_examples": 200,
+    "n_templates": 15,
+    "n_layers": 32,
+    "n_heads": 32,
+    "circuit": [
+      "L16H1",
+      "L16H22",
+      "L17H24",
+      "L17H27",
+      "L19H23",
+      "L20H3",
+      "L22H19",
+      "L24H27",
+      "L27H20",
+      "L30H13"
+    ],
+    "circuit_size": 10,
+    "synthetic": false,
+    "normalization": "F(X) = (LD(X) - LD_all_ablated) / (LD_clean - LD_all_ablated)"
+  },
+  "baselines": {
+    "LD_clean": 5.2286,
+    "LD_all_ablated": -0.0463,
+    "LD_circuit_only": 1.3536,
+    "F_faithfulness": 0.2654
+  },
+  "joint_ablation": {
+    "LD_model_minus_circuit": 1.1982,
+    "F_complete": 0.2359
+  },
+  "leave_one_in": {
+    "F_complete_reference": 0.2359,
+    "heads": [
+      {
+        "head": "L19H23",
+        "layer": 19,
+        "head_idx": 23,
+        "LD_leave_in": 2.3723,
+        "F_leave_in": 0.4585,
+        "delta_F": 0.2226
+      },
+      {
+        "head": "L17H27",
+        "layer": 17,
+        "head_idx": 27,
+        "LD_leave_in": 1.9298,
+        "F_leave_in": 0.3746,
+        "delta_F": 0.1387
+      },
+      {
+        "head": "L16H1",
+        "layer": 16,
+        "head_idx": 1,
+        "LD_leave_in": 1.571,
+        "F_leave_in": 0.3066,
+        "delta_F": 0.0707
+      },
+      {
+        "head": "L30H13",
+        "layer": 30,
+        "head_idx": 13,
+        "LD_leave_in": 1.5527,
+        "F_leave_in": 0.3031,
+        "delta_F": 0.0672
+      },
+      {
+        "head": "L17H24",
+        "layer": 17,
+        "head_idx": 24,
+        "LD_leave_in": 1.4529,
+        "F_leave_in": 0.2842,
+        "delta_F": 0.0483
+      },
+      {
+        "head": "L24H27",
+        "layer": 24,
+        "head_idx": 27,
+        "LD_leave_in": 1.3896,
+        "F_leave_in": 0.2722,
+        "delta_F": 0.0363
+      },
+      {
+        "head": "L22H19",
+        "layer": 22,
+        "head_idx": 19,
+        "LD_leave_in": 1.3592,
+        "F_leave_in": 0.2665,
+        "delta_F": 0.0305
+      },
+      {
+        "head": "L20H3",
+        "layer": 20,
+        "head_idx": 3,
+        "LD_leave_in": 1.2987,
+        "F_leave_in": 0.255,
+        "delta_F": 0.019
+      },
+      {
+        "head": "L16H22",
+        "layer": 16,
+        "head_idx": 22,
+        "LD_leave_in": 1.1912,
+        "F_leave_in": 0.2346,
+        "delta_F": -0.0013
+      },
+      {
+        "head": "L27H20",
+        "layer": 27,
+        "head_idx": 20,
+        "LD_leave_in": 1.0876,
+        "F_leave_in": 0.215,
+        "delta_F": -0.021
+      }
+    ]
+  },
+  "runtime_seconds": 17617.9,
+  "timestamp": "2026-08-05T06:11:13"
+}

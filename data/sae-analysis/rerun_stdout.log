@@ -1,0 +1,124 @@
+=== STEP 1: cross_arch_matching ===
+Started: Thu Jul 30 00:41:30 CDT 2026
+Cross-architecture SAE feature matching (all final checkpoints)
+  EVAL_TOKENS=50,000  N_CHUNKS=100  CHUNK_TOKS=500  SIM_THRESH=0.8
+
+=== LLAMA (checkpoint: checkpoint_final.npz) ===
+  Loading 50,000 tokens from activations.npy (avail=500,000, d=3072)
+  loaded in 0.6s
+  Encoding 50,000 tokens in 10 blocks ...
+    block 2/10  (20%)  2s
+    block 4/10  (40%)  4s
+    block 6/10  (60%)  7s
+    block 8/10  (80%)  9s
+    block 10/10  (100%)  11s
+  fingerprint: (16384, 100)  (0.2 min elapsed)
+
+=== QWEN (checkpoint: checkpoint_final.npz) ===
+  Loading 50,000 tokens from activations.npy (avail=500,000, d=2048)
+  loaded in 0.4s
+  Encoding 50,000 tokens in 10 blocks ...
+    block 2/10  (20%)  2s
+    block 4/10  (40%)  4s
+    block 6/10  (60%)  5s
+    block 8/10  (80%)  7s
+    block 10/10  (100%)  9s
+  fingerprint: (16384, 100)  (0.4 min elapsed)
+
+=== MISTRAL (checkpoint: checkpoint_final.npz) ===
+  Loading 50,000 tokens from activations.npy (avail=500,000, d=4096)
+  loaded in 0.8s
+  Encoding 50,000 tokens in 10 blocks ...
+    block 2/10  (20%)  2s
+    block 4/10  (40%)  4s
+    block 6/10  (60%)  6s
+    block 8/10  (80%)  8s
+    block 10/10  (100%)  10s
+  fingerprint: (16384, 100)  (0.5 min elapsed)
+
+=== PAIRWISE MATCHING ===
+
+  llama ↔ qwen
+  Llama→Qwen:
+    Llama→Qwen: 3939  Qwen→Llama (new): 1925  total: 5864
+
+  mistral ↔ qwen
+  Mistral→Qwen:
+    Mistral→Qwen: 4025  Qwen→Mistral (new): 1795  total: 5820
+
+  llama ↔ mistral
+  Llama→Mistral:
+    Llama→Mistral: 4240  Mistral→Llama (new): 4442  total: 8682
+
+=== UNIVERSAL FEATURES ===
+  Universally replicated features: 3577
+  Venn: {'llama_only': 11474, 'qwen_only': 13852, 'mistral_only': 11224, 'llama_qwen': 454, 'llama_mistral': 971, 'qwen_mistral': 241, 'all_three': 3577}
+
+  Saved → universal-features.json
+  Saved Venn → /Users/lab-02/ResearchPapers/data/sae-analysis/venn_diagram.svg
+
+Done in 0.6 min
+
+
+=== STEP 2: decoder_weight_matching ===
+Started: Thu Jul 30 00:42:03 CDT 2026
+Loading decoder weights...
+  Llama:   (16384, 3072)
+  Mistral: (16384, 4096)
+Loading activation-based anchor pairs...
+  8682 anchors  threshold=0.8
+  Alignment R: (3072, 4096)  top singular values: [22.775 18.623 15.009 11.584 10.459  9.373]
+Projecting Llama W_dec into Mistral space...
+  Aligned: (16384, 4096)  (13.5s)
+Finding nearest-Mistral-neighbor for each Llama feature (16384x16384)...
+  batch 1/16  (1024/16384)  13.6s
+  batch 5/16  (5120/16384)  13.9s
+  batch 9/16  (9216/16384)  14.3s
+  batch 13/16  (13312/16384)  14.6s
+  batch 16/16  (16384/16384)  14.8s
+
+Saved → /Users/lab-02/ResearchPapers/data/sae-analysis/llama-mistral-matching.json  (14.8s total)
+Top match: Llama[9955] ↔ Mistral[15537]  cosim=0.84993
+
+=== STEP 3: find_max_activating (Mistral) ===
+Started: Thu Jul 30 00:42:18 CDT 2026
+
+==============================================================
+  mistral7b
+==============================================================
+  SAE d_in=4096  dict_size=16384  k=128  step=50,000
+  Activations: (500000, 4096)  float16  (4.10 GB)
+  Batches: 250 x 2000
+
+  Pass 1 — frequency (250 batches)...
+    batch 1/250  2,000/500,000 tok  (3946 tok/s)
+    batch 51/250  102,000/500,000 tok  (23804 tok/s)
+    batch 101/250  202,000/500,000 tok  (24992 tok/s)
+    batch 151/250  302,000/500,000 tok  (25361 tok/s)
+    batch 201/250  402,000/500,000 tok  (25546 tok/s)
+    batch 250/250  500,000/500,000 tok  (25671 tok/s)
+  Top-200 freq: 496,219 ... 39,704
+  Pass 1 time: 0.32 min
+
+  Pass 2 — top examples (250 batches)...
+    batch 1/250  2,000/500,000 tok  (6309 tok/s)
+    batch 51/250  102,000/500,000 tok  (22386 tok/s)
+    batch 101/250  202,000/500,000 tok  (22991 tok/s)
+    batch 151/250  302,000/500,000 tok  (23221 tok/s)
+    batch 201/250  402,000/500,000 tok  (23330 tok/s)
+    batch 250/250  500,000/500,000 tok  (23401 tok/s)
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+  Pass 2 time: 0.36 min
+
+  Reconstructing token sequences...
+  Loading tokenizer: mlx-community/Mistral-7B-v0.3-4bit
+  Streaming wikitext-103-raw-v1 (train)...
+  Token IDs reconstructed: 500,000
+
+  Saved → mistral7b-feature-examples.json  (1.3 MB)
+  Total time: 0.8 min
+
+
+All done.

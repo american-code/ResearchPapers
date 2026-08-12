@@ -1,0 +1,517 @@
+{
+  "model": "qwen3b",
+  "display_name": "Qwen2.5-Coder-3B-Instruct",
+  "hf": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "param_b": 3.0,
+  "run_date": "2026-08-06T23:05:43",
+  "arms": {
+    "bf16": {
+      "humaneval": {
+        "pass_at_1": 0.8415,
+        "plus_pass_at_1": 0.7927,
+        "base_passed": 138,
+        "plus_passed": 130,
+        "total": 164,
+        "results_file": "/tmp/evalplus_runs/qwen3b-bf16/humaneval-samples_eval_results.json",
+        "mean_tps": 47.7,
+        "peak_memory_gb": 6.47
+      },
+      "mbpp": {
+        "pass_at_1": 0.7725,
+        "plus_pass_at_1": 0.6534,
+        "base_passed": 292,
+        "plus_passed": 247,
+        "total": 378,
+        "results_file": "/tmp/evalplus_runs/qwen3b-bf16/mbpp-samples_eval_results.json",
+        "mean_tps": 48.2,
+        "peak_memory_gb": 6.47
+      },
+      "realtasks": {
+        "pass_rate": 0.1923,
+        "passed": 5,
+        "total": 26,
+        "mean_tps": 46.4,
+        "peak_memory_gb": 6.55,
+        "by_tier": {
+          "EASY": {
+            "passed": 3,
+            "total": 8
+          },
+          "MEDIUM": {
+            "passed": 1,
+            "total": 8
+          },
+          "HARD": {
+            "passed": 1,
+            "total": 10
+          }
+        },
+        "detail": [
+          {
+            "id": "rt_e01",
+            "tier": "EASY",
+            "name": "cosine_lr",
+            "passed": false,
+            "tps": 47.0,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e01_ubh_13l6.py\", line 33, in <module>\n    assert abs(cosine_lr(0, 1.0, 500, 50000) - 1.0 / 500) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_e02",
+            "tier": "EASY",
+            "name": "bootstrap_ci",
+            "passed": true,
+            "tps": 47.1,
+            "detail": ""
+          },
+          {
+            "id": "rt_e03",
+            "tier": "EASY",
+            "name": "quantiles_and_overflow",
+            "passed": false,
+            "tps": 46.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e03_2expzpf_.py\", line 61, in <module>\n    assert s['n_total'] == 4\nAssertionError"
+          },
+          {
+            "id": "rt_e04",
+            "tier": "EASY",
+            "name": "rel_depth_bucket",
+            "passed": false,
+            "tps": 47.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e04_gzhvgg7a.py\", line 38, in <module>\n    assert rel_depth_bucket(0.30, tol=0.0) == 'early'\nAssertionError"
+          },
+          {
+            "id": "rt_e05",
+            "tier": "EASY",
+            "name": "val_to_hex",
+            "passed": false,
+            "tps": 46.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e05_xp981o__.py\", line 28, in <module>\n    assert val_to_hex(0.0) == '#fff5f0'\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e05_xp981o__.py\", line 17, in val_to_hex\n    for i in range(len(_CMAP) - 1):\nNameError: name '_CMAP' is not defined"
+          },
+          {
+            "id": "rt_e06",
+            "tier": "EASY",
+            "name": "average_precision",
+            "passed": false,
+            "tps": 46.7,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e06_erpygtml.py\", line 59, in <module>\n    assert abs(average_precision([1, 0, 1, 0], [1.0, 1.0, 1.0, 1.0]) - (1.0 + 2/3) / 2) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_e07",
+            "tier": "EASY",
+            "name": "avg_grads",
+            "passed": true,
+            "tps": 47.3,
+            "detail": ""
+          },
+          {
+            "id": "rt_e08",
+            "tier": "EASY",
+            "name": "best_match",
+            "passed": true,
+            "tps": 46.9,
+            "detail": ""
+          },
+          {
+            "id": "rt_m01",
+            "tier": "MEDIUM",
+            "name": "roc_auc",
+            "passed": false,
+            "tps": 46.8,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m01_9szpq5x4.py\", line 51, in <module>\n    assert abs(roc_auc([1, 0, 1, 0], [1.0, 1.0, 1.0, 1.0]) - 0.5) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_m02",
+            "tier": "MEDIUM",
+            "name": "topk_encode",
+            "passed": false,
+            "tps": 46.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m02_vmaouyuc.py\", line 65, in <module>\n    out = topk_encode(x, sae, k=8)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m02_vmaouyuc.py\", line 56, in topk_encode\n    mask = pre >= kth_largest\nValueError: operands could not be broadcast together with shapes (64,256) (64,)"
+          },
+          {
+            "id": "rt_m03",
+            "tier": "MEDIUM",
+            "name": "reciprocal_matches",
+            "passed": false,
+            "tps": 46.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m03_bxvcxd1b.py\", line 61, in <module>\n    assert res == [(1, 3, 1.0), (2, 2, 1.0)], res\nAssertionError: [(np.False_, np.False_, np.float64(1.0))]"
+          },
+          {
+            "id": "rt_m04",
+            "tier": "MEDIUM",
+            "name": "heuristic_pos",
+            "passed": false,
+            "tps": 45.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m04_ykgo_2ib.py\", line 62, in <module>\n    assert heuristic_pos(G + 'the') == 'FUNC'\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m04_ykgo_2ib.py\", line 39, in heuristic_pos\n    if t in _NEG:\nNameError: name '_NEG' is not defined"
+          },
+          {
+            "id": "rt_m05",
+            "tier": "MEDIUM",
+            "name": "drain_acks",
+            "passed": true,
+            "tps": 46.8,
+            "detail": ""
+          },
+          {
+            "id": "rt_m06",
+            "tier": "MEDIUM",
+            "name": "find_shared_positions",
+            "passed": false,
+            "tps": 46.8,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m06_7t2g8v0w.py\", line 48, in <module>\n    assert sh3[0][1][1] == 'b0'\nAssertionError"
+          },
+          {
+            "id": "rt_m07",
+            "tier": "MEDIUM",
+            "name": "detection_rate",
+            "passed": false,
+            "tps": 46.6,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m07_7zcqcc13.py\", line 52, in <module>\n    assert abs(detection_rate(fp_a, fp_b, pa, pb, 0.9) - 1.0) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_m08",
+            "tier": "MEDIUM",
+            "name": "DeadTracker",
+            "passed": false,
+            "tps": 46.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m08_kb3fb55_.py\", line 58, in <module>\n    assert isinstance(t.dead_count, int) and not isinstance(t.dead_count, bool)\nAssertionError"
+          },
+          {
+            "id": "rt_h01",
+            "tier": "HARD",
+            "name": "sae_eval",
+            "passed": false,
+            "tps": 45.1,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h01_t9jiup3p.py\", line 91, in <module>\n    res = sae_eval(sae, acts, K, 0, 200, block=10000)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h01_t9jiup3p.py\", line 79, in sae_eval\n    f = np.maximum(pre, np.sort(pre, axis=1)[:, -k])\nValueError: operands could not be broadcast together with shapes (200,256) (200,)"
+          },
+          {
+            "id": "rt_h02",
+            "tier": "HARD",
+            "name": "plant_signals_batch",
+            "passed": false,
+            "tps": 46.2,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h02_6nj_vyyy.py\", line 59, in <module>\n    out = plant_signals_batch(T, 0.62, np.random.default_rng(7))\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h02_6nj_vyyy.py\", line 39, in plant_signals_batch\n    noise -= np.einsum('ki,ki->k', noise, templates)\nValueError: operands could not be broadcast together with shapes (6,300) (6,) (6,300)"
+          },
+          {
+            "id": "rt_h03",
+            "tier": "HARD",
+            "name": "procrustes_align",
+            "passed": false,
+            "tps": 46.1,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h03_g5p2bvyz.py\", line 60, in <module>\n    R, Wal = procrustes_align(raw, W_b, anchors_a, anchors_b)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h03_g5p2bvyz.py\", line 33, in procrustes_align\n    M = W_a_norm.T @ W_b_norm\nValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 30 is different from 40)"
+          },
+          {
+            "id": "rt_h04",
+            "tier": "HARD",
+            "name": "find_universal_triangles",
+            "passed": false,
+            "tps": 45.3,
+            "detail": "File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h04_d1yycrn6.py\", line 63\n    if len\n          ^\nSyntaxError: invalid syntax"
+          },
+          {
+            "id": "rt_h05",
+            "tier": "HARD",
+            "name": "auxk_loss",
+            "passed": false,
+            "tps": 45.8,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h05_8kn_wx9v.py\", line 90, in <module>\n    got = auxk_loss(x, W_enc, b_enc, W_dec, b_dec, K, dead, KA, 0.1)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h05_8kn_wx9v.py\", line 54, in auxk_loss\n    acts = np.where(pre >= kth_largest, pre, 0)\nValueError: operands could not be broadcast together with shapes (24,256) (24,)"
+          },
+          {
+            "id": "rt_h06",
+            "tier": "HARD",
+            "name": "parse_stream",
+            "passed": false,
+            "tps": 46.6,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h06_ew4mb4ui.py\", line 55, in <module>\n    r = parse_stream(s, 4)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h06_ew4mb4ui.py\", line 24, in parse_stream\n    raise ValueError(\"Protocol violation: token_start does not match layer's cursor\")\nValueError: Protocol violation: token_start does not match layer's cursor"
+          },
+          {
+            "id": "rt_h07",
+            "tier": "HARD",
+            "name": "contrastive_label",
+            "passed": true,
+            "tps": 46.2,
+            "detail": ""
+          },
+          {
+            "id": "rt_h08",
+            "tier": "HARD",
+            "name": "depth_conservation_null",
+            "passed": false,
+            "tps": 44.8,
+            "detail": "File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h08_m6mb99nv.py\", line 81\n    assert greedy_depth_match([0.0, 0.05], [0.04, 0.10], 0.06) == 1\n    ^\nSyntaxError: invalid syntax"
+          },
+          {
+            "id": "rt_h09",
+            "tier": "HARD",
+            "name": "null_threshold",
+            "passed": false,
+            "tps": 46.2,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h09_3vauy8r3.py\", line 60, in <module>\n    tau, allv = null_threshold(FA, FB, va, vb, np.random.default_rng(7), n_perm=6)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h09_3vauy8r3.py\", line 33, in null_threshold\n    perm = rng.permutation(valid_b.shape[1])\nIndexError: tuple index out of range"
+          },
+          {
+            "id": "rt_h10",
+            "tier": "HARD",
+            "name": "build_pdf",
+            "passed": false,
+            "tps": 45.8,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h10_kg3drpgw.py\", line 85, in <module>\n    assert data[sx:sx + 5] == b'xref\\n', data[sx:sx + 12]\nAssertionError: b'%PDF-1.4\\n1 0'"
+          }
+        ],
+        "timestamp": "2026-08-06T22:29:05"
+      }
+    },
+    "4bit-rtn": {
+      "humaneval": {
+        "pass_at_1": 0.811,
+        "plus_pass_at_1": 0.7683,
+        "base_passed": 133,
+        "plus_passed": 126,
+        "total": 164,
+        "results_file": "/tmp/evalplus_runs/qwen3b-4bit-rtn/humaneval-samples_eval_results.json",
+        "mean_tps": 119.8,
+        "peak_memory_gb": 6.55
+      },
+      "mbpp": {
+        "pass_at_1": 0.7275,
+        "plus_pass_at_1": 0.619,
+        "base_passed": 275,
+        "plus_passed": 234,
+        "total": 378,
+        "results_file": "/tmp/evalplus_runs/qwen3b-4bit-rtn/mbpp-samples_eval_results.json",
+        "mean_tps": 122.1,
+        "peak_memory_gb": 6.55
+      },
+      "realtasks": {
+        "pass_rate": 0.1538,
+        "passed": 4,
+        "total": 26,
+        "mean_tps": 114.6,
+        "peak_memory_gb": 6.55,
+        "by_tier": {
+          "EASY": {
+            "passed": 4,
+            "total": 8
+          },
+          "MEDIUM": {
+            "passed": 0,
+            "total": 8
+          },
+          "HARD": {
+            "passed": 0,
+            "total": 10
+          }
+        },
+        "detail": [
+          {
+            "id": "rt_e01",
+            "tier": "EASY",
+            "name": "cosine_lr",
+            "passed": false,
+            "tps": 117.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e01_lwa7wczh.py\", line 29, in <module>\n    assert abs(cosine_lr(0, 1.0, 500, 50000) - 1.0 / 500) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_e02",
+            "tier": "EASY",
+            "name": "bootstrap_ci",
+            "passed": false,
+            "tps": 117.0,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e02_hsnu4f1n.py\", line 47, in <module>\n    lo, hi = bootstrap_ci([0.0, 10.0], n_boot=200, alpha=0.0)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e02_hsnu4f1n.py\", line 24, in bootstrap_ci\n    raise ValueError(\"alpha must be greater than 0.0\")\nValueError: alpha must be greater than 0.0"
+          },
+          {
+            "id": "rt_e03",
+            "tier": "EASY",
+            "name": "quantiles_and_overflow",
+            "passed": false,
+            "tps": 115.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e03_rxnxd38s.py\", line 61, in <module>\n    assert s['n_total'] == 4\nAssertionError"
+          },
+          {
+            "id": "rt_e04",
+            "tier": "EASY",
+            "name": "rel_depth_bucket",
+            "passed": true,
+            "tps": 118.5,
+            "detail": ""
+          },
+          {
+            "id": "rt_e05",
+            "tier": "EASY",
+            "name": "val_to_hex",
+            "passed": true,
+            "tps": 113.1,
+            "detail": ""
+          },
+          {
+            "id": "rt_e06",
+            "tier": "EASY",
+            "name": "average_precision",
+            "passed": false,
+            "tps": 117.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_e06_wkcv5jar.py\", line 57, in <module>\n    assert abs(average_precision([1, 0, 1, 0], [1.0, 1.0, 1.0, 1.0]) - (1.0 + 2/3) / 2) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_e07",
+            "tier": "EASY",
+            "name": "avg_grads",
+            "passed": true,
+            "tps": 117.8,
+            "detail": ""
+          },
+          {
+            "id": "rt_e08",
+            "tier": "EASY",
+            "name": "best_match",
+            "passed": true,
+            "tps": 117.3,
+            "detail": ""
+          },
+          {
+            "id": "rt_m01",
+            "tier": "MEDIUM",
+            "name": "roc_auc",
+            "passed": false,
+            "tps": 116.7,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m01_iv8mmxt1.py\", line 51, in <module>\n    assert abs(roc_auc([0, 0, 1, 1], [0.1, 0.2, 0.3, 0.4]) - 1.0) < 1e-12\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m01_iv8mmxt1.py\", line 37, in roc_auc\n    ranks[sorted_indices] = np.arange(1, len(sorted_indices) + 1)\nIndexError: arrays used as indices must be of integer (or boolean) type"
+          },
+          {
+            "id": "rt_m02",
+            "tier": "MEDIUM",
+            "name": "topk_encode",
+            "passed": false,
+            "tps": 115.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m02_2bqscvdz.py\", line 64, in <module>\n    out = topk_encode(x, sae, k=8)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m02_2bqscvdz.py\", line 55, in topk_encode\n    mask = pre >= kth_largest\nValueError: operands could not be broadcast together with shapes (64,256) (64,8)"
+          },
+          {
+            "id": "rt_m03",
+            "tier": "MEDIUM",
+            "name": "reciprocal_matches",
+            "passed": false,
+            "tps": 114.7,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m03_emlj_6fd.py\", line 65, in <module>\n    assert res == [(1, 3, 1.0), (2, 2, 1.0)], res\nAssertionError: [(np.int64(1), np.int64(2), array([0.]))]"
+          },
+          {
+            "id": "rt_m04",
+            "tier": "MEDIUM",
+            "name": "heuristic_pos",
+            "passed": false,
+            "tps": 111.2,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m04_e736hzad.py\", line 57, in <module>\n    assert heuristic_pos(G + 'the') == 'FUNC'\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m04_e736hzad.py\", line 39, in heuristic_pos\n    if t in _NEG:\nNameError: name '_NEG' is not defined"
+          },
+          {
+            "id": "rt_m05",
+            "tier": "MEDIUM",
+            "name": "drain_acks",
+            "passed": false,
+            "tps": 117.1,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m05_bn6bast3.py\", line 47, in <module>\n    assert drain_acks([split, b'\\x04' + ack(1, 9)], 0) == 0 + 5\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m05_bn6bast3.py\", line 30, in drain_acks\n    type_, credit_amount = struct.unpack('>HH', record)\nstruct.error: unpack requires a buffer of 4 bytes"
+          },
+          {
+            "id": "rt_m06",
+            "tier": "MEDIUM",
+            "name": "find_shared_positions",
+            "passed": false,
+            "tps": 115.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m06_3ysva2d4.py\", line 72, in <module>\n    assert sh3[0][1][1] == 'b0'\nAssertionError"
+          },
+          {
+            "id": "rt_m07",
+            "tier": "MEDIUM",
+            "name": "detection_rate",
+            "passed": false,
+            "tps": 115.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m07_766sx9f7.py\", line 52, in <module>\n    assert abs(detection_rate(fp_a, fp_b, pa, pb, 0.9) - 1.0) < 1e-12\nAssertionError"
+          },
+          {
+            "id": "rt_m08",
+            "tier": "MEDIUM",
+            "name": "DeadTracker",
+            "passed": false,
+            "tps": 115.5,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_m08_0nngk4_b.py\", line 58, in <module>\n    assert isinstance(t.dead_count, int) and not isinstance(t.dead_count, bool)\nAssertionError"
+          },
+          {
+            "id": "rt_h01",
+            "tier": "HARD",
+            "name": "sae_eval",
+            "passed": false,
+            "tps": 109.8,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h01_ojq1_690.py\", line 89, in <module>\n    res = sae_eval(sae, acts, K, 0, 200, block=10000)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h01_ojq1_690.py\", line 80, in sae_eval\n    f = np.where(pre >= kth_largest, pre, 0)\nValueError: operands could not be broadcast together with shapes (200,256) (200,)"
+          },
+          {
+            "id": "rt_h02",
+            "tier": "HARD",
+            "name": "plant_signals_batch",
+            "passed": false,
+            "tps": 113.7,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h02_6on1v173.py\", line 60, in <module>\n    out = plant_signals_batch(T, 0.62, np.random.default_rng(7))\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h02_6on1v173.py\", line 40, in plant_signals_batch\n    noise -= template_dot_noise * templates\nValueError: operands could not be broadcast together with shapes (6,6) (6,300)"
+          },
+          {
+            "id": "rt_h03",
+            "tier": "HARD",
+            "name": "procrustes_align",
+            "passed": false,
+            "tps": 113.3,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h03_lu7kalrp.py\", line 61, in <module>\n    R, Wal = procrustes_align(raw, W_b, anchors_a, anchors_b)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h03_lu7kalrp.py\", line 33, in procrustes_align\n    M = np.dot(W_a[anchors_a], W_b[anchors_b].T).astype(np.float64)\nValueError: shapes (20,6) and (10,20) not aligned: 6 (dim 1) != 10 (dim 0)"
+          },
+          {
+            "id": "rt_h04",
+            "tier": "HARD",
+            "name": "find_universal_triangles",
+            "passed": false,
+            "tps": 113.6,
+            "detail": "    r = find_universal_triangles([(1, 10, 0.9)], [(1, 100, 0.8)], [(100, 10, 0.7)])\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h04_d9gtdef5.py\", line 8, in find_universal_triangles\n    llama_to_index = {feat: i for i, (feat, _,wen, _) in enumerate(llama_qwen)}\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h04_d9gtdef5.py\", line 8, in <dictcomp>\n    llama_to_index = {feat: i for i, (feat, _,wen, _) in enumerate(llama_qwen)}\nValueError: not enough values to unpack (expected 4, got 3)"
+          },
+          {
+            "id": "rt_h05",
+            "tier": "HARD",
+            "name": "auxk_loss",
+            "passed": false,
+            "tps": 112.5,
+            "detail": "File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h05_d_ptd2ni.py\", line 52\n    pre = (x - b_dec) @ W_enc + b_enc\nIndentationError: unexpected indent"
+          },
+          {
+            "id": "rt_h06",
+            "tier": "HARD",
+            "name": "parse_stream",
+            "passed": false,
+            "tps": 112.8,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h06_bke5v4fb.py\", line 86, in <module>\n    r = parse_stream(s, 4)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h06_bke5v4fb.py\", line 56, in parse_stream\n    raise ValueError(\"Token count exceeds payload size\")\nValueError: Token count exceeds payload size"
+          },
+          {
+            "id": "rt_h07",
+            "tier": "HARD",
+            "name": "contrastive_label",
+            "passed": false,
+            "tps": 113.6,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h07_rfjy3sk0.py\", line 74, in <module>\n    assert tok == 'cat', tok\nAssertionError: the"
+          },
+          {
+            "id": "rt_h08",
+            "tier": "HARD",
+            "name": "depth_conservation_null",
+            "passed": false,
+            "tps": 110.5,
+            "detail": "File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h08_mxwm45cl.py\", line 79\n    \"\n     ^\nSyntaxError: EOL while scanning string literal"
+          },
+          {
+            "id": "rt_h09",
+            "tier": "HARD",
+            "name": "null_threshold",
+            "passed": false,
+            "tps": 112.8,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h09_dl1w1nhg.py\", line 61, in <module>\n    tau, allv = null_threshold(FA, FB, va, vb, np.random.default_rng(7), n_perm=6)\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h09_dl1w1nhg.py\", line 39, in null_threshold\n    reciprocal_matches = np.dot(fp_a[valid_a], permuted_fp_b[valid_b].T) / np.linalg.norm(fp_a[valid_a], axis=1)[:, np.newaxis] * np.linalg.norm(permuted_fp_b[valid_b], axis=0)\nValueError: operands could not be broadcast together with shapes (25,23) (24,)"
+          },
+          {
+            "id": "rt_h10",
+            "tier": "HARD",
+            "name": "build_pdf",
+            "passed": false,
+            "tps": 112.4,
+            "detail": "Traceback (most recent call last):\n  File \"/var/folders/kf/gw4d4cdx07d5vmxm7tmdkfw80000gn/T/rt_rt_h10_f4jpmvq9.py\", line 78, in <module>\n    assert data.startswith(b'%PDF-1.4\\n')\nAssertionError"
+          }
+        ],
+        "timestamp": "2026-08-06T22:46:38"
+      }
+    }
+  }
+}

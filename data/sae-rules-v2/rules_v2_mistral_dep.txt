@@ -1,0 +1,77 @@
+# Semantic Rules — mistral — target: dep
+
+## AUC-ROC per class
+  nsubj: 0.8873
+  dobj: 0.9211
+  prep: 0.8224
+  det: 0.9980
+  punct: 0.9933
+  other: 0.7711
+
+## Top-5 Predictive Features per Class (by |coefficient|)
+
+  nsubj:
+    feature  2432  coef=+0.5022
+    feature  8392  coef=+0.4476
+    feature  4672  coef=+0.3903
+    feature 12541  coef=+0.3894
+    feature  6653  coef=+0.3717
+
+  dobj:
+    feature  8392  coef=+0.5224
+    feature  9079  coef=+0.4322
+    feature 12766  coef=+0.4008
+    feature 14747  coef=+0.3713
+    feature 10673  coef=+0.3685
+
+  prep:
+    feature  2555  coef=+0.5345
+    feature 15172  coef=-0.4996
+    feature  2679  coef=+0.4766
+    feature 13227  coef=+0.4742
+    feature 13577  coef=-0.4605
+
+  det:
+    feature  5114  coef=+0.0645
+    feature 14568  coef=+0.0461
+    feature   533  coef=+0.0399
+    feature 14735  coef=+0.0388
+    feature  1587  coef=+0.0353
+
+  punct:
+    feature  8458  coef=+0.3681
+    feature  8636  coef=+0.3643
+    feature  3314  coef=+0.3363
+    feature  2571  coef=+0.2860
+    feature  5825  coef=+0.2797
+
+  other:
+    feature  8392  coef=-0.5683
+    feature  2555  coef=-0.5404
+    feature  2432  coef=-0.4935
+    feature 13577  coef=+0.4674
+    feature 14832  coef=-0.4596
+
+## Decision Tree Rules
+```
+|--- f9170 <= 0.98
+|   |--- f8392 <= 2.00
+|   |   |--- f405 <= 0.89
+|   |   |   |--- f4092 <= 1.91
+|   |   |   |   |--- f3521 <= 1.14
+|   |   |   |   |   |--- class: 5
+|   |   |   |   |--- f3521 >  1.14
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- f4092 >  1.91
+|   |   |   |   |--- class: 2
+|   |   |--- f405 >  0.89
+|   |   |   |--- class: 2
+|   |--- f8392 >  2.00
+|   |   |--- f1808 <= 0.14
+|   |   |   |--- class: 0
+|   |   |--- f1808 >  0.14
+|   |   |   |--- class: 1
+|--- f9170 >  0.98
+|   |--- class: 2
+
+```

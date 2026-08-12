@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "model": "Qwen2.5-Coder-1.5B-Instruct",
+      "mlx_id": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit",
+      "param_b": 1.5,
+      "error": "'text'",
+      "timestamp": "2026-08-05T23:40:24"
+    },
+    {
+      "model": "Qwen2.5-Coder-3B-Instruct",
+      "mlx_id": "mlx-community/Qwen2.5-Coder-3B-Instruct-4bit",
+      "param_b": 3.0,
+      "error": "'text'",
+      "timestamp": "2026-08-05T23:45:21"
+    },
+    {
+      "model": "Qwen2.5-Coder-7B-Instruct",
+      "mlx_id": "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit",
+      "param_b": 7.0,
+      "error": "'text'",
+      "timestamp": "2026-08-05T23:51:17"
+    },
+    {
+      "model": "Phi-4-Mini-Instruct",
+      "mlx_id": "mlx-community/phi-4-mini-instruct-4bit",
+      "param_b": 3.8,
+      "error": "'text'",
+      "timestamp": "2026-08-05T23:55:07"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "mlx_id": "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit",
+      "param_b": 16.0,
+      "error": "'text'",
+      "timestamp": "2026-08-06T00:06:17"
+    },
+    {
+      "model": "Granite-Code-8B-Instruct",
+      "mlx_id": "mlx-community/granite-code-8b-instruct-4bit",
+      "param_b": 8.0,
+      "error": "local variable 'e1' referenced before assignment",
+      "timestamp": "2026-08-06T00:06:18"
+    }
+  ]
+}

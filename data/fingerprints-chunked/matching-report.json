@@ -1,0 +1,174 @@
+{
+ "generated_by": "data/fingerprints-chunked/run_chunked.py",
+ "supersedes_resolution_of": "data/sae-analysis/cross_arch_matching_v2.py",
+ "chunk_resolution": {
+  "chunk_tokens": 100,
+  "n_chunks": 5000,
+  "eval_tokens": 500000,
+  "note": "5\u00d7 finer grain than v2 (100-token vs 500-token chunks). All activation caches reused as-is."
+ },
+ "model_metadata": {
+  "llama": {
+   "checkpoint": "data/sae-runs/llama-3b-layer14/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 3344,
+   "support_lt_min_chunks": 2655,
+   "valid_features": 10385,
+   "median_active_chunks": 490,
+   "eval_tokens": 500000,
+   "n_chunks": 5000,
+   "chunk_tokens": 100
+  },
+  "qwen": {
+   "checkpoint": "data/sae-runs/qwen-3b-layer18/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 9398,
+   "support_lt_min_chunks": 228,
+   "valid_features": 6758,
+   "median_active_chunks": 0,
+   "eval_tokens": 500000,
+   "n_chunks": 5000,
+   "chunk_tokens": 100
+  },
+  "mistral": {
+   "checkpoint": "data/sae-runs/mistral-7b-layer16/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval_corpus": 2346,
+   "support_lt_min_chunks": 7512,
+   "valid_features": 6526,
+   "median_active_chunks": 62,
+   "eval_tokens": 500000,
+   "n_chunks": 5000,
+   "chunk_tokens": 100
+  }
+ },
+ "metrics": {
+  "cosine": {
+   "pairwise": {
+    "llama_qwen": {
+     "n_matches": 21,
+     "n_matches_at_tau_0.80": 21,
+     "tau": 0.8,
+     "null": {
+      "null_p99": 0.6494,
+      "null_mean": 0.3187,
+      "null_max": 0.9706,
+      "n_null_samples": 18524
+     }
+    },
+    "mistral_qwen": {
+     "n_matches": 23,
+     "n_matches_at_tau_0.80": 23,
+     "tau": 0.8,
+     "null": {
+      "null_p99": 0.6563,
+      "null_mean": 0.3172,
+      "null_max": 0.9743,
+      "n_null_samples": 17297
+     }
+    },
+    "llama_mistral": {
+     "n_matches": 38,
+     "n_matches_at_tau_0.80": 38,
+     "tau": 0.8,
+     "null": {
+      "null_p99": 0.7621,
+      "null_mean": 0.3688,
+      "null_max": 0.9633,
+      "n_null_samples": 26192
+     }
+    }
+   },
+   "n_universal_features": 4,
+   "triangle_null_mean": 0.8,
+   "triangle_null_max": 1,
+   "venn_counts": {
+    "llama": {
+     "matched_qwen_only": 16,
+     "matched_mistral_only": 33,
+     "matched_both_not_universal": 1,
+     "universal": 4,
+     "unmatched": 16330
+    },
+    "qwen": {
+     "matched_llama_only": 15,
+     "matched_mistral_only": 17,
+     "matched_both_not_universal": 2,
+     "universal": 4,
+     "unmatched": 16346
+    },
+    "mistral": {
+     "matched_llama_only": 32,
+     "matched_qwen_only": 17,
+     "matched_both_not_universal": 2,
+     "universal": 4,
+     "unmatched": 16329
+    }
+   }
+  },
+  "pearson": {
+   "pairwise": {
+    "llama_qwen": {
+     "n_matches": 123,
+     "n_matches_at_tau_0.80": 18,
+     "tau": 0.6209,
+     "null": {
+      "null_p99": 0.6209,
+      "null_mean": 0.284,
+      "null_max": 0.8915,
+      "n_null_samples": 22984
+     }
+    },
+    "mistral_qwen": {
+     "n_matches": 112,
+     "n_matches_at_tau_0.80": 22,
+     "tau": 0.632,
+     "null": {
+      "null_p99": 0.632,
+      "null_mean": 0.284,
+      "null_max": 0.8979,
+      "n_null_samples": 21329
+     }
+    },
+    "llama_mistral": {
+     "n_matches": 82,
+     "n_matches_at_tau_0.80": 36,
+     "tau": 0.7477,
+     "null": {
+      "null_p99": 0.7477,
+      "null_mean": 0.351,
+      "null_max": 0.9433,
+      "n_null_samples": 27930
+     }
+    }
+   },
+   "n_universal_features": 7,
+   "triangle_null_mean": 0.45,
+   "triangle_null_max": 2,
+   "venn_counts": {
+    "llama": {
+     "matched_qwen_only": 114,
+     "matched_mistral_only": 73,
+     "matched_both_not_universal": 2,
+     "universal": 7,
+     "unmatched": 16188
+    },
+    "qwen": {
+     "matched_llama_only": 96,
+     "matched_mistral_only": 85,
+     "matched_both_not_universal": 20,
+     "universal": 7,
+     "unmatched": 16176
+    },
+    "mistral": {
+     "matched_llama_only": 70,
+     "matched_qwen_only": 100,
+     "matched_both_not_universal": 5,
+     "universal": 7,
+     "unmatched": 16202
+    }
+   }
+  }
+ },
+ "elapsed_s": 16597.5
+}

@@ -1,0 +1,135 @@
+{
+ "metric": "cosine",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 5000 chunks \u00d7 100 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "chunk_tokens": 100,
+ "n_chunks": 5000,
+ "min_active_chunks": 250,
+ "tau_calibrated": 0.8,
+ "permutation_null": {
+  "null_p99": 0.6563,
+  "null_mean": 0.3172,
+  "null_max": 0.9743,
+  "n_null_samples": 17297
+ },
+ "n_matches_tau_0.80": 23,
+ "n_matches_tau_cal": 23,
+ "matches": [
+  {
+   "feat_a": 1281,
+   "feat_b": 8255,
+   "sim": 0.803
+  },
+  {
+   "feat_a": 1486,
+   "feat_b": 626,
+   "sim": 0.8385
+  },
+  {
+   "feat_a": 1917,
+   "feat_b": 11651,
+   "sim": 0.8472
+  },
+  {
+   "feat_a": 4019,
+   "feat_b": 15607,
+   "sim": 0.8263
+  },
+  {
+   "feat_a": 4723,
+   "feat_b": 9880,
+   "sim": 0.8801
+  },
+  {
+   "feat_a": 4937,
+   "feat_b": 1167,
+   "sim": 0.8055
+  },
+  {
+   "feat_a": 5772,
+   "feat_b": 5109,
+   "sim": 0.9573
+  },
+  {
+   "feat_a": 6100,
+   "feat_b": 4198,
+   "sim": 0.8473
+  },
+  {
+   "feat_a": 6556,
+   "feat_b": 10183,
+   "sim": 0.8371
+  },
+  {
+   "feat_a": 10331,
+   "feat_b": 9644,
+   "sim": 0.8668
+  },
+  {
+   "feat_a": 10477,
+   "feat_b": 4977,
+   "sim": 0.8768
+  },
+  {
+   "feat_a": 11843,
+   "feat_b": 1255,
+   "sim": 0.8107
+  },
+  {
+   "feat_a": 11901,
+   "feat_b": 1329,
+   "sim": 0.8483
+  },
+  {
+   "feat_a": 12173,
+   "feat_b": 1638,
+   "sim": 0.9493
+  },
+  {
+   "feat_a": 12197,
+   "feat_b": 4202,
+   "sim": 0.9252
+  },
+  {
+   "feat_a": 12697,
+   "feat_b": 3092,
+   "sim": 0.8033
+  },
+  {
+   "feat_a": 13415,
+   "feat_b": 1718,
+   "sim": 0.8399
+  },
+  {
+   "feat_a": 13519,
+   "feat_b": 16149,
+   "sim": 0.8229
+  },
+  {
+   "feat_a": 13587,
+   "feat_b": 955,
+   "sim": 0.8506
+  },
+  {
+   "feat_a": 14148,
+   "feat_b": 3474,
+   "sim": 0.907
+  },
+  {
+   "feat_a": 14885,
+   "feat_b": 5883,
+   "sim": 0.8242
+  },
+  {
+   "feat_a": 14975,
+   "feat_b": 11140,
+   "sim": 0.8528
+  },
+  {
+   "feat_a": 15407,
+   "feat_b": 3444,
+   "sim": 0.9729
+  }
+ ]
+}

@@ -1,0 +1,80 @@
+# Semantic Rules — llama — target: dep
+
+## AUC-ROC per class
+  nsubj: 0.9787
+  dobj: 0.9918
+  prep: 0.9497
+  det: 1.0000
+  punct: 0.9997
+  other: 0.9322
+
+## Top-5 Predictive Features per Class (by |coefficient|)
+
+  nsubj:
+    feature  9559  coef=-0.4416
+    feature 10753  coef=+0.4194
+    feature  8357  coef=+0.4074
+    feature  7893  coef=+0.4020
+    feature  4235  coef=+0.4019
+
+  dobj:
+    feature  3511  coef=+0.3984
+    feature 13865  coef=+0.3723
+    feature  7656  coef=+0.3641
+    feature   165  coef=+0.3532
+    feature 12885  coef=-0.3511
+
+  prep:
+    feature  2844  coef=-0.4759
+    feature  8038  coef=-0.4544
+    feature   808  coef=+0.4510
+    feature   171  coef=+0.4507
+    feature  9125  coef=+0.4419
+
+  det:
+    feature 13108  coef=-0.2709
+    feature  4210  coef=+0.2343
+    feature  8217  coef=+0.1870
+    feature  1803  coef=+0.1784
+    feature  8535  coef=+0.1764
+
+  punct:
+    feature  8826  coef=+0.4695
+    feature 10454  coef=+0.3571
+    feature 14820  coef=+0.3449
+    feature 13458  coef=+0.3310
+    feature  6155  coef=+0.3266
+
+  other:
+    feature 13749  coef=-0.5323
+    feature  4200  coef=-0.5175
+    feature  4394  coef=+0.5141
+    feature 14790  coef=-0.4901
+    feature  9777  coef=-0.4883
+
+## Decision Tree Rules
+```
+|--- f8218 <= 1.29
+|   |--- f7644 <= 3.28
+|   |   |--- f10195 <= 0.97
+|   |   |   |--- f15669 <= 0.43
+|   |   |   |   |--- f246 <= 2.04
+|   |   |   |   |   |--- class: 5
+|   |   |   |   |--- f246 >  2.04
+|   |   |   |   |   |--- class: 2
+|   |   |   |--- f15669 >  0.43
+|   |   |   |   |--- f2358 <= 0.33
+|   |   |   |   |   |--- class: 5
+|   |   |   |   |--- f2358 >  0.33
+|   |   |   |   |   |--- class: 2
+|   |   |--- f10195 >  0.97
+|   |   |   |--- class: 2
+|   |--- f7644 >  3.28
+|   |   |--- class: 2
+|--- f8218 >  1.29
+|   |--- f1638 <= 0.15
+|   |   |--- class: 2
+|   |--- f1638 >  0.15
+|   |   |--- class: 5
+
+```

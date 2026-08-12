@@ -1,0 +1,216 @@
+========================================================
+IOI circuit v2 pipeline
+Started: Wed Aug  5 01:09:10 CDT 2026
+Working dir: /Users/lab-02/ResearchPapers/data/ioi
+========================================================
+
+--- Pythia-1.4b ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Dataset: 200 examples, 15 templates
+
+Loading EleutherAI/pythia-1.4b …
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 91180.52it/s]
+  loaded in 0.8s
+  lengths all match (12–14 tokens)
+
+================================================================
+PHASE 1: Patching sweep  24L × 16H = 384 passes
+================================================================
+  installed 24 patchable layers
+Clean forward pass …
+  1.2s  mean LD = 3.8883
+Corrupt forward pass …
+  1.1s  mean LD = -3.8546
+
+Sweeping 384 (layer, head) pairs …
+  L00  top=H02(0.048)  elapsed=18s  eta=420s
+  L01  top=H11(0.060)  elapsed=37s  eta=402s
+  L02  top=H07(0.003)  elapsed=55s  eta=384s
+  L03  top=H05(0.016)  elapsed=73s  eta=365s
+  L04  top=H15(0.014)  elapsed=91s  eta=347s
+  L05  top=H06(0.007)  elapsed=110s  eta=329s
+  L06  top=H02(0.008)  elapsed=128s  eta=311s
+  L07  top=H08(0.005)  elapsed=146s  eta=292s
+  L08  top=H04(0.004)  elapsed=164s  eta=274s
+  L09  top=H01(0.015)  elapsed=183s  eta=256s
+  L10  top=H07(0.319)  elapsed=201s  eta=238s
+  L11  top=H08(0.028)  elapsed=219s  eta=219s
+  L12  top=H15(0.028)  elapsed=238s  eta=201s
+  L13  top=H06(0.085)  elapsed=256s  eta=183s
+  L14  top=H06(0.035)  elapsed=274s  eta=164s
+  L15  top=H15(0.102)  elapsed=292s  eta=146s
+  L16  top=H13(0.025)  elapsed=311s  eta=128s
+  L17  top=H07(0.030)  elapsed=329s  eta=110s
+  L18  top=H11(0.006)  elapsed=347s  eta=91s
+  L19  top=H01(0.018)  elapsed=365s  eta=73s
+  L20  top=H11(0.002)  elapsed=384s  eta=55s
+  L21  top=H03(0.057)  elapsed=402s  eta=37s
+  L22  top=H02(0.025)  elapsed=420s  eta=18s
+  L23  top=H09(0.011)  elapsed=439s  eta=0s
+
+Sweep done in 439s (7.3 min)
+
+Circuit (top-10): ['L0H2', 'L10H7', 'L13H6', 'L14H6', 'L15H11', 'L15H15', 'L15H3', 'L15H9', 'L1H11', 'L21H3']
+Saved → /Users/lab-02/ResearchPapers/data/circuit-v2/patching-pythia-v2.json
+
+================================================================
+PHASE 2: Faithfulness / minimality / completeness
+================================================================
+Caching mean SDPA …
+clean LD = 3.8883  floor LD = 0.0184
+faithfulness: LD=-0.1988  F=-0.0561
+  minimality L0H2: dF=+0.0130
+  minimality L1H11: dF=-0.0048
+  minimality L10H7: dF=+0.1205
+  minimality L13H6: dF=-0.0235
+  minimality L14H6: dF=-0.0201
+  minimality L15H3: dF=-0.0147
+  minimality L15H9: dF=+0.0022
+  minimality L15H11: dF=-0.0209
+  minimality L15H15: dF=-0.0599
+  minimality L21H3: dF=+0.0151
+Faithfulness saved → /Users/lab-02/ResearchPapers/data/circuit-v2/faithfulness-pythia-v2.json
+
+================================================================
+PHASE 3: Joint ablation + leave-one-in
+================================================================
+joint ablation: LD=1.2394  F_complete=0.3155
+  leave L0H2: F=0.3160  delta=+0.0005
+  leave L1H11: F=0.3842  delta=+0.0687
+  leave L10H7: F=0.5639  delta=+0.2484
+  leave L13H6: F=0.3346  delta=+0.0191
+  leave L14H6: F=0.3097  delta=-0.0058
+  leave L15H3: F=0.3246  delta=+0.0091
+  leave L15H9: F=0.3318  delta=+0.0163
+  leave L15H11: F=0.3158  delta=+0.0003
+  leave L15H15: F=0.3563  delta=+0.0408
+  leave L21H3: F=0.3772  delta=+0.0617
+Joint ablation saved → /Users/lab-02/ResearchPapers/data/circuit-v2/joint-ablation-pythia-v2.json
+
+================================================================
+DONE — pythia / EleutherAI/pythia-1.4b
+  Dataset:        200 examples, 15 templates
+  Circuit:        ['L0H2', 'L10H7', 'L13H6', 'L14H6', 'L15H11', 'L15H15', 'L15H3', 'L15H9', 'L1H11', 'L21H3']
+  Faithfulness:   -0.0561
+  F_complete:     0.3155  (joint ablation)
+  Total runtime:  503s (0.1h)
+  Outputs:        /Users/lab-02/ResearchPapers/data/circuit-v2/
+  VERDICT: faithfulness collapsed — positional artifact likely
+================================================================
+
+Pythia done: Wed Aug  5 01:17:35 CDT 2026
+
+--- Llama-3.1-8B ---
+/Users/lab-02/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Dataset: 200 examples, 15 templates
+
+Loading mlx-community/Meta-Llama-3.1-8B-Instruct-4bit …
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 70492.50it/s]
+  loaded in 1.4s
+  lengths all match (12–14 tokens)
+
+================================================================
+PHASE 1: Patching sweep  32L × 32H = 1024 passes
+================================================================
+  installed 32 patchable layers
+Clean forward pass …
+  7.3s  mean LD = 5.2286
+Corrupt forward pass …
+  7.2s  mean LD = -5.3512
+
+Sweeping 1024 (layer, head) pairs …
+  L00  top=H09(0.001)  elapsed=300s  eta=9309s
+  L01  top=H25(0.005)  elapsed=625s  eta=9378s
+  L02  top=H27(0.001)  elapsed=854s  eta=8259s
+  L03  top=H05(0.000)  elapsed=1084s  eta=7585s
+  L04  top=H16(0.021)  elapsed=1630s  eta=8802s
+  L05  top=H29(0.000)  elapsed=2192s  eta=9500s
+  L06  top=H11(0.002)  elapsed=2751s  eta=9826s
+  L07  top=H06(0.002)  elapsed=3312s  eta=9935s
+  L08  top=H30(0.003)  elapsed=3874s  eta=9901s
+  L09  top=H28(0.005)  elapsed=4438s  eta=9764s
+  L10  top=H00(0.010)  elapsed=5003s  eta=9552s
+  L11  top=H22(0.007)  elapsed=5561s  eta=9268s
+  L12  top=H25(0.009)  elapsed=6119s  eta=8943s
+  L13  top=H16(0.006)  elapsed=6677s  eta=8585s
+  L14  top=H16(0.039)  elapsed=7238s  eta=8203s
+  L15  top=H16(0.003)  elapsed=7799s  eta=7799s
+  L16  top=H22(0.214)  elapsed=8358s  eta=7374s
+  L17  top=H27(0.118)  elapsed=8917s  eta=6936s
+  L18  top=H29(0.021)  elapsed=9476s  eta=6483s
+  L19  top=H23(0.053)  elapsed=10036s  eta=6022s
+  L20  top=H03(0.041)  elapsed=10595s  eta=5550s
+  L21  top=H10(0.017)  elapsed=11153s  eta=5069s
+  L22  top=H19(0.109)  elapsed=11714s  eta=4584s
+  L23  top=H12(0.018)  elapsed=12274s  eta=4091s
+  L24  top=H27(0.074)  elapsed=12834s  eta=3594s
+  L25  top=H13(0.022)  elapsed=13393s  eta=3091s
+  L26  top=H14(0.028)  elapsed=13949s  eta=2583s
+  L27  top=H20(0.121)  elapsed=14508s  eta=2073s
+  L28  top=H12(0.015)  elapsed=15068s  eta=1559s
+  L29  top=H11(0.037)  elapsed=15626s  eta=1042s
+  L30  top=H13(0.057)  elapsed=16185s  eta=522s
+  L31  top=H22(0.034)  elapsed=16744s  eta=0s
+
+Sweep done in 16744s (279.1 min)
+
+Circuit (top-10): ['L16H1', 'L16H22', 'L17H24', 'L17H27', 'L19H23', 'L20H3', 'L22H19', 'L24H27', 'L27H20', 'L30H13']
+Saved → /Users/lab-02/ResearchPapers/data/circuit-v2/patching-llama8b-v2.json
+
+================================================================
+PHASE 2: Faithfulness / minimality / completeness
+================================================================
+Caching mean SDPA …
+clean LD = 5.2286  floor LD = -0.0463
+faithfulness: LD=1.3536  F=0.2654
+  minimality L16H1: dF=+0.0009
+  minimality L16H22: dF=+0.0745
+  minimality L17H24: dF=+0.0555
+  minimality L17H27: dF=-0.0916
+  minimality L19H23: dF=+0.1324
+  minimality L20H3: dF=+0.0051
+  minimality L22H19: dF=+0.0347
+  minimality L24H27: dF=+0.0175
+  minimality L27H20: dF=+0.1231
+  minimality L30H13: dF=+0.0682
+Faithfulness saved → /Users/lab-02/ResearchPapers/data/circuit-v2/faithfulness-llama8b-v2.json
+
+================================================================
+PHASE 3: Joint ablation + leave-one-in
+================================================================
+joint ablation: LD=1.1982  F_complete=0.2359
+  leave L16H1: F=0.3066  delta=+0.0707
+  leave L16H22: F=0.2346  delta=-0.0013
+  leave L17H24: F=0.2842  delta=+0.0483
+  leave L17H27: F=0.3746  delta=+0.1387
+  leave L19H23: F=0.4585  delta=+0.2226
+  leave L20H3: F=0.2550  delta=+0.0190
+  leave L22H19: F=0.2665  delta=+0.0305
+  leave L24H27: F=0.2722  delta=+0.0363
+  leave L27H20: F=0.2150  delta=-0.0210
+  leave L30H13: F=0.3031  delta=+0.0672
+Joint ablation saved → /Users/lab-02/ResearchPapers/data/circuit-v2/joint-ablation-llama8b-v2.json
+
+================================================================
+DONE — llama8b / mlx-community/Meta-Llama-3.1-8B-Instruct-4bit
+  Dataset:        200 examples, 15 templates
+  Circuit:        ['L16H1', 'L16H22', 'L17H24', 'L17H27', 'L19H23', 'L20H3', 'L22H19', 'L24H27', 'L27H20', 'L30H13']
+  Faithfulness:   0.2654
+  F_complete:     0.2359  (joint ablation)
+  Total runtime:  17618s (4.9h)
+  Outputs:        /Users/lab-02/ResearchPapers/data/circuit-v2/
+  VERDICT: partial faithfulness — circuit is noisy
+================================================================
+
+========================================================
+PIPELINE COMPLETE: Wed Aug  5 06:11:14 CDT 2026
+total 128
+-rw-r--r--  1 lab-02  staff   3.6K Aug  5 06:07 faithfulness-llama8b-v2.json
+-rw-r--r--  1 lab-02  staff   3.6K Aug  5 01:17 faithfulness-pythia-v2.json
+-rw-r--r--  1 lab-02  staff   2.6K Aug  5 06:11 joint-ablation-llama8b-v2.json
+-rw-r--r--  1 lab-02  staff   2.5K Aug  5 01:17 joint-ablation-pythia-v2.json
+-rw-r--r--  1 lab-02  staff    31K Aug  5 05:56 patching-llama8b-v2.json
+-rw-r--r--  1 lab-02  staff    12K Aug  5 01:16 patching-pythia-v2.json
+========================================================

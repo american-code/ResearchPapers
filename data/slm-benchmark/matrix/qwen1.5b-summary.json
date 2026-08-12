@@ -1,0 +1,11 @@
+{
+  "model": "qwen1.5b",
+  "hf": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "arms": {
+    "4bit-rtn": {
+      "humaneval": "ok",
+      "mbpp": "ok",
+      "realtasks": "ok"
+    }
+  }
+}

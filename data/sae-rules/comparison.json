@@ -1,0 +1,1073 @@
+{
+  "shared": [
+    {
+      "mistral_id": 6708,
+      "llama_id": 12873,
+      "similarity": 0.9986,
+      "label": "punctuation",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 3576,
+      "llama_id": 6428,
+      "similarity": 0.9868,
+      "label": "token-are",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 12246,
+      "llama_id": 9955,
+      "similarity": 0.9266,
+      "label": "number",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 3380,
+      "llama_id": 6325,
+      "similarity": 0.9193,
+      "label": "token-for",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 16266,
+      "llama_id": 6044,
+      "similarity": 0.8931,
+      "label": "token-3",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 12668,
+      "llama_id": 11027,
+      "similarity": 0.8812,
+      "label": "function-word",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 3061,
+      "llama_id": 6720,
+      "similarity": 0.8778,
+      "label": "token-.",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 1719,
+      "llama_id": 6892,
+      "similarity": 0.8683,
+      "label": "token-was",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 5950,
+      "llama_id": 6810,
+      "similarity": 0.849,
+      "label": "token-to",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 15152,
+      "llama_id": 5118,
+      "similarity": 0.831,
+      "label": "token-ic",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 5320,
+      "llama_id": 9122,
+      "similarity": 0.8147,
+      "label": "token-at",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 12924,
+      "llama_id": 1947,
+      "similarity": 0.7972,
+      "label": "token-as",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 12861,
+      "llama_id": 2701,
+      "similarity": 0.7684,
+      "label": "token-a",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 14454,
+      "llama_id": 464,
+      "similarity": 0.7468,
+      "label": "token-,",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 9005,
+      "llama_id": 6644,
+      "similarity": 0.7466,
+      "label": "token-9",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 3086,
+      "llama_id": 6852,
+      "similarity": 0.7249,
+      "label": "token-in",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 4197,
+      "llama_id": 16022,
+      "similarity": 0.6506,
+      "label": "token-i",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 1219,
+      "llama_id": 3849,
+      "similarity": 0.6478,
+      "label": "token-his",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 9823,
+      "llama_id": 9711,
+      "similarity": 0.61,
+      "label": "token-s",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 1131,
+      "llama_id": 2753,
+      "similarity": 0.5961,
+      "label": "token-been",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 7385,
+      "llama_id": 9436,
+      "similarity": 0.5892,
+      "label": "token-=",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 1033,
+      "llama_id": 12706,
+      "similarity": 0.5773,
+      "label": "proper-noun",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 1372,
+      "llama_id": 4550,
+      "similarity": 0.5659,
+      "label": "token-m",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 12312,
+      "llama_id": 13830,
+      "similarity": 0.5604,
+      "label": "token-of",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 5736,
+      "llama_id": 12630,
+      "similarity": 0.5211,
+      "label": "token-l",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 11175,
+      "llama_id": 8633,
+      "similarity": 0.5065,
+      "label": "token-@",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 2538,
+      "llama_id": 15114,
+      "similarity": 0.4987,
+      "label": "token-this",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 5111,
+      "llama_id": 31,
+      "similarity": 0.4597,
+      "label": "token-the",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 2779,
+      "llama_id": 6637,
+      "similarity": 0.441,
+      "label": "token-and",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 9769,
+      "llama_id": 14897,
+      "similarity": 0.4207,
+      "label": "token-",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    },
+    {
+      "mistral_id": 1595,
+      "llama_id": 8092,
+      "similarity": 0.3391,
+      "label": "token-j",
+      "note": "label+freq-ratio (d_in mismatch precludes direct cosine)"
+    }
+  ],
+  "mistral_only": [
+    {
+      "feature_id": 7328,
+      "label": "token-cer"
+    },
+    {
+      "feature_id": 9751,
+      "label": "token-press"
+    },
+    {
+      "feature_id": 1564,
+      "label": "token-light"
+    },
+    {
+      "feature_id": 15590,
+      "label": "token-substr"
+    },
+    {
+      "feature_id": 13399,
+      "label": "token-support"
+    },
+    {
+      "feature_id": 9754,
+      "label": "token-little"
+    },
+    {
+      "feature_id": 9465,
+      "label": "token-suitable"
+    },
+    {
+      "feature_id": 6275,
+      "label": "token-en"
+    },
+    {
+      "feature_id": 10549,
+      "label": "token-returns"
+    },
+    {
+      "feature_id": 13592,
+      "label": "token-agent"
+    },
+    {
+      "feature_id": 11348,
+      "label": "token-ensed"
+    },
+    {
+      "feature_id": 14411,
+      "label": "token-tra"
+    },
+    {
+      "feature_id": 7134,
+      "label": "token-train"
+    },
+    {
+      "feature_id": 15529,
+      "label": "token-de"
+    },
+    {
+      "feature_id": 15035,
+      "label": "token-ahl"
+    },
+    {
+      "feature_id": 2912,
+      "label": "token-ent"
+    },
+    {
+      "feature_id": 6204,
+      "label": "token-have"
+    },
+    {
+      "feature_id": 1837,
+      "label": "token-nucle"
+    },
+    {
+      "feature_id": 11020,
+      "label": "token-chron"
+    },
+    {
+      "feature_id": 21,
+      "label": "token-clean"
+    },
+    {
+      "feature_id": 5145,
+      "label": "token-before"
+    },
+    {
+      "feature_id": 3563,
+      "label": "token-become"
+    },
+    {
+      "feature_id": 3033,
+      "label": "token-hamilton"
+    },
+    {
+      "feature_id": 581,
+      "label": "token-ships"
+    },
+    {
+      "feature_id": 5912,
+      "label": "token-career"
+    },
+    {
+      "feature_id": 7593,
+      "label": "token-australia"
+    },
+    {
+      "feature_id": 10304,
+      "label": "token-history"
+    },
+    {
+      "feature_id": 5294,
+      "label": "token-6"
+    },
+    {
+      "feature_id": 7101,
+      "label": "token-years"
+    },
+    {
+      "feature_id": 2800,
+      "label": "token-original"
+    },
+    {
+      "feature_id": 3619,
+      "label": "token-woman"
+    },
+    {
+      "feature_id": 15709,
+      "label": "token-town"
+    },
+    {
+      "feature_id": 2037,
+      "label": "token-urn"
+    },
+    {
+      "feature_id": 10336,
+      "label": "token-game"
+    },
+    {
+      "feature_id": 13839,
+      "label": "token-ep"
+    },
+    {
+      "feature_id": 5078,
+      "label": "token-iron"
+    },
+    {
+      "feature_id": 9876,
+      "label": "token-("
+    },
+    {
+      "feature_id": 14878,
+      "label": "token-her"
+    },
+    {
+      "feature_id": 12581,
+      "label": "token-rec"
+    },
+    {
+      "feature_id": 11457,
+      "label": "token-north"
+    },
+    {
+      "feature_id": 9611,
+      "label": "token-we"
+    },
+    {
+      "feature_id": 2520,
+      "label": "token-notable"
+    },
+    {
+      "feature_id": 718,
+      "label": "token-him"
+    },
+    {
+      "feature_id": 2459,
+      "label": "token-goal"
+    },
+    {
+      "feature_id": 4899,
+      "label": "token-rop"
+    },
+    {
+      "feature_id": 8541,
+      "label": "token-trunk"
+    },
+    {
+      "feature_id": 9443,
+      "label": "token-ves"
+    },
+    {
+      "feature_id": 9299,
+      "label": "token-anced"
+    },
+    {
+      "feature_id": 3578,
+      "label": "token-san"
+    },
+    {
+      "feature_id": 7577,
+      "label": "token-authorities"
+    },
+    {
+      "feature_id": 11274,
+      "label": "token-yl"
+    },
+    {
+      "feature_id": 8910,
+      "label": "token-spray"
+    },
+    {
+      "feature_id": 11088,
+      "label": "token-makes"
+    },
+    {
+      "feature_id": 13102,
+      "label": "token-ley"
+    },
+    {
+      "feature_id": 16213,
+      "label": "token-description"
+    },
+    {
+      "feature_id": 12533,
+      "label": "token-prayer"
+    },
+    {
+      "feature_id": 9636,
+      "label": "token-instruments"
+    },
+    {
+      "feature_id": 15025,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 2678,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 7554,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 10973,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 10665,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 11923,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 11010,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 10909,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 7566,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 12946,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 9002,
+      "label": "token-\""
+    },
+    {
+      "feature_id": 12402,
+      "label": "token-lines"
+    },
+    {
+      "feature_id": 15496,
+      "label": "token-hom"
+    },
+    {
+      "feature_id": 13538,
+      "label": "token-ination"
+    },
+    {
+      "feature_id": 7954,
+      "label": "token-og"
+    },
+    {
+      "feature_id": 12713,
+      "label": "token-0"
+    },
+    {
+      "feature_id": 13418,
+      "label": "token-0"
+    },
+    {
+      "feature_id": 5528,
+      "label": "token-expanded"
+    },
+    {
+      "feature_id": 1973,
+      "label": "token-that"
+    },
+    {
+      "feature_id": 7233,
+      "label": "token--"
+    },
+    {
+      "feature_id": 14232,
+      "label": "token-ass"
+    },
+    {
+      "feature_id": 5535,
+      "label": "token-she"
+    },
+    {
+      "feature_id": 12839,
+      "label": "token-organic"
+    },
+    {
+      "feature_id": 2074,
+      "label": "token-ygon"
+    },
+    {
+      "feature_id": 8489,
+      "label": "token-met"
+    },
+    {
+      "feature_id": 8407,
+      "label": "token-ades"
+    },
+    {
+      "feature_id": 9795,
+      "label": "token-wind"
+    },
+    {
+      "feature_id": 9903,
+      "label": "token-ron"
+    },
+    {
+      "feature_id": 10419,
+      "label": "token-numbers"
+    },
+    {
+      "feature_id": 15407,
+      "label": "token-carried"
+    },
+    {
+      "feature_id": 1441,
+      "label": "token-ers"
+    },
+    {
+      "feature_id": 14487,
+      "label": "token-owned"
+    },
+    {
+      "feature_id": 5385,
+      "label": "token-its"
+    },
+    {
+      "feature_id": 846,
+      "label": "token-def"
+    },
+    {
+      "feature_id": 12217,
+      "label": "token-la"
+    },
+    {
+      "feature_id": 11697,
+      "label": "token-ituted"
+    },
+    {
+      "feature_id": 835,
+      "label": "token-remove"
+    },
+    {
+      "feature_id": 12197,
+      "label": "token-1"
+    },
+    {
+      "feature_id": 12275,
+      "label": "token-1"
+    },
+    {
+      "feature_id": 5854,
+      "label": "token-1"
+    },
+    {
+      "feature_id": 4336,
+      "label": "token-extensive"
+    },
+    {
+      "feature_id": 9989,
+      "label": "token-had"
+    },
+    {
+      "feature_id": 5504,
+      "label": "token-express"
+    },
+    {
+      "feature_id": 11867,
+      "label": "token-expecting"
+    },
+    {
+      "feature_id": 237,
+      "label": "token-p"
+    },
+    {
+      "feature_id": 7518,
+      "label": "token-ph"
+    },
+    {
+      "feature_id": 16116,
+      "label": "token-between"
+    },
+    {
+      "feature_id": 10589,
+      "label": "token-y"
+    },
+    {
+      "feature_id": 9734,
+      "label": "token-november"
+    },
+    {
+      "feature_id": 14969,
+      "label": "token-pilot"
+    },
+    {
+      "feature_id": 13482,
+      "label": "token-ities"
+    },
+    {
+      "feature_id": 9297,
+      "label": "token-tru"
+    }
+  ],
+  "llama_only": [
+    {
+      "feature_id": 2372,
+      "label": "token-able"
+    },
+    {
+      "feature_id": 4237,
+      "label": "token-ach"
+    },
+    {
+      "feature_id": 2018,
+      "label": "token-cult"
+    },
+    {
+      "feature_id": 5389,
+      "label": "token-from"
+    },
+    {
+      "feature_id": 6469,
+      "label": "token-from"
+    },
+    {
+      "feature_id": 2668,
+      "label": "token-from"
+    },
+    {
+      "feature_id": 5093,
+      "label": "token-from"
+    },
+    {
+      "feature_id": 12920,
+      "label": "token-im"
+    },
+    {
+      "feature_id": 15920,
+      "label": "token-power"
+    },
+    {
+      "feature_id": 5864,
+      "label": "token-ized"
+    },
+    {
+      "feature_id": 7592,
+      "label": "token-mis"
+    },
+    {
+      "feature_id": 1656,
+      "label": "token-sul"
+    },
+    {
+      "feature_id": 15964,
+      "label": "token-nominated"
+    },
+    {
+      "feature_id": 1987,
+      "label": "token-stated"
+    },
+    {
+      "feature_id": 15924,
+      "label": "token-st"
+    },
+    {
+      "feature_id": 4709,
+      "label": "token-st"
+    },
+    {
+      "feature_id": 16225,
+      "label": "token-st"
+    },
+    {
+      "feature_id": 8170,
+      "label": "token-st"
+    },
+    {
+      "feature_id": 14097,
+      "label": "token-elements"
+    },
+    {
+      "feature_id": 602,
+      "label": "token-ny"
+    },
+    {
+      "feature_id": 5428,
+      "label": "token-ide"
+    },
+    {
+      "feature_id": 367,
+      "label": "token-turns"
+    },
+    {
+      "feature_id": 1637,
+      "label": "token-\n"
+    },
+    {
+      "feature_id": 13503,
+      "label": "token-\n"
+    },
+    {
+      "feature_id": 12775,
+      "label": "token-concluded"
+    },
+    {
+      "feature_id": 9727,
+      "label": "token-is"
+    },
+    {
+      "feature_id": 1001,
+      "label": "token-gold"
+    },
+    {
+      "feature_id": 538,
+      "label": "token-travel"
+    },
+    {
+      "feature_id": 5573,
+      "label": "token-travel"
+    },
+    {
+      "feature_id": 1202,
+      "label": "token-hor"
+    },
+    {
+      "feature_id": 1247,
+      "label": "token-indirect"
+    },
+    {
+      "feature_id": 4645,
+      "label": "token-ra"
+    },
+    {
+      "feature_id": 8441,
+      "label": "token-behind"
+    },
+    {
+      "feature_id": 8932,
+      "label": "token-atlanta"
+    },
+    {
+      "feature_id": 5983,
+      "label": "token-ways"
+    },
+    {
+      "feature_id": 10048,
+      "label": "token-agricultural"
+    },
+    {
+      "feature_id": 386,
+      "label": "token-brother"
+    },
+    {
+      "feature_id": 10547,
+      "label": "token-brother"
+    },
+    {
+      "feature_id": 8625,
+      "label": "token-brother"
+    },
+    {
+      "feature_id": 14421,
+      "label": "token-sergeant"
+    },
+    {
+      "feature_id": 15823,
+      "label": "token-coin"
+    },
+    {
+      "feature_id": 2681,
+      "label": "token-2"
+    },
+    {
+      "feature_id": 2371,
+      "label": "token-hl"
+    },
+    {
+      "feature_id": 3251,
+      "label": "token-'"
+    },
+    {
+      "feature_id": 3611,
+      "label": "token-'"
+    },
+    {
+      "feature_id": 91,
+      "label": "token-'"
+    },
+    {
+      "feature_id": 5528,
+      "label": "token-schools"
+    },
+    {
+      "feature_id": 13108,
+      "label": "token-schools"
+    },
+    {
+      "feature_id": 10135,
+      "label": "token-proc"
+    },
+    {
+      "feature_id": 5020,
+      "label": "token-er"
+    },
+    {
+      "feature_id": 3660,
+      "label": "token-darwin"
+    },
+    {
+      "feature_id": 513,
+      "label": "token-ks"
+    },
+    {
+      "feature_id": 1335,
+      "label": "token-dict"
+    },
+    {
+      "feature_id": 9686,
+      "label": "token-wherein"
+    },
+    {
+      "feature_id": 6322,
+      "label": "token-\u2019"
+    },
+    {
+      "feature_id": 9285,
+      "label": "token-nt"
+    },
+    {
+      "feature_id": 943,
+      "label": "token-because"
+    },
+    {
+      "feature_id": 10695,
+      "label": "token-often"
+    },
+    {
+      "feature_id": 2402,
+      "label": "token-by"
+    },
+    {
+      "feature_id": 10406,
+      "label": "token-by"
+    },
+    {
+      "feature_id": 3093,
+      "label": "token-outside"
+    },
+    {
+      "feature_id": 13172,
+      "label": "token-outside"
+    },
+    {
+      "feature_id": 11156,
+      "label": "token-ary"
+    },
+    {
+      "feature_id": 5963,
+      "label": "token-aircraft"
+    },
+    {
+      "feature_id": 609,
+      "label": "token-over"
+    },
+    {
+      "feature_id": 27,
+      "label": "token-consisted"
+    },
+    {
+      "feature_id": 4914,
+      "label": "token-figures"
+    },
+    {
+      "feature_id": 8676,
+      "label": "token-russell"
+    },
+    {
+      "feature_id": 12776,
+      "label": "token-way"
+    },
+    {
+      "feature_id": 1503,
+      "label": "token-5"
+    },
+    {
+      "feature_id": 15946,
+      "label": "token-again"
+    },
+    {
+      "feature_id": 5692,
+      "label": "token-escape"
+    },
+    {
+      "feature_id": 8495,
+      "label": "token-youth"
+    },
+    {
+      "feature_id": 7646,
+      "label": "token-farm"
+    },
+    {
+      "feature_id": 8102,
+      "label": "token-more"
+    },
+    {
+      "feature_id": 4971,
+      "label": "token-)"
+    },
+    {
+      "feature_id": 2932,
+      "label": "token-be"
+    },
+    {
+      "feature_id": 4408,
+      "label": "token-air"
+    },
+    {
+      "feature_id": 8515,
+      "label": "token-o"
+    },
+    {
+      "feature_id": 7109,
+      "label": "token-o"
+    },
+    {
+      "feature_id": 12159,
+      "label": "token-world"
+    },
+    {
+      "feature_id": 15992,
+      "label": "token-operations"
+    },
+    {
+      "feature_id": 13421,
+      "label": "token-operations"
+    },
+    {
+      "feature_id": 7824,
+      "label": "token-place"
+    },
+    {
+      "feature_id": 11354,
+      "label": "token-year"
+    },
+    {
+      "feature_id": 12311,
+      "label": "token-year"
+    },
+    {
+      "feature_id": 6175,
+      "label": "token-est"
+    },
+    {
+      "feature_id": 4407,
+      "label": "token-est"
+    },
+    {
+      "feature_id": 11381,
+      "label": "token-est"
+    },
+    {
+      "feature_id": 13615,
+      "label": "token-among"
+    },
+    {
+      "feature_id": 3757,
+      "label": "token-among"
+    },
+    {
+      "feature_id": 1818,
+      "label": "token-cup"
+    },
+    {
+      "feature_id": 15087,
+      "label": "token-am"
+    },
+    {
+      "feature_id": 8536,
+      "label": "token-ess"
+    },
+    {
+      "feature_id": 8467,
+      "label": "token-story"
+    },
+    {
+      "feature_id": 2358,
+      "label": "token-ures"
+    },
+    {
+      "feature_id": 15636,
+      "label": "token-les"
+    },
+    {
+      "feature_id": 12911,
+      "label": "token-ty"
+    },
+    {
+      "feature_id": 1858,
+      "label": "token-although"
+    },
+    {
+      "feature_id": 1142,
+      "label": "token-play"
+    },
+    {
+      "feature_id": 7396,
+      "label": "token-play"
+    },
+    {
+      "feature_id": 14521,
+      "label": "token-sur"
+    },
+    {
+      "feature_id": 15250,
+      "label": "token-ress"
+    }
+  ]
+}

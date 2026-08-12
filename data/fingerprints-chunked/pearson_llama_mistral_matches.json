@@ -1,0 +1,430 @@
+{
+ "metric": "pearson",
+ "method": "reciprocal best match (mutual nearest neighbour), one-to-one",
+ "fingerprint": "chunk-averaged TopK-SAE activations, 5000 chunks \u00d7 100 tokens = 500000 tokens",
+ "corpus": "Salesforce/wikitext wikitext-103-raw-v1 (train)",
+ "chunk_tokens": 100,
+ "n_chunks": 5000,
+ "min_active_chunks": 250,
+ "tau_calibrated": 0.7477,
+ "permutation_null": {
+  "null_p99": 0.7477,
+  "null_mean": 0.351,
+  "null_max": 0.9433,
+  "n_null_samples": 27930
+ },
+ "n_matches_tau_0.80": 36,
+ "n_matches_tau_cal": 82,
+ "matches": [
+  {
+   "feat_a": 91,
+   "feat_b": 12173,
+   "sim": 0.932
+  },
+  {
+   "feat_a": 261,
+   "feat_b": 6992,
+   "sim": 0.861
+  },
+  {
+   "feat_a": 476,
+   "feat_b": 9723,
+   "sim": 0.8426
+  },
+  {
+   "feat_a": 640,
+   "feat_b": 13870,
+   "sim": 0.8248
+  },
+  {
+   "feat_a": 781,
+   "feat_b": 5447,
+   "sim": 0.8147
+  },
+  {
+   "feat_a": 908,
+   "feat_b": 15660,
+   "sim": 0.8682
+  },
+  {
+   "feat_a": 980,
+   "feat_b": 8398,
+   "sim": 0.8287
+  },
+  {
+   "feat_a": 1626,
+   "feat_b": 7521,
+   "sim": 0.8509
+  },
+  {
+   "feat_a": 1991,
+   "feat_b": 15917,
+   "sim": 0.7901
+  },
+  {
+   "feat_a": 2038,
+   "feat_b": 11648,
+   "sim": 0.748
+  },
+  {
+   "feat_a": 2225,
+   "feat_b": 7559,
+   "sim": 0.7527
+  },
+  {
+   "feat_a": 2473,
+   "feat_b": 14148,
+   "sim": 0.8469
+  },
+  {
+   "feat_a": 2635,
+   "feat_b": 7248,
+   "sim": 0.7523
+  },
+  {
+   "feat_a": 2662,
+   "feat_b": 10975,
+   "sim": 0.7672
+  },
+  {
+   "feat_a": 2761,
+   "feat_b": 8228,
+   "sim": 0.7821
+  },
+  {
+   "feat_a": 2798,
+   "feat_b": 6099,
+   "sim": 0.8397
+  },
+  {
+   "feat_a": 3145,
+   "feat_b": 2295,
+   "sim": 0.8186
+  },
+  {
+   "feat_a": 3365,
+   "feat_b": 384,
+   "sim": 0.8386
+  },
+  {
+   "feat_a": 3713,
+   "feat_b": 7371,
+   "sim": 0.7876
+  },
+  {
+   "feat_a": 4203,
+   "feat_b": 6443,
+   "sim": 0.8728
+  },
+  {
+   "feat_a": 4320,
+   "feat_b": 8341,
+   "sim": 0.809
+  },
+  {
+   "feat_a": 4437,
+   "feat_b": 8562,
+   "sim": 0.7906
+  },
+  {
+   "feat_a": 4664,
+   "feat_b": 1795,
+   "sim": 0.7634
+  },
+  {
+   "feat_a": 4885,
+   "feat_b": 1327,
+   "sim": 0.7569
+  },
+  {
+   "feat_a": 4945,
+   "feat_b": 11051,
+   "sim": 0.7961
+  },
+  {
+   "feat_a": 5037,
+   "feat_b": 7889,
+   "sim": 0.8051
+  },
+  {
+   "feat_a": 5114,
+   "feat_b": 10280,
+   "sim": 0.8305
+  },
+  {
+   "feat_a": 5624,
+   "feat_b": 7464,
+   "sim": 0.7667
+  },
+  {
+   "feat_a": 5629,
+   "feat_b": 10477,
+   "sim": 0.8814
+  },
+  {
+   "feat_a": 5683,
+   "feat_b": 42,
+   "sim": 0.8157
+  },
+  {
+   "feat_a": 5798,
+   "feat_b": 3567,
+   "sim": 0.8319
+  },
+  {
+   "feat_a": 5949,
+   "feat_b": 8831,
+   "sim": 0.8522
+  },
+  {
+   "feat_a": 6179,
+   "feat_b": 10774,
+   "sim": 0.7811
+  },
+  {
+   "feat_a": 6529,
+   "feat_b": 10135,
+   "sim": 0.889
+  },
+  {
+   "feat_a": 6536,
+   "feat_b": 3909,
+   "sim": 0.8445
+  },
+  {
+   "feat_a": 6854,
+   "feat_b": 11535,
+   "sim": 0.838
+  },
+  {
+   "feat_a": 7356,
+   "feat_b": 8226,
+   "sim": 0.7593
+  },
+  {
+   "feat_a": 7563,
+   "feat_b": 16100,
+   "sim": 0.7881
+  },
+  {
+   "feat_a": 7597,
+   "feat_b": 7991,
+   "sim": 0.8387
+  },
+  {
+   "feat_a": 7983,
+   "feat_b": 2330,
+   "sim": 0.7583
+  },
+  {
+   "feat_a": 8105,
+   "feat_b": 2032,
+   "sim": 0.8177
+  },
+  {
+   "feat_a": 8378,
+   "feat_b": 7472,
+   "sim": 0.7487
+  },
+  {
+   "feat_a": 8874,
+   "feat_b": 11925,
+   "sim": 0.7974
+  },
+  {
+   "feat_a": 9549,
+   "feat_b": 13519,
+   "sim": 0.7714
+  },
+  {
+   "feat_a": 9563,
+   "feat_b": 3665,
+   "sim": 0.7877
+  },
+  {
+   "feat_a": 9966,
+   "feat_b": 5088,
+   "sim": 0.778
+  },
+  {
+   "feat_a": 10378,
+   "feat_b": 858,
+   "sim": 0.816
+  },
+  {
+   "feat_a": 10619,
+   "feat_b": 1193,
+   "sim": 0.7862
+  },
+  {
+   "feat_a": 10664,
+   "feat_b": 13469,
+   "sim": 0.7914
+  },
+  {
+   "feat_a": 10733,
+   "feat_b": 9837,
+   "sim": 0.7564
+  },
+  {
+   "feat_a": 10903,
+   "feat_b": 13927,
+   "sim": 0.7702
+  },
+  {
+   "feat_a": 11188,
+   "feat_b": 12010,
+   "sim": 0.7604
+  },
+  {
+   "feat_a": 11578,
+   "feat_b": 10646,
+   "sim": 0.8103
+  },
+  {
+   "feat_a": 11636,
+   "feat_b": 3020,
+   "sim": 0.7899
+  },
+  {
+   "feat_a": 11669,
+   "feat_b": 13831,
+   "sim": 0.786
+  },
+  {
+   "feat_a": 12284,
+   "feat_b": 7068,
+   "sim": 0.8953
+  },
+  {
+   "feat_a": 12318,
+   "feat_b": 7731,
+   "sim": 0.7979
+  },
+  {
+   "feat_a": 12352,
+   "feat_b": 11854,
+   "sim": 0.7868
+  },
+  {
+   "feat_a": 12398,
+   "feat_b": 11836,
+   "sim": 0.7564
+  },
+  {
+   "feat_a": 12646,
+   "feat_b": 7414,
+   "sim": 0.7875
+  },
+  {
+   "feat_a": 13006,
+   "feat_b": 14748,
+   "sim": 0.7517
+  },
+  {
+   "feat_a": 13131,
+   "feat_b": 1464,
+   "sim": 0.7868
+  },
+  {
+   "feat_a": 13253,
+   "feat_b": 7714,
+   "sim": 0.7848
+  },
+  {
+   "feat_a": 13381,
+   "feat_b": 5772,
+   "sim": 0.9573
+  },
+  {
+   "feat_a": 13710,
+   "feat_b": 8652,
+   "sim": 0.8174
+  },
+  {
+   "feat_a": 13785,
+   "feat_b": 5307,
+   "sim": 0.7662
+  },
+  {
+   "feat_a": 13791,
+   "feat_b": 15556,
+   "sim": 0.8936
+  },
+  {
+   "feat_a": 13867,
+   "feat_b": 9867,
+   "sim": 0.8839
+  },
+  {
+   "feat_a": 13984,
+   "feat_b": 12131,
+   "sim": 0.7562
+  },
+  {
+   "feat_a": 14144,
+   "feat_b": 417,
+   "sim": 0.8798
+  },
+  {
+   "feat_a": 14180,
+   "feat_b": 13176,
+   "sim": 0.899
+  },
+  {
+   "feat_a": 14333,
+   "feat_b": 1139,
+   "sim": 0.7886
+  },
+  {
+   "feat_a": 14404,
+   "feat_b": 12218,
+   "sim": 0.7686
+  },
+  {
+   "feat_a": 14536,
+   "feat_b": 12235,
+   "sim": 0.7544
+  },
+  {
+   "feat_a": 14653,
+   "feat_b": 7452,
+   "sim": 0.768
+  },
+  {
+   "feat_a": 15030,
+   "feat_b": 8482,
+   "sim": 0.7534
+  },
+  {
+   "feat_a": 15167,
+   "feat_b": 15413,
+   "sim": 0.7591
+  },
+  {
+   "feat_a": 15327,
+   "feat_b": 1917,
+   "sim": 0.8905
+  },
+  {
+   "feat_a": 15528,
+   "feat_b": 15751,
+   "sim": 0.7523
+  },
+  {
+   "feat_a": 15720,
+   "feat_b": 15478,
+   "sim": 0.7637
+  },
+  {
+   "feat_a": 16044,
+   "feat_b": 12224,
+   "sim": 0.8624
+  },
+  {
+   "feat_a": 16222,
+   "feat_b": 625,
+   "sim": 0.7598
+  }
+ ]
+}
