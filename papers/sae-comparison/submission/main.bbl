@@ -1,0 +1,104 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Alain and Bengio(2016)]{alain2016understanding}
+Guillaume Alain and Yoshua Bengio.
+\newblock Understanding intermediate layers using linear classifier probes.
+\newblock \emph{arXiv preprint arXiv:1610.01644}, 2016.
+\newblock URL \url{https://arxiv.org/abs/1610.01644}.
+
+\bibitem[Belinkov(2022)]{belinkov2022probing}
+Yonatan Belinkov.
+\newblock Probing classifiers: Promises, shortcomings, and advances.
+\newblock \emph{Computational Linguistics}, 48\penalty0 (1):\penalty0 207--219,
+  2022.
+
+\bibitem[Bricken et~al.(2023)Bricken, Templeton, Batson, Chen, Jermyn, Conerly,
+  Turner, Anil, Denison, Askell, Lasenby, Wu, Kravec, Schiefer, Maxwell,
+  Joseph, Hatfield-Dodds, Tamkin, Nguyen, McLean, Burke, Hume, Carter,
+  Henighan, and Olah]{bricken2023monosemanticity}
+Trenton Bricken, Adly Templeton, Joshua Batson, Brian Chen, Adam Jermyn, Tom
+  Conerly, Nick Turner, Cem Anil, Carson Denison, Amanda Askell, Robert
+  Lasenby, Yifan Wu, Shauna Kravec, Nicholas Schiefer, Tim Maxwell, Nicholas
+  Joseph, Zac Hatfield-Dodds, Alex Tamkin, Karina Nguyen, Brayden McLean,
+  Josiah~E Burke, Tristan Hume, Shan Carter, Tom Henighan, and Chris Olah.
+\newblock Towards monosemanticity: Decomposing language models with dictionary
+  learning.
+\newblock \emph{Transformer Circuits Thread}, 2023.
+\newblock URL
+  \url{https://transformer-circuits.pub/2023/monosemantic-features/index.html}.
+
+\bibitem[Cunningham et~al.(2023)Cunningham, Ewart, Riggs, Huben, and
+  Sharkey]{cunningham2023sparse}
+Hoagy Cunningham, Aidan Ewart, Logan Riggs, Robert Huben, and Lee Sharkey.
+\newblock Sparse autoencoders find highly interpretable features in language
+  models.
+\newblock \emph{arXiv preprint arXiv:2309.08600}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2309.08600}.
+
+\bibitem[Elhage et~al.(2022)Elhage, Hume, Olsson, Schiefer, Henighan, Kravec,
+  Hatfield-Dodds, Lasenby, Drain, Chen, Grosse, McCandlish, Kaplan, Amodei,
+  Wattenberg, and Olah]{elhage2022superposition}
+Nelson Elhage, Tristan Hume, Catherine Olsson, Nicholas Schiefer, Tom Henighan,
+  Shauna Kravec, Zac Hatfield-Dodds, Robert Lasenby, Dawn Drain, Carol Chen,
+  Roger Grosse, Sam McCandlish, Jared Kaplan, Dario Amodei, Martin Wattenberg,
+  and Chris Olah.
+\newblock Toy models of superposition.
+\newblock \emph{Transformer Circuits Thread}, 2022.
+\newblock URL \url{https://transformer-circuits.pub/2022/toy_model/index.html}.
+
+\bibitem[Gao et~al.(2024)Gao, la~Tour, Tillman, Goh, Troll, Radford, Sutskever,
+  Leike, and Wu]{gao2024scaling}
+Leo Gao, Tom~Dud{\'e} la~Tour, Henk Tillman, Gabriel Goh, Rajan Troll, Alec
+  Radford, Ilya Sutskever, Jan Leike, and Jeffrey Wu.
+\newblock Scaling and evaluating sparse autoencoders.
+\newblock \emph{arXiv preprint arXiv:2406.04093}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.04093}.
+
+\bibitem[Melton(2026)]{melton2026actstream}
+J.~Melton.
+\newblock Distributed mechanistic interpretability at scale: Activation
+  streaming, split-layer inference, and distributed sparse autoencoder
+  training, 2026.
+\newblock Companion paper. Describes the two-node activation-streaming system
+  and the distributed SAE trainer that produced the checkpoints and
+  fingerprints analysed here.
+
+\bibitem[Rajamanoharan et~al.(2024{\natexlab{a}})Rajamanoharan, Conmy, Smith,
+  Lieberum, Varma, Kram{\'a}r, Shah, and Nanda]{rajamanoharan2024gated}
+Senthooran Rajamanoharan, Arthur Conmy, Lewis Smith, Tom Lieberum, Vikrant
+  Varma, J{\'a}nos Kram{\'a}r, Rohin Shah, and Neel Nanda.
+\newblock Improving dictionary learning with gated sparse autoencoders.
+\newblock \emph{arXiv preprint arXiv:2404.16014}, 2024{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2404.16014}.
+
+\bibitem[Rajamanoharan et~al.(2024{\natexlab{b}})Rajamanoharan, Lieberum,
+  Sonnerat, Conmy, Varma, Kram{\'a}r, and Nanda]{rajamanoharan2024jumprelu}
+Senthooran Rajamanoharan, Tom Lieberum, Nicolas Sonnerat, Arthur Conmy, Vikrant
+  Varma, J{\'a}nos Kram{\'a}r, and Neel Nanda.
+\newblock Jumping ahead: Improving reconstruction fidelity with {JumpReLU}
+  sparse autoencoders.
+\newblock \emph{arXiv preprint arXiv:2407.14435}, 2024{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2407.14435}.
+
+\bibitem[Turner et~al.(2023)Turner, Thiergart, Udell, Leike, Mini, and
+  MacDiarmid]{turner2023activation}
+Alex Turner, Lisa Thiergart, Gavin Udell, David Leike, Ulisse Mini, and Monte
+  MacDiarmid.
+\newblock Activation addition: Steering language models without optimization.
+\newblock \emph{arXiv preprint arXiv:2308.10248}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2308.10248}.
+
+\bibitem[Zou et~al.(2023)Zou, Phan, Chen, Campbell, Guo, Ren,
+  et~al.]{zou2023representation}
+Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren,
+  et~al.
+\newblock Representation engineering: A top-down approach to ai transparency.
+\newblock \emph{arXiv preprint arXiv:2310.01405}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.01405}.
+
+\end{thebibliography}

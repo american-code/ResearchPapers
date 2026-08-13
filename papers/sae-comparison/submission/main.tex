@@ -83,7 +83,12 @@ time. The conventional protocol applied to the same fingerprints yields 3,753. A
 planted-signal
 power analysis bounds what that null means: minimum detectable effect size tracks the
 calibrated threshold, reaching a correlation of 0.95--1.00, so the finding is ``no triple
-shared at correlation $\geq 0.95$'' rather than ``no shared structure''. Because the
+shared at correlation $\geq 0.95$'' rather than ``no shared structure''. A positive
+control fixes the other bound. Two SAEs differing only in training seed---same model,
+same activations, same hyperparameters---agree on just 8\% of their matchable features,
+which the procedure recovers at $108\times$ the null. The method is therefore not blind,
+but 8\% is its ceiling, and the three runs are indistinguishable by loss, FVE, $L_0$ and
+dead-feature count while disagreeing about 92\% of their dictionaries. Because the
 threshold must clear a null whose mean grows with dictionary size, that floor is
 structural to dictionary-scale matching rather than a consequence of our choices.
 
@@ -138,6 +143,12 @@ model are confounded across only three runs.
     size equals the threshold, 0.95--1.00, so the method sees near-duplicates and little
     else (\S\ref{sec:mdes}). Reporting that floor should be standard practice for
     cross-model matching claims in either direction.
+  \item \textbf{A positive control for the matching method, and a ceiling.} Two SAEs
+    differing only in seed agree on 8\% of matchable features at $108\times$ the null
+    (\S\ref{sec:seedstability}), so the near-zero cross-model count is not instrument
+    failure---but no study of this kind can report more than about 8\%, and standard
+    quality metrics cannot distinguish dictionaries that disagree about 92\% of their
+    content.
   \item \textbf{An honest account of what these numbers do not establish.} With all
     three SAEs trained over 205 epochs of their entire activation dump, no held-out
     reconstruction measurement is available for any of them. We report the one held-out
@@ -607,6 +618,126 @@ regions for a 16{,}384-feature Qwen dictionary---more members than the set has--
 was a visible signal that many-to-one matching had broken the set algebra, available
 without any null at all.
 
+\subsection{The Method's Ceiling: Same Model, Different Seed}
+\label{sec:seedstability}
+
+A near-zero match count admits two readings: the models share little, or the detector
+cannot see sharing. Nothing reported so far distinguishes them. The direct test is to
+run the procedure on a case where sharing is guaranteed by construction.
+
+We trained two further SAEs on the \emph{same} Llama-3.2-3B layer-14 activations under
+the \emph{same} configuration as the checkpoint used above---dictionary 16{,}384,
+$k = 128$, 50{,}000 steps, batch 2{,}048, identical learning-rate schedule---varying
+only the seed, which sets both weight initialisation and batch order. Any feature that
+is a real property of the model's representation, rather than an accident of one
+optimisation trajectory, should appear in all three dictionaries. We then ran the
+identical matching procedure, including the same permutation calibration, on all three
+pairs.
+
+\begin{table}[t]
+  \centering
+  \caption{Matching two SAEs that differ only in training seed, against the
+    cross-architecture result from Table~\ref{tab:matches}. Same source model, same
+    activations, same hyperparameters. Pearson metric; the cosine metric gives
+    1{,}087--1{,}211 matches (8.9--10.0\%) and is reported in the data release.}
+  \label{tab:seedstability}
+  \smallskip
+  \begin{tabular}{lrrr}
+    \toprule
+    Pair & Matched & \% of matchable & Enrichment over null \\
+    \midrule
+    seed 123 vs.\ seed 456   &   965 & 7.93\% & $108\times$ \\
+    seed 42 vs.\ seed 123    &   978 & 8.06\% & $109\times$ \\
+    seed 42 vs.\ seed 456    & 1{,}002 & 8.26\% & $112\times$ \\
+    \midrule
+    \multicolumn{4}{l}{\emph{Cross-architecture, from Table~\ref{tab:matches}:}} \\
+    Llama--Qwen              &    16 & 0.23\% & $2.2\times$ \\
+    Mistral--Qwen            &    23 & 0.33\% & $3.2\times$ \\
+    Llama--Mistral           &    15 & 0.18\% & $1.7\times$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{The detector is not blind.} Where sharing is guaranteed the procedure
+recovers it at $108$--$112\times$ the permutation null, against $1.7$--$3.2\times$
+across architectures (Table~\ref{tab:seedstability}). Instrument failure is therefore
+not the explanation for the cross-model result. That was the rival reading we could not
+previously exclude, and it is now excluded on a positive control rather than by
+argument.
+
+\paragraph{But the ceiling is 8\%, not 100\%.} Two SAEs trained on identical
+activations from the same model, differing only in seed, agree on roughly \textbf{8\%
+of their matchable features}. Around 92\% of each dictionary does not survive a reseed.
+
+This changes the denominator for everything above. Cross-architecture sharing should be
+read against what is achievable rather than against dictionary size: 0.18--0.33\%
+observed against an 8\% ceiling, a factor of 25 to 45 below the maximum this method
+could return, rather than against 100\%. The gap remains large and the conclusion of
+\S\ref{sec:matching} stands, but stated against the wrong denominator it overstates its
+own strength. The bound is also general: no cross-model study using activation-pattern
+matching of this kind can report more than about 8\% agreement, whatever models it
+compares, because that is what the method returns when the models are the same one.
+
+\paragraph{What survives is near-duplicate.} The matched pairs are not merely similar.
+Their similarity distribution has median $0.991$, with 59\% above $0.99$ and 27\% above
+$0.995$. This is the planted-signal detection floor of \S\ref{sec:mdes} confirmed on real
+data: the procedure recovers features that are essentially identical across runs and
+nothing weaker. A feature genuinely shared but realised at correlation $0.9$ is invisible
+here exactly as the simulation predicts.
+
+\paragraph{The reproducible fraction is itself only half reproducible.} Of the seed-42
+dictionary, 978 features matched seed 123 and 1{,}002 matched seed 456---but those two
+sets intersect in only 515 features, 52.7\% of the smaller set (Jaccard $0.352$). There
+is no stable core of robust features that reseeding recovers. Different runs recover
+overlapping but substantially different subsets, so reproducibility is not a property a
+feature has; it is closer to a property of the pair of runs being compared.
+
+\paragraph{None of this is visible in the quality metrics.} The three runs are
+indistinguishable by everything the literature reports.
+
+\begin{table}[t]
+  \centering
+  \caption{The three seed runs by standard SAE quality metrics, at step 50{,}000.
+    Dead counts here are the rolling 5{,}000-step window logged during training, as in
+    Table~\ref{tab:collapse}.}
+  \label{tab:seedmetrics}
+  \smallskip
+  \begin{tabular}{lrrrr}
+    \toprule
+    Seed & Final loss & FVE & $L_0$ & Dead \\
+    \midrule
+    42 (reported above) & 0.006174 & 0.9939 & 128.0 & 3{,}753 \\
+    123                 & 0.006171 & 0.9951 & 128.0 & 3{,}600 \\
+    456                 & 0.006182 & 0.9898 & 128.0 & 3{,}696 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Loss agrees to 0.2\%, FVE to half a percentage point, $L_0$ exactly, dead-feature count
+to 4\% (Table~\ref{tab:seedmetrics}). By the standard report these are the same
+autoencoder trained three times. They share 8\% of their features. Reconstruction
+quality, sparsity and dead-feature count are jointly blind to the identity of the
+dictionary---not merely insensitive to the collapse dynamics of \S\ref{sec:collapse},
+but unable to distinguish two dictionaries that disagree about 92\% of their content.
+We think this is the strongest form of the paper's argument: the metrics the field
+reports do not identify what an SAE has learned.
+
+\paragraph{Two results replicate along the way.} Dead-on-evaluation counts across the
+three seeds are 3{,}344, 3{,}206 and 3{,}274, within 4\% of one another, so the collapse
+magnitude of \S\ref{sec:collapse} is a property of the training procedure rather than an
+accident of one seed. And the fixed-threshold argument of \S\ref{sec:matching} can now be
+demonstrated on known ground truth: the same-model permutation null has mean $0.757$, so
+$\tau = 0.80$ sits barely above the noise floor even here, and returns roughly 5{,}500
+matches against the 965 that survive calibration---a sixfold inflation in a case where
+the sharing being inflated is real.
+
+\paragraph{Caveats.} Fingerprints are computed on the corpus the SAEs trained on,
+following the protocol used throughout this paper, so the 8\% ceiling is an in-sample
+figure. It is measured on one model at one layer, and whether that value is
+characteristic of TopK SAEs generally is unmeasured. The seed governs weight
+initialisation and batch order together, so this is total retraining variation rather
+than either source in isolation.
+
 \subsection{What the Method Could Have Detected}
 \label{sec:mdes}
 
@@ -662,8 +793,11 @@ depend on either.
 
 \paragraph{What this does and does not show.} It does not show that these three models
 fail to share representational structure. The obvious rival explanation for a near-zero
-count is instrument failure---that the SAEs are simply too degraded to detect what is
-there---and we can rule out one form of it directly. Running the identical analysis on
+count is instrument failure---that the procedure cannot see sharing at all---and
+\S\ref{sec:seedstability} excludes it on a positive control: given two SAEs that differ
+only in seed, the same procedure recovers agreement at $108$--$112\times$ the null. A
+second form of the objection, that these particular SAEs are too degraded, we can rule
+out directly. Running the identical analysis on
 partial checkpoints (Llama at 20\% of its step target, Mistral at under 2\% on a
 ten-times-smaller corpus) returns zero universal features. Training all three to the same
 specification raises the usable dictionary fraction from 51\% to 74\% (Llama) and 33\% to
@@ -680,8 +814,10 @@ A negative result from a coarse statistic is weak evidence of absence.
 The power analysis (\S\ref{sec:mdes}) sharpens what the null result claims. It is not
 ``these models share no features'' but ``no feature triple is shared at correlation
 $\geq 0.95$'' --- everything below that floor is outside the method's reach, and we
-cannot bound how much lives there. Stated that way the finding is considerably weaker
-than a bare zero suggests, and it is the strongest form the evidence supports.
+cannot bound how much lives there. The seed control adds the other half of the frame:
+the finding is 0.18--0.33\% agreement against a same-model ceiling of 8\%, not against
+100\%. Stated with both bounds the result is considerably weaker than a bare zero
+suggests, and it is the strongest form the evidence supports.
 
 What it does show is methodological and transfers beyond this dataset. Cross-model
 feature matching by activation-pattern similarity requires a permutation null: without
