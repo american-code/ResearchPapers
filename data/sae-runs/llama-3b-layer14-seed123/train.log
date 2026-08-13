@@ -1,0 +1,285 @@
+Loading activations: data/activations/llama-3b-layer16/activations.npy
+  shape     : (500000, 3072)  dtype=float16
+  model     : mlx-community/Llama-3.2-3B-bf16
+  layer     : 14
+
+Config:
+{
+  "source_model": "mlx-community/Llama-3.2-3B-bf16",
+  "source_layer": 14,
+  "d_in": 3072,
+  "dict_size": 16384,
+  "k": 128,
+  "expansion": 5.33,
+  "peak_lr": 0.0001,
+  "steps": 50000,
+  "batch": 2048,
+  "warmup": 500,
+  "seed": 123,
+  "n_source_tokens": 500000,
+  "total_tokens": 102400000,
+  "epochs_equiv": 204.8
+}
+
+Training  steps=50,000  dict=16384  K=128  lr=0.0001  batch=2048
+
+step      1/50,000  loss=1.1055  L0=128.0  FVE=-0.107  dead=1,448  lr=2.00e-07     3,252 tok/s
+step    200/50,000  loss=0.4572  L0=128.0  FVE=0.628  dead=1,272  lr=4.00e-05     5,594 tok/s
+step    400/50,000  loss=0.0665  L0=128.0  FVE=0.947  dead=1,241  lr=8.00e-05     5,608 tok/s
+step    600/50,000  loss=0.0199  L0=128.0  FVE=0.975  dead=1,226  lr=1.00e-04     5,614 tok/s
+step    800/50,000  loss=0.0171  L0=128.0  FVE=0.961  dead=1,217  lr=1.00e-04     5,616 tok/s
+step  1,000/50,000  loss=0.0159  L0=128.0  FVE=0.972  dead=1,208  lr=1.00e-04     5,616 tok/s
+step  1,200/50,000  loss=0.0151  L0=128.0  FVE=0.988  dead=1,194  lr=1.00e-04     5,617 tok/s
+step  1,400/50,000  loss=0.0144  L0=128.0  FVE=0.956  dead=1,178  lr=9.99e-05     5,618 tok/s
+step  1,600/50,000  loss=0.0140  L0=128.0  FVE=0.976  dead=1,163  lr=9.99e-05     5,618 tok/s
+step  1,800/50,000  loss=0.0137  L0=128.0  FVE=0.984  dead=1,141  lr=9.98e-05     5,619 tok/s
+step  2,000/50,000  loss=0.0133  L0=128.0  FVE=0.981  dead=1,129  lr=9.98e-05     5,619 tok/s
+step  2,200/50,000  loss=0.0131  L0=128.0  FVE=0.978  dead=1,110  lr=9.97e-05     5,619 tok/s
+step  2,400/50,000  loss=0.0128  L0=128.0  FVE=0.937  dead=1,099  lr=9.97e-05     5,619 tok/s
+step  2,600/50,000  loss=0.0126  L0=128.0  FVE=0.985  dead=1,078  lr=9.96e-05     5,619 tok/s
+step  2,800/50,000  loss=0.0123  L0=128.0  FVE=0.737  dead=1,057  lr=9.95e-05     5,620 tok/s
+step  3,000/50,000  loss=0.0121  L0=128.0  FVE=0.984  dead=1,039  lr=9.94e-05     5,620 tok/s
+step  3,200/50,000  loss=0.0119  L0=128.0  FVE=0.980  dead=1,024  lr=9.93e-05     5,620 tok/s
+step  3,400/50,000  loss=0.0117  L0=128.0  FVE=0.959  dead=1,005  lr=9.92e-05     5,620 tok/s
+step  3,600/50,000  loss=0.0115  L0=128.0  FVE=0.985  dead=  986  lr=9.91e-05     5,621 tok/s
+step  3,800/50,000  loss=0.0113  L0=128.0  FVE=0.980  dead=  964  lr=9.90e-05     5,621 tok/s
+step  4,000/50,000  loss=0.0111  L0=128.0  FVE=0.966  dead=  950  lr=9.88e-05     5,621 tok/s
+step  4,200/50,000  loss=0.0110  L0=128.0  FVE=0.974  dead=  933  lr=9.87e-05     5,621 tok/s
+step  4,400/50,000  loss=0.0108  L0=128.0  FVE=0.984  dead=  910  lr=9.86e-05     5,621 tok/s
+step  4,600/50,000  loss=0.0107  L0=128.0  FVE=0.984  dead=  898  lr=9.84e-05     5,621 tok/s
+step  4,800/50,000  loss=0.0105  L0=128.0  FVE=0.981  dead=  888  lr=9.82e-05     5,621 tok/s
+step  5,000/50,000  loss=0.0104  L0=128.0  FVE=0.985  dead=6,839  lr=9.81e-05     5,621 tok/s
+step  5,200/50,000  loss=0.0102  L0=128.0  FVE=0.986  dead=8,447  lr=9.79e-05     5,621 tok/s
+step  5,400/50,000  loss=0.0101  L0=128.0  FVE=0.988  dead=8,716  lr=9.77e-05     5,621 tok/s
+step  5,600/50,000  loss=0.0100  L0=128.0  FVE=0.982  dead=8,632  lr=9.75e-05     5,621 tok/s
+step  5,800/50,000  loss=0.0098  L0=128.0  FVE=0.992  dead=8,555  lr=9.73e-05     5,621 tok/s
+step  6,000/50,000  loss=0.0097  L0=128.0  FVE=0.979  dead=8,398  lr=9.71e-05     5,621 tok/s
+step  6,200/50,000  loss=0.0096  L0=128.0  FVE=0.991  dead=8,289  lr=9.69e-05     5,621 tok/s
+step  6,400/50,000  loss=0.0095  L0=128.0  FVE=0.969  dead=8,158  lr=9.67e-05     5,621 tok/s
+step  6,600/50,000  loss=0.0094  L0=128.0  FVE=0.971  dead=8,101  lr=9.65e-05     5,621 tok/s
+step  6,800/50,000  loss=0.0093  L0=128.0  FVE=0.986  dead=8,017  lr=9.63e-05     5,621 tok/s
+step  7,000/50,000  loss=0.0092  L0=128.0  FVE=0.972  dead=7,890  lr=9.60e-05     5,621 tok/s
+step  7,200/50,000  loss=0.0091  L0=128.0  FVE=0.803  dead=7,775  lr=9.58e-05     5,621 tok/s
+step  7,400/50,000  loss=0.0091  L0=128.0  FVE=0.985  dead=7,657  lr=9.55e-05     5,621 tok/s
+step  7,600/50,000  loss=0.0089  L0=128.0  FVE=0.979  dead=7,562  lr=9.53e-05     5,621 tok/s
+step  7,800/50,000  loss=0.0088  L0=128.0  FVE=0.990  dead=7,442  lr=9.50e-05     5,621 tok/s
+step  8,000/50,000  loss=0.0087  L0=128.0  FVE=0.991  dead=7,307  lr=9.47e-05     5,621 tok/s
+step  8,200/50,000  loss=0.0087  L0=128.0  FVE=0.973  dead=7,170  lr=9.44e-05     5,621 tok/s
+step  8,400/50,000  loss=0.0086  L0=128.0  FVE=0.980  dead=7,052  lr=9.42e-05     5,621 tok/s
+step  8,600/50,000  loss=0.0085  L0=128.0  FVE=0.985  dead=6,961  lr=9.39e-05     5,621 tok/s
+step  8,800/50,000  loss=0.0084  L0=128.0  FVE=0.986  dead=6,883  lr=9.36e-05     5,621 tok/s
+step  9,000/50,000  loss=0.0083  L0=128.0  FVE=0.990  dead=6,777  lr=9.33e-05     5,621 tok/s
+step  9,200/50,000  loss=0.0083  L0=128.0  FVE=0.990  dead=6,651  lr=9.29e-05     5,621 tok/s
+step  9,400/50,000  loss=0.0082  L0=128.0  FVE=0.982  dead=6,546  lr=9.26e-05     5,621 tok/s
+step  9,600/50,000  loss=0.0081  L0=128.0  FVE=0.980  dead=6,438  lr=9.23e-05     5,621 tok/s
+step  9,800/50,000  loss=0.0081  L0=128.0  FVE=0.986  dead=6,354  lr=9.20e-05     5,621 tok/s
+step 10,000/50,000  loss=0.0080  L0=128.0  FVE=0.988  dead=6,242  lr=9.16e-05     5,621 tok/s
+  [saved checkpoint_step_010000.npz]
+step 10,200/50,000  loss=0.0080  L0=128.0  FVE=0.993  dead=6,124  lr=9.13e-05     5,621 tok/s
+step 10,400/50,000  loss=0.0079  L0=128.0  FVE=0.989  dead=6,048  lr=9.09e-05     5,621 tok/s
+step 10,600/50,000  loss=0.0078  L0=128.0  FVE=0.990  dead=5,970  lr=9.06e-05     5,621 tok/s
+step 10,800/50,000  loss=0.0078  L0=128.0  FVE=0.974  dead=5,864  lr=9.02e-05     5,621 tok/s
+step 11,000/50,000  loss=0.0078  L0=128.0  FVE=0.963  dead=5,772  lr=8.98e-05     5,621 tok/s
+step 11,200/50,000  loss=0.0077  L0=128.0  FVE=0.986  dead=5,686  lr=8.95e-05     5,621 tok/s
+step 11,400/50,000  loss=0.0077  L0=128.0  FVE=0.833  dead=5,627  lr=8.91e-05     5,621 tok/s
+step 11,600/50,000  loss=0.0077  L0=128.0  FVE=0.977  dead=5,556  lr=8.87e-05     5,621 tok/s
+step 11,800/50,000  loss=0.0076  L0=128.0  FVE=0.981  dead=5,483  lr=8.83e-05     5,621 tok/s
+step 12,000/50,000  loss=0.0075  L0=128.0  FVE=0.988  dead=5,418  lr=8.79e-05     5,621 tok/s
+step 12,200/50,000  loss=0.0075  L0=128.0  FVE=0.955  dead=5,333  lr=8.75e-05     5,621 tok/s
+step 12,400/50,000  loss=0.0074  L0=128.0  FVE=0.983  dead=5,262  lr=8.71e-05     5,621 tok/s
+step 12,600/50,000  loss=0.0074  L0=128.0  FVE=0.961  dead=5,206  lr=8.67e-05     5,621 tok/s
+step 12,800/50,000  loss=0.0074  L0=128.0  FVE=0.986  dead=5,175  lr=8.62e-05     5,621 tok/s
+step 13,000/50,000  loss=0.0073  L0=128.0  FVE=0.992  dead=5,115  lr=8.58e-05     5,621 tok/s
+step 13,200/50,000  loss=0.0073  L0=128.0  FVE=0.984  dead=5,072  lr=8.54e-05     5,621 tok/s
+step 13,400/50,000  loss=0.0073  L0=128.0  FVE=0.983  dead=5,034  lr=8.50e-05     5,621 tok/s
+step 13,600/50,000  loss=0.0072  L0=128.0  FVE=0.993  dead=4,981  lr=8.45e-05     5,621 tok/s
+step 13,800/50,000  loss=0.0072  L0=128.0  FVE=0.977  dead=4,925  lr=8.41e-05     5,621 tok/s
+step 14,000/50,000  loss=0.0072  L0=128.0  FVE=0.990  dead=4,877  lr=8.36e-05     5,621 tok/s
+step 14,200/50,000  loss=0.0072  L0=128.0  FVE=0.957  dead=4,839  lr=8.32e-05     5,621 tok/s
+step 14,400/50,000  loss=0.0072  L0=128.0  FVE=0.993  dead=4,804  lr=8.27e-05     5,621 tok/s
+step 14,600/50,000  loss=0.0071  L0=128.0  FVE=0.991  dead=4,780  lr=8.22e-05     5,621 tok/s
+step 14,800/50,000  loss=0.0071  L0=128.0  FVE=0.988  dead=4,754  lr=8.17e-05     5,621 tok/s
+step 15,000/50,000  loss=0.0071  L0=128.0  FVE=0.978  dead=4,720  lr=8.13e-05     5,621 tok/s
+step 15,200/50,000  loss=0.0071  L0=128.0  FVE=0.975  dead=4,701  lr=8.08e-05     5,621 tok/s
+step 15,400/50,000  loss=0.0070  L0=128.0  FVE=0.984  dead=4,675  lr=8.03e-05     5,621 tok/s
+step 15,600/50,000  loss=0.0070  L0=128.0  FVE=0.961  dead=4,650  lr=7.98e-05     5,621 tok/s
+step 15,800/50,000  loss=0.0070  L0=128.0  FVE=0.993  dead=4,624  lr=7.93e-05     5,621 tok/s
+step 16,000/50,000  loss=0.0070  L0=128.0  FVE=0.979  dead=4,596  lr=7.88e-05     5,621 tok/s
+step 16,200/50,000  loss=0.0069  L0=128.0  FVE=0.980  dead=4,573  lr=7.83e-05     5,621 tok/s
+step 16,400/50,000  loss=0.0069  L0=128.0  FVE=0.991  dead=4,553  lr=7.78e-05     5,621 tok/s
+step 16,600/50,000  loss=0.0069  L0=128.0  FVE=0.976  dead=4,530  lr=7.73e-05     5,621 tok/s
+step 16,800/50,000  loss=0.0069  L0=128.0  FVE=0.988  dead=4,512  lr=7.68e-05     5,621 tok/s
+step 17,000/50,000  loss=0.0069  L0=128.0  FVE=0.990  dead=4,491  lr=7.63e-05     5,621 tok/s
+step 17,200/50,000  loss=0.0068  L0=128.0  FVE=0.977  dead=4,470  lr=7.57e-05     5,621 tok/s
+step 17,400/50,000  loss=0.0068  L0=128.0  FVE=0.992  dead=4,460  lr=7.52e-05     5,621 tok/s
+step 17,600/50,000  loss=0.0069  L0=128.0  FVE=0.990  dead=4,438  lr=7.47e-05     5,621 tok/s
+step 17,800/50,000  loss=0.0068  L0=128.0  FVE=0.978  dead=4,418  lr=7.41e-05     5,621 tok/s
+step 18,000/50,000  loss=0.0068  L0=128.0  FVE=0.988  dead=4,398  lr=7.36e-05     5,621 tok/s
+step 18,200/50,000  loss=0.0068  L0=128.0  FVE=0.992  dead=4,372  lr=7.31e-05     5,621 tok/s
+step 18,400/50,000  loss=0.0068  L0=128.0  FVE=0.987  dead=4,358  lr=7.25e-05     5,621 tok/s
+step 18,600/50,000  loss=0.0068  L0=128.0  FVE=0.978  dead=4,337  lr=7.20e-05     5,621 tok/s
+step 18,800/50,000  loss=0.0067  L0=128.0  FVE=0.978  dead=4,318  lr=7.14e-05     5,621 tok/s
+step 19,000/50,000  loss=0.0067  L0=128.0  FVE=0.992  dead=4,295  lr=7.09e-05     5,621 tok/s
+step 19,200/50,000  loss=0.0067  L0=128.0  FVE=0.991  dead=4,291  lr=7.03e-05     5,621 tok/s
+step 19,400/50,000  loss=0.0067  L0=128.0  FVE=0.988  dead=4,278  lr=6.97e-05     5,621 tok/s
+step 19,600/50,000  loss=0.0067  L0=128.0  FVE=0.993  dead=4,267  lr=6.92e-05     5,621 tok/s
+step 19,800/50,000  loss=0.0067  L0=128.0  FVE=0.980  dead=4,248  lr=6.86e-05     5,621 tok/s
+step 20,000/50,000  loss=0.0067  L0=128.0  FVE=0.991  dead=4,232  lr=6.80e-05     5,621 tok/s
+  [saved checkpoint_step_020000.npz]
+step 20,200/50,000  loss=0.0066  L0=128.0  FVE=0.979  dead=4,220  lr=6.75e-05     5,621 tok/s
+step 20,400/50,000  loss=0.0066  L0=128.0  FVE=0.990  dead=4,212  lr=6.69e-05     5,621 tok/s
+step 20,600/50,000  loss=0.0066  L0=128.0  FVE=0.978  dead=4,198  lr=6.63e-05     5,621 tok/s
+step 20,800/50,000  loss=0.0066  L0=128.0  FVE=0.995  dead=4,184  lr=6.57e-05     5,621 tok/s
+step 21,000/50,000  loss=0.0066  L0=128.0  FVE=0.990  dead=4,180  lr=6.52e-05     5,621 tok/s
+step 21,200/50,000  loss=0.0066  L0=128.0  FVE=0.992  dead=4,158  lr=6.46e-05     5,621 tok/s
+step 21,400/50,000  loss=0.0066  L0=128.0  FVE=0.989  dead=4,138  lr=6.40e-05     5,621 tok/s
+step 21,600/50,000  loss=0.0066  L0=128.0  FVE=0.991  dead=4,136  lr=6.34e-05     5,621 tok/s
+step 21,800/50,000  loss=0.0066  L0=128.0  FVE=0.958  dead=4,128  lr=6.28e-05     5,621 tok/s
+step 22,000/50,000  loss=0.0066  L0=128.0  FVE=0.988  dead=4,118  lr=6.22e-05     5,621 tok/s
+step 22,200/50,000  loss=0.0066  L0=128.0  FVE=0.856  dead=4,103  lr=6.16e-05     5,621 tok/s
+step 22,400/50,000  loss=0.0065  L0=128.0  FVE=0.990  dead=4,090  lr=6.10e-05     5,621 tok/s
+step 22,600/50,000  loss=0.0065  L0=128.0  FVE=0.986  dead=4,081  lr=6.05e-05     5,621 tok/s
+step 22,800/50,000  loss=0.0065  L0=128.0  FVE=0.986  dead=4,067  lr=5.99e-05     5,621 tok/s
+step 23,000/50,000  loss=0.0065  L0=128.0  FVE=0.988  dead=4,058  lr=5.93e-05     5,621 tok/s
+step 23,200/50,000  loss=0.0065  L0=128.0  FVE=0.994  dead=4,052  lr=5.87e-05     5,621 tok/s
+step 23,400/50,000  loss=0.0065  L0=128.0  FVE=0.965  dead=4,037  lr=5.81e-05     5,621 tok/s
+step 23,600/50,000  loss=0.0065  L0=128.0  FVE=0.988  dead=4,027  lr=5.75e-05     5,621 tok/s
+step 23,800/50,000  loss=0.0065  L0=128.0  FVE=0.993  dead=4,013  lr=5.69e-05     5,621 tok/s
+step 24,000/50,000  loss=0.0065  L0=128.0  FVE=0.994  dead=4,002  lr=5.63e-05     5,621 tok/s
+step 24,200/50,000  loss=0.0065  L0=128.0  FVE=0.985  dead=3,988  lr=5.57e-05     5,621 tok/s
+step 24,400/50,000  loss=0.0065  L0=128.0  FVE=0.994  dead=3,980  lr=5.51e-05     5,621 tok/s
+step 24,600/50,000  loss=0.0065  L0=128.0  FVE=0.991  dead=3,967  lr=5.45e-05     5,621 tok/s
+step 24,800/50,000  loss=0.0065  L0=128.0  FVE=0.993  dead=3,959  lr=5.39e-05     5,621 tok/s
+step 25,000/50,000  loss=0.0065  L0=128.0  FVE=0.989  dead=3,957  lr=5.33e-05     5,621 tok/s
+step 25,200/50,000  loss=0.0064  L0=128.0  FVE=0.995  dead=3,950  lr=5.27e-05     5,621 tok/s
+step 25,400/50,000  loss=0.0064  L0=128.0  FVE=0.983  dead=3,946  lr=5.21e-05     5,621 tok/s
+step 25,600/50,000  loss=0.0064  L0=128.0  FVE=0.985  dead=3,940  lr=5.14e-05     5,621 tok/s
+step 25,800/50,000  loss=0.0064  L0=128.0  FVE=0.980  dead=3,923  lr=5.08e-05     5,621 tok/s
+step 26,000/50,000  loss=0.0064  L0=128.0  FVE=0.989  dead=3,915  lr=5.02e-05     5,621 tok/s
+step 26,200/50,000  loss=0.0064  L0=128.0  FVE=0.985  dead=3,913  lr=4.96e-05     5,621 tok/s
+step 26,400/50,000  loss=0.0064  L0=128.0  FVE=0.993  dead=3,906  lr=4.90e-05     5,621 tok/s
+step 26,600/50,000  loss=0.0064  L0=128.0  FVE=0.861  dead=3,897  lr=4.84e-05     5,621 tok/s
+step 26,800/50,000  loss=0.0064  L0=128.0  FVE=0.992  dead=3,882  lr=4.78e-05     5,621 tok/s
+step 27,000/50,000  loss=0.0064  L0=128.0  FVE=0.988  dead=3,880  lr=4.72e-05     5,621 tok/s
+step 27,200/50,000  loss=0.0064  L0=128.0  FVE=0.990  dead=3,880  lr=4.66e-05     5,621 tok/s
+step 27,400/50,000  loss=0.0064  L0=128.0  FVE=0.984  dead=3,870  lr=4.60e-05     5,621 tok/s
+step 27,600/50,000  loss=0.0064  L0=128.0  FVE=0.992  dead=3,859  lr=4.54e-05     5,621 tok/s
+step 27,800/50,000  loss=0.0064  L0=128.0  FVE=0.991  dead=3,856  lr=4.48e-05     5,621 tok/s
+step 28,000/50,000  loss=0.0064  L0=128.0  FVE=0.994  dead=3,853  lr=4.43e-05     5,621 tok/s
+step 28,200/50,000  loss=0.0064  L0=128.0  FVE=0.991  dead=3,845  lr=4.37e-05     5,621 tok/s
+step 28,400/50,000  loss=0.0064  L0=128.0  FVE=0.988  dead=3,842  lr=4.31e-05     5,621 tok/s
+step 28,600/50,000  loss=0.0064  L0=128.0  FVE=0.989  dead=3,839  lr=4.25e-05     5,621 tok/s
+step 28,800/50,000  loss=0.0064  L0=128.0  FVE=0.991  dead=3,828  lr=4.19e-05     5,621 tok/s
+step 29,000/50,000  loss=0.0063  L0=128.0  FVE=0.992  dead=3,828  lr=4.13e-05     5,621 tok/s
+step 29,200/50,000  loss=0.0063  L0=128.0  FVE=0.987  dead=3,827  lr=4.07e-05     5,621 tok/s
+step 29,400/50,000  loss=0.0063  L0=128.0  FVE=0.994  dead=3,824  lr=4.01e-05     5,621 tok/s
+step 29,600/50,000  loss=0.0063  L0=128.0  FVE=0.977  dead=3,819  lr=3.96e-05     5,621 tok/s
+step 29,800/50,000  loss=0.0063  L0=128.0  FVE=0.990  dead=3,816  lr=3.90e-05     5,621 tok/s
+step 30,000/50,000  loss=0.0063  L0=128.0  FVE=0.986  dead=3,813  lr=3.84e-05     5,621 tok/s
+  [saved checkpoint_step_030000.npz]
+step 30,200/50,000  loss=0.0063  L0=128.0  FVE=0.990  dead=3,807  lr=3.78e-05     5,621 tok/s
+step 30,400/50,000  loss=0.0063  L0=128.0  FVE=0.988  dead=3,799  lr=3.73e-05     5,621 tok/s
+step 30,600/50,000  loss=0.0063  L0=128.0  FVE=0.991  dead=3,797  lr=3.67e-05     5,621 tok/s
+step 30,800/50,000  loss=0.0063  L0=128.0  FVE=0.992  dead=3,796  lr=3.61e-05     5,621 tok/s
+step 31,000/50,000  loss=0.0063  L0=128.0  FVE=0.987  dead=3,794  lr=3.56e-05     5,621 tok/s
+step 31,200/50,000  loss=0.0063  L0=128.0  FVE=0.991  dead=3,794  lr=3.50e-05     5,621 tok/s
+step 31,400/50,000  loss=0.0063  L0=128.0  FVE=0.989  dead=3,786  lr=3.44e-05     5,621 tok/s
+step 31,600/50,000  loss=0.0063  L0=128.0  FVE=0.986  dead=3,785  lr=3.39e-05     5,621 tok/s
+step 31,800/50,000  loss=0.0063  L0=128.0  FVE=0.981  dead=3,784  lr=3.33e-05     5,621 tok/s
+step 32,000/50,000  loss=0.0063  L0=128.0  FVE=0.986  dead=3,779  lr=3.28e-05     5,621 tok/s
+step 32,200/50,000  loss=0.0063  L0=128.0  FVE=0.986  dead=3,774  lr=3.22e-05     5,621 tok/s
+step 32,400/50,000  loss=0.0063  L0=128.0  FVE=0.990  dead=3,769  lr=3.17e-05     5,621 tok/s
+step 32,600/50,000  loss=0.0063  L0=128.0  FVE=0.989  dead=3,763  lr=3.11e-05     5,621 tok/s
+step 32,800/50,000  loss=0.0063  L0=128.0  FVE=0.864  dead=3,757  lr=3.06e-05     5,621 tok/s
+step 33,000/50,000  loss=0.0063  L0=128.0  FVE=0.989  dead=3,753  lr=3.01e-05     5,621 tok/s
+step 33,200/50,000  loss=0.0063  L0=128.0  FVE=0.989  dead=3,754  lr=2.95e-05     5,621 tok/s
+step 33,400/50,000  loss=0.0063  L0=128.0  FVE=0.991  dead=3,748  lr=2.90e-05     5,621 tok/s
+step 33,600/50,000  loss=0.0063  L0=128.0  FVE=0.987  dead=3,743  lr=2.85e-05     5,621 tok/s
+step 33,800/50,000  loss=0.0063  L0=128.0  FVE=0.992  dead=3,736  lr=2.80e-05     5,621 tok/s
+step 34,000/50,000  loss=0.0063  L0=128.0  FVE=0.981  dead=3,732  lr=2.75e-05     5,621 tok/s
+step 34,200/50,000  loss=0.0063  L0=128.0  FVE=0.987  dead=3,727  lr=2.69e-05     5,621 tok/s
+step 34,400/50,000  loss=0.0063  L0=128.0  FVE=0.977  dead=3,718  lr=2.64e-05     5,621 tok/s
+step 34,600/50,000  loss=0.0063  L0=128.0  FVE=0.978  dead=3,723  lr=2.59e-05     5,621 tok/s
+step 34,800/50,000  loss=0.0063  L0=128.0  FVE=0.993  dead=3,717  lr=2.54e-05     5,621 tok/s
+step 35,000/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,721  lr=2.49e-05     5,621 tok/s
+step 35,200/50,000  loss=0.0063  L0=128.0  FVE=0.989  dead=3,723  lr=2.45e-05     5,621 tok/s
+step 35,400/50,000  loss=0.0063  L0=128.0  FVE=0.963  dead=3,720  lr=2.40e-05     5,621 tok/s
+step 35,600/50,000  loss=0.0062  L0=128.0  FVE=0.986  dead=3,717  lr=2.35e-05     5,621 tok/s
+step 35,800/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,707  lr=2.30e-05     5,621 tok/s
+step 36,000/50,000  loss=0.0062  L0=128.0  FVE=0.990  dead=3,702  lr=2.26e-05     5,621 tok/s
+step 36,200/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,699  lr=2.21e-05     5,621 tok/s
+step 36,400/50,000  loss=0.0062  L0=128.0  FVE=0.981  dead=3,692  lr=2.16e-05     5,621 tok/s
+step 36,600/50,000  loss=0.0062  L0=128.0  FVE=0.964  dead=3,685  lr=2.12e-05     5,621 tok/s
+step 36,800/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,687  lr=2.07e-05     5,621 tok/s
+step 37,000/50,000  loss=0.0062  L0=128.0  FVE=0.965  dead=3,682  lr=2.03e-05     5,621 tok/s
+step 37,200/50,000  loss=0.0062  L0=128.0  FVE=0.986  dead=3,678  lr=1.98e-05     5,621 tok/s
+step 37,400/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,677  lr=1.94e-05     5,621 tok/s
+step 37,600/50,000  loss=0.0062  L0=128.0  FVE=0.965  dead=3,675  lr=1.90e-05     5,621 tok/s
+step 37,800/50,000  loss=0.0062  L0=128.0  FVE=0.986  dead=3,677  lr=1.85e-05     5,621 tok/s
+step 38,000/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,677  lr=1.81e-05     5,621 tok/s
+step 38,200/50,000  loss=0.0062  L0=128.0  FVE=0.990  dead=3,669  lr=1.77e-05     5,621 tok/s
+step 38,400/50,000  loss=0.0062  L0=128.0  FVE=0.993  dead=3,668  lr=1.73e-05     5,621 tok/s
+step 38,600/50,000  loss=0.0062  L0=128.0  FVE=0.984  dead=3,666  lr=1.69e-05     5,621 tok/s
+step 38,800/50,000  loss=0.0062  L0=128.0  FVE=0.993  dead=3,663  lr=1.65e-05     5,621 tok/s
+step 39,000/50,000  loss=0.0062  L0=128.0  FVE=0.994  dead=3,659  lr=1.61e-05     5,621 tok/s
+step 39,200/50,000  loss=0.0062  L0=128.0  FVE=0.988  dead=3,658  lr=1.57e-05     5,621 tok/s
+step 39,400/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,656  lr=1.54e-05     5,621 tok/s
+step 39,600/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,654  lr=1.50e-05     5,621 tok/s
+step 39,800/50,000  loss=0.0062  L0=128.0  FVE=0.986  dead=3,651  lr=1.46e-05     5,621 tok/s
+step 40,000/50,000  loss=0.0062  L0=128.0  FVE=0.987  dead=3,649  lr=1.43e-05     5,621 tok/s
+  [saved checkpoint_step_040000.npz]
+step 40,200/50,000  loss=0.0062  L0=128.0  FVE=0.988  dead=3,642  lr=1.39e-05     5,621 tok/s
+step 40,400/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,637  lr=1.35e-05     5,621 tok/s
+step 40,600/50,000  loss=0.0062  L0=128.0  FVE=0.988  dead=3,634  lr=1.32e-05     5,621 tok/s
+step 40,800/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,638  lr=1.29e-05     5,621 tok/s
+step 41,000/50,000  loss=0.0062  L0=128.0  FVE=0.981  dead=3,639  lr=1.25e-05     5,621 tok/s
+step 41,200/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,637  lr=1.22e-05     5,621 tok/s
+step 41,400/50,000  loss=0.0062  L0=128.0  FVE=0.990  dead=3,633  lr=1.19e-05     5,621 tok/s
+step 41,600/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,634  lr=1.16e-05     5,621 tok/s
+step 41,800/50,000  loss=0.0062  L0=128.0  FVE=0.980  dead=3,635  lr=1.13e-05     5,621 tok/s
+step 42,000/50,000  loss=0.0062  L0=128.0  FVE=0.987  dead=3,634  lr=1.10e-05     5,621 tok/s
+step 42,200/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,636  lr=1.07e-05     5,621 tok/s
+step 42,400/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,632  lr=1.04e-05     5,621 tok/s
+step 42,600/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,624  lr=1.01e-05     5,621 tok/s
+step 42,800/50,000  loss=0.0062  L0=128.0  FVE=0.993  dead=3,621  lr=9.87e-06     5,621 tok/s
+step 43,000/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,620  lr=9.61e-06     5,621 tok/s
+step 43,200/50,000  loss=0.0062  L0=128.0  FVE=0.981  dead=3,623  lr=9.36e-06     5,621 tok/s
+step 43,400/50,000  loss=0.0062  L0=128.0  FVE=0.979  dead=3,621  lr=9.11e-06     5,621 tok/s
+step 43,600/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,621  lr=8.87e-06     5,621 tok/s
+step 43,800/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,620  lr=8.63e-06     5,621 tok/s
+step 44,000/50,000  loss=0.0062  L0=128.0  FVE=0.986  dead=3,615  lr=8.40e-06     5,621 tok/s
+step 44,200/50,000  loss=0.0062  L0=128.0  FVE=0.978  dead=3,612  lr=8.18e-06     5,621 tok/s
+step 44,400/50,000  loss=0.0062  L0=128.0  FVE=0.985  dead=3,618  lr=7.97e-06     5,621 tok/s
+step 44,600/50,000  loss=0.0062  L0=128.0  FVE=0.990  dead=3,615  lr=7.76e-06     5,621 tok/s
+step 44,800/50,000  loss=0.0062  L0=128.0  FVE=0.992  dead=3,615  lr=7.56e-06     5,621 tok/s
+step 45,000/50,000  loss=0.0062  L0=128.0  FVE=0.990  dead=3,616  lr=7.37e-06     5,621 tok/s
+step 45,200/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,611  lr=7.19e-06     5,621 tok/s
+step 45,400/50,000  loss=0.0062  L0=128.0  FVE=0.987  dead=3,611  lr=7.01e-06     5,621 tok/s
+step 45,600/50,000  loss=0.0062  L0=128.0  FVE=0.993  dead=3,610  lr=6.84e-06     5,621 tok/s
+step 45,800/50,000  loss=0.0062  L0=128.0  FVE=0.993  dead=3,609  lr=6.68e-06     5,621 tok/s
+step 46,000/50,000  loss=0.0062  L0=128.0  FVE=0.992  dead=3,601  lr=6.52e-06     5,621 tok/s
+step 46,200/50,000  loss=0.0062  L0=128.0  FVE=0.993  dead=3,598  lr=6.38e-06     5,621 tok/s
+step 46,400/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,596  lr=6.24e-06     5,621 tok/s
+step 46,600/50,000  loss=0.0062  L0=128.0  FVE=0.981  dead=3,597  lr=6.10e-06     5,621 tok/s
+step 46,800/50,000  loss=0.0062  L0=128.0  FVE=0.987  dead=3,592  lr=5.98e-06     5,621 tok/s
+step 47,000/50,000  loss=0.0062  L0=128.0  FVE=0.978  dead=3,590  lr=5.86e-06     5,621 tok/s
+step 47,200/50,000  loss=0.0062  L0=128.0  FVE=0.968  dead=3,587  lr=5.75e-06     5,621 tok/s
+step 47,400/50,000  loss=0.0062  L0=128.0  FVE=0.985  dead=3,587  lr=5.65e-06     5,621 tok/s
+step 47,600/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,589  lr=5.55e-06     5,621 tok/s
+step 47,800/50,000  loss=0.0062  L0=128.0  FVE=0.989  dead=3,589  lr=5.46e-06     5,621 tok/s
+step 48,000/50,000  loss=0.0062  L0=128.0  FVE=0.986  dead=3,587  lr=5.38e-06     5,621 tok/s
+step 48,200/50,000  loss=0.0062  L0=128.0  FVE=0.990  dead=3,590  lr=5.31e-06     5,621 tok/s
+step 48,400/50,000  loss=0.0062  L0=128.0  FVE=0.980  dead=3,593  lr=5.24e-06     5,621 tok/s
+step 48,600/50,000  loss=0.0062  L0=128.0  FVE=0.987  dead=3,592  lr=5.19e-06     5,621 tok/s
+step 48,800/50,000  loss=0.0062  L0=128.0  FVE=0.982  dead=3,591  lr=5.14e-06     5,621 tok/s
+step 49,000/50,000  loss=0.0062  L0=128.0  FVE=0.986  dead=3,590  lr=5.10e-06     5,621 tok/s
+step 49,200/50,000  loss=0.0062  L0=128.0  FVE=0.991  dead=3,592  lr=5.06e-06     5,621 tok/s
+step 49,400/50,000  loss=0.0062  L0=128.0  FVE=0.978  dead=3,594  lr=5.03e-06     5,621 tok/s
+step 49,600/50,000  loss=0.0062  L0=128.0  FVE=0.982  dead=3,595  lr=5.02e-06     5,621 tok/s
+step 49,800/50,000  loss=0.0062  L0=128.0  FVE=0.985  dead=3,595  lr=5.00e-06     5,621 tok/s
+step 50,000/50,000  loss=0.0062  L0=128.0  FVE=0.995  dead=3,600  lr=5.00e-06     5,621 tok/s
+  [saved checkpoint_step_050000.npz]
+  [saved checkpoint_final.npz]
+
+Done — 50,000 steps in 303.6 min
+Output : data/sae-runs/llama-3b-layer14-seed123

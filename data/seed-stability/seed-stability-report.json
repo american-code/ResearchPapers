@@ -1,0 +1,106 @@
+{
+ "experiment": "seed-stability control",
+ "question": "what does the cross-model matching procedure return when feature sharing is guaranteed by construction?",
+ "source_model": "Llama-3.2-3B layer 14",
+ "activations": "/Users/lab-02/ResearchPapers/data/activations/llama-3b-layer16",
+ "parameters": {
+  "eval_tokens": 500000,
+  "n_chunks": 1000,
+  "topk": 128,
+  "min_active_chunks": 50,
+  "null_permutations": 20,
+  "null_percentile": 99.0,
+  "fixed_tau": 0.8,
+  "rng_seed": 42
+ },
+ "arms": {
+  "seed123": {
+   "checkpoint": "/Users/lab-02/ResearchPapers/data/sae-runs/llama-3b-layer14-seed123/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval": 3206,
+   "low_support": 899,
+   "matchable": 12279
+  },
+  "seed456": {
+   "checkpoint": "/Users/lab-02/ResearchPapers/data/sae-runs/llama-3b-layer14-seed456/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval": 3274,
+   "low_support": 942,
+   "matchable": 12168
+  },
+  "seed42": {
+   "checkpoint": "/Users/lab-02/ResearchPapers/data/sae-runs/llama-3b-layer14/checkpoint_final.npz",
+   "dict_size": 16384,
+   "dead_on_eval": 3344,
+   "low_support": 913,
+   "matchable": 12127
+  }
+ },
+ "metrics": {
+  "cosine": {
+   "seed123_vs_seed456": {
+    "null_mean": 0.7584,
+    "null_p99_tau": 0.9846,
+    "null_matches_per_replicate": 893.5,
+    "expected_false_positives": 8.94,
+    "matches_calibrated": 1087,
+    "matches_at_fixed_0.80": 5947,
+    "enrichment_over_null": 121.6,
+    "pct_of_matchable": 8.93
+   },
+   "seed42_vs_seed123": {
+    "null_mean": 0.7539,
+    "null_p99_tau": 0.9844,
+    "null_matches_per_replicate": 901.9,
+    "expected_false_positives": 9.02,
+    "matches_calibrated": 1092,
+    "matches_at_fixed_0.80": 5902,
+    "enrichment_over_null": 121.1,
+    "pct_of_matchable": 9.0
+   },
+   "seed42_vs_seed456": {
+    "null_mean": 0.7486,
+    "null_p99_tau": 0.9827,
+    "null_matches_per_replicate": 894.2,
+    "expected_false_positives": 8.94,
+    "matches_calibrated": 1211,
+    "matches_at_fixed_0.80": 5937,
+    "enrichment_over_null": 135.4,
+    "pct_of_matchable": 9.99
+   }
+  },
+  "pearson": {
+   "seed123_vs_seed456": {
+    "null_mean": 0.7568,
+    "null_p99_tau": 0.983,
+    "null_matches_per_replicate": 890.6,
+    "expected_false_positives": 8.91,
+    "matches_calibrated": 965,
+    "matches_at_fixed_0.80": 5492,
+    "enrichment_over_null": 108.3,
+    "pct_of_matchable": 7.93
+   },
+   "seed42_vs_seed123": {
+    "null_mean": 0.7533,
+    "null_p99_tau": 0.9827,
+    "null_matches_per_replicate": 896.2,
+    "expected_false_positives": 8.96,
+    "matches_calibrated": 978,
+    "matches_at_fixed_0.80": 5439,
+    "enrichment_over_null": 109.1,
+    "pct_of_matchable": 8.06
+   },
+   "seed42_vs_seed456": {
+    "null_mean": 0.7476,
+    "null_p99_tau": 0.9825,
+    "null_matches_per_replicate": 891.3,
+    "expected_false_positives": 8.91,
+    "matches_calibrated": 1002,
+    "matches_at_fixed_0.80": 5479,
+    "enrichment_over_null": 112.4,
+    "pct_of_matchable": 8.26
+   }
+  }
+ },
+ "elapsed_s": 360.3
+}
