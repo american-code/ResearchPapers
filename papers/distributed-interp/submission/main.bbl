@@ -1,0 +1,196 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bricken et~al.(2023)Bricken, Templeton, Batson, Chen, Jermyn, Conerly,
+  Turner, Anil, Denison, Askell, Lasenby, Wu, Kravec, Schiefer, Maxwell,
+  Joseph, Hatfield-Dodds, Tamkin, Nguyen, McLean, Burke, Hume, Carter,
+  Henighan, and Olah]{bricken2023monosemanticity}
+Trenton Bricken, Adly Templeton, Joshua Batson, Brian Chen, Adam Jermyn, Tom
+  Conerly, Nick Turner, Cem Anil, Carson Denison, Amanda Askell, Robert
+  Lasenby, Yifan Wu, Shauna Kravec, Nicholas Schiefer, Tim Maxwell, Nicholas
+  Joseph, Zac Hatfield-Dodds, Alex Tamkin, Karina Nguyen, Brayden McLean,
+  Josiah~E. Burke, Tristan Hume, Shan Carter, Tom Henighan, and Christopher
+  Olah.
+\newblock Towards monosemanticity: Decomposing language models with dictionary
+  learning.
+\newblock \emph{Transformer Circuits Thread}, 2023.
+\newblock URL
+  \url{https://transformer-circuits.pub/2023/monosemantic-features/index.html}.
+
+\bibitem[Burns et~al.(2022)Burns, Ye, Klein, and
+  Steinhardt]{burns2022discovering}
+Collin Burns, Haotian Ye, Dan Klein, and Jacob Steinhardt.
+\newblock Discovering latent knowledge in language models without supervision.
+\newblock \emph{arXiv}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2212.03827}.
+
+\bibitem[Cunningham et~al.(2023)Cunningham, Ewart, Riggs, Huben, and
+  Sharkey]{cunningham2023sparse}
+Hoagy Cunningham, Aidan Ewart, Logan Riggs, Robert Huben, and Lee Sharkey.
+\newblock Sparse autoencoders find highly interpretable features in language
+  models.
+\newblock \emph{arXiv}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2309.08600}.
+
+\bibitem[Elhage et~al.(2022)Elhage, Hume, Olsson, Schiefer, Henighan, Kravec,
+  Hatfield-Dodds, Lasenby, Drain, Chen, Grosse, McCandlish, Kaplan, Amodei,
+  Wattenberg, and Olah]{elhage2022superposition}
+Nelson Elhage, Tristan Hume, Catherine Olsson, Nicholas Schiefer, Tom Henighan,
+  Shauna Kravec, Zac Hatfield-Dodds, Robert Lasenby, Dawn Drain, Carol Chen,
+  Roger Grosse, Sam McCandlish, Jared Kaplan, Dario Amodei, Martin Wattenberg,
+  and Christopher Olah.
+\newblock Toy models of superposition.
+\newblock \emph{Transformer Circuits Thread}, 2022.
+\newblock URL \url{https://transformer-circuits.pub/2022/toy_model/index.html}.
+
+\bibitem[Gao et~al.(2024)Gao, {la Tour}, Tillman, Goh, Troll, Radford,
+  Sutskever, Leike, and Wu]{gao2024scaling}
+Leo Gao, Tom~Dupr\'{e} {la Tour}, Henk Tillman, Gabriel Goh, Rajan Troll, Alec
+  Radford, Ilya Sutskever, Jan Leike, and Jeffrey Wu.
+\newblock Scaling and evaluating sparse autoencoders.
+\newblock \emph{arXiv}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.04093}.
+
+\bibitem[Huang et~al.(2019)Huang, Cheng, Bapna, Firat, Chen, Chen, Lee, Ngiam,
+  Le, Wu, and Chen]{huang2019gpipe}
+Yanping Huang, Youlong Cheng, Ankur Bapna, Orhan Firat, Mia~Xu Chen, Dehao
+  Chen, HyoukJoong Lee, Jiquan Ngiam, Quoc~V. Le, Yonghui Wu, and Zhifeng Chen.
+\newblock {GPipe}: Efficient training of giant neural networks using pipeline
+  parallelism.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2019.
+
+\bibitem[Huh et~al.(2024)Huh, Cheung, Wang, and Isola]{huh2024platonic}
+Minyoung Huh, Brian Cheung, Tongzhou Wang, and Phillip Isola.
+\newblock The platonic representation hypothesis.
+\newblock \emph{arXiv}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2405.07987}.
+
+\bibitem[Ji et~al.(2023)Ji, Liu, Dai, Pan, Zhang, Bian, Chen, Sun, Wang, and
+  Yang]{ji2023beavertails}
+Jiaming Ji, Mickel Liu, Josef Dai, Xuehai Pan, Chi Zhang, Ce~Bian, Boyuan Chen,
+  Ruiyang Sun, Yizhou Wang, and Yaodong Yang.
+\newblock {BeaverTails}: Towards improved safety alignment of {LLM} via a
+  human-preference dataset.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, volume~36, 2023.
+\newblock URL \url{https://arxiv.org/abs/2307.04657}.
+\newblock PKU-SafeRLHF / PKU-Alignment.
+
+\bibitem[Kornblith et~al.(2019)Kornblith, Norouzi, Lee, and
+  Hinton]{kornblith2019similarity}
+Simon Kornblith, Mohammad Norouzi, Honglak Lee, and Geoffrey Hinton.
+\newblock Similarity of neural network representations revisited.
+\newblock In \emph{Proceedings of the International Conference on Machine
+  Learning (ICML)}, 2019.
+
+\bibitem[Kriegeskorte et~al.(2008)Kriegeskorte, Mur, and
+  Bandettini]{kriegeskorte2008rsa}
+Nikolaus Kriegeskorte, Marieke Mur, and Peter Bandettini.
+\newblock Representational similarity analysis --- connecting the branches of
+  systems neuroscience.
+\newblock \emph{Frontiers in Systems Neuroscience}, 2:\penalty0 4, 2008.
+\newblock \doi{10.3389/neuro.06.004.2008}.
+
+\bibitem[Lieberum et~al.(2024)Lieberum, Rajamanoharan, Conmy, Smith, Sonnerat,
+  Kram{\'a}r, Nanda, Sezener, Balle, and Shah]{lieberum2024gemmascope}
+Tom Lieberum, Senthooran Rajamanoharan, Arthur Conmy, Lewis Smith, Nicolas
+  Sonnerat, Vikrant Kram{\'a}r, Neel Nanda, Caglar Sezener, Borja Balle, and
+  Rohin Shah.
+\newblock {Gemma Scope}: Open sparse autoencoders everywhere all at once on
+  {Gemma 2}.
+\newblock \emph{arXiv}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2408.05147}.
+
+\bibitem[Lindsey et~al.(2025)Lindsey, Gould, Templeton, McDougall, Batson,
+  Jermyn, Thomas, Denison, Askell, Durbin, Bricken, Marcus, Lasenby, Conerly,
+  Henighan, Turner, Chen, Pearce, McDonald, Tamkin, Guha, Jones, and
+  Olah]{lindsey2025biology}
+Jack Lindsey, Amanda Gould, Adly Templeton, Callum McDougall, Joshua Batson,
+  Adam Jermyn, Neil Thomas, Carson Denison, Amanda Askell, Anna Durbin, Trenton
+  Bricken, Jason Marcus, Robert Lasenby, Tom Conerly, Tom Henighan, Nick
+  Turner, Brian Chen, David Pearce, Joshua McDonald, Alex Tamkin, Aryan Guha,
+  Aaron Jones, and Christopher Olah.
+\newblock On the biology of a large language model.
+\newblock \emph{Transformer Circuits Thread}, 2025.
+\newblock URL
+  \url{https://transformer-circuits.pub/2025/attribution-graphs/biology.html}.
+
+\bibitem[Melton(2026)]{melton2026saecomparison}
+J.~Melton.
+\newblock {TopK} sparse autoencoders across three model architectures:
+  Dictionary collapse, dense-feature degeneracy, and the limits of
+  activation-pattern feature matching, 2026.
+\newblock URL \url{https://doi.org/10.5281/zenodo.21906712}.
+\newblock Companion paper. Reports the cross-architecture feature-matching
+  analysis whose activations were collected with the system described here,
+  including the permutation-null calibration, the planted-signal power
+  analysis, and the same-model seed control that bounds the method's ceiling.
+  The DOI is a Zenodo concept DOI and always resolves to the current version.
+
+\bibitem[Meng et~al.(2022)Meng, Bau, Andonian, and Belinkov]{meng2022rome}
+Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov.
+\newblock Locating and editing factual associations in {GPT}.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2022.
+
+\bibitem[Narayanan et~al.(2019)Narayanan, Harlap, Phanishayee, Seshadri,
+  Devanur, Ganger, Gibbons, and Zaharia]{narayanan2019pipedream}
+Deepak Narayanan, Aaron Harlap, Amar Phanishayee, Vivek Seshadri, Nikhil~R.
+  Devanur, Gregory~R. Ganger, Phillip~B. Gibbons, and Matei Zaharia.
+\newblock {PipeDream}: Generalized pipeline parallelism for {DNN} training.
+\newblock In \emph{Proceedings of the ACM Symposium on Operating Systems
+  Principles (SOSP)}, 2019.
+
+\bibitem[Olsson et~al.(2022)Olsson, Elhage, Nanda, Joseph, DasSarma, Henighan,
+  Mann, Askell, Bai, Chen, Conerly, Drain, Ganguli, Hatfield-Dodds, Hernandez,
+  Johnston, Jones, Kernion, Lovitt, Ndousse, Amodei, Brown, Clark, Kaplan,
+  McCandlish, and Olah]{olsson2022induction}
+Catherine Olsson, Nelson Elhage, Neel Nanda, Nicholas Joseph, Nova DasSarma,
+  Tom Henighan, Ben Mann, Amanda Askell, Yuntao Bai, Anna Chen, Tom Conerly,
+  Dawn Drain, Deep Ganguli, Zac Hatfield-Dodds, Danny Hernandez, Scott
+  Johnston, Andy Jones, Jackson Kernion, Liane Lovitt, Kamal Ndousse, Dario
+  Amodei, Tom Brown, Jack Clark, Jared Kaplan, Sam McCandlish, and Christopher
+  Olah.
+\newblock In-context learning and induction heads.
+\newblock \emph{Transformer Circuits Thread}, 2022.
+\newblock URL
+  \url{https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html}.
+
+\bibitem[Templeton et~al.(2024)Templeton, Conerly, Marcus, Lindsey, Bricken,
+  Chen, Pearce, Citro, Scheirer, Jones, Hyun, Tamkin, Bau, Chen, and
+  Olah]{templeton2024scaling}
+Adly Templeton, Tom Conerly, Jonathan Marcus, Jack Lindsey, Trenton Bricken,
+  Brian Chen, Adam Pearce, Craig Citro, Emmanuel Scheirer, Andy Jones, Andy
+  Hyun, Alex Tamkin, David Bau, Jack Chen, and Christopher Olah.
+\newblock Scaling monosemanticity: Extracting interpretable features from
+  {Claude 3 Sonnet}.
+\newblock \emph{Transformer Circuits Thread}, 2024.
+\newblock URL
+  \url{https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html}.
+
+\bibitem[Wang et~al.(2022)Wang, Variengien, Conmy, Shlegeris, and
+  Steinhardt]{wang2022ioi}
+Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob
+  Steinhardt.
+\newblock Interpretability in the wild: A circuit for indirect object
+  identification in {GPT-2} small.
+\newblock \emph{arXiv}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2211.00593}.
+
+\bibitem[Zou et~al.(2023)Zou, Phan, Chen, Campbell, Guo, Ren, Pan, Yin,
+  Mazeika, Dombrowski, Goel, Li, Byun, Wang, Mallen, Basart, Koyejo, Song,
+  Fredrikson, Kolter, and Hendrycks]{zou2023repeng}
+Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren,
+  Alexander Pan, Xuwang Yin, Mantas Mazeika, Ann-Kathrin Dombrowski, Shashwat
+  Goel, Nathaniel Li, Michael~J. Byun, Zifan Wang, Alex Mallen, Steven Basart,
+  Sanmi Koyejo, Dawn Song, Matt Fredrikson, J.~Zico Kolter, and Dan Hendrycks.
+\newblock Representation engineering: A top-down approach to {AI} transparency.
+\newblock \emph{arXiv}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.01405}.
+
+\end{thebibliography}

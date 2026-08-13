@@ -64,9 +64,11 @@ J.~Melton.
 \newblock Distributed mechanistic interpretability at scale: Activation
   streaming, split-layer inference, and distributed sparse autoencoder
   training, 2026.
+\newblock URL \url{https://doi.org/10.5281/zenodo.21906710}.
 \newblock Companion paper. Describes the two-node activation-streaming system
   and the distributed SAE trainer that produced the checkpoints and
-  fingerprints analysed here.
+  fingerprints analysed here. The DOI is a Zenodo concept DOI and always
+  resolves to the current version.
 
 \bibitem[Rajamanoharan et~al.(2024{\natexlab{a}})Rajamanoharan, Conmy, Smith,
   Lieberum, Varma, Kram{\'a}r, Shah, and Nanda]{rajamanoharan2024gated}
