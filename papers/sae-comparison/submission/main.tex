@@ -956,7 +956,11 @@ This paper is archived at \href{https://doi.org/10.5281/zenodo.21906712}{\texttt
 
 All SAE training code, activation collection scripts, training logs, checkpoints, and
 analysis scripts are available at
-\url{https://github.com/american-code/sae-crossarch}. All runs used seed 42.
+\url{https://github.com/american-code/ResearchPapers}, under \texttt{data/sae-runs/}
+(training logs and configurations for every run), \texttt{data/sae-analysis/}
+(the matching pipeline and its outputs), \texttt{data/seed-stability/} (the control
+of \S\ref{sec:seedstability}) and \texttt{data/power-analysis/} (the planted-signal
+sweep). The three converged runs used seed 42.
 Training was conducted on Apple Silicon using the MLX framework. The corrected matching
 analysis is \texttt{data/sae-analysis/cross\_arch\_matching\_v2.py} and the superseded
 version is retained as \texttt{cross\_arch\_matching.py} for comparison; reconstruction

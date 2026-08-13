@@ -1,0 +1,243 @@
+\begin{thebibliography}{26}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Apple}(2025{\natexlab{a}})]{applebenchmarks}
+{Apple}.
+\newblock {mlx-lm} benchmarks, 2025{\natexlab{a}}.
+\newblock URL
+  \url{https://github.com/ml-explore/mlx-lm/blob/main/mlx_lm/BENCHMARKS.md}.
+\newblock The only first-party bf16-vs-quantized accuracy comparison located:
+  two models, MMLU Pro, $-$3.33 points bf16$\to$q4 for a 4B model.
+
+\bibitem[{Apple}(2025{\natexlab{b}})]{applelearnedquants}
+{Apple}.
+\newblock {mlx-lm} learned quantization, 2025{\natexlab{b}}.
+\newblock URL
+  \url{https://github.com/ml-explore/mlx-lm/blob/main/mlx_lm/LEARNED_QUANTS.md}.
+\newblock AWQ, GPTQ, DWQ and dynamic-quant CLIs; available only in mlx-lm
+  $\geq$ 0.30.
+
+\bibitem[{Apple}(2025{\natexlab{c}})]{applequantize}
+{Apple}.
+\newblock \texttt{mlx.core.quantize} documentation, 2025{\natexlab{c}}.
+\newblock URL
+  \url{https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.quantize.html}.
+\newblock Affine round-to-nearest, per-group scale and bias.
+
+\bibitem[Dai et~al.(2025)]{dai2025mhpp}
+Jianbo Dai et~al.
+\newblock {MHPP}: Exploring the capabilities and limitations of language models
+  beyond basic code generation.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2405.11430}.
+\newblock GPT-4o 91.0\% $\to$ 51.1\%.
+
+\bibitem[{EvalPlus contributors}(2024)]{evalplusrepo}
+{EvalPlus contributors}.
+\newblock {EvalPlus} project repository, 2024.
+\newblock URL \url{https://github.com/evalplus/evalplus}.
+\newblock Dataset versions and the MBPP+ task-count revision (399 $\to$ 378).
+
+\bibitem[Fang et~al.(2025)Fang, Ding, Mastropaolo, and Xu]{fang2025smaller}
+Sen Fang, Weiyuan Ding, Antonio Mastropaolo, and Bowen Xu.
+\newblock Smaller = weaker? benchmarking robustness of quantized {LLMs} in code
+  generation.
+\newblock \emph{arXiv preprint arXiv:2506.22776}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.22776}.
+\newblock Closest model range to this study; 4-bit costs 1.19\% of clean
+  performance on average.
+
+\bibitem[Frantar et~al.(2023)Frantar, Ashkboos, Hoefler, and
+  Alistarh]{frantar2023gptq}
+Elias Frantar, Saleh Ashkboos, Torsten Hoefler, and Dan Alistarh.
+\newblock {GPTQ}: Accurate post-training quantization for generative
+  pre-trained transformers.
+\newblock \emph{arXiv preprint arXiv:2210.17323}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2210.17323}.
+
+\bibitem[Giagnorio et~al.(2025)Giagnorio, Mastropaolo, Afrin, Di~Penta, and
+  Bavota]{giagnorio2025ptq}
+Alessandro Giagnorio, Antonio Mastropaolo, Saima Afrin, Massimiliano Di~Penta,
+  and Gabriele Bavota.
+\newblock Evaluating the impact of post-training quantization on the
+  performance of code-generation {LLMs}.
+\newblock \emph{Empirical Software Engineering}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2503.07103}.
+\newblock AQLM; CodeLlama-7B MultiPL-E Python 29.8 (FP16) $\to$ 29.1 (4-bit);
+  degradation cliff at 3 bits.
+
+\bibitem[{IBM}(2024)]{ibm2024granite}
+{IBM}.
+\newblock Granite code models: A family of open foundation models for code
+  intelligence.
+\newblock \emph{arXiv preprint arXiv:2405.04324}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2405.04324}.
+\newblock Reports HumanEvalSynthesize rather than vanilla HumanEval.
+
+\bibitem[Jain et~al.(2025)Jain, Han, Gu, Li, Yan, Zhang, Wang, Solar-Lezama,
+  Sen, and Stoica]{jain2025livecodebench}
+Naman Jain, King Han, Alex Gu, Wen-Ding Li, Fanjia Yan, Tianjun Zhang, Sida
+  Wang, Armando Solar-Lezama, Koushik Sen, and Ion Stoica.
+\newblock {LiveCodeBench}: Holistic and contamination-free evaluation of large
+  language models for code.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2403.07974}.
+\newblock Contamination-free time-windowed evaluation; the 59.8\% HumanEval+ vs
+  26.3\% LCB-Easy gap for a fine-tuned sub-2B model.
+
+\bibitem[Jin et~al.(2024)]{jin2024comprehensive}
+Renren Jin et~al.
+\newblock A comprehensive evaluation of quantization strategies for large
+  language models.
+\newblock \emph{arXiv preprint arXiv:2402.16775}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2402.16775}.
+\newblock At equal memory, larger-model-lower-bit outperforms
+  smaller-model-higher-bit.
+
+\bibitem[Kurti{\'c} et~al.(2025)Kurti{\'c}, Marques, Pandit, Kurtz, and
+  Alistarh]{kurtic2025bf16}
+Eldar Kurti{\'c}, Alexandre Marques, Shubhra Pandit, Mark Kurtz, and Dan
+  Alistarh.
+\newblock ``give me {BF16} or give me death''? accuracy-performance trade-offs
+  in {LLM} quantization.
+\newblock In \emph{Proceedings of the Association for Computational Linguistics
+  (ACL)}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2411.02355}.
+\newblock More than 500,000 evaluations; W4A16 recovers 98.9\% of BF16
+  HumanEval.
+
+\bibitem[Lin et~al.(2024)Lin, Tang, Tang, Yang, Dang, and Han]{lin2024awq}
+Ji~Lin, Jiaming Tang, Haotian Tang, Shang Yang, Xingyu Dang, and Song Han.
+\newblock {AWQ}: Activation-aware weight quantization for {LLM} compression and
+  acceleration.
+\newblock \emph{arXiv preprint arXiv:2306.00978}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2306.00978}.
+\newblock The method underlying our calibrated arm.
+
+\bibitem[Liu et~al.(2023)Liu, Xia, Wang, and Zhang]{liu2023evalplus}
+Jiawei Liu, Chunqiu~Steven Xia, Yuyao Wang, and Lingming Zhang.
+\newblock Is your code generated by {ChatGPT} really correct? rigorous
+  evaluation of large language models for code generation.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2305.01210}.
+\newblock EvalPlus; 80$\times$/35$\times$ test augmentation, 19.3--28.9\%
+  pass@k reduction, 18 defective HumanEval reference solutions. Used as this
+  study's harness.
+
+\bibitem[Matton et~al.(2024)Matton, Sherborne, Aumiller,
+  et~al.]{matton2024leakage}
+Alexandre Matton, Tom Sherborne, Dennis Aumiller, et~al.
+\newblock On leakage of code generation evaluation datasets.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2407.07565}.
+\newblock 12.2\% of HumanEval in The Pile, 18.9\% in The Stack; leak-free LBPP
+  scores up to 43\% lower.
+
+\bibitem[{Microsoft}(2025)]{microsoft2025phi4mini}
+{Microsoft}.
+\newblock {Phi-4-Mini} technical report.
+\newblock \emph{arXiv preprint arXiv:2503.01743}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2503.01743}.
+\newblock HumanEval 0-shot / MBPP 3-shot via an internal pipeline.
+
+\bibitem[Ouyang et~al.(2025)Ouyang, Zhang, Harman, and
+  Wang]{ouyang2025nondeterminism}
+Shuyin Ouyang, Jie~M. Zhang, Mark Harman, and Meng Wang.
+\newblock An empirical study of the non-determinism of {ChatGPT} in code
+  generation.
+\newblock \emph{ACM Transactions on Software Engineering and Methodology
+  (TOSEM)}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2308.02828}.
+\newblock 47.56\% of HumanEval tasks non-identical at temperature 0.
+
+\bibitem[Ouyang et~al.(2024)]{ouyang2024lowbit}
+Xu~Ouyang et~al.
+\newblock Low-bit quantization favors undertrained {LLMs}: Scaling laws for
+  quantized {LLMs} with 100t training tokens.
+\newblock \emph{arXiv preprint arXiv:2411.17691}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2411.17691}.
+\newblock Degradation grows with training tokens and shrinks with model size.
+
+\bibitem[{Qwen Team}(2024)]{qwen2024coder}
+{Qwen Team}.
+\newblock {Qwen2.5-Coder} technical report.
+\newblock \emph{arXiv preprint arXiv:2409.12186}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2409.12186}.
+\newblock Published HumanEval/MBPP figures used as the sanity check (Table 16,
+  EvalPlus, 0-shot).
+
+\bibitem[Riddell et~al.(2024)Riddell, Ni, and Cohan]{riddell2024contamination}
+Martin Riddell, Ansong Ni, and Arman Cohan.
+\newblock Quantifying contamination in evaluating code generation capabilities
+  of language models.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics (ACL)}, pages 14116--14137, 2024.
+\newblock URL \url{https://aclanthology.org/2024.acl-long.761/}.
+\newblock 50.8\% (MBPP) and 63.4\% (HumanEval) semantic overlap with Stack
+  samples.
+
+\bibitem[Sclar et~al.(2024)Sclar, Choi, Tsvetkov, and
+  Suhr]{sclar2024formatspread}
+Melanie Sclar, Yejin Choi, Yulia Tsvetkov, and Alane Suhr.
+\newblock Quantifying language models' sensitivity to spurious features in
+  prompt design.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2310.11324}.
+\newblock FormatSpread; up to 76 accuracy points of spread from formatting
+  alone.
+
+\bibitem[Shi and Ding(2025)]{shi2025systematic}
+Tianyao Shi and Yi~Ding.
+\newblock Systematic characterization of {LLM} quantization: Performance,
+  energy, and quality.
+\newblock \emph{arXiv preprint arXiv:2508.16712}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2508.16712}.
+\newblock The dissenting result; large coding degradation, dominated by
+  activation quantization rather than the weight-only setting studied here.
+
+\bibitem[Szalontai et~al.(2025)Szalontai, M{\'a}rton, Pint{\'e}r, and
+  Gregorics]{szalontai2025repro}
+Bal{\'a}zs Szalontai, Bal{\'a}zs M{\'a}rton, Bal{\'a}zs Pint{\'e}r, and Tibor
+  Gregorics.
+\newblock Investigating reproducibility challenges in {LLM} bugfixing on the
+  {HumanEvalFix} benchmark.
+\newblock \emph{Software (MDPI)}, 4\penalty0 (3):\penalty0 17, 2025.
+\newblock URL \url{https://doi.org/10.3390/software4030017}.
+\newblock 12 of 35 published results reproduced; causes include
+  benchmark-variant confusion and unspecified precision.
+
+\bibitem[Xia et~al.(2024)Xia, Deng, and Zhang]{xia2024evoeval}
+Chunqiu~Steven Xia, Yinlin Deng, and Lingming Zhang.
+\newblock Top leaderboard ranking = top coding proficiency, always? {EvoEval}.
+\newblock \emph{arXiv preprint arXiv:2403.19114}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2403.19114}.
+\newblock 39.4\% average drop across 51 LLMs on evolved problems.
+
+\bibitem[Yadav and Singh(2024)]{yadav2024pythonsaga}
+Ankit Yadav and Mayank Singh.
+\newblock {PythonSaga}: Redefining the benchmark to evaluate code generating
+  {LLMs}.
+\newblock \emph{arXiv preprint arXiv:2401.03855}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2401.03855}.
+\newblock Difficulty taxonomy; 84.8\% of HumanEval and 89.6\% of MBPP in the
+  lowest tier.
+
+\bibitem[Yang et~al.(2023)Yang, Chiang, Zheng, Gonzalez, and
+  Stoica]{yang2023rephrased}
+Shuo Yang, Wei-Lin Chiang, Lianmin Zheng, Joseph~E. Gonzalez, and Ion Stoica.
+\newblock Rethinking benchmark and contamination for language models with
+  rephrased samples.
+\newblock \emph{arXiv preprint arXiv:2311.04850}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2311.04850}.
+\newblock $n$-gram decontamination defeated by paraphrase.
+
+\end{thebibliography}
