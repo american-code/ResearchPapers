@@ -1,0 +1,69 @@
+{
+ "experiment": "quantization x interpretability",
+ "question": "do SAE features survive 4-bit quantization of the source model?",
+ "source_model": "Llama-3.2-3B layer 14; 4-bit arm converted locally with mlx_lm.convert --q-bits 4",
+ "reference_points": {
+  "same_model_different_seed_pct": 8.0,
+  "cross_architecture_pct": [
+   0.18,
+   0.33
+  ]
+ },
+ "parameters": {
+  "eval_tokens": 500000,
+  "n_chunks": 1000,
+  "topk": 128,
+  "min_active_chunks": 50,
+  "null_permutations": 20,
+  "null_percentile": 99.0,
+  "fixed_tau": 0.8,
+  "rng_seed": 42
+ },
+ "arms": {
+  "bf16": {
+   "checkpoint": "/Users/lab-02/ResearchPapers/data/sae-runs/llama3b-l14-bf16-sae/checkpoint_final.npz",
+   "activations": "/Users/lab-02/ResearchPapers/data/activations/llama3b-l14-bf16",
+   "dict_size": 16384,
+   "dead_on_eval": 3385,
+   "low_support": 960,
+   "matchable": 12039
+  },
+  "q4": {
+   "checkpoint": "/Users/lab-02/ResearchPapers/data/sae-runs/llama3b-l14-q4-sae/checkpoint_final.npz",
+   "activations": "/Users/lab-02/ResearchPapers/data/activations/llama3b-l14-q4",
+   "dict_size": 16384,
+   "dead_on_eval": 3372,
+   "low_support": 1082,
+   "matchable": 11930
+  }
+ },
+ "metrics": {
+  "cosine": {
+   "bf16_vs_q4": {
+    "null_mean": 0.745,
+    "null_p99_tau": 0.9813,
+    "null_matches_per_replicate": 888.1,
+    "expected_false_positives": 8.88,
+    "matches_calibrated": 1229,
+    "matches_at_fixed_0.80": 5861,
+    "enrichment_over_null": 138.4,
+    "pct_of_matchable": 10.3,
+    "median_similarity": 0.9895
+   }
+  },
+  "pearson": {
+   "bf16_vs_q4": {
+    "null_mean": 0.7433,
+    "null_p99_tau": 0.9816,
+    "null_matches_per_replicate": 885.4,
+    "expected_false_positives": 8.85,
+    "matches_calibrated": 919,
+    "matches_at_fixed_0.80": 5408,
+    "enrichment_over_null": 103.8,
+    "pct_of_matchable": 7.7,
+    "median_similarity": 0.9894
+   }
+  }
+ },
+ "elapsed_s": 228.8
+}

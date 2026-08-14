@@ -1,110 +1,180 @@
-# Research Papers Workspace
+# Research Papers — American Code Labs
 
-Mechanistic interpretability and AI safety research. Three papers.
+Mechanistic interpretability and quantization research, run end to end on consumer
+Apple Silicon. No GPU cluster, no cloud. Four published papers and two in progress.
 
-> **See [CORRECTIONS.md](CORRECTIONS.md)** (2026-07-30) for the audit of all three
-> papers against their data. Two headline claims were withdrawn: cross-architecture
-> feature universality (3,753 shared features → 0 under a permutation null) and IOI
-> depth-zone conservation (80% match rate → not significant, p = 0.098/0.32). The
-> hypotheses below are the *original* framings; the papers now report what the data
-> supports, which in two of three cases is a negative result.
+Every result below is measured and reproducible from this repository. Where a result is
+negative, it is reported as the finding.
 
 ---
 
-## Paper 1 — Circuit Tracing at Scale
+## Published
 
-**Working title:** *Circuit Tracing in Large Language Models: Scaling Mechanistic Explanations Beyond Toy Tasks*
+Cite the **concept DOI** — it always resolves to the latest version. Version DOIs are
+pinned to one deposit and go stale on revision.
 
-**Directory:** `papers/circuit-tracing/`
+### What does MLX 4-bit cost?
+*A Controlled Audit of Quantization for Code Models on Apple Silicon*
+`papers/mlx-quantization/` · [10.5281/zenodo.21906720](https://doi.org/10.5281/zenodo.21906720)
 
-**Hypothesis:** The circuit-level mechanisms identified in small models on controlled tasks
-(e.g., IOI) generalize to larger models and naturalistic inputs, but with additional
-redundancy structure that is obscured by standard activation patching. Targeted
-path-patching combined with sparse decomposition recovers stable, transferable circuits.
+Five instruction-tuned code models, 1.5B to 8B, on HumanEval+ and MBPP+, comparing bf16
+against 4-bit weights quantized from those same weights. One harness, one machine, one
+variable.
 
-**Target venue:** ICLR 2026 (main track — interpretability)
+- 4-bit loses on **220** problems and wins on **125** (McNemar *p* < 10⁻⁶)
+- The cost **shrinks as models grow**: +0.52 points per billion parameters. Phi-4-mini
+  (3.8B) loses 6.5 points; Qwen2.5-Coder-7B loses 1.2
+- Activation-aware quantization (AWQ) does not recover the loss and is statistically
+  indistinguishable from the uncalibrated default (133–116, *p* = 0.31) while costing up
+  to 1h51m to build
+- Differencing a local 4-bit score against a vendor's published bf16 figure is unsound:
+  the harness-mismatch term is the same order as the effect and has no stable sign
 
-**Status:** Bottleneck structure and path-patching results hold. The depth-conservation
-claim was withdrawn after permutation testing. Circuit-level faithfulness is still
-unmeasured — the largest outstanding gap.
+### Efficient Mechanistic Circuit Analysis of Open-Weight LLMs on Apple Silicon
+`papers/circuit-tracing/` · [10.5281/zenodo.21906706](https://doi.org/10.5281/zenodo.21906706)
 
-**Key data:** `data/ioi/`, `data/factual-assoc/`
+IOI circuits in Llama-3.2-3B and Pythia-1.4B, identified by activation patching and mean
+ablation and validated as sets.
+
+- Both models concentrate the task far more than GPT-2 Small: one head carries **22–28%**
+  of clean logit difference, against a distributed 26-component circuit
+- Faithful but incomplete — 0.663 (Llama) and 0.854 (Pythia), with completeness gaps of
+  0.28 and 0.22
+- **Faithfulness on one sentence frame is not generality.** On 15 templates it falls to
+  **0.228** and **−0.028** while both models still perform the task above 90% of their
+  original logit difference
+- **Cross-model depth-position conservation is indistinguishable from chance** (null 59%,
+  *p* = 0.098; layer-band-restricted null 69%, *p* = 0.32)
+
+### TopK Sparse Autoencoders Across Three Model Architectures
+`papers/sae-comparison/` · [10.5281/zenodo.21906712](https://doi.org/10.5281/zenodo.21906712)
+
+TopK SAEs trained to a common specification on Llama-3.2-3B, Mistral-7B-v0.3 and
+Qwen2.5-3B, with cross-architecture feature matching calibrated against a permutation null.
+
+- **A positive control establishes the method's ceiling.** Two SAEs differing only in
+  training seed agree on **8%** of matchable features at 108× the null. The instrument
+  works; 8% is the most any study of this kind can report
+- Cross-architecture agreement is **0.18–0.33%** — near-zero against a working instrument
+- **Standard quality metrics are blind.** Loss, FVE, L0 and dead-feature count cannot
+  distinguish dictionaries that disagree about 92% of their content
+- Dictionary collapse and dense-feature degeneracy severe enough to invalidate
+  frequency-based feature selection
+
+### Distributed Mechanistic Interpretability at Scale (ActStream)
+`papers/distributed-interp/` · [10.5281/zenodo.21906710](https://doi.org/10.5281/zenodo.21906710)
+
+A two-node system that splits inference and analysis, streams activations over a
+purpose-built binary protocol, and trains SAEs on the stream without staging to disk.
+
+- Thunderbolt sustains **2.150 GB/s** — 86% of its negotiated rate, 26× the LAN path,
+  and only 3.0× below in-machine memory
+- Tail latency is the consequential figure: p99 within 1.5× of median, where the LAN
+  spreads to 10.5× with a 52 ms tail
+- Bit-exact split boundary; two-worker distributed SAE training matches the single-node
+  baseline to within **0.05%** on MSE
+- A 40-feature safety classifier reaches ROC-AUC **0.7206** held out. An LLM judge scores
+  higher (0.8545), but the two agree on only 54% of examples (κ = 0.083) — close to
+  orthogonal failure modes
 
 ---
 
-## Paper 2 — SAE Architecture Comparison
+## In progress
 
-**Working title:** *Sparse Autoencoders as Feature Finders: A Systematic Comparison of Training Objectives, Architectures, and Evaluation Metrics*
+Both drafts render every unmeasured value as a red placeholder and carry a title-page
+banner counting them. No number in either is estimated or illustrative.
 
-**Directory:** `papers/sae-comparison/`
+### A Perturbation Ladder for SAE Dictionaries
+`papers/sae-perturbation-ladder/`
 
-**Hypothesis:** Reconstruction-loss-optimized SAEs and auxiliary-loss variants (e.g.,
-TopK, Gated) recover overlapping but non-identical feature sets; the choice of
-evaluation metric (probe accuracy, human interpretability ratings, downstream steering
-fidelity) determines which architecture appears superior, revealing a hidden evaluation
-confound that has driven inconsistent conclusions in prior work.
+How much of a learned dictionary survives seed, optimizer and precision changes — one
+matching procedure, one denominator, so the rungs are comparable to each other. All arms
+50,000 steps on the same corpus.
 
-**Target venue:** NeurIPS 2026 (main track — representation learning)
+| rung | Pearson | cosine |
+|---|---|---|
+| ceiling — seed 42 vs 123 | 9.07% (123×) | 10.99% (150×) |
+| precision — bf16 vs local 4-bit | 7.70% (104×) | 10.30% (138×) |
+| optimizer — Adam vs Muon | *running* | *running* |
+| floor — cross-architecture | 0.18–0.33% | — |
 
-**Status:** Rescoped. Only TopK SAEs were ever trained (no L1, no Gated, no JumpReLU),
-on Llama/Mistral/Qwen rather than GPT-2/Pythia/Llama, and no probe, human-rating or
-steering study was conducted — so the objective comparison in the hypothesis above has
-no data behind it. The paper now reports TopK training dynamics: dictionary collapse,
-dense-feature degeneracy, and held-out reconstruction.
+4-bit quantization retains 85% (Pearson) or 94% (cosine) of the seed ceiling: it perturbs
+the dictionary somewhat more than reseeding, and both sit far above the architecture floor.
+Complements Duan (arXiv:2606.03002), which holds a dictionary fixed and asks whether its
+features still fire; this asks whether the dictionary one would *learn* is the same.
+The two use different denominators and are not numerically comparable.
 
-**Key data:** `data/sae-runs/`, `data/sae-analysis/`
+### Frame Dependence: Circuit Robustness Under Task-Preserving Shift
+`papers/circuit-robustness/`
 
----
-
-## Paper 3 — Distributed Interpretability
-
-**Working title:** *Distributed Interpretability: Collaborative Feature Attribution Across Model Layers and Attention Heads*
-
-**Directory:** `papers/distributed-interp/`
-
-**Hypothesis:** Safety-relevant behaviors (e.g., refusal, deception detection) are not
-localized to single components but emerge from distributed sub-networks spanning multiple
-layers. A graph-based attribution method that propagates credit across the full residual
-stream identifies these sub-networks more faithfully than layer-local methods, and
-the resulting representations improve the robustness of safety classifiers.
-
-**Target venue:** ICLR 2026 (safety & alignment track)
-
-**Status:** Infrastructure results hold (bit-exact split, 1.25 GB/s throughput). Both
-scientific results are negative: zero cross-architecture universal features under a
-calibrated null, and a safety classifier at ROC-AUC 0.564 with a CI spanning chance.
-The two-node Thunderbolt deployment is specified but not built.
-
-**Key data:** `data/safety-classifier/`, `data/sae-analysis/matching-v2/`
+Whether a circuit discovered on diverse sentence frames transfers to frames it was not
+discovered on. Published results conflict, and the candidate reconciliation is that the
+*discovery* set decides it — which requires a shift holding template **count** fixed while
+changing only their identity. Twelve matched-diversity dataset pairs across four task
+families (IOI, factual recall, subject–verb agreement, induction) and three shift axes.
 
 ---
 
-## Directory Layout
+## Layout
 
 ```
 ResearchPapers/
 ├── papers/
-│   ├── circuit-tracing/      # Paper 1 source, notebooks, drafts
-│   ├── sae-comparison/       # Paper 2 source, notebooks, drafts
-│   └── distributed-interp/   # Paper 3 source, notebooks, drafts
+│   ├── mlx-quantization/          published
+│   ├── circuit-tracing/           published
+│   ├── sae-comparison/            published
+│   ├── distributed-interp/        published
+│   ├── sae-perturbation-ladder/   draft
+│   └── circuit-robustness/        draft
 ├── data/
-│   ├── ioi/                  # Indirect Object Identification task data
-│   ├── sae-runs/             # SAE training checkpoints and eval logs
-│   ├── steering/             # Activation steering experiment data
-│   └── safety-classifier/    # Safety classifier training and eval data
-├── figures/                  # Publication-quality figures (shared)
-├── benchmarks/               # Shared benchmark scripts and results
-└── docs/                     # Notes, meeting logs, literature reviews
+│   ├── ioi/                       IOI datasets, patching and ablation harnesses
+│   ├── circuit-v2/                faithfulness, minimality, completeness
+│   ├── circuit-robustness/        D/D' shift pairs and protocol implementation
+│   ├── sae-runs/                  SAE training scripts, checkpoints, logs
+│   ├── sae-analysis/              feature matching, null calibration
+│   ├── seed-stability/            seed control (original corpus)
+│   ├── seed-stability-newcorpus/  seed control (matched corpus)
+│   ├── quant-interp/              bf16 vs 4-bit dictionary matching
+│   ├── slm-benchmark/             quantization benchmark harness
+│   ├── cluster-gate/              distributed-inference determinism gate
+│   ├── safety-classifier/         safety classifier training and eval
+│   └── activations/               collected residual-stream activations
+├── figures/
+└── docs/
 ```
 
-## Key analysis scripts
+## Key scripts
 
 | Script | Purpose |
 |---|---|
-| `data/sae-analysis/cross_arch_matching_v2.py` | Corrected cross-architecture matching: reciprocal one-to-one, closed triangles, permutation-calibrated threshold. Supersedes `cross_arch_matching.py`. |
-| `data/sae-analysis/recompute_corrections.py` | Full-corpus and held-out SAE reconstruction, safety-classifier ROC-AUC, IOI depth-conservation null. |
-| `papers/distributed-interp/submission/make_figures.py` | Convergence and null-distribution figures. |
+| `data/sae-runs/train_sae.py` | TopK SAE trainer. Trained every Adam arm; sha256 `b701c090…` |
+| `data/sae-runs/train_sae_muon.py` | Optimizer-capable variant. Kept separate so the Adam arms and the repo trainer stay byte-identical; see `trainer-muon.diff` |
+| `data/sae-analysis/quant_interp_match.py` | Reciprocal feature matching with permutation-calibrated τ |
+| `data/circuit-robustness/circuit_lib.py` | Both architectures × four intervention modes, dataset-agnostic |
+| `data/circuit-robustness/generate_shift_pairs.py` | D/D′ generation with single-token, length-parity and template-balance constraints |
+| `data/circuit-robustness/discover_circuit.py` | Patching + ablation sweep → circuit file |
+| `data/ioi/run_circuit_faithfulness.py` | Faithfulness, minimality, completeness |
+| `data/slm-benchmark/evalplus_generate.py` | Greedy generation for the quantization audit |
 
-Note: `data/activations/llama-3b-layer14/` and `data/sae-runs/llama-3b-layer14/` were
-renamed from `-layer16` on 2026-07-30. They always contained layer-14 activations; the
-old name did not match the data.
+## Reproducibility notes
+
+**Activation collection is a versioned artifact, not a script.** Activations behind the
+originally published SAEs cannot be regenerated from the released collection code — the
+metadata schemas differ and a hash over the leading 3.072 × 10⁹ bytes does not match.
+Every arm in the perturbation ladder is therefore trained on a corpus regenerated and
+committed as part of that work.
+
+**Two harness requirements**, both silent when violated. The mean-ablation reference must
+be computed over the full example set, not per batch; and sequences must be padded to one
+global length, since the cached mean carries a sequence dimension. Datasets of
+near-uniform length hide both.
+
+**Quantized arms are converted locally**, never downloaded. A community upload cannot be
+verified as to base revision or conversion settings, and a provenance gap in the variable
+under test makes the experiment unreadable.
+
+All runs are seeded (42 unless stated) on a single Apple M1 Max with 32 GB unified memory
+via MLX.
+
+See [CORRECTIONS.md](CORRECTIONS.md) for the 2026-07-30 audit of the papers against their
+underlying data.
