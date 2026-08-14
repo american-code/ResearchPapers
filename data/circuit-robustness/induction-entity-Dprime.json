@@ -1,0 +1,2016 @@
+{
+ "meta": {
+  "family": "induction",
+  "shift": "entity",
+  "n_examples": 200,
+  "seed": 42,
+  "n_templates_D": 6,
+  "n_templates_Dprime": 6,
+  "frames_disjoint": false,
+  "entities_disjoint": true,
+  "metric": "logit(answer_token) - logit(distractor_token) at final position",
+  "split": "Dprime"
+ },
+ "examples": [
+  {
+   "id": 0,
+   "template_id": 0,
+   "prompt": "cat south west river cat",
+   "corrupt_prompt": "cat river west south cat",
+   "answer_token": "south",
+   "distractor_token": "river",
+   "io_name": "south",
+   "subject_name": "river"
+  },
+  {
+   "id": 1,
+   "template_id": 1,
+   "prompt": "cloth -> brick rope -> wood cloth ->",
+   "corrupt_prompt": "cloth -> wood rope -> brick cloth ->",
+   "answer_token": "brick",
+   "distractor_token": "wood",
+   "io_name": "brick",
+   "subject_name": "wood"
+  },
+  {
+   "id": 2,
+   "template_id": 2,
+   "prompt": "wood = cat glass = tree wood =",
+   "corrupt_prompt": "wood = tree glass = cat wood =",
+   "answer_token": "cat",
+   "distractor_token": "tree",
+   "io_name": "cat",
+   "subject_name": "tree"
+  },
+  {
+   "id": 3,
+   "template_id": 3,
+   "prompt": "fire : paper green : glass fire :",
+   "corrupt_prompt": "fire : glass green : paper fire :",
+   "answer_token": "paper",
+   "distractor_token": "glass",
+   "io_name": "paper",
+   "subject_name": "glass"
+  },
+  {
+   "id": 4,
+   "template_id": 4,
+   "prompt": "paper | book cat | dog paper |",
+   "corrupt_prompt": "paper | dog cat | book paper |",
+   "answer_token": "book",
+   "distractor_token": "dog",
+   "io_name": "book",
+   "subject_name": "dog"
+  },
+  {
+   "id": 5,
+   "template_id": 5,
+   "prompt": "book , green iron , west book ,",
+   "corrupt_prompt": "book , west iron , green book ,",
+   "answer_token": "green",
+   "distractor_token": "west",
+   "io_name": "green",
+   "subject_name": "west"
+  },
+  {
+   "id": 6,
+   "template_id": 0,
+   "prompt": "horse moon wood cat horse",
+   "corrupt_prompt": "horse cat wood moon horse",
+   "answer_token": "moon",
+   "distractor_token": "cat",
+   "io_name": "moon",
+   "subject_name": "cat"
+  },
+  {
+   "id": 7,
+   "template_id": 1,
+   "prompt": "cat -> book black -> cloth cat ->",
+   "corrupt_prompt": "cat -> cloth black -> book cat ->",
+   "answer_token": "book",
+   "distractor_token": "cloth",
+   "io_name": "book",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 8,
+   "template_id": 2,
+   "prompt": "west = tree dog = horse west =",
+   "corrupt_prompt": "west = horse dog = tree west =",
+   "answer_token": "tree",
+   "distractor_token": "horse",
+   "io_name": "tree",
+   "subject_name": "horse"
+  },
+  {
+   "id": 9,
+   "template_id": 3,
+   "prompt": "iron : paper stone : glass iron :",
+   "corrupt_prompt": "iron : glass stone : paper iron :",
+   "answer_token": "paper",
+   "distractor_token": "glass",
+   "io_name": "paper",
+   "subject_name": "glass"
+  },
+  {
+   "id": 10,
+   "template_id": 4,
+   "prompt": "wood | brick iron | horse wood |",
+   "corrupt_prompt": "wood | horse iron | brick wood |",
+   "answer_token": "brick",
+   "distractor_token": "horse",
+   "io_name": "brick",
+   "subject_name": "horse"
+  },
+  {
+   "id": 11,
+   "template_id": 5,
+   "prompt": "dog , cat metal , paper dog ,",
+   "corrupt_prompt": "dog , paper metal , cat dog ,",
+   "answer_token": "cat",
+   "distractor_token": "paper",
+   "io_name": "cat",
+   "subject_name": "paper"
+  },
+  {
+   "id": 12,
+   "template_id": 0,
+   "prompt": "glass metal white river glass",
+   "corrupt_prompt": "glass river white metal glass",
+   "answer_token": "metal",
+   "distractor_token": "river",
+   "io_name": "metal",
+   "subject_name": "river"
+  },
+  {
+   "id": 13,
+   "template_id": 1,
+   "prompt": "moon -> tree dog -> cat moon ->",
+   "corrupt_prompt": "moon -> cat dog -> tree moon ->",
+   "answer_token": "tree",
+   "distractor_token": "cat",
+   "io_name": "tree",
+   "subject_name": "cat"
+  },
+  {
+   "id": 14,
+   "template_id": 2,
+   "prompt": "cloth = white wood = book cloth =",
+   "corrupt_prompt": "cloth = book wood = white cloth =",
+   "answer_token": "white",
+   "distractor_token": "book",
+   "io_name": "white",
+   "subject_name": "book"
+  },
+  {
+   "id": 15,
+   "template_id": 3,
+   "prompt": "dog : cat moon : south dog :",
+   "corrupt_prompt": "dog : south moon : cat dog :",
+   "answer_token": "cat",
+   "distractor_token": "south",
+   "io_name": "cat",
+   "subject_name": "south"
+  },
+  {
+   "id": 16,
+   "template_id": 4,
+   "prompt": "river | south west | paper river |",
+   "corrupt_prompt": "river | paper west | south river |",
+   "answer_token": "south",
+   "distractor_token": "paper",
+   "io_name": "south",
+   "subject_name": "paper"
+  },
+  {
+   "id": 17,
+   "template_id": 5,
+   "prompt": "dog , stone metal , iron dog ,",
+   "corrupt_prompt": "dog , iron metal , stone dog ,",
+   "answer_token": "stone",
+   "distractor_token": "iron",
+   "io_name": "stone",
+   "subject_name": "iron"
+  },
+  {
+   "id": 18,
+   "template_id": 0,
+   "prompt": "stone black west wood stone",
+   "corrupt_prompt": "stone wood west black stone",
+   "answer_token": "black",
+   "distractor_token": "wood",
+   "io_name": "black",
+   "subject_name": "wood"
+  },
+  {
+   "id": 19,
+   "template_id": 1,
+   "prompt": "cloth -> river cat -> moon cloth ->",
+   "corrupt_prompt": "cloth -> moon cat -> river cloth ->",
+   "answer_token": "river",
+   "distractor_token": "moon",
+   "io_name": "river",
+   "subject_name": "moon"
+  },
+  {
+   "id": 20,
+   "template_id": 2,
+   "prompt": "paper = book brick = glass paper =",
+   "corrupt_prompt": "paper = glass brick = book paper =",
+   "answer_token": "book",
+   "distractor_token": "glass",
+   "io_name": "book",
+   "subject_name": "glass"
+  },
+  {
+   "id": 21,
+   "template_id": 3,
+   "prompt": "tree : horse black : white tree :",
+   "corrupt_prompt": "tree : white black : horse tree :",
+   "answer_token": "horse",
+   "distractor_token": "white",
+   "io_name": "horse",
+   "subject_name": "white"
+  },
+  {
+   "id": 22,
+   "template_id": 4,
+   "prompt": "west | rope wood | south west |",
+   "corrupt_prompt": "west | south wood | rope west |",
+   "answer_token": "rope",
+   "distractor_token": "south",
+   "io_name": "rope",
+   "subject_name": "south"
+  },
+  {
+   "id": 23,
+   "template_id": 5,
+   "prompt": "wood , south fire , west wood ,",
+   "corrupt_prompt": "wood , west fire , south wood ,",
+   "answer_token": "south",
+   "distractor_token": "west",
+   "io_name": "south",
+   "subject_name": "west"
+  },
+  {
+   "id": 24,
+   "template_id": 0,
+   "prompt": "horse rope white stone horse",
+   "corrupt_prompt": "horse stone white rope horse",
+   "answer_token": "rope",
+   "distractor_token": "stone",
+   "io_name": "rope",
+   "subject_name": "stone"
+  },
+  {
+   "id": 25,
+   "template_id": 1,
+   "prompt": "cat -> moon west -> wood cat ->",
+   "corrupt_prompt": "cat -> wood west -> moon cat ->",
+   "answer_token": "moon",
+   "distractor_token": "wood",
+   "io_name": "moon",
+   "subject_name": "wood"
+  },
+  {
+   "id": 26,
+   "template_id": 2,
+   "prompt": "fire = river iron = west fire =",
+   "corrupt_prompt": "fire = west iron = river fire =",
+   "answer_token": "river",
+   "distractor_token": "west",
+   "io_name": "river",
+   "subject_name": "west"
+  },
+  {
+   "id": 27,
+   "template_id": 3,
+   "prompt": "west : tree metal : cloth west :",
+   "corrupt_prompt": "west : cloth metal : tree west :",
+   "answer_token": "tree",
+   "distractor_token": "cloth",
+   "io_name": "tree",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 28,
+   "template_id": 4,
+   "prompt": "sheep | stone book | black sheep |",
+   "corrupt_prompt": "sheep | black book | stone sheep |",
+   "answer_token": "stone",
+   "distractor_token": "black",
+   "io_name": "stone",
+   "subject_name": "black"
+  },
+  {
+   "id": 29,
+   "template_id": 5,
+   "prompt": "tree , dog rope , river tree ,",
+   "corrupt_prompt": "tree , river rope , dog tree ,",
+   "answer_token": "dog",
+   "distractor_token": "river",
+   "io_name": "dog",
+   "subject_name": "river"
+  },
+  {
+   "id": 30,
+   "template_id": 0,
+   "prompt": "river dog brick horse river",
+   "corrupt_prompt": "river horse brick dog river",
+   "answer_token": "dog",
+   "distractor_token": "horse",
+   "io_name": "dog",
+   "subject_name": "horse"
+  },
+  {
+   "id": 31,
+   "template_id": 1,
+   "prompt": "fire -> horse glass -> book fire ->",
+   "corrupt_prompt": "fire -> book glass -> horse fire ->",
+   "answer_token": "horse",
+   "distractor_token": "book",
+   "io_name": "horse",
+   "subject_name": "book"
+  },
+  {
+   "id": 32,
+   "template_id": 2,
+   "prompt": "rope = fire sheep = tree rope =",
+   "corrupt_prompt": "rope = tree sheep = fire rope =",
+   "answer_token": "fire",
+   "distractor_token": "tree",
+   "io_name": "fire",
+   "subject_name": "tree"
+  },
+  {
+   "id": 33,
+   "template_id": 3,
+   "prompt": "metal : fire brick : paper metal :",
+   "corrupt_prompt": "metal : paper brick : fire metal :",
+   "answer_token": "fire",
+   "distractor_token": "paper",
+   "io_name": "fire",
+   "subject_name": "paper"
+  },
+  {
+   "id": 34,
+   "template_id": 4,
+   "prompt": "paper | south brick | river paper |",
+   "corrupt_prompt": "paper | river brick | south paper |",
+   "answer_token": "south",
+   "distractor_token": "river",
+   "io_name": "south",
+   "subject_name": "river"
+  },
+  {
+   "id": 35,
+   "template_id": 5,
+   "prompt": "paper , horse cat , river paper ,",
+   "corrupt_prompt": "paper , river cat , horse paper ,",
+   "answer_token": "horse",
+   "distractor_token": "river",
+   "io_name": "horse",
+   "subject_name": "river"
+  },
+  {
+   "id": 36,
+   "template_id": 0,
+   "prompt": "wood tree black cat wood",
+   "corrupt_prompt": "wood cat black tree wood",
+   "answer_token": "tree",
+   "distractor_token": "cat",
+   "io_name": "tree",
+   "subject_name": "cat"
+  },
+  {
+   "id": 37,
+   "template_id": 1,
+   "prompt": "metal -> moon book -> sheep metal ->",
+   "corrupt_prompt": "metal -> sheep book -> moon metal ->",
+   "answer_token": "moon",
+   "distractor_token": "sheep",
+   "io_name": "moon",
+   "subject_name": "sheep"
+  },
+  {
+   "id": 38,
+   "template_id": 2,
+   "prompt": "sheep = black brick = stone sheep =",
+   "corrupt_prompt": "sheep = stone brick = black sheep =",
+   "answer_token": "black",
+   "distractor_token": "stone",
+   "io_name": "black",
+   "subject_name": "stone"
+  },
+  {
+   "id": 39,
+   "template_id": 3,
+   "prompt": "stone : tree green : rope stone :",
+   "corrupt_prompt": "stone : rope green : tree stone :",
+   "answer_token": "tree",
+   "distractor_token": "rope",
+   "io_name": "tree",
+   "subject_name": "rope"
+  },
+  {
+   "id": 40,
+   "template_id": 4,
+   "prompt": "sheep | east tree | west sheep |",
+   "corrupt_prompt": "sheep | west tree | east sheep |",
+   "answer_token": "east",
+   "distractor_token": "west",
+   "io_name": "east",
+   "subject_name": "west"
+  },
+  {
+   "id": 41,
+   "template_id": 5,
+   "prompt": "paper , horse iron , book paper ,",
+   "corrupt_prompt": "paper , book iron , horse paper ,",
+   "answer_token": "horse",
+   "distractor_token": "book",
+   "io_name": "horse",
+   "subject_name": "book"
+  },
+  {
+   "id": 42,
+   "template_id": 0,
+   "prompt": "fire paper horse sheep fire",
+   "corrupt_prompt": "fire sheep horse paper fire",
+   "answer_token": "paper",
+   "distractor_token": "sheep",
+   "io_name": "paper",
+   "subject_name": "sheep"
+  },
+  {
+   "id": 43,
+   "template_id": 1,
+   "prompt": "stone -> river white -> west stone ->",
+   "corrupt_prompt": "stone -> west white -> river stone ->",
+   "answer_token": "river",
+   "distractor_token": "west",
+   "io_name": "river",
+   "subject_name": "west"
+  },
+  {
+   "id": 44,
+   "template_id": 2,
+   "prompt": "iron = white paper = cat iron =",
+   "corrupt_prompt": "iron = cat paper = white iron =",
+   "answer_token": "white",
+   "distractor_token": "cat",
+   "io_name": "white",
+   "subject_name": "cat"
+  },
+  {
+   "id": 45,
+   "template_id": 3,
+   "prompt": "cat : west fire : black cat :",
+   "corrupt_prompt": "cat : black fire : west cat :",
+   "answer_token": "west",
+   "distractor_token": "black",
+   "io_name": "west",
+   "subject_name": "black"
+  },
+  {
+   "id": 46,
+   "template_id": 4,
+   "prompt": "horse | iron tree | green horse |",
+   "corrupt_prompt": "horse | green tree | iron horse |",
+   "answer_token": "iron",
+   "distractor_token": "green",
+   "io_name": "iron",
+   "subject_name": "green"
+  },
+  {
+   "id": 47,
+   "template_id": 5,
+   "prompt": "sheep , rope iron , white sheep ,",
+   "corrupt_prompt": "sheep , white iron , rope sheep ,",
+   "answer_token": "rope",
+   "distractor_token": "white",
+   "io_name": "rope",
+   "subject_name": "white"
+  },
+  {
+   "id": 48,
+   "template_id": 0,
+   "prompt": "cat book dog river cat",
+   "corrupt_prompt": "cat river dog book cat",
+   "answer_token": "book",
+   "distractor_token": "river",
+   "io_name": "book",
+   "subject_name": "river"
+  },
+  {
+   "id": 49,
+   "template_id": 1,
+   "prompt": "cloth -> white wood -> moon cloth ->",
+   "corrupt_prompt": "cloth -> moon wood -> white cloth ->",
+   "answer_token": "white",
+   "distractor_token": "moon",
+   "io_name": "white",
+   "subject_name": "moon"
+  },
+  {
+   "id": 50,
+   "template_id": 2,
+   "prompt": "cat = glass stone = east cat =",
+   "corrupt_prompt": "cat = east stone = glass cat =",
+   "answer_token": "glass",
+   "distractor_token": "east",
+   "io_name": "glass",
+   "subject_name": "east"
+  },
+  {
+   "id": 51,
+   "template_id": 3,
+   "prompt": "east : cat metal : paper east :",
+   "corrupt_prompt": "east : paper metal : cat east :",
+   "answer_token": "cat",
+   "distractor_token": "paper",
+   "io_name": "cat",
+   "subject_name": "paper"
+  },
+  {
+   "id": 52,
+   "template_id": 4,
+   "prompt": "east | white horse | cat east |",
+   "corrupt_prompt": "east | cat horse | white east |",
+   "answer_token": "white",
+   "distractor_token": "cat",
+   "io_name": "white",
+   "subject_name": "cat"
+  },
+  {
+   "id": 53,
+   "template_id": 5,
+   "prompt": "moon , book tree , west moon ,",
+   "corrupt_prompt": "moon , west tree , book moon ,",
+   "answer_token": "book",
+   "distractor_token": "west",
+   "io_name": "book",
+   "subject_name": "west"
+  },
+  {
+   "id": 54,
+   "template_id": 0,
+   "prompt": "south cat paper west south",
+   "corrupt_prompt": "south west paper cat south",
+   "answer_token": "cat",
+   "distractor_token": "west",
+   "io_name": "cat",
+   "subject_name": "west"
+  },
+  {
+   "id": 55,
+   "template_id": 1,
+   "prompt": "south -> rope cloth -> river south ->",
+   "corrupt_prompt": "south -> river cloth -> rope south ->",
+   "answer_token": "rope",
+   "distractor_token": "river",
+   "io_name": "rope",
+   "subject_name": "river"
+  },
+  {
+   "id": 56,
+   "template_id": 2,
+   "prompt": "black = rope wood = book black =",
+   "corrupt_prompt": "black = book wood = rope black =",
+   "answer_token": "rope",
+   "distractor_token": "book",
+   "io_name": "rope",
+   "subject_name": "book"
+  },
+  {
+   "id": 57,
+   "template_id": 3,
+   "prompt": "sheep : moon south : river sheep :",
+   "corrupt_prompt": "sheep : river south : moon sheep :",
+   "answer_token": "moon",
+   "distractor_token": "river",
+   "io_name": "moon",
+   "subject_name": "river"
+  },
+  {
+   "id": 58,
+   "template_id": 4,
+   "prompt": "rope | dog white | south rope |",
+   "corrupt_prompt": "rope | south white | dog rope |",
+   "answer_token": "dog",
+   "distractor_token": "south",
+   "io_name": "dog",
+   "subject_name": "south"
+  },
+  {
+   "id": 59,
+   "template_id": 5,
+   "prompt": "dog , wood cloth , cat dog ,",
+   "corrupt_prompt": "dog , cat cloth , wood dog ,",
+   "answer_token": "wood",
+   "distractor_token": "cat",
+   "io_name": "wood",
+   "subject_name": "cat"
+  },
+  {
+   "id": 60,
+   "template_id": 0,
+   "prompt": "metal west stone horse metal",
+   "corrupt_prompt": "metal horse stone west metal",
+   "answer_token": "west",
+   "distractor_token": "horse",
+   "io_name": "west",
+   "subject_name": "horse"
+  },
+  {
+   "id": 61,
+   "template_id": 1,
+   "prompt": "rope -> metal moon -> stone rope ->",
+   "corrupt_prompt": "rope -> stone moon -> metal rope ->",
+   "answer_token": "metal",
+   "distractor_token": "stone",
+   "io_name": "metal",
+   "subject_name": "stone"
+  },
+  {
+   "id": 62,
+   "template_id": 2,
+   "prompt": "white = fire glass = metal white =",
+   "corrupt_prompt": "white = metal glass = fire white =",
+   "answer_token": "fire",
+   "distractor_token": "metal",
+   "io_name": "fire",
+   "subject_name": "metal"
+  },
+  {
+   "id": 63,
+   "template_id": 3,
+   "prompt": "horse : green paper : cloth horse :",
+   "corrupt_prompt": "horse : cloth paper : green horse :",
+   "answer_token": "green",
+   "distractor_token": "cloth",
+   "io_name": "green",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 64,
+   "template_id": 4,
+   "prompt": "cloth | moon stone | white cloth |",
+   "corrupt_prompt": "cloth | white stone | moon cloth |",
+   "answer_token": "moon",
+   "distractor_token": "white",
+   "io_name": "moon",
+   "subject_name": "white"
+  },
+  {
+   "id": 65,
+   "template_id": 5,
+   "prompt": "wood , rope green , white wood ,",
+   "corrupt_prompt": "wood , white green , rope wood ,",
+   "answer_token": "rope",
+   "distractor_token": "white",
+   "io_name": "rope",
+   "subject_name": "white"
+  },
+  {
+   "id": 66,
+   "template_id": 0,
+   "prompt": "sheep horse white wood sheep",
+   "corrupt_prompt": "sheep wood white horse sheep",
+   "answer_token": "horse",
+   "distractor_token": "wood",
+   "io_name": "horse",
+   "subject_name": "wood"
+  },
+  {
+   "id": 67,
+   "template_id": 1,
+   "prompt": "sheep -> tree east -> stone sheep ->",
+   "corrupt_prompt": "sheep -> stone east -> tree sheep ->",
+   "answer_token": "tree",
+   "distractor_token": "stone",
+   "io_name": "tree",
+   "subject_name": "stone"
+  },
+  {
+   "id": 68,
+   "template_id": 2,
+   "prompt": "white = green west = iron white =",
+   "corrupt_prompt": "white = iron west = green white =",
+   "answer_token": "green",
+   "distractor_token": "iron",
+   "io_name": "green",
+   "subject_name": "iron"
+  },
+  {
+   "id": 69,
+   "template_id": 3,
+   "prompt": "west : cloth white : tree west :",
+   "corrupt_prompt": "west : tree white : cloth west :",
+   "answer_token": "cloth",
+   "distractor_token": "tree",
+   "io_name": "cloth",
+   "subject_name": "tree"
+  },
+  {
+   "id": 70,
+   "template_id": 4,
+   "prompt": "dog | rope sheep | white dog |",
+   "corrupt_prompt": "dog | white sheep | rope dog |",
+   "answer_token": "rope",
+   "distractor_token": "white",
+   "io_name": "rope",
+   "subject_name": "white"
+  },
+  {
+   "id": 71,
+   "template_id": 5,
+   "prompt": "tree , horse white , cat tree ,",
+   "corrupt_prompt": "tree , cat white , horse tree ,",
+   "answer_token": "horse",
+   "distractor_token": "cat",
+   "io_name": "horse",
+   "subject_name": "cat"
+  },
+  {
+   "id": 72,
+   "template_id": 0,
+   "prompt": "iron sheep river south iron",
+   "corrupt_prompt": "iron south river sheep iron",
+   "answer_token": "sheep",
+   "distractor_token": "south",
+   "io_name": "sheep",
+   "subject_name": "south"
+  },
+  {
+   "id": 73,
+   "template_id": 1,
+   "prompt": "south -> west white -> moon south ->",
+   "corrupt_prompt": "south -> moon white -> west south ->",
+   "answer_token": "west",
+   "distractor_token": "moon",
+   "io_name": "west",
+   "subject_name": "moon"
+  },
+  {
+   "id": 74,
+   "template_id": 2,
+   "prompt": "west = wood sheep = green west =",
+   "corrupt_prompt": "west = green sheep = wood west =",
+   "answer_token": "wood",
+   "distractor_token": "green",
+   "io_name": "wood",
+   "subject_name": "green"
+  },
+  {
+   "id": 75,
+   "template_id": 3,
+   "prompt": "moon : black rope : cat moon :",
+   "corrupt_prompt": "moon : cat rope : black moon :",
+   "answer_token": "black",
+   "distractor_token": "cat",
+   "io_name": "black",
+   "subject_name": "cat"
+  },
+  {
+   "id": 76,
+   "template_id": 4,
+   "prompt": "black | metal cloth | book black |",
+   "corrupt_prompt": "black | book cloth | metal black |",
+   "answer_token": "metal",
+   "distractor_token": "book",
+   "io_name": "metal",
+   "subject_name": "book"
+  },
+  {
+   "id": 77,
+   "template_id": 5,
+   "prompt": "west , book east , glass west ,",
+   "corrupt_prompt": "west , glass east , book west ,",
+   "answer_token": "book",
+   "distractor_token": "glass",
+   "io_name": "book",
+   "subject_name": "glass"
+  },
+  {
+   "id": 78,
+   "template_id": 0,
+   "prompt": "dog green west glass dog",
+   "corrupt_prompt": "dog glass west green dog",
+   "answer_token": "green",
+   "distractor_token": "glass",
+   "io_name": "green",
+   "subject_name": "glass"
+  },
+  {
+   "id": 79,
+   "template_id": 1,
+   "prompt": "cloth -> book white -> green cloth ->",
+   "corrupt_prompt": "cloth -> green white -> book cloth ->",
+   "answer_token": "book",
+   "distractor_token": "green",
+   "io_name": "book",
+   "subject_name": "green"
+  },
+  {
+   "id": 80,
+   "template_id": 2,
+   "prompt": "east = sheep book = iron east =",
+   "corrupt_prompt": "east = iron book = sheep east =",
+   "answer_token": "sheep",
+   "distractor_token": "iron",
+   "io_name": "sheep",
+   "subject_name": "iron"
+  },
+  {
+   "id": 81,
+   "template_id": 3,
+   "prompt": "paper : cat stone : west paper :",
+   "corrupt_prompt": "paper : west stone : cat paper :",
+   "answer_token": "cat",
+   "distractor_token": "west",
+   "io_name": "cat",
+   "subject_name": "west"
+  },
+  {
+   "id": 82,
+   "template_id": 4,
+   "prompt": "wood | sheep fire | tree wood |",
+   "corrupt_prompt": "wood | tree fire | sheep wood |",
+   "answer_token": "sheep",
+   "distractor_token": "tree",
+   "io_name": "sheep",
+   "subject_name": "tree"
+  },
+  {
+   "id": 83,
+   "template_id": 5,
+   "prompt": "sheep , metal fire , rope sheep ,",
+   "corrupt_prompt": "sheep , rope fire , metal sheep ,",
+   "answer_token": "metal",
+   "distractor_token": "rope",
+   "io_name": "metal",
+   "subject_name": "rope"
+  },
+  {
+   "id": 84,
+   "template_id": 0,
+   "prompt": "white green west book white",
+   "corrupt_prompt": "white book west green white",
+   "answer_token": "green",
+   "distractor_token": "book",
+   "io_name": "green",
+   "subject_name": "book"
+  },
+  {
+   "id": 85,
+   "template_id": 1,
+   "prompt": "metal -> moon west -> horse metal ->",
+   "corrupt_prompt": "metal -> horse west -> moon metal ->",
+   "answer_token": "moon",
+   "distractor_token": "horse",
+   "io_name": "moon",
+   "subject_name": "horse"
+  },
+  {
+   "id": 86,
+   "template_id": 2,
+   "prompt": "sheep = book black = wood sheep =",
+   "corrupt_prompt": "sheep = wood black = book sheep =",
+   "answer_token": "book",
+   "distractor_token": "wood",
+   "io_name": "book",
+   "subject_name": "wood"
+  },
+  {
+   "id": 87,
+   "template_id": 3,
+   "prompt": "glass : east stone : paper glass :",
+   "corrupt_prompt": "glass : paper stone : east glass :",
+   "answer_token": "east",
+   "distractor_token": "paper",
+   "io_name": "east",
+   "subject_name": "paper"
+  },
+  {
+   "id": 88,
+   "template_id": 4,
+   "prompt": "fire | tree white | iron fire |",
+   "corrupt_prompt": "fire | iron white | tree fire |",
+   "answer_token": "tree",
+   "distractor_token": "iron",
+   "io_name": "tree",
+   "subject_name": "iron"
+  },
+  {
+   "id": 89,
+   "template_id": 5,
+   "prompt": "south , sheep wood , stone south ,",
+   "corrupt_prompt": "south , stone wood , sheep south ,",
+   "answer_token": "sheep",
+   "distractor_token": "stone",
+   "io_name": "sheep",
+   "subject_name": "stone"
+  },
+  {
+   "id": 90,
+   "template_id": 0,
+   "prompt": "east wood green paper east",
+   "corrupt_prompt": "east paper green wood east",
+   "answer_token": "wood",
+   "distractor_token": "paper",
+   "io_name": "wood",
+   "subject_name": "paper"
+  },
+  {
+   "id": 91,
+   "template_id": 1,
+   "prompt": "dog -> west brick -> wood dog ->",
+   "corrupt_prompt": "dog -> wood brick -> west dog ->",
+   "answer_token": "west",
+   "distractor_token": "wood",
+   "io_name": "west",
+   "subject_name": "wood"
+  },
+  {
+   "id": 92,
+   "template_id": 2,
+   "prompt": "rope = cat metal = book rope =",
+   "corrupt_prompt": "rope = book metal = cat rope =",
+   "answer_token": "cat",
+   "distractor_token": "book",
+   "io_name": "cat",
+   "subject_name": "book"
+  },
+  {
+   "id": 93,
+   "template_id": 3,
+   "prompt": "moon : glass sheep : cloth moon :",
+   "corrupt_prompt": "moon : cloth sheep : glass moon :",
+   "answer_token": "glass",
+   "distractor_token": "cloth",
+   "io_name": "glass",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 94,
+   "template_id": 4,
+   "prompt": "dog | south glass | black dog |",
+   "corrupt_prompt": "dog | black glass | south dog |",
+   "answer_token": "south",
+   "distractor_token": "black",
+   "io_name": "south",
+   "subject_name": "black"
+  },
+  {
+   "id": 95,
+   "template_id": 5,
+   "prompt": "horse , paper white , cloth horse ,",
+   "corrupt_prompt": "horse , cloth white , paper horse ,",
+   "answer_token": "paper",
+   "distractor_token": "cloth",
+   "io_name": "paper",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 96,
+   "template_id": 0,
+   "prompt": "book cloth horse stone book",
+   "corrupt_prompt": "book stone horse cloth book",
+   "answer_token": "cloth",
+   "distractor_token": "stone",
+   "io_name": "cloth",
+   "subject_name": "stone"
+  },
+  {
+   "id": 97,
+   "template_id": 1,
+   "prompt": "book -> tree stone -> west book ->",
+   "corrupt_prompt": "book -> west stone -> tree book ->",
+   "answer_token": "tree",
+   "distractor_token": "west",
+   "io_name": "tree",
+   "subject_name": "west"
+  },
+  {
+   "id": 98,
+   "template_id": 2,
+   "prompt": "green = river south = sheep green =",
+   "corrupt_prompt": "green = sheep south = river green =",
+   "answer_token": "river",
+   "distractor_token": "sheep",
+   "io_name": "river",
+   "subject_name": "sheep"
+  },
+  {
+   "id": 99,
+   "template_id": 3,
+   "prompt": "iron : brick white : horse iron :",
+   "corrupt_prompt": "iron : horse white : brick iron :",
+   "answer_token": "brick",
+   "distractor_token": "horse",
+   "io_name": "brick",
+   "subject_name": "horse"
+  },
+  {
+   "id": 100,
+   "template_id": 4,
+   "prompt": "rope | fire dog | brick rope |",
+   "corrupt_prompt": "rope | brick dog | fire rope |",
+   "answer_token": "fire",
+   "distractor_token": "brick",
+   "io_name": "fire",
+   "subject_name": "brick"
+  },
+  {
+   "id": 101,
+   "template_id": 5,
+   "prompt": "rope , dog moon , sheep rope ,",
+   "corrupt_prompt": "rope , sheep moon , dog rope ,",
+   "answer_token": "dog",
+   "distractor_token": "sheep",
+   "io_name": "dog",
+   "subject_name": "sheep"
+  },
+  {
+   "id": 102,
+   "template_id": 0,
+   "prompt": "sheep metal brick iron sheep",
+   "corrupt_prompt": "sheep iron brick metal sheep",
+   "answer_token": "metal",
+   "distractor_token": "iron",
+   "io_name": "metal",
+   "subject_name": "iron"
+  },
+  {
+   "id": 103,
+   "template_id": 1,
+   "prompt": "fire -> east west -> horse fire ->",
+   "corrupt_prompt": "fire -> horse west -> east fire ->",
+   "answer_token": "east",
+   "distractor_token": "horse",
+   "io_name": "east",
+   "subject_name": "horse"
+  },
+  {
+   "id": 104,
+   "template_id": 2,
+   "prompt": "horse = iron green = east horse =",
+   "corrupt_prompt": "horse = east green = iron horse =",
+   "answer_token": "iron",
+   "distractor_token": "east",
+   "io_name": "iron",
+   "subject_name": "east"
+  },
+  {
+   "id": 105,
+   "template_id": 3,
+   "prompt": "stone : rope river : sheep stone :",
+   "corrupt_prompt": "stone : sheep river : rope stone :",
+   "answer_token": "rope",
+   "distractor_token": "sheep",
+   "io_name": "rope",
+   "subject_name": "sheep"
+  },
+  {
+   "id": 106,
+   "template_id": 4,
+   "prompt": "tree | black cat | west tree |",
+   "corrupt_prompt": "tree | west cat | black tree |",
+   "answer_token": "black",
+   "distractor_token": "west",
+   "io_name": "black",
+   "subject_name": "west"
+  },
+  {
+   "id": 107,
+   "template_id": 5,
+   "prompt": "iron , paper fire , tree iron ,",
+   "corrupt_prompt": "iron , tree fire , paper iron ,",
+   "answer_token": "paper",
+   "distractor_token": "tree",
+   "io_name": "paper",
+   "subject_name": "tree"
+  },
+  {
+   "id": 108,
+   "template_id": 0,
+   "prompt": "stone fire book west stone",
+   "corrupt_prompt": "stone west book fire stone",
+   "answer_token": "fire",
+   "distractor_token": "west",
+   "io_name": "fire",
+   "subject_name": "west"
+  },
+  {
+   "id": 109,
+   "template_id": 1,
+   "prompt": "horse -> metal cat -> glass horse ->",
+   "corrupt_prompt": "horse -> glass cat -> metal horse ->",
+   "answer_token": "metal",
+   "distractor_token": "glass",
+   "io_name": "metal",
+   "subject_name": "glass"
+  },
+  {
+   "id": 110,
+   "template_id": 2,
+   "prompt": "sheep = wood green = black sheep =",
+   "corrupt_prompt": "sheep = black green = wood sheep =",
+   "answer_token": "wood",
+   "distractor_token": "black",
+   "io_name": "wood",
+   "subject_name": "black"
+  },
+  {
+   "id": 111,
+   "template_id": 3,
+   "prompt": "rope : iron paper : river rope :",
+   "corrupt_prompt": "rope : river paper : iron rope :",
+   "answer_token": "iron",
+   "distractor_token": "river",
+   "io_name": "iron",
+   "subject_name": "river"
+  },
+  {
+   "id": 112,
+   "template_id": 4,
+   "prompt": "book | green tree | east book |",
+   "corrupt_prompt": "book | east tree | green book |",
+   "answer_token": "green",
+   "distractor_token": "east",
+   "io_name": "green",
+   "subject_name": "east"
+  },
+  {
+   "id": 113,
+   "template_id": 5,
+   "prompt": "horse , rope brick , cat horse ,",
+   "corrupt_prompt": "horse , cat brick , rope horse ,",
+   "answer_token": "rope",
+   "distractor_token": "cat",
+   "io_name": "rope",
+   "subject_name": "cat"
+  },
+  {
+   "id": 114,
+   "template_id": 0,
+   "prompt": "dog sheep black tree dog",
+   "corrupt_prompt": "dog tree black sheep dog",
+   "answer_token": "sheep",
+   "distractor_token": "tree",
+   "io_name": "sheep",
+   "subject_name": "tree"
+  },
+  {
+   "id": 115,
+   "template_id": 1,
+   "prompt": "brick -> east west -> tree brick ->",
+   "corrupt_prompt": "brick -> tree west -> east brick ->",
+   "answer_token": "east",
+   "distractor_token": "tree",
+   "io_name": "east",
+   "subject_name": "tree"
+  },
+  {
+   "id": 116,
+   "template_id": 2,
+   "prompt": "east = west moon = cat east =",
+   "corrupt_prompt": "east = cat moon = west east =",
+   "answer_token": "west",
+   "distractor_token": "cat",
+   "io_name": "west",
+   "subject_name": "cat"
+  },
+  {
+   "id": 117,
+   "template_id": 3,
+   "prompt": "east : sheep white : wood east :",
+   "corrupt_prompt": "east : wood white : sheep east :",
+   "answer_token": "sheep",
+   "distractor_token": "wood",
+   "io_name": "sheep",
+   "subject_name": "wood"
+  },
+  {
+   "id": 118,
+   "template_id": 4,
+   "prompt": "moon | tree brick | wood moon |",
+   "corrupt_prompt": "moon | wood brick | tree moon |",
+   "answer_token": "tree",
+   "distractor_token": "wood",
+   "io_name": "tree",
+   "subject_name": "wood"
+  },
+  {
+   "id": 119,
+   "template_id": 5,
+   "prompt": "west , cloth black , paper west ,",
+   "corrupt_prompt": "west , paper black , cloth west ,",
+   "answer_token": "cloth",
+   "distractor_token": "paper",
+   "io_name": "cloth",
+   "subject_name": "paper"
+  },
+  {
+   "id": 120,
+   "template_id": 0,
+   "prompt": "white horse book brick white",
+   "corrupt_prompt": "white brick book horse white",
+   "answer_token": "horse",
+   "distractor_token": "brick",
+   "io_name": "horse",
+   "subject_name": "brick"
+  },
+  {
+   "id": 121,
+   "template_id": 1,
+   "prompt": "brick -> book dog -> glass brick ->",
+   "corrupt_prompt": "brick -> glass dog -> book brick ->",
+   "answer_token": "book",
+   "distractor_token": "glass",
+   "io_name": "book",
+   "subject_name": "glass"
+  },
+  {
+   "id": 122,
+   "template_id": 2,
+   "prompt": "sheep = brick south = fire sheep =",
+   "corrupt_prompt": "sheep = fire south = brick sheep =",
+   "answer_token": "brick",
+   "distractor_token": "fire",
+   "io_name": "brick",
+   "subject_name": "fire"
+  },
+  {
+   "id": 123,
+   "template_id": 3,
+   "prompt": "glass : moon metal : paper glass :",
+   "corrupt_prompt": "glass : paper metal : moon glass :",
+   "answer_token": "moon",
+   "distractor_token": "paper",
+   "io_name": "moon",
+   "subject_name": "paper"
+  },
+  {
+   "id": 124,
+   "template_id": 4,
+   "prompt": "tree | metal moon | horse tree |",
+   "corrupt_prompt": "tree | horse moon | metal tree |",
+   "answer_token": "metal",
+   "distractor_token": "horse",
+   "io_name": "metal",
+   "subject_name": "horse"
+  },
+  {
+   "id": 125,
+   "template_id": 5,
+   "prompt": "black , metal west , cat black ,",
+   "corrupt_prompt": "black , cat west , metal black ,",
+   "answer_token": "metal",
+   "distractor_token": "cat",
+   "io_name": "metal",
+   "subject_name": "cat"
+  },
+  {
+   "id": 126,
+   "template_id": 0,
+   "prompt": "sheep black tree wood sheep",
+   "corrupt_prompt": "sheep wood tree black sheep",
+   "answer_token": "black",
+   "distractor_token": "wood",
+   "io_name": "black",
+   "subject_name": "wood"
+  },
+  {
+   "id": 127,
+   "template_id": 1,
+   "prompt": "stone -> brick wood -> south stone ->",
+   "corrupt_prompt": "stone -> south wood -> brick stone ->",
+   "answer_token": "brick",
+   "distractor_token": "south",
+   "io_name": "brick",
+   "subject_name": "south"
+  },
+  {
+   "id": 128,
+   "template_id": 2,
+   "prompt": "book = white brick = iron book =",
+   "corrupt_prompt": "book = iron brick = white book =",
+   "answer_token": "white",
+   "distractor_token": "iron",
+   "io_name": "white",
+   "subject_name": "iron"
+  },
+  {
+   "id": 129,
+   "template_id": 3,
+   "prompt": "rope : cat green : west rope :",
+   "corrupt_prompt": "rope : west green : cat rope :",
+   "answer_token": "cat",
+   "distractor_token": "west",
+   "io_name": "cat",
+   "subject_name": "west"
+  },
+  {
+   "id": 130,
+   "template_id": 4,
+   "prompt": "green | stone brick | paper green |",
+   "corrupt_prompt": "green | paper brick | stone green |",
+   "answer_token": "stone",
+   "distractor_token": "paper",
+   "io_name": "stone",
+   "subject_name": "paper"
+  },
+  {
+   "id": 131,
+   "template_id": 5,
+   "prompt": "metal , west black , river metal ,",
+   "corrupt_prompt": "metal , river black , west metal ,",
+   "answer_token": "west",
+   "distractor_token": "river",
+   "io_name": "west",
+   "subject_name": "river"
+  },
+  {
+   "id": 132,
+   "template_id": 0,
+   "prompt": "dog sheep fire cloth dog",
+   "corrupt_prompt": "dog cloth fire sheep dog",
+   "answer_token": "sheep",
+   "distractor_token": "cloth",
+   "io_name": "sheep",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 133,
+   "template_id": 1,
+   "prompt": "wood -> metal sheep -> green wood ->",
+   "corrupt_prompt": "wood -> green sheep -> metal wood ->",
+   "answer_token": "metal",
+   "distractor_token": "green",
+   "io_name": "metal",
+   "subject_name": "green"
+  },
+  {
+   "id": 134,
+   "template_id": 2,
+   "prompt": "tree = cloth green = west tree =",
+   "corrupt_prompt": "tree = west green = cloth tree =",
+   "answer_token": "cloth",
+   "distractor_token": "west",
+   "io_name": "cloth",
+   "subject_name": "west"
+  },
+  {
+   "id": 135,
+   "template_id": 3,
+   "prompt": "wood : tree iron : black wood :",
+   "corrupt_prompt": "wood : black iron : tree wood :",
+   "answer_token": "tree",
+   "distractor_token": "black",
+   "io_name": "tree",
+   "subject_name": "black"
+  },
+  {
+   "id": 136,
+   "template_id": 4,
+   "prompt": "sheep | cloth cat | book sheep |",
+   "corrupt_prompt": "sheep | book cat | cloth sheep |",
+   "answer_token": "cloth",
+   "distractor_token": "book",
+   "io_name": "cloth",
+   "subject_name": "book"
+  },
+  {
+   "id": 137,
+   "template_id": 5,
+   "prompt": "black , south stone , metal black ,",
+   "corrupt_prompt": "black , metal stone , south black ,",
+   "answer_token": "south",
+   "distractor_token": "metal",
+   "io_name": "south",
+   "subject_name": "metal"
+  },
+  {
+   "id": 138,
+   "template_id": 0,
+   "prompt": "sheep brick green east sheep",
+   "corrupt_prompt": "sheep east green brick sheep",
+   "answer_token": "brick",
+   "distractor_token": "east",
+   "io_name": "brick",
+   "subject_name": "east"
+  },
+  {
+   "id": 139,
+   "template_id": 1,
+   "prompt": "wood -> iron east -> moon wood ->",
+   "corrupt_prompt": "wood -> moon east -> iron wood ->",
+   "answer_token": "iron",
+   "distractor_token": "moon",
+   "io_name": "iron",
+   "subject_name": "moon"
+  },
+  {
+   "id": 140,
+   "template_id": 2,
+   "prompt": "tree = rope cloth = dog tree =",
+   "corrupt_prompt": "tree = dog cloth = rope tree =",
+   "answer_token": "rope",
+   "distractor_token": "dog",
+   "io_name": "rope",
+   "subject_name": "dog"
+  },
+  {
+   "id": 141,
+   "template_id": 3,
+   "prompt": "dog : fire stone : glass dog :",
+   "corrupt_prompt": "dog : glass stone : fire dog :",
+   "answer_token": "fire",
+   "distractor_token": "glass",
+   "io_name": "fire",
+   "subject_name": "glass"
+  },
+  {
+   "id": 142,
+   "template_id": 4,
+   "prompt": "east | cat dog | west east |",
+   "corrupt_prompt": "east | west dog | cat east |",
+   "answer_token": "cat",
+   "distractor_token": "west",
+   "io_name": "cat",
+   "subject_name": "west"
+  },
+  {
+   "id": 143,
+   "template_id": 5,
+   "prompt": "south , book sheep , paper south ,",
+   "corrupt_prompt": "south , paper sheep , book south ,",
+   "answer_token": "book",
+   "distractor_token": "paper",
+   "io_name": "book",
+   "subject_name": "paper"
+  },
+  {
+   "id": 144,
+   "template_id": 0,
+   "prompt": "tree sheep brick green tree",
+   "corrupt_prompt": "tree green brick sheep tree",
+   "answer_token": "sheep",
+   "distractor_token": "green",
+   "io_name": "sheep",
+   "subject_name": "green"
+  },
+  {
+   "id": 145,
+   "template_id": 1,
+   "prompt": "west -> brick glass -> cat west ->",
+   "corrupt_prompt": "west -> cat glass -> brick west ->",
+   "answer_token": "brick",
+   "distractor_token": "cat",
+   "io_name": "brick",
+   "subject_name": "cat"
+  },
+  {
+   "id": 146,
+   "template_id": 2,
+   "prompt": "east = wood south = river east =",
+   "corrupt_prompt": "east = river south = wood east =",
+   "answer_token": "wood",
+   "distractor_token": "river",
+   "io_name": "wood",
+   "subject_name": "river"
+  },
+  {
+   "id": 147,
+   "template_id": 3,
+   "prompt": "horse : iron cloth : west horse :",
+   "corrupt_prompt": "horse : west cloth : iron horse :",
+   "answer_token": "iron",
+   "distractor_token": "west",
+   "io_name": "iron",
+   "subject_name": "west"
+  },
+  {
+   "id": 148,
+   "template_id": 4,
+   "prompt": "tree | fire cat | green tree |",
+   "corrupt_prompt": "tree | green cat | fire tree |",
+   "answer_token": "fire",
+   "distractor_token": "green",
+   "io_name": "fire",
+   "subject_name": "green"
+  },
+  {
+   "id": 149,
+   "template_id": 5,
+   "prompt": "stone , brick east , horse stone ,",
+   "corrupt_prompt": "stone , horse east , brick stone ,",
+   "answer_token": "brick",
+   "distractor_token": "horse",
+   "io_name": "brick",
+   "subject_name": "horse"
+  },
+  {
+   "id": 150,
+   "template_id": 0,
+   "prompt": "river paper horse stone river",
+   "corrupt_prompt": "river stone horse paper river",
+   "answer_token": "paper",
+   "distractor_token": "stone",
+   "io_name": "paper",
+   "subject_name": "stone"
+  },
+  {
+   "id": 151,
+   "template_id": 1,
+   "prompt": "west -> green white -> south west ->",
+   "corrupt_prompt": "west -> south white -> green west ->",
+   "answer_token": "green",
+   "distractor_token": "south",
+   "io_name": "green",
+   "subject_name": "south"
+  },
+  {
+   "id": 152,
+   "template_id": 2,
+   "prompt": "cloth = south iron = horse cloth =",
+   "corrupt_prompt": "cloth = horse iron = south cloth =",
+   "answer_token": "south",
+   "distractor_token": "horse",
+   "io_name": "south",
+   "subject_name": "horse"
+  },
+  {
+   "id": 153,
+   "template_id": 3,
+   "prompt": "moon : dog black : horse moon :",
+   "corrupt_prompt": "moon : horse black : dog moon :",
+   "answer_token": "dog",
+   "distractor_token": "horse",
+   "io_name": "dog",
+   "subject_name": "horse"
+  },
+  {
+   "id": 154,
+   "template_id": 4,
+   "prompt": "fire | white wood | tree fire |",
+   "corrupt_prompt": "fire | tree wood | white fire |",
+   "answer_token": "white",
+   "distractor_token": "tree",
+   "io_name": "white",
+   "subject_name": "tree"
+  },
+  {
+   "id": 155,
+   "template_id": 5,
+   "prompt": "moon , glass iron , cloth moon ,",
+   "corrupt_prompt": "moon , cloth iron , glass moon ,",
+   "answer_token": "glass",
+   "distractor_token": "cloth",
+   "io_name": "glass",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 156,
+   "template_id": 0,
+   "prompt": "west wood horse river west",
+   "corrupt_prompt": "west river horse wood west",
+   "answer_token": "wood",
+   "distractor_token": "river",
+   "io_name": "wood",
+   "subject_name": "river"
+  },
+  {
+   "id": 157,
+   "template_id": 1,
+   "prompt": "paper -> iron green -> river paper ->",
+   "corrupt_prompt": "paper -> river green -> iron paper ->",
+   "answer_token": "iron",
+   "distractor_token": "river",
+   "io_name": "iron",
+   "subject_name": "river"
+  },
+  {
+   "id": 158,
+   "template_id": 2,
+   "prompt": "sheep = cat dog = tree sheep =",
+   "corrupt_prompt": "sheep = tree dog = cat sheep =",
+   "answer_token": "cat",
+   "distractor_token": "tree",
+   "io_name": "cat",
+   "subject_name": "tree"
+  },
+  {
+   "id": 159,
+   "template_id": 3,
+   "prompt": "stone : brick glass : cloth stone :",
+   "corrupt_prompt": "stone : cloth glass : brick stone :",
+   "answer_token": "brick",
+   "distractor_token": "cloth",
+   "io_name": "brick",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 160,
+   "template_id": 4,
+   "prompt": "sheep | east glass | wood sheep |",
+   "corrupt_prompt": "sheep | wood glass | east sheep |",
+   "answer_token": "east",
+   "distractor_token": "wood",
+   "io_name": "east",
+   "subject_name": "wood"
+  },
+  {
+   "id": 161,
+   "template_id": 5,
+   "prompt": "tree , brick wood , black tree ,",
+   "corrupt_prompt": "tree , black wood , brick tree ,",
+   "answer_token": "brick",
+   "distractor_token": "black",
+   "io_name": "brick",
+   "subject_name": "black"
+  },
+  {
+   "id": 162,
+   "template_id": 0,
+   "prompt": "rope tree black south rope",
+   "corrupt_prompt": "rope south black tree rope",
+   "answer_token": "tree",
+   "distractor_token": "south",
+   "io_name": "tree",
+   "subject_name": "south"
+  },
+  {
+   "id": 163,
+   "template_id": 1,
+   "prompt": "south -> metal east -> book south ->",
+   "corrupt_prompt": "south -> book east -> metal south ->",
+   "answer_token": "metal",
+   "distractor_token": "book",
+   "io_name": "metal",
+   "subject_name": "book"
+  },
+  {
+   "id": 164,
+   "template_id": 2,
+   "prompt": "sheep = glass river = tree sheep =",
+   "corrupt_prompt": "sheep = tree river = glass sheep =",
+   "answer_token": "glass",
+   "distractor_token": "tree",
+   "io_name": "glass",
+   "subject_name": "tree"
+  },
+  {
+   "id": 165,
+   "template_id": 3,
+   "prompt": "cloth : iron metal : fire cloth :",
+   "corrupt_prompt": "cloth : fire metal : iron cloth :",
+   "answer_token": "iron",
+   "distractor_token": "fire",
+   "io_name": "iron",
+   "subject_name": "fire"
+  },
+  {
+   "id": 166,
+   "template_id": 4,
+   "prompt": "south | wood green | cloth south |",
+   "corrupt_prompt": "south | cloth green | wood south |",
+   "answer_token": "wood",
+   "distractor_token": "cloth",
+   "io_name": "wood",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 167,
+   "template_id": 5,
+   "prompt": "paper , rope brick , metal paper ,",
+   "corrupt_prompt": "paper , metal brick , rope paper ,",
+   "answer_token": "rope",
+   "distractor_token": "metal",
+   "io_name": "rope",
+   "subject_name": "metal"
+  },
+  {
+   "id": 168,
+   "template_id": 0,
+   "prompt": "iron rope black west iron",
+   "corrupt_prompt": "iron west black rope iron",
+   "answer_token": "rope",
+   "distractor_token": "west",
+   "io_name": "rope",
+   "subject_name": "west"
+  },
+  {
+   "id": 169,
+   "template_id": 1,
+   "prompt": "fire -> stone west -> dog fire ->",
+   "corrupt_prompt": "fire -> dog west -> stone fire ->",
+   "answer_token": "stone",
+   "distractor_token": "dog",
+   "io_name": "stone",
+   "subject_name": "dog"
+  },
+  {
+   "id": 170,
+   "template_id": 2,
+   "prompt": "rope = cloth paper = dog rope =",
+   "corrupt_prompt": "rope = dog paper = cloth rope =",
+   "answer_token": "cloth",
+   "distractor_token": "dog",
+   "io_name": "cloth",
+   "subject_name": "dog"
+  },
+  {
+   "id": 171,
+   "template_id": 3,
+   "prompt": "dog : south west : cloth dog :",
+   "corrupt_prompt": "dog : cloth west : south dog :",
+   "answer_token": "south",
+   "distractor_token": "cloth",
+   "io_name": "south",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 172,
+   "template_id": 4,
+   "prompt": "wood | river iron | book wood |",
+   "corrupt_prompt": "wood | book iron | river wood |",
+   "answer_token": "river",
+   "distractor_token": "book",
+   "io_name": "river",
+   "subject_name": "book"
+  },
+  {
+   "id": 173,
+   "template_id": 5,
+   "prompt": "fire , river brick , glass fire ,",
+   "corrupt_prompt": "fire , glass brick , river fire ,",
+   "answer_token": "river",
+   "distractor_token": "glass",
+   "io_name": "river",
+   "subject_name": "glass"
+  },
+  {
+   "id": 174,
+   "template_id": 0,
+   "prompt": "iron fire book west iron",
+   "corrupt_prompt": "iron west book fire iron",
+   "answer_token": "fire",
+   "distractor_token": "west",
+   "io_name": "fire",
+   "subject_name": "west"
+  },
+  {
+   "id": 175,
+   "template_id": 1,
+   "prompt": "east -> rope iron -> metal east ->",
+   "corrupt_prompt": "east -> metal iron -> rope east ->",
+   "answer_token": "rope",
+   "distractor_token": "metal",
+   "io_name": "rope",
+   "subject_name": "metal"
+  },
+  {
+   "id": 176,
+   "template_id": 2,
+   "prompt": "river = paper book = tree river =",
+   "corrupt_prompt": "river = tree book = paper river =",
+   "answer_token": "paper",
+   "distractor_token": "tree",
+   "io_name": "paper",
+   "subject_name": "tree"
+  },
+  {
+   "id": 177,
+   "template_id": 3,
+   "prompt": "horse : cat white : rope horse :",
+   "corrupt_prompt": "horse : rope white : cat horse :",
+   "answer_token": "cat",
+   "distractor_token": "rope",
+   "io_name": "cat",
+   "subject_name": "rope"
+  },
+  {
+   "id": 178,
+   "template_id": 4,
+   "prompt": "tree | glass wood | south tree |",
+   "corrupt_prompt": "tree | south wood | glass tree |",
+   "answer_token": "glass",
+   "distractor_token": "south",
+   "io_name": "glass",
+   "subject_name": "south"
+  },
+  {
+   "id": 179,
+   "template_id": 5,
+   "prompt": "sheep , south dog , metal sheep ,",
+   "corrupt_prompt": "sheep , metal dog , south sheep ,",
+   "answer_token": "south",
+   "distractor_token": "metal",
+   "io_name": "south",
+   "subject_name": "metal"
+  },
+  {
+   "id": 180,
+   "template_id": 0,
+   "prompt": "tree metal iron south tree",
+   "corrupt_prompt": "tree south iron metal tree",
+   "answer_token": "metal",
+   "distractor_token": "south",
+   "io_name": "metal",
+   "subject_name": "south"
+  },
+  {
+   "id": 181,
+   "template_id": 1,
+   "prompt": "tree -> brick rope -> glass tree ->",
+   "corrupt_prompt": "tree -> glass rope -> brick tree ->",
+   "answer_token": "brick",
+   "distractor_token": "glass",
+   "io_name": "brick",
+   "subject_name": "glass"
+  },
+  {
+   "id": 182,
+   "template_id": 2,
+   "prompt": "metal = fire rope = iron metal =",
+   "corrupt_prompt": "metal = iron rope = fire metal =",
+   "answer_token": "fire",
+   "distractor_token": "iron",
+   "io_name": "fire",
+   "subject_name": "iron"
+  },
+  {
+   "id": 183,
+   "template_id": 3,
+   "prompt": "iron : river stone : black iron :",
+   "corrupt_prompt": "iron : black stone : river iron :",
+   "answer_token": "river",
+   "distractor_token": "black",
+   "io_name": "river",
+   "subject_name": "black"
+  },
+  {
+   "id": 184,
+   "template_id": 4,
+   "prompt": "rope | cloth paper | dog rope |",
+   "corrupt_prompt": "rope | dog paper | cloth rope |",
+   "answer_token": "cloth",
+   "distractor_token": "dog",
+   "io_name": "cloth",
+   "subject_name": "dog"
+  },
+  {
+   "id": 185,
+   "template_id": 5,
+   "prompt": "fire , brick rope , tree fire ,",
+   "corrupt_prompt": "fire , tree rope , brick fire ,",
+   "answer_token": "brick",
+   "distractor_token": "tree",
+   "io_name": "brick",
+   "subject_name": "tree"
+  },
+  {
+   "id": 186,
+   "template_id": 0,
+   "prompt": "glass east cloth dog glass",
+   "corrupt_prompt": "glass dog cloth east glass",
+   "answer_token": "east",
+   "distractor_token": "dog",
+   "io_name": "east",
+   "subject_name": "dog"
+  },
+  {
+   "id": 187,
+   "template_id": 1,
+   "prompt": "dog -> iron stone -> white dog ->",
+   "corrupt_prompt": "dog -> white stone -> iron dog ->",
+   "answer_token": "iron",
+   "distractor_token": "white",
+   "io_name": "iron",
+   "subject_name": "white"
+  },
+  {
+   "id": 188,
+   "template_id": 2,
+   "prompt": "cat = west fire = moon cat =",
+   "corrupt_prompt": "cat = moon fire = west cat =",
+   "answer_token": "west",
+   "distractor_token": "moon",
+   "io_name": "west",
+   "subject_name": "moon"
+  },
+  {
+   "id": 189,
+   "template_id": 3,
+   "prompt": "horse : wood cat : river horse :",
+   "corrupt_prompt": "horse : river cat : wood horse :",
+   "answer_token": "wood",
+   "distractor_token": "river",
+   "io_name": "wood",
+   "subject_name": "river"
+  },
+  {
+   "id": 190,
+   "template_id": 4,
+   "prompt": "west | river east | south west |",
+   "corrupt_prompt": "west | south east | river west |",
+   "answer_token": "river",
+   "distractor_token": "south",
+   "io_name": "river",
+   "subject_name": "south"
+  },
+  {
+   "id": 191,
+   "template_id": 5,
+   "prompt": "dog , tree moon , black dog ,",
+   "corrupt_prompt": "dog , black moon , tree dog ,",
+   "answer_token": "tree",
+   "distractor_token": "black",
+   "io_name": "tree",
+   "subject_name": "black"
+  },
+  {
+   "id": 192,
+   "template_id": 0,
+   "prompt": "fire book cloth south fire",
+   "corrupt_prompt": "fire south cloth book fire",
+   "answer_token": "book",
+   "distractor_token": "south",
+   "io_name": "book",
+   "subject_name": "south"
+  },
+  {
+   "id": 193,
+   "template_id": 1,
+   "prompt": "south -> dog cloth -> tree south ->",
+   "corrupt_prompt": "south -> tree cloth -> dog south ->",
+   "answer_token": "dog",
+   "distractor_token": "tree",
+   "io_name": "dog",
+   "subject_name": "tree"
+  },
+  {
+   "id": 194,
+   "template_id": 2,
+   "prompt": "rope = book south = cloth rope =",
+   "corrupt_prompt": "rope = cloth south = book rope =",
+   "answer_token": "book",
+   "distractor_token": "cloth",
+   "io_name": "book",
+   "subject_name": "cloth"
+  },
+  {
+   "id": 195,
+   "template_id": 3,
+   "prompt": "book : dog glass : rope book :",
+   "corrupt_prompt": "book : rope glass : dog book :",
+   "answer_token": "dog",
+   "distractor_token": "rope",
+   "io_name": "dog",
+   "subject_name": "rope"
+  },
+  {
+   "id": 196,
+   "template_id": 4,
+   "prompt": "metal | stone south | tree metal |",
+   "corrupt_prompt": "metal | tree south | stone metal |",
+   "answer_token": "stone",
+   "distractor_token": "tree",
+   "io_name": "stone",
+   "subject_name": "tree"
+  },
+  {
+   "id": 197,
+   "template_id": 5,
+   "prompt": "black , wood west , green black ,",
+   "corrupt_prompt": "black , green west , wood black ,",
+   "answer_token": "wood",
+   "distractor_token": "green",
+   "io_name": "wood",
+   "subject_name": "green"
+  },
+  {
+   "id": 198,
+   "template_id": 0,
+   "prompt": "brick east paper stone brick",
+   "corrupt_prompt": "brick stone paper east brick",
+   "answer_token": "east",
+   "distractor_token": "stone",
+   "io_name": "east",
+   "subject_name": "stone"
+  },
+  {
+   "id": 199,
+   "template_id": 1,
+   "prompt": "river -> dog fire -> moon river ->",
+   "corrupt_prompt": "river -> moon fire -> dog river ->",
+   "answer_token": "dog",
+   "distractor_token": "moon",
+   "io_name": "dog",
+   "subject_name": "moon"
+  }
+ ]
+}

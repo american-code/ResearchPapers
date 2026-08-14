@@ -1,0 +1,2016 @@
+{
+ "meta": {
+  "family": "induction",
+  "shift": "entity",
+  "n_examples": 200,
+  "seed": 42,
+  "n_templates_D": 6,
+  "n_templates_Dprime": 6,
+  "frames_disjoint": false,
+  "entities_disjoint": true,
+  "metric": "logit(answer_token) - logit(distractor_token) at final position",
+  "split": "D"
+ },
+ "examples": [
+  {
+   "id": 0,
+   "template_id": 0,
+   "prompt": "table car bird wind table",
+   "corrupt_prompt": "table wind bird car table",
+   "answer_token": "car",
+   "distractor_token": "wind",
+   "io_name": "car",
+   "subject_name": "wind"
+  },
+  {
+   "id": 1,
+   "template_id": 1,
+   "prompt": "fish -> field chair -> wind fish ->",
+   "corrupt_prompt": "fish -> wind chair -> field fish ->",
+   "answer_token": "field",
+   "distractor_token": "wind",
+   "io_name": "field",
+   "subject_name": "wind"
+  },
+  {
+   "id": 2,
+   "template_id": 2,
+   "prompt": "car = water wind = salt car =",
+   "corrupt_prompt": "car = salt wind = water car =",
+   "answer_token": "water",
+   "distractor_token": "salt",
+   "io_name": "water",
+   "subject_name": "salt"
+  },
+  {
+   "id": 3,
+   "template_id": 3,
+   "prompt": "bread : snow milk : blue bread :",
+   "corrupt_prompt": "bread : blue milk : snow bread :",
+   "answer_token": "snow",
+   "distractor_token": "blue",
+   "io_name": "snow",
+   "subject_name": "blue"
+  },
+  {
+   "id": 4,
+   "template_id": 4,
+   "prompt": "bird | bread door | field bird |",
+   "corrupt_prompt": "bird | field door | bread bird |",
+   "answer_token": "bread",
+   "distractor_token": "field",
+   "io_name": "bread",
+   "subject_name": "field"
+  },
+  {
+   "id": 5,
+   "template_id": 5,
+   "prompt": "road , star bird , salt road ,",
+   "corrupt_prompt": "road , salt bird , star road ,",
+   "answer_token": "star",
+   "distractor_token": "salt",
+   "io_name": "star",
+   "subject_name": "salt"
+  },
+  {
+   "id": 6,
+   "template_id": 0,
+   "prompt": "door wheat table salt door",
+   "corrupt_prompt": "door salt table wheat door",
+   "answer_token": "wheat",
+   "distractor_token": "salt",
+   "io_name": "wheat",
+   "subject_name": "salt"
+  },
+  {
+   "id": 7,
+   "template_id": 1,
+   "prompt": "milk -> field north -> snow milk ->",
+   "corrupt_prompt": "milk -> snow north -> field milk ->",
+   "answer_token": "field",
+   "distractor_token": "snow",
+   "io_name": "field",
+   "subject_name": "snow"
+  },
+  {
+   "id": 8,
+   "template_id": 2,
+   "prompt": "fish = bird cloud = wheat fish =",
+   "corrupt_prompt": "fish = wheat cloud = bird fish =",
+   "answer_token": "bird",
+   "distractor_token": "wheat",
+   "io_name": "bird",
+   "subject_name": "wheat"
+  },
+  {
+   "id": 9,
+   "template_id": 3,
+   "prompt": "milk : hill fish : chair milk :",
+   "corrupt_prompt": "milk : chair fish : hill milk :",
+   "answer_token": "hill",
+   "distractor_token": "chair",
+   "io_name": "hill",
+   "subject_name": "chair"
+  },
+  {
+   "id": 10,
+   "template_id": 4,
+   "prompt": "door | hill car | bread door |",
+   "corrupt_prompt": "door | bread car | hill door |",
+   "answer_token": "hill",
+   "distractor_token": "bread",
+   "io_name": "hill",
+   "subject_name": "bread"
+  },
+  {
+   "id": 11,
+   "template_id": 5,
+   "prompt": "lake , car house , star lake ,",
+   "corrupt_prompt": "lake , star house , car lake ,",
+   "answer_token": "car",
+   "distractor_token": "star",
+   "io_name": "car",
+   "subject_name": "star"
+  },
+  {
+   "id": 12,
+   "template_id": 0,
+   "prompt": "fish blue wind north fish",
+   "corrupt_prompt": "fish north wind blue fish",
+   "answer_token": "blue",
+   "distractor_token": "north",
+   "io_name": "blue",
+   "subject_name": "north"
+  },
+  {
+   "id": 13,
+   "template_id": 1,
+   "prompt": "salt -> car lake -> bread salt ->",
+   "corrupt_prompt": "salt -> bread lake -> car salt ->",
+   "answer_token": "car",
+   "distractor_token": "bread",
+   "io_name": "car",
+   "subject_name": "bread"
+  },
+  {
+   "id": 14,
+   "template_id": 2,
+   "prompt": "salt = gold table = star salt =",
+   "corrupt_prompt": "salt = star table = gold salt =",
+   "answer_token": "gold",
+   "distractor_token": "star",
+   "io_name": "gold",
+   "subject_name": "star"
+  },
+  {
+   "id": 15,
+   "template_id": 3,
+   "prompt": "house : snow door : wheat house :",
+   "corrupt_prompt": "house : wheat door : snow house :",
+   "answer_token": "snow",
+   "distractor_token": "wheat",
+   "io_name": "snow",
+   "subject_name": "wheat"
+  },
+  {
+   "id": 16,
+   "template_id": 4,
+   "prompt": "bread | blue water | field bread |",
+   "corrupt_prompt": "bread | field water | blue bread |",
+   "answer_token": "blue",
+   "distractor_token": "field",
+   "io_name": "blue",
+   "subject_name": "field"
+  },
+  {
+   "id": 17,
+   "template_id": 5,
+   "prompt": "gold , bread field , car gold ,",
+   "corrupt_prompt": "gold , car field , bread gold ,",
+   "answer_token": "bread",
+   "distractor_token": "car",
+   "io_name": "bread",
+   "subject_name": "car"
+  },
+  {
+   "id": 18,
+   "template_id": 0,
+   "prompt": "lake fish north table lake",
+   "corrupt_prompt": "lake table north fish lake",
+   "answer_token": "fish",
+   "distractor_token": "table",
+   "io_name": "fish",
+   "subject_name": "table"
+  },
+  {
+   "id": 19,
+   "template_id": 1,
+   "prompt": "house -> cloud door -> water house ->",
+   "corrupt_prompt": "house -> water door -> cloud house ->",
+   "answer_token": "cloud",
+   "distractor_token": "water",
+   "io_name": "cloud",
+   "subject_name": "water"
+  },
+  {
+   "id": 20,
+   "template_id": 2,
+   "prompt": "fish = wheat water = table fish =",
+   "corrupt_prompt": "fish = table water = wheat fish =",
+   "answer_token": "wheat",
+   "distractor_token": "table",
+   "io_name": "wheat",
+   "subject_name": "table"
+  },
+  {
+   "id": 21,
+   "template_id": 3,
+   "prompt": "bread : star table : cloud bread :",
+   "corrupt_prompt": "bread : cloud table : star bread :",
+   "answer_token": "star",
+   "distractor_token": "cloud",
+   "io_name": "star",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 22,
+   "template_id": 4,
+   "prompt": "salt | wind field | cloud salt |",
+   "corrupt_prompt": "salt | cloud field | wind salt |",
+   "answer_token": "wind",
+   "distractor_token": "cloud",
+   "io_name": "wind",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 23,
+   "template_id": 5,
+   "prompt": "north , lake fish , table north ,",
+   "corrupt_prompt": "north , table fish , lake north ,",
+   "answer_token": "lake",
+   "distractor_token": "table",
+   "io_name": "lake",
+   "subject_name": "table"
+  },
+  {
+   "id": 24,
+   "template_id": 0,
+   "prompt": "wheat salt field water wheat",
+   "corrupt_prompt": "wheat water field salt wheat",
+   "answer_token": "salt",
+   "distractor_token": "water",
+   "io_name": "salt",
+   "subject_name": "water"
+  },
+  {
+   "id": 25,
+   "template_id": 1,
+   "prompt": "hill -> blue field -> lake hill ->",
+   "corrupt_prompt": "hill -> lake field -> blue hill ->",
+   "answer_token": "blue",
+   "distractor_token": "lake",
+   "io_name": "blue",
+   "subject_name": "lake"
+  },
+  {
+   "id": 26,
+   "template_id": 2,
+   "prompt": "fish = bread door = snow fish =",
+   "corrupt_prompt": "fish = snow door = bread fish =",
+   "answer_token": "bread",
+   "distractor_token": "snow",
+   "io_name": "bread",
+   "subject_name": "snow"
+  },
+  {
+   "id": 27,
+   "template_id": 3,
+   "prompt": "wheat : hill door : table wheat :",
+   "corrupt_prompt": "wheat : table door : hill wheat :",
+   "answer_token": "hill",
+   "distractor_token": "table",
+   "io_name": "hill",
+   "subject_name": "table"
+  },
+  {
+   "id": 28,
+   "template_id": 4,
+   "prompt": "rain | lake table | north rain |",
+   "corrupt_prompt": "rain | north table | lake rain |",
+   "answer_token": "lake",
+   "distractor_token": "north",
+   "io_name": "lake",
+   "subject_name": "north"
+  },
+  {
+   "id": 29,
+   "template_id": 5,
+   "prompt": "chair , fish field , wind chair ,",
+   "corrupt_prompt": "chair , wind field , fish chair ,",
+   "answer_token": "fish",
+   "distractor_token": "wind",
+   "io_name": "fish",
+   "subject_name": "wind"
+  },
+  {
+   "id": 30,
+   "template_id": 0,
+   "prompt": "salt fish wind snow salt",
+   "corrupt_prompt": "salt snow wind fish salt",
+   "answer_token": "fish",
+   "distractor_token": "snow",
+   "io_name": "fish",
+   "subject_name": "snow"
+  },
+  {
+   "id": 31,
+   "template_id": 1,
+   "prompt": "milk -> snow lake -> house milk ->",
+   "corrupt_prompt": "milk -> house lake -> snow milk ->",
+   "answer_token": "snow",
+   "distractor_token": "house",
+   "io_name": "snow",
+   "subject_name": "house"
+  },
+  {
+   "id": 32,
+   "template_id": 2,
+   "prompt": "field = chair road = rain field =",
+   "corrupt_prompt": "field = rain road = chair field =",
+   "answer_token": "chair",
+   "distractor_token": "rain",
+   "io_name": "chair",
+   "subject_name": "rain"
+  },
+  {
+   "id": 33,
+   "template_id": 3,
+   "prompt": "bread : blue car : chair bread :",
+   "corrupt_prompt": "bread : chair car : blue bread :",
+   "answer_token": "blue",
+   "distractor_token": "chair",
+   "io_name": "blue",
+   "subject_name": "chair"
+  },
+  {
+   "id": 34,
+   "template_id": 4,
+   "prompt": "table | cloud water | milk table |",
+   "corrupt_prompt": "table | milk water | cloud table |",
+   "answer_token": "cloud",
+   "distractor_token": "milk",
+   "io_name": "cloud",
+   "subject_name": "milk"
+  },
+  {
+   "id": 35,
+   "template_id": 5,
+   "prompt": "star , bread lake , north star ,",
+   "corrupt_prompt": "star , north lake , bread star ,",
+   "answer_token": "bread",
+   "distractor_token": "north",
+   "io_name": "bread",
+   "subject_name": "north"
+  },
+  {
+   "id": 36,
+   "template_id": 0,
+   "prompt": "road fish salt bird road",
+   "corrupt_prompt": "road bird salt fish road",
+   "answer_token": "fish",
+   "distractor_token": "bird",
+   "io_name": "fish",
+   "subject_name": "bird"
+  },
+  {
+   "id": 37,
+   "template_id": 1,
+   "prompt": "water -> wind car -> salt water ->",
+   "corrupt_prompt": "water -> salt car -> wind water ->",
+   "answer_token": "wind",
+   "distractor_token": "salt",
+   "io_name": "wind",
+   "subject_name": "salt"
+  },
+  {
+   "id": 38,
+   "template_id": 2,
+   "prompt": "fish = table hill = car fish =",
+   "corrupt_prompt": "fish = car hill = table fish =",
+   "answer_token": "table",
+   "distractor_token": "car",
+   "io_name": "table",
+   "subject_name": "car"
+  },
+  {
+   "id": 39,
+   "template_id": 3,
+   "prompt": "gold : milk cloud : north gold :",
+   "corrupt_prompt": "gold : north cloud : milk gold :",
+   "answer_token": "milk",
+   "distractor_token": "north",
+   "io_name": "milk",
+   "subject_name": "north"
+  },
+  {
+   "id": 40,
+   "template_id": 4,
+   "prompt": "bird | wind fish | road bird |",
+   "corrupt_prompt": "bird | road fish | wind bird |",
+   "answer_token": "wind",
+   "distractor_token": "road",
+   "io_name": "wind",
+   "subject_name": "road"
+  },
+  {
+   "id": 41,
+   "template_id": 5,
+   "prompt": "cloud , road car , table cloud ,",
+   "corrupt_prompt": "cloud , table car , road cloud ,",
+   "answer_token": "road",
+   "distractor_token": "table",
+   "io_name": "road",
+   "subject_name": "table"
+  },
+  {
+   "id": 42,
+   "template_id": 0,
+   "prompt": "gold table road star gold",
+   "corrupt_prompt": "gold star road table gold",
+   "answer_token": "table",
+   "distractor_token": "star",
+   "io_name": "table",
+   "subject_name": "star"
+  },
+  {
+   "id": 43,
+   "template_id": 1,
+   "prompt": "door -> chair house -> cloud door ->",
+   "corrupt_prompt": "door -> cloud house -> chair door ->",
+   "answer_token": "chair",
+   "distractor_token": "cloud",
+   "io_name": "chair",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 44,
+   "template_id": 2,
+   "prompt": "salt = road bird = star salt =",
+   "corrupt_prompt": "salt = star bird = road salt =",
+   "answer_token": "road",
+   "distractor_token": "star",
+   "io_name": "road",
+   "subject_name": "star"
+  },
+  {
+   "id": 45,
+   "template_id": 3,
+   "prompt": "hill : rain bird : car hill :",
+   "corrupt_prompt": "hill : car bird : rain hill :",
+   "answer_token": "rain",
+   "distractor_token": "car",
+   "io_name": "rain",
+   "subject_name": "car"
+  },
+  {
+   "id": 46,
+   "template_id": 4,
+   "prompt": "house | gold field | blue house |",
+   "corrupt_prompt": "house | blue field | gold house |",
+   "answer_token": "gold",
+   "distractor_token": "blue",
+   "io_name": "gold",
+   "subject_name": "blue"
+  },
+  {
+   "id": 47,
+   "template_id": 5,
+   "prompt": "field , snow bread , wind field ,",
+   "corrupt_prompt": "field , wind bread , snow field ,",
+   "answer_token": "snow",
+   "distractor_token": "wind",
+   "io_name": "snow",
+   "subject_name": "wind"
+  },
+  {
+   "id": 48,
+   "template_id": 0,
+   "prompt": "rain bread salt chair rain",
+   "corrupt_prompt": "rain chair salt bread rain",
+   "answer_token": "bread",
+   "distractor_token": "chair",
+   "io_name": "bread",
+   "subject_name": "chair"
+  },
+  {
+   "id": 49,
+   "template_id": 1,
+   "prompt": "chair -> water rain -> salt chair ->",
+   "corrupt_prompt": "chair -> salt rain -> water chair ->",
+   "answer_token": "water",
+   "distractor_token": "salt",
+   "io_name": "water",
+   "subject_name": "salt"
+  },
+  {
+   "id": 50,
+   "template_id": 2,
+   "prompt": "cloud = fish road = star cloud =",
+   "corrupt_prompt": "cloud = star road = fish cloud =",
+   "answer_token": "fish",
+   "distractor_token": "star",
+   "io_name": "fish",
+   "subject_name": "star"
+  },
+  {
+   "id": 51,
+   "template_id": 3,
+   "prompt": "milk : door salt : wind milk :",
+   "corrupt_prompt": "milk : wind salt : door milk :",
+   "answer_token": "door",
+   "distractor_token": "wind",
+   "io_name": "door",
+   "subject_name": "wind"
+  },
+  {
+   "id": 52,
+   "template_id": 4,
+   "prompt": "wheat | door gold | lake wheat |",
+   "corrupt_prompt": "wheat | lake gold | door wheat |",
+   "answer_token": "door",
+   "distractor_token": "lake",
+   "io_name": "door",
+   "subject_name": "lake"
+  },
+  {
+   "id": 53,
+   "template_id": 5,
+   "prompt": "water , table house , north water ,",
+   "corrupt_prompt": "water , north house , table water ,",
+   "answer_token": "table",
+   "distractor_token": "north",
+   "io_name": "table",
+   "subject_name": "north"
+  },
+  {
+   "id": 54,
+   "template_id": 0,
+   "prompt": "road north car field road",
+   "corrupt_prompt": "road field car north road",
+   "answer_token": "north",
+   "distractor_token": "field",
+   "io_name": "north",
+   "subject_name": "field"
+  },
+  {
+   "id": 55,
+   "template_id": 1,
+   "prompt": "field -> bread hill -> bird field ->",
+   "corrupt_prompt": "field -> bird hill -> bread field ->",
+   "answer_token": "bread",
+   "distractor_token": "bird",
+   "io_name": "bread",
+   "subject_name": "bird"
+  },
+  {
+   "id": 56,
+   "template_id": 2,
+   "prompt": "snow = salt field = bird snow =",
+   "corrupt_prompt": "snow = bird field = salt snow =",
+   "answer_token": "salt",
+   "distractor_token": "bird",
+   "io_name": "salt",
+   "subject_name": "bird"
+  },
+  {
+   "id": 57,
+   "template_id": 3,
+   "prompt": "bread : wheat table : blue bread :",
+   "corrupt_prompt": "bread : blue table : wheat bread :",
+   "answer_token": "wheat",
+   "distractor_token": "blue",
+   "io_name": "wheat",
+   "subject_name": "blue"
+  },
+  {
+   "id": 58,
+   "template_id": 4,
+   "prompt": "field | bread blue | hill field |",
+   "corrupt_prompt": "field | hill blue | bread field |",
+   "answer_token": "bread",
+   "distractor_token": "hill",
+   "io_name": "bread",
+   "subject_name": "hill"
+  },
+  {
+   "id": 59,
+   "template_id": 5,
+   "prompt": "bread , road field , fish bread ,",
+   "corrupt_prompt": "bread , fish field , road bread ,",
+   "answer_token": "road",
+   "distractor_token": "fish",
+   "io_name": "road",
+   "subject_name": "fish"
+  },
+  {
+   "id": 60,
+   "template_id": 0,
+   "prompt": "water rain door salt water",
+   "corrupt_prompt": "water salt door rain water",
+   "answer_token": "rain",
+   "distractor_token": "salt",
+   "io_name": "rain",
+   "subject_name": "salt"
+  },
+  {
+   "id": 61,
+   "template_id": 1,
+   "prompt": "chair -> wind snow -> rain chair ->",
+   "corrupt_prompt": "chair -> rain snow -> wind chair ->",
+   "answer_token": "wind",
+   "distractor_token": "rain",
+   "io_name": "wind",
+   "subject_name": "rain"
+  },
+  {
+   "id": 62,
+   "template_id": 2,
+   "prompt": "field = rain milk = door field =",
+   "corrupt_prompt": "field = door milk = rain field =",
+   "answer_token": "rain",
+   "distractor_token": "door",
+   "io_name": "rain",
+   "subject_name": "door"
+  },
+  {
+   "id": 63,
+   "template_id": 3,
+   "prompt": "car : water milk : house car :",
+   "corrupt_prompt": "car : house milk : water car :",
+   "answer_token": "water",
+   "distractor_token": "house",
+   "io_name": "water",
+   "subject_name": "house"
+  },
+  {
+   "id": 64,
+   "template_id": 4,
+   "prompt": "milk | north wind | blue milk |",
+   "corrupt_prompt": "milk | blue wind | north milk |",
+   "answer_token": "north",
+   "distractor_token": "blue",
+   "io_name": "north",
+   "subject_name": "blue"
+  },
+  {
+   "id": 65,
+   "template_id": 5,
+   "prompt": "water , table car , blue water ,",
+   "corrupt_prompt": "water , blue car , table water ,",
+   "answer_token": "table",
+   "distractor_token": "blue",
+   "io_name": "table",
+   "subject_name": "blue"
+  },
+  {
+   "id": 66,
+   "template_id": 0,
+   "prompt": "lake wind hill car lake",
+   "corrupt_prompt": "lake car hill wind lake",
+   "answer_token": "wind",
+   "distractor_token": "car",
+   "io_name": "wind",
+   "subject_name": "car"
+  },
+  {
+   "id": 67,
+   "template_id": 1,
+   "prompt": "field -> door salt -> north field ->",
+   "corrupt_prompt": "field -> north salt -> door field ->",
+   "answer_token": "door",
+   "distractor_token": "north",
+   "io_name": "door",
+   "subject_name": "north"
+  },
+  {
+   "id": 68,
+   "template_id": 2,
+   "prompt": "chair = milk cloud = fish chair =",
+   "corrupt_prompt": "chair = fish cloud = milk chair =",
+   "answer_token": "milk",
+   "distractor_token": "fish",
+   "io_name": "milk",
+   "subject_name": "fish"
+  },
+  {
+   "id": 69,
+   "template_id": 3,
+   "prompt": "north : field bread : salt north :",
+   "corrupt_prompt": "north : salt bread : field north :",
+   "answer_token": "field",
+   "distractor_token": "salt",
+   "io_name": "field",
+   "subject_name": "salt"
+  },
+  {
+   "id": 70,
+   "template_id": 4,
+   "prompt": "car | blue table | salt car |",
+   "corrupt_prompt": "car | salt table | blue car |",
+   "answer_token": "blue",
+   "distractor_token": "salt",
+   "io_name": "blue",
+   "subject_name": "salt"
+  },
+  {
+   "id": 71,
+   "template_id": 5,
+   "prompt": "bird , bread field , cloud bird ,",
+   "corrupt_prompt": "bird , cloud field , bread bird ,",
+   "answer_token": "bread",
+   "distractor_token": "cloud",
+   "io_name": "bread",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 72,
+   "template_id": 0,
+   "prompt": "milk rain door lake milk",
+   "corrupt_prompt": "milk lake door rain milk",
+   "answer_token": "rain",
+   "distractor_token": "lake",
+   "io_name": "rain",
+   "subject_name": "lake"
+  },
+  {
+   "id": 73,
+   "template_id": 1,
+   "prompt": "blue -> cloud lake -> bird blue ->",
+   "corrupt_prompt": "blue -> bird lake -> cloud blue ->",
+   "answer_token": "cloud",
+   "distractor_token": "bird",
+   "io_name": "cloud",
+   "subject_name": "bird"
+  },
+  {
+   "id": 74,
+   "template_id": 2,
+   "prompt": "lake = fish north = gold lake =",
+   "corrupt_prompt": "lake = gold north = fish lake =",
+   "answer_token": "fish",
+   "distractor_token": "gold",
+   "io_name": "fish",
+   "subject_name": "gold"
+  },
+  {
+   "id": 75,
+   "template_id": 3,
+   "prompt": "milk : wheat wind : salt milk :",
+   "corrupt_prompt": "milk : salt wind : wheat milk :",
+   "answer_token": "wheat",
+   "distractor_token": "salt",
+   "io_name": "wheat",
+   "subject_name": "salt"
+  },
+  {
+   "id": 76,
+   "template_id": 4,
+   "prompt": "water | wheat rain | chair water |",
+   "corrupt_prompt": "water | chair rain | wheat water |",
+   "answer_token": "wheat",
+   "distractor_token": "chair",
+   "io_name": "wheat",
+   "subject_name": "chair"
+  },
+  {
+   "id": 77,
+   "template_id": 5,
+   "prompt": "door , gold blue , snow door ,",
+   "corrupt_prompt": "door , snow blue , gold door ,",
+   "answer_token": "gold",
+   "distractor_token": "snow",
+   "io_name": "gold",
+   "subject_name": "snow"
+  },
+  {
+   "id": 78,
+   "template_id": 0,
+   "prompt": "wind salt blue hill wind",
+   "corrupt_prompt": "wind hill blue salt wind",
+   "answer_token": "salt",
+   "distractor_token": "hill",
+   "io_name": "salt",
+   "subject_name": "hill"
+  },
+  {
+   "id": 79,
+   "template_id": 1,
+   "prompt": "blue -> snow rain -> road blue ->",
+   "corrupt_prompt": "blue -> road rain -> snow blue ->",
+   "answer_token": "snow",
+   "distractor_token": "road",
+   "io_name": "snow",
+   "subject_name": "road"
+  },
+  {
+   "id": 80,
+   "template_id": 2,
+   "prompt": "road = cloud blue = bread road =",
+   "corrupt_prompt": "road = bread blue = cloud road =",
+   "answer_token": "cloud",
+   "distractor_token": "bread",
+   "io_name": "cloud",
+   "subject_name": "bread"
+  },
+  {
+   "id": 81,
+   "template_id": 3,
+   "prompt": "cloud : bread star : water cloud :",
+   "corrupt_prompt": "cloud : water star : bread cloud :",
+   "answer_token": "bread",
+   "distractor_token": "water",
+   "io_name": "bread",
+   "subject_name": "water"
+  },
+  {
+   "id": 82,
+   "template_id": 4,
+   "prompt": "field | lake car | snow field |",
+   "corrupt_prompt": "field | snow car | lake field |",
+   "answer_token": "lake",
+   "distractor_token": "snow",
+   "io_name": "lake",
+   "subject_name": "snow"
+  },
+  {
+   "id": 83,
+   "template_id": 5,
+   "prompt": "field , snow star , blue field ,",
+   "corrupt_prompt": "field , blue star , snow field ,",
+   "answer_token": "snow",
+   "distractor_token": "blue",
+   "io_name": "snow",
+   "subject_name": "blue"
+  },
+  {
+   "id": 84,
+   "template_id": 0,
+   "prompt": "star bread milk water star",
+   "corrupt_prompt": "star water milk bread star",
+   "answer_token": "bread",
+   "distractor_token": "water",
+   "io_name": "bread",
+   "subject_name": "water"
+  },
+  {
+   "id": 85,
+   "template_id": 1,
+   "prompt": "snow -> road hill -> fish snow ->",
+   "corrupt_prompt": "snow -> fish hill -> road snow ->",
+   "answer_token": "road",
+   "distractor_token": "fish",
+   "io_name": "road",
+   "subject_name": "fish"
+  },
+  {
+   "id": 86,
+   "template_id": 2,
+   "prompt": "door = water wheat = hill door =",
+   "corrupt_prompt": "door = hill wheat = water door =",
+   "answer_token": "water",
+   "distractor_token": "hill",
+   "io_name": "water",
+   "subject_name": "hill"
+  },
+  {
+   "id": 87,
+   "template_id": 3,
+   "prompt": "field : fish lake : chair field :",
+   "corrupt_prompt": "field : chair lake : fish field :",
+   "answer_token": "fish",
+   "distractor_token": "chair",
+   "io_name": "fish",
+   "subject_name": "chair"
+  },
+  {
+   "id": 88,
+   "template_id": 4,
+   "prompt": "water | table gold | north water |",
+   "corrupt_prompt": "water | north gold | table water |",
+   "answer_token": "table",
+   "distractor_token": "north",
+   "io_name": "table",
+   "subject_name": "north"
+  },
+  {
+   "id": 89,
+   "template_id": 5,
+   "prompt": "hill , bread bird , north hill ,",
+   "corrupt_prompt": "hill , north bird , bread hill ,",
+   "answer_token": "bread",
+   "distractor_token": "north",
+   "io_name": "bread",
+   "subject_name": "north"
+  },
+  {
+   "id": 90,
+   "template_id": 0,
+   "prompt": "star snow car bread star",
+   "corrupt_prompt": "star bread car snow star",
+   "answer_token": "snow",
+   "distractor_token": "bread",
+   "io_name": "snow",
+   "subject_name": "bread"
+  },
+  {
+   "id": 91,
+   "template_id": 1,
+   "prompt": "salt -> door road -> fish salt ->",
+   "corrupt_prompt": "salt -> fish road -> door salt ->",
+   "answer_token": "door",
+   "distractor_token": "fish",
+   "io_name": "door",
+   "subject_name": "fish"
+  },
+  {
+   "id": 92,
+   "template_id": 2,
+   "prompt": "chair = house bread = field chair =",
+   "corrupt_prompt": "chair = field bread = house chair =",
+   "answer_token": "house",
+   "distractor_token": "field",
+   "io_name": "house",
+   "subject_name": "field"
+  },
+  {
+   "id": 93,
+   "template_id": 3,
+   "prompt": "house : gold cloud : north house :",
+   "corrupt_prompt": "house : north cloud : gold house :",
+   "answer_token": "gold",
+   "distractor_token": "north",
+   "io_name": "gold",
+   "subject_name": "north"
+  },
+  {
+   "id": 94,
+   "template_id": 4,
+   "prompt": "salt | wheat gold | star salt |",
+   "corrupt_prompt": "salt | star gold | wheat salt |",
+   "answer_token": "wheat",
+   "distractor_token": "star",
+   "io_name": "wheat",
+   "subject_name": "star"
+  },
+  {
+   "id": 95,
+   "template_id": 5,
+   "prompt": "table , road bird , water table ,",
+   "corrupt_prompt": "table , water bird , road table ,",
+   "answer_token": "road",
+   "distractor_token": "water",
+   "io_name": "road",
+   "subject_name": "water"
+  },
+  {
+   "id": 96,
+   "template_id": 0,
+   "prompt": "salt gold water car salt",
+   "corrupt_prompt": "salt car water gold salt",
+   "answer_token": "gold",
+   "distractor_token": "car",
+   "io_name": "gold",
+   "subject_name": "car"
+  },
+  {
+   "id": 97,
+   "template_id": 1,
+   "prompt": "chair -> fish car -> wind chair ->",
+   "corrupt_prompt": "chair -> wind car -> fish chair ->",
+   "answer_token": "fish",
+   "distractor_token": "wind",
+   "io_name": "fish",
+   "subject_name": "wind"
+  },
+  {
+   "id": 98,
+   "template_id": 2,
+   "prompt": "salt = chair fish = gold salt =",
+   "corrupt_prompt": "salt = gold fish = chair salt =",
+   "answer_token": "chair",
+   "distractor_token": "gold",
+   "io_name": "chair",
+   "subject_name": "gold"
+  },
+  {
+   "id": 99,
+   "template_id": 3,
+   "prompt": "star : door wheat : hill star :",
+   "corrupt_prompt": "star : hill wheat : door star :",
+   "answer_token": "door",
+   "distractor_token": "hill",
+   "io_name": "door",
+   "subject_name": "hill"
+  },
+  {
+   "id": 100,
+   "template_id": 4,
+   "prompt": "door | water table | fish door |",
+   "corrupt_prompt": "door | fish table | water door |",
+   "answer_token": "water",
+   "distractor_token": "fish",
+   "io_name": "water",
+   "subject_name": "fish"
+  },
+  {
+   "id": 101,
+   "template_id": 5,
+   "prompt": "road , rain fish , blue road ,",
+   "corrupt_prompt": "road , blue fish , rain road ,",
+   "answer_token": "rain",
+   "distractor_token": "blue",
+   "io_name": "rain",
+   "subject_name": "blue"
+  },
+  {
+   "id": 102,
+   "template_id": 0,
+   "prompt": "bread table milk fish bread",
+   "corrupt_prompt": "bread fish milk table bread",
+   "answer_token": "table",
+   "distractor_token": "fish",
+   "io_name": "table",
+   "subject_name": "fish"
+  },
+  {
+   "id": 103,
+   "template_id": 1,
+   "prompt": "blue -> bird hill -> chair blue ->",
+   "corrupt_prompt": "blue -> chair hill -> bird blue ->",
+   "answer_token": "bird",
+   "distractor_token": "chair",
+   "io_name": "bird",
+   "subject_name": "chair"
+  },
+  {
+   "id": 104,
+   "template_id": 2,
+   "prompt": "table = fish cloud = wind table =",
+   "corrupt_prompt": "table = wind cloud = fish table =",
+   "answer_token": "fish",
+   "distractor_token": "wind",
+   "io_name": "fish",
+   "subject_name": "wind"
+  },
+  {
+   "id": 105,
+   "template_id": 3,
+   "prompt": "north : salt wheat : milk north :",
+   "corrupt_prompt": "north : milk wheat : salt north :",
+   "answer_token": "salt",
+   "distractor_token": "milk",
+   "io_name": "salt",
+   "subject_name": "milk"
+  },
+  {
+   "id": 106,
+   "template_id": 4,
+   "prompt": "salt | bird car | bread salt |",
+   "corrupt_prompt": "salt | bread car | bird salt |",
+   "answer_token": "bird",
+   "distractor_token": "bread",
+   "io_name": "bird",
+   "subject_name": "bread"
+  },
+  {
+   "id": 107,
+   "template_id": 5,
+   "prompt": "wheat , chair salt , blue wheat ,",
+   "corrupt_prompt": "wheat , blue salt , chair wheat ,",
+   "answer_token": "chair",
+   "distractor_token": "blue",
+   "io_name": "chair",
+   "subject_name": "blue"
+  },
+  {
+   "id": 108,
+   "template_id": 0,
+   "prompt": "house snow salt chair house",
+   "corrupt_prompt": "house chair salt snow house",
+   "answer_token": "snow",
+   "distractor_token": "chair",
+   "io_name": "snow",
+   "subject_name": "chair"
+  },
+  {
+   "id": 109,
+   "template_id": 1,
+   "prompt": "milk -> chair blue -> gold milk ->",
+   "corrupt_prompt": "milk -> gold blue -> chair milk ->",
+   "answer_token": "chair",
+   "distractor_token": "gold",
+   "io_name": "chair",
+   "subject_name": "gold"
+  },
+  {
+   "id": 110,
+   "template_id": 2,
+   "prompt": "house = blue door = water house =",
+   "corrupt_prompt": "house = water door = blue house =",
+   "answer_token": "blue",
+   "distractor_token": "water",
+   "io_name": "blue",
+   "subject_name": "water"
+  },
+  {
+   "id": 111,
+   "template_id": 3,
+   "prompt": "field : water car : house field :",
+   "corrupt_prompt": "field : house car : water field :",
+   "answer_token": "water",
+   "distractor_token": "house",
+   "io_name": "water",
+   "subject_name": "house"
+  },
+  {
+   "id": 112,
+   "template_id": 4,
+   "prompt": "salt | milk star | wind salt |",
+   "corrupt_prompt": "salt | wind star | milk salt |",
+   "answer_token": "milk",
+   "distractor_token": "wind",
+   "io_name": "milk",
+   "subject_name": "wind"
+  },
+  {
+   "id": 113,
+   "template_id": 5,
+   "prompt": "chair , field cloud , milk chair ,",
+   "corrupt_prompt": "chair , milk cloud , field chair ,",
+   "answer_token": "field",
+   "distractor_token": "milk",
+   "io_name": "field",
+   "subject_name": "milk"
+  },
+  {
+   "id": 114,
+   "template_id": 0,
+   "prompt": "bird cloud wind hill bird",
+   "corrupt_prompt": "bird hill wind cloud bird",
+   "answer_token": "cloud",
+   "distractor_token": "hill",
+   "io_name": "cloud",
+   "subject_name": "hill"
+  },
+  {
+   "id": 115,
+   "template_id": 1,
+   "prompt": "milk -> water wind -> field milk ->",
+   "corrupt_prompt": "milk -> field wind -> water milk ->",
+   "answer_token": "water",
+   "distractor_token": "field",
+   "io_name": "water",
+   "subject_name": "field"
+  },
+  {
+   "id": 116,
+   "template_id": 2,
+   "prompt": "fish = cloud wheat = car fish =",
+   "corrupt_prompt": "fish = car wheat = cloud fish =",
+   "answer_token": "cloud",
+   "distractor_token": "car",
+   "io_name": "cloud",
+   "subject_name": "car"
+  },
+  {
+   "id": 117,
+   "template_id": 3,
+   "prompt": "lake : blue rain : field lake :",
+   "corrupt_prompt": "lake : field rain : blue lake :",
+   "answer_token": "blue",
+   "distractor_token": "field",
+   "io_name": "blue",
+   "subject_name": "field"
+  },
+  {
+   "id": 118,
+   "template_id": 4,
+   "prompt": "door | north house | gold door |",
+   "corrupt_prompt": "door | gold house | north door |",
+   "answer_token": "north",
+   "distractor_token": "gold",
+   "io_name": "north",
+   "subject_name": "gold"
+  },
+  {
+   "id": 119,
+   "template_id": 5,
+   "prompt": "field , bird water , door field ,",
+   "corrupt_prompt": "field , door water , bird field ,",
+   "answer_token": "bird",
+   "distractor_token": "door",
+   "io_name": "bird",
+   "subject_name": "door"
+  },
+  {
+   "id": 120,
+   "template_id": 0,
+   "prompt": "lake hill fish bread lake",
+   "corrupt_prompt": "lake bread fish hill lake",
+   "answer_token": "hill",
+   "distractor_token": "bread",
+   "io_name": "hill",
+   "subject_name": "bread"
+  },
+  {
+   "id": 121,
+   "template_id": 1,
+   "prompt": "fish -> house table -> road fish ->",
+   "corrupt_prompt": "fish -> road table -> house fish ->",
+   "answer_token": "house",
+   "distractor_token": "road",
+   "io_name": "house",
+   "subject_name": "road"
+  },
+  {
+   "id": 122,
+   "template_id": 2,
+   "prompt": "lake = water salt = hill lake =",
+   "corrupt_prompt": "lake = hill salt = water lake =",
+   "answer_token": "water",
+   "distractor_token": "hill",
+   "io_name": "water",
+   "subject_name": "hill"
+  },
+  {
+   "id": 123,
+   "template_id": 3,
+   "prompt": "bird : car fish : cloud bird :",
+   "corrupt_prompt": "bird : cloud fish : car bird :",
+   "answer_token": "car",
+   "distractor_token": "cloud",
+   "io_name": "car",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 124,
+   "template_id": 4,
+   "prompt": "snow | fish blue | car snow |",
+   "corrupt_prompt": "snow | car blue | fish snow |",
+   "answer_token": "fish",
+   "distractor_token": "car",
+   "io_name": "fish",
+   "subject_name": "car"
+  },
+  {
+   "id": 125,
+   "template_id": 5,
+   "prompt": "star , milk house , wind star ,",
+   "corrupt_prompt": "star , wind house , milk star ,",
+   "answer_token": "milk",
+   "distractor_token": "wind",
+   "io_name": "milk",
+   "subject_name": "wind"
+  },
+  {
+   "id": 126,
+   "template_id": 0,
+   "prompt": "hill milk star road hill",
+   "corrupt_prompt": "hill road star milk hill",
+   "answer_token": "milk",
+   "distractor_token": "road",
+   "io_name": "milk",
+   "subject_name": "road"
+  },
+  {
+   "id": 127,
+   "template_id": 1,
+   "prompt": "car -> lake snow -> door car ->",
+   "corrupt_prompt": "car -> door snow -> lake car ->",
+   "answer_token": "lake",
+   "distractor_token": "door",
+   "io_name": "lake",
+   "subject_name": "door"
+  },
+  {
+   "id": 128,
+   "template_id": 2,
+   "prompt": "fish = blue wheat = milk fish =",
+   "corrupt_prompt": "fish = milk wheat = blue fish =",
+   "answer_token": "blue",
+   "distractor_token": "milk",
+   "io_name": "blue",
+   "subject_name": "milk"
+  },
+  {
+   "id": 129,
+   "template_id": 3,
+   "prompt": "bird : road salt : water bird :",
+   "corrupt_prompt": "bird : water salt : road bird :",
+   "answer_token": "road",
+   "distractor_token": "water",
+   "io_name": "road",
+   "subject_name": "water"
+  },
+  {
+   "id": 130,
+   "template_id": 4,
+   "prompt": "wind | water door | house wind |",
+   "corrupt_prompt": "wind | house door | water wind |",
+   "answer_token": "water",
+   "distractor_token": "house",
+   "io_name": "water",
+   "subject_name": "house"
+  },
+  {
+   "id": 131,
+   "template_id": 5,
+   "prompt": "milk , bread water , hill milk ,",
+   "corrupt_prompt": "milk , hill water , bread milk ,",
+   "answer_token": "bread",
+   "distractor_token": "hill",
+   "io_name": "bread",
+   "subject_name": "hill"
+  },
+  {
+   "id": 132,
+   "template_id": 0,
+   "prompt": "star hill water car star",
+   "corrupt_prompt": "star car water hill star",
+   "answer_token": "hill",
+   "distractor_token": "car",
+   "io_name": "hill",
+   "subject_name": "car"
+  },
+  {
+   "id": 133,
+   "template_id": 1,
+   "prompt": "wind -> gold road -> water wind ->",
+   "corrupt_prompt": "wind -> water road -> gold wind ->",
+   "answer_token": "gold",
+   "distractor_token": "water",
+   "io_name": "gold",
+   "subject_name": "water"
+  },
+  {
+   "id": 134,
+   "template_id": 2,
+   "prompt": "milk = hill lake = wheat milk =",
+   "corrupt_prompt": "milk = wheat lake = hill milk =",
+   "answer_token": "hill",
+   "distractor_token": "wheat",
+   "io_name": "hill",
+   "subject_name": "wheat"
+  },
+  {
+   "id": 135,
+   "template_id": 3,
+   "prompt": "gold : salt chair : door gold :",
+   "corrupt_prompt": "gold : door chair : salt gold :",
+   "answer_token": "salt",
+   "distractor_token": "door",
+   "io_name": "salt",
+   "subject_name": "door"
+  },
+  {
+   "id": 136,
+   "template_id": 4,
+   "prompt": "milk | water lake | wind milk |",
+   "corrupt_prompt": "milk | wind lake | water milk |",
+   "answer_token": "water",
+   "distractor_token": "wind",
+   "io_name": "water",
+   "subject_name": "wind"
+  },
+  {
+   "id": 137,
+   "template_id": 5,
+   "prompt": "cloud , star snow , gold cloud ,",
+   "corrupt_prompt": "cloud , gold snow , star cloud ,",
+   "answer_token": "star",
+   "distractor_token": "gold",
+   "io_name": "star",
+   "subject_name": "gold"
+  },
+  {
+   "id": 138,
+   "template_id": 0,
+   "prompt": "lake salt bird gold lake",
+   "corrupt_prompt": "lake gold bird salt lake",
+   "answer_token": "salt",
+   "distractor_token": "gold",
+   "io_name": "salt",
+   "subject_name": "gold"
+  },
+  {
+   "id": 139,
+   "template_id": 1,
+   "prompt": "gold -> door milk -> snow gold ->",
+   "corrupt_prompt": "gold -> snow milk -> door gold ->",
+   "answer_token": "door",
+   "distractor_token": "snow",
+   "io_name": "door",
+   "subject_name": "snow"
+  },
+  {
+   "id": 140,
+   "template_id": 2,
+   "prompt": "star = table hill = north star =",
+   "corrupt_prompt": "star = north hill = table star =",
+   "answer_token": "table",
+   "distractor_token": "north",
+   "io_name": "table",
+   "subject_name": "north"
+  },
+  {
+   "id": 141,
+   "template_id": 3,
+   "prompt": "north : water door : road north :",
+   "corrupt_prompt": "north : road door : water north :",
+   "answer_token": "water",
+   "distractor_token": "road",
+   "io_name": "water",
+   "subject_name": "road"
+  },
+  {
+   "id": 142,
+   "template_id": 4,
+   "prompt": "rain | wind cloud | water rain |",
+   "corrupt_prompt": "rain | water cloud | wind rain |",
+   "answer_token": "wind",
+   "distractor_token": "water",
+   "io_name": "wind",
+   "subject_name": "water"
+  },
+  {
+   "id": 143,
+   "template_id": 5,
+   "prompt": "bread , gold road , water bread ,",
+   "corrupt_prompt": "bread , water road , gold bread ,",
+   "answer_token": "gold",
+   "distractor_token": "water",
+   "io_name": "gold",
+   "subject_name": "water"
+  },
+  {
+   "id": 144,
+   "template_id": 0,
+   "prompt": "table star hill bread table",
+   "corrupt_prompt": "table bread hill star table",
+   "answer_token": "star",
+   "distractor_token": "bread",
+   "io_name": "star",
+   "subject_name": "bread"
+  },
+  {
+   "id": 145,
+   "template_id": 1,
+   "prompt": "field -> water gold -> door field ->",
+   "corrupt_prompt": "field -> door gold -> water field ->",
+   "answer_token": "water",
+   "distractor_token": "door",
+   "io_name": "water",
+   "subject_name": "door"
+  },
+  {
+   "id": 146,
+   "template_id": 2,
+   "prompt": "chair = bird blue = field chair =",
+   "corrupt_prompt": "chair = field blue = bird chair =",
+   "answer_token": "bird",
+   "distractor_token": "field",
+   "io_name": "bird",
+   "subject_name": "field"
+  },
+  {
+   "id": 147,
+   "template_id": 3,
+   "prompt": "rain : star bread : north rain :",
+   "corrupt_prompt": "rain : north bread : star rain :",
+   "answer_token": "star",
+   "distractor_token": "north",
+   "io_name": "star",
+   "subject_name": "north"
+  },
+  {
+   "id": 148,
+   "template_id": 4,
+   "prompt": "milk | table snow | door milk |",
+   "corrupt_prompt": "milk | door snow | table milk |",
+   "answer_token": "table",
+   "distractor_token": "door",
+   "io_name": "table",
+   "subject_name": "door"
+  },
+  {
+   "id": 149,
+   "template_id": 5,
+   "prompt": "wheat , lake rain , field wheat ,",
+   "corrupt_prompt": "wheat , field rain , lake wheat ,",
+   "answer_token": "lake",
+   "distractor_token": "field",
+   "io_name": "lake",
+   "subject_name": "field"
+  },
+  {
+   "id": 150,
+   "template_id": 0,
+   "prompt": "chair table wheat bird chair",
+   "corrupt_prompt": "chair bird wheat table chair",
+   "answer_token": "table",
+   "distractor_token": "bird",
+   "io_name": "table",
+   "subject_name": "bird"
+  },
+  {
+   "id": 151,
+   "template_id": 1,
+   "prompt": "car -> milk field -> cloud car ->",
+   "corrupt_prompt": "car -> cloud field -> milk car ->",
+   "answer_token": "milk",
+   "distractor_token": "cloud",
+   "io_name": "milk",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 152,
+   "template_id": 2,
+   "prompt": "wheat = road north = blue wheat =",
+   "corrupt_prompt": "wheat = blue north = road wheat =",
+   "answer_token": "road",
+   "distractor_token": "blue",
+   "io_name": "road",
+   "subject_name": "blue"
+  },
+  {
+   "id": 153,
+   "template_id": 3,
+   "prompt": "salt : field car : north salt :",
+   "corrupt_prompt": "salt : north car : field salt :",
+   "answer_token": "field",
+   "distractor_token": "north",
+   "io_name": "field",
+   "subject_name": "north"
+  },
+  {
+   "id": 154,
+   "template_id": 4,
+   "prompt": "chair | north water | road chair |",
+   "corrupt_prompt": "chair | road water | north chair |",
+   "answer_token": "north",
+   "distractor_token": "road",
+   "io_name": "north",
+   "subject_name": "road"
+  },
+  {
+   "id": 155,
+   "template_id": 5,
+   "prompt": "salt , star hill , north salt ,",
+   "corrupt_prompt": "salt , north hill , star salt ,",
+   "answer_token": "star",
+   "distractor_token": "north",
+   "io_name": "star",
+   "subject_name": "north"
+  },
+  {
+   "id": 156,
+   "template_id": 0,
+   "prompt": "star wind road milk star",
+   "corrupt_prompt": "star milk road wind star",
+   "answer_token": "wind",
+   "distractor_token": "milk",
+   "io_name": "wind",
+   "subject_name": "milk"
+  },
+  {
+   "id": 157,
+   "template_id": 1,
+   "prompt": "salt -> north cloud -> wind salt ->",
+   "corrupt_prompt": "salt -> wind cloud -> north salt ->",
+   "answer_token": "north",
+   "distractor_token": "wind",
+   "io_name": "north",
+   "subject_name": "wind"
+  },
+  {
+   "id": 158,
+   "template_id": 2,
+   "prompt": "rain = north fish = field rain =",
+   "corrupt_prompt": "rain = field fish = north rain =",
+   "answer_token": "north",
+   "distractor_token": "field",
+   "io_name": "north",
+   "subject_name": "field"
+  },
+  {
+   "id": 159,
+   "template_id": 3,
+   "prompt": "table : fish road : rain table :",
+   "corrupt_prompt": "table : rain road : fish table :",
+   "answer_token": "fish",
+   "distractor_token": "rain",
+   "io_name": "fish",
+   "subject_name": "rain"
+  },
+  {
+   "id": 160,
+   "template_id": 4,
+   "prompt": "table | field fish | north table |",
+   "corrupt_prompt": "table | north fish | field table |",
+   "answer_token": "field",
+   "distractor_token": "north",
+   "io_name": "field",
+   "subject_name": "north"
+  },
+  {
+   "id": 161,
+   "template_id": 5,
+   "prompt": "bread , wheat gold , field bread ,",
+   "corrupt_prompt": "bread , field gold , wheat bread ,",
+   "answer_token": "wheat",
+   "distractor_token": "field",
+   "io_name": "wheat",
+   "subject_name": "field"
+  },
+  {
+   "id": 162,
+   "template_id": 0,
+   "prompt": "fish hill salt bread fish",
+   "corrupt_prompt": "fish bread salt hill fish",
+   "answer_token": "hill",
+   "distractor_token": "bread",
+   "io_name": "hill",
+   "subject_name": "bread"
+  },
+  {
+   "id": 163,
+   "template_id": 1,
+   "prompt": "chair -> field lake -> wheat chair ->",
+   "corrupt_prompt": "chair -> wheat lake -> field chair ->",
+   "answer_token": "field",
+   "distractor_token": "wheat",
+   "io_name": "field",
+   "subject_name": "wheat"
+  },
+  {
+   "id": 164,
+   "template_id": 2,
+   "prompt": "chair = wheat door = bread chair =",
+   "corrupt_prompt": "chair = bread door = wheat chair =",
+   "answer_token": "wheat",
+   "distractor_token": "bread",
+   "io_name": "wheat",
+   "subject_name": "bread"
+  },
+  {
+   "id": 165,
+   "template_id": 3,
+   "prompt": "milk : hill salt : north milk :",
+   "corrupt_prompt": "milk : north salt : hill milk :",
+   "answer_token": "hill",
+   "distractor_token": "north",
+   "io_name": "hill",
+   "subject_name": "north"
+  },
+  {
+   "id": 166,
+   "template_id": 4,
+   "prompt": "milk | blue door | lake milk |",
+   "corrupt_prompt": "milk | lake door | blue milk |",
+   "answer_token": "blue",
+   "distractor_token": "lake",
+   "io_name": "blue",
+   "subject_name": "lake"
+  },
+  {
+   "id": 167,
+   "template_id": 5,
+   "prompt": "snow , wheat bird , lake snow ,",
+   "corrupt_prompt": "snow , lake bird , wheat snow ,",
+   "answer_token": "wheat",
+   "distractor_token": "lake",
+   "io_name": "wheat",
+   "subject_name": "lake"
+  },
+  {
+   "id": 168,
+   "template_id": 0,
+   "prompt": "rain bird house gold rain",
+   "corrupt_prompt": "rain gold house bird rain",
+   "answer_token": "bird",
+   "distractor_token": "gold",
+   "io_name": "bird",
+   "subject_name": "gold"
+  },
+  {
+   "id": 169,
+   "template_id": 1,
+   "prompt": "lake -> milk salt -> wind lake ->",
+   "corrupt_prompt": "lake -> wind salt -> milk lake ->",
+   "answer_token": "milk",
+   "distractor_token": "wind",
+   "io_name": "milk",
+   "subject_name": "wind"
+  },
+  {
+   "id": 170,
+   "template_id": 2,
+   "prompt": "wind = salt star = field wind =",
+   "corrupt_prompt": "wind = field star = salt wind =",
+   "answer_token": "salt",
+   "distractor_token": "field",
+   "io_name": "salt",
+   "subject_name": "field"
+  },
+  {
+   "id": 171,
+   "template_id": 3,
+   "prompt": "rain : field fish : milk rain :",
+   "corrupt_prompt": "rain : milk fish : field rain :",
+   "answer_token": "field",
+   "distractor_token": "milk",
+   "io_name": "field",
+   "subject_name": "milk"
+  },
+  {
+   "id": 172,
+   "template_id": 4,
+   "prompt": "rain | bird lake | hill rain |",
+   "corrupt_prompt": "rain | hill lake | bird rain |",
+   "answer_token": "bird",
+   "distractor_token": "hill",
+   "io_name": "bird",
+   "subject_name": "hill"
+  },
+  {
+   "id": 173,
+   "template_id": 5,
+   "prompt": "water , lake wind , cloud water ,",
+   "corrupt_prompt": "water , cloud wind , lake water ,",
+   "answer_token": "lake",
+   "distractor_token": "cloud",
+   "io_name": "lake",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 174,
+   "template_id": 0,
+   "prompt": "north chair star salt north",
+   "corrupt_prompt": "north salt star chair north",
+   "answer_token": "chair",
+   "distractor_token": "salt",
+   "io_name": "chair",
+   "subject_name": "salt"
+  },
+  {
+   "id": 175,
+   "template_id": 1,
+   "prompt": "bird -> lake snow -> water bird ->",
+   "corrupt_prompt": "bird -> water snow -> lake bird ->",
+   "answer_token": "lake",
+   "distractor_token": "water",
+   "io_name": "lake",
+   "subject_name": "water"
+  },
+  {
+   "id": 176,
+   "template_id": 2,
+   "prompt": "bird = bread table = milk bird =",
+   "corrupt_prompt": "bird = milk table = bread bird =",
+   "answer_token": "bread",
+   "distractor_token": "milk",
+   "io_name": "bread",
+   "subject_name": "milk"
+  },
+  {
+   "id": 177,
+   "template_id": 3,
+   "prompt": "chair : north cloud : blue chair :",
+   "corrupt_prompt": "chair : blue cloud : north chair :",
+   "answer_token": "north",
+   "distractor_token": "blue",
+   "io_name": "north",
+   "subject_name": "blue"
+  },
+  {
+   "id": 178,
+   "template_id": 4,
+   "prompt": "fish | lake hill | door fish |",
+   "corrupt_prompt": "fish | door hill | lake fish |",
+   "answer_token": "lake",
+   "distractor_token": "door",
+   "io_name": "lake",
+   "subject_name": "door"
+  },
+  {
+   "id": 179,
+   "template_id": 5,
+   "prompt": "north , hill lake , fish north ,",
+   "corrupt_prompt": "north , fish lake , hill north ,",
+   "answer_token": "hill",
+   "distractor_token": "fish",
+   "io_name": "hill",
+   "subject_name": "fish"
+  },
+  {
+   "id": 180,
+   "template_id": 0,
+   "prompt": "milk fish bread rain milk",
+   "corrupt_prompt": "milk rain bread fish milk",
+   "answer_token": "fish",
+   "distractor_token": "rain",
+   "io_name": "fish",
+   "subject_name": "rain"
+  },
+  {
+   "id": 181,
+   "template_id": 1,
+   "prompt": "bird -> wind salt -> blue bird ->",
+   "corrupt_prompt": "bird -> blue salt -> wind bird ->",
+   "answer_token": "wind",
+   "distractor_token": "blue",
+   "io_name": "wind",
+   "subject_name": "blue"
+  },
+  {
+   "id": 182,
+   "template_id": 2,
+   "prompt": "house = field table = bread house =",
+   "corrupt_prompt": "house = bread table = field house =",
+   "answer_token": "field",
+   "distractor_token": "bread",
+   "io_name": "field",
+   "subject_name": "bread"
+  },
+  {
+   "id": 183,
+   "template_id": 3,
+   "prompt": "table : blue bird : field table :",
+   "corrupt_prompt": "table : field bird : blue table :",
+   "answer_token": "blue",
+   "distractor_token": "field",
+   "io_name": "blue",
+   "subject_name": "field"
+  },
+  {
+   "id": 184,
+   "template_id": 4,
+   "prompt": "door | bird star | chair door |",
+   "corrupt_prompt": "door | chair star | bird door |",
+   "answer_token": "bird",
+   "distractor_token": "chair",
+   "io_name": "bird",
+   "subject_name": "chair"
+  },
+  {
+   "id": 185,
+   "template_id": 5,
+   "prompt": "field , chair rain , water field ,",
+   "corrupt_prompt": "field , water rain , chair field ,",
+   "answer_token": "chair",
+   "distractor_token": "water",
+   "io_name": "chair",
+   "subject_name": "water"
+  },
+  {
+   "id": 186,
+   "template_id": 0,
+   "prompt": "car snow door north car",
+   "corrupt_prompt": "car north door snow car",
+   "answer_token": "snow",
+   "distractor_token": "north",
+   "io_name": "snow",
+   "subject_name": "north"
+  },
+  {
+   "id": 187,
+   "template_id": 1,
+   "prompt": "wheat -> fish house -> cloud wheat ->",
+   "corrupt_prompt": "wheat -> cloud house -> fish wheat ->",
+   "answer_token": "fish",
+   "distractor_token": "cloud",
+   "io_name": "fish",
+   "subject_name": "cloud"
+  },
+  {
+   "id": 188,
+   "template_id": 2,
+   "prompt": "star = wind wheat = car star =",
+   "corrupt_prompt": "star = car wheat = wind star =",
+   "answer_token": "wind",
+   "distractor_token": "car",
+   "io_name": "wind",
+   "subject_name": "car"
+  },
+  {
+   "id": 189,
+   "template_id": 3,
+   "prompt": "cloud : gold car : snow cloud :",
+   "corrupt_prompt": "cloud : snow car : gold cloud :",
+   "answer_token": "gold",
+   "distractor_token": "snow",
+   "io_name": "gold",
+   "subject_name": "snow"
+  },
+  {
+   "id": 190,
+   "template_id": 4,
+   "prompt": "bird | gold snow | water bird |",
+   "corrupt_prompt": "bird | water snow | gold bird |",
+   "answer_token": "gold",
+   "distractor_token": "water",
+   "io_name": "gold",
+   "subject_name": "water"
+  },
+  {
+   "id": 191,
+   "template_id": 5,
+   "prompt": "lake , wheat door , bread lake ,",
+   "corrupt_prompt": "lake , bread door , wheat lake ,",
+   "answer_token": "wheat",
+   "distractor_token": "bread",
+   "io_name": "wheat",
+   "subject_name": "bread"
+  },
+  {
+   "id": 192,
+   "template_id": 0,
+   "prompt": "snow wheat table field snow",
+   "corrupt_prompt": "snow field table wheat snow",
+   "answer_token": "wheat",
+   "distractor_token": "field",
+   "io_name": "wheat",
+   "subject_name": "field"
+  },
+  {
+   "id": 193,
+   "template_id": 1,
+   "prompt": "car -> wheat gold -> water car ->",
+   "corrupt_prompt": "car -> water gold -> wheat car ->",
+   "answer_token": "wheat",
+   "distractor_token": "water",
+   "io_name": "wheat",
+   "subject_name": "water"
+  },
+  {
+   "id": 194,
+   "template_id": 2,
+   "prompt": "star = car snow = blue star =",
+   "corrupt_prompt": "star = blue snow = car star =",
+   "answer_token": "car",
+   "distractor_token": "blue",
+   "io_name": "car",
+   "subject_name": "blue"
+  },
+  {
+   "id": 195,
+   "template_id": 3,
+   "prompt": "house : salt milk : water house :",
+   "corrupt_prompt": "house : water milk : salt house :",
+   "answer_token": "salt",
+   "distractor_token": "water",
+   "io_name": "salt",
+   "subject_name": "water"
+  },
+  {
+   "id": 196,
+   "template_id": 4,
+   "prompt": "house | bread road | table house |",
+   "corrupt_prompt": "house | table road | bread house |",
+   "answer_token": "bread",
+   "distractor_token": "table",
+   "io_name": "bread",
+   "subject_name": "table"
+  },
+  {
+   "id": 197,
+   "template_id": 5,
+   "prompt": "hill , bird milk , rain hill ,",
+   "corrupt_prompt": "hill , rain milk , bird hill ,",
+   "answer_token": "bird",
+   "distractor_token": "rain",
+   "io_name": "bird",
+   "subject_name": "rain"
+  },
+  {
+   "id": 198,
+   "template_id": 0,
+   "prompt": "car milk house table car",
+   "corrupt_prompt": "car table house milk car",
+   "answer_token": "milk",
+   "distractor_token": "table",
+   "io_name": "milk",
+   "subject_name": "table"
+  },
+  {
+   "id": 199,
+   "template_id": 1,
+   "prompt": "north -> wheat chair -> milk north ->",
+   "corrupt_prompt": "north -> milk chair -> wheat north ->",
+   "answer_token": "wheat",
+   "distractor_token": "milk",
+   "io_name": "wheat",
+   "subject_name": "milk"
+  }
+ ]
+}

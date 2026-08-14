@@ -1,0 +1,419 @@
+% arXiv submission — A perturbation ladder for SAE dictionaries
+% J. Melton, American Code Labs — September 2026
+%
+% DRAFT. Unmeasured values are \pending{} and render red; the banner counts them.
+%
+% Framing note: this paper is a direct complement to Duan (arXiv:2606.03002), which
+% asks whether a FROZEN dictionary's features still fire the same way under
+% quantization. We ask whether the dictionary you would LEARN changes. The two
+% metrics are not comparable numerically and the draft must never imply they are.
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+            pdftitle={A Perturbation Ladder for Sparse Autoencoder Dictionaries},
+            pdfauthor={J. Melton}]{hyperref}
+\usepackage[htt]{hyphenat}
+\emergencystretch=2em
+
+% ── Draft placeholder machinery ───────────────────────────────────────────────
+\newcounter{pendingcount}
+% Robust: \pending appears inside \caption, which is a moving argument -- a fragile
+% macro there expands during .lof/.aux writing and crashes the engine.
+\DeclareRobustCommand{\pending}[1]{\stepcounter{pendingcount}%
+  \textcolor{red}{\textbf{[PENDING: #1]}}}
+\makeatletter
+\newcommand{\pendingtotal}{\textbf{?}}
+\AtEndDocument{\immediate\write\@auxout{%
+  \string\gdef\string\pendingtotal{\thependingcount}}}
+\makeatother
+\newcommand{\pendingnotice}{%
+  \begin{center}\fcolorbox{red}{yellow!15}{\parbox{0.92\textwidth}{\centering
+  \textbf{\textcolor{red}{DRAFT --- \pendingtotal\ unmeasured values remain.}}\\
+  \small Every red bracket marks a number the experiment has not yet returned.
+  No value in this document is estimated, extrapolated or illustrative:
+  a number is either measured or visibly absent.}}\end{center}\medskip}
+
+\title{\textbf{A Perturbation Ladder for Sparse Autoencoder\\Dictionaries: Seed,
+Optimizer and Precision\\Against a Measured Ceiling}}
+
+\author{
+  J.\ Melton \\[4pt]
+  American Code Labs \\
+  \texttt{jmelton@americancode.org}
+}
+
+\date{September 2026 \\ \smallskip \small Preprint. Under review.}
+
+\begin{document}
+\maketitle
+\pendingnotice
+
+% ── Abstract ──────────────────────────────────────────────────────────────────
+\begin{abstract}
+This paper measures how much of a sparse autoencoder's learned dictionary survives
+three perturbations---random seed, optimizer, and weight precision---using one matching
+procedure and one denominator, so that the three are comparable to each other.
+
+The seed rung supplies the reference the others are read against. Two TopK
+autoencoders differing \emph{only} in random seed---identical model, layer, corpus,
+architecture, optimizer and step count---agree on \textbf{7.9--8.3\%} of their
+matchable features under Pearson fingerprints (8.9--10.0\% under cosine), recovered at
+\textbf{108--112$\times$} a permutation null. Agreement is therefore strongly
+significant and, simultaneously, far from total: retraining on identical data
+reproduces under a tenth of a dictionary. Eight percent is the ceiling no perturbation
+can exceed. Against it we measure optimizer (Adam versus Muon) and precision (bf16
+versus locally converted 4-bit), and find \pending{headline: where precision and
+optimizer land relative to the 8\% ceiling and the 0.18--0.33\% cross-architecture
+floor}.
+
+The precision rung addresses a question that arises because interpretability on
+consumer hardware is usually done on quantized weights. \citet{duan2026quant} approach
+it by holding a pretrained autoencoder fixed and applying it to full-precision and
+quantized activations, reporting that roughly 62\% (Pythia-70M) and 51\% (Gemma-2-2B)
+of active features survive INT6 at correlation above $0.9$, and identify comparison
+against autoencoder \emph{training} variability as a complementary measurement their
+design does not make. That is the measurement reported here. The two designs answer
+different questions---whether a fixed dictionary's features still fire the same way,
+versus whether the dictionary one would learn is the same dictionary---and their
+percentages are quantities over different denominators that should not be compared
+numerically.
+
+Code, checkpoints and matching outputs are released; all runs are on a single Apple
+M1 Max.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+
+Sparse autoencoders are trained on the residual stream of a model that a researcher
+could afford to run. In practice that means quantized weights. Our own prior
+cross-architecture study \citep{melton2026sae} had to disclose that one of its three
+arms was quantized while the others were not, and could not say what that cost.
+
+\subsection{Two Different Questions}
+\label{sec:twoquestions}
+
+There are two ways to ask whether quantization damages interpretability, and they are
+not the same question.
+
+\textbf{Frozen dictionary.} Take one trained SAE. Apply it to activations from the
+full-precision model and from the quantized model. Ask whether each feature fires the
+same way. This is \citet{duan2026quant}'s design, and it isolates the effect of weight
+compression from anything to do with SAE training. It answers: \emph{if I already have
+a dictionary, do its features still mean what they meant?}
+
+\textbf{Relearned dictionary.} Train one SAE on full-precision activations and another,
+identically, on quantized activations. Match the two dictionaries. This is our design.
+It answers: \emph{if I do interpretability on a quantized model, do I discover the
+same features?}
+
+The second is the question a practitioner faces when they train an SAE on the only
+model that fits their machine. It is also strictly harder to interpret, because
+training an SAE twice does not give the same dictionary twice even with no perturbation
+at all---which is exactly why it needs a baseline, and why the baseline is this paper's
+central object.
+
+\subsection{Why a Survival Number Needs a Ceiling}
+
+\citeauthor{duan2026quant} report that 62.4\% of Pythia features survive INT6. Read
+alone, the natural reaction is that roughly a third of interpretability is lost. But
+neither their design nor ours has any meaning without knowing what perfect conditions
+produce. They supply a null in the correct direction---an FP16-versus-FP16 check
+returning correlation $1.0$ and zero damage---which establishes that their pipeline does
+not manufacture drift, and under a frozen dictionary that check is the right one.
+
+For the relearned-dictionary question no such trivial null exists, because rerunning
+training is itself a perturbation. The ceiling has to be measured. We measure it.
+
+\subsection{Contributions}
+
+\begin{enumerate}
+  \item \textbf{A measured ceiling for dictionary agreement.} Two autoencoders
+    differing only in seed agree on 7.9--8.3\% of matchable features at
+    108--112$\times$ the permutation null (\S\ref{sec:ceiling}). Any claim that a
+    perturbation ``changes the features'' has to clear this.
+  \item \textbf{A ladder rather than a point.} Seed, optimizer and precision measured
+    on one instrument with one denominator, so the rungs are comparable to each other
+    (\S\ref{sec:ladder}).
+  \item \textbf{The complement \citeauthor{duan2026quant} identify as missing}: the
+    training-variability comparison, on a locally converted deployed quantizer rather
+    than simulated round-to-nearest (\S\ref{sec:method}).
+  \item \textbf{An optimizer rung nobody has measured.} Whether the choice of optimizer
+    changes the learned decomposition is, as far as we can determine, unexamined
+    (\S\ref{sec:optimizer}).
+  \item \textbf{Activation collection is a versioned artifact}
+    (\S\ref{sec:notrepro}): released collection code is not sufficient to regenerate a
+    released activation set, and arms collected under different collector revisions are
+    not controlled.
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The Instrument}
+\label{sec:instrument}
+
+\subsection{Matching Procedure}
+
+Features are compared by chunk-averaged activation fingerprints over a held-out corpus.
+A feature pair is matched if each is the other's nearest neighbour---reciprocal
+matching, which prevents a single popular feature from absorbing many partners---and if
+similarity exceeds a threshold $\tau$.
+
+$\tau$ is not chosen by hand. It is set at the 99th percentile of a permutation null in
+which feature identity is shuffled, so that the expected number of false matches is
+approximately 1\% of null matches. Enrichment over that null, rather than raw match
+count, is the significance statistic.
+
+Dead and low-support features are excluded before matching, and all percentages are
+over \emph{matchable} features rather than dictionary size. This matters: a dictionary
+of 16{,}384 with 3{,}300 dead and 900 low-support features has about 12{,}100 matchable
+entries, and using the nominal size would deflate every figure by roughly a quarter.
+
+\subsection{The Ceiling}
+\label{sec:ceiling}
+
+Three autoencoders were trained differing only in random seed---identical model
+(Llama-3.2-3B, layer 14), corpus, architecture, dictionary size, $K$, optimizer, step
+count and learning-rate schedule.
+
+\begin{table}[H]
+  \centering
+  \caption{Seed control. Three pairwise comparisons among seeds 42, 123 and 456.
+    ``\% matchable'' is calibrated matches over matchable features; enrichment is
+    against the permutation null at $\tau = $ null $p_{99}$.}
+  \label{tab:ceiling}
+  \smallskip
+  \begin{tabular}{llrrr}
+    \toprule
+    fingerprint & pair & $\tau$ & \% matchable & enrichment \\
+    \midrule
+    Pearson & 42 vs 123  & 0.9827 & 8.06 & 109.1$\times$ \\
+    Pearson & 42 vs 456  & 0.9825 & 8.26 & 112.4$\times$ \\
+    Pearson & 123 vs 456 & 0.9830 & 7.93 & 108.3$\times$ \\
+    \midrule
+    cosine  & 42 vs 123  & 0.9844 & 9.00 & 121.1$\times$ \\
+    cosine  & 42 vs 456  & 0.9827 & 9.99 & 135.4$\times$ \\
+    cosine  & 123 vs 456 & 0.9846 & 8.93 & 121.6$\times$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Two readings are both correct and both necessary. The agreement is \emph{highly
+significant}---two orders of magnitude above chance, so the procedure detects shared
+structure when shared structure exists. And the agreement is \emph{small}: more than
+nine tenths of a dictionary is not reproduced by retraining on the same data with a
+different seed.
+
+\textbf{Consequences.} First, no perturbation can be shown to damage a dictionary by
+more than reseeding already does; 8\% is the ceiling. Second, and less comfortably, a
+published SAE dictionary is largely a sample from a distribution over dictionaries, and
+claims about ``the features of layer $\ell$'' inherit that.
+
+\subsection{The Floor}
+
+The same procedure applied across architectures (Llama-3.2-3B, Pythia-1.4B,
+Mistral-7B) returns 0.18--0.33\% of matchable features
+\citep{melton2026sae}. Ceiling and floor together give every rung below a scale.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The Ladder}
+\label{sec:ladder}
+
+\begin{table}[H]
+  \centering
+  \caption{Perturbation rungs. Each arm differs from the bf16/Adam reference in exactly
+    one respect; all share corpus, model, layer, dictionary size, $K$, batch, steps and
+    seed 42.}
+  \label{tab:rungs}
+  \smallskip
+  \begin{tabular}{llll}
+    \toprule
+    rung & what changes & agreement & vs ceiling \\
+    \midrule
+    seed      & random seed only        & 7.9--8.3\% & --- (defines it) \\
+    optimizer & Adam $\to$ Muon         & \pending{} & \pending{} \\
+    precision & bf16 $\to$ local 4-bit  & \pending{} & \pending{} \\
+    \midrule
+    floor     & architecture            & 0.18--0.33\% & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Precision}
+
+The 4-bit arm is converted \emph{locally} from the same bf16 checkpoint with
+\texttt{mlx\_lm.convert --q-bits 4}, not downloaded. A community upload cannot be
+verified as to base revision or conversion settings, and a provenance gap in the one
+variable under test would make the experiment unreadable. This also differs from
+\citet{duan2026quant}, who simulate round-to-nearest quantization and list the absence
+of a deployed quantizer as a limitation.
+
+A sanity gate aborts the run if the bf16 and 4-bit activation files hash identically,
+since that would mean the conversion had no effect and the comparison was vacuous.
+
+\subsection{Optimizer}
+\label{sec:optimizer}
+
+Adam versus Muon \citep{jordan2024muon}, the orthogonalised-momentum optimizer whose
+scaled results at Moonshot brought it to attention.
+
+\textbf{The arms are matched on reconstruction quality, not on learning rate.} Adam and
+Muon have natural learning rates two orders of magnitude apart, and Muon rescales
+internally by $\sqrt{\text{rows}/\text{cols}}$. Holding the learning rate fixed would
+pin a nuisance parameter and let quality float, so a low agreement score could mean
+nothing more than that Muon was undertrained. A short probe selects the Muon learning
+rate that matches Adam's FVE under an identical schedule, and the full run uses it.
+This is also the control our own prior finding argues for: if standard quality metrics
+cannot distinguish dictionaries that disagree about most of their content
+\citep{melton2026sae}, then equal-quality dictionaries are precisely what should be
+compared.
+
+Two implementation requirements keep the arms separated by one variable. Muon's
+Newton--Schulz step is defined for matrices, and MLX degrades to plain momentum SGD for
+0D/1D parameters, so biases are routed to AdamW as that implementation's documentation
+specifies. Muon's weight decay is set to zero rather than its default $0.01$, matching
+the Adam arm, which applies none.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Method}
+\label{sec:method}
+
+\pending{full method table: model, layer, corpus, token budget, dictionary size, K,
+steps, batch, schedule, hardware, wall-clock per arm}
+
+\subsection{Activation Provenance}
+\label{sec:notrepro}
+
+Every arm is trained on activations collected as part of this work, from a corpus
+regenerated and committed here, rather than on any previously collected set.
+
+This is a requirement, not a preference. Activations previously collected for the
+autoencoders of \citet{melton2026sae} cannot be regenerated from the released
+collection script: the metadata schemas differ in field names, indicating the collector
+was subsequently rewritten, and a hash over the leading $3.072 \times 10^{9}$ bytes
+differs between the original and a fresh collection. An activation set that cannot be
+regenerated cannot serve as a controlled arm, because the one variable under test would
+share a file with an uncontrolled one.
+
+The general form of the result is that \textbf{activation collection is a versioned
+artifact, not a script}. Releasing the code that produced a set of activations is not
+sufficient to reproduce them, and a pipeline that treats collection as reproducible by
+construction will silently compare arms that were not collected the same way.
+
+\section{Results}
+\label{sec:results}
+
+\begin{table}[H]
+  \centering
+  \caption{Agreement by rung. \pending{caption to state fingerprint metric and $\tau$}}
+  \label{tab:results}
+  \smallskip
+  \begin{tabular}{lrrrr}
+    \toprule
+    comparison & $\tau$ & matches & \% matchable & enrichment \\
+    \midrule
+    bf16 vs 4-bit  & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Adam vs Muon   & \pending{} & \pending{} & \pending{} & \pending{} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Dictionary Quality Across Arms}
+
+\pending{loss, FVE, L0, dead-feature count per arm. Prediction to be tested, not
+assumed: quality metrics will be near-identical across arms regardless of how far the
+dictionaries diverge, extending the metrics-blindness result of melton2026sae.}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Analysis}
+
+\emph{To be written once Table~\ref{tab:results} is filled, and written once. The
+measurement selects the argument; it is not a menu to hedge across.}
+
+\textbf{If precision agreement approaches the 8\% ceiling}: quantization perturbs the
+learned dictionary no more than reseeding does, and interpretability on 4-bit weights
+is sound to the same degree that interpretability on any single SAE is sound---which is
+a real qualification, but not one specific to quantization.
+
+\textbf{If it falls well below}: features discovered on quantized models are
+substantially not the features of the full-precision model, and a large amount of
+consumer-hardware interpretability needs re-examination.
+
+\textbf{If the optimizer rung moves as much as the precision rung}: the more
+uncomfortable outcome, since optimizer choice is rarely reported as a threat to
+validity at all.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Related Work}
+
+\citet{duan2026quant} is the closest work and the reference point throughout;
+\S\ref{sec:twoquestions} states the difference in question, and we do not present
+competing numbers for the same quantity. \citet{bricken2023monosemanticity} and
+\citet{cunningham2023sparse} establish the dictionary-learning setting;
+\citet{gao2024topk} the TopK variant used here. \pending{additional coverage: SAE
+reproducibility and feature-stability literature under vocabulary other than
+``feature universality'', given that phrase-count surveys proved unreliable for this
+purpose in companion work}.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Limitations}
+
+\textbf{One model, one layer.} Llama-3.2-3B layer 14. Whether the ceiling is
+8\% elsewhere is untested, and it is the number everything here is scaled by.
+
+\textbf{One quantization scheme.} MLX 4-bit group quantization at one bit-width.
+\citeauthor{duan2026quant} sweep INT4--INT8; we do not.
+
+\textbf{One architecture family for the ladder.} The floor is cross-architecture but
+the rungs are all Llama.
+
+\textbf{Matching is one operationalisation of ``same feature''.} Reciprocal nearest
+neighbour on activation fingerprints is not the only reasonable choice, and agreement
+percentages are not invariant to it---as the Pearson/cosine spread in
+Table~\ref{tab:ceiling} shows within this paper alone.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Reproducibility}
+
+Code and data: \url{https://github.com/american-code/ResearchPapers}. Archived at
+\pending{Zenodo concept DOI}.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+artifact & path \\
+\midrule
+run script          & \texttt{data/sae-runs/run\_quant\_interp.sh} \\
+optimizer arm       & \texttt{data/sae-runs/run\_muon\_arm.sh} \\
+trainer             & \texttt{data/sae-runs/train\_sae.py} \\
+matching            & \texttt{data/sae-analysis/quant\_interp\_match.py} \\
+seed control        & \texttt{data/seed-stability/} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All runs on a single Apple M1 Max, 32\,GB unified memory, via MLX. Seed 42 throughout
+except in the seed control.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

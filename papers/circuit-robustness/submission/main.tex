@@ -1,0 +1,589 @@
+% arXiv submission — Frame Dependence: circuit robustness under task-preserving shift
+% J. Melton, American Code Labs — September 2026
+%
+% DRAFT STATUS. Every number not yet measured is wrapped in \pending{} and renders
+% as a red bracketed placeholder, so a partially-filled draft cannot be mistaken for
+% a finished one at a glance. Before submission: \pendingcount must be zero and the
+% \pendingnotice below must be deleted.
+%
+% The results and discussion sections are deliberately written WITHOUT committing to
+% an outcome. The central measurement can land two ways and they support opposite
+% prescriptions; prose that assumes one and gets edited later is how a paper ends up
+% contradicting itself between sections.
+
+\documentclass[11pt,a4paper]{article}
+
+% ── Encoding & fonts ──────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% ── Math ──────────────────────────────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ── Layout ────────────────────────────────────────────────────────────────────
+\usepackage[margin=1.25in]{geometry}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{setspace}
+
+% ── Figures & tables ──────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{multirow}
+
+% ── Code listings ─────────────────────────────────────────────────────────────
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegray}{rgb}{0.97,0.97,0.97}
+\definecolor{commentgreen}{rgb}{0.0,0.5,0.0}
+\definecolor{keywordblue}{rgb}{0.0,0.0,0.7}
+\definecolor{stringbrown}{rgb}{0.5,0.1,0.0}
+
+\lstdefinestyle{python}{
+  language=Python, backgroundcolor=\color{codegray}, basicstyle=\small\ttfamily,
+  keywordstyle=\color{keywordblue}\bfseries, commentstyle=\color{commentgreen},
+  stringstyle=\color{stringbrown}, numberstyle=\tiny\color{gray}, numbers=left,
+  numbersep=6pt, stepnumber=1, frame=single, framerule=0.4pt, xleftmargin=2em,
+  breaklines=true, showstringspaces=false, tabsize=4, captionpos=b,
+}
+
+% ── Citations ─────────────────────────────────────────────────────────────────
+\usepackage[numbers,sort&compress]{natbib}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────────
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+            pdftitle={Frame Dependence: Circuit Robustness Under Task-Preserving Distribution Shift},
+            pdfauthor={J. Melton}]{hyperref}
+\usepackage[htt]{hyphenat}
+\emergencystretch=2em
+
+% ── Draft placeholder machinery ───────────────────────────────────────────────
+% A pending value is never rendered as a bare number. It is red, bracketed and
+% counted, so that no draft can silently read as complete and no placeholder can be
+% mistaken for a measurement in a screenshot or a skim.
+\newcounter{pendingcount}
+% Robust: a fragile macro inside \caption expands during .lof/.aux writing and
+% crashes the engine. Declared robust pre-emptively -- captions are exactly where a
+% pending value will eventually be needed.
+\DeclareRobustCommand{\pending}[1]{\stepcounter{pendingcount}%
+  \textcolor{red}{\textbf{[PENDING: #1]}}}
+
+% The notice sits at the top of the document but must report a total that is only
+% known at the bottom. Counting live would print 0 on the title page -- the exact
+% "looks finished" signal this banner exists to prevent -- so the total is written to
+% the .aux file at end of document and read back on the next pass.
+\makeatletter
+\newcommand{\pendingtotal}{\textbf{?}}
+\AtEndDocument{\immediate\write\@auxout{%
+  \string\gdef\string\pendingtotal{\thependingcount}}}
+\makeatother
+
+\newcommand{\pendingnotice}{%
+  \begin{center}\fcolorbox{red}{yellow!15}{\parbox{0.92\textwidth}{\centering
+  \textbf{\textcolor{red}{DRAFT --- \pendingtotal\ unmeasured values remain.}}\\
+  \small Every red bracket marks a number the experiment has not yet returned.
+  No value in this document is estimated, extrapolated or illustrative:
+  a number is either measured or visibly absent.}}\end{center}\medskip}
+
+\newcommand{\FD}{F(C_D \!\mid\! D)}
+\newcommand{\FDp}{F(C_D \!\mid\! D')}
+
+% ─────────────────────────────────────────────────────────────────────────────
+
+\title{\textbf{Frame Dependence: Circuit Robustness\\Under Task-Preserving Distribution Shift}}
+
+\author{
+  J.\ Melton \\[4pt]
+  American Code Labs \\
+  \texttt{jmelton@americancode.org}
+}
+
+\date{September 2026 \\ \smallskip \small Preprint. Under review.}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+\maketitle
+\pendingnotice
+
+% ── Abstract ──────────────────────────────────────────────────────────────────
+\begin{abstract}
+This paper measures whether a circuit discovered on a diverse set of sentence frames
+remains faithful on frames it was not discovered on. Across \pending{n} task
+families---indirect object identification, factual recall, subject--verb agreement and
+in-context induction---on Llama-3.2-3B and Pythia-1.4B, we find \pending{headline:
+does diverse discovery restore transfer, and does it depend on family}.
+\pending{secondary: frame axis versus entity axis}.
+
+The question is open because published results conflict. Merullo et al.\ report that
+the GPT-2 Small indirect-object circuit ``generalizes surprisingly well'' to prompt
+variants designed to break it. Rai et al.\ report cross-dataset faithfulness drops
+reaching 79 percentage points under variations that preserve task semantics, and
+conclude that circuit discovery recovers dataset-specific implementations. A third
+study finds near-zero circuit overlap between template groups. One candidate
+reconciliation is that the outcome is set by the \emph{discovery} data: a circuit found
+on a narrow set has no opportunity to encode anything but that set---with a single
+sentence frame, token position is perfectly confounded with syntactic role---while the
+circuit Merullo et al.\ evaluate came from a fifteen-template protocol. If that is the
+explanation, the remedy is a better discovery set rather than a new discovery
+algorithm, which is what the field has so far proposed.
+
+Deciding it requires a shift design that prior work does not supply: one holding the
+number of templates fixed while changing only their identity. Comparing a one-frame
+discovery set against a fifteen-frame evaluation set moves count and identity together
+and cannot separate them. We discover a circuit on $D$ and score it on $D'$, where both
+contain the same number of templates and share none, report the ratio $\FDp/\FD$ as
+\emph{retention}, and admit a result only where the model still performs the task on
+$D'$. Frame shift and entity shift are reported on separate axes rather than merged
+into a single held-out number.
+
+We release the protocol, twelve matched-diversity dataset pairs and reference
+implementations, all runnable on a single consumer machine.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+
+Mechanistic interpretability is growing quickly and validating slowly. A survey of
+indexed publications (\S\ref{sec:landscape}) finds \pending{N} papers matching
+``mechanistic interpretability'', \pending{pct}\% of them from the last two years,
+against \pending{N} matching ``circuit faithfulness'' and \pending{N} matching
+``circuit generalization''. Circuits are being discovered far faster than they are
+being tested, and the standard test---faithfulness---is normally computed on the data
+the circuit was found on.
+
+That is not a criticism of the metric. Faithfulness answers a well-posed question:
+does this subgraph, on its own, reproduce the behaviour? The problem is what readers
+take it to mean. A circuit reported as 87\% faithful is read as a claim about how the
+model does the task, not about how the model does the task \emph{on these prompts},
+and nothing in the usual reporting distinguishes those.
+
+\subsection{Two Explanations With Opposite Consequences}
+
+Our own prior work \citep{melton2026circuits} measured faithfulness falling from
+$0.663$ to $0.228$ (Llama-3.2-3B) and $0.854$ to $-0.028$ (Pythia-1.4B) when circuits
+discovered on one sentence frame were re-scored on fifteen, while both models
+continued to perform the task. We reported the mechanism as unverified, and it is
+worth being precise about why that caveat was unavoidable. The comparison moved two
+variables together:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & discovery set & evaluation set \\
+\midrule
+templates & 1 & 15 \\
+identity  & frame $f_1$ & frames $f_1 \dots f_{15}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two stories fit that evidence equally well.
+
+\textbf{(a) Circuits are frame-specific.} A circuit found on any frame fails on other
+frames. If so, a large and accelerating literature is reporting numbers that overstate
+what has been established, and the remedy is procedural: faithfulness must be reported
+on held-out data, always.
+
+\textbf{(b) The discovery set was degenerate.} With a single frame, token position is
+perfectly confounded with syntactic role. A head that appears circuit-critical may be
+responding to a fixed position, and such a head fails anywhere the coincidence breaks.
+If so, the published collapse is a fact about single-template discovery rather than
+about circuits, and the remedy is upstream and cheap: discover on diverse data.
+
+These prescribe opposite things---one says change how you report, the other says
+change how you search---and no comparison that varies template count can choose
+between them.
+
+\subsection{Contributions}
+
+Prior work has established that circuits often fail to transfer and that frame and
+lexical shift are distinct axes; \S\ref{sec:positioning} states precisely which of our
+earlier claims those results anticipate, and we do not restate them as new. What this
+paper adds:
+
+\begin{enumerate}
+  \item \textbf{A test of the cheap remedy.} The field's response to dataset-specific
+    circuits has been to propose new discovery algorithms. We test whether simply
+    discovering on a diverse set is sufficient, which is the intervention a
+    practitioner would try first and which no prior study isolates
+    (\S\ref{sec:protocol}).
+  \item \textbf{Matched-diversity disjoint splits.} Template count held fixed, template
+    identity disjoint---the design that separates ``the frames differ'' from ``there
+    are more frames''. Prior variation axes are systematic transformations or lexical
+    substitutions and do not make this separation (\S\ref{sec:axes}).
+  \item \textbf{Retention as the reported quantity.} $\FDp/\FD$ rather than $\FDp$,
+    which distinguishes a circuit that was weak everywhere from one that collapsed off
+    its discovery set (\S\ref{sec:protocol}).
+  \item \textbf{Measurements} across \pending{n} families and two models, one of them
+    a family not covered at this scale by prior work (\S\ref{sec:results}).
+  \item \textbf{Two harness defects, disclosed} (\S\ref{sec:defects}), both silent on
+    near-uniform-length data and both capable of contaminating this comparison.
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Background}
+\label{sec:background}
+
+\subsection{Circuits and Faithfulness}
+
+Following \citet{wang2022ioi}, a circuit $C$ is a set of model components---here
+attention heads---hypothesised to implement a behaviour. Faithfulness mean-ablates
+every component outside $C$ and measures the recovered logit difference, normalised
+against the fully-ablated floor:
+\[
+  F(C) \;=\; \frac{\mathrm{LD}(\text{only } C \text{ active}) - \mathrm{LD}_{\text{floor}}}
+                  {\mathrm{LD}(\text{clean}) - \mathrm{LD}_{\text{floor}}}
+\]
+The floor term matters. An unnormalised ratio implicitly treats the fully-ablated
+model as scoring zero, which is not generally true and can be negative.
+
+\subsection{Field Context}
+\label{sec:landscape}
+
+Validation of circuits has not kept pace with their discovery. Indexed publication
+counts (OpenAlex, exact-phrase title-and-abstract search, retrieved 2026-08-13) place
+``mechanistic interpretability'' at 2{,}957 works, 87\% of them from 2025--2026, and
+``activation patching'' at 561. Terms naming the validation question are two orders of
+magnitude rarer.
+
+\begin{table}[H]
+  \centering
+  \caption{Exact-phrase publication counts, OpenAlex, 2026-08-13. Counts use quoted
+    phrase search; the default fuzzy search is not phrase search and inflates
+    \texttt{activation patching} from 561 to 41{,}006. Terms whose usage is dominated
+    by electrical-circuit senses (\texttt{circuit validation}, \texttt{circuit
+    robustness}) are excluded.}
+  \label{tab:landscape}
+  \smallskip
+  \begin{tabular}{lrrr}
+    \toprule
+    phrase & all & 2025--26 & recent \\
+    \midrule
+    mechanistic interpretability  & 2{,}957 & 2{,}578 & 87\% \\
+    activation patching           &     561 &     442 & 79\% \\
+    circuit generalization        &       8 &       1 & 12\% \\
+    circuit faithfulness          &       8 &       5 & 62\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+These counts measure vocabulary rather than activity and should be read only as an
+order of magnitude. The three studies most directly relevant to this paper
+(\S\ref{sec:related}) use none of the phrases above, describing the same problem as
+adaptive circuit behaviour, dataset-specific circuits and rephrasing variance. The
+literature review in \S\ref{sec:related}, not Table~\ref{tab:landscape}, establishes
+what is known.
+
+\subsection{Related Work: The Field Disagrees With Itself}
+\label{sec:related}
+
+Circuit robustness is not an unexamined question. It is an examined question with
+contradictory answers, and that contradiction is what this paper is positioned against.
+
+\textbf{Evidence that circuits generalize.} \citet{merullo2024adaptive} test the GPT-2
+Small IOI circuit on prompt variants that violate the assumptions of the published
+algorithm, and report that it ``generalizes surprisingly well, reusing all of its
+components and mechanisms while only adding additional input edges''. They identify a
+previously undescribed mechanism, S2 Hacking, that accounts for the circuit succeeding
+on formats where the original algorithm should fail, and conclude that circuits may be
+more flexible than previously recognised.
+
+\textbf{Evidence that circuits do not generalize.} \citet{rai2026dcd} test the
+single-circuit-per-task assumption across four tasks (indirect object identification,
+entity binding, arithmetic addition, sequence completion) on GPT-2 Small,
+Qwen2.5-7B-Instruct and Llama-3.1-8B-Instruct, varying datasets along complexity,
+syntax and domain axes while preserving task semantics. They report in-distribution to
+cross-dataset faithfulness drops reaching 79 percentage points at circuit size 0.05,
+and conclude that existing methods recover dataset-specific rather than task-general
+circuits. Independently, \citet{anon2026variance} study rephrasing variance and find
+that different templates activate substantially different circuits, with near-zero
+overlap between template groups, across GPT-2 and Pythia models on subject--verb
+agreement, IOI, greater-than and coding tasks.
+
+\textbf{These cannot all be straightforwardly true.} One candidate reconciliation is
+that the answer depends on the discovery set. \citet{merullo2024adaptive} evaluate a
+circuit produced by the Wang et al.\ protocol, which uses fifteen templates with
+balanced name ordering; a circuit discovered on a narrow set has no opportunity to
+encode anything but the narrow set. If that is the reconciliation, frame dependence is
+a property of \emph{how the circuit was found} rather than of circuits as such, and
+the remedy is cheaper than it currently appears.
+
+\section{The Protocol}
+\label{sec:protocol}
+
+\subsection{Definitions}
+
+Let $\mathcal{T}$ be a task, and let $D$ and $D'$ be two datasets that both instantiate
+$\mathcal{T}$. Discover $C_D$ on $D$ by any procedure; here, the combined
+patching-and-ablation ranking of \S\ref{sec:discovery}. Then report:
+\[
+  \text{retention } R \;=\; \frac{\FDp}{\FD}
+  \qquad\qquad
+  \text{frame dependence } \Delta \;=\; \FD - \FDp
+\]
+$R$ is the headline because it is scale-free; $\Delta$ is reported alongside because
+$R$ is unstable when $\FD$ is near zero.
+
+\subsection{Matched Diversity}
+
+$D$ and $D'$ must have the same number of templates and share none. This is the whole
+design. Holding count fixed removes the confound of \S\ref{sec:intro}; sharing no
+frames is what makes the shift a shift.
+
+We additionally hold clause \emph{shape} constant across the two template banks where
+the family permits it. Varying syntax as well would broaden the shift, but it would
+also reintroduce a second moving part, and the point of this protocol is that exactly
+one thing moves.
+
+\subsection{Shift Axes}
+\label{sec:axes}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+axis & templates & entity pool \\
+\midrule
+frame  & disjoint & shared \\
+entity & shared   & disjoint \\
+both   & disjoint & disjoint \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Reporting only a merged ``held-out'' number would conflate two different objects. A
+circuit that survives new names but not new frames is a syntactic-position circuit; a
+circuit that survives new frames but not new names has memorised lexical items. Both
+are interesting; they are not the same finding.
+
+\subsection{The Task-Preservation Gate}
+\label{sec:gate}
+
+A faithfulness collapse on $D'$ means nothing about circuits if the model cannot do
+the task on $D'$. We therefore report clean logit difference on both splits and admit
+a row only if behaviour is retained above a threshold of $0.8$; failing rows are
+listed as excluded, with their numbers, rather than dropped silently or averaged in.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Datasets}
+\label{sec:datasets}
+
+Four families, each in three shift axes, each split into $D$ and $D'$ of 200 examples:
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+family & mechanism exercised & templates/bank & answer contrast \\
+\midrule
+\texttt{ioi}       & routing / name suppression      & 15 & indirect object vs subject \\
+\texttt{factual}   & retrieval                       & 6  & capital vs other capital \\
+\texttt{agreement} & long-range syntactic dependency & 6  & \emph{are} vs \emph{is} \\
+\texttt{induction} & in-context copying              & 6  & paired vs unpaired token \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Bank A for \texttt{ioi} reproduces the fifteen frames of \citet{melton2026circuits}
+exactly, so $D$ matches the previously published evaluation set and the new $D'$ is
+the only novel object.
+
+\subsection{Construction Constraints}
+
+Three constraints are enforced at generation time; each was added because violating it
+produces a plausible-looking but wrong measurement rather than an error.
+
+\textbf{Single-token answers.} The metric reads one token id at the final position, so
+a multi-token answer would be scored on its first piece---often a shared prefix, and
+therefore not diagnostic. Candidate answers are filtered to single tokens under
+\emph{both} tokenizers.
+
+\textbf{Clean/corrupt token-length parity.} Activation patching caches per-head output
+on a clean pass and splices it into a corrupt pass at the same tensor positions. That
+correspondence requires position $i$ to mean the same thing in both. IOI corruption
+swaps two single-token names and is length-preserving by construction; entity
+substitution in other families is not. Pairs failing parity under either tokenizer are
+dropped---\pending{pct}\% of \texttt{factual} candidates, and none elsewhere.
+
+\textbf{Template-balanced sampling.} The parity filter does not drop uniformly across
+frames, so taking the first $n$ survivors would skew the template mix and confound
+frame identity with frame frequency. Records are taken round-robin across template ids.
+
+\textbf{Entity pools are filtered before splitting, not after.} Splitting into fixed
+banks and filtering each independently lets tokenizer attrition fall unevenly; in an
+early version this left one induction bank with five usable words and the other with
+one. An unequal pool is itself a difference between $D$ and $D'$.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Method}
+\label{sec:method}
+
+\subsection{Discovery}
+\label{sec:discovery}
+
+Two per-head metrics over a full $\text{layers} \times \text{heads}$ sweep:
+
+\emph{Patching.} Run the corrupt prompt with head $(l,h)$'s clean output spliced in,
+and measure the fraction of the clean-corrupt gap recovered. High means the head
+carries task signal.
+
+\emph{Ablation.} Mean-ablate $(l,h)$ on the clean prompt and measure the logit-difference
+drop. High means nothing else compensates for its loss.
+
+Each is min-max normalised across all heads and summed; the circuit is the top ten by
+that sum. The two metrics disagree often enough to matter, which is why the selection
+uses both.
+
+\subsection{Implementation Requirements}
+\label{sec:defects}
+
+Two implementation properties are required for this comparison and are not guaranteed
+by a harness built for a single near-uniform dataset. Both are silent when violated:
+they produce numbers rather than errors.
+
+\textbf{The mean-ablation reference must be computed over the full example set.} A
+caching step that assigns rather than accumulates leaves only the final batch's mean,
+so the ablation value is estimated from a fraction of the data. The quantity estimated
+is the same, but its variance is not, and $D$ and $D'$ must be scored against the same
+reference for their difference to mean anything.
+
+\textbf{Sequences must be padded to one global length, not per batch.} The cached mean
+carries a sequence dimension, so a mean cached at one padded length cannot be broadcast
+onto a batch padded to another. Datasets of near-uniform length hide this; three of the
+four families here vary enough in length to expose it.
+
+The harness used for all measurements below satisfies both. Figures produced under
+these corrections do not reproduce previously published IOI values to the last decimal,
+and the two are not presented in a common column.
+
+\section{Results}
+\label{sec:results}
+
+\begin{table}[H]
+  \centering
+  \caption{Retention under frame shift. $R = \FDp/\FD$. ``behav.'' is clean logit
+    difference on $D'$ as a fraction of $D$; rows below $0.8$ fail the
+    task-preservation gate and are excluded from any aggregate.}
+  \label{tab:frame}
+  \smallskip
+  \begin{tabular}{llccccc}
+    \toprule
+    model & family & $\FD$ & $\FDp$ & $R$ & behav. & gate \\
+    \midrule
+    Llama-3.2-3B & \texttt{ioi}       & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Llama-3.2-3B & \texttt{factual}   & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Llama-3.2-3B & \texttt{agreement} & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Llama-3.2-3B & \texttt{induction} & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    \midrule
+    Pythia-1.4B  & \texttt{ioi}       & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Pythia-1.4B  & \texttt{factual}   & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Pythia-1.4B  & \texttt{agreement} & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Pythia-1.4B  & \texttt{induction} & \pending{} & \pending{} & \pending{} & \pending{} & \pending{} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Frame versus entity shift, IOI only.}
+  \label{tab:axes}
+  \smallskip
+  \begin{tabular}{lcccc}
+    \toprule
+    model & $R$ (frame) & $R$ (entity) & $R$ (both) & $\FD$ \\
+    \midrule
+    Llama-3.2-3B & \pending{} & \pending{} & \pending{} & \pending{} \\
+    Pythia-1.4B  & \pending{} & \pending{} & \pending{} & \pending{} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Circuit Overlap}
+
+\pending{How much do $C_D$ and a circuit discovered directly on $D'$ overlap? A
+circuit that fails to transfer but whose replacement shares most of its heads is a
+different phenomenon from one replaced wholesale.}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Analysis}
+\label{sec:analysis}
+
+\emph{Drafting note --- to be written once Table~\ref{tab:frame} is filled, and to be
+written once. The measurement selects which of these the paper argues; it is not a
+menu to hedge across. Both branches share the framing above, so no section written so
+far needs revisiting either way.}
+
+\textbf{If retention is high} ($R$ near $1$ across families): the published collapse
+was about single-template discovery, not about circuits. The prescription is upstream
+and cheap, the finding bounds our own prior paper, and the protocol's value is as a
+cheap check that a discovery set was not degenerate.
+
+\textbf{If retention is low}: frame dependence is real, general across mechanisms as
+different as retrieval and induction, and faithfulness reported in-distribution
+systematically overstates what has been shown.
+
+\textbf{If retention splits by family}: the most informative outcome, and the one that
+would need the most careful writing---which mechanisms are portable and which are
+frame-bound is a stronger claim than either uniform result.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Limitations}
+\label{sec:limitations}
+
+\textbf{Two models, both small.} Llama-3.2-3B and Pythia-1.4B. Whether frame
+dependence changes with scale is untested here.
+
+\textbf{Attention heads only.} MLP components are not in the circuit vocabulary, so a
+circuit that appears to lose faithfulness may have had its work taken over by
+components this method cannot see.
+
+\textbf{One discovery procedure.} Retention is a property of the circuit-finding
+method as much as of the model. A different procedure may produce more portable
+circuits, and this protocol is the way to check that rather than an argument that it
+would not.
+
+\textbf{Templates are hand-written.} Frame banks were authored, not sampled from a
+corpus, so ``frame shift'' means the shift the author constructed.
+
+\textbf{The shift is synthetic.} $D'$ is task-preserving by construction and gated on
+behaviour, but it is not natural text.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Reproducibility}
+\label{sec:repro}
+
+Code and data: \url{https://github.com/american-code/ResearchPapers}. Archived at
+\pending{Zenodo concept DOI}.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+artifact & path \\
+\midrule
+dataset generator      & \texttt{data/circuit-robustness/generate\_shift\_pairs.py} \\
+intervention library   & \texttt{data/circuit-robustness/circuit\_lib.py} \\
+discovery              & \texttt{data/circuit-robustness/discover\_circuit.py} \\
+scoring                & \texttt{data/circuit-robustness/score\_faithfulness.py} \\
+end-to-end protocol    & \texttt{data/circuit-robustness/run\_protocol.sh} \\
+generated splits       & \texttt{data/circuit-robustness/*-\{D,Dprime\}.json} \\
+results                & \texttt{data/circuit-robustness/results/} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All runs are seeded (42) and executed on a single Apple M1 Max with 32\,GB unified
+memory via MLX.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

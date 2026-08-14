@@ -1,0 +1,66 @@
+14,15c14,15
+<     --activations data/activations/llama-3b-layer16/ \\
+<     --output      data/sae-runs/llama-3b-layer16/ \\
+---
+>     --activations data/activations/llama-3b-layer14/ \\
+>     --output      data/sae-runs/llama-3b-layer14/ \\
+151a152,161
+>     p.add_argument('--optimizer',     choices=['adam', 'muon'], default='adam',
+>                    help='adam (default, the published runs) or muon. Muon needs a '
+>                         'peak --lr roughly two orders larger; see --bias-lr.')
+>     p.add_argument('--bias-lr',       type=float, default=None,
+>                    help='Peak LR for 0D/1D parameters under --optimizer muon, which '
+>                         'routes them to AdamW. Defaults to 1e-4, the Adam arm value.')
+>     p.add_argument('--muon-wd',       type=float, default=0.0,
+>                    help="Muon weight decay. Default 0.0, NOT MLX's 0.01: the Adam arm "
+>                         'applies no decay, so a nonzero value would make the optimizer '
+>                         'comparison two variables instead of one.')
+202a213,216
+>         'optimizer':      args.optimizer,
+>         'bias_lr':        (args.bias_lr if args.bias_lr is not None else 1e-4)
+>                           if args.optimizer == 'muon' else None,
+>         'muon_weight_decay': args.muon_wd if args.optimizer == 'muon' else None,
+229c243,256
+<     optimizer = optim.Adam(learning_rate=args.lr)
+---
+>     # Muon orthogonalizes the update via Newton-Schulz, which is defined only for
+>     # matrices. MLX's implementation silently degrades to plain momentum SGD for
+>     # 0D/1D parameters rather than erroring, and its own docs say those belong on
+>     # AdamW -- so b_enc and b_dec are routed there explicitly. Leaving them on the
+>     # Muon path would have trained the biases with an undocumented third rule.
+>     bias_lr = args.bias_lr if args.bias_lr is not None else 1e-4
+>     if args.optimizer == 'muon':
+>         optimizer = optim.MultiOptimizer(
+>             [optim.Muon(learning_rate=args.lr, weight_decay=args.muon_wd),
+>              optim.AdamW(learning_rate=bias_lr, weight_decay=0.0)],
+>             filters=[lambda _path, arr: arr.ndim >= 2],
+>         )
+>     else:
+>         optimizer = optim.Adam(learning_rate=args.lr)
+230a258,274
+>     def set_lr(step: int) -> float:
+>         """Advance the schedule. Returns the matrix LR, which is what gets logged.
+> 
+>         MultiOptimizer does not forward attribute assignment to its children, so
+>         setting .learning_rate on the wrapper would silently leave both sub-optimizers
+>         pinned at their peak for the whole run -- warmup and cosine decay would simply
+>         not happen, and nothing would report an error.
+>         """
+>         lr_mat = cosine_lr(step, args.lr, args.warmup, args.steps)
+>         if args.optimizer == 'muon':
+>             optimizer.optimizers[0].learning_rate = lr_mat
+>             optimizer.optimizers[1].learning_rate = cosine_lr(
+>                 step, bias_lr, args.warmup, args.steps)
+>         else:
+>             optimizer.learning_rate = lr_mat
+>         return lr_mat
+> 
+262c306
+<           f'K={args.k}  lr={args.lr}  batch={args.batch}'
+---
+>           f'K={args.k}  opt={args.optimizer}  lr={args.lr}  batch={args.batch}'
+269,270c313
+<             lr                      = cosine_lr(step, args.lr, args.warmup, args.steps)
+<             optimizer.learning_rate = lr
+---
+>             lr = set_lr(step)

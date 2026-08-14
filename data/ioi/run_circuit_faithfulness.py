@@ -34,6 +34,7 @@ Output: data/ioi/faithfulness-{llama3b,pythia1b}.json
 
 import argparse
 import json
+import pathlib
 import random
 import time
 from pathlib import Path
@@ -204,12 +205,22 @@ def run_batches(model, attns, batches, pairs: Optional[set]):
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", choices=list(MODELS), required=True)
-    ap.add_argument("--dataset", default="dataset.json")
+    ap.add_argument("--dataset", default="dataset.json",
+                    help="path relative to data/ioi/, or an absolute path")
+    ap.add_argument("--circuit-file", default=None,
+                    help='JSON with {"circuit": [[layer, head], ...]}. Overrides the '
+                         "built-in per-model circuit. Required for robustness testing, "
+                         "where the circuit is discovered on D and scored on D-prime "
+                         "and so cannot be a constant baked into this file.")
+    ap.add_argument("--out", default=None, help="override output filename")
     args = ap.parse_args()
     cfg = MODELS[args.model]
     random.seed(SEED)
 
-    ds = json.loads((DATA_DIR / args.dataset).read_text())
+    ds_path = pathlib.Path(args.dataset)
+    if not ds_path.is_absolute():
+        ds_path = DATA_DIR / args.dataset
+    ds = json.loads(ds_path.read_text())
     examples = ds["examples"]
     print(f"Loading {cfg['id']} …", flush=True)
     model, tokenizer = load(cfg["id"])
@@ -246,7 +257,12 @@ def main() -> None:
     ld_floor, _ = run_batches(model, attns, batches, all_heads)
     print(f"all-heads-ablated LD = {ld_floor:.4f}", flush=True)
 
-    circuit = {tuple(x) for x in cfg["circuit"]}
+    if args.circuit_file:
+        cf = pathlib.Path(args.circuit_file)
+        circuit = {tuple(x) for x in json.loads(cf.read_text())["circuit"]}
+        print(f"  circuit from {cf}: {len(circuit)} heads")
+    else:
+        circuit = {tuple(x) for x in cfg["circuit"]}
 
     def norm(ld: float) -> float:
         """Fraction of clean LD recovered above the all-ablated floor."""
@@ -289,7 +305,8 @@ def main() -> None:
 
     result = {
         "meta": {
-            "model": cfg["id"], "dataset": args.dataset,
+            "model": cfg["id"], "dataset": str(ds_path),
+            "circuit_source": args.circuit_file or "built-in",
             "n_examples": len(examples),
             "n_layers": cfg["n_layers"], "n_heads": cfg["n_heads"],
             "circuit": [f"L{l}H{h}" for l, h in sorted(circuit)],
@@ -311,7 +328,10 @@ def main() -> None:
             "subsets": completeness,
         },
     }
-    out = DATA_DIR / cfg["out"]
+    out = pathlib.Path(args.out) if args.out else DATA_DIR / cfg["out"]
+    if not out.is_absolute():
+        out = DATA_DIR / out
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=1))
     print(f"\nfaithfulness={faith:.4f}  mean completeness gap={result['completeness']['mean_gap']:.4f}")
     print(f"wrote {out}")
