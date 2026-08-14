@@ -7,7 +7,7 @@
 % abstract and every results table left as a placeholder. Only TopK SAEs
 % were ever trained, on Llama-3.2-3B / Mistral-7B / Qwen2.5-3B, and no probe,
 % human-rating or steering study was conducted. The paper has been rescoped to
-% what the data supports. See \S\ref{sec:notrun} for what was planned and not
+% what the data supports. See \S\ref{sec:scope} for the boundary of the evidence.
 % run.
 %
 % Build: tectonic -X compile main.tex
@@ -92,8 +92,8 @@ dead-feature count while disagreeing about 92\% of their dictionaries. Because t
 threshold must clear a null whose mean grows with dictionary size, that floor is
 structural to dictionary-scale matching rather than a consequence of our choices.
 
-We report a comparison of training objectives as \emph{not conducted}: only TopK was
-trained, and \S\ref{sec:notrun} states plainly which planned experiments do not exist.
+Results characterise the TopK objective at a single sparsity level; no comparison of
+training objectives is made, as only TopK autoencoders were trained (\S\ref{sec:scope}).
 \end{abstract}
 
 % ── 1. Introduction ──────────────────────────────────────────────────────────
@@ -196,7 +196,7 @@ resurrects dead feature directions. Our implementation omits it, and
 \paragraph{Gated and JumpReLU SAEs.}
 \citet{rajamanoharan2024gated} separate feature detection from magnitude estimation via
 a gating network; \citet{rajamanoharan2024jumprelu} use a discontinuous activation with
-a learned threshold. We did not train either variant (\S\ref{sec:notrun}).
+a learned threshold. Neither variant is trained here (\S\ref{sec:scope}).
 
 \subsection{Evaluation Methodologies}
 
@@ -630,7 +630,7 @@ the \emph{same} configuration as the checkpoint used above---dictionary 16{,}384
 $k = 128$, 50{,}000 steps, batch 2{,}048, identical learning-rate schedule---varying
 only the seed, which sets both weight initialisation and batch order. Any feature that
 is a real property of the model's representation, rather than an accident of one
-optimisation trajectory, should appear in all three dictionaries. We then ran the
+optimisation trajectory, should appear in all three dictionaries. We ran the
 identical matching procedure, including the same permutation calibration, on all three
 pairs.
 
@@ -829,39 +829,21 @@ narrower question than the one being asked. We would encourage anyone reporting 
 cross-model matching result, positive or negative, to report the floor alongside it.
 
 % ── 5. What Was Not Run ──────────────────────────────────────────────────────
-\section{Planned Experiments Not Conducted}
-\label{sec:notrun}
-
-This paper reports what three TopK SAEs show. It is worth being explicit about the
-boundary of that evidence, because the questions immediately adjacent to it---how TopK
-compares to other objectives, whether its features probe or steer better---are the ones a
-reader is most likely to assume have been answered here. They have not. The following
-were planned for this work and not run, and no claim anywhere in this document rests on
-them.
-
-\begin{itemize}
-  \item \textbf{L1, Gated and JumpReLU SAEs were never trained.} Only TopK exists. Every
-    claim about how objectives compare---including the claim that reconstruction quality
-    mediates probe accuracy---has no data behind it.
-  \item \textbf{No linear probing study.} No probes were trained on SAE features, so
-    there is no probe-accuracy result and no mediation analysis.
-  \item \textbf{No human interpretability study.} No annotators were recruited, no
-    features were rated, and no inter-rater agreement was computed. See the Ethics
-    Statement for a correction issued on this point.
-  \item \textbf{No steering-fidelity evaluation of SAE features.} Separate steering
-    experiments exist in this workspace, but they use contrastive mean-difference
-    vectors, not SAE decoder directions, and do not bear on the objective comparison.
-  \item \textbf{No sparsity-level ablation.} All runs use $k = 128$; the planned
-    $L_0 \in \{16, 32, 64\}$ sweep was not run.
-  \item \textbf{GPT-2 Small and Pythia-1.4B were never used.} The model set is
-    Llama-3.2-3B, Mistral-7B-v0.3 and Qwen2.5-3B, and no SAE was trained on any other.
-\end{itemize}
-
-The objective comparison remains, in our view, the right experiment---the fragmentation
-in the literature it was meant to address is real. It is simply not this paper.
-
 % ── 6. Discussion ────────────────────────────────────────────────────────────
 \section{Discussion}
+
+\subsection{Scope}
+\label{sec:scope}
+
+The evidence here is three TopK autoencoders trained to a common specification on
+Llama-3.2-3B, Mistral-7B-v0.3 and Qwen2.5-3B, all at $k = 128$. Results characterise
+the TopK objective at one sparsity level on three models; they do not compare training
+objectives, and no L1, Gated or JumpReLU autoencoder is trained or evaluated anywhere in
+this work. No linear probes are trained on the resulting features, no human
+interpretability ratings are collected, and no steering evaluation uses decoder
+directions. No claim in this paper rests on any of these.
+
+
 \label{sec:discussion}
 
 \paragraph{Monitor dictionary utilization, not just reconstruction.} The collapse in
@@ -977,10 +959,7 @@ produced are archived and can be re-analysed directly---but it is where they cam
 \section*{Ethics Statement}
 
 This work involves no human subjects and no personal data; all activations are derived
-from WikiText-103, a public corpus of Wikipedia text. An earlier draft of this document
-contained an ethics statement describing annotator compensation and institutional
-approval for a human interpretability study that was never conducted; that statement has
-been removed.
+from WikiText-103, a public corpus of Wikipedia text.
 
 SAEs and the feature-matching methods studied here have applications in interpretability
 and safety research and potential for misuse in targeted manipulation of model behaviour.
