@@ -115,6 +115,13 @@ families (IOI, factual recall, subject–verb agreement, induction) and three sh
 
 ---
 
+## Backlog
+
+Parked ideas, with prior-art status and cost, are in
+[docs/research-backlog.md](docs/research-backlog.md). Nothing there is started.
+
+---
+
 ## Layout
 
 ```
